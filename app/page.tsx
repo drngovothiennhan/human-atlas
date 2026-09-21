@@ -35,6 +35,14 @@ export default function Home(){
    return {...s,explode:0,isolate:false,rotate:false,visible:hasSkin?s.visible:[...s.visible,'integumentary']};
   });
  },[registrationEnabled,state.explode,state.isolate,state.rotate,state.visible]);
+ useEffect(()=>{
+  if(!meridianOverlay.enabled)return;
+  setState(s=>{
+   const hasSkin=s.visible.includes('integumentary');
+   if(s.explode===0&&!s.isolate&&!s.rotate&&hasSkin)return s;
+   return {...s,explode:0,isolate:false,rotate:false,visible:hasSkin?s.visible:[...s.visible,'integumentary']};
+  });
+ },[meridianOverlay.enabled,state.explode,state.isolate,state.rotate,state.visible]);
  const parts=useMemo(()=>new Map(atlas?.parts.map(p=>[p.id,p])),[atlas]);
  const counts=useMemo(()=>Object.fromEntries(SYSTEMS.map(s=>[s.id,atlas?.parts.filter(p=>p.system===s.id).length??0])),[atlas]);
  const activeSystems=SYSTEMS.filter(s=>counts[s.id]>0);
