@@ -21,11 +21,11 @@ type PilotFile={schemaVersion:string;coordinateSystem:string;policy:string;pilot
 type ReferenceEntry={sourceId:string;label:string;role:string;locator:string};
 type ReferenceEvidenceFile={schemaVersion:string;policy:string;pilot:Array<{pointCode:string;references:ReferenceEntry[]}>};
 type Target={pointCode:string;side:RegistrationSide};
-interface Props{target:Target;capture:SurfaceCapture|null;onTargetChange:(target:Target)=>void}
+interface Props{target:Target;capture:SurfaceCapture|null;onTargetChange:(target:Target)=>void;onDraftsChange:(drafts:AcupointAnchorDraft[])=>void}
 
 const STORAGE_KEY='hiu-yhct-registration-drafts-v0.1';
 
-export default function RegistrationPanel({target,capture,onTargetChange}:Props){
+export default function RegistrationPanel({target,capture,onTargetChange,onDraftsChange}:Props){
   const [pilot,setPilot]=useState<PilotFile|null>(null);
   const [referenceEvidence,setReferenceEvidence]=useState<ReferenceEvidenceFile|null>(null);
   const [drafts,setDrafts]=useState<AcupointAnchorDraft[]>([]);
@@ -46,6 +46,8 @@ export default function RegistrationPanel({target,capture,onTargetChange}:Props)
     }catch{}
     return()=>{live=false;};
   },[]);
+
+  useEffect(()=>{onDraftsChange(drafts)},[drafts,onDraftsChange]);
 
   const active=useMemo(
     ()=>pilot?.pilot.find(point=>point.pointCode===target.pointCode)??pilot?.pilot[0]??null,
