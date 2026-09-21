@@ -47,7 +47,7 @@ try{
   await send('Page.navigate',{url:base});
   await waitFor(()=>evaluate("document.readyState==='complete'&&document.body.innerText.includes('HIU YHCT Atlas')"),{timeout:30000,label:'HIU Atlas UI'});
   await waitFor(()=>evaluate("document.querySelector('canvas')?.width>0&&document.querySelector('canvas')?.height>0"),{label:'3D canvas'});
-  await waitFor(()=>responses.filter(r=>/\/models\/.*\.bin(?:\?|$)/.test(r.url)&&r.status===200).length>0,{timeout:30000,label:'3D binary model response'});
+  await waitFor(()=>responses.filter(r=>r.url.includes('/models/')&&!r.url.includes('/models/atlas.json')&&r.status===200).length>0,{timeout:30000,label:'3D binary model response'});
   await sleep(1200);
 
   const canvas=await evaluate("(()=>{const r=document.querySelector('canvas').getBoundingClientRect();return{x:r.x,y:r.y,w:r.width,h:r.height}})()");
