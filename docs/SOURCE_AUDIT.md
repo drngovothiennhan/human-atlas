@@ -10,6 +10,7 @@ Audit date: 2026-09-21. Public availability is **not** treated as permission to 
 | AcuAtlas reference dataset | AcuAtlas | 361 point records + mapped body-plate x/y | Dataset publication states CC BY 4.0 | DIRECT_USE / REGISTRATION_BLOCKED |
 | AcuSim Dryad 2025 | Sun et al. | 174 cervicocranial points; RGB-D + 2D/3D keypoint annotations | Dryad CC0 dataset | DIRECT_USE / REGISTRATION_BLOCKED |
 | Antonio-Abrao/acu-master | Antonio Abrao | 3D acupuncture app | GPL-3.0 | REFERENCE_ONLY |
+| wwwwangg/smplify-m-new (SMPLify-M) | SMPLify-M authors / SMPL-X licensors | Dynamic 3D acupoint mapping, 14-meridian visualization, SMPL-X vertex-index/geodesic-path approach | Repository follows SMPL-X/SMPLify-X non-commercial research/education license; non-transferable and no distribution; indices are tied to a specific SMPL-X vertex ordering | REFERENCE_ONLY |
 | spacejohnlf/tcm-acupoints | spacejohnlf | Three.js meridian/acupoint viewer + surface snapping | MIT code; model CC BY-SA 4.0; medical prose/data reuse provenance unresolved; coordinates explicitly illustrative | REFERENCE_ONLY |
 | AcuGuide | kany-e | iOS 3D/acupressure atlas | Proprietary all-rights-reserved source; public for reading/evaluation only | REFERENCE_ONLY |
 | AAIDA | vtrantranzen | Local TCM app | MIT code; medical content provenance not yet audited | REFERENCE_ONLY |
@@ -32,6 +33,7 @@ Audit date: 2026-09-21. Public availability is **not** treated as permission to 
 
 - `spacejohnlf/tcm-acupoints`: MIT code is a useful implementation reference for Three.js interaction/surface snapping, but its README explicitly labels its 3D acupoint coordinates as teaching/illustrative coordinates rather than a standard clinical coordinate database. Its body model is separately CC BY-SA 4.0 and its medical prose provenance is insufficient for direct runtime import. No data/assets are imported by this checkpoint.
 - `kany-e/AcuGuide`: public source but proprietary. Its license permits reading/study/evaluation and forbids reuse in another product without written permission. Reference-only; no code/data import.
+- `wwwwwangg/smplify-m-new` (SMPLify-M): useful research reference for mapping acupoints to a 3D human mesh and visualizing meridian routes, but the repository follows the restrictive SMPL-X/SMPLify-X research license and explicitly notes that acupoint indices depend on a specific SMPL-X vertex ordering. No code, model, vertex-index table or coordinate data is imported.
 
 ## Additional open 3D anatomy reference
 
@@ -43,7 +45,7 @@ Two spatial candidates now pass the **license** gate: AcuAtlas (361 records, CC 
 
 ## Clean-room rule
 
-kinhlac.online is used only to enumerate public viewer journeys. No private API, source, model, database or copied prose is used.
+kinhlac.online is used only to enumerate public viewer journeys (3D rotation, meridian selection, point lookup, search/fly-to). No private API, source, model, database or copied prose is used. The HIU implementation is clean-room and keeps spatial publication behind the BodyParts3D registration/review gate.
 
 ## User-provided course/reference PDFs
 
