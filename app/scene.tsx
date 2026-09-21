@@ -55,7 +55,7 @@ export default function AnatomyScene({atlas,state,onSelect,onProgress,onError,re
    }
   };
   const rebuildOverlay=(value:MeridianOverlayState|undefined)=>{
-   disposeOverlay();if(!value?.enabled)return;
+   disposeOverlay();renderer.domElement.dataset.meridianAnchors='0';renderer.domElement.dataset.meridianPaths='0';if(!value?.enabled)return;
    const color=meridianColors[value.meridianId??'']??0x0f766e;
    for(const anchor of value.anchors){
     if(![anchor.x,anchor.y,anchor.z].every(Number.isFinite))continue;
@@ -64,6 +64,7 @@ export default function AnatomyScene({atlas,state,onSelect,onProgress,onError,re
     marker.position.set(anchor.x,anchor.y,anchor.z);marker.renderOrder=24;marker.userData.pointCode=anchor.pointCode;marker.userData.side=anchor.side;marker.userData.verificationStatus=anchor.verificationStatus;
     meridianGroup.add(marker);meridianMarkers.push(marker);
    }
+   renderer.domElement.dataset.meridianAnchors=String(meridianMarkers.length);
    for(const path of value.paths){
     if(!['FACULTY_REVIEWED','PUBLISHED'].includes(path.verificationStatus)||path.points.length<2)continue;
     const points=path.points.map(point=>new T.Vector3(point[0],point[1],point[2]));
@@ -72,6 +73,7 @@ export default function AnatomyScene({atlas,state,onSelect,onProgress,onError,re
     const material=new T.MeshBasicMaterial({color,transparent:true,opacity:.9,depthTest:true});
     const tube=new T.Mesh(geometry,material);tube.renderOrder=22;meridianGroup.add(tube);
    }
+   renderer.domElement.dataset.meridianPaths=String(value.paths.filter(path=>['FACULTY_REVIEWED','PUBLISHED'].includes(path.verificationStatus)&&path.points.length>=2).length);
   };
   const hover=document.createElement('div');hover.className='part-hover';hover.setAttribute('role','tooltip');hover.hidden=true;el.appendChild(hover);
   type Target={index:number;x:number;y:number;left:number;right:number;top:number;bottom:number};let targets:Target[]=[];
