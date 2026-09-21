@@ -4,6 +4,9 @@ on:
     branches: [feature-hiu-yhct-3d-atlas]
   pull_request:
     branches: [main]
+concurrency:
+  group: hiu-atlas-ci-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   verify:
     runs-on: ubuntu-latest
