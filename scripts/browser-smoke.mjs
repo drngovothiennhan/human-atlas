@@ -32,15 +32,32 @@ try{
     if(msg.method==='Network.responseReceived')responses.push({url:msg.params.response.url,status:msg.params.response.status,mimeType:msg.params.response.mimeType});
     if(msg.method==='Runtime.consoleAPICalled'&&msg.params.type==='error')consoleErrors.push(msg.params.args.map(a=>a.value||a.description||'').join(' '));
   });
-  const send=(method,params={})=>new Promise((resolve,reject)=>{const id=nextId++;const timer=setTimeout(()=>{pending.delete(id);reject(new Error('CDP timeout: '+method))},10000);pending.set(id,{resolve:value=>{clearTimeout(timer);resolve(value)},reject:error=>{clearTimeout(timer);reject(error)}});ws.send(JSON.stringify({id,method,params}))});
+  const methodTimeouts={'Page.captureScreenshot':45000,'Page.navigate':30000,'Page.reload':30000};
+  const send=(method,params={},timeout=methodTimeouts[method]??15000)=>new Promise((resolve,reject)=>{
+    const id=nextId++;
+    const timer=setTimeout(()=>{pending.delete(id);reject(new Error('CDP timeout after '+timeout+'ms: '+method))},timeout);
+    pending.set(id,{resolve:value=>{clearTimeout(timer);resolve(value)},reject:error=>{clearTimeout(timer);reject(error)}});
+    ws.send(JSON.stringify({id,method,params}));
+  });
   const evaluate=async(expression)=>{
     const result=await send('Runtime.evaluate',{expression,awaitPromise:true,returnByValue:true});
     if(result.exceptionDetails)throw new Error(result.exceptionDetails.text||'Runtime evaluation failed');
     return result.result?.value;
   };
   const screenshot=async name=>{
-    const shot=await send('Page.captureScreenshot',{format:'png',captureBeyondViewport:false});
-    const bytes=Buffer.from(shot.data,'base64');await writeFile('artifacts/'+name,bytes);return createHash('sha256').update(bytes).digest('hex');
+    let lastError;
+    for(let attempt=1;attempt<=3;attempt++){
+      try{
+        const shot=await send('Page.captureScreenshot',{format:'png',captureBeyondViewport:false});
+        const bytes=Buffer.from(shot.data,'base64');
+        await writeFile('artifacts/'+name,bytes);
+        return createHash('sha256').update(bytes).digest('hex');
+      }catch(error){
+        lastError=error;
+        if(attempt<3)await sleep(750*attempt);
+      }
+    }
+    throw new Error('Screenshot failed after 3 attempts: '+(lastError?.message||lastError));
   };
   await mkdir('artifacts',{recursive:true});
   await send('Page.enable');await send('Runtime.enable');await send('Network.enable');
