@@ -48,8 +48,8 @@ export default function YhctStudyPanel(){
   useEffect(()=>{
     let alive=true;
     Promise.all([
-      fetch('/data/meridians.json').then(async r=>(await r.json()) as Meridian[]),
-      fetch('/data/acupoints.json').then(async r=>(await r.json()) as Acupoint[])
+      fetch(import.meta.env.BASE_URL+'data/meridians.json').then(async r=>(await r.json()) as Meridian[]),
+      fetch(import.meta.env.BASE_URL+'data/acupoints.json').then(async r=>(await r.json()) as Acupoint[])
     ]).then(([m,p])=>{if(alive){setMeridians(m);setPoints(p)}})
       .catch(()=>{if(alive)setAnswer('Không tải được cơ sở dữ liệu local. Hãy thử tải lại ứng dụng.')});
     return()=>{alive=false};

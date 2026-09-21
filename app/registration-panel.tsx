@@ -29,7 +29,7 @@ export default function RegistrationPanel({target,capture,onTargetChange}:Props)
 
   useEffect(()=>{
     let live=true;
-    fetch('/data/registration-pilot.json')
+    fetch(import.meta.env.BASE_URL+'data/registration-pilot.json')
       .then(response=>{if(!response.ok)throw new Error('registration pilot unavailable');return response.json();})
       .then((data:unknown)=>{if(live)setPilot(data as PilotFile);})
       .catch(()=>{});

@@ -1,16 +1,18 @@
-const SHELL='hiu-yhct-atlas-shell-v0.3.1';
-const DATA='hiu-yhct-atlas-data-v0.3.1';
-const CORE=['/','/manifest.webmanifest','/favicon.svg','/data/meridians.json','/data/acupoints.json','/data/registration-pilot.json','/data/provenance.json'];
+const BASE=new URL('./',self.location.href).pathname;
+const asset=path=>BASE+path.replace(/^\//,'');
+const SHELL='hiu-yhct-atlas-shell-v0.3.2';
+const DATA='hiu-yhct-atlas-data-v0.3.2';
+const CORE=[BASE,asset('manifest.webmanifest'),asset('favicon.svg'),asset('data/meridians.json'),asset('data/acupoints.json'),asset('data/registration-pilot.json'),asset('data/provenance.json')];
 
 async function precacheShell(){
   const cache=await caches.open(SHELL);
   await cache.addAll(CORE);
   try{
-    const response=await fetch('/',{cache:'no-store'});
+    const response=await fetch(BASE,{cache:'no-store'});
     const html=await response.text();
     const assetUrls=[...html.matchAll(/(?:src|href)=["']([^"'#?]+)["']/g)]
-      .map(match=>match[1])
-      .filter(url=>url.startsWith('/')&&!url.startsWith('//'));
+      .map(match=>new URL(match[1],self.location.origin+BASE).pathname)
+      .filter(url=>url.startsWith(BASE));
     if(assetUrls.length)await cache.addAll([...new Set(assetUrls)]);
   }catch(error){
     console.warn('PWA shell asset discovery failed',error);
@@ -30,8 +32,8 @@ self.addEventListener('fetch',event=>{
     caches.match(event.request).then(hit=>hit||fetch(event.request).then(response=>{
       if(!response||!response.ok)return response;
       const copy=response.clone();
-      caches.open(url.pathname.startsWith('/models/')?DATA:SHELL).then(cache=>cache.put(event.request,copy));
+      caches.open(url.pathname.startsWith(asset('models/'))?DATA:SHELL).then(cache=>cache.put(event.request,copy));
       return response;
-    }).catch(()=>caches.match('/')))
+    }).catch(()=>caches.match(BASE)))
   );
 });
