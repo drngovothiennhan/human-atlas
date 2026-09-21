@@ -155,6 +155,7 @@ try{
   await waitFor(()=>evaluate("document.querySelector('canvas')?.width>0&&document.querySelector('canvas')?.height>0"),{label:'registration 3D canvas'});
   await waitFor(()=>evaluate("!document.querySelector('.loading')"),{timeout:180000,label:'registration anatomy ready'});
   await waitFor(()=>evaluate("document.querySelector('[data-registration-references=true]')?.innerText.includes('Bộ Y tế')&&document.querySelector('[data-registration-references=true]')?.innerText.includes('Huyệt Vị Kinh Lạc')"),{timeout:30000,label:'registration reference evidence'});
+  await waitFor(()=>evaluate("document.querySelector('[data-registration-progress=true]')?.innerText.includes('0/10')"),{timeout:30000,label:'registration pilot progress initial'});
   await sleep(500);
   const rc=await evaluate("(()=>{const r=document.querySelector('canvas').getBoundingClientRect();return{x:r.x,y:r.y,w:r.width,h:r.height}})()");
   let registrationEvidence=null;
@@ -173,6 +174,7 @@ try{
   if(registrationEvidence.status!=='UNVERIFIED'||!Number.isInteger(registrationEvidence.triangleIndex)||!Array.isArray(registrationEvidence.barycentric)||registrationEvidence.barycentric.length!==3)throw new Error('Registration evidence gate failed: '+JSON.stringify(registrationEvidence));
   const barySum=registrationEvidence.barycentric.reduce((a,b)=>a+b,0);
   if(Math.abs(barySum-1)>1e-4)throw new Error('Registration barycentric sum invalid: '+barySum);
+  await waitFor(()=>evaluate("document.querySelector('[data-registration-progress=true]')?.innerText.includes('1/10')"),{label:'registration pilot progress after capture'});
   await screenshot('tablet-registration-workspace.png');
 
   await waitFor(()=>evaluate("navigator.serviceWorker?Promise.race([navigator.serviceWorker.ready.then(()=>true),new Promise(resolve=>setTimeout(()=>resolve(false),1000))]):false"),{timeout:15000,label:'service worker ready'});
@@ -191,6 +193,7 @@ try{
     localMeridianSearch:true,
     localStudyAssistant:true,
     registrationReferences:true,
+    registrationPilotProgress:true,
     registrationCapture:{pointCode:registrationEvidence.pointCode,side:registrationEvidence.side,status:registrationEvidence.status,triangleIndex:registrationEvidence.triangleIndex,barycentricValid:true},
     pwaOfflineReload:Boolean(offlineOk),
     consoleErrors

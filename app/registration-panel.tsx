@@ -86,6 +86,8 @@ export default function RegistrationPanel({target,capture,onTargetChange}:Props)
   },[capture,active,target.side]);
 
   const currentDraft=drafts.find(item=>item.pointCode===target.pointCode&&item.side===target.side);
+  const requiredAnchorCount=pilot?.pilot.reduce((count,point)=>count+point.requiredSides.length,0)??0;
+  const capturedAnchorCount=pilot?.pilot.reduce((count,point)=>count+point.requiredSides.filter(side=>drafts.some(draft=>draft.pointCode===point.pointCode&&draft.side===side)).length,0)??0;
 
   const exportDrafts=()=>{
     const payload={
@@ -123,6 +125,10 @@ export default function RegistrationPanel({target,capture,onTargetChange}:Props)
         </select>
       </label>
     </div>
+    {pilot&&<div className="capture-card" data-registration-progress="true">
+      <strong>Tiến độ anchor pilot {capturedAnchorCount}/{requiredAnchorCount}</strong>
+      {pilot.pilot.map(point=><code key={point.pointCode}>{point.pointCode} · LEFT {drafts.some(draft=>draft.pointCode===point.pointCode&&draft.side==='LEFT')?'✓':'—'} · RIGHT {drafts.some(draft=>draft.pointCode===point.pointCode&&draft.side==='RIGHT')?'✓':'—'}</code>)}
+    </div>}
     <p className="registration-note">{active?.referenceOnlyLabel??'Tham khảo Google/nguồn công khai – không tái sử dụng dữ liệu'}</p>
     <a href={google} target="_blank" rel="noreferrer">Mở tham khảo Google cho {target.pointCode}</a>
     {activeReferences.length>0&&<div className="capture-card" data-registration-references="true">
