@@ -48,7 +48,7 @@ export default function Home(){
  const reset=()=>{setState(s=>({...initial,visible:DEFAULT_VISIBLE,reset:s.reset+1}));setChosen(null);setDetails(false);setPanel(null);};
  const openPanel=(next:'layers'|'search')=>{setDetails(false);setPanel(p=>p===next?null:next);};
  return <main className="studio">
-  {atlas&&<AnatomyScene atlas={atlas} state={{...state,inspectorOpen:details&&selectedParts.length>0}} onSelect={choosePart} onProgress={n=>{setProgress(n);if(n===100)setError('');}} onError={setError} registrationMode={registrationEnabled} onRegisterSurface={setRegistrationCapture}/>}
+  {atlas&&<AnatomyScene atlas={atlas} state={{...state,inspectorOpen:details&&selectedParts.length>0}} onSelect={choosePart} onProgress={n=>{setProgress(n);if(n===100)setError('');}} onError={setError} registrationMode={registrationEnabled} onRegisterSurface={setRegistrationCapture} meridianOverlay={meridianOverlay} focusAcupoint={meridianFocus} onSelectAcupoint={setSelectedMeridianPoint}/>} 
   <div className="vignette"/>
   <header className="identity"><div className="eyebrow"><span className="status-dot"/> HIU CLB YHCT · ATLAS GIÁO DỤC</div><h1>HIU YHCT Atlas<Badge variant="outline" className="edition">3D</Badge></h1><div className="identity-meta">{atlas?atlas.parts.length.toLocaleString():'2,234'} cấu trúc giải phẫu <span>·</span> BodyParts3D</div></header>
   <YhctStudyPanel/>
