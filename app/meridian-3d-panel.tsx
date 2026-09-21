@@ -12,7 +12,7 @@ import {
 
 type Meridian={id:string;code:string;vietnameseName:string;englishName:string;pointIds:string[];path3d:number[][];reviewStatus:string;spatialStatus:string};
 type Acupoint={code:string;meridianId:string;sequence:number;vietnameseName?:string|null;englishName?:string|null;position3d?:{x:number;y:number;z:number;coordinateSystem?:string;source?:string}|null;reviewStatus?:string;verificationStatus?:string};
-type SchematicSpatial={anchors:MeridianSceneAnchor[];paths:MeridianScenePath[];source?:{repository?:string;commit?:string;license?:string};omittedTopology?:string[]};
+type SchematicSpatial={anchors:MeridianSceneAnchor[];paths:MeridianScenePath[];source?:{repository?:string;commit?:string;license?:string};omittedTopology?:string[];sourceSideWarnings?:{pointCode:string;reason:string}[]};
 
 interface Props{drafts:AcupointAnchorDraft[];selectedPointCode:string|null;onOverlayChange:(overlay:MeridianOverlayState)=>void;onFocus:(target:MeridianFocusTarget|null)=>void}
 
@@ -117,6 +117,7 @@ export default function Meridian3DPanel({drafts,selectedPointCode,onOverlayChang
       <div className="meridian3d-list">{filteredPoints.map(point=>{const anchors=allAnchors.filter(a=>a.pointCode===point.code);return <button key={point.code} onClick={()=>focusPoint(point)} data-meridian3d-point={point.code}><b>{point.code}</b><span>{point.vietnameseName||point.englishName||'Huyệt chuẩn'}</span><small>{anchors.length?anchors.length+' anchor 3D · bấm để bay tới':'chưa có anchor 3D'}</small></button>})}</div>
       {selectedRecord&&<div className="meridian3d-detail" data-meridian3d-detail="true">
         <strong>{selectedRecord.code}{selectedRecord.vietnameseName?' · '+selectedRecord.vietnameseName:''}</strong>
+        {schematic.sourceSideWarnings?.some(w=>w.pointCode===selectedRecord.code)&&<small role="status">Nguồn sơ đồ có dữ liệu hai bên không thống nhất với kinh giữa thân tại huyệt này; cần đối chiếu chuyên môn, chưa dùng để xác định vị trí chuẩn.</small>}
         <span>{selectedAnchors.some(a=>a.sourceKind==='PUBLISHED')?'Có tọa độ BodyParts3D đã kiểm duyệt.':'Chưa có tọa độ BodyParts3D đã kiểm duyệt. '}{selectedAnchors.length?selectedAnchors.map(a=>a.side+': '+(a.sourceKind==='PUBLISHED'?'đã duyệt':a.sourceKind==='LOCAL_DRAFT'?'nháp local · UNVERIFIED':'sơ đồ nguồn mở · UNVERIFIED')).join(' · '):'Chưa có tọa độ BodyParts3D đã đăng ký.'}</span>
         <small>Sơ đồ nguồn mở dùng để học/định hướng, không được tự nâng thành tọa độ xuất bản. Capture local và sơ đồ đều giữ UNVERIFIED cho đến khi có duyệt chuyên môn.</small>
       </div>}

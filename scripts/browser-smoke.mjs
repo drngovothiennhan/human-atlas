@@ -79,6 +79,7 @@ try{
   await send('Network.setBlockedURLs',{urls:[]});
   await evaluate("document.querySelector('[data-meridian3d-load-error=true] button').click()");
   await waitFor(()=>evaluate("!document.querySelector('[data-meridian3d-load-error=true]')&&document.querySelector('[data-meridian3d-launch=true]')?.innerText.includes('361 huyệt')"),{label:'meridian retry recovers data'});
+  console.log('SMOKE_LOAD_FAILURE_RECOVERY_PASS');
   await evaluate("document.querySelector('.meridian3d-actions button').click()");
   await evaluate("document.querySelector('.meridian3d-head button').click()");
   await waitFor(()=>evaluate("document.querySelector('canvas')?.width>0&&document.querySelector('canvas')?.height>0"),{label:'3D canvas'});
@@ -159,6 +160,7 @@ try{
     await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.meridianId==="+JSON.stringify(code)+"&&Number(document.querySelector('canvas')?.dataset.meridianSchematicAnchors)>0&&Number(document.querySelector('canvas')?.dataset.meridianSchematicPaths)>0"),{label:code+' schematic markers and paths'});
     schematicCoverage.push({code,...await evaluate("({...document.querySelector('canvas').dataset})")});
   }
+  console.log('SMOKE_ALL_14_SCHEMATIC_MERIDIANS_PASS '+JSON.stringify(schematicCoverage));
   await evaluate("(()=>{const s=document.querySelectorAll('.meridian3d-controls select')[0];s.value='ST';s.dispatchEvent(new Event('change',{bubbles:true}));})()");
   await waitFor(()=>evaluate("document.querySelector('.meridian3d-summary').innerText.includes('Kinh Vị')"),{label:'restore stomach meridian'});
   const bilateralCount=await waitFor(()=>evaluate("Number(document.querySelector('canvas')?.dataset.meridianSchematicAnchors)===90?90:0"),{label:'90 bilateral stomach markers'});

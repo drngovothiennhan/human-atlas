@@ -12,6 +12,17 @@ test('licensed schematic spatial dataset stays unverified and complete',async()=
   assert.deepEqual(data.omittedTopology,['BL-39']);
   const codes=new Set(data.anchors.map(x=>x.pointCode));
   assert.equal(codes.size,361);
+  const catalogue=JSON.parse(await readFile(new URL('../content/acupoints/acupoints.json',import.meta.url),'utf8'));
+  const meridians=JSON.parse(await readFile(new URL('../content/meridians/meridians.json',import.meta.url),'utf8'));
+  assert.deepEqual([...codes].sort(),catalogue.map(p=>p.code).sort(),'schematic point codes must join the actual UI catalogue');
+  for(const meridian of meridians){
+    assert.ok(data.anchors.some(a=>a.meridianId===meridian.id),'missing markers: '+meridian.id);
+    assert.ok(data.paths.some(p=>p.meridianId===meridian.id),'missing paths: '+meridian.id);
+  }
+  assert.equal(data.anchors.filter(a=>a.meridianId==='TE').length,46);
+  assert.ok(data.anchors.filter(a=>a.meridianId==='TE').every(a=>a.sourceMeridianId==='SJ'));
+  assert.ok(data.paths.filter(p=>['CV','GV'].includes(p.meridianId)).every(p=>p.side==='MIDLINE'));
+  assert.deepEqual(data.sourceSideWarnings.map(p=>p.pointCode).sort(),['CV-24','GV-25','GV-26','GV-27','GV-28']);
   for(const a of data.anchors){
     assert.equal(a.verificationStatus,'UNVERIFIED');
     assert.equal(a.sourceKind,'LICENSED_SCHEMATIC');
