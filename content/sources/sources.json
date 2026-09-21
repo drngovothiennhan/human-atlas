@@ -127,5 +127,37 @@
     "commercialRestriction": false,
     "status": "DIRECT_USE",
     "auditedVersion": "0.2.0"
+  },
+  {
+    "id": "ACUATLAS-361-2026",
+    "name": "AcuAtlas reference dataset (361-point JSON)",
+    "owner": "AcuAtlas",
+    "url": "https://acupointatlas.com/data/acupoints.json",
+    "dataType": "361-point reference records with mapped body-plate coordinates (view + normalized x/y)",
+    "codeLicense": null,
+    "assetDataLicense": "CC-BY-4.0",
+    "attribution": "AcuAtlas reference dataset, licensed under CC BY 4.0",
+    "shareAlike": false,
+    "commercialRestriction": false,
+    "status": "DIRECT_USE",
+    "auditedVersion": "remote JSON + dataset/methodology pages audited 2026-09-21",
+    "spatialRegistrationStatus": "BLOCKED",
+    "note": "License gate passes for the reference dataset only. The audited JSON exposes normalized 2D plate coordinates (view/x/y), not a verified BodyParts3D xyz/surface-anchor frame. App code and Z-Anatomy meshes are not imported."
+  },
+  {
+    "id": "ACUSIM-DRYAD-2025",
+    "name": "AcuSim: synthetic dataset for cervicocranial acupuncture points localisation",
+    "owner": "Sun, Qilei; Ma, Jiatao; Craig, Paul; Dai, Linjun; Lim, EngGee",
+    "url": "https://doi.org/10.5061/dryad.zs7h44jkz",
+    "dataType": "63,936 RGB-D images / 504 synthetic anatomical models / 174 cervicocranial acupoints with 2D/3D keypoint annotations",
+    "codeLicense": null,
+    "assetDataLicense": "CC0-1.0",
+    "attribution": "Citation requested by the Dryad dataset record; CC0 permits reuse",
+    "shareAlike": false,
+    "commercialRestriction": false,
+    "status": "DIRECT_USE",
+    "auditedVersion": "Dryad version published 2025-03-28; metadata audited 2026-09-21",
+    "spatialRegistrationStatus": "BLOCKED",
+    "note": "License gate passes for the Dryad dataset. Spatial annotations are tied to its synthetic models/rendering frames; no verified transform or surface-anchor mapping to BodyParts3D has been established."
   }
 ]
