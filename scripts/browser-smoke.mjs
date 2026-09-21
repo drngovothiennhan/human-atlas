@@ -90,7 +90,7 @@ try{
   const touchAfter=await screenshot('tablet-after-touch.png');
   if(touchAfter===touchBefore)throw new Error('Tablet touch orbit did not change rendered screenshot');
 
-  await waitFor(()=>evaluate("navigator.serviceWorker&&navigator.serviceWorker.ready.then(()=>true)"),{timeout:15000,label:'service worker ready'});
+  await waitFor(()=>evaluate("navigator.serviceWorker?Promise.race([navigator.serviceWorker.ready.then(()=>true),new Promise(resolve=>setTimeout(()=>resolve(false),1000))]):false"),{timeout:15000,label:'service worker ready'});
   await sleep(500);
   await send('Network.emulateNetworkConditions',{offline:true,latency:0,downloadThroughput:0,uploadThroughput:0});
   await send('Page.reload',{});
