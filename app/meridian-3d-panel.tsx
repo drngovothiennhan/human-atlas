@@ -181,13 +181,13 @@ export default function Meridian3DPanel({drafts,selectedPointCode,onOverlayChang
       data-meridian3d-launch="true"
     >
       <strong>Kinh lạc 3D</strong>
-      <span>{publishedAnchors.length} duyệt · {draftAnchors.length} nháp local</span>
+      <span>{points.length} huyệt · {meridians.length} kinh · {publishedAnchors.length} vị trí 3D duyệt</span>
     </Button>
     {open&&<aside className="meridian3d-panel glass" data-meridian3d-panel="true" aria-label="Mô hình kinh lạc và huyệt vị 3D">
       <div className="meridian3d-head">
         <div>
           <strong>Mô hình kinh lạc · huyệt vị 3D</strong>
-          <small>Clean-room UX · chỉ hiển thị tọa độ có bằng chứng hoặc bản nháp local</small>
+          <small>Danh mục huyệt/kinh có thể tra cứu; 3D chỉ hiện tọa độ có bằng chứng hoặc bản nháp local</small>
         </div>
         <Button variant="ghost" onClick={()=>setOpen(false)} aria-label="Đóng mô hình kinh lạc 3D">×</Button>
       </div>
@@ -209,7 +209,7 @@ export default function Meridian3DPanel({drafts,selectedPointCode,onOverlayChang
 
       <div className="meridian3d-summary">
         <strong>{active?.vietnameseName??activeMeridian}</strong>
-        <span>{sideLabel(side)} · {publishedCount} anchor đã duyệt · {draftCount} anchor nháp local</span>
+        <span>{active?.pointIds.length??filteredPoints.length} huyệt · {sideLabel(side)} · {publishedCount} anchor đã duyệt · {draftCount} anchor nháp local</span>
         <span>{visiblePaths.length?'Có đường kinh 3D đã kiểm duyệt':'Chưa có path 3D đã kiểm duyệt — không tự nối điểm'}</span>
       </div>
 
