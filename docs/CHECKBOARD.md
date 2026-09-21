@@ -88,3 +88,17 @@ Rule: evidence first. Do not mark DONE/PASS without commit, CI, deploy, test, so
 5. Promote only reviewed anchors, then generate reviewed paths.
 6. Re-run the full CI gate after spatial promotion.
 7. Perform physical-device QA and fresh side-by-side reference parity before >=95% handoff.
+
+## Checkpoint — Stage 1 licensed source import (2026-09-21)
+- [x] Pinned `FuriaRozkwit/acupuncture-3d@1fc9ec98d365c9fb035844e2775c1be05a0a05fc`.
+- [x] Vendored reduced 361-point anchor dataset with clinical prose/categories excluded.
+- [x] Vendored 14-channel topology + MIT proportional rig.
+- [x] Vendored `structures.json` under its upstream CC BY-SA 4.0 attribution boundary.
+- [x] Added `npm run source:furia:validate` to CI.
+- [x] Validator confirms 361 unique point records, 14 channels, 89 structural anchors and 21 scalp anchors.
+- [x] Upstream topology has 360 unique point codes; BL-39 is the single omitted path code and is recorded rather than invented.
+- [x] Inherited CI failure #102/#103 was an outdated smoke assertion after the meridian status UI changed; fixed by checking the panel summary.
+- [x] Initial source validator failure #105/#106 was the incorrect assumption that upstream topology contained all 361 points; corrected to the evidenced 360 + BL-39 omission.
+- [x] Stage 1 verified: push CI #109 `35583964566` SUCCESS; PR CI #110 `35583969307` SUCCESS.
+- [x] Stage 1 code checkpoint: `30c178303d0f58f6766ea626db16b3465e89d9dc`.
+- [ ] Stage 2: build the licensed schematic resolver/BodyParts3D surface projection from these pinned sources. No PUBLISHED/faculty status may be inferred from this source layer.
