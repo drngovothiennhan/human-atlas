@@ -127,6 +127,7 @@ export default function RegistrationPanel({target,capture,onTargetChange}:Props)
     <div className="registration-actions">
       <Button variant="ghost" onClick={exportDrafts} disabled={!drafts.length}>Xuất JSON kiểm duyệt ({drafts.length})</Button>
     </div>
+    <p className="registration-note">Trong chế độ đăng ký, mô hình được khóa ở trạng thái assembled và lớp da luôn được giữ hiển thị để tránh ghi anchor sai do explode/ẩn bề mặt.</p>
     <p className="registration-note">Đường kinh chỉ được sinh từ anchor FACULTY_REVIEWED/PUBLISHED; bản nháp UNVERIFIED bị gate chặn.</p>
   </aside>;
 }

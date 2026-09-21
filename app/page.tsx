@@ -21,6 +21,14 @@ export default function Home(){
  useEffect(()=>{const abort=new AbortController();setProgress(0);setError('');setAtlas(null);setChosen(null);setDetails(false);setState({...initial,visible:DEFAULT_VISIBLE});fetch(import.meta.env.BASE_URL+'models/atlas.json',{signal:abort.signal}).then(r=>{if(!r.ok)throw new Error('The anatomy catalogue could not be loaded.');return r.json();}).then(data=>setAtlas(data as Atlas)).catch(e=>{if(e.name!=='AbortError')setError(e.message);});return()=>abort.abort();},[]);
  useEffect(()=>{const key=(e:KeyboardEvent)=>{if(e.key==='/'&&!(e.target instanceof HTMLInputElement)&&!(e.target instanceof HTMLTextAreaElement)){e.preventDefault();setPanel('search');setDetails(false);}};window.addEventListener('keydown',key);return()=>window.removeEventListener('keydown',key);},[]);
  useEffect(()=>{const enabled=new URLSearchParams(window.location.search).get('register')==='1';setRegistrationEnabled(enabled);if(enabled)setState(s=>({...s,explode:0,isolate:false,rotate:false,visible:s.visible.includes('integumentary')?s.visible:[...s.visible,'integumentary']}));},[]);
+ useEffect(()=>{
+  if(!registrationEnabled)return;
+  setState(s=>{
+   const hasSkin=s.visible.includes('integumentary');
+   if(s.explode===0&&!s.isolate&&!s.rotate&&hasSkin)return s;
+   return {...s,explode:0,isolate:false,rotate:false,visible:hasSkin?s.visible:[...s.visible,'integumentary']};
+  });
+ },[registrationEnabled,state.explode,state.isolate,state.rotate,state.visible]);
  const parts=useMemo(()=>new Map(atlas?.parts.map(p=>[p.id,p])),[atlas]);
  const counts=useMemo(()=>Object.fromEntries(SYSTEMS.map(s=>[s.id,atlas?.parts.filter(p=>p.system===s.id).length??0])),[atlas]);
  const activeSystems=SYSTEMS.filter(s=>counts[s.id]>0);
