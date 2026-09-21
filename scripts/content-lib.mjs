@@ -8,10 +8,16 @@ export const SPATIAL_REGISTRATION_STATUSES=new Set(['NOT_APPLICABLE','BLOCKED','
 export const LICENSE_GATE_STATUSES=new Set(['PASS','FAIL','PENDING']);
 export const REGISTRATION_GATE_STATUSES=new Set(['PASS','BLOCKED','PENDING']);
 export const BODY_CANONICAL_COORDINATE_SYSTEM='BodyParts3D-4.0-browser-meters-Y-up';
+export const STANDARD_POINT_COUNTS=Object.freeze({LU:11,LI:20,ST:45,SP:21,HT:9,SI:19,BL:67,KI:27,PC:9,TE:23,GB:44,LR:14,GV:28,CV:24});
 
 export function readJson(file){return JSON.parse(fs.readFileSync(file,'utf8'))}
 export function sha256Text(text){return crypto.createHash('sha256').update(text).digest('hex')}
 export function isFinite3(v){return Array.isArray(v)&&v.length===3&&v.every(Number.isFinite)}
+export function canonicalAcupointCode(value){
+  const compact=String(value||'').trim().toUpperCase().replace(/[\s_-]+/g,'');
+  const match=compact.match(/^([A-Z]+)(\d+)$/);
+  return match?`${match[1]}-${Number(match[2])}`:compact;
+}
 
 export function validateContent({root=process.cwd()}={}){
   const errors=[],warnings=[];
@@ -55,20 +61,26 @@ export function validateContent({root=process.cwd()}={}){
     if(!REVIEW_STATUSES.has(m.reviewStatus))errors.push('Invalid meridian reviewStatus: '+m.id);
     if(!Array.isArray(m.sources)||!m.sources.length)errors.push('Meridian missing source: '+m.id);
     for(const sid of m.sources||[])if(!sm.has(sid))errors.push('Meridian '+m.id+' references unknown source '+sid);
+    if(!Array.isArray(m.pointIds))errors.push('Meridian pointIds must be array: '+m.id);
     if(!Array.isArray(m.path3d))errors.push('Meridian path3d must be array: '+m.id);
     for(const p of m.path3d||[])if(!isFinite3(p))errors.push('Invalid 3D path coordinate: '+m.id);
     mm.set(m.id,m);
   }
 
-  const codes=new Set();
+  const codes=new Set(),pointsByMeridian=new Map();
   for(const p of points){
     if(!p.id||!p.code)errors.push('Point missing id/code');
+    const canonical=canonicalAcupointCode(p.code);
+    if(canonical!==p.code)errors.push('Point code must be canonical CODE-N format: '+p.code);
     if(codes.has(p.code))errors.push('Duplicate acupoint code: '+p.code);
     codes.add(p.code);
     if(!mm.has(p.meridianId))errors.push('Point '+p.code+' references unknown meridian '+p.meridianId);
+    if(!Number.isInteger(p.sequence)||p.sequence<1)errors.push('Point '+p.code+' has invalid sequence');
     const status=p.reviewStatus||p.verificationStatus;
     if(!REVIEW_STATUSES.has(status))errors.push('Invalid point review status: '+p.code);
+    if(!Array.isArray(p.sources)||!p.sources.length)errors.push('Point '+p.code+' missing source');
     for(const sid of p.sources||[])if(!sm.has(sid))errors.push('Point '+p.code+' references unknown source '+sid);
+    const bucket=pointsByMeridian.get(p.meridianId)||[];bucket.push(p);pointsByMeridian.set(p.meridianId,bucket);
     if(p.position3d!=null){
       if(!isFinite3([p.position3d.x,p.position3d.y,p.position3d.z]))errors.push('Invalid point xyz: '+p.code);
       for(const k of ['coordinateSystem','surfaceStructureId','source'])if(!p.position3d[k])errors.push('Point '+p.code+' position missing '+k);
@@ -85,12 +97,30 @@ export function validateContent({root=process.cwd()}={}){
     if(clinical&&p.reviewStatus!=='PUBLISHED')errors.push('Clinical/simulation claim requires PUBLISHED: '+p.code);
   }
 
+  const expectedTotal=Object.values(STANDARD_POINT_COUNTS).reduce((a,b)=>a+b,0);
+  if(points.length!==expectedTotal)errors.push('Standard acupoint catalogue must contain '+expectedTotal+' records; found '+points.length);
+  for(const [meridianId,count] of Object.entries(STANDARD_POINT_COUNTS)){
+    const meridian=mm.get(meridianId);
+    if(!meridian){errors.push('Missing standard meridian '+meridianId);continue}
+    const expected=Array.from({length:count},(_,i)=>`${meridianId}-${i+1}`);
+    const actual=(pointsByMeridian.get(meridianId)||[]).sort((a,b)=>a.sequence-b.sequence).map(p=>p.code);
+    if(JSON.stringify(actual)!==JSON.stringify(expected))errors.push('Point sequence mismatch for '+meridianId);
+    if(JSON.stringify(meridian.pointIds)!==JSON.stringify(expected))errors.push('Meridian pointIds mismatch for '+meridianId);
+  }
+
   return {
     errors,warnings,
     counts:{sources:sources.length,spatialCandidates:candidates.length,meridians:meridians.length,acupoints:points.length},
     files:{sourceFile:sf,candidateFile:cf,meridianFile:mf,pointFile:pf}
   };
 }
-export function lookupByCode(records,code){const q=String(code||'').trim().toUpperCase();return records.find(x=>String(x.code||'').toUpperCase()===q)||null}
+export function lookupByCode(records,code){
+  const raw=String(code||'').trim().toUpperCase(),canonical=canonicalAcupointCode(code);
+  return records.find(x=>String(x.code||'').toUpperCase()===raw||canonicalAcupointCode(x.code)===canonical)||null;
+}
 export function normalizeVi(v){return String(v||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d').replace(/Đ/g,'D').toLowerCase().trim()}
-export function searchRecords(records,q){q=normalizeVi(q);if(!q)return[];return records.filter(r=>[r.code,r.vietnameseName,r.englishName,r.pinyin,r.chineseName].filter(Boolean).some(v=>normalizeVi(v).includes(q)))}
+export function searchRecords(records,q){
+  const normalized=normalizeVi(q),canonical=canonicalAcupointCode(q);
+  if(!normalized)return[];
+  return records.filter(r=>canonicalAcupointCode(r.code)===canonical||[r.code,r.vietnameseName,r.englishName,r.pinyin,r.chineseName,r.meridianId].filter(Boolean).some(v=>normalizeVi(v).includes(normalized)));
+}

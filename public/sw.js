@@ -1,5 +1,5 @@
-const SHELL='hiu-yhct-atlas-shell-v0.2.1';
-const DATA='hiu-yhct-atlas-data-v0.2.1';
+const SHELL='hiu-yhct-atlas-shell-v0.3.0';
+const DATA='hiu-yhct-atlas-data-v0.3.0';
 const CORE=['/','/manifest.webmanifest','/favicon.svg','/data/meridians.json','/data/acupoints.json','/data/provenance.json'];
 
 async function precacheShell(){

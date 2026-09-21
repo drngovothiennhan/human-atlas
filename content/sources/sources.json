@@ -126,7 +126,7 @@
     "shareAlike": false,
     "commercialRestriction": false,
     "status": "DIRECT_USE",
-    "auditedVersion": "0.2.0"
+    "auditedVersion": "0.3.0"
   },
   {
     "id": "ACUATLAS-361-2026",
@@ -159,5 +159,20 @@
     "auditedVersion": "Dryad version published 2025-03-28; metadata audited 2026-09-21",
     "spatialRegistrationStatus": "BLOCKED",
     "note": "License gate passes for the Dryad dataset. Spatial annotations are tied to its synthetic models/rendering frames; no verified transform or surface-anchor mapping to BodyParts3D has been established."
+  },
+  {
+    "id": "GOOGLE-SEARCH-REFERENCE",
+    "name": "Google Search external reference",
+    "owner": "Google",
+    "url": "https://www.google.com/search",
+    "dataType": "outbound search/navigation links only",
+    "codeLicense": null,
+    "assetDataLicense": "N/A-NO-DATA-IMPORTED",
+    "attribution": null,
+    "shareAlike": null,
+    "commercialRestriction": null,
+    "status": "REFERENCE_ONLY",
+    "auditedVersion": "navigation-only integration checked 2026-09-21",
+    "note": "The app generates outbound Google Search links for user reference when richer licensed content is unavailable. No Google result text, images, coordinates, or other data are copied or bundled."
   }
 ]

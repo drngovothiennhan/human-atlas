@@ -95,10 +95,16 @@ try{
   await waitFor(()=>evaluate("!!document.querySelector('.yhct-panel')"),{label:'YHCT drawer'});
   await evaluate("(()=>{const i=document.querySelector('.yhct-search');const s=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;s.call(i,'Phế');i.dispatchEvent(new Event('input',{bubbles:true}));return true})()");
   await waitFor(()=>evaluate("document.querySelector('.yhct-list')?.innerText.includes('LU')"),{label:'local meridian search'});
-  const assistantResult=await evaluate("(()=>{const buttons=[...document.querySelectorAll('.yhct-tabs button')];buttons.find(b=>b.textContent.includes('Trợ lý'))?.click();return true})()");
+  const catalogueCount=await evaluate("document.querySelector('.yhct-launch')?.innerText||''");
+  if(!catalogueCount.includes('361 huyệt'))throw new Error('361-point catalogue count not visible: '+catalogueCount);
+  await evaluate("(()=>{const buttons=[...document.querySelectorAll('.yhct-tabs button')];buttons.find(b=>b.textContent.includes('Huyệt'))?.click();return true})()");
   await sleep(100);
-  await evaluate("(()=>{const t=document.querySelector('.yhct-assistant textarea');const s=Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype,'value').set;s.call(t,'Kinh Phế có dữ liệu gì?');t.dispatchEvent(new Event('input',{bubbles:true}));document.querySelector('.yhct-assistant>button').click();return true})()");
-  await waitFor(()=>evaluate("document.querySelector('.yhct-assistant p')?.innerText.includes('Kinh Phế')"),{label:'local study assistant'});
+  await evaluate("(()=>{const i=document.querySelector('.yhct-search');const s=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;s.call(i,'ST36');i.dispatchEvent(new Event('input',{bubbles:true}));return true})()");
+  await waitFor(()=>evaluate("document.querySelector('.yhct-list')?.innerText.includes('ST-36')"),{label:'ST36 catalogue search'});
+  await evaluate("(()=>{const buttons=[...document.querySelectorAll('.yhct-tabs button')];buttons.find(b=>b.textContent.includes('Trợ lý'))?.click();return true})()");
+  await sleep(100);
+  await evaluate("(()=>{const t=document.querySelector('.yhct-assistant textarea');const s=Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype,'value').set;s.call(t,'ST36 thuộc kinh nào?');t.dispatchEvent(new Event('input',{bubbles:true}));document.querySelector('.yhct-assistant>button').click();return true})()");
+  await waitFor(()=>evaluate("document.querySelector('.yhct-assistant p')?.innerText.includes('Kinh Vị')"),{label:'local study assistant ST36'});
   await screenshot('desktop-study-panel.png');
 
   await send('Emulation.setDeviceMetricsOverride',{width:1024,height:768,deviceScaleFactor:1,mobile:false,screenWidth:1024,screenHeight:768});

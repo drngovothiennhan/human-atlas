@@ -94,3 +94,14 @@ h1 .edition{font-family:inherit;font-weight:500;font-size:10px;letter-spacing:.0
 @media(max-width:1100px) and (min-width:768px){.yhct-launch{right:20px}.yhct-panel{right:20px;width:330px}}
 @media(max-width:767px){.yhct-launch{top:max(70px,calc(env(safe-area-inset-top) + 58px));right:14px;min-height:44px}.yhct-launch span{display:none}.yhct-panel{left:12px;right:12px;top:max(126px,calc(env(safe-area-inset-top) + 112px));bottom:calc(140px + env(safe-area-inset-bottom));width:auto;background:#fffffff8}.yhct-tabs button{min-height:44px}.yhct-modes button{min-height:44px}}
 @media(max-height:600px) and (orientation:landscape){.yhct-launch{top:16px;right:112px}.yhct-panel{left:auto;right:12px;top:68px;bottom:12px;width:330px}.yhct-panel footer{display:none}}
+
+/* HIU YHCT 0.3 catalogue + reference labels */
+.yhct-stats{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.yhct-stats span{font-size:9px;line-height:1;padding:6px 8px;border-radius:999px;background:#edf1f3;color:#61707c;border:1px solid #1825360c}
+.yhct-list article{grid-template-columns:48px 1fr}
+.yhct-list article .yhct-sequence,.yhct-list article .yhct-links{grid-column:2}
+.yhct-sequence{margin:4px 0 0;font-size:10px!important;line-height:1.45!important;color:#667481!important}
+.yhct-links{display:flex;gap:10px;flex-wrap:wrap;margin-top:5px}
+.yhct-links a{font-size:9px;color:#4f7786;text-decoration:none}
+.yhct-links a:hover{text-decoration:underline}
+@media(max-width:767px){.yhct-stats span{font-size:10px}.yhct-links a{font-size:10px;min-height:28px;display:inline-flex;align-items:center}}
