@@ -12,12 +12,13 @@
     "build:vercel": "npm run content:build && vite build",
     "check": "tsc --noEmit",
     "content:validate": "node scripts/content-validate.mjs",
-    "content:build": "node scripts/content-build.mjs && node scripts/build-furia-schematic.mjs",
+    "content:build": "node scripts/content-build.mjs && node scripts/build-furia-schematic.mjs && node scripts/fetch-zanatomy-muscles.mjs",
     "registration:validate-review": "node scripts/registration-review-validate.mjs",
     "test:unit": "node --test tests/*.test.mjs",
     "test": "npm run test:unit",
     "verify:pages": "node scripts/verify-pages-assets.mjs",
-    "source:furia:validate": "node scripts/validate-furia-source.mjs"
+    "source:furia:validate": "node scripts/validate-furia-source.mjs",
+    "source:muscles:fetch": "node scripts/fetch-zanatomy-muscles.mjs"
   },
   "dependencies": {
     "@base-ui/react": "1.7.0",
