@@ -1,0 +1,4945 @@
+{
+  "schemaVersion": "1.0.0",
+  "source": {
+    "repository": "FuriaRozkwit/acupuncture-3d",
+    "commit": "1fc9ec98d365c9fb035844e2775c1be05a0a05fc",
+    "sourcePath": "data/points.json",
+    "sourceBlobSha": "143748e031e9f515b655eef533ca3b535f9ffdc6",
+    "license": "MIT",
+    "importPolicy": "Only code/channel/index/side/accuracy/anchor are imported. Clinical prose, categories and source-book OCR are excluded."
+  },
+  "coordinateSystem": "+X = prawa strona, +Y = przod, +Z = gora; kotwice w cun",
+  "points": [
+    {
+      "code": "LU-1",
+      "channel": "LU",
+      "index": 1,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_frac": 0.772,
+        "lat": 6,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "LU-2",
+      "channel": "LU",
+      "index": 2,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_frac": 0.795,
+        "lat": 6,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "LU-3",
+      "channel": "LU",
+      "index": 3,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "upper_arm",
+        "cun": 3,
+        "from": "p0",
+        "az": 35
+      }
+    },
+    {
+      "code": "LU-4",
+      "channel": "LU",
+      "index": 4,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "upper_arm",
+        "cun": 4,
+        "from": "p0",
+        "az": 35
+      }
+    },
+    {
+      "code": "LU-5",
+      "channel": "LU",
+      "index": 5,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "forearm",
+        "cun": 0,
+        "from": "p0",
+        "az": 45
+      }
+    },
+    {
+      "code": "LU-6",
+      "channel": "LU",
+      "index": 6,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "forearm",
+        "cun": 5,
+        "from": "p0",
+        "az": 55
+      }
+    },
+    {
+      "code": "LU-7",
+      "channel": "LU",
+      "index": 7,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "forearm",
+        "cun": 1.5,
+        "from": "p1",
+        "az": 88
+      }
+    },
+    {
+      "code": "LU-8",
+      "channel": "LU",
+      "index": 8,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "forearm",
+        "cun": 1,
+        "from": "p1",
+        "az": 72
+      }
+    },
+    {
+      "code": "LU-9",
+      "channel": "LU",
+      "index": 9,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "forearm",
+        "cun": 0.3,
+        "from": "p1",
+        "az": 80
+      }
+    },
+    {
+      "code": "LU-10",
+      "channel": "LU",
+      "index": 10,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "First metacarpal bone",
+        "along": 0.55,
+        "dir": "palmar",
+        "region": "hand"
+      }
+    },
+    {
+      "code": "LU-11",
+      "channel": "LU",
+      "index": 11,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Distal phalanx of first finger of hand",
+        "along": 0.8,
+        "dir": "dorsal",
+        "shift": {
+          "radial": 4
+        },
+        "region": "hand"
+      }
+    },
+    {
+      "code": "LI-1",
+      "channel": "LI",
+      "index": 1,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Distal phalanx of second finger of hand",
+        "along": 0.82,
+        "dir": "dorsal",
+        "shift": {
+          "radial": 4
+        },
+        "region": "hand"
+      }
+    },
+    {
+      "code": "LI-2",
+      "channel": "LI",
+      "index": 2,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Proximal phalanx of second finger of hand",
+        "along": 0.15,
+        "dir": "radial",
+        "region": "hand"
+      }
+    },
+    {
+      "code": "LI-3",
+      "channel": "LI",
+      "index": 3,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Second metacarpal bone",
+        "along": 0.88,
+        "dir": "radial",
+        "region": "hand"
+      }
+    },
+    {
+      "code": "LI-4",
+      "channel": "LI",
+      "index": 4,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Second metacarpal bone",
+        "along": 0.45,
+        "dir": "dorsal",
+        "toward": "First metacarpal bone",
+        "frac": 0.32,
+        "region": "hand"
+      }
+    },
+    {
+      "code": "LI-5",
+      "channel": "LI",
+      "index": 5,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Scaphoid bone",
+        "along": 0.5,
+        "dir": "dorsal",
+        "shift": {
+          "radial": 4
+        },
+        "region": "hand"
+      }
+    },
+    {
+      "code": "LI-6",
+      "channel": "LI",
+      "index": 6,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "forearm",
+        "cun": 3,
+        "from": "p1",
+        "az": 115
+      }
+    },
+    {
+      "code": "LI-7",
+      "channel": "LI",
+      "index": 7,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "forearm",
+        "cun": 5,
+        "from": "p1",
+        "az": 115
+      }
+    },
+    {
+      "code": "LI-8",
+      "channel": "LI",
+      "index": 8,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "forearm",
+        "cun": 4,
+        "from": "p0",
+        "az": 110
+      }
+    },
+    {
+      "code": "LI-9",
+      "channel": "LI",
+      "index": 9,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "forearm",
+        "cun": 3,
+        "from": "p0",
+        "az": 110
+      }
+    },
+    {
+      "code": "LI-10",
+      "channel": "LI",
+      "index": 10,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "forearm",
+        "cun": 2,
+        "from": "p0",
+        "az": 110
+      }
+    },
+    {
+      "code": "LI-11",
+      "channel": "LI",
+      "index": 11,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "forearm",
+        "cun": 0,
+        "from": "p0",
+        "az": 118
+      }
+    },
+    {
+      "code": "LI-12",
+      "channel": "LI",
+      "index": 12,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "upper_arm",
+        "cun": 1,
+        "from": "p1",
+        "az": 120
+      }
+    },
+    {
+      "code": "LI-13",
+      "channel": "LI",
+      "index": 13,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "upper_arm",
+        "cun": 3,
+        "from": "p1",
+        "az": 115
+      }
+    },
+    {
+      "code": "LI-14",
+      "channel": "LI",
+      "index": 14,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "upper_arm",
+        "cun": 6,
+        "from": "p1",
+        "az": 110
+      }
+    },
+    {
+      "code": "LI-15",
+      "channel": "LI",
+      "index": 15,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "upper_arm",
+        "t": 0.02,
+        "az": 105
+      }
+    },
+    {
+      "code": "LI-16",
+      "channel": "LI",
+      "index": 16,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_frac": 0.828,
+        "lat": 4.2,
+        "face": "anterior",
+        "out": 0.2
+      }
+    },
+    {
+      "code": "LI-17",
+      "channel": "LI",
+      "index": 17,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "neck",
+        "z_frac": 0.84,
+        "az": 20
+      }
+    },
+    {
+      "code": "LI-18",
+      "channel": "LI",
+      "index": 18,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "neck",
+        "z_frac": 0.845,
+        "az": 24
+      }
+    },
+    {
+      "code": "LI-19",
+      "channel": "LI",
+      "index": 19,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Nasal bone",
+        "along": 1,
+        "dir": "anterior",
+        "shift": {
+          "down": 17,
+          "lateral": 6
+        }
+      }
+    },
+    {
+      "code": "LI-20",
+      "channel": "LI",
+      "index": 20,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Nasal bone",
+        "along": 1,
+        "dir": "anterior",
+        "shift": {
+          "down": 10,
+          "lateral": 9
+        }
+      }
+    },
+    {
+      "code": "ST-1",
+      "channel": "ST",
+      "index": 1,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Anterior segment of eyeball",
+        "along": 0.5,
+        "dir": "anterior",
+        "shift": {
+          "down": 9
+        }
+      }
+    },
+    {
+      "code": "ST-2",
+      "channel": "ST",
+      "index": 2,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Anterior segment of eyeball",
+        "along": 0.5,
+        "dir": "anterior",
+        "shift": {
+          "down": 17
+        }
+      }
+    },
+    {
+      "code": "ST-3",
+      "channel": "ST",
+      "index": 3,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Nasal bone",
+        "along": 1,
+        "dir": "anterior",
+        "shift": {
+          "down": 12,
+          "lateral": 17
+        }
+      }
+    },
+    {
+      "code": "ST-4",
+      "channel": "ST",
+      "index": 4,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Nasal bone",
+        "along": 1,
+        "dir": "anterior",
+        "shift": {
+          "down": 30,
+          "lateral": 21
+        }
+      }
+    },
+    {
+      "code": "ST-5",
+      "channel": "ST",
+      "index": 5,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Mandible",
+        "along": 0.35,
+        "dir": "lateral",
+        "shift": {
+          "up": 4
+        }
+      }
+    },
+    {
+      "code": "ST-6",
+      "channel": "ST",
+      "index": 6,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Mandible",
+        "along": 0.25,
+        "dir": "lateral",
+        "shift": {
+          "up": 18
+        }
+      }
+    },
+    {
+      "code": "ST-7",
+      "channel": "ST",
+      "index": 7,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Zygomatic bone",
+        "along": 0.25,
+        "dir": "lateral",
+        "shift": {
+          "down": 6
+        }
+      }
+    },
+    {
+      "code": "ST-8",
+      "channel": "ST",
+      "index": 8,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Frontal bone",
+        "along": 0.5,
+        "dir": "anterior",
+        "shift": {
+          "lateral": 45,
+          "up": 42
+        }
+      }
+    },
+    {
+      "code": "ST-9",
+      "channel": "ST",
+      "index": 9,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "neck",
+        "z_frac": 0.845,
+        "lat": 1.5,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "ST-10",
+      "channel": "ST",
+      "index": 10,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "neck",
+        "z_frac": 0.828,
+        "lat": 1.8,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "ST-11",
+      "channel": "ST",
+      "index": 11,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_frac": 0.806,
+        "lat": 2,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "ST-12",
+      "channel": "ST",
+      "index": 12,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_frac": 0.812,
+        "lat": 4,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "ST-13",
+      "channel": "ST",
+      "index": 13,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_frac": 0.8,
+        "lat": 4,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "ST-14",
+      "channel": "ST",
+      "index": 14,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_frac": 0.775,
+        "lat": 4,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "ST-15",
+      "channel": "ST",
+      "index": 15,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_frac": 0.755,
+        "lat": 4,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "ST-16",
+      "channel": "ST",
+      "index": 16,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_frac": 0.737,
+        "lat": 4,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "ST-17",
+      "channel": "ST",
+      "index": 17,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_frac": 0.72,
+        "lat": 4,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "ST-18",
+      "channel": "ST",
+      "index": 18,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_frac": 0.702,
+        "lat": 4,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "ST-19",
+      "channel": "ST",
+      "index": 19,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_from": "umbilicus",
+        "z_cun": 6,
+        "lat": 2,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "ST-20",
+      "channel": "ST",
+      "index": 20,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_from": "umbilicus",
+        "z_cun": 5,
+        "lat": 2,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "ST-21",
+      "channel": "ST",
+      "index": 21,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_from": "umbilicus",
+        "z_cun": 4,
+        "lat": 2,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "ST-22",
+      "channel": "ST",
+      "index": 22,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_from": "umbilicus",
+        "z_cun": 3,
+        "lat": 2,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "ST-23",
+      "channel": "ST",
+      "index": 23,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_from": "umbilicus",
+        "z_cun": 2,
+        "lat": 2,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "ST-24",
+      "channel": "ST",
+      "index": 24,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_from": "umbilicus",
+        "z_cun": 1,
+        "lat": 2,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "ST-25",
+      "channel": "ST",
+      "index": 25,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_from": "umbilicus",
+        "z_cun": 0,
+        "lat": 2,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "ST-26",
+      "channel": "ST",
+      "index": 26,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_from": "umbilicus",
+        "z_cun": -1,
+        "lat": 2,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "ST-27",
+      "channel": "ST",
+      "index": 27,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_from": "umbilicus",
+        "z_cun": -2,
+        "lat": 2,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "ST-28",
+      "channel": "ST",
+      "index": 28,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_from": "umbilicus",
+        "z_cun": -3,
+        "lat": 2,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "ST-29",
+      "channel": "ST",
+      "index": 29,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_from": "umbilicus",
+        "z_cun": -4,
+        "lat": 2,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "ST-30",
+      "channel": "ST",
+      "index": 30,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_from": "umbilicus",
+        "z_cun": -5,
+        "lat": 2,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "ST-31",
+      "channel": "ST",
+      "index": 31,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "thigh",
+        "cun": 0,
+        "from": "p0",
+        "az": 30
+      }
+    },
+    {
+      "code": "ST-32",
+      "channel": "ST",
+      "index": 32,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "thigh",
+        "cun": 6,
+        "from": "p1",
+        "az": 20
+      }
+    },
+    {
+      "code": "ST-33",
+      "channel": "ST",
+      "index": 33,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "thigh",
+        "cun": 3,
+        "from": "p1",
+        "az": 25
+      }
+    },
+    {
+      "code": "ST-34",
+      "channel": "ST",
+      "index": 34,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "thigh",
+        "cun": 2,
+        "from": "p1",
+        "az": 22
+      }
+    },
+    {
+      "code": "ST-35",
+      "channel": "ST",
+      "index": 35,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "shank",
+        "cun": 0,
+        "from": "p0",
+        "az": 25
+      }
+    },
+    {
+      "code": "ST-36",
+      "channel": "ST",
+      "index": 36,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "shank",
+        "cun": 3,
+        "from": "p0",
+        "az": 22
+      }
+    },
+    {
+      "code": "ST-37",
+      "channel": "ST",
+      "index": 37,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "shank",
+        "cun": 6,
+        "from": "p0",
+        "az": 22
+      }
+    },
+    {
+      "code": "ST-38",
+      "channel": "ST",
+      "index": 38,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "shank",
+        "cun": 8,
+        "from": "p0",
+        "az": 22
+      }
+    },
+    {
+      "code": "ST-39",
+      "channel": "ST",
+      "index": 39,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "shank",
+        "cun": 9,
+        "from": "p0",
+        "az": 22
+      }
+    },
+    {
+      "code": "ST-40",
+      "channel": "ST",
+      "index": 40,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "shank",
+        "cun": 8,
+        "from": "p0",
+        "az": 38
+      }
+    },
+    {
+      "code": "ST-41",
+      "channel": "ST",
+      "index": 41,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Talus",
+        "along": 0.5,
+        "dir": "dorsal",
+        "shift": {
+          "up": 6
+        },
+        "region": "foot"
+      }
+    },
+    {
+      "code": "ST-42",
+      "channel": "ST",
+      "index": 42,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Second metatarsal bone",
+        "along": 0.3,
+        "dir": "dorsal",
+        "toward": "Third metatarsal bone",
+        "frac": 0.45,
+        "region": "foot"
+      }
+    },
+    {
+      "code": "ST-43",
+      "channel": "ST",
+      "index": 43,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Second metatarsal bone",
+        "along": 0.62,
+        "dir": "dorsal",
+        "toward": "Third metatarsal bone",
+        "frac": 0.45,
+        "region": "foot"
+      }
+    },
+    {
+      "code": "ST-44",
+      "channel": "ST",
+      "index": 44,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Proximal phalanx of second finger of foot",
+        "along": 0.05,
+        "dir": "dorsal",
+        "toward": "Proximal phalanx of third finger of foot",
+        "frac": 0.5,
+        "region": "foot"
+      }
+    },
+    {
+      "code": "ST-45",
+      "channel": "ST",
+      "index": 45,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Distal phalanx of second finger of foot",
+        "along": 0.8,
+        "dir": "dorsal",
+        "shift": {
+          "lateral": 3
+        },
+        "region": "foot"
+      }
+    },
+    {
+      "code": "SP-1",
+      "channel": "SP",
+      "index": 1,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Distal phalanx of first finger of foot",
+        "along": 0.8,
+        "dir": "dorsal",
+        "shift": {
+          "medial": 4
+        },
+        "region": "foot"
+      }
+    },
+    {
+      "code": "SP-2",
+      "channel": "SP",
+      "index": 2,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Proximal phalanx of first finger of foot",
+        "along": 0.2,
+        "dir": "medial",
+        "region": "foot"
+      }
+    },
+    {
+      "code": "SP-3",
+      "channel": "SP",
+      "index": 3,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "First metatarsal bone",
+        "along": 0.85,
+        "dir": "medial",
+        "region": "foot"
+      }
+    },
+    {
+      "code": "SP-4",
+      "channel": "SP",
+      "index": 4,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "First metatarsal bone",
+        "along": 0.12,
+        "dir": "medial",
+        "region": "foot"
+      }
+    },
+    {
+      "code": "SP-5",
+      "channel": "SP",
+      "index": 5,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Navicular bone",
+        "along": 0.5,
+        "dir": "medial",
+        "shift": {
+          "proximal": 6
+        },
+        "region": "foot"
+      }
+    },
+    {
+      "code": "SP-6",
+      "channel": "SP",
+      "index": 6,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "shank",
+        "cun": 3,
+        "from": "p1",
+        "az": -80
+      }
+    },
+    {
+      "code": "SP-7",
+      "channel": "SP",
+      "index": 7,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "shank",
+        "cun": 6,
+        "from": "p1",
+        "az": -80
+      }
+    },
+    {
+      "code": "SP-8",
+      "channel": "SP",
+      "index": 8,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "shank",
+        "cun": 3,
+        "from": "p0",
+        "az": -75
+      }
+    },
+    {
+      "code": "SP-9",
+      "channel": "SP",
+      "index": 9,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "shank",
+        "cun": 0.5,
+        "from": "p0",
+        "az": -80
+      }
+    },
+    {
+      "code": "SP-10",
+      "channel": "SP",
+      "index": 10,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "thigh",
+        "cun": 2,
+        "from": "p1",
+        "az": -45
+      }
+    },
+    {
+      "code": "SP-11",
+      "channel": "SP",
+      "index": 11,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "thigh",
+        "cun": 6,
+        "from": "p1",
+        "az": -55
+      }
+    },
+    {
+      "code": "SP-12",
+      "channel": "SP",
+      "index": 12,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_frac": 0.492,
+        "lat": 3.5,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "SP-13",
+      "channel": "SP",
+      "index": 13,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_frac": 0.512,
+        "lat": 4,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "SP-14",
+      "channel": "SP",
+      "index": 14,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_from": "umbilicus",
+        "z_cun": -1.3,
+        "lat": 4,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "SP-15",
+      "channel": "SP",
+      "index": 15,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_from": "umbilicus",
+        "z_cun": 0,
+        "lat": 4,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "SP-16",
+      "channel": "SP",
+      "index": 16,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_from": "umbilicus",
+        "z_cun": 3,
+        "lat": 4,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "SP-17",
+      "channel": "SP",
+      "index": 17,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_frac": 0.702,
+        "lat": 6,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "SP-18",
+      "channel": "SP",
+      "index": 18,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_frac": 0.72,
+        "lat": 6,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "SP-19",
+      "channel": "SP",
+      "index": 19,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_frac": 0.737,
+        "lat": 6,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "SP-20",
+      "channel": "SP",
+      "index": 20,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_frac": 0.755,
+        "lat": 6,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "SP-21",
+      "channel": "SP",
+      "index": 21,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_frac": 0.735,
+        "lat": 6,
+        "face": "lateral"
+      }
+    },
+    {
+      "code": "HT-1",
+      "channel": "HT",
+      "index": 1,
+      "side": "bilateral",
+      "accuracy": "approx",
+      "anchor": {
+        "seg": "trunk",
+        "z_frac": 0.79,
+        "lat": 6,
+        "face": "lateral"
+      }
+    },
+    {
+      "code": "HT-2",
+      "channel": "HT",
+      "index": 2,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "upper_arm",
+        "cun": 3,
+        "from": "p1",
+        "az": -35
+      }
+    },
+    {
+      "code": "HT-3",
+      "channel": "HT",
+      "index": 3,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "forearm",
+        "cun": 0,
+        "from": "p0",
+        "az": -55
+      }
+    },
+    {
+      "code": "HT-4",
+      "channel": "HT",
+      "index": 4,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "forearm",
+        "cun": 1.5,
+        "from": "p1",
+        "az": -92
+      }
+    },
+    {
+      "code": "HT-5",
+      "channel": "HT",
+      "index": 5,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "forearm",
+        "cun": 1,
+        "from": "p1",
+        "az": -88
+      }
+    },
+    {
+      "code": "HT-6",
+      "channel": "HT",
+      "index": 6,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "forearm",
+        "cun": 0.5,
+        "from": "p1",
+        "az": -76
+      }
+    },
+    {
+      "code": "HT-7",
+      "channel": "HT",
+      "index": 7,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "forearm",
+        "cun": 0.3,
+        "from": "p1",
+        "az": -80
+      }
+    },
+    {
+      "code": "HT-8",
+      "channel": "HT",
+      "index": 8,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Fourth metacarpal bone",
+        "along": 0.8,
+        "dir": "palmar",
+        "toward": "Fifth metacarpal bone",
+        "frac": 0.5,
+        "region": "hand"
+      }
+    },
+    {
+      "code": "HT-9",
+      "channel": "HT",
+      "index": 9,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Distal phalanx of fifth finger of hand",
+        "along": 0.82,
+        "dir": "dorsal",
+        "shift": {
+          "radial": 3
+        },
+        "region": "hand"
+      }
+    },
+    {
+      "code": "SI-1",
+      "channel": "SI",
+      "index": 1,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Distal phalanx of fifth finger of hand",
+        "along": 0.82,
+        "dir": "dorsal",
+        "shift": {
+          "ulnar": 3
+        },
+        "region": "hand"
+      }
+    },
+    {
+      "code": "SI-2",
+      "channel": "SI",
+      "index": 2,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Proximal phalanx of fifth finger of hand",
+        "along": 0.15,
+        "dir": "ulnar",
+        "region": "hand"
+      }
+    },
+    {
+      "code": "SI-3",
+      "channel": "SI",
+      "index": 3,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Fifth metacarpal bone",
+        "along": 0.88,
+        "dir": "ulnar",
+        "region": "hand"
+      }
+    },
+    {
+      "code": "SI-4",
+      "channel": "SI",
+      "index": 4,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Fifth metacarpal bone",
+        "along": 0.08,
+        "dir": "ulnar",
+        "region": "hand"
+      }
+    },
+    {
+      "code": "SI-5",
+      "channel": "SI",
+      "index": 5,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "forearm",
+        "cun": 0,
+        "from": "p1",
+        "az": -125
+      }
+    },
+    {
+      "code": "SI-6",
+      "channel": "SI",
+      "index": 6,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "forearm",
+        "cun": 1,
+        "from": "p1",
+        "az": -130
+      }
+    },
+    {
+      "code": "SI-7",
+      "channel": "SI",
+      "index": 7,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "forearm",
+        "cun": 5,
+        "from": "p1",
+        "az": -108
+      }
+    },
+    {
+      "code": "SI-8",
+      "channel": "SI",
+      "index": 8,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "forearm",
+        "cun": 0,
+        "from": "p0",
+        "az": -150
+      }
+    },
+    {
+      "code": "SI-9",
+      "channel": "SI",
+      "index": 9,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_frac": 0.772,
+        "lat": 5.5,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "SI-10",
+      "channel": "SI",
+      "index": 10,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_frac": 0.8,
+        "lat": 5,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "SI-11",
+      "channel": "SI",
+      "index": 11,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_frac": 0.76,
+        "lat": 4,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "SI-12",
+      "channel": "SI",
+      "index": 12,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_frac": 0.795,
+        "lat": 4,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "SI-13",
+      "channel": "SI",
+      "index": 13,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_frac": 0.8,
+        "lat": 3,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "SI-14",
+      "channel": "SI",
+      "index": 14,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "vertebra": "T1",
+        "dz_cun": -0.4,
+        "lat": 3,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "SI-15",
+      "channel": "SI",
+      "index": 15,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "vertebra": "C7",
+        "dz_cun": -0.4,
+        "lat": 2,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "SI-16",
+      "channel": "SI",
+      "index": 16,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "neck",
+        "z_frac": 0.845,
+        "az": 115
+      }
+    },
+    {
+      "code": "SI-17",
+      "channel": "SI",
+      "index": 17,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "neck",
+        "z_frac": 0.862,
+        "az": 135
+      }
+    },
+    {
+      "code": "SI-18",
+      "channel": "SI",
+      "index": 18,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Zygomatic bone",
+        "along": 0.5,
+        "dir": "anterior",
+        "shift": {
+          "down": 5
+        }
+      }
+    },
+    {
+      "code": "SI-19",
+      "channel": "SI",
+      "index": 19,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Tragus",
+        "along": 0.5,
+        "dir": "lateral",
+        "shift": {
+          "anterior": 5
+        }
+      }
+    },
+    {
+      "code": "BL-1",
+      "channel": "BL",
+      "index": 1,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Anterior segment of eyeball",
+        "along": 0.5,
+        "dir": "anterior",
+        "shift": {
+          "medial": 7
+        }
+      }
+    },
+    {
+      "code": "BL-2",
+      "channel": "BL",
+      "index": 2,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Anterior segment of eyeball",
+        "along": 0.5,
+        "dir": "anterior",
+        "shift": {
+          "medial": 6,
+          "up": 14
+        }
+      }
+    },
+    {
+      "code": "BL-3",
+      "channel": "BL",
+      "index": 3,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "head",
+        "arc_cun": 0.5,
+        "lat": 0.75
+      }
+    },
+    {
+      "code": "BL-4",
+      "channel": "BL",
+      "index": 4,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "head",
+        "arc_cun": 0.5,
+        "lat": 1.5
+      }
+    },
+    {
+      "code": "BL-5",
+      "channel": "BL",
+      "index": 5,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "head",
+        "arc_cun": 1,
+        "lat": 1.5
+      }
+    },
+    {
+      "code": "BL-6",
+      "channel": "BL",
+      "index": 6,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "head",
+        "arc_cun": 2.5,
+        "lat": 1.5
+      }
+    },
+    {
+      "code": "BL-7",
+      "channel": "BL",
+      "index": 7,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "head",
+        "arc_cun": 4,
+        "lat": 1.5
+      }
+    },
+    {
+      "code": "BL-8",
+      "channel": "BL",
+      "index": 8,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "head",
+        "arc_cun": 5.5,
+        "lat": 1.5
+      }
+    },
+    {
+      "code": "BL-9",
+      "channel": "BL",
+      "index": 9,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "head",
+        "arc_cun": 9.5,
+        "lat": 1.3
+      }
+    },
+    {
+      "code": "BL-10",
+      "channel": "BL",
+      "index": 10,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "neck",
+        "z_frac": 0.862,
+        "az": 165
+      }
+    },
+    {
+      "code": "BL-11",
+      "channel": "BL",
+      "index": 11,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "vertebra": "T1",
+        "dz_cun": -0.4,
+        "lat": 1.5,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "BL-12",
+      "channel": "BL",
+      "index": 12,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "vertebra": "T2",
+        "dz_cun": -0.4,
+        "lat": 1.5,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "BL-13",
+      "channel": "BL",
+      "index": 13,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "vertebra": "T3",
+        "dz_cun": -0.4,
+        "lat": 1.5,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "BL-14",
+      "channel": "BL",
+      "index": 14,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "vertebra": "T4",
+        "dz_cun": -0.4,
+        "lat": 1.5,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "BL-15",
+      "channel": "BL",
+      "index": 15,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "vertebra": "T5",
+        "dz_cun": -0.4,
+        "lat": 1.5,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "BL-16",
+      "channel": "BL",
+      "index": 16,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "vertebra": "T6",
+        "dz_cun": -0.4,
+        "lat": 1.5,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "BL-17",
+      "channel": "BL",
+      "index": 17,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "vertebra": "T7",
+        "dz_cun": -0.4,
+        "lat": 1.5,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "BL-18",
+      "channel": "BL",
+      "index": 18,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "vertebra": "T9",
+        "dz_cun": -0.4,
+        "lat": 1.5,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "BL-19",
+      "channel": "BL",
+      "index": 19,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "vertebra": "T10",
+        "dz_cun": -0.4,
+        "lat": 1.5,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "BL-20",
+      "channel": "BL",
+      "index": 20,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "vertebra": "T11",
+        "dz_cun": -0.4,
+        "lat": 1.5,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "BL-21",
+      "channel": "BL",
+      "index": 21,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "vertebra": "T12",
+        "dz_cun": -0.4,
+        "lat": 1.5,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "BL-22",
+      "channel": "BL",
+      "index": 22,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "vertebra": "L1",
+        "dz_cun": -0.4,
+        "lat": 1.5,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "BL-23",
+      "channel": "BL",
+      "index": 23,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "vertebra": "L2",
+        "dz_cun": -0.4,
+        "lat": 1.5,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "BL-24",
+      "channel": "BL",
+      "index": 24,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "vertebra": "L3",
+        "dz_cun": -0.4,
+        "lat": 1.5,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "BL-25",
+      "channel": "BL",
+      "index": 25,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "vertebra": "L4",
+        "dz_cun": -0.4,
+        "lat": 1.5,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "BL-26",
+      "channel": "BL",
+      "index": 26,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "vertebra": "L5",
+        "dz_cun": -0.4,
+        "lat": 1.5,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "BL-27",
+      "channel": "BL",
+      "index": 27,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "vertebra": "S1",
+        "dz_cun": -0.4,
+        "lat": 1.5,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "BL-28",
+      "channel": "BL",
+      "index": 28,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "vertebra": "S2",
+        "dz_cun": -0.4,
+        "lat": 1.5,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "BL-29",
+      "channel": "BL",
+      "index": 29,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "vertebra": "S3",
+        "dz_cun": -0.4,
+        "lat": 1.5,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "BL-30",
+      "channel": "BL",
+      "index": 30,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "vertebra": "S4",
+        "dz_cun": -0.4,
+        "lat": 1.5,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "BL-31",
+      "channel": "BL",
+      "index": 31,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "vertebra": "S1",
+        "dz_cun": -0.4,
+        "lat": 0.8,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "BL-32",
+      "channel": "BL",
+      "index": 32,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "vertebra": "S2",
+        "dz_cun": -0.4,
+        "lat": 0.8,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "BL-33",
+      "channel": "BL",
+      "index": 33,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "vertebra": "S3",
+        "dz_cun": -0.4,
+        "lat": 0.8,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "BL-34",
+      "channel": "BL",
+      "index": 34,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "vertebra": "S4",
+        "dz_cun": -0.4,
+        "lat": 0.8,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "BL-35",
+      "channel": "BL",
+      "index": 35,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "vertebra": "coccyx",
+        "dz_cun": 0,
+        "lat": 0.5,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "BL-36",
+      "channel": "BL",
+      "index": 36,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "thigh",
+        "cun": 0,
+        "from": "p0",
+        "az": 180
+      }
+    },
+    {
+      "code": "BL-37",
+      "channel": "BL",
+      "index": 37,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "thigh",
+        "cun": 6,
+        "from": "p0",
+        "az": 180
+      }
+    },
+    {
+      "code": "BL-38",
+      "channel": "BL",
+      "index": 38,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "thigh",
+        "cun": 1,
+        "from": "p1",
+        "az": 120
+      }
+    },
+    {
+      "code": "BL-39",
+      "channel": "BL",
+      "index": 39,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "shank",
+        "cun": 0,
+        "from": "p0",
+        "az": 116
+      }
+    },
+    {
+      "code": "BL-40",
+      "channel": "BL",
+      "index": 40,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "shank",
+        "cun": 0,
+        "from": "p0",
+        "az": 180
+      }
+    },
+    {
+      "code": "BL-41",
+      "channel": "BL",
+      "index": 41,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "vertebra": "T2",
+        "dz_cun": -0.4,
+        "lat": 3,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "BL-42",
+      "channel": "BL",
+      "index": 42,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "vertebra": "T3",
+        "dz_cun": -0.4,
+        "lat": 3,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "BL-43",
+      "channel": "BL",
+      "index": 43,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "vertebra": "T4",
+        "dz_cun": -0.4,
+        "lat": 3,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "BL-44",
+      "channel": "BL",
+      "index": 44,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "vertebra": "T5",
+        "dz_cun": -0.4,
+        "lat": 3,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "BL-45",
+      "channel": "BL",
+      "index": 45,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "vertebra": "T6",
+        "dz_cun": -0.4,
+        "lat": 3,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "BL-46",
+      "channel": "BL",
+      "index": 46,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "vertebra": "T7",
+        "dz_cun": -0.4,
+        "lat": 3,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "BL-47",
+      "channel": "BL",
+      "index": 47,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "vertebra": "T9",
+        "dz_cun": -0.4,
+        "lat": 3,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "BL-48",
+      "channel": "BL",
+      "index": 48,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "vertebra": "T10",
+        "dz_cun": -0.4,
+        "lat": 3,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "BL-49",
+      "channel": "BL",
+      "index": 49,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "vertebra": "T11",
+        "dz_cun": -0.4,
+        "lat": 3,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "BL-50",
+      "channel": "BL",
+      "index": 50,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "vertebra": "T12",
+        "dz_cun": -0.4,
+        "lat": 3,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "BL-51",
+      "channel": "BL",
+      "index": 51,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "vertebra": "L1",
+        "dz_cun": -0.4,
+        "lat": 3,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "BL-52",
+      "channel": "BL",
+      "index": 52,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "vertebra": "L2",
+        "dz_cun": -0.4,
+        "lat": 3,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "BL-53",
+      "channel": "BL",
+      "index": 53,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "vertebra": "S2",
+        "dz_cun": -0.4,
+        "lat": 3,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "BL-54",
+      "channel": "BL",
+      "index": 54,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "vertebra": "S4",
+        "dz_cun": -0.4,
+        "lat": 3,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "BL-55",
+      "channel": "BL",
+      "index": 55,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "shank",
+        "cun": 2,
+        "from": "p0",
+        "az": 176
+      }
+    },
+    {
+      "code": "BL-56",
+      "channel": "BL",
+      "index": 56,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "shank",
+        "cun": 5,
+        "from": "p0",
+        "az": -180
+      }
+    },
+    {
+      "code": "BL-57",
+      "channel": "BL",
+      "index": 57,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "shank",
+        "cun": 8,
+        "from": "p0",
+        "az": -172
+      }
+    },
+    {
+      "code": "BL-58",
+      "channel": "BL",
+      "index": 58,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "shank",
+        "cun": 7,
+        "from": "p1",
+        "az": 168
+      }
+    },
+    {
+      "code": "BL-59",
+      "channel": "BL",
+      "index": 59,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "shank",
+        "cun": 3,
+        "from": "p1",
+        "az": 170
+      }
+    },
+    {
+      "code": "BL-60",
+      "channel": "BL",
+      "index": 60,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "shank",
+        "cun": 0,
+        "from": "p1",
+        "az": 150
+      }
+    },
+    {
+      "code": "BL-61",
+      "channel": "BL",
+      "index": 61,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Calcaneus",
+        "along": 0.45,
+        "dir": "lateral",
+        "shift": {
+          "plantar": 4
+        },
+        "region": "foot"
+      }
+    },
+    {
+      "code": "BL-62",
+      "channel": "BL",
+      "index": 62,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Fibula",
+        "along": 1,
+        "dir": "lateral",
+        "shift": {
+          "plantar": 8
+        },
+        "region": "foot"
+      }
+    },
+    {
+      "code": "BL-63",
+      "channel": "BL",
+      "index": 63,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Cuboid bone",
+        "along": 0.4,
+        "dir": "lateral",
+        "region": "foot"
+      }
+    },
+    {
+      "code": "BL-64",
+      "channel": "BL",
+      "index": 64,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Fifth metatarsal bone",
+        "along": 0.12,
+        "dir": "lateral",
+        "region": "foot"
+      }
+    },
+    {
+      "code": "BL-65",
+      "channel": "BL",
+      "index": 65,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Fifth metatarsal bone",
+        "along": 0.88,
+        "dir": "lateral",
+        "region": "foot"
+      }
+    },
+    {
+      "code": "BL-66",
+      "channel": "BL",
+      "index": 66,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Proximal phalanx of fifth finger of foot",
+        "along": 0.15,
+        "dir": "lateral",
+        "region": "foot"
+      }
+    },
+    {
+      "code": "BL-67",
+      "channel": "BL",
+      "index": 67,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Distal phalanx of fifth finger of foot",
+        "along": 0.8,
+        "dir": "dorsal",
+        "shift": {
+          "lateral": 3
+        },
+        "region": "foot"
+      }
+    },
+    {
+      "code": "KI-1",
+      "channel": "KI",
+      "index": 1,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Second metatarsal bone",
+        "along": 0.55,
+        "dir": "plantar",
+        "toward": "Third metatarsal bone",
+        "frac": 0.5,
+        "region": "foot"
+      }
+    },
+    {
+      "code": "KI-2",
+      "channel": "KI",
+      "index": 2,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Navicular bone",
+        "along": 0.75,
+        "dir": "medial",
+        "region": "foot"
+      }
+    },
+    {
+      "code": "KI-3",
+      "channel": "KI",
+      "index": 3,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Tibia",
+        "along": 1,
+        "dir": "medial",
+        "shift": {
+          "distal": 4,
+          "proximal": 0
+        },
+        "region": "foot"
+      }
+    },
+    {
+      "code": "KI-4",
+      "channel": "KI",
+      "index": 4,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Calcaneus",
+        "along": 0.3,
+        "dir": "medial",
+        "region": "foot"
+      }
+    },
+    {
+      "code": "KI-5",
+      "channel": "KI",
+      "index": 5,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Tibia",
+        "along": 1,
+        "dir": "medial",
+        "shift": {
+          "plantar": 10
+        },
+        "region": "foot"
+      }
+    },
+    {
+      "code": "KI-6",
+      "channel": "KI",
+      "index": 6,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Talus",
+        "along": 0.5,
+        "dir": "medial",
+        "shift": {
+          "plantar": 6
+        },
+        "region": "foot"
+      }
+    },
+    {
+      "code": "KI-7",
+      "channel": "KI",
+      "index": 7,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "shank",
+        "cun": 2,
+        "from": "p1",
+        "az": -160
+      }
+    },
+    {
+      "code": "KI-8",
+      "channel": "KI",
+      "index": 8,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "shank",
+        "cun": 2,
+        "from": "p1",
+        "az": -130
+      }
+    },
+    {
+      "code": "KI-9",
+      "channel": "KI",
+      "index": 9,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "shank",
+        "cun": 5,
+        "from": "p1",
+        "az": -150
+      }
+    },
+    {
+      "code": "KI-10",
+      "channel": "KI",
+      "index": 10,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "shank",
+        "cun": 0,
+        "from": "p0",
+        "az": -112
+      }
+    },
+    {
+      "code": "KI-11",
+      "channel": "KI",
+      "index": 11,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_from": "umbilicus",
+        "z_cun": -5,
+        "lat": 0.5,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "KI-12",
+      "channel": "KI",
+      "index": 12,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_from": "umbilicus",
+        "z_cun": -4,
+        "lat": 0.5,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "KI-13",
+      "channel": "KI",
+      "index": 13,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_from": "umbilicus",
+        "z_cun": -3,
+        "lat": 0.5,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "KI-14",
+      "channel": "KI",
+      "index": 14,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_from": "umbilicus",
+        "z_cun": -2,
+        "lat": 0.5,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "KI-15",
+      "channel": "KI",
+      "index": 15,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_from": "umbilicus",
+        "z_cun": -1,
+        "lat": 0.5,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "KI-16",
+      "channel": "KI",
+      "index": 16,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_from": "umbilicus",
+        "z_cun": 0,
+        "lat": 0.5,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "KI-17",
+      "channel": "KI",
+      "index": 17,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_from": "umbilicus",
+        "z_cun": 2,
+        "lat": 0.5,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "KI-18",
+      "channel": "KI",
+      "index": 18,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_from": "umbilicus",
+        "z_cun": 3,
+        "lat": 0.5,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "KI-19",
+      "channel": "KI",
+      "index": 19,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_from": "umbilicus",
+        "z_cun": 4,
+        "lat": 0.5,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "KI-20",
+      "channel": "KI",
+      "index": 20,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_from": "umbilicus",
+        "z_cun": 5,
+        "lat": 0.5,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "KI-21",
+      "channel": "KI",
+      "index": 21,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_from": "umbilicus",
+        "z_cun": 6,
+        "lat": 0.5,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "KI-22",
+      "channel": "KI",
+      "index": 22,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_frac": 0.702,
+        "lat": 2,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "KI-23",
+      "channel": "KI",
+      "index": 23,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_frac": 0.72,
+        "lat": 2,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "KI-24",
+      "channel": "KI",
+      "index": 24,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_frac": 0.737,
+        "lat": 2,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "KI-25",
+      "channel": "KI",
+      "index": 25,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_frac": 0.755,
+        "lat": 2,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "KI-26",
+      "channel": "KI",
+      "index": 26,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_frac": 0.775,
+        "lat": 2,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "KI-27",
+      "channel": "KI",
+      "index": 27,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_frac": 0.795,
+        "lat": 2,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "PC-1",
+      "channel": "PC",
+      "index": 1,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_frac": 0.745,
+        "lat": 5,
+        "face": "lateral"
+      }
+    },
+    {
+      "code": "PC-2",
+      "channel": "PC",
+      "index": 2,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "upper_arm",
+        "cun": 2,
+        "from": "p0",
+        "az": -10
+      }
+    },
+    {
+      "code": "PC-3",
+      "channel": "PC",
+      "index": 3,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "forearm",
+        "cun": 0,
+        "from": "p0",
+        "az": -8
+      }
+    },
+    {
+      "code": "PC-4",
+      "channel": "PC",
+      "index": 4,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "forearm",
+        "cun": 5,
+        "from": "p1",
+        "az": 0
+      }
+    },
+    {
+      "code": "PC-5",
+      "channel": "PC",
+      "index": 5,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "forearm",
+        "cun": 3,
+        "from": "p1",
+        "az": 0
+      }
+    },
+    {
+      "code": "PC-6",
+      "channel": "PC",
+      "index": 6,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "forearm",
+        "cun": 2,
+        "from": "p1",
+        "az": 0
+      }
+    },
+    {
+      "code": "PC-7",
+      "channel": "PC",
+      "index": 7,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "forearm",
+        "cun": 0.3,
+        "from": "p1",
+        "az": 0
+      }
+    },
+    {
+      "code": "PC-8",
+      "channel": "PC",
+      "index": 8,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Third metacarpal bone",
+        "along": 0.78,
+        "dir": "palmar",
+        "toward": "Second metacarpal bone",
+        "frac": 0.45,
+        "region": "hand"
+      }
+    },
+    {
+      "code": "PC-9",
+      "channel": "PC",
+      "index": 9,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Distal phalanx of third finger of hand",
+        "along": 0.95,
+        "dir": "distal",
+        "region": "hand"
+      }
+    },
+    {
+      "code": "SJ-1",
+      "channel": "SJ",
+      "index": 1,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Distal phalanx of fourth finger of hand",
+        "along": 0.82,
+        "dir": "dorsal",
+        "shift": {
+          "ulnar": 3
+        },
+        "region": "hand"
+      }
+    },
+    {
+      "code": "SJ-2",
+      "channel": "SJ",
+      "index": 2,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Proximal phalanx of fourth finger of hand",
+        "along": 0.05,
+        "dir": "dorsal",
+        "toward": "Proximal phalanx of fifth finger of hand",
+        "frac": 0.5,
+        "region": "hand"
+      }
+    },
+    {
+      "code": "SJ-3",
+      "channel": "SJ",
+      "index": 3,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Fourth metacarpal bone",
+        "along": 0.8,
+        "dir": "dorsal",
+        "toward": "Fifth metacarpal bone",
+        "frac": 0.5,
+        "region": "hand"
+      }
+    },
+    {
+      "code": "SJ-4",
+      "channel": "SJ",
+      "index": 4,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "forearm",
+        "cun": 0.3,
+        "from": "p1",
+        "az": -116
+      }
+    },
+    {
+      "code": "SJ-5",
+      "channel": "SJ",
+      "index": 5,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "forearm",
+        "cun": 2,
+        "from": "p1",
+        "az": -168
+      }
+    },
+    {
+      "code": "SJ-6",
+      "channel": "SJ",
+      "index": 6,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "forearm",
+        "cun": 3,
+        "from": "p1",
+        "az": 164
+      }
+    },
+    {
+      "code": "SJ-7",
+      "channel": "SJ",
+      "index": 7,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "forearm",
+        "cun": 3,
+        "from": "p1",
+        "az": 164
+      }
+    },
+    {
+      "code": "SJ-8",
+      "channel": "SJ",
+      "index": 8,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "forearm",
+        "cun": 4,
+        "from": "p1",
+        "az": 148
+      }
+    },
+    {
+      "code": "SJ-9",
+      "channel": "SJ",
+      "index": 9,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "forearm",
+        "cun": 5,
+        "from": "p0",
+        "az": 180
+      }
+    },
+    {
+      "code": "SJ-10",
+      "channel": "SJ",
+      "index": 10,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "upper_arm",
+        "cun": 1,
+        "from": "p1",
+        "az": 180
+      }
+    },
+    {
+      "code": "SJ-11",
+      "channel": "SJ",
+      "index": 11,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "upper_arm",
+        "cun": 2,
+        "from": "p1",
+        "az": 180
+      }
+    },
+    {
+      "code": "SJ-12",
+      "channel": "SJ",
+      "index": 12,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "upper_arm",
+        "cun": 4,
+        "from": "p1",
+        "az": 180
+      }
+    },
+    {
+      "code": "SJ-13",
+      "channel": "SJ",
+      "index": 13,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "upper_arm",
+        "cun": 5,
+        "from": "p1",
+        "az": 170
+      }
+    },
+    {
+      "code": "SJ-14",
+      "channel": "SJ",
+      "index": 14,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "upper_arm",
+        "t": 0.02,
+        "az": 150
+      }
+    },
+    {
+      "code": "SJ-15",
+      "channel": "SJ",
+      "index": 15,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_frac": 0.812,
+        "lat": 3.2,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "SJ-16",
+      "channel": "SJ",
+      "index": 16,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "neck",
+        "z_frac": 0.855,
+        "az": 150
+      }
+    },
+    {
+      "code": "SJ-17",
+      "channel": "SJ",
+      "index": 17,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Lobule of auricle",
+        "along": 0.5,
+        "dir": "lateral",
+        "shift": {
+          "posterior": 22
+        }
+      }
+    },
+    {
+      "code": "SJ-18",
+      "channel": "SJ",
+      "index": 18,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Helix",
+        "along": 0.25,
+        "dir": "lateral",
+        "shift": {
+          "posterior": 11
+        }
+      }
+    },
+    {
+      "code": "SJ-19",
+      "channel": "SJ",
+      "index": 19,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Helix",
+        "along": 0.55,
+        "dir": "lateral",
+        "shift": {
+          "posterior": 11
+        }
+      }
+    },
+    {
+      "code": "SJ-20",
+      "channel": "SJ",
+      "index": 20,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Apex of auricle",
+        "along": 0.5,
+        "dir": "lateral",
+        "shift": {
+          "up": 4
+        }
+      }
+    },
+    {
+      "code": "SJ-21",
+      "channel": "SJ",
+      "index": 21,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Anterior notch of auricle",
+        "along": 0.5,
+        "dir": "lateral",
+        "shift": {
+          "up": 11,
+          "anterior": 16
+        }
+      }
+    },
+    {
+      "code": "SJ-22",
+      "channel": "SJ",
+      "index": 22,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Zygomatic bone",
+        "along": 0.85,
+        "dir": "lateral",
+        "shift": {
+          "up": 14
+        }
+      }
+    },
+    {
+      "code": "SJ-23",
+      "channel": "SJ",
+      "index": 23,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Anterior segment of eyeball",
+        "along": 0.5,
+        "dir": "anterior",
+        "shift": {
+          "lateral": 10,
+          "up": 13
+        }
+      }
+    },
+    {
+      "code": "GB-1",
+      "channel": "GB",
+      "index": 1,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Anterior segment of eyeball",
+        "along": 0.5,
+        "dir": "anterior",
+        "shift": {
+          "lateral": 9
+        }
+      }
+    },
+    {
+      "code": "GB-2",
+      "channel": "GB",
+      "index": 2,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Antitragus",
+        "along": 0.5,
+        "dir": "lateral",
+        "shift": {
+          "anterior": 4
+        }
+      }
+    },
+    {
+      "code": "GB-3",
+      "channel": "GB",
+      "index": 3,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Zygomatic bone",
+        "along": 0.75,
+        "dir": "lateral",
+        "shift": {
+          "up": 6
+        }
+      }
+    },
+    {
+      "code": "GB-4",
+      "channel": "GB",
+      "index": 4,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Temporal bone",
+        "along": 0.5,
+        "dir": "lateral",
+        "shift": {
+          "up": 24,
+          "anterior": 16
+        }
+      }
+    },
+    {
+      "code": "GB-5",
+      "channel": "GB",
+      "index": 5,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Temporal bone",
+        "along": 0.5,
+        "dir": "lateral",
+        "shift": {
+          "up": 26,
+          "anterior": 8
+        }
+      }
+    },
+    {
+      "code": "GB-6",
+      "channel": "GB",
+      "index": 6,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Temporal bone",
+        "along": 0.5,
+        "dir": "lateral",
+        "shift": {
+          "up": 24,
+          "anterior": 2
+        }
+      }
+    },
+    {
+      "code": "GB-7",
+      "channel": "GB",
+      "index": 7,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Temporal bone",
+        "along": 0.5,
+        "dir": "lateral",
+        "shift": {
+          "up": 22,
+          "posterior": 6
+        }
+      }
+    },
+    {
+      "code": "GB-8",
+      "channel": "GB",
+      "index": 8,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Apex of auricle",
+        "along": 0.5,
+        "dir": "lateral",
+        "shift": {
+          "up": 15
+        }
+      }
+    },
+    {
+      "code": "GB-9",
+      "channel": "GB",
+      "index": 9,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Apex of auricle",
+        "along": 0.5,
+        "dir": "lateral",
+        "shift": {
+          "up": 8,
+          "posterior": 12
+        }
+      }
+    },
+    {
+      "code": "GB-10",
+      "channel": "GB",
+      "index": 10,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Apex of auricle",
+        "along": 0.5,
+        "dir": "lateral",
+        "shift": {
+          "posterior": 18
+        }
+      }
+    },
+    {
+      "code": "GB-11",
+      "channel": "GB",
+      "index": 11,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Temporal bone",
+        "along": 0.5,
+        "dir": "lateral",
+        "shift": {
+          "posterior": 14,
+          "down": 6
+        }
+      }
+    },
+    {
+      "code": "GB-12",
+      "channel": "GB",
+      "index": 12,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Temporal bone",
+        "along": 0.5,
+        "dir": "lateral",
+        "shift": {
+          "posterior": 16,
+          "down": 20
+        }
+      }
+    },
+    {
+      "code": "GB-13",
+      "channel": "GB",
+      "index": 13,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "head",
+        "arc_cun": 0.5,
+        "lat": 3
+      }
+    },
+    {
+      "code": "GB-14",
+      "channel": "GB",
+      "index": 14,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Frontal bone",
+        "along": 0.5,
+        "dir": "anterior",
+        "shift": {
+          "lateral": 22,
+          "up": 10
+        }
+      }
+    },
+    {
+      "code": "GB-15",
+      "channel": "GB",
+      "index": 15,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "head",
+        "arc_cun": 0.5,
+        "lat": 2.25
+      }
+    },
+    {
+      "code": "GB-16",
+      "channel": "GB",
+      "index": 16,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "head",
+        "arc_cun": 1.5,
+        "lat": 2.25
+      }
+    },
+    {
+      "code": "GB-17",
+      "channel": "GB",
+      "index": 17,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "head",
+        "arc_cun": 2.5,
+        "lat": 2.25
+      }
+    },
+    {
+      "code": "GB-18",
+      "channel": "GB",
+      "index": 18,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "head",
+        "arc_cun": 4,
+        "lat": 2.25
+      }
+    },
+    {
+      "code": "GB-19",
+      "channel": "GB",
+      "index": 19,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "head",
+        "arc_cun": 8.5,
+        "lat": 2.25
+      }
+    },
+    {
+      "code": "GB-20",
+      "channel": "GB",
+      "index": 20,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "neck",
+        "z_frac": 0.868,
+        "az": 145
+      }
+    },
+    {
+      "code": "GB-21",
+      "channel": "GB",
+      "index": 21,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_frac": 0.827,
+        "lat": 5.5,
+        "face": "posterior",
+        "out": 0.3
+      }
+    },
+    {
+      "code": "GB-22",
+      "channel": "GB",
+      "index": 22,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_frac": 0.752,
+        "lat": 6.5,
+        "face": "lateral"
+      }
+    },
+    {
+      "code": "GB-23",
+      "channel": "GB",
+      "index": 23,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_frac": 0.745,
+        "lat": 6,
+        "face": "lateral"
+      }
+    },
+    {
+      "code": "GB-24",
+      "channel": "GB",
+      "index": 24,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_frac": 0.7,
+        "lat": 4,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "GB-25",
+      "channel": "GB",
+      "index": 25,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_frac": 0.66,
+        "lat": 5.5,
+        "face": "lateral"
+      }
+    },
+    {
+      "code": "GB-26",
+      "channel": "GB",
+      "index": 26,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_from": "umbilicus",
+        "z_cun": 0,
+        "lat": 6,
+        "face": "lateral"
+      }
+    },
+    {
+      "code": "GB-27",
+      "channel": "GB",
+      "index": 27,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_frac": 0.56,
+        "lat": 5,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "GB-28",
+      "channel": "GB",
+      "index": 28,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_frac": 0.548,
+        "lat": 5.5,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "GB-29",
+      "channel": "GB",
+      "index": 29,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_frac": 0.53,
+        "lat": 6.5,
+        "face": "lateral"
+      }
+    },
+    {
+      "code": "GB-30",
+      "channel": "GB",
+      "index": 30,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "thigh",
+        "t": 0.02,
+        "az": 160
+      }
+    },
+    {
+      "code": "GB-31",
+      "channel": "GB",
+      "index": 31,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "thigh",
+        "cun": 7,
+        "from": "p1",
+        "az": 90
+      }
+    },
+    {
+      "code": "GB-32",
+      "channel": "GB",
+      "index": 32,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "thigh",
+        "cun": 5,
+        "from": "p1",
+        "az": 90
+      }
+    },
+    {
+      "code": "GB-33",
+      "channel": "GB",
+      "index": 33,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "thigh",
+        "cun": 0.5,
+        "from": "p1",
+        "az": 120
+      }
+    },
+    {
+      "code": "GB-34",
+      "channel": "GB",
+      "index": 34,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "shank",
+        "cun": 1,
+        "from": "p0",
+        "az": 80
+      }
+    },
+    {
+      "code": "GB-35",
+      "channel": "GB",
+      "index": 35,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "shank",
+        "cun": 7,
+        "from": "p1",
+        "az": 100
+      }
+    },
+    {
+      "code": "GB-36",
+      "channel": "GB",
+      "index": 36,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "shank",
+        "cun": 7,
+        "from": "p1",
+        "az": 85
+      }
+    },
+    {
+      "code": "GB-37",
+      "channel": "GB",
+      "index": 37,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "shank",
+        "cun": 5,
+        "from": "p1",
+        "az": 88
+      }
+    },
+    {
+      "code": "GB-38",
+      "channel": "GB",
+      "index": 38,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "shank",
+        "cun": 4,
+        "from": "p1",
+        "az": 88
+      }
+    },
+    {
+      "code": "GB-39",
+      "channel": "GB",
+      "index": 39,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "shank",
+        "cun": 3,
+        "from": "p1",
+        "az": 90
+      }
+    },
+    {
+      "code": "GB-40",
+      "channel": "GB",
+      "index": 40,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Fibula",
+        "along": 1,
+        "dir": "lateral",
+        "shift": {
+          "proximal": 6,
+          "dorsal": 4
+        },
+        "region": "foot"
+      }
+    },
+    {
+      "code": "GB-41",
+      "channel": "GB",
+      "index": 41,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Fourth metatarsal bone",
+        "along": 0.75,
+        "dir": "dorsal",
+        "toward": "Fifth metatarsal bone",
+        "frac": 0.5,
+        "region": "foot"
+      }
+    },
+    {
+      "code": "GB-42",
+      "channel": "GB",
+      "index": 42,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Fourth metatarsal bone",
+        "along": 0.9,
+        "dir": "dorsal",
+        "toward": "Fifth metatarsal bone",
+        "frac": 0.5,
+        "region": "foot"
+      }
+    },
+    {
+      "code": "GB-43",
+      "channel": "GB",
+      "index": 43,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Proximal phalanx of fourth finger of foot",
+        "along": 0.05,
+        "dir": "dorsal",
+        "toward": "Proximal phalanx of fifth finger of foot",
+        "frac": 0.5,
+        "region": "foot"
+      }
+    },
+    {
+      "code": "GB-44",
+      "channel": "GB",
+      "index": 44,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Distal phalanx of fourth finger of foot",
+        "along": 0.8,
+        "dir": "dorsal",
+        "shift": {
+          "lateral": 3
+        },
+        "region": "foot"
+      }
+    },
+    {
+      "code": "LR-1",
+      "channel": "LR",
+      "index": 1,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Distal phalanx of first finger of foot",
+        "along": 0.8,
+        "dir": "dorsal",
+        "shift": {
+          "lateral": 4
+        },
+        "region": "foot"
+      }
+    },
+    {
+      "code": "LR-2",
+      "channel": "LR",
+      "index": 2,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Proximal phalanx of first finger of foot",
+        "along": 0.05,
+        "dir": "dorsal",
+        "toward": "Proximal phalanx of second finger of foot",
+        "frac": 0.5,
+        "region": "foot"
+      }
+    },
+    {
+      "code": "LR-3",
+      "channel": "LR",
+      "index": 3,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "First metatarsal bone",
+        "along": 0.7,
+        "dir": "dorsal",
+        "toward": "Second metatarsal bone",
+        "frac": 0.5,
+        "region": "foot"
+      }
+    },
+    {
+      "code": "LR-4",
+      "channel": "LR",
+      "index": 4,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Tibia",
+        "along": 1,
+        "dir": "medial",
+        "shift": {
+          "distal": 10,
+          "dorsal": 6
+        },
+        "region": "foot"
+      }
+    },
+    {
+      "code": "LR-5",
+      "channel": "LR",
+      "index": 5,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "shank",
+        "cun": 5,
+        "from": "p1",
+        "az": -95
+      }
+    },
+    {
+      "code": "LR-6",
+      "channel": "LR",
+      "index": 6,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "shank",
+        "cun": 7,
+        "from": "p1",
+        "az": -95
+      }
+    },
+    {
+      "code": "LR-7",
+      "channel": "LR",
+      "index": 7,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "shank",
+        "cun": 5,
+        "from": "p0",
+        "az": -85
+      }
+    },
+    {
+      "code": "LR-8",
+      "channel": "LR",
+      "index": 8,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "shank",
+        "cun": 0,
+        "from": "p0",
+        "az": -96
+      }
+    },
+    {
+      "code": "LR-9",
+      "channel": "LR",
+      "index": 9,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "thigh",
+        "cun": 4,
+        "from": "p1",
+        "az": -76
+      }
+    },
+    {
+      "code": "LR-10",
+      "channel": "LR",
+      "index": 10,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "thigh",
+        "cun": 3,
+        "from": "p0",
+        "az": -40
+      }
+    },
+    {
+      "code": "LR-11",
+      "channel": "LR",
+      "index": 11,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "thigh",
+        "cun": 3.5,
+        "from": "p0",
+        "az": -44
+      }
+    },
+    {
+      "code": "LR-12",
+      "channel": "LR",
+      "index": 12,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_frac": 0.495,
+        "lat": 2.5,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "LR-13",
+      "channel": "LR",
+      "index": 13,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_frac": 0.64,
+        "lat": 5.5,
+        "face": "lateral"
+      }
+    },
+    {
+      "code": "LR-14",
+      "channel": "LR",
+      "index": 14,
+      "side": "bilateral",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_frac": 0.7,
+        "lat": 4,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "REN-1",
+      "channel": "REN",
+      "index": 1,
+      "side": "midline",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_frac": 0.452,
+        "az": 0
+      }
+    },
+    {
+      "code": "REN-2",
+      "channel": "REN",
+      "index": 2,
+      "side": "midline",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_from": "pubis",
+        "z_cun": 0,
+        "lat": 0,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "REN-3",
+      "channel": "REN",
+      "index": 3,
+      "side": "midline",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_from": "pubis",
+        "z_cun": 1,
+        "lat": 0,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "REN-4",
+      "channel": "REN",
+      "index": 4,
+      "side": "midline",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_from": "pubis",
+        "z_cun": 2,
+        "lat": 0,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "REN-5",
+      "channel": "REN",
+      "index": 5,
+      "side": "midline",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_from": "pubis",
+        "z_cun": 3,
+        "lat": 0,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "REN-6",
+      "channel": "REN",
+      "index": 6,
+      "side": "midline",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_from": "umbilicus",
+        "z_cun": -1.5,
+        "lat": 0,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "REN-7",
+      "channel": "REN",
+      "index": 7,
+      "side": "midline",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_from": "umbilicus",
+        "z_cun": -1,
+        "lat": 0,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "REN-8",
+      "channel": "REN",
+      "index": 8,
+      "side": "midline",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_from": "umbilicus",
+        "z_cun": 0,
+        "lat": 0,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "REN-9",
+      "channel": "REN",
+      "index": 9,
+      "side": "midline",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_from": "umbilicus",
+        "z_cun": 1,
+        "lat": 0,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "REN-10",
+      "channel": "REN",
+      "index": 10,
+      "side": "midline",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_from": "umbilicus",
+        "z_cun": 2,
+        "lat": 0,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "REN-11",
+      "channel": "REN",
+      "index": 11,
+      "side": "midline",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_from": "umbilicus",
+        "z_cun": 3,
+        "lat": 0,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "REN-12",
+      "channel": "REN",
+      "index": 12,
+      "side": "midline",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_from": "umbilicus",
+        "z_cun": 4,
+        "lat": 0,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "REN-13",
+      "channel": "REN",
+      "index": 13,
+      "side": "midline",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_from": "umbilicus",
+        "z_cun": 5,
+        "lat": 0,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "REN-14",
+      "channel": "REN",
+      "index": 14,
+      "side": "midline",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_from": "umbilicus",
+        "z_cun": 6,
+        "lat": 0,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "REN-15",
+      "channel": "REN",
+      "index": 15,
+      "side": "midline",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_from": "umbilicus",
+        "z_cun": 7,
+        "lat": 0,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "REN-16",
+      "channel": "REN",
+      "index": 16,
+      "side": "midline",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_frac": 0.7,
+        "lat": 0,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "REN-17",
+      "channel": "REN",
+      "index": 17,
+      "side": "midline",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_frac": 0.72,
+        "lat": 0,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "REN-18",
+      "channel": "REN",
+      "index": 18,
+      "side": "midline",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_frac": 0.737,
+        "lat": 0,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "REN-19",
+      "channel": "REN",
+      "index": 19,
+      "side": "midline",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_frac": 0.755,
+        "lat": 0,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "REN-20",
+      "channel": "REN",
+      "index": 20,
+      "side": "midline",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_frac": 0.772,
+        "lat": 0,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "REN-21",
+      "channel": "REN",
+      "index": 21,
+      "side": "midline",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_frac": 0.788,
+        "lat": 0,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "REN-22",
+      "channel": "REN",
+      "index": 22,
+      "side": "midline",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_frac": 0.802,
+        "lat": 0,
+        "face": "anterior"
+      }
+    },
+    {
+      "code": "REN-23",
+      "channel": "REN",
+      "index": 23,
+      "side": "midline",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "neck",
+        "z_frac": 0.85,
+        "az": 0
+      }
+    },
+    {
+      "code": "REN-24",
+      "channel": "REN",
+      "index": 24,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Mandible",
+        "along": 0.5,
+        "dir": "anterior",
+        "shift": {
+          "up": 22
+        }
+      }
+    },
+    {
+      "code": "DU-1",
+      "channel": "DU",
+      "index": 1,
+      "side": "midline",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_frac": 0.472,
+        "lat": 0,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "DU-2",
+      "channel": "DU",
+      "index": 2,
+      "side": "midline",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "z_frac": 0.512,
+        "lat": 0,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "DU-3",
+      "channel": "DU",
+      "index": 3,
+      "side": "midline",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "vertebra": "L4",
+        "dz_cun": -0.4,
+        "lat": 0,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "DU-4",
+      "channel": "DU",
+      "index": 4,
+      "side": "midline",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "vertebra": "L2",
+        "dz_cun": -0.4,
+        "lat": 0,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "DU-5",
+      "channel": "DU",
+      "index": 5,
+      "side": "midline",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "vertebra": "L1",
+        "dz_cun": -0.4,
+        "lat": 0,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "DU-6",
+      "channel": "DU",
+      "index": 6,
+      "side": "midline",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "vertebra": "T11",
+        "dz_cun": -0.4,
+        "lat": 0,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "DU-7",
+      "channel": "DU",
+      "index": 7,
+      "side": "midline",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "vertebra": "T10",
+        "dz_cun": -0.4,
+        "lat": 0,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "DU-8",
+      "channel": "DU",
+      "index": 8,
+      "side": "midline",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "vertebra": "T9",
+        "dz_cun": -0.4,
+        "lat": 0,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "DU-9",
+      "channel": "DU",
+      "index": 9,
+      "side": "midline",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "vertebra": "T7",
+        "dz_cun": -0.4,
+        "lat": 0,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "DU-10",
+      "channel": "DU",
+      "index": 10,
+      "side": "midline",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "vertebra": "T6",
+        "dz_cun": -0.4,
+        "lat": 0,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "DU-11",
+      "channel": "DU",
+      "index": 11,
+      "side": "midline",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "vertebra": "T5",
+        "dz_cun": -0.4,
+        "lat": 0,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "DU-12",
+      "channel": "DU",
+      "index": 12,
+      "side": "midline",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "vertebra": "T3",
+        "dz_cun": -0.4,
+        "lat": 0,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "DU-13",
+      "channel": "DU",
+      "index": 13,
+      "side": "midline",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "vertebra": "T1",
+        "dz_cun": -0.4,
+        "lat": 0,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "DU-14",
+      "channel": "DU",
+      "index": 14,
+      "side": "midline",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "trunk",
+        "vertebra": "C7",
+        "dz_cun": -0.4,
+        "lat": 0,
+        "face": "posterior"
+      }
+    },
+    {
+      "code": "DU-15",
+      "channel": "DU",
+      "index": 15,
+      "side": "midline",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "neck",
+        "z_frac": 0.858,
+        "az": 180
+      }
+    },
+    {
+      "code": "DU-16",
+      "channel": "DU",
+      "index": 16,
+      "side": "midline",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "neck",
+        "z_frac": 0.87,
+        "az": 180
+      }
+    },
+    {
+      "code": "DU-17",
+      "channel": "DU",
+      "index": 17,
+      "side": "midline",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "head",
+        "arc_cun": 9.5
+      }
+    },
+    {
+      "code": "DU-18",
+      "channel": "DU",
+      "index": 18,
+      "side": "midline",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "head",
+        "arc_cun": 8
+      }
+    },
+    {
+      "code": "DU-19",
+      "channel": "DU",
+      "index": 19,
+      "side": "midline",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "head",
+        "arc_cun": 6.5
+      }
+    },
+    {
+      "code": "DU-20",
+      "channel": "DU",
+      "index": 20,
+      "side": "midline",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "head",
+        "arc_cun": 5
+      }
+    },
+    {
+      "code": "DU-21",
+      "channel": "DU",
+      "index": 21,
+      "side": "midline",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "head",
+        "arc_cun": 3.5
+      }
+    },
+    {
+      "code": "DU-22",
+      "channel": "DU",
+      "index": 22,
+      "side": "midline",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "head",
+        "arc_cun": 2
+      }
+    },
+    {
+      "code": "DU-23",
+      "channel": "DU",
+      "index": 23,
+      "side": "midline",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "head",
+        "arc_cun": 1
+      }
+    },
+    {
+      "code": "DU-24",
+      "channel": "DU",
+      "index": 24,
+      "side": "midline",
+      "accuracy": "anchored",
+      "anchor": {
+        "seg": "head",
+        "arc_cun": 0.5
+      }
+    },
+    {
+      "code": "DU-25",
+      "channel": "DU",
+      "index": 25,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Nasal bone",
+        "along": 1,
+        "dir": "anterior",
+        "shift": {
+          "down": 8
+        }
+      }
+    },
+    {
+      "code": "DU-26",
+      "channel": "DU",
+      "index": 26,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Nasal bone",
+        "along": 1,
+        "dir": "anterior",
+        "shift": {
+          "down": 20
+        }
+      }
+    },
+    {
+      "code": "DU-27",
+      "channel": "DU",
+      "index": 27,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Nasal bone",
+        "along": 1,
+        "dir": "anterior",
+        "shift": {
+          "down": 28
+        }
+      }
+    },
+    {
+      "code": "DU-28",
+      "channel": "DU",
+      "index": 28,
+      "side": "bilateral",
+      "accuracy": "structural",
+      "anchor": {
+        "struct": "Nasal bone",
+        "along": 1,
+        "dir": "anterior",
+        "shift": {
+          "down": 33
+        }
+      }
+    }
+  ]
+}
