@@ -2,67 +2,67 @@
 
 You are the execution engineer for **HIU YHCT 3D Atlas — Huyệt vị · Kinh lạc · Giải phẫu 3D — HIU CLB YHCT**.
 
-## Non-negotiable operating rules
-- Continue from the exact repository/branch/checkpoint; never rebuild from scratch.
+## Non-negotiable rules
+- Continue from the exact repository/branch/checkpoint; do not rebuild from scratch.
 - Repository: `drngovothiennhan/human-atlas`.
-- Working branch: `feature-hiu-yhct-3d-atlas`.
-- PR #1 is draft/open. Do not merge `main` unless the user explicitly orders it.
-- Before editing, read `PROJECT_STATE.md`, `docs/CHECKBOARD.md`, `docs/SOURCE_AUDIT.md`, `docs/LICENSE_MATRIX.md`, `docs/ACUPOINT_SPATIAL_AUDIT.md`, and this file.
-- Fetch the live branch HEAD and latest GitHub Actions runs first. Do not trust conversational memory or repeat completed work.
-- Never fabricate coordinates, anatomical/clinical facts, tests, deployments, licenses, citations, reviewer identity/status, or completion percentages.
-- Never infer a 3D z coordinate from a 2D map.
-- A reusable license is necessary but not sufficient for 3D publication; BodyParts3D registration/review is a separate gate.
-- Google/kinhlac.online/WHO and other non-redistributable sources are human reference/navigation only. Do not copy protected prose/assets/data.
-- New third-party sources require exact artifact + exact license + attribution + coordinate-frame + provenance audit before import.
-- Do not add unrelated features or code merely to increase activity.
-- Keep the stable anatomy viewer, study panel and PWA intact.
+- Branch: `feature-hiu-yhct-3d-atlas`.
+- PR #1 is draft/open. Do not merge main unless the user explicitly orders it.
+- Before editing, read `PROJECT_STATE.md`, `docs/CHECKBOARD.md`, `docs/SOURCE_AUDIT.md`, `docs/LICENSE_MATRIX.md`, `docs/USER_PROVIDED_SOURCE_AUDIT.md`, `docs/ACUPOINT_SPATIAL_AUDIT.md` and this file.
+- Fetch live branch HEAD and latest Actions runs first. Do not repeat completed work.
+- Never fabricate coordinates, anatomy/clinical facts, test/deploy status, licenses, citations, reviewer identity/status, or completion percentages.
+- Never infer a z coordinate from a 2D diagram.
+- User upload/possession is not a redistribution license.
+- User-provided PDFs remain REFERENCE_ONLY until exact reuse rights are established; do not commit their PDFs, pages, diagrams, long prose or coordinate tables.
+- A reusable license is not enough for 3D publication; BodyParts3D registration plus review is a separate gate.
+- Do not add unrelated features merely to increase code/activity.
 
 ## Last verified code checkpoint
-- Code commit: `5046b736efc98ddce81347718edcdf5e8920a4a5`.
-- Push CI: `35572643746` (#66) — SUCCESS.
-- PR CI: `35572647309` (#67) — SUCCESS.
-- Unit tests: 19/19 PASS.
-- Content: 15 sources, 2 spatial candidates, 14 meridians, 361 acupoints, 5 pilot points, 0 committed pilot anchors.
-- Anatomy validation: 2,234 meshes, 3,432 concept mappings, 2,288,268 triangles.
-- Browser smoke: PASS on desktop 1440x900 and tablet emulation 1024x768; rotate/zoom/camera presets/reset/layer presets/touch orbit/catalogue/local assistant/registration draft capture/offline reload all passed; console errors = [].
-- Registration review validator is implemented.
-- Registration capture is locked to assembled geometry with the integumentary surface kept visible.
+- Code commit: `4e7e5edb6da4c82a0e92d81894720e3d30166579`.
+- Push CI #68: `35576327240` — SUCCESS.
+- PR CI #69: `35576331914` — SUCCESS.
+- 20/20 unit tests PASS.
+- Content: 19 sources, of which 4 user-provided REFERENCE_ONLY sources; 2 spatial candidates; 14 meridians; 361 points; 5 pilot points; 0 committed pilot anchors; 15 registration-reference evidence entries.
+- Anatomy: 2,234 meshes; 3,432 mappings; 2,288,268 triangles.
+- Browser smoke PASS: desktop rotate/zoom/camera presets/reset/layers; tablet touch emulation; local search/assistant; registration references; ST-36 LEFT UNVERIFIED surface capture; PWA offline reload; zero console errors.
+- Push browser artifact ID: `10628377175`.
+- PR browser artifact ID: `10627653035`.
+
+## Newly integrated source workflow
+The four user-provided PDFs are metadata/reference sources only:
+- `USER-BYT-2020-YHCT-GUIDELINE`
+- `USER-HANOI-YHCT-LECTURE-T1-2005`
+- `USER-CONGSI-KINH-LAC-HOC`
+- `USER-NGO-TRUNG-TRIEU-HUYET-VI-KINH-LAC`
+
+`content/registration/reference-evidence.json` contains short bibliographic locators for ST-36, LI-4, LU-5, LU-9 and ST-41. The registration UI displays them to a human reviewer. These locators are not spatial coordinates.
 
 ## Current blockers
-- Runtime spatial acupoints = 0.
+- Runtime published 3D acupoints = 0.
 - Published 3D meridian paths = 0.
-- The approved pilot needs 10 bilateral reviewed anchors; none may be synthesized.
-- GitHub Pages deploy code builds successfully, but repository Pages is not enabled/configured. Auto push deployment is parked; workflow is manual-only until enablement.
-- Render preview `https://hiu-yhct-3d-atlas-preview.onrender.com` is live but its latest listed deploy is commit `3ea0b3da…`, so it is not evidence for commit 5046.
-- Physical tablet/laptop QA and fresh kinhlac.online side-by-side parity are not done.
+- Pilot requires 10 bilateral reviewed anchors; do not synthesize them.
+- GitHub Pages repo-level enablement is still missing; old run `35571169188` failed only at Configure Pages.
+- Render preview `https://hiu-yhct-3d-atlas-preview.onrender.com` remains stale; latest listed live deploy `dep-daobqpmgekts73blir4g` is from commit `3ea0b3da…`.
+- Physical-device QA and fresh kinhlac.online parity are pending.
 - Do not claim >=95% acceptance/stability until a defined acceptance set is measured at that level.
 
 ## Exact continuation workflow
-1. Fetch branch HEAD and Actions status. If HEAD contains only a later checkpoint/documentation commit, keep `5046b736…` as the last verified runtime code baseline unless newer runtime code has green CI.
-2. Do not retry the old Pages failure as an app-code bug. Pages must first be enabled in repository Settings -> Pages -> Source: GitHub Actions; then manually dispatch the Pages workflow.
-3. Continue the approved registration pilot only: ST-36, LI-4, LU-5, LU-9, ST-41.
-4. Capture LEFT and RIGHT directly on the BodyParts3D surface through the registration workspace. Preserve pointCode, side, surface structure, triangle, barycentric coordinates, canonical XYZ, geometry source, location-reference sources and capture timestamp.
-5. All new captures remain UNVERIFIED.
-6. When genuine faculty review evidence exists, add reviewer + reviewedAt + FACULTY_REVIEWED/PUBLISHED and run:
-   `npm run registration:validate-review -- <review-artifact.json>`
-7. If validation fails, correct only the evidenced issue. Never alter coordinates to make validation pass.
-8. Only after review validation passes, implement/promote reviewed anchors into runtime spatial records. Unreviewed anchors stay excluded.
-9. Generate surface-following meridian paths only from reviewed anchors.
-10. For every runtime/content change run: content validation -> content build -> TypeScript -> anatomy validator -> interaction validator -> unit tests -> production build -> static asset verification -> browser smoke -> Pages static build verification.
-11. Record exact commit/run/deploy provenance at every checkpoint.
-12. Update a live preview only from a verified commit. Do not label the stale Render deploy as current.
-13. Physical-device QA and fresh reference parity remain required before handoff.
+1. Fetch branch HEAD and Actions status.
+2. Preserve `4e7e5edb…` as the last verified runtime code baseline unless newer runtime code has green CI.
+3. Do not redo PDF/source integration.
+4. Continue only the approved registration pilot: ST-36, LI-4, LU-5, LU-9, ST-41.
+5. For each point, capture LEFT and RIGHT by clicking directly on the BodyParts3D surface while consulting the UI reference locators.
+6. Preserve pointCode, side, BodyParts3D structure, triangle, barycentric, canonical XYZ, geometry source, reference sources and timestamp.
+7. Every new capture remains UNVERIFIED.
+8. When genuine faculty review exists, attach reviewer + reviewedAt + FACULTY_REVIEWED/PUBLISHED and run `npm run registration:validate-review -- <review-artifact.json>`.
+9. Correct only evidenced review errors; never move coordinates merely to make validation pass.
+10. Only after review validation passes, promote reviewed anchors into runtime spatial records.
+11. Generate meridian paths only from reviewed anchors.
+12. After every runtime/content change run: content validate -> content build -> TypeScript -> anatomy validator -> interaction validator -> unit tests -> production build -> static verification -> browser smoke -> Pages static build verification.
+13. Record exact commit/run/deploy provenance at every checkpoint.
+14. Update a live preview only from a verified code commit.
+15. Complete physical tablet/laptop QA and fresh side-by-side reference parity before handoff.
 
-## Checkpoint output format
-Record:
-- current branch HEAD and last verified runtime code SHA;
-- exact changes;
-- push/PR CI run IDs and outcomes;
-- content counts;
-- runtime spatial point/path counts;
-- deployment URL + source commit/deploy ID;
-- source/license changes;
-- exact failures/blockers;
-- next exact action.
+## Checkpoint format
+Record branch HEAD, verified runtime SHA, changes, CI run IDs, test counts, content counts, spatial point/path counts, deploy provenance, source/license changes, exact blockers and next action.
 
-If interrupted, a new ChatGPT session must start from these repository files and live GitHub/hosting state, not from memory.
+If interrupted, a new session must start by reading these repository files and live GitHub/hosting state rather than trusting conversational memory.
