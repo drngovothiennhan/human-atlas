@@ -10,6 +10,8 @@ Audit date: 2026-09-21. Public availability is **not** treated as permission to 
 | AcuAtlas reference dataset | AcuAtlas | 361 point records + mapped body-plate x/y | Dataset publication states CC BY 4.0 | DIRECT_USE / REGISTRATION_BLOCKED |
 | AcuSim Dryad 2025 | Sun et al. | 174 cervicocranial points; RGB-D + 2D/3D keypoint annotations | Dryad CC0 dataset | DIRECT_USE / REGISTRATION_BLOCKED |
 | Antonio-Abrao/acu-master | Antonio Abrao | 3D acupuncture app | GPL-3.0 | REFERENCE_ONLY |
+| spacejohnlf/tcm-acupoints | spacejohnlf | Three.js meridian/acupoint viewer + surface snapping | MIT code; model CC BY-SA 4.0; medical prose/data reuse provenance unresolved; coordinates explicitly illustrative | REFERENCE_ONLY |
+| AcuGuide | kany-e | iOS 3D/acupressure atlas | Proprietary all-rights-reserved source; public for reading/evaluation only | REFERENCE_ONLY |
 | AAIDA | vtrantranzen | Local TCM app | MIT code; medical content provenance not yet audited | REFERENCE_ONLY |
 | UBERON | OBO/UBERON | Anatomy ontology | CC BY 3.0 public record | REFERENCE_ONLY |
 | FMA | FMA maintainers | Anatomy ontology | Exact artifact/version license unresolved | QUARANTINE |
@@ -21,6 +23,11 @@ Audit date: 2026-09-21. Public availability is **not** treated as permission to 
 
 - BodyParts3D 4.0 anatomy assets. Official license: https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html
 - AcuAtlas 361-point index (CC BY 4.0): only point codes, 14-meridian membership, and standard numeric ordering are bundled in catalogue 0.3.0. Clinical prose and mapped coordinates remain excluded.
+
+## Additional 3D acupuncture implementation references
+
+- `spacejohnlf/tcm-acupoints`: MIT code is a useful implementation reference for Three.js interaction/surface snapping, but its README explicitly labels its 3D acupoint coordinates as teaching/illustrative coordinates rather than a standard clinical coordinate database. Its body model is separately CC BY-SA 4.0 and its medical prose provenance is insufficient for direct runtime import. No data/assets are imported by this checkpoint.
+- `kany-e/AcuGuide`: public source but proprietary. Its license permits reading/study/evaluation and forbids reuse in another product without written permission. Reference-only; no code/data import.
 
 ## Additional open 3D anatomy reference
 
