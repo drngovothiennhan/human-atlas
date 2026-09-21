@@ -19,7 +19,7 @@ jobs:
       - run: npm run content:build
       - run: npm run check
       - run: node scripts/validate-atlas.mjs
-      - run: node scripts/validate-interactions.mjs
+      - run: node --experimental-strip-types scripts/validate-interactions.mjs
       - run: npm test
       - run: npm run build
       - run: npm run verify:pages
