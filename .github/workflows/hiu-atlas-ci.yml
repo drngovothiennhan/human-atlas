@@ -19,6 +19,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run content:validate
+      - run: npm run source:furia:validate
       - run: npm run content:build
       - run: npm run check
       - run: node scripts/validate-atlas.mjs
