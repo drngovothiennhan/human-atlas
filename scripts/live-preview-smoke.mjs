@@ -41,7 +41,7 @@ try{
   await waitFor(()=>evaluate("!document.querySelector('.loading')"),{timeout:180000,label:'live anatomy ready'});
   await evaluate("document.querySelector('[data-meridian3d-launch=true]')?.click()");
   await waitFor(()=>evaluate("!!document.querySelector('[data-meridian3d-panel=true]')"),{label:'live 3D meridian panel'});
-  await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.meridianEffect==='flow'"),{label:'live meridian flow effect'});
+  await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.meridianEffect==='flow'&&Number(document.querySelector('canvas')?.dataset.meridianPulseMarkers||0)>0&&Number(document.querySelector('canvas')?.dataset.meridianFlowParticles||0)>0"),{label:'live meridian flow and pulse primitives'});
 
   const before=await evaluate("(()=>{const c=document.querySelector('canvas');const r=c.getBoundingClientRect();return {id:c.dataset.meridianId,effect:c.dataset.meridianEffect,frame:Number(c.dataset.meridianEffectFrame||0),anchors:Number(c.dataset.meridianSchematicAnchors||0),paths:Number(c.dataset.meridianSchematicPaths||0),rect:{x:r.x,y:r.y,w:r.width,h:r.height}}})()");
   const effectA=await screenshot('effect-a.png');
@@ -54,7 +54,7 @@ try{
 
   await evaluate("(()=>{const s=document.querySelectorAll('.meridian3d-controls select')[0];s.value='ST';s.dispatchEvent(new Event('change',{bubbles:true}));return true})()");
   await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.meridianId==='ST'&&Number(document.querySelector('canvas')?.dataset.meridianSchematicAnchors)>0&&Number(document.querySelector('canvas')?.dataset.meridianSchematicPaths)>0"),{label:'live ST overlay'});
-  const st=await evaluate("(()=>{const c=document.querySelector('canvas');return {id:c.dataset.meridianId,effect:c.dataset.meridianEffect,anchors:Number(c.dataset.meridianSchematicAnchors||0),paths:Number(c.dataset.meridianSchematicPaths||0)}})()");
+  const st=await evaluate("(()=>{const c=document.querySelector('canvas');return {id:c.dataset.meridianId,effect:c.dataset.meridianEffect,anchors:Number(c.dataset.meridianSchematicAnchors||0),paths:Number(c.dataset.meridianSchematicPaths||0),pulseMarkers:Number(c.dataset.meridianPulseMarkers||0),flowParticles:Number(c.dataset.meridianFlowParticles||0),legend:document.querySelector('.meridian3d-effect-note')?.innerText||''}})()");if(!st.legend.includes('Huyệt nhịp')||!st.legend.includes('Dòng kinh'))throw new Error('Meridian effect legend missing');
 
   await evaluate("(()=>{const i=document.querySelector('.meridian3d-search');Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set.call(i,'ST36');i.dispatchEvent(new Event('input',{bubbles:true}));return true})()");
   await waitFor(()=>evaluate("!!document.querySelector('[data-meridian3d-point=\"ST-36\"]')"),{label:'live ST-36 search'});
