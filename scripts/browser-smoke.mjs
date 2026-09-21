@@ -80,7 +80,7 @@ try{
   await evaluate("document.querySelector('[data-meridian3d-load-error=true] button').click()");
   await waitFor(()=>evaluate("!document.querySelector('[data-meridian3d-load-error=true]')&&document.querySelector('[data-meridian3d-launch=true]')?.innerText.includes('361 huyệt')"),{label:'meridian retry recovers data'});
   console.log('SMOKE_LOAD_FAILURE_RECOVERY_PASS');
-  await evaluate("document.querySelector('.meridian3d-actions button').click()");
+  await evaluate("document.querySelector('[data-effect-master=true]').click()");
   await evaluate("document.querySelector('.meridian3d-head button').click()");
   await waitFor(()=>evaluate("document.querySelector('canvas')?.width>0&&document.querySelector('canvas')?.height>0"),{label:'3D canvas'});
   await waitFor(()=>responses.filter(r=>r.url.includes('/models/')&&!r.url.includes('/models/atlas.json')&&r.status===200).length>0,{timeout:30000,label:'3D binary model response'});
