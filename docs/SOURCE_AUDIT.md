@@ -10,6 +10,7 @@ Audit date: 2026-09-21. Public availability is **not** treated as permission to 
 | AcuAtlas reference dataset | AcuAtlas | 361 point records + mapped body-plate x/y | Dataset publication states CC BY 4.0 | DIRECT_USE / REGISTRATION_BLOCKED |
 | AcuSim Dryad 2025 | Sun et al. | 174 cervicocranial points; RGB-D + 2D/3D keypoint annotations | Dryad CC0 dataset | DIRECT_USE / REGISTRATION_BLOCKED |
 | Antonio-Abrao/acu-master | Antonio Abrao | 3D acupuncture app | GPL-3.0 | REFERENCE_ONLY |
+| FuriaRozkwit/acupuncture-3d | Pawel Turzynski | 361 authored proportional anchors, 14-channel topology, procedural rig; structural metadata derived from anatomy assets | Code + authored anchor/topology/rig data MIT; `structures.json` CC BY-SA 4.0 per upstream attribution | DIRECT_USE_SCHEMATIC / REVIEW_REQUIRED |
 | wwwwangg/smplify-m-new (SMPLify-M) | SMPLify-M authors / SMPL-X licensors | Dynamic 3D acupoint mapping, 14-meridian visualization, SMPL-X vertex-index/geodesic-path approach | Repository follows SMPL-X/SMPLify-X non-commercial research/education license; non-transferable and no distribution; indices are tied to a specific SMPL-X vertex ordering | REFERENCE_ONLY |
 | spacejohnlf/tcm-acupoints | spacejohnlf | Three.js meridian/acupoint viewer + surface snapping | MIT code; model CC BY-SA 4.0; medical prose/data reuse provenance unresolved; coordinates explicitly illustrative | REFERENCE_ONLY |
 | AcuGuide | kany-e | iOS 3D/acupressure atlas | Proprietary all-rights-reserved source; public for reading/evaluation only | REFERENCE_ONLY |
@@ -50,3 +51,9 @@ kinhlac.online is used only to enumerate public viewer journeys (3D rotation, me
 ## User-provided course/reference PDFs
 
 Four supplied PDFs are audited into source metadata only. No PDF binary, scan page, diagram, long prose, or coordinate table is bundled. The Bộ Y tế document is used to corroborate point nomenclature/clinical usage; the illustrated Ngô Trung Triều atlas is a human visual reference for pilot registration. Neither is treated as a transferable BodyParts3D coordinate source. See `docs/USER_PROVIDED_SOURCE_AUDIT.md`.
+
+## FuriaRozkwit/acupuncture-3d pinned import
+
+Pinned upstream commit: `1fc9ec98d365c9fb035844e2775c1be05a0a05fc`.
+
+The HIU vendor subset imports 361 point identifiers with authored anchor geometry, 14 channel definitions, the proportional rig and structural reference metadata. Clinical prose, categories, needling material and `point_meta.json` are explicitly excluded. Upstream channel topology contains 360 unique point codes and omits BL-39 from the drawn path set; HIU records that fact and does not silently invent a BL-39 path segment. The imported layer is eligible only for a clearly labelled licensed schematic/unverified visualization until BodyParts3D registration and review gates are satisfied.
