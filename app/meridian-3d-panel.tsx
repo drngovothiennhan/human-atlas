@@ -111,12 +111,19 @@ export default function Meridian3DPanel({drafts,selectedPointCode,onOverlayChang
         <span>{active?.pointIds.length??filteredPoints.length} huyệt · {sideLabel(side)} · {schematicCount} anchor sơ đồ · {publishedCount} anchor đã duyệt · {draftCount} anchor nháp local</span>
         <span>{publishedPaths.some(p=>p.meridianId===activeMeridian)?'Có đường kinh 3D đã kiểm duyệt':schematicPaths?schematicPaths+' đoạn đường kinh sơ đồ nguồn mở · UNVERIFIED · Chưa có path 3D đã kiểm duyệt':'Chưa có path 3D đã kiểm duyệt — không tự nối điểm'}</span>
       </div>
+      <div className="meridian3d-effect-note" aria-label="Chú giải hiệu ứng 3D"><span><i className="effect-dot"/>Huyệt nhịp</span><span><i className="effect-flow"/>Dòng kinh</span><span>Chạm huyệt → camera focus</span></div>
       <div className="meridian3d-actions"><Button variant="ghost" className={enabled?'active':''} onClick={()=>setEnabled(v=>!v)}>{enabled?'Ẩn khỏi mô hình':'Hiện trên mô hình'}</Button><a href="https://kinhlac.online/xem-3d/" target="_blank" rel="noreferrer">Đối chiếu kinhlac.online ↗</a></div>
       <input className="meridian3d-search" value={query} onChange={e=>setQuery(e.target.value)} placeholder="Tìm ST-36, LI-4…" aria-label="Tìm huyệt để bay tới"/>
       {!loading&&!loadError&&!filteredPoints.length&&<p role="status">Không tìm thấy huyệt phù hợp.</p>}
-      <div className="meridian3d-list">{filteredPoints.map(point=>{const anchors=allAnchors.filter(a=>a.pointCode===point.code);return <button key={point.code} onClick={()=>focusPoint(point)} data-meridian3d-point={point.code}><b>{point.code}</b><span>{point.vietnameseName||point.englishName||'Huyệt chuẩn'}</span><small>{anchors.length?anchors.length+' anchor 3D · bấm để bay tới':'chưa có anchor 3D'}</small></button>})}</div>
+      <div className="meridian3d-list">{filteredPoints.map(point=>{const anchors=allAnchors.filter(a=>a.pointCode===point.code),activePoint=selected===point.code;return <button key={point.code} className={activePoint?'selected':''} aria-pressed={activePoint} onClick={()=>focusPoint(point)} data-meridian3d-point={point.code}><b>{point.code}</b><span>{point.vietnameseName||point.englishName||'Huyệt chuẩn'}</span><small>{anchors.length?anchors.length+' anchor 3D · bấm để bay tới':'chưa có anchor 3D'}</small></button>})}</div>
       {selectedRecord&&<div className="meridian3d-detail" data-meridian3d-detail="true">
         <strong>{selectedRecord.code}{selectedRecord.vietnameseName?' · '+selectedRecord.vietnameseName:''}</strong>
+        <div className="meridian3d-facts">
+          <span><small>Kinh</small><b>{meridians.find(m=>m.id===selectedRecord.meridianId)?.vietnameseName??selectedRecord.meridianId}</b></span>
+          <span><small>Thứ tự</small><b>{selectedRecord.sequence}</b></span>
+          <span><small>Anchor đang có</small><b>{selectedAnchors.length}</b></span>
+          <span><small>Trạng thái</small><b>{selectedAnchors.some(a=>a.sourceKind==='PUBLISHED')?'Đã duyệt':'UNVERIFIED'}</b></span>
+        </div>
         {schematic.sourceSideWarnings?.some(w=>w.pointCode===selectedRecord.code)&&<small role="status">Nguồn sơ đồ có dữ liệu hai bên không thống nhất với kinh giữa thân tại huyệt này; cần đối chiếu chuyên môn, chưa dùng để xác định vị trí chuẩn.</small>}
         <span>{selectedAnchors.some(a=>a.sourceKind==='PUBLISHED')?'Có tọa độ BodyParts3D đã kiểm duyệt.':'Chưa có tọa độ BodyParts3D đã kiểm duyệt. '}{selectedAnchors.length?selectedAnchors.map(a=>a.side+': '+(a.sourceKind==='PUBLISHED'?'đã duyệt':a.sourceKind==='LOCAL_DRAFT'?'nháp local · UNVERIFIED':'sơ đồ nguồn mở · UNVERIFIED')).join(' · '):'Chưa có tọa độ BodyParts3D đã đăng ký.'}</span>
         <small>Sơ đồ nguồn mở dùng để học/định hướng, không được tự nâng thành tọa độ xuất bản. Capture local và sơ đồ đều giữ UNVERIFIED cho đến khi có duyệt chuyên môn.</small>
