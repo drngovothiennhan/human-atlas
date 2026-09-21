@@ -108,16 +108,18 @@ try{
 
   const clickAria=async label=>evaluate("(()=>{const b=document.querySelector('[aria-label=\\\""+label+"\\\"]');if(!b)return false;b.click();return true})()");
   for(const [label,file] of [['front view','desktop-front.png'],['back view','desktop-back.png'],['side view','desktop-side.png']]){
+    const motionSeqBefore=await evaluate("Number(document.querySelector('canvas')?.dataset.cameraMotionSeq||0)");
     if(!await clickAria(label))throw new Error('Missing camera control: '+label);
     await waitFor(()=>evaluate("document.querySelector('[aria-label=\\\""+label+"\\\"]')?.getAttribute('aria-pressed')==='true'"),{label:'camera '+label});
-    await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.cameraMotion==='active'"),{label:'camera '+label+' smooth motion starts'});
+    await waitFor(()=>evaluate("Number(document.querySelector('canvas')?.dataset.cameraMotionSeq||0)>"+motionSeqBefore),{label:'camera '+label+' smooth motion sequence'});
     await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.cameraMotion==='idle'"),{timeout:30000,label:'camera '+label+' smooth motion completes'});
     await screenshot(file);
   }
   const sideHash=await screenshot('desktop-side-confirm.png');
+  const resetMotionSeqBefore=await evaluate("Number(document.querySelector('canvas')?.dataset.cameraMotionSeq||0)");
   if(!await clickAria('Reset view and layers'))throw new Error('Missing reset camera control');
   await waitFor(()=>evaluate("document.querySelector('[aria-label=\\\"three-quarter view\\\"]')?.getAttribute('aria-pressed')==='true'"),{label:'camera reset'});
-  await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.cameraMotion==='active'"),{label:'camera reset smooth motion starts'});
+  await waitFor(()=>evaluate("Number(document.querySelector('canvas')?.dataset.cameraMotionSeq||0)>"+resetMotionSeqBefore),{label:'camera reset smooth motion sequence'});
   await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.cameraMotion==='idle'"),{timeout:30000,label:'camera reset smooth motion completes'});
   const resetHash=await screenshot('desktop-reset.png');
   if(resetHash===sideHash)throw new Error('Camera reset did not change rendered screenshot');
