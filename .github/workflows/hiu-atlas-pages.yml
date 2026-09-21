@@ -1,7 +1,5 @@
 name: Deploy HIU YHCT Atlas to GitHub Pages
 on:
-  push:
-    branches: [feature-hiu-yhct-3d-atlas]
   workflow_dispatch:
 permissions:
   contents: read
