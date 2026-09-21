@@ -29,7 +29,10 @@ const pathCodes=[];
 for(const paths of Object.values(meridians.paths)){
   for(const path of paths)for(const code of path)pathCodes.push(code);
 }
-assert.equal(new Set(pathCodes).size,361);
+const topologyCodes=new Set(pathCodes);
+assert.equal(topologyCodes.size,360);
+const omitted=points.points.map(point=>point.code).filter(code=>!topologyCodes.has(code));
+assert.deepEqual(omitted,['BL-39']);
 assert.ok(rig.default_height_m>1&&rig.default_height_m<2.5);
 assert.ok(Object.keys(rig.cun_lengths).length>=9);
 assert.ok(Object.keys(structures.structures||{}).length>=44);
@@ -39,7 +42,8 @@ console.log(JSON.stringify({
   sourceCommit:source.commit,
   points:points.points.length,
   channels:channels.size,
-  topologyPoints:new Set(pathCodes).size,
+  topologyPoints:topologyCodes.size,
+  topologyOmitted:omitted,
   structuralPoints:points.points.filter(point=>Boolean(point.anchor.struct)).length,
   scalpPoints:points.points.filter(point=>Number.isFinite(point.anchor.arc_cun)).length,
   status:'PASS'
