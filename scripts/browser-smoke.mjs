@@ -123,6 +123,26 @@ try{
   const touchAfter=await screenshot('tablet-after-touch.png');
   if(touchAfter===touchBefore)throw new Error('Tablet touch orbit did not change rendered screenshot');
 
+  await send('Page.navigate',{url:base+'?register=1'});
+  await waitFor(()=>evaluate("document.readyState==='complete'&&!!document.querySelector('[data-registration-panel=true]')"),{timeout:30000,label:'registration workspace'});
+  await waitFor(()=>evaluate("document.querySelector('canvas')?.width>0&&document.querySelector('canvas')?.height>0"),{label:'registration 3D canvas'});
+  await sleep(1400);
+  const rc=await evaluate("(()=>{const r=document.querySelector('canvas').getBoundingClientRect();return{x:r.x,y:r.y,w:r.width,h:r.height}})()");
+  let registrationEvidence=null;
+  for(const fraction of [.32,.42,.52,.62,.72]){
+    const px=rc.x+rc.w*.55,py=rc.y+rc.h*fraction;
+    await send('Input.dispatchMouseEvent',{type:'mousePressed',x:px,y:py,button:'left',buttons:1,clickCount:1});
+    await send('Input.dispatchMouseEvent',{type:'mouseReleased',x:px,y:py,button:'left',buttons:0,clickCount:1});
+    await sleep(180);
+    registrationEvidence=await evaluate("(()=>{try{const rows=JSON.parse(localStorage.getItem('hiu-yhct-registration-drafts-v0.1')||'[]');const d=rows.find(x=>x.pointCode==='ST-36'&&x.side==='LEFT');return d?{pointCode:d.pointCode,side:d.side,status:d.verificationStatus,triangleIndex:d.triangleIndex,barycentric:d.barycentric,structure:d.surfaceStructureId}:null}catch{return null}})()");
+    if(registrationEvidence)break;
+  }
+  if(!registrationEvidence)throw new Error('Registration workspace did not capture a BodyParts3D surface anchor');
+  if(registrationEvidence.status!=='UNVERIFIED'||!Number.isInteger(registrationEvidence.triangleIndex)||!Array.isArray(registrationEvidence.barycentric)||registrationEvidence.barycentric.length!==3)throw new Error('Registration evidence gate failed: '+JSON.stringify(registrationEvidence));
+  const barySum=registrationEvidence.barycentric.reduce((a,b)=>a+b,0);
+  if(Math.abs(barySum-1)>1e-4)throw new Error('Registration barycentric sum invalid: '+barySum);
+  await screenshot('tablet-registration-workspace.png');
+
   await waitFor(()=>evaluate("navigator.serviceWorker?Promise.race([navigator.serviceWorker.ready.then(()=>true),new Promise(resolve=>setTimeout(()=>resolve(false),1000))]):false"),{timeout:15000,label:'service worker ready'});
   await sleep(500);
   await send('Network.emulateNetworkConditions',{offline:true,latency:0,downloadThroughput:0,uploadThroughput:0});
@@ -138,6 +158,7 @@ try{
     modelResponses:responses.filter(r=>/\/models\//.test(r.url)&&r.status===200).length,
     localMeridianSearch:true,
     localStudyAssistant:true,
+    registrationCapture:{pointCode:registrationEvidence.pointCode,side:registrationEvidence.side,status:registrationEvidence.status,triangleIndex:registrationEvidence.triangleIndex,barycentricValid:true},
     pwaOfflineReload:Boolean(offlineOk),
     consoleErrors
   };
