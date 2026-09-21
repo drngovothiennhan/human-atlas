@@ -23,12 +23,13 @@ export default function AnatomyScene({atlas,state,onSelect,onProgress,onError,re
   renderer.setPixelRatio(Math.min(devicePixelRatio,innerWidth<768?1.5:2));renderer.setClearColor('#f2f3f3');renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1.12;el.appendChild(renderer.domElement);
   renderer.domElement.setAttribute('aria-label','Interactive human anatomy. Drag to orbit, pinch or scroll to zoom, and tap a structure to inspect it.');
   const scene=new T.Scene(),camera=new T.PerspectiveCamera(34,1,.005,100),controls=new OrbitControls(camera,renderer.domElement);
-  camera.position.set(1.4,1.05,3.6);controls.target.set(0,.85,0);controls.enableDamping=true;controls.dampingFactor=.085;controls.minDistance=.07;controls.maxDistance=40;controls.maxPolarAngle=Math.PI*.96;controls.zoomToCursor=true;renderer.domElement.dataset.cameraMotion='idle';
+  camera.position.set(1.4,1.05,3.6);controls.target.set(0,.85,0);controls.enableDamping=true;controls.dampingFactor=.085;controls.minDistance=.07;controls.maxDistance=40;controls.maxPolarAngle=Math.PI*.96;controls.zoomToCursor=true;renderer.domElement.dataset.cameraMotion='idle';renderer.domElement.dataset.cameraMotionSeq='0';
+  let cameraMotionSeq=0;
   type CameraMotion={startedAt:number;duration:number;fromPosition:T.Vector3;fromTarget:T.Vector3;toPosition:T.Vector3;toTarget:T.Vector3};
   let cameraMotion:CameraMotion|null=null;
   const startCameraMotion=(toTarget:T.Vector3,toPosition:T.Vector3,duration=.68)=>{
    cameraMotion={startedAt:performance.now(),duration,fromPosition:camera.position.clone(),fromTarget:controls.target.clone(),toPosition:toPosition.clone(),toTarget:toTarget.clone()};
-   renderer.domElement.dataset.cameraMotion='active';dirty=true;
+   cameraMotionSeq++;renderer.domElement.dataset.cameraMotionSeq=String(cameraMotionSeq);renderer.domElement.dataset.cameraMotion='active';dirty=true;
   };
   controls.addEventListener('start',()=>{if(cameraMotion){cameraMotion=null;renderer.domElement.dataset.cameraMotion='idle';dirty=true;}});
   controls.addEventListener('change',()=>{dirty=true;});
