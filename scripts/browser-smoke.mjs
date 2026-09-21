@@ -110,13 +110,15 @@ try{
   for(const [label,file] of [['front view','desktop-front.png'],['back view','desktop-back.png'],['side view','desktop-side.png']]){
     if(!await clickAria(label))throw new Error('Missing camera control: '+label);
     await waitFor(()=>evaluate("document.querySelector('[aria-label=\\\""+label+"\\\"]')?.getAttribute('aria-pressed')==='true'"),{label:'camera '+label});
-    await sleep(250);
+    await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.cameraMotion==='active'"),{label:'camera '+label+' smooth motion starts'});
+    await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.cameraMotion==='idle'"),{timeout:3000,label:'camera '+label+' smooth motion completes'});
     await screenshot(file);
   }
   const sideHash=await screenshot('desktop-side-confirm.png');
   if(!await clickAria('Reset view and layers'))throw new Error('Missing reset camera control');
   await waitFor(()=>evaluate("document.querySelector('[aria-label=\\\"three-quarter view\\\"]')?.getAttribute('aria-pressed')==='true'"),{label:'camera reset'});
-  await sleep(250);
+  await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.cameraMotion==='active'"),{label:'camera reset smooth motion starts'});
+  await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.cameraMotion==='idle'"),{timeout:3000,label:'camera reset smooth motion completes'});
   const resetHash=await screenshot('desktop-reset.png');
   if(resetHash===sideHash)throw new Error('Camera reset did not change rendered screenshot');
 
@@ -173,6 +175,8 @@ try{
     await waitFor(()=>evaluate("!!document.querySelector('[data-meridian3d-point=\""+code+"\"]')"),{label:input+' cross-meridian search'});
     await evaluate("document.querySelector('[data-meridian3d-point=\""+code+"\"]').click()");
     await waitFor(()=>evaluate("document.querySelectorAll('.meridian3d-controls select')[0].value==="+JSON.stringify(code.split('-')[0])),{label:code+' selects its meridian'});
+    await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.cameraMotion==='active'"),{label:code+' fly-to starts'});
+    await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.cameraMotion==='idle'"),{timeout:3000,label:code+' fly-to completes'});
   }
   await evaluate("(()=>{const i=document.querySelector('.meridian3d-search');const s=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;s.call(i,'ST-36');i.dispatchEvent(new Event('input',{bubbles:true}));return true})()");
   await waitFor(()=>evaluate("!!document.querySelector('[data-meridian3d-point=\\\"ST-36\\\"]')"),{label:'3D meridian ST36 search'});
@@ -266,6 +270,8 @@ try{
     meridian3dSchematicCoverage:schematicCoverage,
     meridian3dSideFilter:{both:bilateralCount,left:45},
     meridian3dCompactCodeSearch:true,
+    smoothCameraPresets:true,
+    acupointFlyToMotion:true,
     meridian3dDraftOverlay:true,
     meridian3dNoFabricatedPath:true,
     registrationReferences:true,
