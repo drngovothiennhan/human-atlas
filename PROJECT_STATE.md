@@ -51,3 +51,13 @@ VERIFIED RUNTIME CODE: `b06b4acacf3f02037ffbdea5da75ab957a79db15`
 5. Promote only reviewed anchors; generate paths only from reviewed anchors.
 6. Run complete CI after promotion.
 7. Complete physical-device and fresh reference-parity QA before >=95% handoff.
+
+## STAGE 1 LICENSED SOURCE IMPORT — VERIFIED
+- Source: `FuriaRozkwit/acupuncture-3d@1fc9ec98d365c9fb035844e2775c1be05a0a05fc`.
+- Checkpoint SHA: `30c178303d0f58f6766ea626db16b3465e89d9dc`.
+- CI: push #109 `35583964566` SUCCESS; PR #110 `35583969307` SUCCESS.
+- Imported: reduced 361 authored anchors, 14-channel topology, MIT proportional rig, CC BY-SA structural metadata + notices.
+- Excluded: clinical prose/categories, needling/OCR/protected `point_meta.json` material.
+- Source topology fact: 360 unique path codes; BL-39 omitted upstream. Do not auto-invent a BL-39 route.
+- Current live Render preview remains the earlier verified runtime `b06b4ac…`; Stage 1 did not trigger another Render deploy because it is source/validation work only.
+- Next: Stage 2 licensed schematic resolver + BodyParts3D surface projection, explicitly UNVERIFIED/SCHEMATIC until review.
