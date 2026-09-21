@@ -198,9 +198,9 @@ try{
   const barySum=registrationEvidence.barycentric.reduce((a,b)=>a+b,0);
   if(Math.abs(barySum-1)>1e-4)throw new Error('Registration barycentric sum invalid: '+barySum);
   await waitFor(()=>evaluate("document.querySelector('[data-registration-progress=true]')?.innerText.includes('1/10')"),{label:'registration pilot progress after capture'});
-  await waitFor(()=>evaluate("document.querySelector('[data-meridian3d-launch=true]')?.innerText.includes('1 nháp local')"),{label:'3D meridian local draft count'});
   await evaluate("document.querySelector('[data-meridian3d-launch=true]')?.click()");
   await waitFor(()=>evaluate("!!document.querySelector('[data-meridian3d-panel=true]')"),{label:'registration 3D meridian panel'});
+  await waitFor(()=>evaluate("document.querySelector('.meridian3d-summary')?.innerText.includes('1 anchor nháp local')"),{label:'3D meridian local draft count'});
   await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.meridianAnchors==='1'"),{label:'3D local anchor rendered'});
   await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.meridianPaths==='0'"),{label:'no fabricated 3D meridian path'});
   await evaluate("(()=>{const i=document.querySelector('.meridian3d-search');const s=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;s.call(i,'ST-36');i.dispatchEvent(new Event('input',{bubbles:true}));return true})()");
