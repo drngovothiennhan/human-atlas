@@ -36,4 +36,4 @@ A spatial candidate may become `runtimeEligible: true` only after all of the fol
 6. landmark/sample QA is reviewed before promoting point positions;
 7. content validation and automated tests pass.
 
-Until then, `content/acupoints/acupoints.json` remains empty. No 2D coordinate is promoted to 3D and no missing z/anchor is synthesized.
+Until then, the 361 catalogue records in `content/acupoints/acupoints.json` remain metadata-only and contain no published `position3d`. Draft registration evidence is staged separately and is not runtime-eligible. No 2D coordinate is promoted to 3D and no missing z/anchor is synthesized.
