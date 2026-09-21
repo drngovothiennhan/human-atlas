@@ -126,15 +126,19 @@ try{
   await send('Page.navigate',{url:base+'?register=1'});
   await waitFor(()=>evaluate("document.readyState==='complete'&&!!document.querySelector('[data-registration-panel=true]')"),{timeout:30000,label:'registration workspace'});
   await waitFor(()=>evaluate("document.querySelector('canvas')?.width>0&&document.querySelector('canvas')?.height>0"),{label:'registration 3D canvas'});
-  await sleep(1400);
+  await waitFor(()=>evaluate("!document.querySelector('.loading')"),{timeout:180000,label:'registration anatomy ready'});
+  await sleep(500);
   const rc=await evaluate("(()=>{const r=document.querySelector('canvas').getBoundingClientRect();return{x:r.x,y:r.y,w:r.width,h:r.height}})()");
   let registrationEvidence=null;
-  for(const fraction of [.32,.42,.52,.62,.72]){
-    const px=rc.x+rc.w*.55,py=rc.y+rc.h*fraction;
-    await send('Input.dispatchMouseEvent',{type:'mousePressed',x:px,y:py,button:'left',buttons:1,clickCount:1});
-    await send('Input.dispatchMouseEvent',{type:'mouseReleased',x:px,y:py,button:'left',buttons:0,clickCount:1});
-    await sleep(180);
-    registrationEvidence=await evaluate("(()=>{try{const rows=JSON.parse(localStorage.getItem('hiu-yhct-registration-drafts-v0.1')||'[]');const d=rows.find(x=>x.pointCode==='ST-36'&&x.side==='LEFT');return d?{pointCode:d.pointCode,side:d.side,status:d.verificationStatus,triangleIndex:d.triangleIndex,barycentric:d.barycentric,structure:d.surfaceStructureId}:null}catch{return null}})()");
+  for(const xFraction of [.50,.54,.58]){
+    for(const yFraction of [.38,.46,.54,.62,.70]){
+      const px=rc.x+rc.w*xFraction,py=rc.y+rc.h*yFraction;
+      await send('Input.dispatchMouseEvent',{type:'mousePressed',x:px,y:py,button:'left',buttons:1,clickCount:1});
+      await send('Input.dispatchMouseEvent',{type:'mouseReleased',x:px,y:py,button:'left',buttons:0,clickCount:1});
+      await sleep(120);
+      registrationEvidence=await evaluate("(()=>{try{const rows=JSON.parse(localStorage.getItem('hiu-yhct-registration-drafts-v0.1')||'[]');const d=rows.find(x=>x.pointCode==='ST-36'&&x.side==='LEFT');return d?{pointCode:d.pointCode,side:d.side,status:d.verificationStatus,triangleIndex:d.triangleIndex,barycentric:d.barycentric,structure:d.surfaceStructureId}:null}catch{return null}})()");
+      if(registrationEvidence)break;
+    }
     if(registrationEvidence)break;
   }
   if(!registrationEvidence)throw new Error('Registration workspace did not capture a BodyParts3D surface anchor');
