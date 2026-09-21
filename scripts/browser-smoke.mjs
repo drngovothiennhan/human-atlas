@@ -32,8 +32,18 @@ try{
     if(msg.method==='Network.responseReceived')responses.push({url:msg.params.response.url,status:msg.params.response.status,mimeType:msg.params.response.mimeType});
     if(msg.method==='Runtime.consoleAPICalled'&&msg.params.type==='error')consoleErrors.push(msg.params.args.map(a=>a.value||a.description||'').join(' '));
   });
-  const methodTimeouts={'Page.captureScreenshot':45000,'Page.navigate':30000,'Page.reload':30000};
-  const send=(method,params={},timeout=methodTimeouts[method]??15000)=>new Promise((resolve,reject)=>{
+  const methodTimeouts={
+    'Page.captureScreenshot':60000,
+    'Page.navigate':45000,
+    'Page.reload':45000,
+    'Runtime.evaluate':30000,
+    'Input.dispatchMouseEvent':45000,
+    'Input.dispatchTouchEvent':45000,
+    'Emulation.setDeviceMetricsOverride':30000,
+    'Emulation.setTouchEmulationEnabled':30000,
+    'Network.emulateNetworkConditions':30000
+  };
+  const send=(method,params={},timeout=methodTimeouts[method]??30000)=>new Promise((resolve,reject)=>{
     const id=nextId++;
     const timer=setTimeout(()=>{pending.delete(id);reject(new Error('CDP timeout after '+timeout+'ms: '+method))},timeout);
     pending.set(id,{resolve:value=>{clearTimeout(timer);resolve(value)},reject:error=>{clearTimeout(timer);reject(error)}});
