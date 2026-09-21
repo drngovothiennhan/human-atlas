@@ -28,6 +28,12 @@ export type MeridianOverlayState={
   side:MeridianOverlaySide;
   anchors:MeridianSceneAnchor[];
   paths:MeridianScenePath[];
+  effects?:{
+    motion:boolean;
+    meridians:boolean;
+    acupoints:boolean;
+    collaterals:boolean;
+  };
 };
 
 export type MeridianFocusTarget={
