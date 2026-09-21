@@ -161,6 +161,21 @@
     "note": "License gate passes for the Dryad dataset. Spatial annotations are tied to its synthetic models/rendering frames; no verified transform or surface-anchor mapping to BodyParts3D has been established."
   },
   {
+    "id": "Z-ANATOMY",
+    "name": "Z-Anatomy Models of Human Anatomy",
+    "owner": "Z-Anatomy",
+    "url": "https://github.com/Z-Anatomy/Models-of-human-anatomy",
+    "dataType": "3D anatomy models and related project content",
+    "codeLicense": null,
+    "assetDataLicense": "CC-BY-SA-4.0 (repository-level statement; individual upstream inclusions still require asset-level audit)",
+    "attribution": "Z-Anatomy — The libre 3D atlas of anatomy — CC BY-SA 4.0",
+    "shareAlike": true,
+    "commercialRestriction": null,
+    "status": "REFERENCE_ONLY",
+    "auditedVersion": "public repository license audited 2026-09-21",
+    "note": "Open reference candidate only. Do not bundle assets until exact-file provenance, upstream sub-asset restrictions and ShareAlike compatibility with the HIU runtime distribution are explicitly resolved."
+  },
+  {
     "id": "GOOGLE-SEARCH-REFERENCE",
     "name": "Google Search external reference",
     "owner": "Google",
