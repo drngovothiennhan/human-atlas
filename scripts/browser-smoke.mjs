@@ -139,6 +139,16 @@ try{
   await evaluate("(()=>{const t=document.querySelector('.yhct-assistant textarea');const s=Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype,'value').set;s.call(t,'ST36 thuộc kinh nào?');t.dispatchEvent(new Event('input',{bubbles:true}));document.querySelector('.yhct-assistant>button').click();return true})()");
   await waitFor(()=>evaluate("document.querySelector('.yhct-assistant p')?.innerText.includes('Kinh Vị')"),{label:'local study assistant ST36'});
   await screenshot('desktop-study-panel.png');
+  await evaluate("document.querySelector('.yhct-head>button')?.click()");
+  await evaluate("document.querySelector('[data-meridian3d-launch=true]')?.click()");
+  await waitFor(()=>evaluate("!!document.querySelector('[data-meridian3d-panel=true]')"),{label:'3D meridian panel'});
+  await waitFor(()=>evaluate("document.querySelector('[data-meridian3d-panel=true]')?.innerText.includes('Kinh Vị')&&document.querySelector('[data-meridian3d-panel=true]')?.innerText.includes('Chưa có path 3D đã kiểm duyệt')"),{label:'3D meridian clean-room gate'});
+  await evaluate("(()=>{const i=document.querySelector('.meridian3d-search');const s=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;s.call(i,'ST-36');i.dispatchEvent(new Event('input',{bubbles:true}));return true})()");
+  await waitFor(()=>evaluate("!!document.querySelector('[data-meridian3d-point=\\\"ST-36\\\"]')"),{label:'3D meridian ST36 search'});
+  await evaluate("document.querySelector('[data-meridian3d-point=\\\"ST-36\\\"]')?.click()");
+  await waitFor(()=>evaluate("document.querySelector('[data-meridian3d-detail=true]')?.innerText.includes('Chưa có tọa độ BodyParts3D')"),{label:'3D unregistered point gate'});
+  await screenshot('desktop-meridian3d-panel.png');
+  await evaluate("document.querySelector('[data-meridian3d-panel=true] [aria-label=\\\"Đóng mô hình kinh lạc 3D\\\"]')?.click()");
 
   await send('Emulation.setDeviceMetricsOverride',{width:1024,height:768,deviceScaleFactor:1,mobile:false,screenWidth:1024,screenHeight:768});
   await send('Emulation.setTouchEmulationEnabled',{enabled:true,maxTouchPoints:5});
@@ -188,6 +198,17 @@ try{
   const barySum=registrationEvidence.barycentric.reduce((a,b)=>a+b,0);
   if(Math.abs(barySum-1)>1e-4)throw new Error('Registration barycentric sum invalid: '+barySum);
   await waitFor(()=>evaluate("document.querySelector('[data-registration-progress=true]')?.innerText.includes('1/10')"),{label:'registration pilot progress after capture'});
+  await waitFor(()=>evaluate("document.querySelector('[data-meridian3d-launch=true]')?.innerText.includes('1 nháp local')"),{label:'3D meridian local draft count'});
+  await evaluate("document.querySelector('[data-meridian3d-launch=true]')?.click()");
+  await waitFor(()=>evaluate("!!document.querySelector('[data-meridian3d-panel=true]')"),{label:'registration 3D meridian panel'});
+  await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.meridianAnchors==='1'"),{label:'3D local anchor rendered'});
+  await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.meridianPaths==='0'"),{label:'no fabricated 3D meridian path'});
+  await evaluate("(()=>{const i=document.querySelector('.meridian3d-search');const s=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;s.call(i,'ST-36');i.dispatchEvent(new Event('input',{bubbles:true}));return true})()");
+  await waitFor(()=>evaluate("!!document.querySelector('[data-meridian3d-point=\\\"ST-36\\\"]')"),{label:'registration 3D ST36 result'});
+  await evaluate("document.querySelector('[data-meridian3d-point=\\\"ST-36\\\"]')?.click()");
+  await waitFor(()=>evaluate("document.querySelector('[data-meridian3d-detail=true]')?.innerText.includes('UNVERIFIED')"),{label:'local draft remains unverified in 3D viewer'});
+  await screenshot('tablet-meridian3d-local-anchor.png');
+  await evaluate("document.querySelector('[data-meridian3d-panel=true] [aria-label=\\\"Đóng mô hình kinh lạc 3D\\\"]')?.click()");
   await waitFor(()=>evaluate("document.querySelector('[data-registration-next-missing=true]')?.innerText.includes('ST-36 · RIGHT')"),{label:'next missing pilot anchor'});
   const nextMissingClicked=await evaluate("(()=>{const b=document.querySelector('[data-registration-next-missing=true]');if(!b)return false;b.click();return true})()");
   if(!nextMissingClicked)throw new Error('Next-missing pilot control unavailable');
@@ -209,6 +230,9 @@ try{
     modelResponses:responses.filter(r=>/\/models\//.test(r.url)&&r.status===200).length,
     localMeridianSearch:true,
     localStudyAssistant:true,
+    meridian3dExplorer:true,
+    meridian3dDraftOverlay:true,
+    meridian3dNoFabricatedPath:true,
     registrationReferences:true,
     registrationPilotProgress:true,
     registrationNextMissing:true,
