@@ -176,6 +176,36 @@
     "note": "Open reference candidate only. Do not bundle assets until exact-file provenance, upstream sub-asset restrictions and ShareAlike compatibility with the HIU runtime distribution are explicitly resolved."
   },
   {
+    "id": "TCM-ACUPOINTS-SPACEJOHNLF",
+    "name": "tcm-acupoints",
+    "owner": "spacejohnlf",
+    "url": "https://github.com/spacejohnlf/tcm-acupoints",
+    "dataType": "Three.js 3D meridian/acupoint viewer; surface-snap implementation; educational point coordinates and prose",
+    "codeLicense": "MIT",
+    "assetDataLicense": "MIXED/SEPARATE: body model CC-BY-SA-4.0; acupoint text reuse provenance/license not established; coordinates explicitly illustrative",
+    "attribution": "MIT notice required for reused code; model attribution/share-alike separately required",
+    "shareAlike": null,
+    "commercialRestriction": null,
+    "status": "REFERENCE_ONLY",
+    "auditedVersion": "public repository README/LICENSE audited 2026-09-21",
+    "note": "Implementation techniques may be studied under MIT, but no medical prose, illustrative coordinates, or CC-BY-SA body model asset is imported by this checkpoint."
+  },
+  {
+    "id": "ACUGUIDE-2026",
+    "name": "AcuGuide",
+    "owner": "kany-e",
+    "url": "https://github.com/kany-e/AcuGuide",
+    "dataType": "iOS 3D acupressure/atlas application used only as public design/QA reference",
+    "codeLicense": "PROPRIETARY / ALL RIGHTS RESERVED",
+    "assetDataLicense": "THIRD-PARTY COMPONENTS HAVE SEPARATE LICENSES",
+    "attribution": "Repository permits reading/study/evaluation; product reuse requires permission",
+    "shareAlike": null,
+    "commercialRestriction": true,
+    "status": "REFERENCE_ONLY",
+    "auditedVersion": "LICENSE and README audited 2026-09-21",
+    "note": "Public source is not open-source. No AcuGuide code or bundled medical data is imported."
+  },
+  {
     "id": "GOOGLE-SEARCH-REFERENCE",
     "name": "Google Search external reference",
     "owner": "Google",
