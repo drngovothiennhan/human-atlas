@@ -31,7 +31,7 @@ export default function RegistrationPanel({target,capture,onTargetChange}:Props)
     let live=true;
     fetch('/data/registration-pilot.json')
       .then(response=>{if(!response.ok)throw new Error('registration pilot unavailable');return response.json();})
-      .then(data=>{if(live)setPilot(data);})
+      .then((data:unknown)=>{if(live)setPilot(data as PilotFile);})
       .catch(()=>{});
     try{
       const saved=localStorage.getItem(STORAGE_KEY);
