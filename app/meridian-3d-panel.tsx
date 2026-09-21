@@ -10,17 +10,21 @@ import {
   type MeridianScenePath
 } from './meridian-overlay';
 
-type Meridian={id:string;code:string;vietnameseName:string;englishName:string;pointIds:string[];path3d:number[][];reviewStatus:string;spatialStatus:string};
-type Acupoint={code:string;meridianId:string;sequence:number;vietnameseName?:string|null;englishName?:string|null;position3d?:{x:number;y:number;z:number;coordinateSystem?:string;source?:string}|null;reviewStatus?:string;verificationStatus?:string};
+type Language='vi'|'en'|'zh';
+type Meridian={id:string;code:string;vietnameseName:string;englishName:string;chineseName?:string|null;pointIds:string[];path3d:number[][];reviewStatus:string;spatialStatus:string};
+type Acupoint={code:string;meridianId:string;sequence:number;vietnameseName?:string|null;englishName?:string|null;chineseName?:string|null;pinyin?:string|null;position3d?:{x:number;y:number;z:number;coordinateSystem?:string;source?:string}|null;reviewStatus?:string;verificationStatus?:string};
 type SchematicSpatial={anchors:MeridianSceneAnchor[];paths:MeridianScenePath[];source?:{repository?:string;commit?:string;license?:string};omittedTopology?:string[];sourceSideWarnings?:{pointCode:string;reason:string}[]};
 
 interface Props{drafts:AcupointAnchorDraft[];selectedPointCode:string|null;onOverlayChange:(overlay:MeridianOverlayState)=>void;onFocus:(target:MeridianFocusTarget|null)=>void}
 
 const norm=(value:string)=>value.normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d').replace(/Đ/g,'D').toLowerCase().trim();
 const sideLabel=(side:MeridianOverlaySide)=>side==='BOTH'?'Hai bên':side==='LEFT'?'Trái':'Phải';
+const MERIDIAN_ZH:Record<string,string>={LU:'手太阴肺经',LI:'手阳明大肠经',ST:'足阳明胃经',SP:'足太阴脾经',HT:'手少阴心经',SI:'手太阳小肠经',BL:'足太阳膀胱经',KI:'足少阴肾经',PC:'手厥阴心包经',TE:'手少阳三焦经',GB:'足少阳胆经',LR:'足厥阴肝经',CV:'任脉',GV:'督脉'};
 
 export default function Meridian3DPanel({drafts,selectedPointCode,onOverlayChange,onFocus}:Props){
-  const [open,setOpen]=useState(false),[enabled,setEnabled]=useState(false);
+  const [open,setOpen]=useState(false),[enabled,setEnabled]=useState(true);
+  const [motion,setMotion]=useState(true),[showMeridians,setShowMeridians]=useState(true),[showPoints,setShowPoints]=useState(true),[showCollaterals,setShowCollaterals]=useState(false);
+  const [language,setLanguage]=useState<Language>('vi');
   const [meridians,setMeridians]=useState<Meridian[]>([]),[points,setPoints]=useState<Acupoint[]>([]);
   const [schematic,setSchematic]=useState<SchematicSpatial>({anchors:[],paths:[]});
   const [activeMeridian,setActiveMeridian]=useState('ST'),[side,setSide]=useState<MeridianOverlaySide>('BOTH');
@@ -78,9 +82,21 @@ export default function Meridian3DPanel({drafts,selectedPointCode,onOverlayChang
     return schematic.paths.filter(p=>p.meridianId===activeMeridian&&(side==='BOTH'||p.side===side||p.side==='MIDLINE'||p.side==='UNKNOWN'));
   },[publishedPaths,schematic.paths,activeMeridian,side]);
 
-  useEffect(()=>{onOverlayChange({enabled,meridianId:activeMeridian,side,anchors:visibleAnchors,paths:visiblePaths})},[enabled,activeMeridian,side,visibleAnchors,visiblePaths,onOverlayChange]);
+  useEffect(()=>{onOverlayChange({enabled,meridianId:activeMeridian,side,anchors:visibleAnchors,paths:visiblePaths,effects:{motion,meridians:showMeridians,acupoints:showPoints,collaterals:showCollaterals}})},[enabled,activeMeridian,side,visibleAnchors,visiblePaths,motion,showMeridians,showPoints,showCollaterals,onOverlayChange]);
 
-  const filteredPoints=useMemo(()=>{const q=norm(query),codeQuery=q.replace(/[-\s]/g,'');return points.filter(p=>q?p.code.toLowerCase().replace(/-/g,'').includes(codeQuery)||[p.vietnameseName??'',p.englishName??''].some(v=>norm(v).includes(q)):p.meridianId===activeMeridian).slice(0,80)},[points,activeMeridian,query]);
+  const meridianName=(m:Meridian|undefined)=>{
+    if(!m)return activeMeridian;
+    if(language==='zh')return m.chineseName||MERIDIAN_ZH[m.id]||m.code;
+    if(language==='en')return m.englishName||m.code;
+    return m.vietnameseName||m.code;
+  };
+  const pointName=(p:Acupoint)=>{
+    if(language==='zh')return p.chineseName||p.pinyin||p.code;
+    if(language==='en')return p.englishName||p.pinyin||p.code;
+    return p.vietnameseName||p.pinyin||p.code;
+  };
+
+  const filteredPoints=useMemo(()=>{const q=norm(query),codeQuery=q.replace(/[-\s]/g,'');return points.filter(p=>q?p.code.toLowerCase().replace(/-/g,'').includes(codeQuery)||[p.vietnameseName??'',p.englishName??'',p.chineseName??'',p.pinyin??''].some(v=>norm(v).includes(q)):p.meridianId===activeMeridian).slice(0,80)},[points,activeMeridian,query]);
   const active=meridians.find(m=>m.id===activeMeridian),selectedRecord=points.find(p=>p.code===selected),selectedAnchors=allAnchors.filter(a=>a.pointCode===selected);
   const publishedCount=publishedAnchors.filter(a=>a.meridianId===activeMeridian).length,draftCount=draftAnchors.filter(a=>a.meridianId===activeMeridian).length,schematicCount=schematic.anchors.filter(a=>a.meridianId===activeMeridian).length;
   const schematicPaths=visiblePaths.filter(p=>p.sourceKind==='LICENSED_SCHEMATIC').length;
