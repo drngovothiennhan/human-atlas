@@ -1,7 +1,7 @@
 const BASE=new URL('./',self.location.href).pathname;
 const asset=path=>BASE+path.replace(/^\//,'');
-const SHELL='hiu-yhct-atlas-shell-v0.3.3';
-const DATA='hiu-yhct-atlas-data-v0.3.3';
+const SHELL='hiu-yhct-atlas-shell-v0.3.4';
+const DATA='hiu-yhct-atlas-data-v0.3.4';
 const CORE=[BASE,asset('manifest.webmanifest'),asset('favicon.svg'),asset('data/meridians.json'),asset('data/acupoints.json'),asset('data/registration-pilot.json'),asset('data/provenance.json')];
 
 async function precacheShell(){
@@ -28,12 +28,21 @@ self.addEventListener('fetch',event=>{
   if(event.request.method!=='GET')return;
   const url=new URL(event.request.url);
   if(url.origin!==location.origin)return;
-  event.respondWith(
-    caches.match(event.request).then(hit=>hit||fetch(event.request).then(response=>{
-      if(!response||!response.ok)return response;
-      const copy=response.clone();
-      caches.open(url.pathname.startsWith(asset('models/'))?DATA:SHELL).then(cache=>cache.put(event.request,copy));
-      return response;
-    }).catch(()=>caches.match(BASE)))
-  );
+  const fresh=event.request.mode==='navigate'||url.pathname.startsWith(asset('data/'));
+  const network=async()=>{
+    const response=await fetch(event.request,{signal:AbortSignal.timeout(15000)});
+    if(response.ok){const cache=await caches.open(url.pathname.startsWith(asset('models/'))?DATA:SHELL);await cache.put(event.request,response.clone());}
+    return response;
+  };
+  event.respondWith((async()=>{
+    const cached=await caches.match(event.request);
+    try{
+      if(fresh){const response=await network();return !response.ok&&cached?cached:response;}
+      return cached||await network();
+    }catch{
+      if(cached)return cached;
+      if(event.request.mode==='navigate'){const shell=await caches.match(BASE);if(shell)return shell;}
+      return Response.error();
+    }
+  })());
 });

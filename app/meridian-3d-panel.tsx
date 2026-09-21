@@ -98,14 +98,14 @@ export default function Meridian3DPanel({drafts,selectedPointCode,onOverlayChang
 
   const meridianName=(m:Meridian|undefined)=>{
     if(!m)return activeMeridian;
-    if(language==='zh')return m.chineseName||MERIDIAN_ZH[m.id]||m.code;
-    if(language==='en')return m.englishName||m.code;
+    if(language==='zh')return (m.vietnameseName||m.code)+' · '+(m.chineseName||MERIDIAN_ZH[m.id]||m.code);
+    if(language==='en')return (m.vietnameseName||m.code)+' · '+(m.englishName||m.code);
     return m.vietnameseName||m.code;
   };
   const pointName=(p:Acupoint)=>{
-    if(language==='zh')return p.chineseName||p.pinyin||p.code;
-    if(language==='en')return p.englishName||p.pinyin||p.code;
-    return p.vietnameseName||p.pinyin||p.code;
+    if(language==='zh')return (p.vietnameseName||p.code)+' · '+(p.chineseName||p.pinyin||p.code);
+    if(language==='en')return (p.vietnameseName||p.code)+' · '+(p.englishName||p.pinyin||p.code);
+    return p.vietnameseName||('Huyệt '+p.code);
   };
 
   const filteredPoints=useMemo(()=>{const q=norm(query),codeQuery=q.replace(/[-\s]/g,'');return points.filter(p=>q?p.code.toLowerCase().replace(/-/g,'').includes(codeQuery)||[p.vietnameseName??'',p.englishName??'',p.chineseName??'',p.pinyin??''].some(v=>norm(v).includes(q)):p.meridianId===activeMeridian).slice(0,80)},[points,activeMeridian,query]);
@@ -128,19 +128,19 @@ export default function Meridian3DPanel({drafts,selectedPointCode,onOverlayChang
       <span>{loading?'Đang tải dữ liệu…':loadError?'Chưa tải được dữ liệu — bấm để thử lại':`${points.length} huyệt · ${meridians.length} kinh · ${schematic.anchors.length} vị trí 3D sơ đồ`}</span>
     </Button>
     {open&&<aside className="meridian3d-panel glass" data-meridian3d-panel="true" aria-label="Mô hình kinh lạc và huyệt vị 3D">
-      <div className="meridian3d-head"><div><strong>Mô hình kinh lạc · huyệt vị 3D</strong><small>Chế độ học tập · theo giáo trình và nguồn tham chiếu. Sơ đồ chiếu 2D→3D giữ nhãn tham chiếu cho tới khi có đăng ký bề mặt BodyParts3D.</small></div><Button variant="ghost" onClick={()=>setOpen(false)} aria-label="Đóng mô hình kinh lạc 3D">×</Button></div>
+      <div className="meridian3d-head"><div><strong>Mô hình kinh lạc · huyệt vị 3D</strong><small>Chế độ học tập · theo giáo trình và nguồn tham chiếu. Tọa độ huyệt và đường kinh 3D là mô phỏng phục vụ học tập, chưa được thẩm định vị trí giải phẫu.</small></div><Button variant="ghost" onClick={()=>setOpen(false)} aria-label="Đóng mô hình kinh lạc 3D">×</Button></div>
       {loading&&<p role="status">Đang tải dữ liệu huyệt và kinh lạc…</p>}
       {loadError&&<div role="alert" data-meridian3d-load-error="true"><p>{loadError}</p><Button variant="ghost" disabled={loading} onClick={()=>setLoadAttempt(v=>v+1)}>Thử tải lại dữ liệu</Button></div>}
       <div className="meridian3d-controls">
-        <label>Kinh<select value={activeMeridian} onChange={e=>{setActiveMeridian(e.target.value);setQuery('');setSelected(null);onFocus(null)}}>{meridians.map(m=><option key={m.id} value={m.id}>{m.code} · {meridianName(m)}</option>)}</select></label>
+        <label>Kinh<select value={activeMeridian} onChange={e=>{setActiveMeridian(e.target.value);setEnabled(true);setMotion(true);setShowMeridians(true);setQuery('');setSelected(null);onFocus(null)}}>{meridians.map(m=><option key={m.id} value={m.id}>{m.code} · {meridianName(m)}</option>)}</select></label>
         <label>Bên<select value={side} onChange={e=>setSide(e.target.value as MeridianOverlaySide)}><option value="BOTH">Hai bên</option><option value="LEFT">Trái</option><option value="RIGHT">Phải</option></select></label>
-        <label>Ngôn ngữ<select value={language} onChange={e=>setLanguage(e.target.value as Language)} data-meridian-language="true"><option value="vi">Tiếng Việt</option><option value="en">English</option><option value="zh">中文</option></select></label>
+        <label>Ngôn ngữ phụ<select value={language} onChange={e=>setLanguage(e.target.value as Language)} data-meridian-language="true"><option value="vi">Chỉ tiếng Việt</option><option value="en">Kèm tiếng Anh</option><option value="zh">Kèm tiếng Trung</option></select></label>
       </div>
       <div className="meridian3d-summary">
         <strong>{meridianName(active)}</strong>
-        <span>{active?.pointIds.length??filteredPoints.length} huyệt · {sideLabel(side)} · {schematicCount} anchor sơ đồ · {publishedCount} anchor đăng ký · {draftCount} anchor nháp local</span>
+        <span>{active?.pointIds.length??filteredPoints.length} huyệt · {sideLabel(side)} · {schematicCount} vị trí mô phỏng · {publishedCount} vị trí đã đăng ký · {draftCount} vị trí nháp trên máy</span>
         <span>{publishedPaths.some(p=>p.meridianId===activeMeridian)?'Có đường kinh 3D đã đăng ký':schematicPaths?schematicPaths+' đoạn đường kinh sơ đồ nguồn mở · THAM CHIẾU HỌC TẬP':'Chưa có đường kinh 3D — không tự nối điểm'}</span>
-        {showCollaterals&&<span role="status">Lạc: hạ tầng đã bật nhưng chưa có geometry direct-use phù hợp; không vẽ đường giả.</span>}
+        {showCollaterals&&<span role="status">Chưa có dữ liệu đường lạc phù hợp để hiển thị.</span>}
       </div>
       <div className="meridian3d-effect-controls" data-meridian3d-effect-controls="true" aria-label="Điều khiển hiệu ứng kinh lạc">
         <button type="button" data-effect-master="true" aria-pressed={enabled} className={enabled?'active':''} onClick={()=>setEnabled(v=>!v)}>Hiệu ứng: {enabled?'Bật':'Tắt'}</button>
@@ -149,24 +149,24 @@ export default function Meridian3DPanel({drafts,selectedPointCode,onOverlayChang
         <button type="button" data-effect-collateral="true" aria-pressed={showCollaterals} className={showCollaterals?'active':''} onClick={()=>setShowCollaterals(v=>!v)}>Lạc</button>
         <button type="button" data-effect-acupoint="true" aria-pressed={showPoints} className={showPoints?'active':''} onClick={()=>setShowPoints(v=>!v)}>Huyệt</button>
       </div>
-      <div className="meridian3d-effect-note" aria-label="Chú giải hiệu ứng 3D"><span><i className="effect-dot"/>Huyệt nhịp</span><span><i className="effect-flow"/>Dòng kinh</span><span>Chạm huyệt → camera focus</span></div>
+      <div className="meridian3d-effect-note" aria-label="Chú giải hiệu ứng 3D"><span><i className="effect-dot"/>Huyệt nhịp</span><span><i className="effect-flow"/>Dòng kinh</span><span>Chạm huyệt → phóng tới vị trí</span></div>
       <input className="meridian3d-search" value={query} onChange={e=>setQuery(e.target.value)} placeholder="Tìm ST-36, LI-4, tên Việt/Anh/中文…" aria-label="Tìm huyệt để bay tới"/>
       {!loading&&!loadError&&!filteredPoints.length&&<p role="status">Không tìm thấy huyệt phù hợp.</p>}
-      <div className="meridian3d-list">{filteredPoints.map(point=>{const anchors=allAnchors.filter(a=>a.pointCode===point.code),activePoint=selected===point.code;return <button key={point.code} className={activePoint?'selected':''} aria-pressed={activePoint} onClick={()=>focusPoint(point)} data-meridian3d-point={point.code}><b>{point.code}</b><span>{pointName(point)}</span><small>{anchors.length?anchors.length+' anchor 3D · bấm để bay tới':'chưa có anchor 3D'}</small></button>})}</div>
+      <div className="meridian3d-list">{filteredPoints.map(point=>{const anchors=allAnchors.filter(a=>a.pointCode===point.code),activePoint=selected===point.code;return <button key={point.code} className={activePoint?'selected':''} aria-pressed={activePoint} onClick={()=>focusPoint(point)} data-meridian3d-point={point.code}><b>{point.code}</b><span>{pointName(point)}</span><small>{anchors.length?anchors.length+' vị trí 3D · bấm để bay tới':'chưa có vị trí 3D'}</small></button>})}</div>
       {selectedRecord&&<div className="meridian3d-detail" data-meridian3d-detail="true">
         <strong>{selectedRecord.code} · {pointName(selectedRecord)}</strong>
         <div className="meridian3d-facts">
           <span><small>Kinh</small><b>{meridianName(meridians.find(m=>m.id===selectedRecord.meridianId))}</b></span>
           <span><small>Thứ tự</small><b>{selectedRecord.sequence}</b></span>
-          <span><small>Anchor đang có</small><b>{selectedAnchors.length}</b></span>
+          <span><small>Vị trí đang có</small><b>{selectedAnchors.length}</b></span>
           <span><small>Trạng thái</small><b>{selectedAnchors.some(a=>a.sourceKind==='PUBLISHED')?'Đã đăng ký 3D':'Tham chiếu học tập'}</b></span>
         </div>
         {selectedDocumentRef&&<small className="meridian3d-source-label" data-document-reference="true">{selectedDocumentRef.label} · {selectedDocumentRef.heading}</small>}
         {schematic.sourceSideWarnings?.some(w=>w.pointCode===selectedRecord.code)&&<small role="status">Nguồn sơ đồ có dữ liệu hai bên không thống nhất với kinh giữa thân tại huyệt này; giữ nhãn tham chiếu học tập.</small>}
-        <span>{selectedAnchors.some(a=>a.sourceKind==='PUBLISHED')?'Có tọa độ BodyParts3D đã đăng ký.':'Chưa có tọa độ BodyParts3D đã đăng ký. '}{selectedAnchors.length?selectedAnchors.map(a=>a.side+': '+(a.sourceKind==='PUBLISHED'?'đã đăng ký':a.sourceKind==='LOCAL_DRAFT'?'nháp local':'sơ đồ nguồn mở')).join(' · '):'Chưa có anchor BodyParts3D.'}</span>
+        <span>{selectedAnchors.some(a=>a.sourceKind==='PUBLISHED')?'Có tọa độ BodyParts3D đã đăng ký.':'Chưa có tọa độ BodyParts3D đã đăng ký. '}{selectedAnchors.length?selectedAnchors.map(a=>a.side+': '+(a.sourceKind==='PUBLISHED'?'đã đăng ký':a.sourceKind==='LOCAL_DRAFT'?'nháp trên máy':'sơ đồ nguồn mở')).join(' · '):'Chưa có vị trí trên mô hình.'}</span>
         <small>Ứng dụng học tập: giáo trình/tài liệu được dùng làm căn cứ tra cứu và gắn nhãn nguồn; hình 2D không tự động trở thành tọa độ 3D chuẩn.</small>
       </div>}
-      <footer>Nguồn hình học sơ đồ: FuriaRozkwit/acupuncture-3d. Tài liệu nội bộ được gắn provenance theo trang; nguồn ngoài mới chỉ được đưa vào registry sau kiểm tra license. BL-39 không có trong topology nguồn nên không tạo đoạn nối giả.</footer>
+      <footer>Nguồn hình học sơ đồ: FuriaRozkwit/acupuncture-3d. Tài liệu nội bộ được ghi nguồn theo trang; nguồn ngoài được kiểm tra giấy phép. BL-39 chưa có đoạn nối trong dữ liệu nguồn.</footer>
     </aside>}
   </>;
 }

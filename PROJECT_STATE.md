@@ -1,3 +1,20 @@
+# CURRENT CHECKPOINT — motion, readability and Vietnamese UI (2026-09-21)
+
+This section supersedes the historical UI checkpoint below.
+
+- Base: `32f89be68817bad9e64ade04a6ad3505e2804af6`, branch `feature-hiu-yhct-3d-atlas`; retain existing Preview, do not create services or merge main.
+- Proven bug: scene renderer ignored `effects.motion`, `effects.meridians`, and `effects.acupoints`. Renderer now handles these controls; selecting a meridian enables its line and motion.
+- Paths now have an opaque color core with a contrasting edge and five moving lights per path. Markers reduced from 0.0105 to 0.0048 schematic radius and pulse scale from up to 1.50 to 1.14.
+- Vietnamese primary interface and anatomy system summaries; English/Chinese are supplemental in the meridian panel. Missing translated source names remain source identifiers, never invented.
+- About explicitly describes educational simulated coordinates and illustrative flow, not verified clinical locations. Existing schematic source topology and UNVERIFIED gates preserved.
+- Catalogue/model downloads have finite timeout and Vietnamese error feedback. Service worker v0.3.4 refreshes navigation/data online and retains cached offline fallback, never HTML fallback for failed model requests.
+- Local validation: TypeScript, 21 unit tests, content/anatomy/interaction checks, production build and static asset limit PASS. Browser regression in progress at commit preparation; inspect current run before claiming browser PASS.
+- Browser regression includes motion pause, hide path/points, and re-enable on channel choice, plus existing 14-channel, focus, desktop/tablet and offline checks.
+- Existing Render Preview responded with HTTP HTML, but still serves old JS `index-BsVdg5hn.js` before this patch. Do not call this patch live until its assets are observed.
+- Render connector currently says `no workspace selected` and explicitly requires the user to confirm a workspace. Listed workspace: `ngô's workspace` (`tea-dah44dh42hec73en41jg`). No Render mutation performed. Check automatic deploy after branch update first.
+
+---
+
 # CURRENT CHECKPOINT — 2026-09-21 P0 recovery
 
 This section supersedes the historical checkpoints below.

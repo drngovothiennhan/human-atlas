@@ -113,7 +113,7 @@ try{
   if(panHash===zoomHash)throw new Error('Desktop pan did not change rendered screenshot');
 
   const clickAria=async label=>evaluate("(()=>{const b=document.querySelector('[aria-label=\\\""+label+"\\\"]');if(!b)return false;b.click();return true})()");
-  for(const [label,file] of [['front view','desktop-front.png'],['back view','desktop-back.png'],['side view','desktop-side.png']]){
+  for(const [label,file] of [['Mặt trước','desktop-front.png'],['Mặt sau','desktop-back.png'],['Mặt bên','desktop-side.png']]){
     const motionSeqBefore=await evaluate("Number(document.querySelector('canvas')?.dataset.cameraMotionSeq||0)");
     if(!await clickAria(label))throw new Error('Missing camera control: '+label);
     await waitFor(()=>evaluate("document.querySelector('[aria-label=\\\""+label+"\\\"]')?.getAttribute('aria-pressed')==='true'"),{label:'camera '+label});
@@ -123,22 +123,22 @@ try{
   }
   const sideHash=await screenshot('desktop-side-confirm.png');
   const resetMotionSeqBefore=await evaluate("Number(document.querySelector('canvas')?.dataset.cameraMotionSeq||0)");
-  if(!await clickAria('Reset view and layers'))throw new Error('Missing reset camera control');
-  await waitFor(()=>evaluate("document.querySelector('[aria-label=\\\"three-quarter view\\\"]')?.getAttribute('aria-pressed')==='true'"),{label:'camera reset'});
+  if(!await clickAria('Đặt lại góc nhìn và lớp'))throw new Error('Missing reset camera control');
+  await waitFor(()=>evaluate("document.querySelector('[aria-label=\\\"Góc nghiêng\\\"]')?.getAttribute('aria-pressed')==='true'"),{label:'camera reset'});
   await waitFor(()=>evaluate("Number(document.querySelector('canvas')?.dataset.cameraMotionSeq||0)>"+resetMotionSeqBefore),{label:'camera reset smooth motion sequence'});
   await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.cameraMotion==='idle'"),{timeout:30000,label:'camera reset smooth motion completes'});
   const resetHash=await screenshot('desktop-reset.png');
   if(resetHash===sideHash)throw new Error('Camera reset did not change rendered screenshot');
 
-  const skeletonPreset=await evaluate("(()=>{const b=[...document.querySelectorAll('.layer-presets button')].find(x=>x.textContent.trim()==='Skeleton');if(!b)return false;b.click();return true})()");
+  const skeletonPreset=await evaluate("(()=>{const b=[...document.querySelectorAll('.layer-presets button')].find(x=>x.textContent.trim()==='Bộ xương');if(!b)return false;b.click();return true})()");
   if(!skeletonPreset)throw new Error('Skeleton layer preset missing');
-  await waitFor(()=>evaluate("(()=>{const b=[...document.querySelectorAll('.layer-presets button')].find(x=>x.textContent.trim()==='Skeleton');return b?.getAttribute('aria-pressed')==='true'})()"),{label:'skeleton layer preset'});
+  await waitFor(()=>evaluate("(()=>{const b=[...document.querySelectorAll('.layer-presets button')].find(x=>x.textContent.trim()==='Bộ xương');return b?.getAttribute('aria-pressed')==='true'})()"),{label:'skeleton layer preset'});
   await sleep(250);
   const skeletonHash=await screenshot('desktop-skeleton.png');
   if(skeletonHash===resetHash)throw new Error('Skeleton preset did not change rendered screenshot');
-  const allPreset=await evaluate("(()=>{const b=[...document.querySelectorAll('.layer-presets button')].find(x=>x.textContent.trim()==='All');if(!b)return false;b.click();return true})()");
+  const allPreset=await evaluate("(()=>{const b=[...document.querySelectorAll('.layer-presets button')].find(x=>x.textContent.trim()==='Tất cả');if(!b)return false;b.click();return true})()");
   if(!allPreset)throw new Error('All layer preset missing');
-  await waitFor(()=>evaluate("(()=>{const b=[...document.querySelectorAll('.layer-presets button')].find(x=>x.textContent.trim()==='All');return b?.getAttribute('aria-pressed')==='true'})()"),{label:'all layer preset'});
+  await waitFor(()=>evaluate("(()=>{const b=[...document.querySelectorAll('.layer-presets button')].find(x=>x.textContent.trim()==='Tất cả');return b?.getAttribute('aria-pressed')==='true'})()"),{label:'all layer preset'});
   await sleep(250);
   const allHash=await screenshot('desktop-all-layers.png');
   if(allHash===skeletonHash)throw new Error('All layer preset did not change rendered screenshot');
@@ -167,6 +167,20 @@ try{
   await waitFor(()=>evaluate("Number(document.querySelector('canvas')?.dataset.meridianEffectFrame||0)>"+effectFrameBefore),{timeout:30000,label:'meridian animation frame advances'});
   const effectFrameAfter=await evaluate("Number(document.querySelector('canvas')?.dataset.meridianEffectFrame||0)");
   console.log('SMOKE_MERIDIAN_FLOW_EFFECT_PASS '+JSON.stringify({effectFrameBefore,effectFrameAfter,pulseMarkers:await evaluate("Number(document.querySelector('canvas')?.dataset.meridianPulseMarkers||0)"),flowParticles:await evaluate("Number(document.querySelector('canvas')?.dataset.meridianFlowParticles||0)")}));
+  await evaluate("document.querySelector('[data-effect-motion=true]').click()");
+  await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.meridianEffect==='paused'"),{label:'motion toggle pauses scene'});
+  const pausedFrame=await evaluate("document.querySelector('canvas').dataset.meridianEffectFrame");
+  await sleep(400);
+  if(await evaluate("document.querySelector('canvas').dataset.meridianEffectFrame")!==pausedFrame)throw new Error('Animation advanced while paused');
+  await evaluate("document.querySelector('[data-effect-meridian=true]').click()");
+  await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.meridianFlowParticles==='0'&&document.querySelector('canvas')?.dataset.meridianSchematicPaths==='0'"),{label:'meridian toggle hides paths and moving lights'});
+  await evaluate("document.querySelector('[data-effect-acupoint=true]').click()");
+  await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.meridianPulseMarkers==='0'"),{label:'acupoint toggle hides markers'});
+  await evaluate("document.querySelector('[data-effect-acupoint=true]').click()");
+  // Choosing a new channel must restore its line and motion, including after hiding it.
+  await evaluate("(()=>{const s=document.querySelectorAll('.meridian3d-controls select')[0];s.value='LU';s.dispatchEvent(new Event('change',{bubbles:true}));})()");
+  await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.meridianEffect==='flow'&&Number(document.querySelector('canvas')?.dataset.meridianSchematicPaths)>0"),{label:'channel selection restores line and animation'});
+  console.log('SMOKE_EFFECT_CONTROLS_PASS');
   const schematicCoverage=[];
   const meridianCodes=await evaluate("[...document.querySelectorAll('.meridian3d-controls select')[0].options].map(o=>o.value)");
   if(meridianCodes.length!==14)throw new Error('Expected 14 meridians');
@@ -249,7 +263,7 @@ try{
   await waitFor(()=>evaluate("document.querySelector('[data-registration-progress=true]')?.innerText.includes('1/10')"),{label:'registration pilot progress after capture'});
   await evaluate("document.querySelector('[data-meridian3d-launch=true]')?.click()");
   await waitFor(()=>evaluate("!!document.querySelector('[data-meridian3d-panel=true]')"),{label:'registration 3D meridian panel'});
-  await waitFor(()=>evaluate("document.querySelector('.meridian3d-summary')?.innerText.includes('1 anchor nháp local')"),{label:'3D meridian local draft count'});
+  await waitFor(()=>evaluate("document.querySelector('.meridian3d-summary')?.innerText.includes('1 vị trí nháp trên máy')"),{label:'3D meridian local draft count'});
   await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.meridianAnchors==='1'"),{label:'3D local anchor rendered'});
   await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.meridianPaths==='0'"),{label:'no fabricated 3D meridian path'});
   await evaluate("(()=>{const i=document.querySelector('.meridian3d-search');const s=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;s.call(i,'ST-36');i.dispatchEvent(new Event('input',{bubbles:true}));return true})()");
