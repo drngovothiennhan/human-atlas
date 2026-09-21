@@ -1,3 +1,19 @@
+# CURRENT CHECKPOINT — 2026-09-21 P0 recovery
+
+This section supersedes the historical checkpoints below.
+
+- Branch: `feature-hiu-yhct-3d-atlas`; PR #1 stays draft; main unchanged.
+- Stage 2 code `ab505d27fb88025a344b2dc3daaa8e6f76316152` passed push CI `35593310089` and PR CI `35593315147`, including 21 tests, both static builds and desktop/tablet browser smoke.
+- Stage 2 implements the licensed schematic projection and path renderer. It is not faculty-reviewed spatial data. Preserve UNVERIFIED labels and upstream BL-39 topology omission.
+- Live preview inspected on 2026-09-21 still shows the older `0 duyệt · 0 nháp local` launcher. Do not report Stage 2 live until redeployed and checked.
+- P0 fix in this commit: bounded 20-second meridian-data loading with visible error/retry; compact cross-meridian code search; repeated camera focus; browser regression covers injected data failure/recovery, all 14 schematic overlays and left/both filtering.
+- Local syntax validation passed. Full CI for this P0 commit is pending; do not mark it verified until the run completes.
+- Render MCP returned `no workspace selected`. Available workspace: `ngô's workspace` (`tea-dah44dh42hec73en41jg`). Connector explicitly requires user confirmation before using that workspace. No Render mutation performed.
+- Next: inspect this commit's CI, repair only evidenced failures, then checkpoint evidence. Request workspace confirmation only after code verification. Update the existing `hiu-yhct-3d-atlas-preview` service only; create no service, paid plan or production.
+- Physical-device QA and faculty-reviewed coordinates remain unverified; do not claim 95% or full clinical completion.
+
+---
+
 # HIU YHCT 3D ATLAS — EXECUTION CHECKBOARD
 
 Last refreshed: 2026-09-21

@@ -55,6 +55,7 @@ export default function AnatomyScene({atlas,state,onSelect,onProgress,onError,re
    }
   };
   const rebuildOverlay=(value:MeridianOverlayState|undefined)=>{
+   renderer.domElement.dataset.meridianId=value?.enabled?(value.meridianId??''):'';
    disposeOverlay();renderer.domElement.dataset.meridianAnchors='0';renderer.domElement.dataset.meridianPaths='0';renderer.domElement.dataset.meridianSchematicAnchors='0';renderer.domElement.dataset.meridianSchematicPaths='0';if(!value?.enabled)return;
    const color=meridianColors[value.meridianId??'']??0x0f766e;let trustedAnchors=0,schematicAnchors=0,schematicPaths=0,trustedPaths=0;
    for(const anchor of value.anchors){

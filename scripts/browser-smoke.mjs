@@ -71,8 +71,16 @@ try{
   };
   await mkdir('artifacts',{recursive:true});
   await send('Page.enable');await send('Runtime.enable');await send('Network.enable');
+  await send('Network.setBlockedURLs',{urls:['*data/schematic-spatial.json*']});
   await send('Page.navigate',{url:base});
   await waitFor(()=>evaluate("document.readyState==='complete'&&document.body.innerText.includes('HIU YHCT Atlas')"),{timeout:30000,label:'HIU Atlas UI'});
+  await evaluate("document.querySelector('[data-meridian3d-launch=true]').click()");
+  await waitFor(()=>evaluate("!!document.querySelector('[data-meridian3d-load-error=true]')"),{label:'meridian load failure is visible'});
+  await send('Network.setBlockedURLs',{urls:[]});
+  await evaluate("document.querySelector('[data-meridian3d-load-error=true] button').click()");
+  await waitFor(()=>evaluate("!document.querySelector('[data-meridian3d-load-error=true]')&&document.querySelector('[data-meridian3d-launch=true]')?.innerText.includes('361 huyệt')"),{label:'meridian retry recovers data'});
+  await evaluate("document.querySelector('.meridian3d-actions button').click()");
+  await evaluate("document.querySelector('.meridian3d-head button').click()");
   await waitFor(()=>evaluate("document.querySelector('canvas')?.width>0&&document.querySelector('canvas')?.height>0"),{label:'3D canvas'});
   await waitFor(()=>responses.filter(r=>r.url.includes('/models/')&&!r.url.includes('/models/atlas.json')&&r.status===200).length>0,{timeout:30000,label:'3D binary model response'});
   await sleep(1200);
@@ -143,6 +151,27 @@ try{
   await evaluate("document.querySelector('[data-meridian3d-launch=true]')?.click()");
   await waitFor(()=>evaluate("!!document.querySelector('[data-meridian3d-panel=true]')"),{label:'3D meridian panel'});
   await waitFor(()=>evaluate("document.querySelector('[data-meridian3d-panel=true]')?.innerText.includes('Kinh Vị')&&document.querySelector('[data-meridian3d-panel=true]')?.innerText.includes('Chưa có path 3D đã kiểm duyệt')"),{label:'3D meridian clean-room gate'});
+  const schematicCoverage=[];
+  const meridianCodes=await evaluate("[...document.querySelectorAll('.meridian3d-controls select')[0].options].map(o=>o.value)");
+  if(meridianCodes.length!==14)throw new Error('Expected 14 meridians');
+  for(const code of meridianCodes){
+    await evaluate("(()=>{const s=document.querySelectorAll('.meridian3d-controls select')[0];s.value="+JSON.stringify(code)+";s.dispatchEvent(new Event('change',{bubbles:true}));})()");
+    await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.meridianId==="+JSON.stringify(code)+"&&Number(document.querySelector('canvas')?.dataset.meridianSchematicAnchors)>0&&Number(document.querySelector('canvas')?.dataset.meridianSchematicPaths)>0"),{label:code+' schematic markers and paths'});
+    schematicCoverage.push({code,...await evaluate("({...document.querySelector('canvas').dataset})")});
+  }
+  await evaluate("(()=>{const s=document.querySelectorAll('.meridian3d-controls select')[0];s.value='ST';s.dispatchEvent(new Event('change',{bubbles:true}));})()");
+  await waitFor(()=>evaluate("document.querySelector('.meridian3d-summary').innerText.includes('Kinh Vị')"),{label:'restore stomach meridian'});
+  const bilateralCount=await waitFor(()=>evaluate("Number(document.querySelector('canvas')?.dataset.meridianSchematicAnchors)===90?90:0"),{label:'90 bilateral stomach markers'});
+  await evaluate("(()=>{const s=document.querySelectorAll('.meridian3d-controls select')[1];s.value='LEFT';s.dispatchEvent(new Event('change',{bubbles:true}));})()");
+  await waitFor(()=>evaluate("Number(document.querySelector('canvas')?.dataset.meridianSchematicAnchors)===45"),{label:'left filter halves bilateral stomach markers'});
+  await evaluate("(()=>{const s=document.querySelectorAll('.meridian3d-controls select')[1];s.value='BOTH';s.dispatchEvent(new Event('change',{bubbles:true}));})()");
+  await waitFor(()=>evaluate("Number(document.querySelector('canvas')?.dataset.meridianSchematicAnchors)===90"),{label:'restore bilateral markers'});
+  for(const [input,code] of [['LI4','LI-4'],['ST36','ST-36']]){
+    await evaluate("(()=>{const i=document.querySelector('.meridian3d-search');Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set.call(i,"+JSON.stringify(input)+");i.dispatchEvent(new Event('input',{bubbles:true}));})()");
+    await waitFor(()=>evaluate("!!document.querySelector('[data-meridian3d-point=\""+code+"\"]')"),{label:input+' cross-meridian search'});
+    await evaluate("document.querySelector('[data-meridian3d-point=\""+code+"\"]').click()");
+    await waitFor(()=>evaluate("document.querySelectorAll('.meridian3d-controls select')[0].value==="+JSON.stringify(code.split('-')[0])),{label:code+' selects its meridian'});
+  }
   await evaluate("(()=>{const i=document.querySelector('.meridian3d-search');const s=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;s.call(i,'ST-36');i.dispatchEvent(new Event('input',{bubbles:true}));return true})()");
   await waitFor(()=>evaluate("!!document.querySelector('[data-meridian3d-point=\\\"ST-36\\\"]')"),{label:'3D meridian ST36 search'});
   await evaluate("document.querySelector('[data-meridian3d-point=\\\"ST-36\\\"]')?.click()");
@@ -231,6 +260,10 @@ try{
     localMeridianSearch:true,
     localStudyAssistant:true,
     meridian3dExplorer:true,
+    meridian3dLoadRetry:true,
+    meridian3dSchematicCoverage:schematicCoverage,
+    meridian3dSideFilter:{both:bilateralCount,left:45},
+    meridian3dCompactCodeSearch:true,
     meridian3dDraftOverlay:true,
     meridian3dNoFabricatedPath:true,
     registrationReferences:true,

@@ -25,16 +25,24 @@ export default function Meridian3DPanel({drafts,selectedPointCode,onOverlayChang
   const [schematic,setSchematic]=useState<SchematicSpatial>({anchors:[],paths:[]});
   const [activeMeridian,setActiveMeridian]=useState('ST'),[side,setSide]=useState<MeridianOverlaySide>('BOTH');
   const [query,setQuery]=useState(''),[selected,setSelected]=useState<string|null>(null);
+  const [loading,setLoading]=useState(true),[loadError,setLoadError]=useState(''),[loadAttempt,setLoadAttempt]=useState(0);
 
   useEffect(()=>{
     let alive=true;
+    const controller=new AbortController();
+    const timer=setTimeout(()=>controller.abort(),20000);
+    setLoading(true);setLoadError('');
     Promise.all([
-      fetch(import.meta.env.BASE_URL+'data/meridians.json').then(async r=>{if(!r.ok)throw new Error('meridian data unavailable');return await r.json() as Meridian[]}),
-      fetch(import.meta.env.BASE_URL+'data/acupoints.json').then(async r=>{if(!r.ok)throw new Error('acupoint data unavailable');return await r.json() as Acupoint[]}),
-      fetch(import.meta.env.BASE_URL+'data/schematic-spatial.json').then(async r=>{if(!r.ok)throw new Error('schematic spatial data unavailable');return await r.json() as SchematicSpatial})
-    ]).then(([m,p,s])=>{if(alive){setMeridians(m);setPoints(p);setSchematic(s)}}).catch(()=>{});
-    return()=>{alive=false};
-  },[]);
+      fetch(import.meta.env.BASE_URL+'data/meridians.json',{signal:controller.signal}).then(async r=>{if(!r.ok)throw new Error('meridian data unavailable');return await r.json() as Meridian[]}),
+      fetch(import.meta.env.BASE_URL+'data/acupoints.json',{signal:controller.signal}).then(async r=>{if(!r.ok)throw new Error('acupoint data unavailable');return await r.json() as Acupoint[]}),
+      fetch(import.meta.env.BASE_URL+'data/schematic-spatial.json',{signal:controller.signal}).then(async r=>{if(!r.ok)throw new Error('schematic spatial data unavailable');return await r.json() as SchematicSpatial})
+    ]).then(([m,p,s])=>{
+      if(!Array.isArray(m)||!m.length||!Array.isArray(p)||!p.length||!Array.isArray(s.anchors)||!s.anchors.length||!Array.isArray(s.paths)||!s.paths.length)throw new Error('invalid meridian dataset');
+      if(alive){setMeridians(m);setPoints(p);setSchematic(s)}
+    }).catch(()=>{if(alive)setLoadError('Chưa tải được dữ liệu huyệt và kinh lạc. Kiểm tra kết nối rồi thử lại.');controller.abort();})
+      .finally(()=>{clearTimeout(timer);if(alive)setLoading(false)});
+    return()=>{alive=false;clearTimeout(timer);controller.abort()};
+  },[loadAttempt]);
 
   useEffect(()=>{
     if(!selectedPointCode)return;
@@ -72,28 +80,30 @@ export default function Meridian3DPanel({drafts,selectedPointCode,onOverlayChang
 
   useEffect(()=>{onOverlayChange({enabled,meridianId:activeMeridian,side,anchors:visibleAnchors,paths:visiblePaths})},[enabled,activeMeridian,side,visibleAnchors,visiblePaths,onOverlayChange]);
 
-  const filteredPoints=useMemo(()=>{const q=norm(query);return points.filter(p=>p.meridianId===activeMeridian).filter(p=>!q||[p.code,p.vietnameseName??'',p.englishName??''].some(v=>norm(v).includes(q))).slice(0,80)},[points,activeMeridian,query]);
+  const filteredPoints=useMemo(()=>{const q=norm(query),codeQuery=q.replace(/[-\s]/g,'');return points.filter(p=>q?p.code.toLowerCase().replace(/-/g,'').includes(codeQuery)||[p.vietnameseName??'',p.englishName??''].some(v=>norm(v).includes(q)):p.meridianId===activeMeridian).slice(0,80)},[points,activeMeridian,query]);
   const active=meridians.find(m=>m.id===activeMeridian),selectedRecord=points.find(p=>p.code===selected),selectedAnchors=allAnchors.filter(a=>a.pointCode===selected);
   const publishedCount=publishedAnchors.filter(a=>a.meridianId===activeMeridian).length,draftCount=draftAnchors.filter(a=>a.meridianId===activeMeridian).length,schematicCount=schematic.anchors.filter(a=>a.meridianId===activeMeridian).length;
   const schematicPaths=visiblePaths.filter(p=>p.sourceKind==='LICENSED_SCHEMATIC').length;
 
   const focusPoint=(point:Acupoint)=>{
-    setSelected(point.code);
+    setSelected(point.code);setActiveMeridian(point.meridianId);setEnabled(true);
     const candidates=allAnchors.filter(a=>a.pointCode===point.code);
     const anchor=(side==='LEFT'||side==='RIGHT')?candidates.find(a=>a.side===side)||candidates[0]:candidates[0];
     if(!anchor){onFocus(null);return}
-    onFocus({key:point.code+':'+anchor.side+':'+anchor.x.toFixed(5)+':'+anchor.y.toFixed(5)+':'+anchor.z.toFixed(5),pointCode:point.code,x:anchor.x,y:anchor.y,z:anchor.z});
+    onFocus({key:point.code+':'+anchor.side+':'+Date.now(),pointCode:point.code,x:anchor.x,y:anchor.y,z:anchor.z});
   };
 
   return <>
     <Button variant="ghost" className={'meridian3d-launch '+(enabled?'active':'')} onClick={()=>open?setOpen(false):(setOpen(true),setEnabled(true))} aria-label="Mở mô hình kinh lạc 3D" data-meridian3d-launch="true">
       <strong>Kinh lạc 3D</strong>
-      <span>{points.length} huyệt · {meridians.length} kinh · {schematic.anchors.length} vị trí 3D sơ đồ</span>
+      <span>{loading?'Đang tải dữ liệu…':loadError?'Chưa tải được dữ liệu — bấm để thử lại':`${points.length} huyệt · ${meridians.length} kinh · ${schematic.anchors.length} vị trí 3D sơ đồ`}</span>
     </Button>
     {open&&<aside className="meridian3d-panel glass" data-meridian3d-panel="true" aria-label="Mô hình kinh lạc và huyệt vị 3D">
       <div className="meridian3d-head"><div><strong>Mô hình kinh lạc · huyệt vị 3D</strong><small>Vị trí sơ đồ được chiếu lên BodyParts3D từ nguồn mở có giấy phép; trạng thái UNVERIFIED cho tới khi được duyệt chuyên môn.</small></div><Button variant="ghost" onClick={()=>setOpen(false)} aria-label="Đóng mô hình kinh lạc 3D">×</Button></div>
+      {loading&&<p role="status">Đang tải dữ liệu huyệt và kinh lạc…</p>}
+      {loadError&&<div role="alert" data-meridian3d-load-error="true"><p>{loadError}</p><Button variant="ghost" disabled={loading} onClick={()=>setLoadAttempt(v=>v+1)}>Thử tải lại dữ liệu</Button></div>}
       <div className="meridian3d-controls">
-        <label>Kinh<select value={activeMeridian} onChange={e=>{setActiveMeridian(e.target.value);setSelected(null);onFocus(null)}}>{meridians.map(m=><option key={m.id} value={m.id}>{m.code} · {m.vietnameseName}</option>)}</select></label>
+        <label>Kinh<select value={activeMeridian} onChange={e=>{setActiveMeridian(e.target.value);setQuery('');setSelected(null);onFocus(null)}}>{meridians.map(m=><option key={m.id} value={m.id}>{m.code} · {m.vietnameseName}</option>)}</select></label>
         <label>Bên<select value={side} onChange={e=>setSide(e.target.value as MeridianOverlaySide)}><option value="BOTH">Hai bên</option><option value="LEFT">Trái</option><option value="RIGHT">Phải</option></select></label>
       </div>
       <div className="meridian3d-summary">
@@ -103,6 +113,7 @@ export default function Meridian3DPanel({drafts,selectedPointCode,onOverlayChang
       </div>
       <div className="meridian3d-actions"><Button variant="ghost" className={enabled?'active':''} onClick={()=>setEnabled(v=>!v)}>{enabled?'Ẩn khỏi mô hình':'Hiện trên mô hình'}</Button><a href="https://kinhlac.online/xem-3d/" target="_blank" rel="noreferrer">Đối chiếu kinhlac.online ↗</a></div>
       <input className="meridian3d-search" value={query} onChange={e=>setQuery(e.target.value)} placeholder="Tìm ST-36, LI-4…" aria-label="Tìm huyệt để bay tới"/>
+      {!loading&&!loadError&&!filteredPoints.length&&<p role="status">Không tìm thấy huyệt phù hợp.</p>}
       <div className="meridian3d-list">{filteredPoints.map(point=>{const anchors=allAnchors.filter(a=>a.pointCode===point.code);return <button key={point.code} onClick={()=>focusPoint(point)} data-meridian3d-point={point.code}><b>{point.code}</b><span>{point.vietnameseName||point.englishName||'Huyệt chuẩn'}</span><small>{anchors.length?anchors.length+' anchor 3D · bấm để bay tới':'chưa có anchor 3D'}</small></button>})}</div>
       {selectedRecord&&<div className="meridian3d-detail" data-meridian3d-detail="true">
         <strong>{selectedRecord.code}{selectedRecord.vietnameseName?' · '+selectedRecord.vietnameseName:''}</strong>
