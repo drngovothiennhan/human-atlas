@@ -8,6 +8,7 @@
 | ACUATLAS-361-2026 | n/a | CC-BY-4.0 reference dataset | Required | No | No | DIRECT_USE data / spatial registration BLOCKED |
 | ACUSIM-DRYAD-2025 | n/a | CC0-1.0 Dryad dataset | Citation requested | No | No | DIRECT_USE data / spatial registration BLOCKED |
 | ACU-MASTER | GPL-3.0 | Separate asset audit needed | GPL notice if reused | Yes (code) | No | REFERENCE_ONLY |
+| FURIA-ACUPUNCTURE-3D | MIT code + authored anchors/topology/rig; CC BY-SA 4.0 structural metadata | Preserve MIT notice; preserve CC BY-SA attribution for structural metadata | Structural metadata: Yes | No clinical prose imported | DIRECT_USE_SCHEMATIC / REVIEW_REQUIRED |
 | SMPLIFY-M-2026 | SMPL-X/SMPLify-X research license | Model/software are restricted research/education materials | Citation required for research use | n/a | Non-commercial, non-transferable, no distribution; vertex indices model-specific | REFERENCE_ONLY |
 | TCM-ACUPOINTS-SPACEJOHNLF | MIT code | Mixed: CC-BY-SA model; medical prose/data reuse not cleared | MIT attribution if code reused | Model: Yes | Illustrative coordinates are not accepted as clinical spatial truth | REFERENCE_ONLY |
 | ACUGUIDE-2026 | Proprietary | Third-party components separate | No reuse without permission | n/a | Public source is not open-source | REFERENCE_ONLY |
