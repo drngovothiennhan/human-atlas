@@ -26,7 +26,7 @@ WHAT FAILED:
 - AcuSim cannot yet supply runtime positions: Dryad documents 2D/3D keypoints in its synthetic-model/rendering context, but no transform/surface-anchor mapping to BodyParts3D has been validated.
 - P0 acupuncture functionality remains incomplete because no acupoint spatial source has passed both license and BodyParts3D registration gates.
 - No licensed/validated 3D meridian paths are imported.
-- No feature deployment URL has been verified for this branch.
+- Feature preview is deployed as a dedicated Render static site from this branch.
 - Physical tablet/laptop testing and side-by-side kinhlac.online reference parity measurement have not been executed.
 
 TESTS RUN:
@@ -62,8 +62,12 @@ TEST RESULTS:
 - Browser smoke console errors: none recorded.
 
 DEPLOYMENT URL:
-- Existing main demo only: https://human-atlas-seven.vercel.app
-- Feature branch preview: NOT VERIFIED / NOT DEPLOYED in this checkpoint. Do not treat the main demo as this branch preview.
+- Feature preview: https://hiu-yhct-3d-atlas-preview.onrender.com
+- Render service: srv-daob9fp42hec7395v8ug
+- First verified preview deploy: dep-daob9g142hec7395va90
+- First preview deploy source commit: 282e1c31041e322d6abb4b7cb183170da0715abe
+- First preview deploy status: LIVE
+- Existing main demo: https://human-atlas-seven.vercel.app (not used as branch-preview evidence).
 
 DATASETS IMPORTED:
 - Runtime anatomy: BodyParts3D 4.0 existing repository assets.
@@ -93,4 +97,4 @@ KNOWN RISKS:
 - Existing anatomy educational descriptions predate this branch and are not faculty-reviewed under the new governance.
 
 NEXT EXACT ACTION:
-Audit whether AcuSim's exact Dryad 3D annotation/model frame can be deterministically transformed into BodyParts3D using only reusable assets and documented geometry. In parallel search for an exact-artifact full-body open 3D acupoint dataset. Promote no positions unless the transform and BodyParts3D surface anchors validate. If no transferable open 3D frame exists, implement a faculty-reviewed landmark registration workflow that authors anchors directly on BodyParts3D from validated point-location references; do not convert AcuAtlas 2D map coordinates into invented z values.
+Use the dedicated preview URL for user visual QA on tablet/laptop while continuing the spatial-registration investigation: audit whether AcuSim's exact Dryad 3D annotation/model frame can be deterministically transformed into BodyParts3D using only reusable assets and documented geometry. In parallel search for an exact-artifact full-body open 3D acupoint dataset. Promote no positions unless the transform and BodyParts3D surface anchors validate. If no transferable open 3D frame exists, implement a faculty-reviewed landmark registration workflow that authors anchors directly on BodyParts3D from validated point-location references; do not convert AcuAtlas 2D map coordinates into invented z values.
