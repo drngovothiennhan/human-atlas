@@ -175,6 +175,10 @@ try{
   const barySum=registrationEvidence.barycentric.reduce((a,b)=>a+b,0);
   if(Math.abs(barySum-1)>1e-4)throw new Error('Registration barycentric sum invalid: '+barySum);
   await waitFor(()=>evaluate("document.querySelector('[data-registration-progress=true]')?.innerText.includes('1/10')"),{label:'registration pilot progress after capture'});
+  await waitFor(()=>evaluate("document.querySelector('[data-registration-next-missing=true]')?.innerText.includes('ST-36 · RIGHT')"),{label:'next missing pilot anchor'});
+  const nextMissingClicked=await evaluate("(()=>{const b=document.querySelector('[data-registration-next-missing=true]');if(!b)return false;b.click();return true})()");
+  if(!nextMissingClicked)throw new Error('Next-missing pilot control unavailable');
+  await waitFor(()=>evaluate("(()=>{const selects=document.querySelectorAll('.registration-grid select');return selects[0]?.value==='ST-36'&&selects[1]?.value==='RIGHT'})()"),{label:'next missing pilot target selected'});
   await screenshot('tablet-registration-workspace.png');
 
   await waitFor(()=>evaluate("navigator.serviceWorker?Promise.race([navigator.serviceWorker.ready.then(()=>true),new Promise(resolve=>setTimeout(()=>resolve(false),1000))]):false"),{timeout:15000,label:'service worker ready'});
@@ -194,6 +198,7 @@ try{
     localStudyAssistant:true,
     registrationReferences:true,
     registrationPilotProgress:true,
+    registrationNextMissing:true,
     registrationCapture:{pointCode:registrationEvidence.pointCode,side:registrationEvidence.side,status:registrationEvidence.status,triangleIndex:registrationEvidence.triangleIndex,barycentricValid:true},
     pwaOfflineReload:Boolean(offlineOk),
     consoleErrors
