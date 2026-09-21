@@ -103,7 +103,7 @@ export default function AnatomyScene({atlas,state,onSelect,onProgress,onError,re
    const validTap=tap.up(e.pointerId,e.clientX,e.clientY);if(!validTap||!ready)return;const rect=renderer.domElement.getBoundingClientRect();pointer.set((e.clientX-rect.left)/rect.width*2-1,-(e.clientY-rect.top)/rect.height*2+1);raycaster.setFromCamera(pointer,camera);
    if(registration.current){
     let nearest=Infinity,found=-1,bestHit:T.Intersection|null=null,bestMesh:T.Mesh|null=null;
-    pickers.forEach((mesh,i)=>{if(!mesh||atlas.parts[i].system!=='integumentary')return;worldBox.copy(bounds[i]).translate(mesh.position);if(!raycaster.ray.intersectBox(worldBox,hitPoint))return;const hit=raycaster.intersectObject(mesh,false)[0];if(hit&&hit.distance<nearest){nearest=hit.distance;found=i;bestHit=hit;bestMesh=mesh;}});
+    for(let i=0;i<pickers.length;i++){const mesh=pickers[i];if(!mesh||atlas.parts[i].system!=='integumentary')continue;worldBox.copy(bounds[i]).translate(mesh.position);if(!raycaster.ray.intersectBox(worldBox,hitPoint))continue;const hit=raycaster.intersectObject(mesh,false)[0];if(hit&&hit.distance<nearest){nearest=hit.distance;found=i;bestHit=hit;bestMesh=mesh;}}
     if(found>=0&&bestHit&&bestMesh){const capture=makeSurfaceCapture(found,bestMesh,bestHit);if(capture){registrationMarker.position.copy(bestHit.point);registrationMarker.visible=true;dirty=true;registerSurface.current?.(capture);}}
     return;
    }
