@@ -2,6 +2,7 @@
 
 Last refreshed: 2026-09-21
 Branch: `feature-hiu-yhct-3d-atlas`
+Verified code commit: `5046b736efc98ddce81347718edcdf5e8920a4a5`
 Rule: evidence first. Do not mark DONE/PASS without a commit, CI run, test result, deploy record, or source/license evidence.
 
 ## Status legend
@@ -12,70 +13,76 @@ Rule: evidence first. Do not mark DONE/PASS without a commit, CI run, test resul
 
 ## Repository / delivery
 - [x] Isolated feature branch exists; main remains untouched.
-- [x] PR #1 exists and is draft.
-- [x] CI workflow validates content, TypeScript, atlas integrity, interactions, unit tests, build, static assets and browser smoke.
-- [x] TypeScript `import.meta.env.BASE_URL` regression fixed at commit `b9f1bd89276584a0cb15ddfea6647d95849ca9c0`.
-- [~] GitHub Pages build code passes, but Pages site deployment is BLOCKED because Pages is not enabled/configured at repository level.
-- [x] Render feature preview exists as the currently documented live preview.
-- [ ] Update the live preview to a post-registration verified commit only after CI is green and deployment provenance is confirmed.
+- [x] PR #1 exists and remains draft/open.
+- [x] Latest code verified by push CI `35572643746` (#66) and PR CI `35572647309` (#67), both SUCCESS.
+- [x] Content validation, TypeScript, anatomy/interactions validators, 19 unit tests, production build, static-host build and browser smoke are green at the verified code commit.
+- [!] GitHub Pages site itself is not enabled/configured at repository level. Failure `35571169188` is isolated to `Configure GitHub Pages`; preceding build/tests passed.
+- [x] Pages deploy-on-push parked; workflow remains manually dispatchable after repository Pages is enabled.
+- [~] Render preview remains LIVE but is behind the latest registration code; do not use the current Render deploy as proof of commit 5046.
+- [ ] Update a live preview from a verified post-registration commit and record exact deployment provenance.
 
-## 3D anatomy
-- [x] BodyParts3D 4.0 anatomy viewer retained.
-- [x] Orbit/rotate, zoom, select/search, isolate/explode implemented.
+## 3D anatomy / QA
+- [x] BodyParts3D 4.0 viewer retained.
 - [x] 15 anatomy display systems.
-- [x] Anatomy integrity validation covers 2,234 indexed meshes and model assets.
-- [x] Desktop browser smoke covers model load, rotate and wheel zoom.
-- [x] Tablet emulation browser smoke covers touch orbit at 1024×768.
-- [ ] Physical tablet/laptop acceptance remains required before claiming physical-device QA.
+- [x] 2,234 indexed meshes / 3,432 complete concept mappings / 2,288,268 triangles validated.
+- [x] Desktop smoke: rotate, wheel zoom, front/back/side presets, reset and layer presets.
+- [x] Tablet 1024x768 emulation: touch orbit.
+- [x] Browser smoke console errors: none.
+- [ ] Dedicated browser pan assertion remains pending.
+- [ ] Dedicated pinch-zoom assertion and physical-device tablet/laptop QA remain pending.
 
 ## Acupoint / meridian catalogue
-- [x] 361 standard acupoint identifiers published across 14 meridians.
-- [x] Ordered sequences present for all 14 meridians.
-- [x] Search supports compact/hyphenated codes such as ST36/ST-36.
-- [x] Local study assistant answers point-to-meridian queries from local catalogue.
-- [x] Google outbound reference links are link-only; no Google result data is bundled.
-- [~] Full Vietnamese/English point-name and localization text is not yet complete because unverified prose is intentionally excluded.
+- [x] 361 standard acupoint identifiers across 14 meridians.
+- [x] Ordered point sequence present for all 14 meridians.
+- [x] ST36/ST-36 code search.
+- [x] Local point-to-meridian study assistant.
+- [x] Google links are outbound reference-only; no Google result data bundled.
+- [~] Full Vietnamese/English names and localization prose remain incomplete where reusable/reviewed provenance is missing.
 
 ## Spatial registration / 3D acupoints
-- [x] License gate and spatial-registration gate are separated.
-- [x] Five-point pilot staged: ST-36, LI-4, LU-5, LU-9, ST-41.
-- [x] Faculty registration workspace implemented.
-- [x] Surface capture records BodyParts3D structure, triangle index, barycentric coordinates and XYZ.
+- [x] License gate and BodyParts3D spatial-registration gate are separate.
+- [x] Pilot staged: ST-36, LI-4, LU-5, LU-9, ST-41.
+- [x] Registration workspace captures canonical BodyParts3D surface evidence.
 - [x] New captures are forced to UNVERIFIED.
-- [x] Browser smoke exercises a real BodyParts3D surface-anchor draft capture.
+- [x] Registration mode now locks assembled geometry and ensures the integumentary surface stays visible.
+- [x] Review artifact validator added; CLI rejects unreviewed/out-of-pilot/malformed reviewer evidence.
+- [x] Review gate unit tests added; total unit suite 19/19 PASS.
 - [x] Meridian path builder rejects unreviewed anchors.
-- [!] Runtime published spatial anchors remain 0 until faculty review.
-- [!] 3D meridian paths remain 0 until reviewed anchors exist.
-- [!] Point-click → 3D focus/highlight, 3D quiz and simulation remain gated until spatial data is reviewed.
-- [ ] Capture both sides for pilot bilateral points using licensed/reference location evidence.
-- [ ] Faculty review pilot anchors and record reviewer evidence.
+- [!] Committed pilot anchors: 0.
+- [!] Runtime published spatial points: 0.
+- [!] Published 3D meridian paths: 0.
+- [ ] Capture 10 bilateral pilot anchors directly on BodyParts3D.
+- [ ] Obtain and record faculty review evidence.
+- [ ] Validate reviewed artifact.
 - [ ] Promote only reviewed anchors to runtime.
 - [ ] Scale registration meridian-by-meridian only after pilot acceptance.
 
 ## Data/source/license
-- [x] BodyParts3D 4.0: direct-use anatomy source under audited license.
-- [x] AcuAtlas: 361-point dataset licensed for direct data use; its mapped coordinates remain registration-blocked.
-- [x] AcuSim/Dryad: open dataset with 2D/3D annotations; its synthetic coordinate frame remains registration-blocked.
-- [x] WHO 2008: reference-only; copyrighted location prose is not redistributed.
-- [x] kinhlac.online: UX/reference-only; no private API/model/database/source copied.
-- [x] TARA/FMA exact artifacts remain quarantined until exact license evidence is verified.
-- [x] Z-Anatomy audited as an open 3D anatomy reference (CC BY-SA 4.0); no asset will be bundled until share-alike/asset-level compatibility is explicitly handled.
-- [ ] Audit any newly proposed repository/dataset before import: exact artifact, exact license, attribution, coordinate system, provenance, and compatibility.
+- [x] BodyParts3D 4.0 audited for direct use.
+- [x] AcuAtlas data license audited; 2D mapped coordinates remain spatially blocked.
+- [x] AcuSim/Dryad audited; synthetic coordinate frame remains spatially blocked.
+- [x] WHO 2008 kept reference-only.
+- [x] kinhlac.online kept clean-room reference-only.
+- [x] Z-Anatomy recorded reference-only pending exact-asset/share-alike review.
+- [x] TARA/FMA remain quarantined until exact artifact license is known.
+- [x] No unlicensed 3D acupoint coordinate set has been promoted.
 
-## PWA / hosting / reliability
-- [x] PWA manifest/service worker exists.
-- [x] Offline shell reload is covered by browser smoke.
-- [x] Static asset gate exists.
-- [~] GitHub Pages static build passes but repository Pages configuration is not enabled.
-- [ ] Re-run push + PR CI after every code/content change.
-- [ ] Do not claim >95% application acceptance until required journeys have measured evidence; current reference parity remains NOT MEASURED.
+## PWA / hosting / acceptance
+- [x] PWA manifest/service worker.
+- [x] Offline app-shell reload verified.
+- [x] Static asset size gate verified.
+- [!] GitHub Pages repository configuration still requires enablement outside application code.
+- [~] Current Render preview is not the latest code checkpoint.
+- [ ] Physical tablet/laptop acceptance.
+- [ ] Fresh side-by-side kinhlac.online parity measurement.
+- [ ] Do not state >=95% complete/stable until the defined acceptance set is actually measured at >=95%.
 
 ## Immediate execution order
-1. Finish CI for commit `b9f1bd8…`; if browser smoke fails, fix only the failing regression.
-2. Treat GitHub Pages repository enablement as environment configuration, not an application-code defect.
-3. Refresh `PROJECT_STATE.md` with the newest verified CI commit/run IDs and exact blockers.
-4. Preserve 0 runtime spatial anchors until pilot anchors receive faculty review.
-5. Continue registration pilot; do not infer missing coordinates or z values from 2D maps.
-6. After pilot review, promote only reviewed anchors and generate paths from reviewed anchors.
-7. Expand search/names/localization only from licensed or independently reviewed content.
-8. Re-run browser/tablet smoke and deployment checks; create a new checkpoint before any handoff.
+1. Preserve verified code baseline `5046b736…`; do not repeat completed work.
+2. Capture the 5-point bilateral pilot only through the BodyParts3D registration workspace.
+3. Keep all captures UNVERIFIED until actual faculty review exists.
+4. Validate reviewed artifacts with `npm run registration:validate-review -- <file.json>`.
+5. Add runtime promotion only after reviewed evidence passes validation; never infer coordinates.
+6. Generate 3D paths only from reviewed anchors.
+7. Re-run the complete automated gate after every runtime/content change.
+8. Refresh deployment provenance and perform physical-device/reference-parity QA before handoff.

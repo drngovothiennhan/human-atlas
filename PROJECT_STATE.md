@@ -1,107 +1,68 @@
 # PROJECT_STATE
 
-CURRENT PHASE: Phase 17 checkpoint — 361-point licensed catalogue + ordered meridian sequences published; 3D registration still gated; P0 NOT COMPLETE
-LAST VERIFIED CODE COMMIT: f54aab5cd0759b97ef5fff844bcbede3fa5fc4d2
+CURRENT PHASE: Phase 17 continuation checkpoint — registration review gate and canonical surface-capture hardening complete; runtime spatial publication remains review-gated.
+CHECKPOINT BASE CODE COMMIT: 5046b736efc98ddce81347718edcdf5e8920a4a5
 BRANCH: feature-hiu-yhct-3d-atlas
+PR: #1 draft/open; main not merged.
 
-WHAT WORKS:
-- Existing BodyParts3D 4.0 anatomy viewer with orbit/zoom/select/search/isolate/explode.
-- 15 anatomy display systems.
-- Dedicated isolated feature branch and open PR #1; main is not merged.
-- License-gated content pipeline and schema validation.
-- Complete standard catalogue of 361 acupoint identifiers distributed across 14 meridians.
-- All 14 meridians now contain verified ordered pointIds sequences:
-  - LU 11, LI 20, ST 45, SP 21, HT 9, SI 19, BL 67, KI 27, PC 9, TE 23, GB 44, LR 14, GV 28, CV 24.
-- Runtime search accepts compact/hyphenated codes such as ST36 and ST-36.
-- Local Study Assistant can answer point-to-meridian and meridian-to-point-list queries from the local catalogue.
-- Meridian UI shows point sequence as a clearly labelled study sequence, not as a fake 3D path.
-- Every catalogue point remains spatially UNREGISTERED unless it passes the BodyParts3D registration gate.
-- Outbound “Tham khảo Google” links are available for reference-only lookup; Google result data is not copied or bundled.
-- AcuAtlas source links/attribution are visible for the catalogue.
-- PWA manifest/service worker and offline shell; cache version bumped for catalogue 0.3.0.
-- CI production build and static-host asset checks.
-- Browser smoke validates desktop rotate/wheel zoom, tablet 1024x768 touch orbit, model loading, 361-point catalogue count, ST36 search, Local Study Assistant, and offline shell reload.
+## WHAT WORKS
+- BodyParts3D 4.0 web anatomy viewer with orbit/rotate, zoom, select/search, isolate/explode and 15 anatomy display systems.
+- Isolated feature branch and draft PR; production/main remains untouched.
+- License-gated content pipeline with 15 audited source records.
+- Complete 361-point standard catalogue across 14 meridians with ordered point sequences.
+- Point-code search supports compact/hyphenated forms such as ST36/ST-36.
+- Local study assistant answers catalogue/meridian questions from bundled local data.
+- PWA manifest/service worker and offline app-shell reload.
+- Five-point BodyParts3D registration pilot is staged: ST-36, LI-4, LU-5, LU-9, ST-41.
+- Faculty registration workspace captures BodyParts3D surface structure, triangle index, barycentric coordinates and canonical XYZ as UNVERIFIED local drafts.
+- Registration workspace now forces assembled geometry and keeps integumentary surface visible while registration is enabled, preventing capture against an exploded/hidden visual state.
+- Faculty-review artifact validator exists: `npm run registration:validate-review -- <file.json>`.
+- Review validator rejects UNVERIFIED anchors, duplicate/out-of-pilot anchors, missing reviewer evidence, wrong coordinate system, invalid barycentric evidence and unapproved pilot references.
+- Meridian path builder accepts only FACULTY_REVIEWED/PUBLISHED anchors.
+- CI exercises desktop 1440x900, tablet emulation 1024x768, model load, rotate, wheel zoom, front/back/side camera presets, reset, layer presets, 361-point catalogue, ST36 search, local assistant, registration surface capture and offline reload.
 
-WHAT FAILED / NOT YET COMPLETE:
-- No current CI failure at the verified code commit.
-- Runtime spatially registered acupoints remain 0.
-- No licensed/validated BodyParts3D 3D meridian paths are published.
-- AcuAtlas mapped coordinates remain excluded from 3D because its reusable mapping is not registered to the BodyParts3D canonical surface.
-- AcuSim synthetic-model coordinates remain excluded pending a validated transform to BodyParts3D.
-- Search by full point name is incomplete because this checkpoint intentionally imports point identifiers/order only, not unverified name/location prose.
-- Point click -> 3D marker/focus cannot be enabled until anchor registration passes.
-- Quiz 3D and Simulation Lab remain disabled while spatialPointCount = 0.
-- Physical tablet/laptop testing and side-by-side kinhlac.online reference parity measurement have not been executed.
+## VERIFIED TEST EVIDENCE
+Verified code commit: `5046b736efc98ddce81347718edcdf5e8920a4a5`.
 
-TESTS RUN:
-- Push CI run 35563018730 on commit f54aab5cd0759b97ef5fff844bcbede3fa5fc4d2.
-- PR CI run 35563113375 on the same commit.
-- npm run content:validate
-- npm run content:build
-- npm run check
-- node scripts/validate-atlas.mjs
-- node --experimental-strip-types scripts/validate-interactions.mjs
-- npm test
-- npm run build
-- npm run verify:pages
-- node scripts/browser-smoke.mjs
-
-TEST RESULTS:
-- Push CI: PASS.
-- PR CI: PASS.
+- Push CI run: `35572643746` / run #66 — SUCCESS.
+- PR CI run: `35572647309` / run #67 — SUCCESS.
 - Content validation: PASS.
-- Content counts: 12 sources; 2 spatial candidates; 14 meridians; 361 catalogue acupoints.
-- Unit tests: 13/13 PASS; 0 failed.
-- Standard sequence gate: PASS for all 14 meridians and exactly 361 codes.
-- Spatial guard: PASS; all 361 catalogue records have no published position3d.
-- Anatomy validation: 2,234 indexed meshes; 3,432 complete concept mappings; 2,288,268 triangles; binary buffers verified.
-- Production build: PASS.
-- Static artifact check: 43 files; largest asset models/body-1.bin = 4,526,484 bytes; configured per-asset gate 26,214,400 bytes.
+- Content counts: 15 sources; 2 spatial candidates; 14 meridians; 361 acupoints; 5 pilot points; 0 committed pilot anchors.
+- Unit tests: 19/19 PASS.
+- Anatomy integrity: 2,234 indexed meshes; 3,432 complete concept mappings; 2,288,268 triangles; binary buffers verified.
+- Static build check: 44 files; largest asset `models/body-1.bin` = 4,526,484 bytes; per-asset gate = 26,214,400 bytes.
 - Browser smoke: PASS.
-- Browser desktop: 1440x900; rotate screenshot changed=true; zoom screenshot changed=true.
-- Browser tablet emulation: 1024x768; touch enabled=true; touch screenshot changed=true.
-- Model responses observed: 32 successful model responses.
-- 361-point catalogue count visible: PASS.
-- ST36 catalogue search: PASS.
-- Local Study Assistant ST36 -> Kinh Vị: PASS.
-- PWA offline shell reload: PASS.
-- Browser smoke console errors: none recorded.
+- Browser smoke evidence: desktop rotate/zoom/camera presets/reset/layer presets PASS; tablet touch orbit PASS; 48 successful model responses; local meridian search PASS; local assistant PASS; registration ST-36 LEFT draft capture UNVERIFIED with valid barycentric evidence; PWA offline reload PASS; console errors = [].
+- Push run artifact: `browser-smoke-evidence`, artifact ID `10627161150`.
 
-DEPLOYMENT URL:
-- Feature preview: https://hiu-yhct-3d-atlas-preview.onrender.com
-- Render service: srv-daob9fp42hec7395v8ug
-- Verified catalogue deploy: dep-daobnfugekts73bl77eg
-- Verified catalogue deploy source commit: f54aab5cd0759b97ef5fff844bcbede3fa5fc4d2
-- Verified catalogue deploy status: LIVE
-- Existing main demo: https://human-atlas-seven.vercel.app (not used as branch-preview evidence).
+## FAILED / BLOCKED / NOT YET COMPLETE
+- GitHub Pages deploy run `35571169188` failed at `actions/configure-pages@v5` because the repository Pages site is not enabled/configured to build with GitHub Actions. Build/tests/static verification before that step passed.
+- Automatic Pages deploy-on-push has been parked; the Pages workflow is manual-only until repository-level Pages is enabled. This prevents known environment configuration from producing repeated false-red deploy runs.
+- Runtime spatially published acupoints remain 0.
+- Published 3D meridian paths remain 0.
+- The five pilot points require 10 bilateral reviewed anchors (LEFT + RIGHT for each point); none may be synthesized.
+- Full point-name/localization prose remains intentionally incomplete where exact reusable provenance/review is missing.
+- Physical tablet/laptop QA has not been executed; CI tablet evidence is emulation only.
+- Side-by-side kinhlac.online parity remains NOT MEASURED.
+- Latest Render preview is LIVE but stale relative to the registration code: service `srv-daob9fp42hec7395v8ug`, URL https://hiu-yhct-3d-atlas-preview.onrender.com, latest listed live deploy `dep-daobqpmgekts73blir4g` from commit `3ea0b3da8c656dd344a52680318f4b86d8035472`. Do not cite it as proof of commit 5046.
 
-DATASETS IMPORTED:
-- Runtime anatomy: BodyParts3D 4.0 existing repository assets.
-- Runtime acupoint catalogue: 361 standard identifiers with meridian membership and sequence only.
-- Runtime meridian catalogue: 14 records with complete ordered pointIds, 0 published 3D paths.
-- Runtime spatially registered acupoints: 0.
-- AcuAtlas CC BY 4.0: used for catalogue cross-check/source attribution; mapped coordinates and clinical prose excluded.
-- AcuSim Dryad: audited spatial candidate only; no coordinates/assets imported.
-- Google Search: link-only reference; no search result data imported.
-
-LICENSE STATUS:
+## SOURCE / LICENSE STATE
 - BodyParts3D 4.0: DIRECT_USE / CC-BY-4.0.
 - HIU standard nomenclature compilation: DIRECT_USE / CC0-1.0.
-- AcuAtlas 361 reference dataset: DIRECT_USE data / CC-BY-4.0; catalogue identifiers/order now used; spatial registration BLOCKED.
-- AcuSim Dryad 2025 dataset: DIRECT_USE data / CC0-1.0; spatial registration BLOCKED.
-- Google Search external reference: REFERENCE_ONLY / LINK_ONLY.
-- WHO 2008 acupuncture publication: REFERENCE_ONLY.
-- TARA 1.7.0 exact reusable artifact: QUARANTINE pending exact-artifact license.
-- FMA exact artifact/version: QUARANTINE pending audit.
-- kinhlac.online: REFERENCE_ONLY.
-- Runtime spatial rule: DIRECT_USE license is necessary but insufficient; source must also be REGISTERED to BodyParts3D canonical coordinates/surface anchors.
+- AcuAtlas 361 reference dataset: DIRECT_USE data / CC-BY-4.0; mapped coordinates remain BodyParts3D registration BLOCKED.
+- AcuSim Dryad 2025: DIRECT_USE data / CC0-1.0; synthetic-model coordinate frame remains BodyParts3D registration BLOCKED.
+- WHO 2008 acupuncture publication: REFERENCE_ONLY; copyrighted prose is not redistributed.
+- kinhlac.online: REFERENCE_ONLY clean-room UX reference.
+- Google Search: REFERENCE_ONLY / LINK_ONLY; no result data bundled.
+- Z-Anatomy: REFERENCE_ONLY pending exact-asset/share-alike compatibility handling.
+- TARA/FMA exact artifacts: QUARANTINE until exact license evidence is verified.
 
-KNOWN RISKS:
-- 361 catalogue entries are identifiers/order records, not 361 verified BodyParts3D marker positions.
-- Meridian point sequence is not equivalent to a surface-following 3D meridian curve.
-- Full point-name/localization fields still require licensed exact-artifact import or independent reviewed compilation.
-- Physical tablet/laptop testing is still required; CI tablet testing is emulation, not a physical-device claim.
-- Reference parity weighted score remains NOT MEASURED until a fresh side-by-side run against the public reference is performed.
-
-NEXT EXACT ACTION:
-Implement the BodyParts3D landmark-registration workflow and validate a small faculty-reviewable pilot set before publishing any marker coordinates. Priority pilot for workflow validation: ST-36, LI-4, LU-5, LU-9 and ST-41, using licensed/reference location sources only; author anchors directly on the BodyParts3D surface, record structure/triangle/side/source/reviewer evidence, and keep them UNVERIFIED until faculty review. After the pilot passes, scale registration by meridian and generate surface-following paths only from registered anchors. Do not infer z from AcuAtlas 2D coordinates.
+## NEXT EXACT ACTION
+1. Use the built-in registration workspace to capture the approved bilateral pilot only: ST-36, LI-4, LU-5, LU-9 and ST-41.
+2. Do not programmatically invent coordinates or infer z from 2D maps. Each capture must come from the BodyParts3D surface and preserve triangle/barycentric/structure evidence.
+3. Obtain faculty review evidence for each captured anchor and validate the reviewed file with `registration:validate-review`.
+4. Only after review validation passes, add the promotion adapter that writes reviewed anchors into runtime spatial records; keep unreviewed anchors excluded.
+5. Generate meridian paths only from reviewed anchors.
+6. Re-run content validation -> build -> TypeScript -> anatomy/interactions validators -> unit tests -> static build checks -> browser smoke.
+7. Update the live preview only from a verified commit and record deploy provenance.
+8. Perform physical tablet/laptop QA and a fresh side-by-side reference-parity run before any >=95% acceptance claim.
