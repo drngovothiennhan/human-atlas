@@ -5,18 +5,19 @@ import {validateContent,sha256Text} from './content-lib.mjs';
 const root=process.cwd(),out=path.join(root,'public/data'),r=validateContent({root});
 if(r.errors.length){for(const e of r.errors)console.error(e);process.exit(1)}
 fs.mkdirSync(out,{recursive:true});
-for(const [src,name] of [[r.files.meridianFile,'meridians.json'],[r.files.pointFile,'acupoints.json']]){
+for(const [src,name] of [[r.files.meridianFile,'meridians.json'],[r.files.pointFile,'acupoints.json'],[r.files.registrationFile,'registration-pilot.json']]){
   const t=fs.readFileSync(src,'utf8');
   fs.writeFileSync(path.join(out,name),t.endsWith('\n')?t:t+'\n');
 }
 const manifest={
-  contentVersion:'0.3.0',
+  contentVersion:'0.3.1',
   builtAt:new Date().toISOString(),
   counts:r.counts,
   sourceHashes:{
     sources:sha256Text(fs.readFileSync(r.files.sourceFile,'utf8')),
     meridians:sha256Text(fs.readFileSync(r.files.meridianFile,'utf8')),
-    acupoints:sha256Text(fs.readFileSync(r.files.pointFile,'utf8'))
+    acupoints:sha256Text(fs.readFileSync(r.files.pointFile,'utf8')),
+    registration:sha256Text(fs.readFileSync(r.files.registrationFile,'utf8'))
   }
 };
 fs.writeFileSync(path.join(out,'content-manifest.json'),JSON.stringify(manifest,null,2)+'\n');
