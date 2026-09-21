@@ -1,7 +1,7 @@
 # PROJECT_STATE
 
 CURRENT PHASE: Phase 17 checkpoint — browser smoke recovered; P0 NOT COMPLETE
-LAST VERIFIED COMMIT: 302352db8cdd1c32e4617971aa10ee2bf98330d8
+LAST VERIFIED COMMIT: 5760d0473fb661c579c80628e7162d490b49b61b
 BRANCH: feature-hiu-yhct-3d-atlas
 
 WHAT WORKS:
@@ -23,8 +23,8 @@ WHAT FAILED:
 - Physical tablet/laptop testing and side-by-side kinhlac.online reference parity measurement have not been executed.
 
 TESTS RUN:
-- Push CI run 35558940665 on commit 302352db8cdd1c32e4617971aa10ee2bf98330d8.
-- PR CI run 35558943361 on the same commit.
+- Push CI run 35559640239 on commit 5760d0473fb661c579c80628e7162d490b49b61b.
+- PR CI run 35559642282 on the same commit.
 - npm run content:validate
 - npm run content:build
 - npm run check

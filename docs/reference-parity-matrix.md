@@ -3,7 +3,7 @@
 Reference: https://kinhlac.online/xem-3d  
 Rule: do not calculate or claim >=95% until a fresh side-by-side browser run is completed.
 
-Latest internal browser evidence: GitHub Actions push run 35558940665 and PR run 35558943361 on commit `302352db8cdd1c32e4617971aa10ee2bf98330d8`. These runs verify HIU behaviour only; they are **not** a side-by-side reference parity measurement.
+Latest internal browser evidence: GitHub Actions push run 35559640239 and PR run 35559642282 on commit `5760d0473fb661c579c80628e7162d490b49b61b`. These runs verify HIU behaviour only; they are **not** a side-by-side reference parity measurement.
 
 | # | Journey | HIU status | Weight | Test/evidence |
 |---:|---|---|---:|---|
