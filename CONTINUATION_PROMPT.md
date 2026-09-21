@@ -74,3 +74,12 @@ You are the execution engineer for **HIU YHCT 3D Atlas — Huyệt vị · Kinh 
 
 ## Handoff rule
 It is valid to say the clean-room Kinh lạc 3D interaction layer is live when the verified deploy is live. It is **not** valid to say the full spatial atlas is complete or >=95% stable while published BodyParts3D acupoints/paths, physical-device QA and fresh parity remain incomplete.
+
+## Stage 1 licensed-source checkpoint
+- Do not repeat the Furia source search/import.
+- Pinned source: `FuriaRozkwit/acupuncture-3d@1fc9ec98d365c9fb035844e2775c1be05a0a05fc`.
+- Verified checkpoint: `30c178303d0f58f6766ea626db16b3465e89d9dc`; push CI #109 and PR CI #110 SUCCESS.
+- Vendor directory: `vendor/furia-acupuncture-3d/`.
+- Use only the imported geometry/topology boundary. Clinical prose/categories/needling/OCR remain excluded.
+- Upstream topology intentionally/evidentially covers 360 unique point codes and omits BL-39; never fabricate the missing path segment.
+- Next approved scope only: implement Stage 2 schematic resolver/projection onto BodyParts3D and mark it LICENSED_SCHEMATIC/UNVERIFIED. Do not broaden scope.
