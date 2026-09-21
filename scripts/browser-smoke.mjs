@@ -91,6 +91,33 @@ try{
   const zoomHash=await screenshot('desktop-zoomed.png');
   if(zoomHash===rotateHash)throw new Error('Desktop wheel zoom did not change rendered screenshot');
 
+  const clickAria=async label=>evaluate("(()=>{const b=document.querySelector('[aria-label=\\\""+label+"\\\"]');if(!b)return false;b.click();return true})()");
+  for(const [label,file] of [['front view','desktop-front.png'],['back view','desktop-back.png'],['side view','desktop-side.png']]){
+    if(!await clickAria(label))throw new Error('Missing camera control: '+label);
+    await waitFor(()=>evaluate("document.querySelector('[aria-label=\\\""+label+"\\\"]')?.getAttribute('aria-pressed')==='true'"),{label:'camera '+label});
+    await sleep(250);
+    await screenshot(file);
+  }
+  const sideHash=await screenshot('desktop-side-confirm.png');
+  if(!await clickAria('Reset view and layers'))throw new Error('Missing reset camera control');
+  await waitFor(()=>evaluate("document.querySelector('[aria-label=\\\"three-quarter view\\\"]')?.getAttribute('aria-pressed')==='true'"),{label:'camera reset'});
+  await sleep(250);
+  const resetHash=await screenshot('desktop-reset.png');
+  if(resetHash===sideHash)throw new Error('Camera reset did not change rendered screenshot');
+
+  const skeletonPreset=await evaluate("(()=>{const b=[...document.querySelectorAll('.layer-presets button')].find(x=>x.textContent.trim()==='Skeleton');if(!b)return false;b.click();return true})()");
+  if(!skeletonPreset)throw new Error('Skeleton layer preset missing');
+  await waitFor(()=>evaluate("(()=>{const b=[...document.querySelectorAll('.layer-presets button')].find(x=>x.textContent.trim()==='Skeleton');return b?.getAttribute('aria-pressed')==='true'})()"),{label:'skeleton layer preset'});
+  await sleep(250);
+  const skeletonHash=await screenshot('desktop-skeleton.png');
+  if(skeletonHash===resetHash)throw new Error('Skeleton preset did not change rendered screenshot');
+  const allPreset=await evaluate("(()=>{const b=[...document.querySelectorAll('.layer-presets button')].find(x=>x.textContent.trim()==='All');if(!b)return false;b.click();return true})()");
+  if(!allPreset)throw new Error('All layer preset missing');
+  await waitFor(()=>evaluate("(()=>{const b=[...document.querySelectorAll('.layer-presets button')].find(x=>x.textContent.trim()==='All');return b?.getAttribute('aria-pressed')==='true'})()"),{label:'all layer preset'});
+  await sleep(250);
+  const allHash=await screenshot('desktop-all-layers.png');
+  if(allHash===skeletonHash)throw new Error('All layer preset did not change rendered screenshot');
+
   await evaluate("document.querySelector('.yhct-launch').click()");
   await waitFor(()=>evaluate("!!document.querySelector('.yhct-panel')"),{label:'YHCT drawer'});
   await evaluate("(()=>{const i=document.querySelector('.yhct-search');const s=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;s.call(i,'Phế');i.dispatchEvent(new Event('input',{bubbles:true}));return true})()");
@@ -157,7 +184,7 @@ try{
 
   const report={
     chrome:chromeBin,
-    desktop:{viewport:[1440,900],rotateScreenshotChanged:rotateHash!==desktopBefore,zoomScreenshotChanged:zoomHash!==rotateHash},
+    desktop:{viewport:[1440,900],rotateScreenshotChanged:rotateHash!==desktopBefore,zoomScreenshotChanged:zoomHash!==rotateHash,cameraPresets:true,cameraReset:true,layerPresets:true},
     tablet:{viewport:[tabletViewport.w,tabletViewport.h],touchEnabled:true,touchScreenshotChanged:touchAfter!==touchBefore},
     modelResponses:responses.filter(r=>/\/models\//.test(r.url)&&r.status===200).length,
     localMeridianSearch:true,
