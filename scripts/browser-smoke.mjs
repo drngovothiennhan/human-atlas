@@ -154,6 +154,13 @@ try{
   await evaluate("document.querySelector('[data-meridian3d-launch=true]')?.click()");
   await waitFor(()=>evaluate("!!document.querySelector('[data-meridian3d-panel=true]')"),{label:'3D meridian panel'});
   await waitFor(()=>evaluate("document.querySelector('[data-meridian3d-panel=true]')?.innerText.includes('Kinh Vị')&&document.querySelector('[data-meridian3d-panel=true]')?.innerText.includes('Chưa có path 3D đã kiểm duyệt')"),{label:'3D meridian clean-room gate'});
+  await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.meridianEffect==='flow'"),{label:'animated meridian flow effect'});
+  const effectFrameBefore=await evaluate("Number(document.querySelector('canvas')?.dataset.meridianEffectFrame||0)");
+  await sleep(180);
+  await waitFor(()=>evaluate("Number(document.querySelector('canvas')?.dataset.meridianEffectFrame||0)>"+String(0)),{label:'meridian animation frame'});
+  const effectFrameAfter=await evaluate("Number(document.querySelector('canvas')?.dataset.meridianEffectFrame||0)");
+  if(effectFrameAfter===effectFrameBefore)throw new Error('Meridian motion effect did not advance');
+  console.log('SMOKE_MERIDIAN_FLOW_EFFECT_PASS '+JSON.stringify({effectFrameBefore,effectFrameAfter}));
   const schematicCoverage=[];
   const meridianCodes=await evaluate("[...document.querySelectorAll('.meridian3d-controls select')[0].options].map(o=>o.value)");
   if(meridianCodes.length!==14)throw new Error('Expected 14 meridians');

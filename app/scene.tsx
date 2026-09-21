@@ -51,10 +51,11 @@ export default function AnatomyScene({atlas,state,onSelect,onProgress,onError,re
   const markers=new T.Points(markerGeometry,markerMaterial);markers.frustumCulled=false;markers.renderOrder=10;markers.visible=false;scene.add(markers);
   const registrationMarker=new T.Mesh(new T.SphereGeometry(.009,18,12),new T.MeshBasicMaterial({color:0x0f766e,depthTest:false}));registrationMarker.visible=false;registrationMarker.renderOrder=30;scene.add(registrationMarker);
   const meridianGroup=new T.Group();meridianGroup.name='hiu-meridian-overlay';scene.add(meridianGroup);
-  let meridianMarkers:T.Mesh[]=[];
+  const reduceMeridianMotion=window.matchMedia?.('(prefers-reduced-motion: reduce)').matches??false;
+  let meridianMarkers:T.Mesh[]=[],meridianPulseMarkers:T.Mesh[]=[],meridianFlowMaterials:T.LineDashedMaterial[]=[];
   const meridianColors:Record<string,number>={LU:0x2563eb,LI:0xf97316,ST:0xeab308,SP:0x8b5cf6,HT:0xdc2626,SI:0x0ea5e9,BL:0x475569,KI:0x0f766e,PC:0xdb2777,TE:0x06b6d4,GB:0x65a30d,LR:0x16a34a,CV:0x7c3aed,GV:0xb91c1c};
   const disposeOverlay=()=>{
-   meridianMarkers=[];
+   meridianMarkers=[];meridianPulseMarkers=[];meridianFlowMaterials=[];
    while(meridianGroup.children.length){
     const child=meridianGroup.children.pop()!;
     const geometry=(child as T.Mesh).geometry as T.BufferGeometry|undefined;geometry?.dispose();
@@ -64,7 +65,7 @@ export default function AnatomyScene({atlas,state,onSelect,onProgress,onError,re
   };
   const rebuildOverlay=(value:MeridianOverlayState|undefined)=>{
    renderer.domElement.dataset.meridianId=value?.enabled?(value.meridianId??''):'';
-   disposeOverlay();renderer.domElement.dataset.meridianAnchors='0';renderer.domElement.dataset.meridianPaths='0';renderer.domElement.dataset.meridianSchematicAnchors='0';renderer.domElement.dataset.meridianSchematicPaths='0';if(!value?.enabled)return;
+   disposeOverlay();renderer.domElement.dataset.meridianAnchors='0';renderer.domElement.dataset.meridianPaths='0';renderer.domElement.dataset.meridianSchematicAnchors='0';renderer.domElement.dataset.meridianSchematicPaths='0';renderer.domElement.dataset.meridianEffect=value?.enabled?(reduceMeridianMotion?'reduced':'flow'):'off';if(!value?.enabled)return;
    const color=meridianColors[value.meridianId??'']??0x0f766e;let trustedAnchors=0,schematicAnchors=0,schematicPaths=0,trustedPaths=0;
    for(const anchor of value.anchors){
     if(![anchor.x,anchor.y,anchor.z].every(Number.isFinite))continue;
@@ -72,7 +73,7 @@ export default function AnatomyScene({atlas,state,onSelect,onProgress,onError,re
     const material=new T.MeshBasicMaterial({color,transparent:true,opacity:anchor.sourceKind==='PUBLISHED'?1:schematic?.76:.84,depthTest:true});
     const marker=new T.Mesh(new T.SphereGeometry(anchor.sourceKind==='PUBLISHED'?.012:schematic?.0085:.010,16,12),material);
     marker.position.set(anchor.x,anchor.y,anchor.z);marker.renderOrder=24;marker.userData.pointCode=anchor.pointCode;marker.userData.side=anchor.side;marker.userData.verificationStatus=anchor.verificationStatus;marker.userData.sourceKind=anchor.sourceKind;
-    meridianGroup.add(marker);meridianMarkers.push(marker);if(schematic)schematicAnchors++;else trustedAnchors++;
+    meridianGroup.add(marker);meridianMarkers.push(marker);meridianPulseMarkers.push(marker);if(schematic)schematicAnchors++;else trustedAnchors++;
    }
    renderer.domElement.dataset.meridianAnchors=String(trustedAnchors);renderer.domElement.dataset.meridianSchematicAnchors=String(schematicAnchors);
    for(const path of value.paths){
@@ -84,12 +85,15 @@ export default function AnatomyScene({atlas,state,onSelect,onProgress,onError,re
     if(schematic){
      const geometry=new T.BufferGeometry().setFromPoints(points);
      const material=new T.LineDashedMaterial({color,transparent:true,opacity:.72,dashSize:.012,gapSize:.007,depthTest:true});
-     const line=new T.Line(geometry,material);line.computeLineDistances();line.renderOrder=22;meridianGroup.add(line);schematicPaths++;
+     const line=new T.Line(geometry,material);line.computeLineDistances();line.renderOrder=22;meridianGroup.add(line);meridianFlowMaterials.push(material);schematicPaths++;
     }else{
      const curve=new T.CatmullRomCurve3(points,false,'centripetal');
      const geometry=new T.TubeGeometry(curve,Math.max(12,points.length*10),.0045,6,false);
      const material=new T.MeshBasicMaterial({color,transparent:true,opacity:.9,depthTest:true});
-     const tube=new T.Mesh(geometry,material);tube.renderOrder=22;meridianGroup.add(tube);trustedPaths++;
+     const tube=new T.Mesh(geometry,material);tube.renderOrder=22;meridianGroup.add(tube);
+     const flowGeometry=new T.BufferGeometry().setFromPoints(curve.getPoints(Math.max(24,points.length*12)));
+     const flowMaterial=new T.LineDashedMaterial({color:0xffffff,transparent:true,opacity:.72,dashSize:.014,gapSize:.012,depthTest:true});
+     const flowLine=new T.Line(flowGeometry,flowMaterial);flowLine.computeLineDistances();flowLine.renderOrder=23;meridianGroup.add(flowLine);meridianFlowMaterials.push(flowMaterial);trustedPaths++;
     }
    }
    renderer.domElement.dataset.meridianPaths=String(trustedPaths);renderer.domElement.dataset.meridianSchematicPaths=String(schematicPaths);
@@ -172,7 +176,7 @@ export default function AnatomyScene({atlas,state,onSelect,onProgress,onError,re
    if(found<0&&amount>.45)found=findTarget(e.clientX-rect.left,e.clientY-rect.top,e.pointerType==='touch'?24:16);if(found>=0){hover.hidden=true;select.current(atlas.parts[found].id);}
   };
   renderer.domElement.addEventListener('pointerdown',down);renderer.domElement.addEventListener('pointermove',move);renderer.domElement.addEventListener('pointerup',up);renderer.domElement.addEventListener('pointercancel',cancel);
-  const clock=new T.Clock();let lastExtent=-1,lastOverlayKey='',lastFocusKey='';
+  const clock=new T.Clock();let lastExtent=-1,lastOverlayKey='',lastFocusKey='',lastMeridianEffectFrame=-1;
   const animate=()=>{
    if(disposed)return;frame=requestAnimationFrame(animate);const dt=Math.min(clock.getDelta(),.05),s=latest.current;
    const overlayValue=overlay.current;
@@ -180,6 +184,14 @@ export default function AnatomyScene({atlas,state,onSelect,onProgress,onError,re
     ?[overlayValue.meridianId,overlayValue.side,overlayValue.anchors.map(anchor=>[anchor.pointCode,anchor.side,anchor.x.toFixed(5),anchor.y.toFixed(5),anchor.z.toFixed(5),anchor.verificationStatus].join(':')).join('|'),overlayValue.paths.map(path=>path.meridianId+':'+path.verificationStatus+':'+path.points.length).join('|')].join('::')
     :'off';
    if(overlayKey!==lastOverlayKey){rebuildOverlay(overlayValue);lastOverlayKey=overlayKey;dirty=true;}
+   if(overlayValue?.enabled&&!reduceMeridianMotion&&(meridianFlowMaterials.length||meridianPulseMarkers.length)){
+    const effectFrame=Math.floor(clock.elapsedTime*30);
+    if(effectFrame!==lastMeridianEffectFrame){
+     meridianFlowMaterials.forEach((material,index)=>{material.dashOffset=-(clock.elapsedTime*.035+index*.004);});
+     meridianPulseMarkers.forEach((marker,index)=>{const pulse=1.02+.16*(.5+.5*Math.sin(clock.elapsedTime*5+index*.43));marker.scale.setScalar(pulse);});
+     renderer.domElement.dataset.meridianEffect='flow';renderer.domElement.dataset.meridianEffectFrame=String(effectFrame);lastMeridianEffectFrame=effectFrame;dirty=true;
+    }
+   }else if(!overlayValue?.enabled){renderer.domElement.dataset.meridianEffect='off';}
    const focusValue=focus.current;
    if(focusValue?.key&&focusValue.key!==lastFocusKey){
     const point=new T.Vector3(focusValue.x,focusValue.y,focusValue.z),destination=point.clone().add(new T.Vector3(.28,.12,.42).normalize().multiplyScalar(.48));
