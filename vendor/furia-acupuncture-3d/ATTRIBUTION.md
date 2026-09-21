@@ -65,3 +65,8 @@ lokalizacji z `data/points.json` zamiast cytatów z podręcznika.
 `data/points.json` to moja praca: 361 punktów opisanych kotwicą proporcjonalną
 (segment ciała + odległość w *cun* + azymut) wraz z polskimi notatkami o lokalizacji.
 Anatomiczne fakty pochodzą z literatury, ale zapis i układ danych są własne — MIT.
+
+
+## Stage 2 browser projection
+
+`rig_fitted.json` is vendored from the pinned upstream commit and remains under the upstream CC BY-SA 4.0 attribution boundary. The HIU build uses it together with the MIT-authored point anchors to ray-project schematic markers onto BodyParts3D FMA7163. Output is educational schematic geometry marked UNVERIFIED, not reviewed clinical spatial data.

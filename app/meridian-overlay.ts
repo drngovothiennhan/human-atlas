@@ -11,13 +11,15 @@ export type MeridianSceneAnchor={
   y:number;
   z:number;
   verificationStatus:ReviewStatus;
-  sourceKind:'LOCAL_DRAFT'|'PUBLISHED';
+  sourceKind:'LOCAL_DRAFT'|'LICENSED_SCHEMATIC'|'PUBLISHED';
 };
 
 export type MeridianScenePath={
   meridianId:string;
+  side?:'LEFT'|'RIGHT'|'MIDLINE'|'UNKNOWN';
   points:[number,number,number][];
-  verificationStatus:'FACULTY_REVIEWED'|'PUBLISHED';
+  verificationStatus:'UNVERIFIED'|'FACULTY_REVIEWED'|'PUBLISHED';
+  sourceKind?:'LICENSED_SCHEMATIC'|'PUBLISHED';
 };
 
 export type MeridianOverlayState={

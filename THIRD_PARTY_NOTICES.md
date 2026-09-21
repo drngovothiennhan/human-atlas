@@ -12,3 +12,12 @@ WHO acupuncture text, TARA curated rows, kinhlac.online assets/data, acu-master 
 AcuAtlas 361-point reference dataset is audited as CC BY 4.0. HIU Atlas 0.3.0 uses only the standard point identifiers, meridian membership and numeric ordering for the runtime catalogue. AcuAtlas mapped x/y coordinates, clinical prose and 3D projection are not imported into BodyParts3D.
 
 Source index: https://acupointatlas.com/acupuncture-points/
+
+
+## Furia calibrated rig — Stage 2 schematic projection
+
+- File: `vendor/furia-acupuncture-3d/rig_fitted.json`
+- Upstream: `FuriaRozkwit/acupuncture-3d@1fc9ec98d365c9fb035844e2775c1be05a0a05fc`, `data/rig_fitted.json`.
+- License boundary: CC BY-SA 4.0 for calibrated anatomical metadata derived from Z-Anatomy/BodyParts3D, as declared by upstream ATTRIBUTION.md.
+- Use here: source-frame ray origins/directions are projected onto the already licensed BodyParts3D FMA7163 skin. Generated coordinates and topology are labelled `LICENSED_SCHEMATIC / UNVERIFIED`; they are never promoted to faculty-reviewed/published data automatically.
+- BL-39 is absent from the pinned upstream path topology; the build deliberately splits that path rather than inventing a connection.

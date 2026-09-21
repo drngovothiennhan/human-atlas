@@ -55,25 +55,35 @@ export default function AnatomyScene({atlas,state,onSelect,onProgress,onError,re
    }
   };
   const rebuildOverlay=(value:MeridianOverlayState|undefined)=>{
-   disposeOverlay();renderer.domElement.dataset.meridianAnchors='0';renderer.domElement.dataset.meridianPaths='0';if(!value?.enabled)return;
-   const color=meridianColors[value.meridianId??'']??0x0f766e;
+   disposeOverlay();renderer.domElement.dataset.meridianAnchors='0';renderer.domElement.dataset.meridianPaths='0';renderer.domElement.dataset.meridianSchematicAnchors='0';renderer.domElement.dataset.meridianSchematicPaths='0';if(!value?.enabled)return;
+   const color=meridianColors[value.meridianId??'']??0x0f766e;let trustedAnchors=0,schematicAnchors=0,schematicPaths=0,trustedPaths=0;
    for(const anchor of value.anchors){
     if(![anchor.x,anchor.y,anchor.z].every(Number.isFinite))continue;
-    const material=new T.MeshBasicMaterial({color,transparent:true,opacity:anchor.sourceKind==='PUBLISHED'?1:.72,depthTest:true});
-    const marker=new T.Mesh(new T.SphereGeometry(anchor.sourceKind==='PUBLISHED'?.012:.010,16,12),material);
-    marker.position.set(anchor.x,anchor.y,anchor.z);marker.renderOrder=24;marker.userData.pointCode=anchor.pointCode;marker.userData.side=anchor.side;marker.userData.verificationStatus=anchor.verificationStatus;
-    meridianGroup.add(marker);meridianMarkers.push(marker);
+    const schematic=anchor.sourceKind==='LICENSED_SCHEMATIC';
+    const material=new T.MeshBasicMaterial({color,transparent:true,opacity:anchor.sourceKind==='PUBLISHED'?1:schematic?.76:.84,depthTest:true});
+    const marker=new T.Mesh(new T.SphereGeometry(anchor.sourceKind==='PUBLISHED'?.012:schematic?.0085:.010,16,12),material);
+    marker.position.set(anchor.x,anchor.y,anchor.z);marker.renderOrder=24;marker.userData.pointCode=anchor.pointCode;marker.userData.side=anchor.side;marker.userData.verificationStatus=anchor.verificationStatus;marker.userData.sourceKind=anchor.sourceKind;
+    meridianGroup.add(marker);meridianMarkers.push(marker);if(schematic)schematicAnchors++;else trustedAnchors++;
    }
-   renderer.domElement.dataset.meridianAnchors=String(meridianMarkers.length);
+   renderer.domElement.dataset.meridianAnchors=String(trustedAnchors);renderer.domElement.dataset.meridianSchematicAnchors=String(schematicAnchors);
    for(const path of value.paths){
-    if(!['FACULTY_REVIEWED','PUBLISHED'].includes(path.verificationStatus)||path.points.length<2)continue;
+    if(path.points.length<2)continue;
+    const schematic=path.sourceKind==='LICENSED_SCHEMATIC'&&path.verificationStatus==='UNVERIFIED';
+    const reviewed=['FACULTY_REVIEWED','PUBLISHED'].includes(path.verificationStatus);
+    if(!schematic&&!reviewed)continue;
     const points=path.points.map(point=>new T.Vector3(point[0],point[1],point[2]));
-    const curve=new T.CatmullRomCurve3(points,false,'centripetal');
-    const geometry=new T.TubeGeometry(curve,Math.max(12,points.length*10),.0045,6,false);
-    const material=new T.MeshBasicMaterial({color,transparent:true,opacity:.9,depthTest:true});
-    const tube=new T.Mesh(geometry,material);tube.renderOrder=22;meridianGroup.add(tube);
+    if(schematic){
+     const geometry=new T.BufferGeometry().setFromPoints(points);
+     const material=new T.LineDashedMaterial({color,transparent:true,opacity:.72,dashSize:.012,gapSize:.007,depthTest:true});
+     const line=new T.Line(geometry,material);line.computeLineDistances();line.renderOrder=22;meridianGroup.add(line);schematicPaths++;
+    }else{
+     const curve=new T.CatmullRomCurve3(points,false,'centripetal');
+     const geometry=new T.TubeGeometry(curve,Math.max(12,points.length*10),.0045,6,false);
+     const material=new T.MeshBasicMaterial({color,transparent:true,opacity:.9,depthTest:true});
+     const tube=new T.Mesh(geometry,material);tube.renderOrder=22;meridianGroup.add(tube);trustedPaths++;
+    }
    }
-   renderer.domElement.dataset.meridianPaths=String(value.paths.filter(path=>['FACULTY_REVIEWED','PUBLISHED'].includes(path.verificationStatus)&&path.points.length>=2).length);
+   renderer.domElement.dataset.meridianPaths=String(trustedPaths);renderer.domElement.dataset.meridianSchematicPaths=String(schematicPaths);
   };
   const hover=document.createElement('div');hover.className='part-hover';hover.setAttribute('role','tooltip');hover.hidden=true;el.appendChild(hover);
   type Target={index:number;x:number;y:number;left:number;right:number;top:number;bottom:number};let targets:Target[]=[];
