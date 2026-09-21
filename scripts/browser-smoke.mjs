@@ -90,6 +90,12 @@ try{
   await sleep(500);
   const zoomHash=await screenshot('desktop-zoomed.png');
   if(zoomHash===rotateHash)throw new Error('Desktop wheel zoom did not change rendered screenshot');
+  await send('Input.dispatchMouseEvent',{type:'mousePressed',x,y,button:'right',buttons:2,clickCount:1});
+  await send('Input.dispatchMouseEvent',{type:'mouseMoved',x:x+90,y:y+45,button:'right',buttons:2});
+  await send('Input.dispatchMouseEvent',{type:'mouseReleased',x:x+90,y:y+45,button:'right',buttons:0,clickCount:1});
+  await sleep(500);
+  const panHash=await screenshot('desktop-panned.png');
+  if(panHash===zoomHash)throw new Error('Desktop pan did not change rendered screenshot');
 
   const clickAria=async label=>evaluate("(()=>{const b=document.querySelector('[aria-label=\\\""+label+"\\\"]');if(!b)return false;b.click();return true})()");
   for(const [label,file] of [['front view','desktop-front.png'],['back view','desktop-back.png'],['side view','desktop-side.png']]){
@@ -149,6 +155,13 @@ try{
   await sleep(500);
   const touchAfter=await screenshot('tablet-after-touch.png');
   if(touchAfter===touchBefore)throw new Error('Tablet touch orbit did not change rendered screenshot');
+  const pinchBefore=touchAfter;
+  await send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:tc.x-45,y:tc.y,id:11,radiusX:1,radiusY:1,force:1},{x:tc.x+45,y:tc.y,id:12,radiusX:1,radiusY:1,force:1}]});
+  await send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:tc.x-95,y:tc.y,id:11,radiusX:1,radiusY:1,force:1},{x:tc.x+95,y:tc.y,id:12,radiusX:1,radiusY:1,force:1}]});
+  await send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});
+  await sleep(500);
+  const pinchAfter=await screenshot('tablet-after-pinch.png');
+  if(pinchAfter===pinchBefore)throw new Error('Tablet pinch zoom did not change rendered screenshot');
 
   await send('Page.navigate',{url:base+'?register=1'});
   await waitFor(()=>evaluate("document.readyState==='complete'&&!!document.querySelector('[data-registration-panel=true]')"),{timeout:30000,label:'registration workspace'});
@@ -191,8 +204,8 @@ try{
 
   const report={
     chrome:chromeBin,
-    desktop:{viewport:[1440,900],rotateScreenshotChanged:rotateHash!==desktopBefore,zoomScreenshotChanged:zoomHash!==rotateHash,cameraPresets:true,cameraReset:true,layerPresets:true},
-    tablet:{viewport:[tabletViewport.w,tabletViewport.h],touchEnabled:true,touchScreenshotChanged:touchAfter!==touchBefore},
+    desktop:{viewport:[1440,900],rotateScreenshotChanged:rotateHash!==desktopBefore,zoomScreenshotChanged:zoomHash!==rotateHash,panScreenshotChanged:panHash!==zoomHash,cameraPresets:true,cameraReset:true,layerPresets:true},
+    tablet:{viewport:[tabletViewport.w,tabletViewport.h],touchEnabled:true,touchScreenshotChanged:touchAfter!==touchBefore,pinchScreenshotChanged:pinchAfter!==pinchBefore},
     modelResponses:responses.filter(r=>/\/models\//.test(r.url)&&r.status===200).length,
     localMeridianSearch:true,
     localStudyAssistant:true,
