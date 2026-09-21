@@ -1,6 +1,6 @@
-const SHELL='hiu-yhct-atlas-shell-v0.3.0';
-const DATA='hiu-yhct-atlas-data-v0.3.0';
-const CORE=['/','/manifest.webmanifest','/favicon.svg','/data/meridians.json','/data/acupoints.json','/data/provenance.json'];
+const SHELL='hiu-yhct-atlas-shell-v0.3.1';
+const DATA='hiu-yhct-atlas-data-v0.3.1';
+const CORE=['/','/manifest.webmanifest','/favicon.svg','/data/meridians.json','/data/acupoints.json','/data/registration-pilot.json','/data/provenance.json'];
 
 async function precacheShell(){
   const cache=await caches.open(SHELL);
