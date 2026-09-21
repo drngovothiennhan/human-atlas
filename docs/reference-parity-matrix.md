@@ -11,12 +11,12 @@ Latest internal browser evidence: GitHub Actions push run 35559640239 and PR run
 |2|Drag to rotate|PASS|5|Browser smoke desktop 1440x900: rotated screenshot hash changed|
 |3|Pinch/wheel zoom|PARTIAL|5|Desktop wheel zoom browser smoke PASS; dedicated pinch-zoom assertion/physical tablet still pending|
 |4|Pan|PARTIAL|3|Interaction validator covers drag/multitouch contracts; dedicated browser pan assertion pending|
-|5|Select meridian|FAIL|6|14 nomenclature records; no validated 3D path|
+|5|Select meridian|PARTIAL|6|14 meridians are searchable/listed with complete ordered point sequences; 3D path selection is still unavailable|
 |6|Toggle meridian|FAIL|4|Not wired to a validated scene path|
 |7|Display meridian path|FAIL|7|No validated spatial path|
-|8|Display acupoint markers|FAIL|7|0 verified 3D acupoints|
-|9|Tap point -> info|FAIL|5|0 runtime points|
-|10|Search point code/name|FAIL|5|0 verified point records|
+|8|Display acupoint markers|FAIL|7|361 catalogue records exist, but 0 BodyParts3D-registered marker positions|
+|9|Tap point -> info|PARTIAL|5|Point catalogue/reference entries are browsable in the YHCT panel; 3D marker tap remains unavailable|
+|10|Search point code/name|PARTIAL|5|361 point-code records searchable; full-name coverage remains incomplete|
 |11|Search -> camera focus|FAIL|6|No point anchors|
 |12|Highlight selected point|FAIL|3|No point anchors|
 |13|Highlight containing meridian|FAIL|3|No path registration|
