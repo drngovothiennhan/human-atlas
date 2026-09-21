@@ -269,7 +269,7 @@ try{
   await evaluate("(()=>{const i=document.querySelector('.meridian3d-search');const s=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;s.call(i,'ST-36');i.dispatchEvent(new Event('input',{bubbles:true}));return true})()");
   await waitFor(()=>evaluate("!!document.querySelector('[data-meridian3d-point=\\\"ST-36\\\"]')"),{label:'registration 3D ST36 result'});
   await evaluate("document.querySelector('[data-meridian3d-point=\\\"ST-36\\\"]')?.click()");
-  await waitFor(()=>evaluate("document.querySelector('[data-meridian3d-detail=true]')?.innerText.includes('nháp local')&&document.querySelector('[data-meridian3d-detail=true]')?.innerText.includes('Tham chiếu học tập')"),{label:'local draft remains unverified in 3D viewer'});
+  await waitFor(()=>evaluate("document.querySelector('[data-meridian3d-detail=true]')?.innerText.includes('nháp trên máy')&&document.querySelector('[data-meridian3d-detail=true]')?.innerText.includes('Tham chiếu học tập')"),{label:'local draft remains unverified in 3D viewer'});
   await screenshot('tablet-meridian3d-local-anchor.png');
   await evaluate("document.querySelector('[data-meridian3d-panel=true] [aria-label=\\\"Đóng mô hình kinh lạc 3D\\\"]')?.click()");
   await waitFor(()=>evaluate("document.querySelector('[data-registration-next-missing=true]')?.innerText.includes('ST-36 · RIGHT')"),{label:'next missing pilot anchor'});
