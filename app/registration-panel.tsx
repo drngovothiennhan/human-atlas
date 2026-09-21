@@ -88,6 +88,14 @@ export default function RegistrationPanel({target,capture,onTargetChange}:Props)
   const currentDraft=drafts.find(item=>item.pointCode===target.pointCode&&item.side===target.side);
   const requiredAnchorCount=pilot?.pilot.reduce((count,point)=>count+point.requiredSides.length,0)??0;
   const capturedAnchorCount=pilot?.pilot.reduce((count,point)=>count+point.requiredSides.filter(side=>drafts.some(draft=>draft.pointCode===point.pointCode&&draft.side===side)).length,0)??0;
+  const nextMissingTarget=useMemo(()=>{
+    for(const point of pilot?.pilot??[]){
+      for(const side of point.requiredSides){
+        if(!drafts.some(draft=>draft.pointCode===point.pointCode&&draft.side===side))return {pointCode:point.pointCode,side};
+      }
+    }
+    return null;
+  },[pilot,drafts]);
 
   const exportDrafts=()=>{
     const payload={
@@ -147,6 +155,9 @@ export default function RegistrationPanel({target,capture,onTargetChange}:Props)
         <code>Chạm bề mặt da trên mô hình để ghi bản nháp.</code>
       </div>}
     <div className="registration-actions">
+      <Button data-registration-next-missing="true" variant="ghost" onClick={()=>nextMissingTarget&&onTargetChange(nextMissingTarget)} disabled={!nextMissingTarget}>
+        {nextMissingTarget?`Anchor còn thiếu tiếp theo: ${nextMissingTarget.pointCode} · ${nextMissingTarget.side}`:'Đã ghi đủ anchor pilot'}
+      </Button>
       <Button variant="ghost" onClick={exportDrafts} disabled={!drafts.length}>Xuất JSON kiểm duyệt ({drafts.length})</Button>
     </div>
     <p className="registration-note">Trong chế độ đăng ký, mô hình được khóa ở trạng thái assembled và lớp da luôn được giữ hiển thị để tránh ghi anchor sai do explode/ẩn bề mặt.</p>
