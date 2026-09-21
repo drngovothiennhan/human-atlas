@@ -1,0 +1,18 @@
+{
+  "name": "Huyệt vị · Kinh lạc · Giải phẫu 3D — HIU CLB YHCT",
+  "short_name": "HIU YHCT 3D Atlas",
+  "description": "Atlas giáo dục 3D về giải phẫu, huyệt vị và kinh lạc. Không phải công cụ tự chẩn đoán hoặc tự điều trị.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f3f4f4",
+  "theme_color": "#263b48",
+  "lang": "vi",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+export const BODY_CANONICAL_COORDINATE_SYSTEM='BodyParts3D-4.0-browser-meters-Y-up' as const;
+export type AcupointAnchor={x:number;y:number;z:number;coordinateSystem:string;surfaceStructureId:string;triangleIndex?:number|null;barycentric?:[number,number,number]|null;nearestSurfaceDistance?:number|null;side:'LEFT'|'RIGHT'|'MIDLINE'|'BILATERAL'|'UNKNOWN';source:string;verificationStatus:'UNVERIFIED'|'SOURCE_VERIFIED'|'FACULTY_REVIEWED'|'PUBLISHED'};
+export function isPublishableAnchor(a:AcupointAnchor){return [a.x,a.y,a.z].every(Number.isFinite)&&Boolean(a.surfaceStructureId)&&Boolean(a.source)&&a.verificationStatus!=='UNVERIFIED'}

@@ -1,0 +1,25 @@
+name: HIU YHCT 3D Atlas CI
+on:
+  push:
+    branches: [feature-hiu-yhct-3d-atlas]
+  pull_request:
+    branches: [main]
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.13.0'
+          cache: npm
+      - run: npm ci
+      - run: npm run content:validate
+      - run: npm run content:build
+      - run: npm run check
+      - run: node scripts/validate-atlas.mjs
+      - run: node scripts/validate-interactions.mjs
+      - run: npm test
+      - run: npm run build
+      - run: npm run verify:pages
