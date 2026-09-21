@@ -14,6 +14,8 @@ type Language='vi'|'en'|'zh';
 type Meridian={id:string;code:string;vietnameseName:string;englishName:string;chineseName?:string|null;pointIds:string[];path3d:number[][];reviewStatus:string;spatialStatus:string};
 type Acupoint={code:string;meridianId:string;sequence:number;vietnameseName?:string|null;englishName?:string|null;chineseName?:string|null;pinyin?:string|null;position3d?:{x:number;y:number;z:number;coordinateSystem?:string;source?:string}|null;reviewStatus?:string;verificationStatus?:string};
 type SchematicSpatial={anchors:MeridianSceneAnchor[];paths:MeridianScenePath[];source?:{repository?:string;commit?:string;license?:string};omittedTopology?:string[];sourceSideWarnings?:{pointCode:string;reason:string}[]};
+type PointDocumentReference={pointCode:string;meridianId:string;label:string;heading:string;pdfPageRange:number[];spatialStatus:string};
+type PointDocumentReferences={points:PointDocumentReference[]};
 
 interface Props{drafts:AcupointAnchorDraft[];selectedPointCode:string|null;onOverlayChange:(overlay:MeridianOverlayState)=>void;onFocus:(target:MeridianFocusTarget|null)=>void}
 
@@ -27,6 +29,7 @@ export default function Meridian3DPanel({drafts,selectedPointCode,onOverlayChang
   const [language,setLanguage]=useState<Language>('vi');
   const [meridians,setMeridians]=useState<Meridian[]>([]),[points,setPoints]=useState<Acupoint[]>([]);
   const [schematic,setSchematic]=useState<SchematicSpatial>({anchors:[],paths:[]});
+  const [documentRefs,setDocumentRefs]=useState<PointDocumentReference[]>([]);
   const [activeMeridian,setActiveMeridian]=useState('ST'),[side,setSide]=useState<MeridianOverlaySide>('BOTH');
   const [query,setQuery]=useState(''),[selected,setSelected]=useState<string|null>(null);
   const [loading,setLoading]=useState(true),[loadError,setLoadError]=useState(''),[loadAttempt,setLoadAttempt]=useState(0);
@@ -46,6 +49,15 @@ export default function Meridian3DPanel({drafts,selectedPointCode,onOverlayChang
     }).catch(()=>{if(alive)setLoadError('Chưa tải được dữ liệu huyệt và kinh lạc. Kiểm tra kết nối rồi thử lại.');controller.abort();})
       .finally(()=>{clearTimeout(timer);if(alive)setLoading(false)});
     return()=>{alive=false;clearTimeout(timer);controller.abort()};
+  },[loadAttempt]);
+
+  useEffect(()=>{
+    let alive=true;
+    fetch(import.meta.env.BASE_URL+'data/point-document-references.json')
+      .then(async r=>r.ok?await r.json() as PointDocumentReferences:{points:[]})
+      .then(data=>{if(alive&&Array.isArray(data.points))setDocumentRefs(data.points)})
+      .catch(()=>{});
+    return()=>{alive=false};
   },[loadAttempt]);
 
   useEffect(()=>{
@@ -98,6 +110,7 @@ export default function Meridian3DPanel({drafts,selectedPointCode,onOverlayChang
 
   const filteredPoints=useMemo(()=>{const q=norm(query),codeQuery=q.replace(/[-\s]/g,'');return points.filter(p=>q?p.code.toLowerCase().replace(/-/g,'').includes(codeQuery)||[p.vietnameseName??'',p.englishName??'',p.chineseName??'',p.pinyin??''].some(v=>norm(v).includes(q)):p.meridianId===activeMeridian).slice(0,80)},[points,activeMeridian,query]);
   const active=meridians.find(m=>m.id===activeMeridian),selectedRecord=points.find(p=>p.code===selected),selectedAnchors=allAnchors.filter(a=>a.pointCode===selected);
+  const selectedDocumentRef=documentRefs.find(r=>r.pointCode===selected);
   const publishedCount=publishedAnchors.filter(a=>a.meridianId===activeMeridian).length,draftCount=draftAnchors.filter(a=>a.meridianId===activeMeridian).length,schematicCount=schematic.anchors.filter(a=>a.meridianId===activeMeridian).length;
   const schematicPaths=visiblePaths.filter(p=>p.sourceKind==='LICENSED_SCHEMATIC').length;
 
