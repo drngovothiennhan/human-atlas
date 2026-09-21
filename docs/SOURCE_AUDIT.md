@@ -14,12 +14,17 @@ Audit date: 2026-09-21. Public availability is **not** treated as permission to 
 | UBERON | OBO/UBERON | Anatomy ontology | CC BY 3.0 public record | REFERENCE_ONLY |
 | FMA | FMA maintainers | Anatomy ontology | Exact artifact/version license unresolved | QUARANTINE |
 | kinhlac.online/xem-3d | kinhlac.online | UX reference | No reusable source/model/database license verified | REFERENCE_ONLY |
+| Z-Anatomy | Z-Anatomy | 3D anatomy models/project content | Repository states CC BY-SA 4.0; upstream included assets still require exact-file audit | REFERENCE_ONLY |
 | Google Search external reference | Google | Outbound navigation only | No result content is imported | REFERENCE_ONLY / LINK_ONLY |
 
 ## Directly bundled third-party data
 
 - BodyParts3D 4.0 anatomy assets. Official license: https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html
 - AcuAtlas 361-point index (CC BY 4.0): only point codes, 14-meridian membership, and standard numeric ordering are bundled in catalogue 0.3.0. Clinical prose and mapped coordinates remain excluded.
+
+## Additional open 3D anatomy reference
+
+Z-Anatomy is publicly licensed under CC BY-SA 4.0 at repository level. It is recorded as REFERENCE_ONLY for this project because ShareAlike obligations and the repository's listed upstream inclusions require exact-file provenance/compatibility review before any asset is bundled. No Z-Anatomy asset is imported by this checkpoint.
 
 ## Acupuncture data gate
 
