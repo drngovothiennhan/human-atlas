@@ -180,9 +180,10 @@ try{
   for(const [input,code] of [['LI4','LI-4'],['ST36','ST-36']]){
     await evaluate("(()=>{const i=document.querySelector('.meridian3d-search');Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set.call(i,"+JSON.stringify(input)+");i.dispatchEvent(new Event('input',{bubbles:true}));})()");
     await waitFor(()=>evaluate("!!document.querySelector('[data-meridian3d-point=\""+code+"\"]')"),{label:input+' cross-meridian search'});
+    const flySeqBefore=await evaluate("Number(document.querySelector('canvas')?.dataset.cameraMotionSeq||0)");
     await evaluate("document.querySelector('[data-meridian3d-point=\""+code+"\"]').click()");
     await waitFor(()=>evaluate("document.querySelectorAll('.meridian3d-controls select')[0].value==="+JSON.stringify(code.split('-')[0])),{label:code+' selects its meridian'});
-    await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.cameraMotion==='active'"),{label:code+' fly-to starts'});
+    await waitFor(()=>evaluate("Number(document.querySelector('canvas')?.dataset.cameraMotionSeq||0)>"+flySeqBefore),{label:code+' fly-to starts'});
     await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.cameraMotion==='idle'"),{timeout:30000,label:code+' fly-to completes'});
   }
   await evaluate("(()=>{const i=document.querySelector('.meridian3d-search');const s=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;s.call(i,'ST-36');i.dispatchEvent(new Event('input',{bubbles:true}));return true})()");
