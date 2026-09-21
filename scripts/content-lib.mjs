@@ -1,12 +1,14 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
+import {barycentricValid} from './registration-lib.mjs';
 
 export const REVIEW_STATUSES=new Set(['UNVERIFIED','SOURCE_VERIFIED','FACULTY_REVIEWED','PUBLISHED']);
 export const SOURCE_USE=new Set(['DIRECT_USE','REFERENCE_ONLY','QUARANTINE']);
 export const SPATIAL_REGISTRATION_STATUSES=new Set(['NOT_APPLICABLE','BLOCKED','REGISTERED']);
 export const LICENSE_GATE_STATUSES=new Set(['PASS','FAIL','PENDING']);
 export const REGISTRATION_GATE_STATUSES=new Set(['PASS','BLOCKED','PENDING']);
+export const PILOT_REGISTRATION_STATUSES=new Set(['PENDING_CAPTURE','CAPTURED_UNVERIFIED','FACULTY_REVIEWED','PUBLISHED']);
 export const BODY_CANONICAL_COORDINATE_SYSTEM='BodyParts3D-4.0-browser-meters-Y-up';
 export const STANDARD_POINT_COUNTS=Object.freeze({LU:11,LI:20,ST:45,SP:21,HT:9,SI:19,BL:67,KI:27,PC:9,TE:23,GB:44,LR:14,GV:28,CV:24});
 
@@ -25,8 +27,10 @@ export function validateContent({root=process.cwd()}={}){
   const mf=path.join(root,'content/meridians/meridians.json');
   const pf=path.join(root,'content/acupoints/acupoints.json');
   const cf=path.join(root,'content/spatial-candidates/candidates.json');
+  const rf=path.join(root,'content/registration/pilot.json');
   const sources=readJson(sf),meridians=readJson(mf),points=readJson(pf);
   const candidates=fs.existsSync(cf)?readJson(cf):[];
+  const registration=fs.existsSync(rf)?readJson(rf):{pilot:[]};
   const sm=new Map(),mm=new Map(),cm=new Map();
 
   for(const s of sources){
@@ -108,10 +112,48 @@ export function validateContent({root=process.cwd()}={}){
     if(JSON.stringify(meridian.pointIds)!==JSON.stringify(expected))errors.push('Meridian pointIds mismatch for '+meridianId);
   }
 
+  const pilot=Array.isArray(registration.pilot)?registration.pilot:[];
+  const pilotCodes=new Set();
+  let draftAnchorCount=0;
+  if(registration.coordinateSystem&&registration.coordinateSystem!==BODY_CANONICAL_COORDINATE_SYSTEM){
+    errors.push('Registration pilot uses wrong coordinate system');
+  }
+  for(const target of pilot){
+    if(!target.pointCode||pilotCodes.has(target.pointCode))errors.push('Duplicate/missing pilot point: '+String(target.pointCode));
+    pilotCodes.add(target.pointCode);
+    if(!codes.has(target.pointCode))errors.push('Pilot point is outside standard catalogue: '+target.pointCode);
+    if(!PILOT_REGISTRATION_STATUSES.has(target.status))errors.push('Invalid pilot registration status: '+target.pointCode);
+    if(!['LEFT','RIGHT'].every(side=>(target.requiredSides||[]).includes(side)))errors.push('Pilot point must require LEFT and RIGHT capture: '+target.pointCode);
+    const geometrySource=sm.get(target.geometrySource);
+    if(!geometrySource||geometrySource.status!=='DIRECT_USE')errors.push('Pilot geometry source must be DIRECT_USE: '+target.pointCode);
+    if(!Array.isArray(target.locationReferenceSources)||!target.locationReferenceSources.length)errors.push('Pilot point missing location reference source: '+target.pointCode);
+    for(const sid of target.locationReferenceSources||[])if(!sm.has(sid))errors.push('Pilot point '+target.pointCode+' references unknown source '+sid);
+    const anchorSides=new Set();
+    for(const anchor of target.anchors||[]){
+      draftAnchorCount++;
+      if(anchor.pointCode!==target.pointCode)errors.push('Pilot anchor pointCode mismatch: '+target.pointCode);
+      if(!['LEFT','RIGHT'].includes(anchor.side)||anchorSides.has(anchor.side))errors.push('Duplicate/invalid pilot anchor side: '+target.pointCode+' '+String(anchor.side));
+      anchorSides.add(anchor.side);
+      if(!isFinite3([anchor.x,anchor.y,anchor.z]))errors.push('Pilot anchor xyz invalid: '+target.pointCode);
+      if(anchor.coordinateSystem!==BODY_CANONICAL_COORDINATE_SYSTEM)errors.push('Pilot anchor coordinate system invalid: '+target.pointCode);
+      if(!anchor.surfaceStructureId||!Number.isInteger(anchor.triangleIndex)||anchor.triangleIndex<0)errors.push('Pilot anchor surface evidence incomplete: '+target.pointCode);
+      if(!barycentricValid(anchor.barycentric))errors.push('Pilot anchor barycentric invalid: '+target.pointCode);
+      if(!REVIEW_STATUSES.has(anchor.verificationStatus))errors.push('Pilot anchor review status invalid: '+target.pointCode);
+      if(anchor.verificationStatus!=='UNVERIFIED'&&(!anchor.reviewer||!anchor.reviewedAt))errors.push('Reviewed pilot anchor missing reviewer evidence: '+target.pointCode);
+    }
+  }
+
   return {
     errors,warnings,
-    counts:{sources:sources.length,spatialCandidates:candidates.length,meridians:meridians.length,acupoints:points.length},
-    files:{sourceFile:sf,candidateFile:cf,meridianFile:mf,pointFile:pf}
+    counts:{
+      sources:sources.length,
+      spatialCandidates:candidates.length,
+      meridians:meridians.length,
+      acupoints:points.length,
+      registrationPilotPoints:pilot.length,
+      registrationDraftAnchors:draftAnchorCount
+    },
+    files:{sourceFile:sf,candidateFile:cf,meridianFile:mf,pointFile:pf,registrationFile:rf}
   };
 }
 export function lookupByCode(records,code){
