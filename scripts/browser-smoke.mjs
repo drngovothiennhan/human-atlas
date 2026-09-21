@@ -154,11 +154,11 @@ try{
   await evaluate("document.querySelector('[data-meridian3d-launch=true]')?.click()");
   await waitFor(()=>evaluate("!!document.querySelector('[data-meridian3d-panel=true]')"),{label:'3D meridian panel'});
   await waitFor(()=>evaluate("document.querySelector('[data-meridian3d-panel=true]')?.innerText.includes('Kinh Vị')&&document.querySelector('[data-meridian3d-panel=true]')?.innerText.includes('Chưa có path 3D đã kiểm duyệt')"),{label:'3D meridian clean-room gate'});
-  await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.meridianEffect==='flow'"),{label:'animated meridian flow effect'});
+  await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.meridianEffect==='flow'&&Number(document.querySelector('canvas')?.dataset.meridianPulseMarkers||0)>0&&Number(document.querySelector('canvas')?.dataset.meridianFlowParticles||0)>0"),{label:'animated meridian flow and pulse effect'});
   const effectFrameBefore=await evaluate("Number(document.querySelector('canvas')?.dataset.meridianEffectFrame||0)");
   await waitFor(()=>evaluate("Number(document.querySelector('canvas')?.dataset.meridianEffectFrame||0)>"+effectFrameBefore),{timeout:30000,label:'meridian animation frame advances'});
   const effectFrameAfter=await evaluate("Number(document.querySelector('canvas')?.dataset.meridianEffectFrame||0)");
-  console.log('SMOKE_MERIDIAN_FLOW_EFFECT_PASS '+JSON.stringify({effectFrameBefore,effectFrameAfter}));
+  console.log('SMOKE_MERIDIAN_FLOW_EFFECT_PASS '+JSON.stringify({effectFrameBefore,effectFrameAfter,pulseMarkers:await evaluate("Number(document.querySelector('canvas')?.dataset.meridianPulseMarkers||0)"),flowParticles:await evaluate("Number(document.querySelector('canvas')?.dataset.meridianFlowParticles||0)")}));
   const schematicCoverage=[];
   const meridianCodes=await evaluate("[...document.querySelectorAll('.meridian3d-controls select')[0].options].map(o=>o.value)");
   if(meridianCodes.length!==14)throw new Error('Expected 14 meridians');
