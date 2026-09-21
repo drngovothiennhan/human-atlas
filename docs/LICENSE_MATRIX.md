@@ -17,5 +17,9 @@
 | Z-ANATOMY | n/a | CC-BY-SA-4.0 repository-level; exact assets need provenance audit | Required | Yes | Asset-level upstream restrictions/compatibility must be resolved | REFERENCE_ONLY |
 | GOOGLE-SEARCH-REFERENCE | n/a | No data bundled | n/a | n/a | Navigation only | REFERENCE_ONLY / LINK_ONLY |
 | HIU-STANDARD-NOMENCLATURE | n/a | CC0-1.0 compilation | Not required | No | No | DIRECT_USE |
+| USER-BYT-2020-YHCT-GUIDELINE | n/a | REUSE-NOT-ESTABLISHED | Bibliographic/reference use only | Unknown | User-provided PDF; do not redistribute | REFERENCE_ONLY |
+| USER-HANOI-YHCT-LECTURE-T1-2005 | n/a | REUSE-NOT-ESTABLISHED | Bibliographic/reference use only | Unknown | User-provided scan; do not redistribute | REFERENCE_ONLY |
+| USER-CONGSI-KINH-LAC-HOC | n/a | REUSE-NOT-ESTABLISHED | Bibliographic/reference use only | Unknown | User-provided scan; do not redistribute | REFERENCE_ONLY |
+| USER-NGO-TRUNG-TRIEU-HUYET-VI-KINH-LAC | n/a | REUSE-NOT-ESTABLISHED | Bibliographic/reference use only | Unknown | User-provided scan; do not redistribute | REFERENCE_ONLY |
 
 Only `DIRECT_USE` sources may enter runtime bundles. Spatial coordinates additionally require a separate `REGISTERED` BodyParts3D registration gate; DIRECT_USE alone is insufficient.

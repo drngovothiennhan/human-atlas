@@ -12,11 +12,15 @@
       ],
       "geometrySource": "BODYPARTS3D-4.0",
       "locationReferenceSources": [
-        "WHO-2008-ACUPOINT"
+        "WHO-2008-ACUPOINT",
+        "USER-NGO-TRUNG-TRIEU-HUYET-VI-KINH-LAC"
       ],
-      "referenceOnlyLabel": "Tham khảo Google/nguồn công khai – không tái sử dụng dữ liệu",
+      "referenceOnlyLabel": "WHO + Bộ Y tế + tài liệu kinh huyệt người dùng cung cấp; chỉ đối chiếu thủ công, không nhúng bản scan",
       "status": "PENDING_CAPTURE",
-      "anchors": []
+      "anchors": [],
+      "corroborationSources": [
+        "USER-BYT-2020-YHCT-GUIDELINE"
+      ]
     },
     {
       "pointCode": "LI-4",
@@ -27,11 +31,15 @@
       ],
       "geometrySource": "BODYPARTS3D-4.0",
       "locationReferenceSources": [
-        "WHO-2008-ACUPOINT"
+        "WHO-2008-ACUPOINT",
+        "USER-NGO-TRUNG-TRIEU-HUYET-VI-KINH-LAC"
       ],
-      "referenceOnlyLabel": "Tham khảo Google/nguồn công khai – không tái sử dụng dữ liệu",
+      "referenceOnlyLabel": "WHO + Bộ Y tế + tài liệu kinh huyệt người dùng cung cấp; chỉ đối chiếu thủ công, không nhúng bản scan",
       "status": "PENDING_CAPTURE",
-      "anchors": []
+      "anchors": [],
+      "corroborationSources": [
+        "USER-BYT-2020-YHCT-GUIDELINE"
+      ]
     },
     {
       "pointCode": "LU-5",
@@ -42,11 +50,15 @@
       ],
       "geometrySource": "BODYPARTS3D-4.0",
       "locationReferenceSources": [
-        "WHO-2008-ACUPOINT"
+        "WHO-2008-ACUPOINT",
+        "USER-NGO-TRUNG-TRIEU-HUYET-VI-KINH-LAC"
       ],
-      "referenceOnlyLabel": "Tham khảo Google/nguồn công khai – không tái sử dụng dữ liệu",
+      "referenceOnlyLabel": "WHO + Bộ Y tế + tài liệu kinh huyệt người dùng cung cấp; chỉ đối chiếu thủ công, không nhúng bản scan",
       "status": "PENDING_CAPTURE",
-      "anchors": []
+      "anchors": [],
+      "corroborationSources": [
+        "USER-BYT-2020-YHCT-GUIDELINE"
+      ]
     },
     {
       "pointCode": "LU-9",
@@ -57,11 +69,15 @@
       ],
       "geometrySource": "BODYPARTS3D-4.0",
       "locationReferenceSources": [
-        "WHO-2008-ACUPOINT"
+        "WHO-2008-ACUPOINT",
+        "USER-NGO-TRUNG-TRIEU-HUYET-VI-KINH-LAC"
       ],
-      "referenceOnlyLabel": "Tham khảo Google/nguồn công khai – không tái sử dụng dữ liệu",
+      "referenceOnlyLabel": "WHO + Bộ Y tế + tài liệu kinh huyệt người dùng cung cấp; chỉ đối chiếu thủ công, không nhúng bản scan",
       "status": "PENDING_CAPTURE",
-      "anchors": []
+      "anchors": [],
+      "corroborationSources": [
+        "USER-BYT-2020-YHCT-GUIDELINE"
+      ]
     },
     {
       "pointCode": "ST-41",
@@ -72,11 +88,15 @@
       ],
       "geometrySource": "BODYPARTS3D-4.0",
       "locationReferenceSources": [
-        "WHO-2008-ACUPOINT"
+        "WHO-2008-ACUPOINT",
+        "USER-NGO-TRUNG-TRIEU-HUYET-VI-KINH-LAC"
       ],
-      "referenceOnlyLabel": "Tham khảo Google/nguồn công khai – không tái sử dụng dữ liệu",
+      "referenceOnlyLabel": "WHO + Bộ Y tế + tài liệu kinh huyệt người dùng cung cấp; chỉ đối chiếu thủ công, không nhúng bản scan",
       "status": "PENDING_CAPTURE",
-      "anchors": []
+      "anchors": [],
+      "corroborationSources": [
+        "USER-BYT-2020-YHCT-GUIDELINE"
+      ]
     }
   ]
 }

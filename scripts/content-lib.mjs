@@ -28,15 +28,23 @@ export function validateContent({root=process.cwd()}={}){
   const pf=path.join(root,'content/acupoints/acupoints.json');
   const cf=path.join(root,'content/spatial-candidates/candidates.json');
   const rf=path.join(root,'content/registration/pilot.json');
+  const refEvidenceFile=path.join(root,'content/registration/reference-evidence.json');
   const sources=readJson(sf),meridians=readJson(mf),points=readJson(pf);
   const candidates=fs.existsSync(cf)?readJson(cf):[];
   const registration=fs.existsSync(rf)?readJson(rf):{pilot:[]};
+  const referenceEvidence=fs.existsSync(refEvidenceFile)?readJson(refEvidenceFile):{pilot:[]};
   const sm=new Map(),mm=new Map(),cm=new Map();
 
   for(const s of sources){
     if(!s.id||sm.has(s.id))errors.push('Duplicate/missing source id: '+String(s.id));
     if(!SOURCE_USE.has(s.status))errors.push('Invalid source status: '+s.id);
     if(s.status==='DIRECT_USE'&&(!s.assetDataLicense||/UNKNOWN|UNVERIFIED|NEEDS/i.test(s.assetDataLicense)))errors.push('DIRECT_USE source has unresolved license: '+s.id);
+    if(s.origin==='USER_PROVIDED_ATTACHMENT'){
+      if(s.status!=='REFERENCE_ONLY')errors.push('User-provided attachment must remain REFERENCE_ONLY until exact reuse rights are established: '+s.id);
+      if(s.runtimeBundled!==false)errors.push('User-provided attachment must declare runtimeBundled=false: '+s.id);
+      if(!s.attachmentName)errors.push('User-provided attachment missing attachmentName: '+s.id);
+    }
+    if(s.status==='REFERENCE_ONLY'&&s.runtimeBundled===true)errors.push('REFERENCE_ONLY source may not be runtime bundled: '+s.id);
     if(s.spatialRegistrationStatus!=null&&!SPATIAL_REGISTRATION_STATUSES.has(s.spatialRegistrationStatus))errors.push('Invalid spatialRegistrationStatus: '+s.id);
     sm.set(s.id,s);
   }
@@ -127,7 +135,8 @@ export function validateContent({root=process.cwd()}={}){
     const geometrySource=sm.get(target.geometrySource);
     if(!geometrySource||geometrySource.status!=='DIRECT_USE')errors.push('Pilot geometry source must be DIRECT_USE: '+target.pointCode);
     if(!Array.isArray(target.locationReferenceSources)||!target.locationReferenceSources.length)errors.push('Pilot point missing location reference source: '+target.pointCode);
-    for(const sid of target.locationReferenceSources||[])if(!sm.has(sid))errors.push('Pilot point '+target.pointCode+' references unknown source '+sid);
+    for(const sid of target.locationReferenceSources||[]){const source=sm.get(sid);if(!source)errors.push('Pilot point '+target.pointCode+' references unknown source '+sid);else if(source.status==='QUARANTINE')errors.push('Pilot point '+target.pointCode+' may not use quarantined location reference '+sid);}
+    for(const sid of target.corroborationSources||[]){const source=sm.get(sid);if(!source)errors.push('Pilot point '+target.pointCode+' references unknown corroboration source '+sid);else if(source.status==='QUARANTINE')errors.push('Pilot point '+target.pointCode+' may not use quarantined corroboration source '+sid);}
     const anchorSides=new Set();
     for(const anchor of target.anchors||[]){
       draftAnchorCount++;
@@ -143,17 +152,23 @@ export function validateContent({root=process.cwd()}={}){
     }
   }
 
+  const evidenceRows=Array.isArray(referenceEvidence.pilot)?referenceEvidence.pilot:[];const evidencePointCodes=new Set();let registrationReferenceEvidence=0;
+  for(const row of evidenceRows){if(!row.pointCode||evidencePointCodes.has(row.pointCode))errors.push('Duplicate/missing registration reference evidence point: '+String(row.pointCode));evidencePointCodes.add(row.pointCode);if(!pilotCodes.has(row.pointCode))errors.push('Registration reference evidence is outside pilot: '+String(row.pointCode));if(!Array.isArray(row.references)||!row.references.length)errors.push('Registration reference evidence missing references: '+String(row.pointCode));for(const evidence of row.references||[]){registrationReferenceEvidence++;const source=sm.get(evidence.sourceId);if(!source)errors.push('Registration reference evidence uses unknown source: '+String(evidence.sourceId));else if(source.status==='QUARANTINE')errors.push('Registration reference evidence uses quarantined source: '+evidence.sourceId);if(!evidence.role||!evidence.locator)errors.push('Registration reference evidence missing role/locator: '+String(row.pointCode));}}
+  for(const code of pilotCodes)if(evidenceRows.length&&!evidencePointCodes.has(code))warnings.push('Pilot point missing registration reference evidence: '+code);
+
   return {
     errors,warnings,
     counts:{
       sources:sources.length,
+      userProvidedReferenceSources:sources.filter(source=>source.origin==='USER_PROVIDED_ATTACHMENT').length,
       spatialCandidates:candidates.length,
       meridians:meridians.length,
       acupoints:points.length,
       registrationPilotPoints:pilot.length,
-      registrationDraftAnchors:draftAnchorCount
+      registrationDraftAnchors:draftAnchorCount,
+      registrationReferenceEvidence
     },
-    files:{sourceFile:sf,candidateFile:cf,meridianFile:mf,pointFile:pf,registrationFile:rf}
+    files:{sourceFile:sf,candidateFile:cf,meridianFile:mf,pointFile:pf,registrationFile:rf,referenceEvidenceFile:refEvidenceFile}
   };
 }
 export function lookupByCode(records,code){

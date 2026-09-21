@@ -1,0 +1,121 @@
+{
+  "schemaVersion": "0.1.0",
+  "policy": "Bibliographic locators only. Human review aid; no copyrighted page image/prose and no inferred 3D coordinate is bundled.",
+  "pilot": [
+    {
+      "pointCode": "ST-36",
+      "references": [
+        {
+          "sourceId": "WHO-2008-ACUPOINT",
+          "label": "WHO 2008",
+          "role": "STANDARD_LOCATION_REFERENCE",
+          "locator": "Standard point-location publication; consult source separately."
+        },
+        {
+          "sourceId": "USER-BYT-2020-YHCT-GUIDELINE",
+          "label": "Bộ Y tế — Hướng dẫn YHCT/YHHĐ",
+          "role": "NOMENCLATURE_CLINICAL_CROSSCHECK",
+          "locator": "Thoái hóa khớp gối — điều trị không dùng thuốc: Túc tam lý (ST.36)."
+        },
+        {
+          "sourceId": "USER-NGO-TRUNG-TRIEU-HUYET-VI-KINH-LAC",
+          "label": "Huyệt Vị Kinh Lạc Cơ Thể Người",
+          "role": "VISUAL_LOCATION_REFERENCE",
+          "locator": "PDF pages 15–20: Túc Dương Minh Vị Kinh."
+        }
+      ]
+    },
+    {
+      "pointCode": "LI-4",
+      "references": [
+        {
+          "sourceId": "WHO-2008-ACUPOINT",
+          "label": "WHO 2008",
+          "role": "STANDARD_LOCATION_REFERENCE",
+          "locator": "Standard point-location publication; consult source separately."
+        },
+        {
+          "sourceId": "USER-BYT-2020-YHCT-GUIDELINE",
+          "label": "Bộ Y tế — Hướng dẫn YHCT/YHHĐ",
+          "role": "NOMENCLATURE_CLINICAL_CROSSCHECK",
+          "locator": "Bại não trẻ em — công thức huyệt liệt chi trên: Hợp cốc (LI.4)."
+        },
+        {
+          "sourceId": "USER-NGO-TRUNG-TRIEU-HUYET-VI-KINH-LAC",
+          "label": "Huyệt Vị Kinh Lạc Cơ Thể Người",
+          "role": "VISUAL_LOCATION_REFERENCE",
+          "locator": "PDF pages 12–14: Thủ Dương Minh Đại Trường Kinh."
+        }
+      ]
+    },
+    {
+      "pointCode": "LU-5",
+      "references": [
+        {
+          "sourceId": "WHO-2008-ACUPOINT",
+          "label": "WHO 2008",
+          "role": "STANDARD_LOCATION_REFERENCE",
+          "locator": "Standard point-location publication; consult source separately."
+        },
+        {
+          "sourceId": "USER-BYT-2020-YHCT-GUIDELINE",
+          "label": "Bộ Y tế — Hướng dẫn YHCT/YHHĐ",
+          "role": "NOMENCLATURE_CLINICAL_CROSSCHECK",
+          "locator": "Bại não trẻ em / bệnh hô hấp — công thức huyệt có Xích trạch (LU.5)."
+        },
+        {
+          "sourceId": "USER-NGO-TRUNG-TRIEU-HUYET-VI-KINH-LAC",
+          "label": "Huyệt Vị Kinh Lạc Cơ Thể Người",
+          "role": "VISUAL_LOCATION_REFERENCE",
+          "locator": "PDF pages 9–11: Thủ Thái Âm Phế Kinh."
+        }
+      ]
+    },
+    {
+      "pointCode": "LU-9",
+      "references": [
+        {
+          "sourceId": "WHO-2008-ACUPOINT",
+          "label": "WHO 2008",
+          "role": "STANDARD_LOCATION_REFERENCE",
+          "locator": "Standard point-location publication; consult source separately."
+        },
+        {
+          "sourceId": "USER-BYT-2020-YHCT-GUIDELINE",
+          "label": "Bộ Y tế — Hướng dẫn YHCT/YHHĐ",
+          "role": "NOMENCLATURE_CLINICAL_CROSSCHECK",
+          "locator": "Bệnh phổi tắc nghẽn mạn tính — điều trị không dùng thuốc: Thái uyên (LU.9)."
+        },
+        {
+          "sourceId": "USER-NGO-TRUNG-TRIEU-HUYET-VI-KINH-LAC",
+          "label": "Huyệt Vị Kinh Lạc Cơ Thể Người",
+          "role": "VISUAL_LOCATION_REFERENCE",
+          "locator": "PDF pages 9–11: Thủ Thái Âm Phế Kinh."
+        }
+      ]
+    },
+    {
+      "pointCode": "ST-41",
+      "references": [
+        {
+          "sourceId": "WHO-2008-ACUPOINT",
+          "label": "WHO 2008",
+          "role": "STANDARD_LOCATION_REFERENCE",
+          "locator": "Standard point-location publication; consult source separately."
+        },
+        {
+          "sourceId": "USER-BYT-2020-YHCT-GUIDELINE",
+          "label": "Bộ Y tế — Hướng dẫn YHCT/YHHĐ",
+          "role": "NOMENCLATURE_CLINICAL_CROSSCHECK",
+          "locator": "Bại não trẻ em — công thức huyệt liệt chi dưới: Giải khê (ST.41)."
+        },
+        {
+          "sourceId": "USER-NGO-TRUNG-TRIEU-HUYET-VI-KINH-LAC",
+          "label": "Huyệt Vị Kinh Lạc Cơ Thể Người",
+          "role": "VISUAL_LOCATION_REFERENCE",
+          "locator": "PDF pages 15–20: Túc Dương Minh Vị Kinh."
+        }
+      ]
+    }
+  ]
+}

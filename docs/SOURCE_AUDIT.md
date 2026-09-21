@@ -18,6 +18,10 @@ Audit date: 2026-09-21. Public availability is **not** treated as permission to 
 | kinhlac.online/xem-3d | kinhlac.online | UX reference | No reusable source/model/database license verified | REFERENCE_ONLY |
 | Z-Anatomy | Z-Anatomy | 3D anatomy models/project content | Repository states CC BY-SA 4.0; upstream included assets still require exact-file audit | REFERENCE_ONLY |
 | Google Search external reference | Google | Outbound navigation only | No result content is imported | REFERENCE_ONLY / LINK_ONLY |
+| Bộ Y tế — Hướng dẫn chẩn đoán và điều trị bệnh theo YHCT/YHHĐ, Tập I | Bộ Y tế Việt Nam | Clinical/nomenclature cross-check | User-provided PDF; redistribution license not established | REFERENCE_ONLY |
+| Bài giảng Y học cổ truyền — Tập I (2005) | Trường Đại học Y Hà Nội / NXB Y học | Foundational YHCT, tạng phủ, kinh lạc | User-provided scan; redistribution license not established | REFERENCE_ONLY |
+| Kinh Lạc Học (Kỳ Huyệt) | Công Sĩ / NXB Phương Đông | Kỳ huyệt and diagrams | User-provided scan; redistribution license not established | REFERENCE_ONLY |
+| Huyệt Vị Kinh Lạc Cơ Thể Người | Ngô Trung Triều / NXB Hồng Đức | Illustrated meridian/acupoint reference | User-provided scan; redistribution license not established | REFERENCE_ONLY |
 
 ## Directly bundled third-party data
 
@@ -40,3 +44,7 @@ Two spatial candidates now pass the **license** gate: AcuAtlas (361 records, CC 
 ## Clean-room rule
 
 kinhlac.online is used only to enumerate public viewer journeys. No private API, source, model, database or copied prose is used.
+
+## User-provided course/reference PDFs
+
+Four supplied PDFs are audited into source metadata only. No PDF binary, scan page, diagram, long prose, or coordinate table is bundled. The Bộ Y tế document is used to corroborate point nomenclature/clinical usage; the illustrated Ngô Trung Triều atlas is a human visual reference for pilot registration. Neither is treated as a transferable BodyParts3D coordinate source. See `docs/USER_PROVIDED_SOURCE_AUDIT.md`.

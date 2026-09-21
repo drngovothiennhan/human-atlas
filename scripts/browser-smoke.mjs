@@ -154,6 +154,7 @@ try{
   await waitFor(()=>evaluate("document.readyState==='complete'&&!!document.querySelector('[data-registration-panel=true]')"),{timeout:30000,label:'registration workspace'});
   await waitFor(()=>evaluate("document.querySelector('canvas')?.width>0&&document.querySelector('canvas')?.height>0"),{label:'registration 3D canvas'});
   await waitFor(()=>evaluate("!document.querySelector('.loading')"),{timeout:180000,label:'registration anatomy ready'});
+  await waitFor(()=>evaluate("document.querySelector('[data-registration-references=true]')?.innerText.includes('Bộ Y tế')&&document.querySelector('[data-registration-references=true]')?.innerText.includes('Huyệt Vị Kinh Lạc')"),{timeout:30000,label:'registration reference evidence'});
   await sleep(500);
   const rc=await evaluate("(()=>{const r=document.querySelector('canvas').getBoundingClientRect();return{x:r.x,y:r.y,w:r.width,h:r.height}})()");
   let registrationEvidence=null;
@@ -189,6 +190,7 @@ try{
     modelResponses:responses.filter(r=>/\/models\//.test(r.url)&&r.status===200).length,
     localMeridianSearch:true,
     localStudyAssistant:true,
+    registrationReferences:true,
     registrationCapture:{pointCode:registrationEvidence.pointCode,side:registrationEvidence.side,status:registrationEvidence.status,triangleIndex:registrationEvidence.triangleIndex,barycentricValid:true},
     pwaOfflineReload:Boolean(offlineOk),
     consoleErrors

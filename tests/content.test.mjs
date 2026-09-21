@@ -37,3 +37,15 @@ test('search finds point code and meridian id without inventing names',async()=>
 
 test('Vietnamese search is accent insensitive',()=>assert.equal(searchRecords([{code:'SP',vietnameseName:'Kinh Tỳ'}],'ty').length,1));
 test('coordinates reject non-finite values',()=>{assert.equal(isFinite3([1,2,3]),true);assert.equal(isFinite3([1,Infinity,3]),false)});
+
+
+test('user-provided medical PDFs stay reference-only and pilot evidence is bibliographic only',async()=>{
+  const sources=JSON.parse(await readFile(new URL('../content/sources/sources.json',import.meta.url)));
+  const refs=JSON.parse(await readFile(new URL('../content/registration/reference-evidence.json',import.meta.url)));
+  const userSources=sources.filter(source=>source.origin==='USER_PROVIDED_ATTACHMENT');
+  assert.equal(userSources.length,4);
+  assert.ok(userSources.every(source=>source.status==='REFERENCE_ONLY'&&source.runtimeBundled===false));
+  assert.deepEqual(refs.pilot.map(row=>row.pointCode),['ST-36','LI-4','LU-5','LU-9','ST-41']);
+  assert.ok(refs.pilot.every(row=>row.references.length>=3));
+  assert.ok(refs.pilot.flatMap(row=>row.references).every(reference=>!/[\n\r]/.test(reference.locator)));
+});

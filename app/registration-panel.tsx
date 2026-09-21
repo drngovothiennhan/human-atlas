@@ -18,6 +18,8 @@ type PilotTarget={
   anchors:AcupointAnchorDraft[];
 };
 type PilotFile={schemaVersion:string;coordinateSystem:string;policy:string;pilot:PilotTarget[]};
+type ReferenceEntry={sourceId:string;label:string;role:string;locator:string};
+type ReferenceEvidenceFile={schemaVersion:string;policy:string;pilot:Array<{pointCode:string;references:ReferenceEntry[]}>};
 type Target={pointCode:string;side:RegistrationSide};
 interface Props{target:Target;capture:SurfaceCapture|null;onTargetChange:(target:Target)=>void}
 
@@ -25,6 +27,7 @@ const STORAGE_KEY='hiu-yhct-registration-drafts-v0.1';
 
 export default function RegistrationPanel({target,capture,onTargetChange}:Props){
   const [pilot,setPilot]=useState<PilotFile|null>(null);
+  const [referenceEvidence,setReferenceEvidence]=useState<ReferenceEvidenceFile|null>(null);
   const [drafts,setDrafts]=useState<AcupointAnchorDraft[]>([]);
 
   useEffect(()=>{
@@ -32,6 +35,10 @@ export default function RegistrationPanel({target,capture,onTargetChange}:Props)
     fetch(import.meta.env.BASE_URL+'data/registration-pilot.json')
       .then(response=>{if(!response.ok)throw new Error('registration pilot unavailable');return response.json();})
       .then((data:unknown)=>{if(live)setPilot(data as PilotFile);})
+      .catch(()=>{});
+    fetch(import.meta.env.BASE_URL+'data/registration-reference-evidence.json')
+      .then(response=>{if(!response.ok)throw new Error('registration references unavailable');return response.json();})
+      .then((data:unknown)=>{if(live)setReferenceEvidence(data as ReferenceEvidenceFile);})
       .catch(()=>{});
     try{
       const saved=localStorage.getItem(STORAGE_KEY);
@@ -43,6 +50,11 @@ export default function RegistrationPanel({target,capture,onTargetChange}:Props)
   const active=useMemo(
     ()=>pilot?.pilot.find(point=>point.pointCode===target.pointCode)??pilot?.pilot[0]??null,
     [pilot,target.pointCode]
+  );
+
+  const activeReferences=useMemo(
+    ()=>referenceEvidence?.pilot.find(point=>point.pointCode===target.pointCode)?.references??[],
+    [referenceEvidence,target.pointCode]
   );
 
   useEffect(()=>{
@@ -113,6 +125,10 @@ export default function RegistrationPanel({target,capture,onTargetChange}:Props)
     </div>
     <p className="registration-note">{active?.referenceOnlyLabel??'Tham khảo Google/nguồn công khai – không tái sử dụng dữ liệu'}</p>
     <a href={google} target="_blank" rel="noreferrer">Mở tham khảo Google cho {target.pointCode}</a>
+    {activeReferences.length>0&&<div className="capture-card" data-registration-references="true">
+      <strong>Tài liệu đối chiếu cho {target.pointCode}</strong>
+      {activeReferences.map(reference=><code key={reference.sourceId+reference.role}>{reference.label} · {reference.locator}</code>)}
+    </div>}
     {currentDraft
       ?<div className="capture-card">
         <strong>Đã ghi bản nháp {currentDraft.pointCode} · {currentDraft.side}</strong>
