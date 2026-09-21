@@ -51,7 +51,10 @@ try{
   });
   const evaluate=async(expression)=>{
     const result=await send('Runtime.evaluate',{expression,awaitPromise:true,returnByValue:true});
-    if(result.exceptionDetails)throw new Error(result.exceptionDetails.text||'Runtime evaluation failed');
+    if(result.exceptionDetails){
+      const detail=result.exceptionDetails.exception?.description||result.exceptionDetails.text||'Runtime evaluation failed';
+      throw new Error(detail+' | expression: '+expression);
+    }
     return result.result?.value;
   };
   const screenshot=async name=>{
@@ -80,8 +83,11 @@ try{
   await evaluate("document.querySelector('[data-meridian3d-load-error=true] button').click()");
   await waitFor(()=>evaluate("!document.querySelector('[data-meridian3d-load-error=true]')&&document.querySelector('[data-meridian3d-launch=true]')?.innerText.includes('361 huyệt')"),{label:'meridian retry recovers data'});
   console.log('SMOKE_LOAD_FAILURE_RECOVERY_PASS');
-  await evaluate("document.querySelector('[data-effect-master=true]').click()");
-  await evaluate("document.querySelector('.meridian3d-head button').click()");
+  await waitFor(()=>evaluate("!!document.querySelector('[data-effect-master=true]')"),{label:'effect master control'});
+  const effectToggleClicked=await evaluate("(()=>{const b=document.querySelector('[data-effect-master=true]');if(!b)return false;b.click();return true})()");
+  if(!effectToggleClicked)throw new Error('Effect master control could not be clicked');
+  const closeMeridianPanel=await evaluate("(()=>{const b=document.querySelector('.meridian3d-head button');if(!b)return false;b.click();return true})()");
+  if(!closeMeridianPanel)throw new Error('Meridian panel close control could not be clicked');
   await waitFor(()=>evaluate("document.querySelector('canvas')?.width>0&&document.querySelector('canvas')?.height>0"),{label:'3D canvas'});
   await waitFor(()=>responses.filter(r=>r.url.includes('/models/')&&!r.url.includes('/models/atlas.json')&&r.status===200).length>0,{timeout:30000,label:'3D binary model response'});
   await sleep(1200);
