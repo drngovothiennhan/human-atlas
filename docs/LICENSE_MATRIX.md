@@ -12,6 +12,7 @@
 | UBERON | n/a | CC-BY-3.0 | Required | No | No | REFERENCE_ONLY |
 | FMA | Version-dependent | NEEDS_AUDIT | Exact artifact required | Unknown | Unknown | QUARANTINE |
 | KINHLAC-ONLINE | UNKNOWN | UNKNOWN | Unknown | Unknown | Unknown | REFERENCE_ONLY |
+| Z-ANATOMY | n/a | CC-BY-SA-4.0 repository-level; exact assets need provenance audit | Required | Yes | Asset-level upstream restrictions/compatibility must be resolved | REFERENCE_ONLY |
 | GOOGLE-SEARCH-REFERENCE | n/a | No data bundled | n/a | n/a | Navigation only | REFERENCE_ONLY / LINK_ONLY |
 | HIU-STANDARD-NOMENCLATURE | n/a | CC0-1.0 compilation | Not required | No | No | DIRECT_USE |
 
