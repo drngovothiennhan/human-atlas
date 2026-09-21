@@ -287,9 +287,9 @@
     "commercialRestriction": null,
     "status": "REFERENCE_ONLY",
     "origin": "USER_PROVIDED_ATTACHMENT",
-    "attachmentName": "68811b5f35114acf0658943246ff16da_HUYỆT VỊ KINH LẠC CƠ THỂ NGƯỜI.pdf",
+    "attachmentName": "huyet-vi-kinh-lac-co-the-nguoi-58728c04.pdf",
     "runtimeBundled": false,
-    "auditedVersion": "user-provided scan received 2026-09-21; edition page references 11/2015 publication arrangement",
-    "note": "Visual human reference for reviewer-assisted registration only; no scan images, prose, diagrams or coordinates are bundled."
+    "auditedVersion": "66-page user-provided scan received 2026-09-21; publication page references 11/2015 arrangement and 2016 legal deposit",
+    "note": "Private LLM/reviewer visual reference for meridian/acupoint location mapping. Runtime may expose only bibliographic/page labels; no scan image, expressive prose or inferred BodyParts3D coordinate is bundled."
   }
 ]
