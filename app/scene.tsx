@@ -8,11 +8,12 @@ import {decodeModelResponse} from './model-download';
 import {PointerTap} from './pointer-tap';
 import {SYSTEMS,type Atlas,type SceneState} from './anatomy';
 import {BODY_CANONICAL_COORDINATE_SYSTEM,type SurfaceCapture} from '../src/acupoints/registration/coordinate-system';
-interface Props {atlas:Atlas;state:SceneState;onSelect:(id:string)=>void;onProgress:(n:number)=>void;onError:(s:string)=>void;registrationMode?:boolean;onRegisterSurface?:(capture:SurfaceCapture)=>void}
+import type {MeridianFocusTarget,MeridianOverlayState} from './meridian-overlay';
+interface Props {atlas:Atlas;state:SceneState;onSelect:(id:string)=>void;onProgress:(n:number)=>void;onError:(s:string)=>void;registrationMode?:boolean;onRegisterSurface?:(capture:SurfaceCapture)=>void;meridianOverlay?:MeridianOverlayState;focusAcupoint?:MeridianFocusTarget|null;onSelectAcupoint?:(pointCode:string)=>void}
 const assetUrl=(url:string)=>url.startsWith('/')?import.meta.env.BASE_URL+url.slice(1):url;
-export default function AnatomyScene({atlas,state,onSelect,onProgress,onError,registrationMode=false,onRegisterSurface}:Props){
- const host=useRef<HTMLDivElement>(null),latest=useRef(state),select=useRef(onSelect),registration=useRef(registrationMode),registerSurface=useRef(onRegisterSurface);
- latest.current=state;select.current=onSelect;registration.current=registrationMode;registerSurface.current=onRegisterSurface;
+export default function AnatomyScene({atlas,state,onSelect,onProgress,onError,registrationMode=false,onRegisterSurface,meridianOverlay,focusAcupoint,onSelectAcupoint}:Props){
+ const host=useRef<HTMLDivElement>(null),latest=useRef(state),select=useRef(onSelect),registration=useRef(registrationMode),registerSurface=useRef(onRegisterSurface),overlay=useRef(meridianOverlay),focus=useRef(focusAcupoint),selectAcupoint=useRef(onSelectAcupoint);
+ latest.current=state;select.current=onSelect;registration.current=registrationMode;registerSurface.current=onRegisterSurface;overlay.current=meridianOverlay;focus.current=focusAcupoint;selectAcupoint.current=onSelectAcupoint;
  useEffect(()=>{
   const el=host.current!;let disposed=false,frame=0,dirty=true,ready=false,lastView='',lastReset=-1,lastIsolate='',layoutKey='',amount=0;
   let lastState:SceneState|null=null;
@@ -41,6 +42,37 @@ export default function AnatomyScene({atlas,state,onSelect,onProgress,onError,re
   markerMaterial.onBeforeCompile=shader=>{shader.fragmentShader=shader.fragmentShader.replace('#include <clipping_planes_fragment>','#include <clipping_planes_fragment>\nif (distance(gl_PointCoord, vec2(0.5)) > 0.5) discard;');};
   const markers=new T.Points(markerGeometry,markerMaterial);markers.frustumCulled=false;markers.renderOrder=10;markers.visible=false;scene.add(markers);
   const registrationMarker=new T.Mesh(new T.SphereGeometry(.009,18,12),new T.MeshBasicMaterial({color:0x0f766e,depthTest:false}));registrationMarker.visible=false;registrationMarker.renderOrder=30;scene.add(registrationMarker);
+  const meridianGroup=new T.Group();meridianGroup.name='hiu-meridian-overlay';scene.add(meridianGroup);
+  let meridianMarkers:T.Mesh[]=[];
+  const meridianColors:Record<string,number>={LU:0x2563eb,LI:0xf97316,ST:0xeab308,SP:0x8b5cf6,HT:0xdc2626,SI:0x0ea5e9,BL:0x475569,KI:0x0f766e,PC:0xdb2777,TE:0x06b6d4,GB:0x65a30d,LR:0x16a34a,CV:0x7c3aed,GV:0xb91c1c};
+  const disposeOverlay=()=>{
+   meridianMarkers=[];
+   while(meridianGroup.children.length){
+    const child=meridianGroup.children.pop()!;
+    const geometry=(child as T.Mesh).geometry as T.BufferGeometry|undefined;geometry?.dispose();
+    const material=(child as T.Mesh).material as T.Material|T.Material[]|undefined;
+    if(Array.isArray(material))material.forEach(item=>item.dispose());else material?.dispose();
+   }
+  };
+  const rebuildOverlay=(value:MeridianOverlayState|undefined)=>{
+   disposeOverlay();if(!value?.enabled)return;
+   const color=meridianColors[value.meridianId??'']??0x0f766e;
+   for(const anchor of value.anchors){
+    if(![anchor.x,anchor.y,anchor.z].every(Number.isFinite))continue;
+    const material=new T.MeshBasicMaterial({color,transparent:true,opacity:anchor.sourceKind==='PUBLISHED'?1:.72,depthTest:true});
+    const marker=new T.Mesh(new T.SphereGeometry(anchor.sourceKind==='PUBLISHED'?.012:.010,16,12),material);
+    marker.position.set(anchor.x,anchor.y,anchor.z);marker.renderOrder=24;marker.userData.pointCode=anchor.pointCode;marker.userData.side=anchor.side;marker.userData.verificationStatus=anchor.verificationStatus;
+    meridianGroup.add(marker);meridianMarkers.push(marker);
+   }
+   for(const path of value.paths){
+    if(!['FACULTY_REVIEWED','PUBLISHED'].includes(path.verificationStatus)||path.points.length<2)continue;
+    const points=path.points.map(point=>new T.Vector3(point[0],point[1],point[2]));
+    const curve=new T.CatmullRomCurve3(points,false,'centripetal');
+    const geometry=new T.TubeGeometry(curve,Math.max(12,points.length*10),.0045,6,false);
+    const material=new T.MeshBasicMaterial({color,transparent:true,opacity:.9,depthTest:true});
+    const tube=new T.Mesh(geometry,material);tube.renderOrder=22;meridianGroup.add(tube);
+   }
+  };
   const hover=document.createElement('div');hover.className='part-hover';hover.setAttribute('role','tooltip');hover.hidden=true;el.appendChild(hover);
   type Target={index:number;x:number;y:number;left:number;right:number;top:number;bottom:number};let targets:Target[]=[];
   const projected=new T.Vector3();
@@ -102,6 +134,11 @@ export default function AnatomyScene({atlas,state,onSelect,onProgress,onError,re
   };
   const up=(e:PointerEvent)=>{
    const validTap=tap.up(e.pointerId,e.clientX,e.clientY);if(!validTap||!ready)return;const rect=renderer.domElement.getBoundingClientRect();pointer.set((e.clientX-rect.left)/rect.width*2-1,-(e.clientY-rect.top)/rect.height*2+1);raycaster.setFromCamera(pointer,camera);
+   if(!registration.current&&meridianMarkers.length){
+    const markerHit=raycaster.intersectObjects(meridianMarkers,false)[0];
+    const pointCode=markerHit?.object?.userData?.pointCode;
+    if(typeof pointCode==='string'&&pointCode){selectAcupoint.current?.(pointCode);return;}
+   }
    if(registration.current){
     let nearest=Infinity,found=-1,bestHit:T.Intersection|null=null,bestMesh:T.Mesh|null=null;
     for(let i=0;i<pickers.length;i++){const mesh=pickers[i];if(!mesh||atlas.parts[i].system!=='integumentary')continue;worldBox.copy(bounds[i]).translate(mesh.position);if(!raycaster.ray.intersectBox(worldBox,hitPoint))continue;const hit=raycaster.intersectObject(mesh,false)[0];if(hit&&hit.distance<nearest){nearest=hit.distance;found=i;bestHit=hit;bestMesh=mesh;}}
@@ -113,9 +150,19 @@ export default function AnatomyScene({atlas,state,onSelect,onProgress,onError,re
    if(found<0&&amount>.45)found=findTarget(e.clientX-rect.left,e.clientY-rect.top,e.pointerType==='touch'?24:16);if(found>=0){hover.hidden=true;select.current(atlas.parts[found].id);}
   };
   renderer.domElement.addEventListener('pointerdown',down);renderer.domElement.addEventListener('pointermove',move);renderer.domElement.addEventListener('pointerup',up);renderer.domElement.addEventListener('pointercancel',cancel);
-  const clock=new T.Clock();let lastExtent=-1;
+  const clock=new T.Clock();let lastExtent=-1,lastOverlayKey='',lastFocusKey='';
   const animate=()=>{
    if(disposed)return;frame=requestAnimationFrame(animate);const dt=Math.min(clock.getDelta(),.05),s=latest.current;
+   const overlayValue=overlay.current;
+   const overlayKey=overlayValue?.enabled
+    ?[overlayValue.meridianId,overlayValue.side,overlayValue.anchors.map(anchor=>[anchor.pointCode,anchor.side,anchor.x.toFixed(5),anchor.y.toFixed(5),anchor.z.toFixed(5),anchor.verificationStatus].join(':')).join('|'),overlayValue.paths.map(path=>path.meridianId+':'+path.verificationStatus+':'+path.points.length).join('|')].join('::')
+    :'off';
+   if(overlayKey!==lastOverlayKey){rebuildOverlay(overlayValue);lastOverlayKey=overlayKey;dirty=true;}
+   const focusValue=focus.current;
+   if(focusValue?.key&&focusValue.key!==lastFocusKey){
+    const point=new T.Vector3(focusValue.x,focusValue.y,focusValue.z);
+    camera.clearViewOffset();controls.target.copy(point);camera.position.copy(point).add(new T.Vector3(.28,.12,.42).normalize().multiplyScalar(.48));controls.update();lastFocusKey=focusValue.key;dirty=true;
+   }
    const changed=lastState?.visible!==s.visible||lastState?.selected!==s.selected||lastState?.isolate!==s.isolate;
    const moving=Math.abs(amount-s.explode)>.0001;
    if(moving){amount=T.MathUtils.damp(amount,s.explode,8,dt);dirty=true;}
@@ -147,7 +194,7 @@ export default function AnatomyScene({atlas,state,onSelect,onProgress,onError,re
 
   };animate();
   const contextLost=(e:Event)=>{e.preventDefault();onError('The 3D session was paused by your device. Reload to continue.');};renderer.domElement.addEventListener('webglcontextlost',contextLost);
-  return()=>{disposed=true;abort.abort();cancelAnimationFrame(frame);observer.disconnect();controls.dispose();geometries.forEach(g=>g.dispose());materials.forEach(m=>m.dispose());scene.traverse(o=>{if(o instanceof T.Mesh&&!geometries.includes(o.geometry)){o.geometry.dispose();const ms=Array.isArray(o.material)?o.material:[o.material];ms.forEach(m=>m.dispose());}});env.dispose();partTexture.dispose();selectionTexture.dispose();markerGeometry.dispose();markerMaterial.dispose();hover.remove();renderer.dispose();renderer.domElement.remove();};
+  return()=>{disposed=true;abort.abort();cancelAnimationFrame(frame);observer.disconnect();controls.dispose();disposeOverlay();geometries.forEach(g=>g.dispose());materials.forEach(m=>m.dispose());scene.traverse(o=>{if(o instanceof T.Mesh&&!geometries.includes(o.geometry)){o.geometry.dispose();const ms=Array.isArray(o.material)?o.material:[o.material];ms.forEach(m=>m.dispose());}});env.dispose();partTexture.dispose();selectionTexture.dispose();markerGeometry.dispose();markerMaterial.dispose();hover.remove();renderer.dispose();renderer.domElement.remove();};
  },[atlas]);
  return <div className="scene" ref={host}/>;
 }
