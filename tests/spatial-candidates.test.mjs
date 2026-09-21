@@ -15,13 +15,14 @@ test('spatial candidates stay outside runtime until registration passes',async()
     assert.equal(candidate.surfaceAnchorMapping,null);
   }
   const points=JSON.parse(await readFile(new URL('../content/acupoints/acupoints.json',import.meta.url)));
-  assert.equal(points.length,361);\n  assert.ok(points.every(point=>point.position3d==null));
+  assert.equal(points.length,361);
+  assert.ok(points.every(point=>point.position3d==null));
 });
 
-test('validator rejects an unregistered spatial point source',async()=>{
-  const root=new URL('../',import.meta.url);
-  const result=validateContent({root:decodeURIComponent(root.pathname)});
+test('validator keeps blocked spatial candidates out of published 3D positions',()=>{
+  const result=validateContent();
   assert.deepEqual(result.errors,[]);
   assert.equal(result.counts.spatialCandidates,2);
+  assert.equal(result.counts.acupoints,361);
   assert.equal(BODY_CANONICAL_COORDINATE_SYSTEM,'BodyParts3D-4.0-browser-meters-Y-up');
 });
