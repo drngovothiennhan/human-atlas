@@ -7,10 +7,11 @@ import {createExplosionLayout} from './explosion-layout';
 import {decodeModelResponse} from './model-download';
 import {PointerTap} from './pointer-tap';
 import {SYSTEMS,type Atlas,type SceneState} from './anatomy';
-interface Props {atlas:Atlas;state:SceneState;onSelect:(id:string)=>void;onProgress:(n:number)=>void;onError:(s:string)=>void}
-export default function AnatomyScene({atlas,state,onSelect,onProgress,onError}:Props){
- const host=useRef<HTMLDivElement>(null),latest=useRef(state),select=useRef(onSelect);
- latest.current=state;select.current=onSelect;
+import {BODY_CANONICAL_COORDINATE_SYSTEM,type SurfaceCapture} from '../src/acupoints/registration/coordinate-system';
+interface Props {atlas:Atlas;state:SceneState;onSelect:(id:string)=>void;onProgress:(n:number)=>void;onError:(s:string)=>void;registrationMode?:boolean;onRegisterSurface?:(capture:SurfaceCapture)=>void}
+export default function AnatomyScene({atlas,state,onSelect,onProgress,onError,registrationMode=false,onRegisterSurface}:Props){
+ const host=useRef<HTMLDivElement>(null),latest=useRef(state),select=useRef(onSelect),registration=useRef(registrationMode),registerSurface=useRef(onRegisterSurface);
+ latest.current=state;select.current=onSelect;registration.current=registrationMode;registerSurface.current=onRegisterSurface;
  useEffect(()=>{
   const el=host.current!;let disposed=false,frame=0,dirty=true,ready=false,lastView='',lastReset=-1,lastIsolate='',layoutKey='',amount=0;
   let lastState:SceneState|null=null;
@@ -38,6 +39,7 @@ export default function AnatomyScene({atlas,state,onSelect,onProgress,onError}:P
   const markerMaterial=new T.PointsMaterial({color:0x64748b,size:5,sizeAttenuation:false,transparent:true,opacity:.72,depthTest:false});
   markerMaterial.onBeforeCompile=shader=>{shader.fragmentShader=shader.fragmentShader.replace('#include <clipping_planes_fragment>','#include <clipping_planes_fragment>\nif (distance(gl_PointCoord, vec2(0.5)) > 0.5) discard;');};
   const markers=new T.Points(markerGeometry,markerMaterial);markers.frustumCulled=false;markers.renderOrder=10;markers.visible=false;scene.add(markers);
+  const registrationMarker=new T.Mesh(new T.SphereGeometry(.009,18,12),new T.MeshBasicMaterial({color:0x0f766e,depthTest:false}));registrationMarker.visible=false;registrationMarker.renderOrder=30;scene.add(registrationMarker);
   const hover=document.createElement('div');hover.className='part-hover';hover.setAttribute('role','tooltip');hover.hidden=true;el.appendChild(hover);
   type Target={index:number;x:number;y:number;left:number;right:number;top:number;bottom:number};let targets:Target[]=[];
   const projected=new T.Vector3();
@@ -85,10 +87,26 @@ export default function AnatomyScene({atlas,state,onSelect,onProgress,onError}:P
   const resize=()=>{layoutKey='';lastState=null;renderer.setPixelRatio(Math.min(devicePixelRatio,el.clientWidth<768||el.clientHeight<600?1.5:2));camera.aspect=el.clientWidth/el.clientHeight;camera.updateProjectionMatrix();renderer.setSize(el.clientWidth,el.clientHeight);fit(latest.current.view,amount);};const observer=new ResizeObserver(resize);observer.observe(el);
   const raycaster=new T.Raycaster(),pointer=new T.Vector2(),tap=new PointerTap(),worldBox=new T.Box3(),hitPoint=new T.Vector3();
   const down=(e:PointerEvent)=>{hover.hidden=true;tap.down(e.pointerId,e.clientX,e.clientY,e.pointerType==='touch'?12:5);};
-  const move=(e:PointerEvent)=>{tap.move(e.pointerId,e.clientX,e.clientY);if(e.buttons||amount<.5||e.pointerType==='touch'){hover.hidden=true;return;}const rect=el.getBoundingClientRect(),x=e.clientX-rect.left,y=e.clientY-rect.top,index=findTarget(x,y,12);hover.hidden=index<0;renderer.domElement.style.cursor=index<0?'grab':'pointer';if(index>=0){hover.textContent=atlas.parts[index].name;hover.style.left=`${Math.max(8,Math.min(x+14,el.clientWidth-260))}px`;hover.style.top=`${Math.max(8,Math.min(y+18,el.clientHeight-55))}px`;}};
+  const move=(e:PointerEvent)=>{tap.move(e.pointerId,e.clientX,e.clientY);if(registration.current){hover.hidden=true;renderer.domElement.style.cursor='crosshair';return;}if(e.buttons||amount<.5||e.pointerType==='touch'){hover.hidden=true;return;}const rect=el.getBoundingClientRect(),x=e.clientX-rect.left,y=e.clientY-rect.top,index=findTarget(x,y,12);hover.hidden=index<0;renderer.domElement.style.cursor=index<0?'grab':'pointer';if(index>=0){hover.textContent=atlas.parts[index].name;hover.style.left=`${Math.max(8,Math.min(x+14,el.clientWidth-260))}px`;hover.style.top=`${Math.max(8,Math.min(y+18,el.clientHeight-55))}px`;}};
   const cancel=(e:PointerEvent)=>tap.cancel(e.pointerId);
+  const makeSurfaceCapture=(partIndex:number,mesh:T.Mesh,hit:T.Intersection):SurfaceCapture|null=>{
+   const faceIndex=hit.faceIndex;if(faceIndex==null)return null;
+   const geometry=mesh.geometry as T.BufferGeometry,index=geometry.getIndex(),position=geometry.getAttribute('position');if(!index||!position)return null;
+   const base=faceIndex*3;if(base+2>=index.count)return null;
+   const a=new T.Vector3().fromBufferAttribute(position,index.getX(base)),b=new T.Vector3().fromBufferAttribute(position,index.getX(base+1)),cc=new T.Vector3().fromBufferAttribute(position,index.getX(base+2));
+   const local=mesh.worldToLocal(hit.point.clone()),bary=new T.Vector3();
+   const baryResult=T.Triangle.getBarycoord(local,a,b,cc,bary);if(!baryResult)return null;
+   if(![local.x,local.y,local.z,bary.x,bary.y,bary.z].every(Number.isFinite))return null;
+   return {x:local.x,y:local.y,z:local.z,coordinateSystem:BODY_CANONICAL_COORDINATE_SYSTEM,surfaceStructureId:atlas.parts[partIndex].id,surfaceStructureName:atlas.parts[partIndex].name,triangleIndex:faceIndex,barycentric:[bary.x,bary.y,bary.z],nearestSurfaceDistance:0};
+  };
   const up=(e:PointerEvent)=>{
    const validTap=tap.up(e.pointerId,e.clientX,e.clientY);if(!validTap||!ready)return;const rect=renderer.domElement.getBoundingClientRect();pointer.set((e.clientX-rect.left)/rect.width*2-1,-(e.clientY-rect.top)/rect.height*2+1);raycaster.setFromCamera(pointer,camera);
+   if(registration.current){
+    let nearest=Infinity,found=-1,bestHit:T.Intersection|null=null,bestMesh:T.Mesh|null=null;
+    pickers.forEach((mesh,i)=>{if(!mesh||atlas.parts[i].system!=='integumentary')return;worldBox.copy(bounds[i]).translate(mesh.position);if(!raycaster.ray.intersectBox(worldBox,hitPoint))return;const hit=raycaster.intersectObject(mesh,false)[0];if(hit&&hit.distance<nearest){nearest=hit.distance;found=i;bestHit=hit;bestMesh=mesh;}});
+    if(found>=0&&bestHit&&bestMesh){const capture=makeSurfaceCapture(found,bestMesh,bestHit);if(capture){registrationMarker.position.copy(bestHit.point);registrationMarker.visible=true;dirty=true;registerSurface.current?.(capture);}}
+    return;
+   }
    let nearest=Infinity,found=-1;const hasSolid=atlas.parts.some((p,i)=>p.system!=='integumentary'&&data[i*4+3]>.5);
    pickers.forEach((mesh,i)=>{if(!mesh||data[i*4+3]<.5||(hasSolid&&atlas.parts[i].system==='integumentary'))return;worldBox.copy(bounds[i]).translate(mesh.position);if(!raycaster.ray.intersectBox(worldBox,hitPoint))return;const hits=raycaster.intersectObject(mesh,false);if(hits[0]&&hits[0].distance<nearest){nearest=hits[0].distance;found=i;}});
    if(found<0&&amount>.45)found=findTarget(e.clientX-rect.left,e.clientY-rect.top,e.pointerType==='touch'?24:16);if(found>=0){hover.hidden=true;select.current(atlas.parts[found].id);}
