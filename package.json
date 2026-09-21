@@ -16,7 +16,8 @@
     "registration:validate-review": "node scripts/registration-review-validate.mjs",
     "test:unit": "node --test tests/*.test.mjs",
     "test": "npm run test:unit",
-    "verify:pages": "node scripts/verify-pages-assets.mjs"
+    "verify:pages": "node scripts/verify-pages-assets.mjs",
+    "source:furia:validate": "node scripts/validate-furia-source.mjs"
   },
   "dependencies": {
     "@base-ui/react": "1.7.0",
