@@ -192,9 +192,9 @@ try{
   await waitFor(()=>evaluate("document.querySelector('[data-head-muscles-toggle=true]')?.getAttribute('aria-pressed')==='true'&&document.querySelector('canvas')?.dataset.headMusclesActive==='true'&&document.querySelector('canvas')?.dataset.headMuscleCount==='78'"),{label:'head muscle toggle restores 78 meshes'});
   await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.footMuscleCount==='4'&&document.querySelector('canvas')?.dataset.neckMuscleCount==='1'"),{label:'missing foot/neck meshes loaded'});
   await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.detailedMusclesStatus==='ready'&&document.querySelector('canvas')?.dataset.detailedMuscleCount==='484'"),{timeout:90000,label:'484 detailed muscle meshes'});
-  const articularPreset=await evaluate("(()=>{const b=[...document.querySelectorAll('.layer-presets button')].find(x=>x.textContent.trim()==='Khớp & dây chằng');if(!b)return false;b.click();return true})()");
+  const articularPreset=await evaluate("(()=>{const b=[...document.querySelectorAll('.layer-presets button')].find(x=>x.textContent.trim()==='Khớp');if(!b)return false;b.click();return true})()");
   if(!articularPreset)throw new Error('Articular layer preset missing');
-  await waitFor(()=>evaluate("(()=>{const b=[...document.querySelectorAll('.layer-presets button')].find(x=>x.textContent.trim()==='Khớp & dây chằng');return b?.getAttribute('aria-pressed')==='true'})()"),{label:'articular layer preset'});
+  await waitFor(()=>evaluate("(()=>{const b=[...document.querySelectorAll('.layer-presets button')].find(x=>x.textContent.trim()==='Khớp');return b?.getAttribute('aria-pressed')==='true'})()"),{label:'articular layer preset'});
   await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.articularStatus==='ready'&&document.querySelector('canvas')?.dataset.articularCount==='413'"),{timeout:90000,label:'413 articular meshes'});
   const detailedAnatomyMetrics=await evaluate("(()=>{const d=document.querySelector('canvas')?.dataset||{};return{muscleStatus:d.detailedMusclesStatus,muscleCount:d.detailedMuscleCount,muscleExpected:d.detailedMuscleExpected,muscleBounds:d.detailedMuscleBounds,articularStatus:d.articularStatus,articularCount:d.articularCount,articularExpected:d.articularExpected,articularBounds:d.articularBounds,articularActive:d.articularActive}})()");
   if(detailedAnatomyMetrics.muscleCount!=='484'||detailedAnatomyMetrics.muscleExpected!=='484'||detailedAnatomyMetrics.articularCount!=='413'||detailedAnatomyMetrics.articularExpected!=='413'||detailedAnatomyMetrics.articularActive!=='true')throw new Error('Detailed anatomy verification failed: '+JSON.stringify(detailedAnatomyMetrics));
@@ -205,9 +205,9 @@ try{
   const skeletalReferenceMetrics=await evaluate("(()=>{const d=document.querySelector('canvas')?.dataset||{};return{status:d.skeletalReferenceStatus,count:d.skeletalReferenceCount,expected:d.skeletalReferenceExpected,bounds:d.skeletalReferenceBounds,active:d.skeletalReferenceActive}})()");
   if(skeletalReferenceMetrics.status!=='ready'||skeletalReferenceMetrics.count!=='335'||skeletalReferenceMetrics.expected!=='335'||skeletalReferenceMetrics.active!=='true'||!skeletalReferenceMetrics.bounds)throw new Error('Skeletal reference verification failed: '+JSON.stringify(skeletalReferenceMetrics));
   console.log('SMOKE_DETAILED_ANATOMY_PASS '+JSON.stringify({detailedAnatomyMetrics,skeletalReferenceMetrics}));
-  const musclePresetForQa=await evaluate("(()=>{const b=[...document.querySelectorAll('.layer-presets button')].find(x=>x.textContent.trim()==='Cơ');if(!b)return false;b.click();return true})()");
+  const musclePresetForQa=await evaluate("(()=>{const b=[...document.querySelectorAll('.layer-presets button')].find(x=>x.textContent.trim()==='Cơ toàn thân');if(!b)return false;b.click();return true})()");
   if(!musclePresetForQa)throw new Error('Muscle layer preset missing before regional QA');
-  await waitFor(()=>evaluate("(()=>{const b=[...document.querySelectorAll('.layer-presets button')].find(x=>x.textContent.trim()==='Cơ');return b?.getAttribute('aria-pressed')==='true'})()"),{label:'muscle layer preset for regional QA'});
+  await waitFor(()=>evaluate("(()=>{const b=[...document.querySelectorAll('.layer-presets button')].find(x=>x.textContent.trim()==='Cơ toàn thân');return b?.getAttribute('aria-pressed')==='true'})()"),{label:'muscle layer preset for regional QA'});
   const regionalQaHashes=[];
   for(const [region,yFraction] of [['head',.20],['foot',.80]]){
     for(const [label,suffix] of [['Mặt trước','front'],['Mặt bên','side'],['Mặt sau','back']]){
