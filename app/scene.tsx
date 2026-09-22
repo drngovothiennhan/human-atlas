@@ -56,7 +56,7 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
   const markerMaterial=new T.PointsMaterial({color:0x64748b,size:5,sizeAttenuation:false,transparent:true,opacity:.72,depthTest:false});
   markerMaterial.onBeforeCompile=shader=>{shader.fragmentShader=shader.fragmentShader.replace('#include <clipping_planes_fragment>','#include <clipping_planes_fragment>\nif (distance(gl_PointCoord, vec2(0.5)) > 0.5) discard;');};
   const markers=new T.Points(markerGeometry,markerMaterial);markers.frustumCulled=false;markers.renderOrder=10;markers.visible=false;scene.add(markers);
-  const registrationMarker=new T.Mesh(new T.SphereGeometry(.009,18,12),new T.MeshBasicMaterial({color:0x0f766e,depthTest:false}));registrationMarker.visible=false;registrationMarker.renderOrder=30;scene.add(registrationMarker);
+  const registrationMarker=new T.Mesh(new T.SphereGeometry(.009,qualityConfig.markerSegments,Math.max(8,qualityConfig.markerSegments-4)),new T.MeshBasicMaterial({color:0x0f766e,depthTest:false}));registrationMarker.visible=false;registrationMarker.renderOrder=30;scene.add(registrationMarker);
   const meridianGroup=new T.Group();meridianGroup.name='hiu-meridian-overlay';scene.add(meridianGroup);
   const headMuscleGroup=new T.Group();headMuscleGroup.name='hiu-head-muscles';headMuscleGroup.visible=false;scene.add(headMuscleGroup);
   const footMuscleGroup=new T.Group();footMuscleGroup.name='hiu-foot-muscles';footMuscleGroup.visible=false;scene.add(footMuscleGroup);
@@ -83,7 +83,7 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
      const isHead=headMuscleAllowed.has(clean),isFoot=footMuscleAllowed.has(clean);if(!isHead&&!isFoot)return;
      if(!object.geometry.boundingBox)object.geometry.computeBoundingBox();
      const worldBox=object.geometry.boundingBox?.clone().applyMatrix4(object.matrixWorld);if(worldBox)box.union(worldBox);
-     const mesh=new T.Mesh(object.geometry,headMuscleMaterial);mesh.name='hiu-head:'+object.name;mesh.matrixAutoUpdate=false;mesh.matrix.copy(object.matrixWorld);mesh.frustumCulled=false;mesh.renderOrder=12;(isHead?headMuscleGroup:footMuscleGroup).add(mesh);if(isHead)count++;
+     const mesh=new T.Mesh(object.geometry,headMuscleMaterial);mesh.name='hiu-head:'+object.name;mesh.matrixAutoUpdate=false;mesh.matrix.copy(object.matrixWorld);mesh.frustumCulled=false;mesh.castShadow=qualityConfig.shadows;mesh.renderOrder=12;(isHead?headMuscleGroup:footMuscleGroup).add(mesh);if(isHead)count++;
     });
     renderer.domElement.dataset.footMuscleCount=String(footMuscleGroup.children.filter(mesh=>!mesh.name.includes('Longus')).length);
     renderer.domElement.dataset.neckMuscleCount=String(footMuscleGroup.children.filter(mesh=>mesh.name.includes('Longus')).length);
@@ -128,7 +128,7 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
     const baseOpacity=selected?1:anchor.sourceKind==='PUBLISHED'?.98:schematic?.94:.96;
     const material=new T.MeshBasicMaterial({color,transparent:true,opacity:baseOpacity,depthTest:false,depthWrite:false});
     const radius=selected?ACUPOINT_RADIUS_SELECTED:anchor.sourceKind==='PUBLISHED'?ACUPOINT_RADIUS_PUBLISHED:schematic?ACUPOINT_RADIUS_SCHEMATIC:ACUPOINT_RADIUS_LOCAL;
-    const marker=new T.Mesh(new T.SphereGeometry(radius,18,14),material);
+    const marker=new T.Mesh(new T.SphereGeometry(radius,qualityConfig.markerSegments,Math.max(8,qualityConfig.markerSegments-4)),material);
     marker.position.set(anchor.x,anchor.y,anchor.z);marker.renderOrder=selected?26:24;marker.userData.pointCode=anchor.pointCode;marker.userData.side=anchor.side;marker.userData.verificationStatus=anchor.verificationStatus;marker.userData.sourceKind=anchor.sourceKind;marker.userData.baseOpacity=baseOpacity;marker.userData.selected=selected;
     meridianGroup.add(marker);meridianMarkers.push(marker);meridianPulseMarkers.push(marker);if(selected)selectedMarkers++;if(schematic)schematicAnchors++;else trustedAnchors++;
    }
@@ -142,14 +142,14 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
     const curve=new T.CatmullRomCurve3(points,false,'centripetal');
     const segments=Math.max(24,points.length*12);
     // Thin semi-transparent channels stay legible without masking anatomy.
-    const edge=new T.Mesh(new T.TubeGeometry(curve,segments,MERIDIAN_LINE_EDGE_RADIUS,8,false),new T.MeshBasicMaterial({color:0x17212b,transparent:true,opacity:MERIDIAN_LINE_EDGE_OPACITY,depthTest:false,depthWrite:false}));
+    const edge=new T.Mesh(new T.TubeGeometry(curve,segments,MERIDIAN_LINE_EDGE_RADIUS,qualityConfig.tubeRadialSegments,false),new T.MeshBasicMaterial({color:0x17212b,transparent:true,opacity:MERIDIAN_LINE_EDGE_OPACITY,depthTest:false,depthWrite:false}));
     edge.renderOrder=21;meridianGroup.add(edge);
-    const tube=new T.Mesh(new T.TubeGeometry(curve,segments,MERIDIAN_LINE_CORE_RADIUS,8,false),new T.MeshBasicMaterial({color:lineColor,transparent:true,opacity:MERIDIAN_LINE_CORE_OPACITY,depthTest:false,depthWrite:false}));
+    const tube=new T.Mesh(new T.TubeGeometry(curve,segments,MERIDIAN_LINE_CORE_RADIUS,qualityConfig.tubeRadialSegments,false),new T.MeshBasicMaterial({color:lineColor,transparent:true,opacity:MERIDIAN_LINE_CORE_OPACITY,depthTest:false,depthWrite:false}));
     tube.renderOrder=22;meridianGroup.add(tube);
     // Several moving lights make motion visible along long channels, not only at one end.
-    for(let i=0;i<5;i++){
-     const particle=new T.Mesh(new T.SphereGeometry(.0029,12,10),new T.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:.9,depthTest:false,depthWrite:false}));
-     const offset=i/5;particle.position.copy(curve.getPointAt(offset));particle.renderOrder=25;
+    for(let i=0;i<qualityConfig.flowParticlesPerPath;i++){
+     const particle=new T.Mesh(new T.SphereGeometry(.0029,Math.max(8,qualityConfig.markerSegments-2),8),new T.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:.9,depthTest:false,depthWrite:false}));
+     const offset=i/qualityConfig.flowParticlesPerPath;particle.position.copy(curve.getPointAt(offset));particle.renderOrder=25;
      meridianGroup.add(particle);meridianFlowParticles.push({mesh:particle,curve,offset});
     }
     if(schematic)schematicPaths++;else trustedPaths++;
@@ -190,7 +190,7 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
     g.setAttribute('partIndex',new T.BufferAttribute(new Float32Array(p.vertexCount).fill(i),1));
     const list=groups.get(p.system)??[];list.push(g);groups.set(p.system,list);
    });
-   groups.forEach((gs,system)=>{const geometry=mergeGeometries(gs,false);if(!geometry)throw new Error('Không ghép được hình học giải phẫu.');geometries.push(geometry);const mesh=new T.Mesh(geometry,mats.get(system as never));mesh.frustumCulled=false;scene.add(mesh);});
+   groups.forEach((gs,system)=>{const geometry=mergeGeometries(gs,false);if(!geometry)throw new Error('Không ghép được hình học giải phẫu.');geometries.push(geometry);const mesh=new T.Mesh(geometry,mats.get(system as never));mesh.frustumCulled=false;mesh.castShadow=qualityConfig.shadows;scene.add(mesh);});
    lastState=null;loaded++;onProgress(Math.round(loaded/atlas.chunks.length*100));dirty=true;
   };
   (async()=>{try{let cursor=0;await Promise.all(Array.from({length:3},async()=>{while(cursor<atlas.chunks.length){const i=cursor++;await loadChunk(i);}}));if(!disposed){ready=true;dirty=true;}}catch(e){if(!disposed)onError(e instanceof Error&&e.name==='AbortError'?'Tải mô hình quá thời gian. Vui lòng kiểm tra kết nối và tải lại.':e instanceof Error?e.message:'Không tải được mô hình giải phẫu.');}})();
@@ -202,7 +202,7 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
    const target=new T.Vector3(extent>.1&&el.clientWidth>767?-packingWidth*.12:0,extent>.1||mobile?.85:.68,0),position=target.clone().addScaledVector(direction,distance);
    if(animated)startCameraMotion(target,position);else{cameraMotion=null;renderer.domElement.dataset.cameraMotion='idle';controls.target.copy(target);camera.position.copy(position);controls.update();dirty=true;}
   };
-  const resize=()=>{layoutKey='';lastState=null;renderer.setPixelRatio(Math.min(devicePixelRatio,el.clientWidth<768||el.clientHeight<600?1.5:2));camera.aspect=el.clientWidth/el.clientHeight;camera.updateProjectionMatrix();renderer.setSize(el.clientWidth,el.clientHeight);fit(latest.current.view,amount);};const observer=new ResizeObserver(resize);observer.observe(el);
+  const resize=()=>{layoutKey='';lastState=null;renderer.setPixelRatio(Math.min(devicePixelRatio,qualityConfig.pixelRatioCap));renderer.domElement.dataset.renderPixelRatio=renderer.getPixelRatio().toFixed(2);camera.aspect=el.clientWidth/el.clientHeight;camera.updateProjectionMatrix();renderer.setSize(el.clientWidth,el.clientHeight);fit(latest.current.view,amount);};const observer=new ResizeObserver(resize);observer.observe(el);
   const raycaster=new T.Raycaster(),pointer=new T.Vector2(),tap=new PointerTap(),worldBox=new T.Box3(),hitPoint=new T.Vector3();
   const down=(e:PointerEvent)=>{hover.hidden=true;tap.down(e.pointerId,e.clientX,e.clientY,e.pointerType==='touch'?12:5);};
   const move=(e:PointerEvent)=>{tap.move(e.pointerId,e.clientX,e.clientY);if(registration.current){hover.hidden=true;renderer.domElement.style.cursor='crosshair';return;}if(e.buttons||amount<.5||e.pointerType==='touch'){hover.hidden=true;return;}const rect=el.getBoundingClientRect(),x=e.clientX-rect.left,y=e.clientY-rect.top,index=findTarget(x,y,12);hover.hidden=index<0;renderer.domElement.style.cursor=index<0?'grab':'pointer';if(index>=0){hover.textContent=atlas.parts[index].name;hover.style.left=`${Math.max(8,Math.min(x+14,el.clientWidth-260))}px`;hover.style.top=`${Math.max(8,Math.min(y+18,el.clientHeight-55))}px`;}};
