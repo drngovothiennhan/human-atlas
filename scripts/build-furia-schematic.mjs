@@ -147,7 +147,7 @@ for(const point of pointDoc.points){
   const right=resolveRight(point.anchor),meridianId=canonicalChannel(point.channel),canonicalMidline=meridianId==='CV'||meridianId==='GV';
   const records=canonicalMidline||point.side==='midline'
     ?[['MIDLINE',[0,right[1],right[2]]]]
-    :[['RIGHT',right],['LEFT',[-right[0],right[1],right[2]]];
+    :[['RIGHT',right],['LEFT',[-right[0],right[1],right[2]]]];
   for(const [side,src] of records){const p=toBrowser(src);anchorOut.push({pointCode:canonicalCode(point.code),meridianId,sourcePointCode:point.code,sourceMeridianId:point.channel,sequence:point.index,side,x:round(p[0]),y:round(p[1]),z:round(p[2]),verificationStatus:'UNVERIFIED',sourceKind:'LICENSED_SCHEMATIC',accuracy:point.accuracy,projection:'BodyParts3D FMA7163 surface raycast'})}
 }
 const byKey=new Map(anchorOut.map(a=>[a.pointCode+':'+a.side,a]));
