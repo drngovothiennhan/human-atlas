@@ -189,19 +189,13 @@ try{
   if(allHash===skeletonHash)throw new Error('All layer preset did not change rendered screenshot');
 
   console.log('SMOKE_DETAILED_ANATOMY_START');
-  const headToggle=await evaluate("document.querySelector('[data-head-muscles-toggle=true]')?.getAttribute('aria-pressed')==='true'");
-  if(!headToggle)throw new Error('Head muscle toggle missing');
-  await waitFor(()=>evaluate("document.querySelector('[data-head-muscles-toggle=true]')?.getAttribute('aria-pressed')==='true'"),{label:'head muscle toggle on'});
-  await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.headMusclesStatus==='ready'&&document.querySelector('canvas')?.dataset.headMuscleCount==='78'"),{timeout:60000,label:'78 licensed head muscle meshes'});
+  await waitFor(()=>evaluate("(()=>{const d=document.querySelector('canvas')?.dataset||{};return d.detailedMusclesStatus==='ready'&&d.detailedMuscleCount==='484'&&d.detailedMuscleVisibleCount==='484'&&d.detailedMusclesReplacement==='true'&&d.headMuscleCount==='78'&&d.headMusclesActive==='true'&&d.articularStatus==='ready'&&d.articularCount==='413'&&d.articularReplacement==='true'&&d.skeletalReferenceStatus==='ready'&&d.skeletalReferenceCount==='335'&&d.skeletalReferenceReplacement==='true'})()"),{timeout:120000,label:'aligned muscle/skeleton/joint replacements in composite view'});
+  const alignedCompositeMetrics=await evaluate("(()=>{const d=document.querySelector('canvas')?.dataset||{};return{muscleStatus:d.detailedMusclesStatus,muscleCount:d.detailedMuscleCount,muscleVisibleCount:d.detailedMuscleVisibleCount,muscleReplacement:d.detailedMusclesReplacement,headCount:d.headMuscleCount,headActive:d.headMusclesActive,headBounds:d.headMuscleBounds,footCount:d.footMuscleCount,neckCount:d.neckMuscleCount,skeletonCount:d.skeletalReferenceCount,skeletonReplacement:d.skeletalReferenceReplacement,skeletonBounds:d.skeletalReferenceBounds,articularCount:d.articularCount,articularReplacement:d.articularReplacement}})()");
+  if(alignedCompositeMetrics.muscleCount!=='484'||alignedCompositeMetrics.muscleVisibleCount!=='484'||alignedCompositeMetrics.muscleReplacement!=='true'||alignedCompositeMetrics.headCount!=='78'||alignedCompositeMetrics.headActive!=='true'||alignedCompositeMetrics.skeletonCount!=='335'||alignedCompositeMetrics.skeletonReplacement!=='true'||alignedCompositeMetrics.articularCount!=='413'||alignedCompositeMetrics.articularReplacement!=='true')throw new Error('Aligned composite anatomy verification failed: '+JSON.stringify(alignedCompositeMetrics));
   const headMetrics=await evaluate("(()=>{const d=document.querySelector('canvas')?.dataset||{};return{active:d.headMusclesActive,status:d.headMusclesStatus,count:d.headMuscleCount,expected:d.headMuscleExpected,source:d.headMuscleSource,license:d.headMuscleLicense,bounds:d.headMuscleBounds}})()");
   if(headMetrics.active!=='true'||headMetrics.status!=='ready'||headMetrics.count!=='78'||headMetrics.expected!=='78'||!headMetrics.source?.includes('Nurkan1/Anatria-3D')||!headMetrics.license?.includes('CC BY-SA 4.0'))throw new Error('Head muscle verification failed: '+JSON.stringify(headMetrics));
-  await screenshot('desktop-head-muscles.png');
-  await evaluate("document.querySelector('[data-head-muscles-toggle=true]').click()");
-  await waitFor(()=>evaluate("document.querySelector('[data-head-muscles-toggle=true]')?.getAttribute('aria-pressed')==='false'&&document.querySelector('canvas')?.dataset.headMusclesActive==='false'"),{label:'head muscle toggle off'});
-  await evaluate("document.querySelector('[data-head-muscles-toggle=true]').click()");
-  await waitFor(()=>evaluate("document.querySelector('[data-head-muscles-toggle=true]')?.getAttribute('aria-pressed')==='true'&&document.querySelector('canvas')?.dataset.headMusclesActive==='true'&&document.querySelector('canvas')?.dataset.headMuscleCount==='78'"),{label:'head muscle toggle restores 78 meshes'});
-  await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.footMuscleCount==='4'&&document.querySelector('canvas')?.dataset.neckMuscleCount==='1'"),{label:'missing foot/neck meshes loaded'});
-  await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.detailedMusclesStatus==='ready'&&document.querySelector('canvas')?.dataset.detailedMuscleCount==='484'"),{timeout:90000,label:'484 detailed muscle meshes'});
+  await screenshot('desktop-aligned-all-layers.png');
+  console.log('SMOKE_ALIGNED_COMPOSITE_PASS '+JSON.stringify(alignedCompositeMetrics));
   console.log('SMOKE_DETAILED_MUSCLES_READY');
   const articularPreset=await evaluate("(()=>{const b=[...document.querySelectorAll('.layer-presets button')].find(x=>x.textContent.trim()==='Khớp');if(!b)return false;b.click();return true})()");
   if(!articularPreset)throw new Error('Articular layer preset missing');
@@ -217,12 +211,30 @@ try{
   const skeletalReferenceMetrics=await evaluate("(()=>{const d=document.querySelector('canvas')?.dataset||{};return{status:d.skeletalReferenceStatus,count:d.skeletalReferenceCount,expected:d.skeletalReferenceExpected,bounds:d.skeletalReferenceBounds,active:d.skeletalReferenceActive,replacement:d.skeletalReferenceReplacement}})()");
   if(skeletalReferenceMetrics.status!=='ready'||skeletalReferenceMetrics.count!=='335'||skeletalReferenceMetrics.expected!=='335'||skeletalReferenceMetrics.active!=='true'||skeletalReferenceMetrics.replacement!=='true'||!skeletalReferenceMetrics.bounds)throw new Error('Skeletal reference verification failed: '+JSON.stringify(skeletalReferenceMetrics));
   console.log('SMOKE_DETAILED_ANATOMY_PASS '+JSON.stringify({detailedAnatomyMetrics,skeletalReferenceMetrics}));
+  const skeletalRegionalHashes=[];
+  for(const [region,yFraction] of [['skull',.20],['thigh',.58]]){
+    const seq=await evaluate("Number(document.querySelector('canvas')?.dataset.cameraMotionSeq||0)");
+    if(!await clickAria('Mặt trước'))throw new Error('Missing front camera control for skeletal '+region+' QA');
+    await waitFor(()=>evaluate("Number(document.querySelector('canvas')?.dataset.cameraMotionSeq||0)>"+seq),{label:'skeletal '+region+' camera motion'});
+    await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.cameraMotion==='idle'"),{timeout:30000,label:'skeletal '+region+' camera settled'});
+    const rc=await evaluate("(()=>{const r=document.querySelector('canvas').getBoundingClientRect();return{x:r.x,y:r.y,w:r.width,h:r.height}})()");
+    for(let i=0;i<3;i++)await send('Input.dispatchMouseEvent',{type:'mouseWheel',x:rc.x+rc.w*.5,y:rc.y+rc.h*yFraction,deltaX:0,deltaY:-300});
+    await sleep(350);
+    skeletalRegionalHashes.push(await screenshot('desktop-skeleton-'+region+'-front-enlarged.png'));
+    if(!await clickAria('Đặt lại góc nhìn và lớp'))throw new Error('Missing reset during skeletal '+region+' QA');
+    await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.cameraMotion==='idle'"),{timeout:30000,label:'skeletal '+region+' reset'});
+    const restoreSkeleton=await evaluate("(()=>{const b=[...document.querySelectorAll('.layer-presets button')].find(x=>x.textContent.trim()==='Bộ xương');if(!b)return false;b.click();return true})()");
+    if(!restoreSkeleton)throw new Error('Unable to restore skeleton preset after regional QA');
+    await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.skeletalReferenceReplacement==='true'"),{label:'skeletal replacement restored'});
+  }
+  if(new Set(skeletalRegionalHashes).size!==2)throw new Error('Skull/thigh skeletal screenshots did not vary as expected');
+  console.log('SMOKE_SKULL_THIGH_SKELETAL_QA_PASS');
   const musclePresetForQa=await evaluate("(()=>{const b=[...document.querySelectorAll('.layer-presets button')].find(x=>x.textContent.trim()==='Cơ toàn thân');if(!b)return false;b.click();return true})()");
   if(!musclePresetForQa)throw new Error('Muscle layer preset missing before regional QA');
   await waitFor(()=>evaluate("(()=>{const b=[...document.querySelectorAll('.layer-presets button')].find(x=>x.textContent.trim()==='Cơ toàn thân');return b?.getAttribute('aria-pressed')==='true'})()"),{label:'muscle layer preset for regional QA'});
   await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.detailedMusclesReplacement==='true'"),{label:'aligned detailed muscle layer replaces base muscle geometry'});
   const regionalQaHashes=[];
-  for(const [region,yFraction] of [['head',.20],['foot',.80]]){
+  for(const [region,yFraction] of [['head',.20],['thigh',.58],['foot',.80]]){
     for(const [label,suffix] of [['Mặt trước','front'],['Mặt bên','side'],['Mặt sau','back']]){
       const seq=await evaluate("Number(document.querySelector('canvas')?.dataset.cameraMotionSeq||0)");
       if(!await clickAria(label))throw new Error('Missing regional QA camera control: '+label);
@@ -236,8 +248,8 @@ try{
       await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.cameraMotion==='idle'"),{timeout:30000,label:region+' '+label+' reset'});
     }
   }
-  if(new Set(regionalQaHashes).size<4)throw new Error('Regional head/foot visual QA screenshots did not vary as expected');
-  console.log('SMOKE_REGIONAL_MUSCLE_QA_PASS '+JSON.stringify({headViews:3,footViews:3,footMeshes:4,neckMeshes:1}));
+  if(new Set(regionalQaHashes).size<6)throw new Error('Regional head/thigh/foot visual QA screenshots did not vary as expected');
+  console.log('SMOKE_REGIONAL_MUSCLE_QA_PASS '+JSON.stringify({headViews:3,thighViews:3,footViews:3,totalMuscleMeshes:484,headMeshes:78,footMeshes:4,neckMeshes:1}));
   console.log('SMOKE_HEAD_MUSCLES_78_PASS '+JSON.stringify(headMetrics));
   const performanceSample=await evaluate("new Promise(resolve=>{const intervals=[];let last=performance.now(),start=last,done=false,raf=0;const finish=()=>{if(done)return;done=true;cancelAnimationFrame(raf);const end=performance.now();resolve({environment:'GitHub/Linux headless Chromium SwiftShader, not physical device',elapsedMs:end-start,frames:intervals.length,meanFrameMs:intervals.length?intervals.reduce((a,b)=>a+b,0)/intervals.length:null,loadMs:performance.getEntriesByType('navigation')[0]?.loadEventEnd,resources:performance.getEntriesByType('resource').length,renderStats:document.querySelector('canvas')?.dataset.renderCount??null,quality:{mode:document.querySelector('canvas')?.dataset.renderQualityMode,profile:document.querySelector('canvas')?.dataset.renderQualityProfile,pixelRatio:document.querySelector('canvas')?.dataset.renderPixelRatio,measuredMeanFrameMs:document.querySelector('canvas')?.dataset.renderFrameMeanMs},sampleBounded:true})};const timer=setTimeout(finish,2600);const tick=now=>{if(done)return;intervals.push(now-last);last=now;if(now-start>=2000){clearTimeout(timer);finish()}else raf=requestAnimationFrame(tick)};raf=requestAnimationFrame(tick)})");
   await writeFile('artifacts/performance-sample.json',JSON.stringify(performanceSample,null,2));
@@ -431,6 +443,31 @@ try{
   await screenshot('mobile-meridian3d-layout.png');
   await evaluate("document.querySelector('[data-meridian3d-panel=true] [aria-label=\"Đóng mô hình kinh lạc 3D\"]')?.click()");
   console.log('SMOKE_MOBILE_MERIDIAN_LAYOUT_PASS '+JSON.stringify(mobileLayout));
+  const touchControl=async label=>{
+    const box=await evaluate("(()=>{const b=document.querySelector('[aria-label=\\\""+label+"\\\"]');if(!b)return null;const r=b.getBoundingClientRect(),x=r.left+r.width/2,y=r.top+r.height/2,hit=document.elementFromPoint(x,y);return{x,y,w:r.width,h:r.height,disabled:b.disabled,hit:hit===b||b.contains(hit)}})()");
+    if(!box||box.disabled||!box.hit||box.w<40||box.h<40)throw new Error('Mobile touch target blocked or too small: '+label+' '+JSON.stringify(box));
+    await send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:box.x,y:box.y,id:41,radiusX:1,radiusY:1,force:1}]});
+    await send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});
+    return box;
+  };
+  for(const label of ['Mặt trước','Mặt bên','Mặt sau']){
+    await touchControl(label);
+    await waitFor(()=>evaluate("document.querySelector('[aria-label=\\\""+label+"\\\"]')?.getAttribute('aria-pressed')==='true'"),{label:'mobile touch '+label});
+  }
+  await touchControl('Xoay mô hình');
+  await waitFor(()=>evaluate("!!document.querySelector('[aria-label=\\\"Dừng xoay\\\"]')"),{label:'mobile auto rotate starts'});
+  await touchControl('Dừng xoay');
+  await waitFor(()=>evaluate("!!document.querySelector('[aria-label=\\\"Xoay mô hình\\\"]')"),{label:'mobile auto rotate stops'});
+  await touchControl('Đặt lại góc nhìn và lớp');
+  await waitFor(()=>evaluate("document.querySelector('[aria-label=\\\"Góc nghiêng\\\"]')?.getAttribute('aria-pressed')==='true'"),{label:'mobile reset'});
+  await touchControl('Mở lớp cơ quan');
+  await waitFor(()=>evaluate("document.querySelector('.layers-panel')?.classList.contains('mobile-open')"),{label:'mobile layer panel opens from dock'});
+  const mobileSkeletonPreset=await evaluate("(()=>{const b=[...document.querySelectorAll('.layers-panel.mobile-open .layer-presets button')].find(x=>x.textContent.trim()==='Bộ xương');if(!b)return false;b.click();return true})()");
+  if(!mobileSkeletonPreset)throw new Error('Mobile skeleton preset unavailable');
+  await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.skeletalReferenceReplacement==='true'"),{timeout:90000,label:'mobile skeleton replacement'});
+  await screenshot('mobile-controls-functional.png');
+  await touchControl('Đóng hệ cơ quan');
+  console.log('SMOKE_MOBILE_CONTROLS_PASS');
   await evaluate("document.querySelector('.yhct-launch')?.click()");
   await waitFor(()=>evaluate("!!document.querySelector('.yhct-panel')"),{label:'mobile YHCT panel'});
   await evaluate("document.querySelector('[data-yhct-mode=quiz]')?.click()");
