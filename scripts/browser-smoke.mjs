@@ -195,7 +195,10 @@ try{
   await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.articularStatus==='ready'&&document.querySelector('canvas')?.dataset.articularCount==='413'"),{timeout:90000,label:'413 articular meshes'});
   const detailedAnatomyMetrics=await evaluate("(()=>{const d=document.querySelector('canvas')?.dataset||{};return{muscleStatus:d.detailedMusclesStatus,muscleCount:d.detailedMuscleCount,muscleExpected:d.detailedMuscleExpected,muscleBounds:d.detailedMuscleBounds,articularStatus:d.articularStatus,articularCount:d.articularCount,articularExpected:d.articularExpected,articularBounds:d.articularBounds,articularActive:d.articularActive}})()");
   if(detailedAnatomyMetrics.muscleCount!=='484'||detailedAnatomyMetrics.muscleExpected!=='484'||detailedAnatomyMetrics.articularCount!=='413'||detailedAnatomyMetrics.articularExpected!=='413'||detailedAnatomyMetrics.articularActive!=='true')throw new Error('Detailed anatomy verification failed: '+JSON.stringify(detailedAnatomyMetrics));
-  console.log('SMOKE_DETAILED_ANATOMY_PASS '+JSON.stringify(detailedAnatomyMetrics));
+  await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.skeletalReferenceStatus==='ready'&&document.querySelector('canvas')?.dataset.skeletalReferenceCount==='335'"),{timeout:90000,label:'335 aligned skeletal reference meshes'});
+  const skeletalReferenceMetrics=await evaluate("(()=>{const d=document.querySelector('canvas')?.dataset||{};return{status:d.skeletalReferenceStatus,count:d.skeletalReferenceCount,expected:d.skeletalReferenceExpected,bounds:d.skeletalReferenceBounds,active:d.skeletalReferenceActive}})()");
+  if(skeletalReferenceMetrics.status!=='ready'||skeletalReferenceMetrics.count!=='335'||skeletalReferenceMetrics.expected!=='335'||skeletalReferenceMetrics.active!=='true'||!skeletalReferenceMetrics.bounds)throw new Error('Skeletal reference verification failed: '+JSON.stringify(skeletalReferenceMetrics));
+  console.log('SMOKE_DETAILED_ANATOMY_PASS '+JSON.stringify({detailedAnatomyMetrics,skeletalReferenceMetrics}));
   const regionalQaHashes=[];
   for(const [region,yFraction] of [['head',.20],['foot',.80]]){
     for(const [label,suffix] of [['Mặt trước','front'],['Mặt bên','side'],['Mặt sau','back']]){
