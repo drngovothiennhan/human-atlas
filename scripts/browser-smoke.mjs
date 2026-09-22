@@ -162,6 +162,7 @@ try{
   await evaluate("document.querySelector('[data-meridian3d-launch=true]')?.click()");
   await waitFor(()=>evaluate("!!document.querySelector('[data-meridian3d-panel=true]')"),{label:'3D meridian panel'});
   await waitFor(()=>evaluate("document.querySelector('[data-meridian3d-panel=true]')?.innerText.includes('Kinh Vị')&&document.querySelector('[data-meridian3d-panel=true]')?.innerText.includes('THAM CHIẾU HỌC TẬP')"),{label:'3D meridian clean-room gate'});
+  await waitFor(()=>evaluate("document.querySelector('[data-spatial-source-license=true]')?.innerText.includes('FuriaRozkwit/acupuncture-3d')&&document.querySelector('[data-spatial-source-license=true]')?.innerText.includes('MIT')&&document.querySelector('[data-spatial-source-license=true]')?.innerText.includes('CC BY-SA')"),{label:'licensed schematic provenance visible'});
   await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.meridianEffect==='flow'&&Number(document.querySelector('canvas')?.dataset.meridianPulseMarkers||0)>0&&Number(document.querySelector('canvas')?.dataset.meridianFlowParticles||0)>0"),{label:'animated meridian flow and pulse effect'});
   const effectFrameBefore=await evaluate("Number(document.querySelector('canvas')?.dataset.meridianEffectFrame||0)");
   await waitFor(()=>evaluate("Number(document.querySelector('canvas')?.dataset.meridianEffectFrame||0)>"+effectFrameBefore),{timeout:30000,label:'meridian animation frame advances'});

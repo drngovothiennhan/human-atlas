@@ -162,11 +162,12 @@ export default function Meridian3DPanel({drafts,selectedPointCode,onOverlayChang
           <span><small>Trạng thái</small><b>{selectedAnchors.some(a=>a.sourceKind==='PUBLISHED')?'Đã đăng ký 3D':'Tham chiếu học tập'}</b></span>
         </div>
         {selectedDocumentRef&&<small className="meridian3d-source-label" data-document-reference="true">{selectedDocumentRef.label} · {selectedDocumentRef.heading}</small>}
+        {selectedAnchors.some(a=>a.sourceKind==='LICENSED_SCHEMATIC')&&<small className="meridian3d-source-label" data-spatial-provenance="true">Nguồn tọa độ sơ đồ 3D: {schematic.source?.repository??'FuriaRozkwit/acupuncture-3d'} · {schematic.source?.license??'MIT anchors; CC BY-SA dữ liệu hiệu chỉnh'} · CHƯA THẨM ĐỊNH</small>}
         {schematic.sourceSideWarnings?.some(w=>w.pointCode===selectedRecord.code)&&<small role="status">Nguồn sơ đồ có dữ liệu hai bên không thống nhất với kinh giữa thân tại huyệt này; giữ nhãn tham chiếu học tập.</small>}
         <span>{selectedAnchors.some(a=>a.sourceKind==='PUBLISHED')?'Có tọa độ BodyParts3D đã đăng ký.':'Chưa có tọa độ BodyParts3D đã đăng ký. '}{selectedAnchors.length?selectedAnchors.map(a=>a.side+': '+(a.sourceKind==='PUBLISHED'?'đã đăng ký':a.sourceKind==='LOCAL_DRAFT'?'nháp trên máy':'sơ đồ nguồn mở')).join(' · '):'Chưa có vị trí trên mô hình.'}</span>
         <small>Ứng dụng học tập: giáo trình/tài liệu được dùng làm căn cứ tra cứu và gắn nhãn nguồn; hình 2D không tự động trở thành tọa độ 3D chuẩn.</small>
       </div>}
-      <footer>Nguồn hình học sơ đồ: FuriaRozkwit/acupuncture-3d. Tài liệu nội bộ được ghi nguồn theo trang; nguồn ngoài được kiểm tra giấy phép. BL-39 chưa có đoạn nối trong dữ liệu nguồn.</footer>
+      <footer data-spatial-source-license="true">Nguồn tọa độ/đường kinh sơ đồ: {schematic.source?.repository??'FuriaRozkwit/acupuncture-3d'} · {schematic.source?.license??'MIT anchors; CC BY-SA dữ liệu hiệu chỉnh'}. 361 huyệt / 14 kinh được dùng ở lớp LICENSED_SCHEMATIC · UNVERIFIED; BL-39 không có đoạn nối trong topology nguồn.</footer>
     </aside>}
   </>;
 }

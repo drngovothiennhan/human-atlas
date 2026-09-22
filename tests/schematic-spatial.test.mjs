@@ -7,6 +7,8 @@ test('licensed schematic spatial dataset stays unverified and complete',async()=
   assert.equal(data.verificationStatus,'UNVERIFIED');
   assert.equal(data.source.repository,'FuriaRozkwit/acupuncture-3d');
   assert.equal(data.source.commit,'1fc9ec98d365c9fb035844e2775c1be05a0a05fc');
+  assert.match(data.source.license,/MIT/);
+  assert.match(data.source.license,/CC BY-SA/);
   assert.equal(data.coordinateSystem,'BodyParts3D-4.0-browser-meters-Y-up');
   assert.equal(data.anchors.length,675);
   assert.deepEqual(data.omittedTopology,['BL-39']);
