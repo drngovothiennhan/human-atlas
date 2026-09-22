@@ -5,7 +5,8 @@ export const DETAILED_MUSCLE_SOURCE = {
   runtimeManifest:'/models/z-muscles-manifest.json',
   license:'CC BY-SA 4.0',
   expectedMeshCount:484,
-  scope:'Actual muscle meshes selected from the pinned Z-Anatomy hierarchy. Muscular insertion markings and non-muscle support structures are excluded.'
+  runtimeEnabled:false,
+  scope:'Reference-only full Z-Anatomy muscle inventory. Disabled in the meridian-first runtime; the live muscle layer uses a compact BodyParts3D landmark subset instead.'
 } as const;
 
 export const SKELETAL_SOURCE = {
