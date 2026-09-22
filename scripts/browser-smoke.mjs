@@ -209,8 +209,31 @@ try{
   await writeFile('artifacts/performance-sample.json',JSON.stringify(performanceSample,null,2));
   console.log('PERFORMANCE_SAMPLE '+JSON.stringify(performanceSample));
 
+  if(!await clickAria('Tìm giải phẫu'))throw new Error('Anatomy search control missing');
+  await waitFor(()=>evaluate("!!document.querySelector('.search-panel')"),{label:'anatomy search panel'});
+  await evaluate("(()=>{const i=document.querySelector('[aria-label=\\\"Tìm theo tên cấu trúc giải phẫu\\\"]');if(!i)return false;const s=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;s.call(i,'Tim');i.dispatchEvent(new Event('input',{bubbles:true}));return true})()");
+  await waitFor(()=>evaluate("document.querySelector('.anatomy-search-results')?.innerText.includes('Tim')"),{label:'anatomy search actual result'});
+  if(!await clickAria('Đóng tìm kiếm'))throw new Error('Anatomy search close missing');
+
+  if(!await clickAria('Thông tin ứng dụng'))throw new Error('Information control missing');
+  await waitFor(()=>evaluate("document.body.innerText.includes('Thông tin ứng dụng')&&document.body.innerText.includes('Tọa độ và hiệu ứng mô phỏng')"),{label:'information sheet'});
+  await send('Input.dispatchKeyEvent',{type:'keyDown',key:'Escape',code:'Escape'});await send('Input.dispatchKeyEvent',{type:'keyUp',key:'Escape',code:'Escape'});
+  await waitFor(()=>evaluate("!document.querySelector('.about-sheet')"),{label:'information sheet closes'});
+
+  const explodeBefore=await screenshot('desktop-explode-before.png');
+  const sliderFocused=await evaluate("(()=>{const s=document.querySelector('[role=slider]');if(!s)return false;s.focus();return true})()");
+  if(!sliderFocused)throw new Error('Explode slider missing');
+  for(let i=0;i<8;i++){await send('Input.dispatchKeyEvent',{type:'keyDown',key:'ArrowRight',code:'ArrowRight'});await send('Input.dispatchKeyEvent',{type:'keyUp',key:'ArrowRight',code:'ArrowRight'});}
+  await waitFor(()=>evaluate("Number(document.querySelector('[role=slider]')?.getAttribute('aria-valuenow')||0)>0"),{label:'explode slider changes'});
+  await sleep(450);
+  const explodeAfter=await screenshot('desktop-explode-after.png');
+  if(explodeAfter===explodeBefore)throw new Error('Explode slider did not change rendered view');
+  if(!await clickAria('Ghép và đặt lại'))throw new Error('Dock reset missing after explode');
+  await waitFor(()=>evaluate("Number(document.querySelector('[role=slider]')?.getAttribute('aria-valuenow')||0)===0"),{label:'explode reset'});
+
   await evaluate("document.querySelector('.yhct-launch').click()");
   await waitFor(()=>evaluate("!!document.querySelector('.yhct-panel')"),{label:'YHCT drawer'});
+  await waitFor(()=>evaluate("document.querySelector('[data-yhct-spatial-counts=true]')?.innerText.includes('vị trí mô phỏng')&&!document.querySelector('[data-yhct-spatial-counts=true]')?.innerText.includes('anchor 3D')"),{label:'honest spatial counts'});
   await evaluate("(()=>{const i=document.querySelector('.yhct-search');const s=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;s.call(i,'Phế');i.dispatchEvent(new Event('input',{bubbles:true}));return true})()");
   await waitFor(()=>evaluate("document.querySelector('.yhct-list')?.innerText.includes('LU')"),{label:'local meridian search'});
   const catalogueCount=await evaluate("document.querySelector('.yhct-launch')?.innerText||''");
@@ -222,9 +245,43 @@ try{
   await evaluate("(()=>{const buttons=[...document.querySelectorAll('.yhct-tabs button')];buttons.find(b=>b.textContent.includes('Trợ lý'))?.click();return true})()");
   await sleep(100);
   await evaluate("(()=>{const t=document.querySelector('.yhct-assistant textarea');const s=Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype,'value').set;s.call(t,'ST36 thuộc kinh nào?');t.dispatchEvent(new Event('input',{bubbles:true}));document.querySelector('.yhct-assistant>button').click();return true})()");
-  await waitFor(()=>evaluate("document.querySelector('.yhct-assistant p')?.innerText.includes('Kinh Vị')"),{label:'local study assistant ST36'});
+  await waitFor(()=>evaluate("document.querySelector('.yhct-assistant p')?.innerText.includes('Kinh Vị')&&document.querySelector('.yhct-assistant small')?.innerText.includes('không phải LLM')"),{label:'local study assistant ST36 and provenance'});
+  await evaluate("(()=>{const buttons=[...document.querySelectorAll('.yhct-tabs button')];buttons.find(b=>b.textContent.includes('Giải phẫu'))?.click();return true})()");
+  await waitFor(()=>evaluate("document.querySelector('.yhct-copy')?.innerText.includes('BodyParts3D')"),{label:'YHCT anatomy tab'});
+  const studyMotionBefore=await evaluate("Number(document.querySelector('canvas')?.dataset.cameraMotionSeq||0)");
+  await evaluate("document.querySelector('[data-yhct-mode=explore]')?.click()");
+  await waitFor(()=>evaluate("!!document.querySelector('[data-mode-panel=explore]')&&!!document.querySelector('[data-meridian3d-panel=true]')"),{label:'Explore opens real 3D journey'});
+  await waitFor(()=>evaluate("Number(document.querySelector('canvas')?.dataset.cameraMotionSeq||0)>"+studyMotionBefore),{label:'Explore focuses 3D point'});
+  await evaluate("document.querySelector('[data-yhct-mode=study]')?.click()");
+  await waitFor(()=>evaluate("!!document.querySelector('[data-mode-panel=study]')&&document.querySelector('[data-study-progress=true]')?.innerText.includes('/')"),{label:'study-by-meridian progress'});
+  const studyCodeBefore=await evaluate("document.querySelector('[data-study-progress=true]')?.innerText");
+  await evaluate("document.querySelector('[data-mode-panel=study] button:last-child')?.click()");
+  await sleep(250);
+  const studyCodeAfter=await evaluate("document.querySelector('[data-study-progress=true]')?.innerText");
+  if(!studyCodeBefore||studyCodeAfter===studyCodeBefore)throw new Error('Study-by-meridian did not advance: '+JSON.stringify({studyCodeBefore,studyCodeAfter}));
+
+  await evaluate("document.querySelector('[data-yhct-mode=quiz]')?.click()");
+  await waitFor(()=>evaluate("!!document.querySelector('[data-mode-panel=quiz]')&&document.querySelectorAll('.quiz-options button').length>=2"),{label:'Quiz 3D flow'});
+  const quizTarget=await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.meridianSelectedPoint||''"),{label:'Quiz selected 3D target'});
+  // Click the option whose code matches the actual selected 3D target.
+  await evaluate("(()=>{const code=document.querySelector('canvas')?.dataset.meridianSelectedPoint;const b=[...document.querySelectorAll('.quiz-options button')].find(x=>x.textContent.trim()===code);if(!b)return false;b.click();return true})()");
+  await waitFor(()=>evaluate("document.querySelector('[data-quiz-result=true]')?.innerText.startsWith('Đúng:')"),{label:'Quiz validates correct answer'});
+  await evaluate("document.querySelector('[data-yhct-mode=simulation]')?.click()");
+  await waitFor(()=>evaluate("!!document.querySelector('[data-mode-panel=simulation]')"),{label:'Simulation Lab opens'});
+  await evaluate("(()=>{const b=[...document.querySelectorAll('.simulation-controls button')].find(x=>x.textContent.includes('Đường kinh'));b?.click();return Boolean(b)})()");
+  await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.meridianSchematicPaths==='0'"),{label:'Simulation hides meridian paths'});
+  await evaluate("(()=>{const b=[...document.querySelectorAll('.simulation-controls button')].find(x=>x.textContent.includes('Đường kinh'));b?.click();return Boolean(b)})()");
+  await waitFor(()=>evaluate("Number(document.querySelector('canvas')?.dataset.meridianSchematicPaths||0)>0"),{label:'Simulation restores meridian paths'});
+  await evaluate("(()=>{const b=[...document.querySelectorAll('.simulation-controls button')].find(x=>x.textContent.includes('Chuyển động'));b?.click();return Boolean(b)})()");
+  await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.meridianEffect==='paused'"),{label:'Simulation pauses motion'});
+  await evaluate("(()=>{const b=[...document.querySelectorAll('.simulation-controls button')].find(x=>x.textContent.includes('Chuyển động'));b?.click();return Boolean(b)})()");
+  await evaluate("(()=>{const b=[...document.querySelectorAll('.simulation-controls button')].find(x=>x.textContent.includes('Mặt bên'));b?.click();return Boolean(b)})()");
+  await waitFor(()=>evaluate("document.querySelector('[aria-label=\\\"Mặt bên\\\"]')?.getAttribute('aria-pressed')==='true'"),{label:'Simulation controls anatomy view'});
+  console.log('SMOKE_YHCT_FUNCTIONAL_MODES_PASS '+JSON.stringify({studyCodeBefore,studyCodeAfter,quizTarget}));
   await screenshot('desktop-study-panel.png');
   await evaluate("document.querySelector('.yhct-head>button')?.click()");
+  await evaluate("document.querySelector('[data-exit-meridians=true]')?.click()");
+  await waitFor(()=>evaluate("document.querySelector('[data-meridian3d-launch=true]')?.getAttribute('aria-pressed')==='false'"),{label:'study mode exits meridian overlay'});
   await evaluate("document.querySelector('[data-meridian3d-launch=true]')?.click()");
   await waitFor(()=>evaluate("!!document.querySelector('[data-meridian3d-panel=true]')"),{label:'3D meridian panel'});
   await waitFor(()=>evaluate("document.querySelector('[data-meridian3d-panel=true]')?.innerText.includes('Kinh Vị')&&document.querySelector('[data-meridian3d-panel=true]')?.innerText.includes('THAM CHIẾU HỌC TẬP')"),{label:'3D meridian clean-room gate'});
