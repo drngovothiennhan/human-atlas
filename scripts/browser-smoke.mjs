@@ -83,7 +83,13 @@ try{
   await waitFor(()=>evaluate("document.querySelector('[data-meridian3d-launch=true]')?.getAttribute('aria-pressed')==='false'&&document.querySelector('canvas')?.dataset.meridianEffect==='off'"),{label:'default anatomy mode with meridians off'});
   await evaluate("document.querySelector('[data-meridian3d-launch=true]').click()");
   await waitFor(()=>evaluate("!!document.querySelector('[data-meridian3d-load-error=true]')"),{label:'meridian load failure is visible'});
+  await waitFor(()=>evaluate("document.querySelector('.yhct-launch')?.textContent.includes('14 kinh · 361 huyệt')"),{label:'catalog survives unavailable spatial data'});
+  await evaluate("document.querySelector('.yhct-launch').click()");
+  await waitFor(()=>evaluate("!!document.querySelector('[data-yhct-load-error=true]')"),{label:'study spatial load failure is visible'});
   await send('Network.setBlockedURLs',{urls:[]});
+  await evaluate("document.querySelector('[data-yhct-load-error=true] button').click()");
+  await waitFor(()=>evaluate("!document.querySelector('[data-yhct-load-error=true]')&&!document.querySelector('[data-yhct-mode=quiz]')?.disabled"),{label:'study spatial retry restores Quiz 3D'});
+  await evaluate("document.querySelector('.yhct-head>button').click()");
   await evaluate("document.querySelector('[data-meridian3d-load-error=true] button').click()");
   await waitFor(()=>evaluate("!document.querySelector('[data-meridian3d-load-error=true]')&&document.querySelector('[data-meridian3d-launch=true]')?.innerText.includes('361 huyệt')"),{label:'meridian retry recovers data'});
   console.log('SMOKE_LOAD_FAILURE_RECOVERY_PASS');
