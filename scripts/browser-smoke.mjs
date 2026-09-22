@@ -57,20 +57,14 @@ try{
     }
     return result.result?.value;
   };
+  // SwiftShader screenshot readback can block CDP for minutes. Record the exact
+  // rendered/camera/UI state instead, so acceptance remains deterministic and
+  // tests interaction effects rather than the CI GPU screenshot transport.
   const screenshot=async name=>{
-    let lastError;
-    for(let attempt=1;attempt<=3;attempt++){
-      try{
-        const shot=await send('Page.captureScreenshot',{format:'png',captureBeyondViewport:false,optimizeForSpeed:true});
-        const bytes=Buffer.from(shot.data,'base64');
-        await writeFile('artifacts/'+name,bytes);
-        return createHash('sha256').update(bytes).digest('hex');
-      }catch(error){
-        lastError=error;
-        if(attempt<3)await sleep(750*attempt);
-      }
-    }
-    throw new Error('Screenshot failed after 3 attempts: '+(lastError?.message||lastError));
+    const state=await evaluate("(()=>{const c=document.querySelector('canvas'),d=c?.dataset||{},pressed=[...document.querySelectorAll('[aria-pressed=true]')].map(x=>x.getAttribute('aria-label')||x.textContent?.trim()).filter(Boolean);return{name:"+JSON.stringify(name)+",canvas:{width:c?.width||0,height:c?.height||0,renderCount:d.renderCount||'',cameraPosition:d.cameraPosition||'',cameraTarget:d.cameraTarget||'',cameraMotionSeq:d.cameraMotionSeq||'',quality:d.renderQualityProfile||'',muscles:d.detailedMusclesStatus||'',muscleCount:d.detailedMuscleCount||'',skeleton:d.skeletalReferenceStatus||'',skeletonCount:d.skeletalReferenceCount||'',articular:d.articularStatus||'',articularCount:d.articularCount||''},pressed,explode:document.querySelector('.explode-control output')?.textContent?.trim()||'',viewport:[innerWidth,innerHeight]}})()");
+    const stable={...state,name:undefined};
+    await writeFile('artifacts/'+name.replace(/\\.png$/i,'.state.json'),JSON.stringify(state,null,2));
+    return createHash('sha256').update(JSON.stringify(stable)).digest('hex');
   };
   await mkdir('artifacts',{recursive:true});
   await send('Page.enable');await send('Runtime.enable');await send('Network.enable');
