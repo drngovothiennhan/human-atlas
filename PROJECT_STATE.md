@@ -1,3 +1,21 @@
+# CURRENT CHECKPOINT — main synchronized, Pages blocker isolated (2026-09-22)
+
+This section supersedes every historical checkpoint below.
+
+- Repository: `drngovothiennhan/human-atlas`.
+- Canonical source branch is now `main`; PR #1 is MERGED/CLOSED. The feature branch `feature-hiu-yhct-3d-atlas` remains only as historical/source lineage at `5526e0388cc014ff2cf83f361a46155931dbd38a`.
+- Current main before this docs-only checkpoint: `3a7e5bf713670c8806434cc6e899940a6647cb8d` (`ci: enable GitHub Pages from deploy workflow`).
+- Runtime application code is already validated: feature push CI #185 and PR CI #186 passed at `bde8cbefac200dd2ce5617d68da1aa1fde9b1781`; later feature CI #187/#188 passed at `5526e0388cc014ff2cf83f361a46155931dbd38a`. The latter changes the Pages workflow, not the 3D runtime behavior.
+- GitHub Pages run #18 `35691718235` passed checkout, install, content/source validation, TypeScript, anatomy/interactions validation, all 21 unit tests, `build:pages`, and static asset verification. It failed only at `actions/configure-pages@v5`.
+- Exact blocker after testing `enablement: true`: GitHub returned `Resource not accessible by integration` while attempting to create the Pages site. This is a repository-administration permission/configuration blocker, not an application/build failure. Do not keep retrying or change runtime code for this error.
+- Required external action: repository owner/admin must enable GitHub Pages with **Settings → Pages → Build and deployment → Source: GitHub Actions**. After that, rerun the Pages workflow and verify the returned `page_url` before declaring a canonical Pages URL live.
+- Existing Render service `hiu-yhct-3d-atlas-preview` is legacy/transitional only. Its last verified LIVE deploy is `dep-dap0jsegekts73fbljn0` from runtime SHA `bde8cbefac200dd2ce5617d68da1aa1fde9b1781`. Do not create/reintroduce hosting services while the GitHub-only decision remains active.
+- Medical/spatial safety gates are unchanged: schematic coordinates remain educational/UNVERIFIED unless genuinely reviewed; published faculty-reviewed BodyParts3D anchors/paths, physical-device QA, and fresh reference parity remain incomplete. Do not claim >=95%/98% overall completion.
+- Protected checkpoint branch to use for this synchronized state: `checkpoint/main-pages-blocker-20260922`.
+- Next execution after Pages is enabled: rerun Pages → verify deployment URL and assets → direct browser check → then continue approved atlas work without rebuilding completed UI/3D shell work.
+
+---
+
 # CURRENT CHECKPOINT — GitHub-only main synchronized (2026-09-22)
 
 - Repository: `drngovothiennhan/human-atlas`.
