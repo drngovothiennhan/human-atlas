@@ -1,3 +1,19 @@
+# CURRENT CHECKPOINT — GitHub-only main synchronized (2026-09-22)
+
+- Repository: `drngovothiennhan/human-atlas`.
+- Current production source branch: `main`.
+- Verified synchronized main after legacy-host cleanup: `9c1646cff6c113f1ef1949676d92f046e256d1b4`.
+- Protected checkpoint: `checkpoint/github-only-clean-20260922` at the same SHA.
+- PR #1 (HIU YHCT 3D Atlas foundation) is merged. PR #2 removed only legacy Vercel deployment configuration and is merged.
+- GitHub Pages is the only approved deployment path. `.github/workflows/hiu-atlas-pages.yml` builds on every push to `main`; `vercel.json` and `build:vercel` have been removed.
+- GitHub Pages run #15 (`35690359721`) checked out the exact `main` SHA, passed content/source validation, TypeScript, anatomy/interaction validation, all 21 unit tests, `build:pages`, and Pages asset verification. Deployment then stopped only at `actions/configure-pages` because Pages is not yet enabled/configured at repository level.
+- Do not reintroduce Render, Vercel, Cloudflare deployment, or another hosting service unless the user explicitly changes the GitHub-only decision.
+- Do not claim a GitHub Pages live URL until repository Settings → Pages → Source is set to GitHub Actions and the deploy workflow succeeds.
+- Existing medical/spatial safety gates remain unchanged: schematic coordinates are educational/unverified unless explicitly reviewed; do not fabricate faculty review or clinical coordinates.
+- After Pages is enabled and a deploy succeeds, continue the already-approved project sequence from this main/checkpoint; do not rebuild completed 3D shell work.
+
+---
+
 # CURRENT CHECKPOINT — browser smoke repaired + CI verified (2026-09-22)
 
 - Branch: `feature-hiu-yhct-3d-atlas`; PR #1 remains draft/open; `main` is untouched.
