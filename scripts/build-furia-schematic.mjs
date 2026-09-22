@@ -151,6 +151,11 @@ for(const point of pointDoc.points){
   for(const [side,src] of records){const p=toBrowser(src);anchorOut.push({pointCode:canonicalCode(point.code),meridianId,sourcePointCode:point.code,sourceMeridianId:point.channel,sequence:point.index,side,x:round(p[0]),y:round(p[1]),z:round(p[2]),verificationStatus:'UNVERIFIED',sourceKind:'LICENSED_SCHEMATIC',accuracy:point.accuracy,projection:'BodyParts3D FMA7163 surface raycast'})}
 }
 const byKey=new Map(anchorOut.map(a=>[a.pointCode+':'+a.side,a]));
+if(byKey.size!==anchorOut.length)throw new Error('Duplicate generated acupoint anchor key');
+const anchorPointCodes=new Set(anchorOut.map(anchor=>anchor.pointCode));
+const catalogCodes=new Set(pointDoc.points.map(point=>canonicalCode(point.code)));
+const missingAnchorCodes=[...catalogCodes].filter(code=>!anchorPointCodes.has(code)).sort();
+if(missingAnchorCodes.length)throw new Error('Generated acupoint anchor coverage drift: '+JSON.stringify(missingAnchorCodes));
 const paths=[];
 for(const [sourceMeridianId,groups] of Object.entries(topology.paths)){
   const meridianId=canonicalChannel(sourceMeridianId);
@@ -169,10 +174,25 @@ const generatedPathCodes=new Set(paths.flatMap(path=>path.pointCodes));
 const missingGenerated=[...topologyCodes].filter(code=>!generatedPathCodes.has(code)).sort();
 const extraGenerated=[...generatedPathCodes].filter(code=>!topologyCodes.has(code)).sort();
 if(missingGenerated.length||extraGenerated.length)throw new Error('Generated meridian topology drift: '+JSON.stringify({missingGenerated,extraGenerated}));
+const endpointAudit={};
+for(const sourceMeridianId of Object.keys(topology.paths)){
+  const meridianId=canonicalChannel(sourceMeridianId),records=pointDoc.points.filter(point=>point.channel===sourceMeridianId).sort((a,b)=>a.index-b.index);
+  if(!records.length)throw new Error('No point records for '+sourceMeridianId);
+  const start=canonicalCode(records[0].code),end=canonicalCode(records.at(-1).code),sides=meridianId==='CV'||meridianId==='GV'?['MIDLINE']:['RIGHT','LEFT'];
+  endpointAudit[meridianId]={start,end,count:records.length,sides:{}};
+  for(const side of sides){
+    const sideCodes=new Set(paths.filter(path=>path.meridianId===meridianId&&path.side===side).flatMap(path=>path.pointCodes));
+    const startPresent=sideCodes.has(start),endPresent=sideCodes.has(end);
+    endpointAudit[meridianId].sides[side]={startPresent,endPresent};
+    if(!startPresent||!endPresent)throw new Error('Generated meridian endpoint drift: '+JSON.stringify({meridianId,side,start,end,startPresent,endPresent}));
+  }
+}
 
 const out={schemaVersion:'1.0.0',coordinateSystem:'BodyParts3D-4.0-browser-meters-Y-up',verificationStatus:'UNVERIFIED',source:{repository:'FuriaRozkwit/acupuncture-3d',commit:'1fc9ec98d365c9fb035844e2775c1be05a0a05fc',license:'MIT anchors/code; CC BY-SA calibrated anatomy metadata',skin:'BodyParts3D FMA7163'},anchors:anchorOut,paths,omittedTopology:omitted,generatedBy:'scripts/build-furia-schematic.mjs'};
 out.channelAliases=channelAliases;out.sourceSideWarnings=sourceSideWarnings;
+out.anchorCoverage={catalogPoints:catalogCodes.size,generatedPointCodes:anchorPointCodes.size,generatedAnchors:anchorOut.length,missingAnchorCodes};
 out.pathCoverage={catalogPoints:codes.size,sourceTopologyPoints:topologyCodes.size,generatedTopologyPoints:generatedPathCodes.size,missingGenerated,extraGenerated};
+out.endpointAudit=endpointAudit;
 await mkdir(path.join(ROOT,'public','data'),{recursive:true});
 await writeFile(path.join(ROOT,'public','data','schematic-spatial.json'),JSON.stringify(out,null,2)+'\n');
-console.log('FURIA_SCHEMATIC_BUILD '+JSON.stringify({anchors:anchorOut.length,paths:paths.length,omitted,pathCoverage:out.pathCoverage,normalizedMidlineSides:sourceSideWarnings.length}));
+console.log('FURIA_SCHEMATIC_BUILD '+JSON.stringify({anchors:anchorOut.length,paths:paths.length,omitted,anchorCoverage:out.anchorCoverage,pathCoverage:out.pathCoverage,endpoints:endpointAudit,normalizedMidlineSides:sourceSideWarnings.length}));
