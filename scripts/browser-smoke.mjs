@@ -155,9 +155,26 @@ try{
   await waitFor(()=>evaluate("document.querySelector('[data-head-muscles-toggle=true]')?.getAttribute('aria-pressed')==='false'&&document.querySelector('canvas')?.dataset.headMusclesActive==='false'"),{label:'head muscle toggle off'});
   await evaluate("document.querySelector('[data-head-muscles-toggle=true]').click()");
   await waitFor(()=>evaluate("document.querySelector('[data-head-muscles-toggle=true]')?.getAttribute('aria-pressed')==='true'&&document.querySelector('canvas')?.dataset.headMusclesActive==='true'&&document.querySelector('canvas')?.dataset.headMuscleCount==='78'"),{label:'head muscle toggle restores 78 meshes'});
-  await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.footMuscleCount==='4'"),{label:'four missing foot meshes loaded'});
+  await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.footMuscleCount==='4'&&document.querySelector('canvas')?.dataset.neckMuscleCount==='1'"),{label:'missing foot/neck meshes loaded'});
+  const regionalQaHashes=[];
+  for(const [region,yFraction] of [['head',.20],['foot',.80]]){
+    for(const [label,suffix] of [['Mặt trước','front'],['Mặt bên','side'],['Mặt sau','back']]){
+      const seq=await evaluate("Number(document.querySelector('canvas')?.dataset.cameraMotionSeq||0)");
+      if(!await clickAria(label))throw new Error('Missing regional QA camera control: '+label);
+      await waitFor(()=>evaluate("Number(document.querySelector('canvas')?.dataset.cameraMotionSeq||0)>"+seq),{label:region+' '+label+' camera motion'});
+      await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.cameraMotion==='idle'"),{timeout:30000,label:region+' '+label+' camera settled'});
+      const rc=await evaluate("(()=>{const r=document.querySelector('canvas').getBoundingClientRect();return{x:r.x,y:r.y,w:r.width,h:r.height}})()");
+      for(let i=0;i<3;i++)await send('Input.dispatchMouseEvent',{type:'mouseWheel',x:rc.x+rc.w*.5,y:rc.y+rc.h*yFraction,deltaX:0,deltaY:-300});
+      await sleep(350);
+      regionalQaHashes.push(await screenshot('desktop-'+region+'-'+suffix+'-enlarged.png'));
+      if(!await clickAria('Đặt lại góc nhìn và lớp'))throw new Error('Missing reset during regional QA');
+      await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.cameraMotion==='idle'"),{timeout:30000,label:region+' '+label+' reset'});
+    }
+  }
+  if(new Set(regionalQaHashes).size<4)throw new Error('Regional head/foot visual QA screenshots did not vary as expected');
+  console.log('SMOKE_REGIONAL_MUSCLE_QA_PASS '+JSON.stringify({headViews:3,footViews:3,footMeshes:4,neckMeshes:1}));
   console.log('SMOKE_HEAD_MUSCLES_78_PASS '+JSON.stringify(headMetrics));
-  const performanceSample=await evaluate("new Promise(resolve=>{const intervals=[];let last=performance.now(),start=last;const tick=now=>{intervals.push(now-last);last=now;if(now-start<2000)requestAnimationFrame(tick);else resolve({environment:'GitHub/Linux headless Chromium SwiftShader, not physical device',elapsedMs:now-start,frames:intervals.length,meanFrameMs:intervals.reduce((a,b)=>a+b,0)/intervals.length,loadMs:performance.getEntriesByType('navigation')[0]?.loadEventEnd,resources:performance.getEntriesByType('resource').length,renderStats:document.querySelector('canvas')?.dataset.renderCount??null})};requestAnimationFrame(tick)})");
+  const performanceSample=await evaluate("new Promise(resolve=>{const intervals=[];let last=performance.now(),start=last,done=false,raf=0;const finish=()=>{if(done)return;done=true;cancelAnimationFrame(raf);const end=performance.now();resolve({environment:'GitHub/Linux headless Chromium SwiftShader, not physical device',elapsedMs:end-start,frames:intervals.length,meanFrameMs:intervals.length?intervals.reduce((a,b)=>a+b,0)/intervals.length:null,loadMs:performance.getEntriesByType('navigation')[0]?.loadEventEnd,resources:performance.getEntriesByType('resource').length,renderStats:document.querySelector('canvas')?.dataset.renderCount??null,sampleBounded:true})};const timer=setTimeout(finish,2600);const tick=now=>{if(done)return;intervals.push(now-last);last=now;if(now-start>=2000){clearTimeout(timer);finish()}else raf=requestAnimationFrame(tick)};raf=requestAnimationFrame(tick)})");
   await writeFile('artifacts/performance-sample.json',JSON.stringify(performanceSample,null,2));
   console.log('PERFORMANCE_SAMPLE '+JSON.stringify(performanceSample));
 
@@ -234,7 +251,14 @@ try{
   await waitFor(()=>evaluate("document.querySelector('[data-meridian3d-detail=true]')?.innerText.includes('Chưa có tọa độ BodyParts3D')"),{label:'3D unregistered point gate'});
   await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.meridianSelectedPoint==='ST-36'&&Number(document.querySelector('canvas')?.dataset.meridianSelectedMarkers||0)>0"),{label:'selected acupoint stronger 3D state'});
   await screenshot('desktop-meridian3d-panel.png');
+  const effectFrameBeforePanelClose=await evaluate("document.querySelector('canvas')?.dataset.meridianEffectFrame");
   await evaluate("document.querySelector('[data-meridian3d-panel=true] [aria-label=\\\"Đóng mô hình kinh lạc 3D\\\"]')?.click()");
+  await waitFor(()=>evaluate("!document.querySelector('[data-meridian3d-panel=true]')&&document.querySelector('[data-meridian3d-launch=true]')?.getAttribute('aria-pressed')==='true'&&document.querySelector('canvas')?.dataset.meridianEffect!=='off'"),{label:'closing panel preserves meridian mode'});
+  await evaluate("document.querySelector('[data-meridian3d-launch=true]')?.click()");
+  await waitFor(()=>evaluate("!!document.querySelector('[data-meridian3d-panel=true]')"),{label:'reopen active meridian mode'});
+  await evaluate("document.querySelector('[data-exit-meridians=true]')?.click()");
+  await waitFor(()=>evaluate("document.querySelector('[data-meridian3d-launch=true]')?.getAttribute('aria-pressed')==='false'&&document.querySelector('canvas')?.dataset.meridianEffect==='off'&&document.querySelector('canvas')?.dataset.meridianFlowParticles==='0'"),{label:'exit meridian mode clears animation'});
+  console.log('SMOKE_MERIDIAN_MODE_EXIT_PASS '+JSON.stringify({effectFrameBeforePanelClose}));
 
   await send('Emulation.setDeviceMetricsOverride',{width:1024,height:768,deviceScaleFactor:1,mobile:false,screenWidth:1024,screenHeight:768});
   await send('Emulation.setTouchEmulationEnabled',{enabled:true,maxTouchPoints:5});
