@@ -148,7 +148,7 @@ try{
   if(panHash===zoomHash)throw new Error('Desktop pan did not change rendered screenshot');
 
   const clickAria=async label=>evaluate("(()=>{const b=document.querySelector('[aria-label=\\\""+label+"\\\"]');if(!b)return false;b.click();return true})()");
-  const setControlledText=async(selector,text)=>evaluate(`(()=>{const el=document.querySelector(${JSON.stringify(selector)});if(!el)return false;const proto=el.tagName==='TEXTAREA'?HTMLTextAreaElement.prototype:HTMLInputElement.prototype;const setter=Object.getOwnPropertyDescriptor(proto,'value')?.set;if(!setter)return false;setter.call(el,${JSON.stringify(text)});el.dispatchEvent(new Event('input',{bubbles:true}));return true})()`);
+  const setControlledText=async(selector,text)=>evaluate(`(()=>{const el=document.querySelector(${JSON.stringify(selector)});if(!el)return false;const proto=el.tagName==='TEXTAREA'?HTMLTextAreaElement.prototype:HTMLInputElement.prototype;const setter=Object.getOwnPropertyDescriptor(proto,'value')?.set;if(!setter)return false;setter.call(el,${JSON.stringify(text)});el.dispatchEvent(new InputEvent('input',{bubbles:true,inputType:'insertText',data:${JSON.stringify(text)}}));el.dispatchEvent(new Event('change',{bubbles:true}));return true})()`);
   for(const [label,file] of [['Mặt trước','desktop-front.png'],['Mặt sau','desktop-back.png'],['Mặt bên','desktop-side.png']]){
     const motionSeqBefore=await evaluate("Number(document.querySelector('canvas')?.dataset.cameraMotionSeq||0)");
     if(!await clickAria(label))throw new Error('Missing camera control: '+label);
@@ -250,6 +250,7 @@ try{
   if(!await clickAria('Ghép và đặt lại'))throw new Error('Dock reset missing after explode');
   await waitFor(()=>evaluate("document.querySelector('.explode-control output')?.textContent==='0%'"),{label:'explode reset'});
 
+  await waitFor(()=>evaluate("document.querySelector('.yhct-launch')?.innerText.includes('14 kinh · 361 huyệt')"),{timeout:30000,label:'YHCT catalog ready before drawer'});
   await evaluate("document.querySelector('.yhct-launch').click()");
   await waitFor(()=>evaluate("!!document.querySelector('.yhct-panel')"),{label:'YHCT drawer'});
   await waitFor(()=>evaluate("document.querySelector('[data-yhct-spatial-counts=true]')?.innerText.includes('vị trí mô phỏng')&&!document.querySelector('[data-yhct-spatial-counts=true]')?.innerText.includes('anchor 3D')"),{label:'honest spatial counts'});
