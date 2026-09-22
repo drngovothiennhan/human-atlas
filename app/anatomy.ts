@@ -1,6 +1,7 @@
-export type SystemId = 'skeletal'|'muscular'|'arterial'|'venous'|'nervous'|'digestive'|'respiratory'|'urinary'|'reproductive'|'lymphatic'|'endocrine'|'integumentary'|'connective'|'sensory'|'cardiac';
+export type SystemId = 'skeletal'|'articular'|'muscular'|'arterial'|'venous'|'nervous'|'digestive'|'respiratory'|'urinary'|'reproductive'|'lymphatic'|'endocrine'|'integumentary'|'connective'|'sensory'|'cardiac';
 export const SYSTEMS: {id:SystemId;name:string;color:string;description:string}[] = [
  {id:'skeletal',name:'Bộ xương',color:'#e2d9ba',description:'Xương tạo khung nâng đỡ cơ thể, bảo vệ cơ quan và làm điểm bám cho cơ. Mô xương còn dự trữ khoáng chất và tham gia tạo máu.'},
+ {id:'articular',name:'Khớp & dây chằng',color:'#c6b98f',description:'Bao khớp, sụn viền, đĩa khớp, sụn chêm và dây chằng liên kết các xương, định hướng và giới hạn vận động khớp.'},
  {id:'muscular',name:'Cơ',color:'#a85b50',description:'Cơ xương tạo chuyển động, ổn định tư thế và sinh nhiệt.'},
  {id:'cardiac',name:'Tim',color:'#b96760',description:'Tim là bơm cơ gồm bốn buồng. Các van định hướng máu qua tuần hoàn phổi và tuần hoàn hệ thống.'},
  {id:'sensory',name:'Cơ quan cảm giác',color:'#b0c8ce',description:'Các cấu trúc hỗ trợ thị giác, thính giác và thăng bằng.'},
@@ -21,7 +22,7 @@ export interface Concept {id:string;name:string;elements:string[]}
 export interface Atlas {version:string;sex?:'male';source?:string;scope?:string;parts:Part[];concepts:Concept[];chunks:{url:string;bytes:number;gzip?:string;gzipBytes?:number}[];triangles:number}
 export type View = 'three-quarter'|'front'|'back'|'side';
 export interface SceneState {inspectorOpen?:boolean;headMuscles?:boolean;explode:number;visible:SystemId[];selected:string[];isolate:boolean;view:View;rotate:boolean;reset:number}
-export const DEFAULT_VISIBLE:SystemId[] = ['cardiac','sensory','skeletal','muscular','arterial','venous','nervous','respiratory','digestive','urinary','lymphatic','endocrine','reproductive','connective'];
+export const DEFAULT_VISIBLE:SystemId[] = ['articular','cardiac','sensory','skeletal','muscular','arterial','venous','nervous','respiratory','digestive','urinary','lymphatic','endocrine','reproductive','connective'];
 export const EXPLANATIONS:Record<string,string> = {
  'heart':'Bơm cơ trong lồng ngực. Tim phải đưa máu tới phổi; tim trái đưa máu vào tuần hoàn hệ thống.',
  'liver':'Cơ quan lớn dưới bên phải cơ hoành, xử lý dưỡng chất, tạo mật và tổng hợp nhiều protein huyết tương.',
