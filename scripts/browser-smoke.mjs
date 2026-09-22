@@ -72,10 +72,21 @@ try{
   };
   const setViewport=async(width,height,{touch=false}={})=>{
     const info=await send('Browser.getWindowForTarget',{targetId:target.id},15000);
-    await send('Browser.setWindowBounds',{windowId:info.windowId,bounds:{width,height}},20000);
-    await waitFor(()=>evaluate("Math.abs(innerWidth-"+width+")<=2&&Math.abs(innerHeight-"+height+")<=2"),{timeout:15000,label:'viewport '+width+'x'+height});
+    let current=await evaluate("({w:innerWidth,h:innerHeight})");
+    const bounds=info.bounds||{};
+    let frameWidth=Math.max(0,Number(bounds.width||current.w)-current.w);
+    let frameHeight=Math.max(0,Number(bounds.height||current.h)-current.h);
+    for(let attempt=0;attempt<4;attempt++){
+      await send('Browser.setWindowBounds',{windowId:info.windowId,bounds:{width:Math.max(200,Math.round(width+frameWidth)),height:Math.max(200,Math.round(height+frameHeight))}},20000);
+      await sleep(250);
+      current=await evaluate("({w:innerWidth,h:innerHeight})");
+      const deltaWidth=width-current.w,deltaHeight=height-current.h;
+      if(Math.abs(deltaWidth)<=2&&Math.abs(deltaHeight)<=2)break;
+      frameWidth+=deltaWidth;frameHeight+=deltaHeight;
+    }
+    if(Math.abs(current.w-width)>2||Math.abs(current.h-height)>2)throw new Error('Viewport resize failed: '+JSON.stringify({requested:{width,height},actual:current,frameWidth,frameHeight,bounds}));
     await send('Emulation.setTouchEmulationEnabled',{enabled:touch,maxTouchPoints:touch?5:1},15000);
-    return evaluate("({w:innerWidth,h:innerHeight})");
+    return current;
   };
   await mkdir('artifacts',{recursive:true});
   await send('Page.enable');await send('Runtime.enable');await send('Network.enable');
