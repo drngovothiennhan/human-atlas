@@ -59,6 +59,9 @@ export default function YhctStudyPanel({localDraftCount,onStudyCommand}:Props){
   const [meridians,setMeridians]=useState<Meridian[]>([]);
   const [points,setPoints]=useState<Acupoint[]>([]);
   const [schematic,setSchematic]=useState<SchematicSpatial>({anchors:[],paths:[]});
+  const [catalogError,setCatalogError]=useState(false);
+  const [spatialError,setSpatialError]=useState(false);
+  const [loadAttempt,setLoadAttempt]=useState(0);
   const [query,setQuery]=useState('');
   const [question,setQuestion]=useState('');
   const [answer,setAnswer]=useState('Tra cứu cục bộ sẽ trả lời từ catalog đã nạp trong ứng dụng.');
@@ -73,14 +76,18 @@ export default function YhctStudyPanel({localDraftCount,onStudyCommand}:Props){
 
   useEffect(()=>{
     let alive=true;
+    setCatalogError(false);setSpatialError(false);
     Promise.all([
       fetch(import.meta.env.BASE_URL+'data/meridians.json').then(async r=>{if(!r.ok)throw new Error('meridians');return await r.json() as Meridian[]}),
-      fetch(import.meta.env.BASE_URL+'data/acupoints.json').then(async r=>{if(!r.ok)throw new Error('acupoints');return await r.json() as Acupoint[]}),
-      fetch(import.meta.env.BASE_URL+'data/schematic-spatial.json').then(async r=>{if(!r.ok)throw new Error('schematic');return await r.json() as SchematicSpatial})
-    ]).then(([m,p,s])=>{if(alive){setMeridians(m);setPoints(p);setSchematic(Array.isArray(s.anchors)?s:{anchors:[],paths:[]})}})
-      .catch(()=>{if(alive)setAnswer('Không tải được cơ sở dữ liệu cục bộ. Hãy thử tải lại ứng dụng.')});
+      fetch(import.meta.env.BASE_URL+'data/acupoints.json').then(async r=>{if(!r.ok)throw new Error('acupoints');return await r.json() as Acupoint[]})
+    ]).then(([m,p])=>{if(!Array.isArray(m)||!Array.isArray(p))throw new Error('catalog');if(alive){setMeridians(m);setPoints(p)}})
+      .catch(()=>{if(alive)setCatalogError(true)});
+    fetch(import.meta.env.BASE_URL+'data/schematic-spatial.json')
+      .then(async r=>{if(!r.ok)throw new Error('schematic');return await r.json() as SchematicSpatial})
+      .then(s=>{if(!Array.isArray(s.anchors)||!Array.isArray(s.paths))throw new Error('schematic');if(alive)setSchematic(s)})
+      .catch(()=>{if(alive)setSpatialError(true)});
     return()=>{alive=false};
-  },[]);
+  },[loadAttempt]);
 
   const reviewedPointCount=useMemo(()=>points.filter(p=>Boolean(p.position3d)&&['FACULTY_REVIEWED','PUBLISHED'].includes(p.reviewStatus??p.verificationStatus??'')).length,[points]);
   const schematicUniquePoints=useMemo(()=>new Set(schematic.anchors.map(a=>a.pointCode)).size,[schematic.anchors]);
@@ -178,6 +185,10 @@ export default function YhctStudyPanel({localDraftCount,onStudyCommand}:Props){
         <span>{schematic.anchors.length} vị trí mô phỏng · {schematicUniquePoints} mã huyệt</span>
         <span>{localDraftCount} nháp BodyParts3D · {reviewedPointCount} đã duyệt</span>
       </div>
+      {(catalogError||spatialError)&&<div role="alert" data-yhct-load-error="true">
+        <p>{catalogError?'Không tải được danh mục kinh huyệt.':'Chưa tải được vị trí mô phỏng 3D. Danh mục kinh huyệt vẫn có thể tra cứu.'}</p>
+        <button type="button" onClick={()=>setLoadAttempt(v=>v+1)}>Thử tải lại dữ liệu YHCT</button>
+      </div>}
       <div className="yhct-tabs">
         {([['meridians','Kinh'],['points','Huyệt'],['anatomy','Giải phẫu'],['assistant','Trợ lý']] as [Tab,string][]).map(([id,label])=>
           <button key={id} className={tab===id?'active':''} onClick={()=>{setTab(id);setQuery('')}}>{label}</button>
