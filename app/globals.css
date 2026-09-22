@@ -230,3 +230,6 @@ body:has(.registration-panel) .meridian3d-launch{left:376px}body:has(.registrati
  .yhct-links button,.yhct-links a{font-size:10px;min-height:30px;display:inline-flex;align-items:center}
  .yhct-panel footer{max-height:42px;overflow:auto;flex-shrink:0}
 }
+
+.studio-footer [data-build-sha]{font-size:8px;opacity:.55;font-weight:400;white-space:nowrap}
+@media(max-width:767px){.studio-footer [data-build-sha]{display:none}}
