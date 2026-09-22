@@ -61,7 +61,7 @@ try{
     let lastError;
     for(let attempt=1;attempt<=3;attempt++){
       try{
-        const shot=await send('Page.captureScreenshot',{format:'png',captureBeyondViewport:false});
+        const shot=await send('Page.captureScreenshot',{format:'png',captureBeyondViewport:false,optimizeForSpeed:true});
         const bytes=Buffer.from(shot.data,'base64');
         await writeFile('artifacts/'+name,bytes);
         return createHash('sha256').update(bytes).digest('hex');
