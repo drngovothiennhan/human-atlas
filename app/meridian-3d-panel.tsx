@@ -24,7 +24,7 @@ const sideLabel=(side:MeridianOverlaySide)=>side==='BOTH'?'Hai bên':side==='LEF
 const MERIDIAN_ZH:Record<string,string>={LU:'手太阴肺经',LI:'手阳明大肠经',ST:'足阳明胃经',SP:'足太阴脾经',HT:'手少阴心经',SI:'手太阳小肠经',BL:'足太阳膀胱经',KI:'足少阴肾经',PC:'手厥阴心包经',TE:'手少阳三焦经',GB:'足少阳胆经',LR:'足厥阴肝经',CV:'任脉',GV:'督脉'};
 
 export default function Meridian3DPanel({drafts,selectedPointCode,onOverlayChange,onFocus}:Props){
-  const [open,setOpen]=useState(false),[enabled,setEnabled]=useState(true);
+  const [open,setOpen]=useState(false),[enabled,setEnabled]=useState(false);
   const [motion,setMotion]=useState(true),[showMeridians,setShowMeridians]=useState(true),[showPoints,setShowPoints]=useState(true),[showCollaterals,setShowCollaterals]=useState(false);
   const [language,setLanguage]=useState<Language>('vi');
   const [meridians,setMeridians]=useState<Meridian[]>([]),[points,setPoints]=useState<Acupoint[]>([]);
@@ -123,7 +123,7 @@ export default function Meridian3DPanel({drafts,selectedPointCode,onOverlayChang
   };
 
   return <>
-    <Button variant="ghost" className={'meridian3d-launch '+(enabled?'active':'')} onClick={()=>open?setOpen(false):(setOpen(true),setEnabled(true))} aria-label="Mở mô hình kinh lạc 3D" data-meridian3d-launch="true">
+    <Button variant="ghost" className={'meridian3d-launch '+(enabled?'active':'')} onClick={()=>open?setOpen(false):(setOpen(true),setEnabled(true))} aria-pressed={enabled} aria-expanded={open} aria-label="Mở mô hình kinh lạc 3D" data-meridian3d-launch="true">
       <strong>Kinh lạc 3D</strong>
       <span>{loading?'Đang tải dữ liệu…':loadError?'Chưa tải được dữ liệu — bấm để thử lại':`${points.length} huyệt · ${meridians.length} kinh · ${schematic.anchors.length} vị trí 3D sơ đồ`}</span>
     </Button>
@@ -142,6 +142,7 @@ export default function Meridian3DPanel({drafts,selectedPointCode,onOverlayChang
         <span>{publishedPaths.some(p=>p.meridianId===activeMeridian)?'Có đường kinh 3D đã đăng ký':schematicPaths?schematicPaths+' đoạn đường kinh sơ đồ nguồn mở · THAM CHIẾU HỌC TẬP':'Chưa có đường kinh 3D — không tự nối điểm'}</span>
         {showCollaterals&&<span role="status">Chưa có dữ liệu đường lạc phù hợp để hiển thị.</span>}
       </div>
+      <Button variant="ghost" data-exit-meridians="true" onClick={()=>{setEnabled(false);setOpen(false);onFocus(null)}}>Về giải phẫu</Button>
       <div className="meridian3d-effect-controls" data-meridian3d-effect-controls="true" aria-label="Điều khiển hiệu ứng kinh lạc">
         <button type="button" data-effect-master="true" aria-pressed={enabled} className={enabled?'active':''} onClick={()=>setEnabled(v=>!v)}>Hiệu ứng: {enabled?'Bật':'Tắt'}</button>
         <button type="button" data-effect-motion="true" aria-pressed={motion} className={motion?'active':''} onClick={()=>setMotion(v=>!v)}>Chuyển động</button>
@@ -171,3 +172,4 @@ export default function Meridian3DPanel({drafts,selectedPointCode,onOverlayChang
     </aside>}
   </>;
 }
+

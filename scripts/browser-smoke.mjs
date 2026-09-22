@@ -77,6 +77,7 @@ try{
   await send('Network.setBlockedURLs',{urls:['*data/schematic-spatial.json*']});
   await send('Page.navigate',{url:base});
   await waitFor(()=>evaluate("document.readyState==='complete'&&document.body.innerText.includes('HIU YHCT Atlas')"),{timeout:30000,label:'HIU Atlas UI'});
+  await waitFor(()=>evaluate("document.querySelector('[data-meridian3d-launch=true]')?.getAttribute('aria-pressed')==='false'"),{label:'default anatomy mode'});
   await evaluate("document.querySelector('[data-meridian3d-launch=true]').click()");
   await waitFor(()=>evaluate("!!document.querySelector('[data-meridian3d-load-error=true]')"),{label:'meridian load failure is visible'});
   await send('Network.setBlockedURLs',{urls:[]});
@@ -143,7 +144,7 @@ try{
   const allHash=await screenshot('desktop-all-layers.png');
   if(allHash===skeletonHash)throw new Error('All layer preset did not change rendered screenshot');
 
-  const headToggle=await evaluate("document.querySelector('[data-head-muscles-toggle=true]')?.click()||true");
+  const headToggle=await evaluate("document.querySelector('[data-head-muscles-toggle=true]')?.getAttribute('aria-pressed')==='true'");
   if(!headToggle)throw new Error('Head muscle toggle missing');
   await waitFor(()=>evaluate("document.querySelector('[data-head-muscles-toggle=true]')?.getAttribute('aria-pressed')==='true'"),{label:'head muscle toggle on'});
   await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.headMusclesStatus==='ready'&&document.querySelector('canvas')?.dataset.headMuscleCount==='78'"),{timeout:60000,label:'78 licensed head muscle meshes'});
@@ -154,7 +155,11 @@ try{
   await waitFor(()=>evaluate("document.querySelector('[data-head-muscles-toggle=true]')?.getAttribute('aria-pressed')==='false'&&document.querySelector('canvas')?.dataset.headMusclesActive==='false'"),{label:'head muscle toggle off'});
   await evaluate("document.querySelector('[data-head-muscles-toggle=true]').click()");
   await waitFor(()=>evaluate("document.querySelector('[data-head-muscles-toggle=true]')?.getAttribute('aria-pressed')==='true'&&document.querySelector('canvas')?.dataset.headMusclesActive==='true'&&document.querySelector('canvas')?.dataset.headMuscleCount==='78'"),{label:'head muscle toggle restores 78 meshes'});
+  await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.footMuscleCount==='4'"),{label:'four missing foot meshes loaded'});
   console.log('SMOKE_HEAD_MUSCLES_78_PASS '+JSON.stringify(headMetrics));
+  const performanceSample=await evaluate("new Promise(resolve=>{const intervals=[];let last=performance.now(),start=last;const tick=now=>{intervals.push(now-last);last=now;if(now-start<2000)requestAnimationFrame(tick);else resolve({environment:'GitHub/Linux headless Chromium SwiftShader, not physical device',elapsedMs:now-start,frames:intervals.length,meanFrameMs:intervals.reduce((a,b)=>a+b,0)/intervals.length,loadMs:performance.getEntriesByType('navigation')[0]?.loadEventEnd,resources:performance.getEntriesByType('resource').length,renderStats:document.querySelector('canvas')?.dataset.renderCount??null})};requestAnimationFrame(tick)})");
+  await writeFile('artifacts/performance-sample.json',JSON.stringify(performanceSample,null,2));
+  console.log('PERFORMANCE_SAMPLE '+JSON.stringify(performanceSample));
 
   await evaluate("document.querySelector('.yhct-launch').click()");
   await waitFor(()=>evaluate("!!document.querySelector('.yhct-panel')"),{label:'YHCT drawer'});
@@ -350,3 +355,4 @@ try{
   chrome?.kill('SIGTERM');
   vite.kill('SIGTERM');
 }
+

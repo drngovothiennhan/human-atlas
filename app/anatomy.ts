@@ -37,3 +37,8 @@ export function explanation(name:string,system:SystemId){return EXPLANATIONS[nam
 
 const ANATOMY_VI:Record<string,string>={'heart': 'Tim', 'liver': 'Gan', 'brain': 'Não', 'stomach': 'Dạ dày', 'spleen': 'Lách', 'pancreas': 'Tụy', 'urinary bladder': 'Bàng quang', 'trachea': 'Khí quản', 'diaphragm': 'Cơ hoành'};
 export const anatomyName=(name:string)=>ANATOMY_VI[name.toLowerCase()]?ANATOMY_VI[name.toLowerCase()]+" · "+name:name;
+
+
+// Source atlas labels incorrectly group these named lower-leg muscles as bone.
+const LEG_MUSCLE_IDS=new Set(["FJ1409","FJ1409M","FJ1410","FJ1410M","FJ1411","FJ1411M","FJ1439","FJ1439M","FJ1440","FJ1440M"]);
+export function normalizeAtlasSystems(atlas:Atlas):Atlas{return {...atlas,parts:atlas.parts.map(part=>LEG_MUSCLE_IDS.has(part.id)?{...part,system:"muscular" as SystemId}:part)};}
