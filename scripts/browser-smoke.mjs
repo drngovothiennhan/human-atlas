@@ -143,6 +143,19 @@ try{
   const allHash=await screenshot('desktop-all-layers.png');
   if(allHash===skeletonHash)throw new Error('All layer preset did not change rendered screenshot');
 
+  const headToggle=await evaluate("document.querySelector('[data-head-muscles-toggle=true]')?.click()||true");
+  if(!headToggle)throw new Error('Head muscle toggle missing');
+  await waitFor(()=>evaluate("document.querySelector('[data-head-muscles-toggle=true]')?.getAttribute('aria-pressed')==='true'"),{label:'head muscle toggle on'});
+  await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.headMusclesStatus==='ready'&&document.querySelector('canvas')?.dataset.headMuscleCount==='78'"),{timeout:60000,label:'78 licensed head muscle meshes'});
+  const headMetrics=await evaluate("(()=>{const d=document.querySelector('canvas')?.dataset||{};return{active:d.headMusclesActive,status:d.headMusclesStatus,count:d.headMuscleCount,expected:d.headMuscleExpected,source:d.headMuscleSource,license:d.headMuscleLicense,bounds:d.headMuscleBounds}})()");
+  if(headMetrics.active!=='true'||headMetrics.status!=='ready'||headMetrics.count!=='78'||headMetrics.expected!=='78'||!headMetrics.source?.includes('Nurkan1/Anatria-3D')||!headMetrics.license?.includes('CC BY-SA 4.0'))throw new Error('Head muscle verification failed: '+JSON.stringify(headMetrics));
+  await screenshot('desktop-head-muscles.png');
+  await evaluate("document.querySelector('[data-head-muscles-toggle=true]').click()");
+  await waitFor(()=>evaluate("document.querySelector('[data-head-muscles-toggle=true]')?.getAttribute('aria-pressed')==='false'&&document.querySelector('canvas')?.dataset.headMusclesActive==='false'"),{label:'head muscle toggle off'});
+  await evaluate("document.querySelector('[data-head-muscles-toggle=true]').click()");
+  await waitFor(()=>evaluate("document.querySelector('[data-head-muscles-toggle=true]')?.getAttribute('aria-pressed')==='true'&&document.querySelector('canvas')?.dataset.headMusclesActive==='true'&&document.querySelector('canvas')?.dataset.headMuscleCount==='78'"),{label:'head muscle toggle restores 78 meshes'});
+  console.log('SMOKE_HEAD_MUSCLES_78_PASS '+JSON.stringify(headMetrics));
+
   await evaluate("document.querySelector('.yhct-launch').click()");
   await waitFor(()=>evaluate("!!document.querySelector('.yhct-panel')"),{label:'YHCT drawer'});
   await evaluate("(()=>{const i=document.querySelector('.yhct-search');const s=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;s.call(i,'Phế');i.dispatchEvent(new Event('input',{bubbles:true}));return true})()");
