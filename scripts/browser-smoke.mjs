@@ -225,10 +225,11 @@ try{
   await waitFor(()=>evaluate("!document.querySelector('.about-sheet')"),{label:'information sheet closes'});
 
   const explodeBefore=await screenshot('desktop-explode-before.png');
-  const sliderFocused=await evaluate("(()=>{const s=document.querySelector('[role=slider]');if(!s)return false;s.focus();return true})()");
-  if(!sliderFocused)throw new Error('Explode slider missing');
-  for(let i=0;i<8;i++){await send('Input.dispatchKeyEvent',{type:'keyDown',key:'ArrowRight',code:'ArrowRight'});await send('Input.dispatchKeyEvent',{type:'keyUp',key:'ArrowRight',code:'ArrowRight'});}
-  await waitFor(()=>evaluate("Number(document.querySelector('[role=slider]')?.getAttribute('aria-valuenow')||0)>0"),{label:'explode slider changes'});
+  const sliderBox=await evaluate("(()=>{const s=document.querySelector('[data-slot=slider]');if(!s)return null;const r=s.getBoundingClientRect();return{x:r.x,y:r.y,w:r.width,h:r.height}})()");
+  if(!sliderBox||!sliderBox.w||!sliderBox.h)throw new Error('Explode slider missing');
+  await send('Input.dispatchMouseEvent',{type:'mousePressed',button:'left',clickCount:1,x:sliderBox.x+sliderBox.w*.35,y:sliderBox.y+sliderBox.h*.5});
+  await send('Input.dispatchMouseEvent',{type:'mouseReleased',button:'left',clickCount:1,x:sliderBox.x+sliderBox.w*.35,y:sliderBox.y+sliderBox.h*.5});
+  await waitFor(()=>evaluate("Number(document.querySelector('[data-slot=slider-thumb]')?.getAttribute('aria-valuenow')||0)>0"),{label:'explode slider changes'});
   await sleep(450);
   const explodeAfter=await screenshot('desktop-explode-after.png');
   if(explodeAfter===explodeBefore)throw new Error('Explode slider did not change rendered view');
