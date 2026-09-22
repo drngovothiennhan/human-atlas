@@ -80,6 +80,18 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
   renderer.domElement.dataset.articularExpected=String(ARTICULAR_SOURCE.expectedMeshCount);
   renderer.domElement.dataset.skeletalReferenceStatus='idle';renderer.domElement.dataset.skeletalReferenceExpected=String(SKELETAL_SOURCE.expectedMeshCount);
   const clearGroup=(group:T.Group)=>{while(group.children.length)group.remove(group.children[0]);};
+  const bakeStaticGeometry=(mesh:T.Mesh)=>{
+   const baked=mesh.geometry.index?mesh.geometry.toNonIndexed():mesh.geometry.clone();
+   baked.applyMatrix4(mesh.matrixWorld);
+   Object.keys(baked.attributes).forEach(key=>{if(key!=='position'&&key!=='normal')baked.deleteAttribute(key);});
+   if(!baked.getAttribute('normal'))baked.computeVertexNormals();
+   baked.clearGroups();return baked;
+  };
+  const addMergedMesh=(group:T.Group,parts:T.BufferGeometry[],material:T.Material,name:string,renderOrder:number)=>{
+   const merged=mergeGeometries(parts,false);parts.forEach(part=>part.dispose());if(!merged)throw new Error('Không thể gộp batch giải phẫu: '+name);
+   merged.computeBoundingBox();merged.computeBoundingSphere();geometries.push(merged);
+   const mesh=new T.Mesh(merged,material);mesh.name=name;mesh.frustumCulled=false;mesh.castShadow=qualityConfig.shadows;mesh.renderOrder=renderOrder;group.add(mesh);return mesh;
+  };
   const loadManifest=async(url:string,expected:number)=>{
    const response=await fetch(assetUrl(url),{signal:abort.signal});if(!response.ok)throw new Error('Không tải được manifest giải phẫu: '+response.status);
    const manifest=await response.json() as RuntimeNodeManifest;
@@ -94,18 +106,21 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
    Promise.all([loadManifest(DETAILED_MUSCLE_SOURCE.runtimeManifest,DETAILED_MUSCLE_SOURCE.expectedMeshCount),loader.loadAsync(assetUrl(DETAILED_MUSCLE_SOURCE.runtimeAsset))]).then(([manifest,gltf])=>{
     if(disposed)return;
     gltf.scene.updateMatrixWorld(true);clearGroup(headMuscleGroup);clearGroup(bodyMuscleGroup);
-    const allowed=new Set(manifest.nodes.map(name=>T.PropertyBinding.sanitizeNodeName(name))),headBox=new T.Box3(),allBox=new T.Box3();let count=0,headCount=0,footCount=0,neckCount=0;
+    const allowed=new Set(manifest.nodes.map(name=>T.PropertyBinding.sanitizeNodeName(name))),headBox=new T.Box3(),allBox=new T.Box3(),headParts:T.BufferGeometry[]=[],bodyParts:T.BufferGeometry[]=[];let count=0,headCount=0,footCount=0,neckCount=0;
     gltf.scene.traverse(object=>{
      if(!(object instanceof T.Mesh))return;
      const clean=T.PropertyBinding.sanitizeNodeName(object.name);if(!allowed.has(clean))return;
      if(!object.geometry.boundingBox)object.geometry.computeBoundingBox();
      const worldBox=object.geometry.boundingBox?.clone().applyMatrix4(object.matrixWorld);if(worldBox)allBox.union(worldBox);
      const isHead=headMuscleAllowed.has(clean);if(isHead&&worldBox)headBox.union(worldBox);
-     const mesh=new T.Mesh(object.geometry,detailedMuscleMaterial);mesh.name=(isHead?'hiu-head:':'hiu-muscle:')+object.name;mesh.matrixAutoUpdate=false;mesh.matrix.copy(object.matrixWorld);mesh.frustumCulled=false;mesh.castShadow=qualityConfig.shadows;mesh.renderOrder=12;(isHead?headMuscleGroup:bodyMuscleGroup).add(mesh);
+     (isHead?headParts:bodyParts).push(bakeStaticGeometry(object));
      count++;if(isHead)headCount++;if(legacyFootMuscles.has(clean))footCount++;if(legacyNeckMuscles.has(clean))neckCount++;
     });
     if(count!==DETAILED_MUSCLE_SOURCE.expectedMeshCount)throw new Error('Detailed muscle source mismatch: '+count+'/'+DETAILED_MUSCLE_SOURCE.expectedMeshCount);
     if(headCount!==HEAD_MUSCLE_SOURCE.expectedMeshCount)throw new Error('Head muscle source mismatch: '+headCount+'/'+HEAD_MUSCLE_SOURCE.expectedMeshCount);
+    addMergedMesh(headMuscleGroup,headParts,detailedMuscleMaterial,'hiu-head-muscles-batch',12);
+    addMergedMesh(bodyMuscleGroup,bodyParts,detailedMuscleMaterial,'hiu-body-muscles-batch',12);
+    renderer.domElement.dataset.detailedMuscleDrawCalls='2';
     detailedMuscleStatus='ready';lastState=null;renderer.domElement.dataset.detailedMusclesStatus='ready';renderer.domElement.dataset.detailedMuscleCount=String(count);
     renderer.domElement.dataset.headMusclesStatus='ready';renderer.domElement.dataset.headMuscleCount=String(headCount);
     renderer.domElement.dataset.footMuscleCount=String(footCount);renderer.domElement.dataset.neckMuscleCount=String(neckCount);
@@ -123,13 +138,14 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
    const loader=new GLTFLoader();loader.setDRACOLoader(draco);
    Promise.all([loadManifest(ARTICULAR_SOURCE.runtimeManifest,ARTICULAR_SOURCE.expectedMeshCount),loader.loadAsync(assetUrl(ARTICULAR_SOURCE.runtimeAsset))]).then(([manifest,gltf])=>{
     if(disposed)return;
-    gltf.scene.updateMatrixWorld(true);clearGroup(jointGroup);const allowed=new Set(manifest.nodes.map(name=>T.PropertyBinding.sanitizeNodeName(name))),box=new T.Box3();let count=0;
+    gltf.scene.updateMatrixWorld(true);clearGroup(jointGroup);const allowed=new Set(manifest.nodes.map(name=>T.PropertyBinding.sanitizeNodeName(name))),box=new T.Box3(),parts:T.BufferGeometry[]=[];let count=0;
     gltf.scene.traverse(object=>{
      if(!(object instanceof T.Mesh))return;const clean=T.PropertyBinding.sanitizeNodeName(object.name);if(!allowed.has(clean))return;
      if(!object.geometry.boundingBox)object.geometry.computeBoundingBox();const worldBox=object.geometry.boundingBox?.clone().applyMatrix4(object.matrixWorld);if(worldBox)box.union(worldBox);
-     const mesh=new T.Mesh(object.geometry,jointMaterial);mesh.name='hiu-joint:'+object.name;mesh.matrixAutoUpdate=false;mesh.matrix.copy(object.matrixWorld);mesh.frustumCulled=false;mesh.castShadow=qualityConfig.shadows;mesh.renderOrder=11;jointGroup.add(mesh);count++;
+     parts.push(bakeStaticGeometry(object));count++;
     });
     if(count!==ARTICULAR_SOURCE.expectedMeshCount)throw new Error('Articular source mismatch: '+count+'/'+ARTICULAR_SOURCE.expectedMeshCount);
+    addMergedMesh(jointGroup,parts,jointMaterial,'hiu-articular-batch',11);renderer.domElement.dataset.articularDrawCalls='1';
     jointStatus='ready';lastState=null;renderer.domElement.dataset.articularStatus='ready';renderer.domElement.dataset.articularCount=String(count);renderer.domElement.dataset.articularBounds=[box.min.x,box.min.y,box.min.z,box.max.x,box.max.y,box.max.z].map(v=>v.toFixed(4)).join(',');
     const s=latest.current;jointGroup.visible=s.visible.includes('articular')&&!s.isolate&&s.explode<.01;dirty=true;
    }).catch(error=>{
@@ -142,9 +158,10 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
    const draco=new DRACOLoader();draco.setDecoderPath(assetUrl('/draco/'));const loader=new GLTFLoader();loader.setDRACOLoader(draco);
    Promise.all([loadManifest(SKELETAL_SOURCE.runtimeManifest,SKELETAL_SOURCE.expectedMeshCount),loader.loadAsync(assetUrl(SKELETAL_SOURCE.runtimeAsset))]).then(([manifest,gltf])=>{
     if(disposed)return;gltf.scene.updateMatrixWorld(true);clearGroup(skeletalReferenceGroup);
-    const allowed=new Set(manifest.nodes.map(name=>T.PropertyBinding.sanitizeNodeName(name))),box=new T.Box3();let count=0;
-    gltf.scene.traverse(object=>{if(!(object instanceof T.Mesh))return;const clean=T.PropertyBinding.sanitizeNodeName(object.name);if(!allowed.has(clean))return;if(!object.geometry.boundingBox)object.geometry.computeBoundingBox();const worldBox=object.geometry.boundingBox?.clone().applyMatrix4(object.matrixWorld);if(worldBox)box.union(worldBox);const mesh=new T.Mesh(object.geometry,skeletalReferenceMaterial);mesh.name='hiu-skeleton:'+object.name;mesh.matrixAutoUpdate=false;mesh.matrix.copy(object.matrixWorld);mesh.frustumCulled=false;mesh.castShadow=qualityConfig.shadows;mesh.renderOrder=10;skeletalReferenceGroup.add(mesh);count++;});
+    const allowed=new Set(manifest.nodes.map(name=>T.PropertyBinding.sanitizeNodeName(name))),box=new T.Box3(),parts:T.BufferGeometry[]=[];let count=0;
+    gltf.scene.traverse(object=>{if(!(object instanceof T.Mesh))return;const clean=T.PropertyBinding.sanitizeNodeName(object.name);if(!allowed.has(clean))return;if(!object.geometry.boundingBox)object.geometry.computeBoundingBox();const worldBox=object.geometry.boundingBox?.clone().applyMatrix4(object.matrixWorld);if(worldBox)box.union(worldBox);parts.push(bakeStaticGeometry(object));count++;});
     if(count!==SKELETAL_SOURCE.expectedMeshCount)throw new Error('Skeletal source mismatch: '+count+'/'+SKELETAL_SOURCE.expectedMeshCount);
+    addMergedMesh(skeletalReferenceGroup,parts,skeletalReferenceMaterial,'hiu-skeletal-batch',10);renderer.domElement.dataset.skeletalReferenceDrawCalls='1';
     skeletalStatus='ready';lastState=null;renderer.domElement.dataset.skeletalReferenceStatus='ready';renderer.domElement.dataset.skeletalReferenceCount=String(count);renderer.domElement.dataset.skeletalReferenceBounds=[box.min.x,box.min.y,box.min.z,box.max.x,box.max.y,box.max.z].map(v=>v.toFixed(4)).join(',');
     const s=latest.current;skeletalReferenceGroup.visible=s.visible.includes('skeletal')&&!s.isolate&&s.explode<.01;dirty=true;
    }).catch(error=>{if(disposed)return;skeletalStatus='error';clearGroup(skeletalReferenceGroup);renderer.domElement.dataset.skeletalReferenceStatus='error';renderer.domElement.dataset.skeletalReferenceError=error instanceof Error?error.message:'load failed';console.error('[skeletal-reference]',error);dirty=true;}).finally(()=>draco.dispose());
