@@ -382,6 +382,16 @@ try{
   await screenshot('mobile-meridian3d-layout.png');
   await evaluate("document.querySelector('[data-meridian3d-panel=true] [aria-label=\"Đóng mô hình kinh lạc 3D\"]')?.click()");
   console.log('SMOKE_MOBILE_MERIDIAN_LAYOUT_PASS '+JSON.stringify(mobileLayout));
+  await evaluate("document.querySelector('.yhct-launch')?.click()");
+  await waitFor(()=>evaluate("!!document.querySelector('.yhct-panel')"),{label:'mobile YHCT panel'});
+  await evaluate("document.querySelector('[data-yhct-mode=quiz]')?.click()");
+  await waitFor(()=>evaluate("!!document.querySelector('[data-mode-panel=quiz]')"),{label:'mobile Quiz panel'});
+  const mobileStudyLayout=await evaluate("(()=>{const p=document.querySelector('.yhct-panel')?.getBoundingClientRect(),m=document.querySelector('[data-mode-panel=quiz]')?.getBoundingClientRect();return{vw:innerWidth,vh:innerHeight,panel:p&&{left:p.left,right:p.right,top:p.top,bottom:p.bottom,height:p.height,scrollHeight:document.querySelector('.yhct-panel').scrollHeight,clientHeight:document.querySelector('.yhct-panel').clientHeight},mode:m&&{left:m.left,right:m.right,top:m.top,bottom:m.bottom}}})()");
+  if(!mobileStudyLayout.panel||mobileStudyLayout.panel.left<0||mobileStudyLayout.panel.right>mobileStudyLayout.vw||mobileStudyLayout.panel.top<0||mobileStudyLayout.panel.bottom>mobileStudyLayout.vh||mobileStudyLayout.panel.height>mobileStudyLayout.vh*.62)throw new Error('Mobile YHCT layout overflow: '+JSON.stringify(mobileStudyLayout));
+  if(!mobileStudyLayout.mode||mobileStudyLayout.mode.left<mobileStudyLayout.panel.left||mobileStudyLayout.mode.right>mobileStudyLayout.panel.right)throw new Error('Mobile study mode overflow: '+JSON.stringify(mobileStudyLayout));
+  await screenshot('mobile-yhct-quiz-layout.png');
+  await evaluate("document.querySelector('.yhct-head>button')?.click()");
+  console.log('SMOKE_MOBILE_YHCT_LAYOUT_PASS '+JSON.stringify(mobileStudyLayout));
 
   await send('Emulation.setDeviceMetricsOverride',{width:1024,height:768,deviceScaleFactor:1,mobile:false,screenWidth:1024,screenHeight:768});
   await send('Emulation.setTouchEmulationEnabled',{enabled:true,maxTouchPoints:5});
