@@ -72,20 +72,28 @@ try{
   };
   const setViewport=async(width,height,{touch=false}={})=>{
     const info=await send('Browser.getWindowForTarget',{targetId:target.id},15000);
-    let current=await evaluate("({w:innerWidth,h:innerHeight})");
-    const bounds=info.bounds||{};
-    let frameWidth=Math.max(0,Number(bounds.width||current.w)-current.w);
-    let frameHeight=Math.max(0,Number(bounds.height||current.h)-current.h);
-    for(let attempt=0;attempt<4;attempt++){
-      await send('Browser.setWindowBounds',{windowId:info.windowId,bounds:{width:Math.max(200,Math.round(width+frameWidth)),height:Math.max(200,Math.round(height+frameHeight))}},20000);
-      await sleep(250);
-      current=await evaluate("({w:innerWidth,h:innerHeight})");
-      const deltaWidth=width-current.w,deltaHeight=height-current.h;
-      if(Math.abs(deltaWidth)<=2&&Math.abs(deltaHeight)<=2)break;
-      frameWidth+=deltaWidth;frameHeight+=deltaHeight;
+    let resizeMethod='Browser.setContentsSize';
+    try{
+      await send('Browser.setContentsSize',{windowId:info.windowId,width,height},20000);
+    }catch(error){
+      resizeMethod='Browser.setWindowBounds-fallback';
+      let current=await evaluate("({w:innerWidth,h:innerHeight})");
+      const bounds=info.bounds||{};
+      let frameWidth=Math.max(0,Number(bounds.width||current.w)-current.w);
+      let frameHeight=Math.max(0,Number(bounds.height||current.h)-current.h);
+      for(let attempt=0;attempt<4;attempt++){
+        await send('Browser.setWindowBounds',{windowId:info.windowId,bounds:{width:Math.max(500,Math.round(width+frameWidth)),height:Math.max(200,Math.round(height+frameHeight))}},20000);
+        await sleep(250);
+        current=await evaluate("({w:innerWidth,h:innerHeight})");
+        const deltaWidth=width-current.w,deltaHeight=height-current.h;
+        if(Math.abs(deltaWidth)<=2&&Math.abs(deltaHeight)<=2)break;
+        frameWidth+=deltaWidth;frameHeight+=deltaHeight;
+      }
     }
-    if(Math.abs(current.w-width)>2||Math.abs(current.h-height)>2)throw new Error('Viewport resize failed: '+JSON.stringify({requested:{width,height},actual:current,frameWidth,frameHeight,bounds}));
+    await waitFor(()=>evaluate("Math.abs(innerWidth-"+width+")<=2&&Math.abs(innerHeight-"+height+")<=2"),{timeout:20000,label:'viewport '+width+'x'+height+' via '+resizeMethod});
     await send('Emulation.setTouchEmulationEnabled',{enabled:touch,maxTouchPoints:touch?5:1},15000);
+    const current=await evaluate("({w:innerWidth,h:innerHeight})");
+    console.log('SMOKE_VIEWPORT_SET '+JSON.stringify({requested:{width,height},actual:current,resizeMethod}));
     return current;
   };
   await mkdir('artifacts',{recursive:true});
@@ -578,6 +586,11 @@ try{
   await writeFile('artifacts/browser-smoke.json',JSON.stringify(report,null,2)+'\n');
   console.log('BROWSER_SMOKE_PASS '+JSON.stringify(report));
   ws.close();
+} catch(error) {
+  await mkdir('artifacts',{recursive:true});
+  const detail=error instanceof Error?(error.stack||error.message):String(error);
+  await writeFile('artifacts/browser-smoke-error.txt',detail+'\n');
+  throw error;
 } finally {
   chrome?.kill('SIGTERM');
   vite.kill('SIGTERM');
