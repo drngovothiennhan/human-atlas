@@ -25,6 +25,20 @@ for(const point of points.points){
   }
 }
 
+const sourcePointCounts={LU:11,LI:20,ST:45,SP:21,HT:9,SI:19,BL:67,KI:27,PC:9,SJ:23,GB:44,LR:14,REN:24,DU:28};
+const endpointAudit={};
+for(const [channel,count] of Object.entries(sourcePointCounts)){
+  const records=points.points.filter(point=>point.channel===channel).sort((a,b)=>a.index-b.index);
+  assert.equal(records.length,count,channel+' point count');
+  assert.deepEqual(records.map(point=>point.index),Array.from({length:count},(_,i)=>i+1),channel+' index sequence');
+  assert.equal(records[0].code,channel+'-1',channel+' start point');
+  assert.equal(records.at(-1).code,channel+'-'+count,channel+' end point');
+  const sourcePaths=meridians.paths[channel]||[],codes=new Set(sourcePaths.flat());
+  assert.ok(codes.has(channel+'-1'),channel+' topology missing start');
+  assert.ok(codes.has(channel+'-'+count),channel+' topology missing end');
+  endpointAudit[channel]={start:channel+'-1',end:channel+'-'+count,count};
+}
+
 const pathCodes=[];
 for(const paths of Object.values(meridians.paths)){
   for(const path of paths)for(const code of path)pathCodes.push(code);
@@ -44,6 +58,7 @@ console.log(JSON.stringify({
   channels:channels.size,
   topologyPoints:topologyCodes.size,
   topologyOmitted:omitted,
+  endpoints:endpointAudit,
   structuralPoints:points.points.filter(point=>Boolean(point.anchor.struct)).length,
   scalpPoints:points.points.filter(point=>Number.isFinite(point.anchor.arc_cun)).length,
   status:'PASS'
