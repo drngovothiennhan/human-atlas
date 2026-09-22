@@ -1,15 +1,24 @@
 {
-  "name": "anatomy-studio",
-  "version": "0.1.0",
+  "name": "hiu-yhct-3d-atlas",
+  "version": "0.2.0",
   "private": true,
   "engines": {
     "node": ">=22.13.0"
   },
   "scripts": {
     "dev": "vite --host 0.0.0.0 --port 3016",
-    "build": "vite build",
-    "build:vercel": "vite build",
-    "check": "tsc --noEmit"
+    "build": "npm run content:build && vite build",
+    "build:pages": "npm run content:build && vite build --base=./",
+    "build:vercel": "npm run content:build && vite build",
+    "check": "tsc --noEmit",
+    "content:validate": "node scripts/content-validate.mjs",
+    "content:build": "node scripts/content-build.mjs && node scripts/build-furia-schematic.mjs && node scripts/fetch-zanatomy-muscles.mjs",
+    "registration:validate-review": "node scripts/registration-review-validate.mjs",
+    "test:unit": "node --test tests/*.test.mjs",
+    "test": "npm run test:unit",
+    "verify:pages": "node scripts/verify-pages-assets.mjs",
+    "source:furia:validate": "node scripts/validate-furia-source.mjs",
+    "source:muscles:fetch": "node scripts/fetch-zanatomy-muscles.mjs"
   },
   "dependencies": {
     "@base-ui/react": "1.7.0",

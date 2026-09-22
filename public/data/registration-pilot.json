@@ -1,0 +1,82 @@
+{
+  "schemaVersion": "0.1.0",
+  "coordinateSystem": "BodyParts3D-4.0-browser-meters-Y-up",
+  "policy": "Faculty-review staging only. No anchor in this file is eligible for runtime publication until independently reviewed. Reference-only material is linked, not copied.",
+  "pilot": [
+    {
+      "pointCode": "ST-36",
+      "meridianId": "ST",
+      "requiredSides": [
+        "LEFT",
+        "RIGHT"
+      ],
+      "geometrySource": "BODYPARTS3D-4.0",
+      "locationReferenceSources": [
+        "WHO-2008-ACUPOINT"
+      ],
+      "referenceOnlyLabel": "Tham khảo Google/nguồn công khai – không tái sử dụng dữ liệu",
+      "status": "PENDING_CAPTURE",
+      "anchors": []
+    },
+    {
+      "pointCode": "LI-4",
+      "meridianId": "LI",
+      "requiredSides": [
+        "LEFT",
+        "RIGHT"
+      ],
+      "geometrySource": "BODYPARTS3D-4.0",
+      "locationReferenceSources": [
+        "WHO-2008-ACUPOINT"
+      ],
+      "referenceOnlyLabel": "Tham khảo Google/nguồn công khai – không tái sử dụng dữ liệu",
+      "status": "PENDING_CAPTURE",
+      "anchors": []
+    },
+    {
+      "pointCode": "LU-5",
+      "meridianId": "LU",
+      "requiredSides": [
+        "LEFT",
+        "RIGHT"
+      ],
+      "geometrySource": "BODYPARTS3D-4.0",
+      "locationReferenceSources": [
+        "WHO-2008-ACUPOINT"
+      ],
+      "referenceOnlyLabel": "Tham khảo Google/nguồn công khai – không tái sử dụng dữ liệu",
+      "status": "PENDING_CAPTURE",
+      "anchors": []
+    },
+    {
+      "pointCode": "LU-9",
+      "meridianId": "LU",
+      "requiredSides": [
+        "LEFT",
+        "RIGHT"
+      ],
+      "geometrySource": "BODYPARTS3D-4.0",
+      "locationReferenceSources": [
+        "WHO-2008-ACUPOINT"
+      ],
+      "referenceOnlyLabel": "Tham khảo Google/nguồn công khai – không tái sử dụng dữ liệu",
+      "status": "PENDING_CAPTURE",
+      "anchors": []
+    },
+    {
+      "pointCode": "ST-41",
+      "meridianId": "ST",
+      "requiredSides": [
+        "LEFT",
+        "RIGHT"
+      ],
+      "geometrySource": "BODYPARTS3D-4.0",
+      "locationReferenceSources": [
+        "WHO-2008-ACUPOINT"
+      ],
+      "referenceOnlyLabel": "Tham khảo Google/nguồn công khai – không tái sử dụng dữ liệu",
+      "status": "PENDING_CAPTURE",
+      "anchors": []
+    }
+  ]
+}

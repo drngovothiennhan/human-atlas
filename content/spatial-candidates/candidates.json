@@ -1,0 +1,55 @@
+[
+  {
+    "schemaVersion": "1.0.0",
+    "candidateId": "ACUATLAS-361-2026-SPATIAL",
+    "sourceId": "ACUATLAS-361-2026",
+    "exactArtifactUrl": "https://acupointatlas.com/data/acupoints.json",
+    "declaredPointCount": 361,
+    "spatialScope": "full 361-point reference across 14 meridians",
+    "licenseGate": "PASS",
+    "registrationGate": "BLOCKED",
+    "coordinateEvidence": {
+      "fields": [
+        "view",
+        "x",
+        "y"
+      ],
+      "frame": "normalized 2D anatomical body-plate coordinates",
+      "verifiedCanonical3d": false,
+      "verifiedSurfaceAnchors": false
+    },
+    "canonicalCoordinateSystem": null,
+    "bodypartsTransform": null,
+    "surfaceAnchorMapping": null,
+    "runtimeEligible": false,
+    "auditedAt": "2026-09-21",
+    "reason": "The exact public JSON was inspected: point records expose view plus normalized x/y but no verified z/coordinate3d or BodyParts3D structure/triangle anchor. AcuAtlas describes projection onto its own 3D body; that projection layer is not part of the audited reusable JSON."
+  },
+  {
+    "schemaVersion": "1.0.0",
+    "candidateId": "ACUSIM-DRYAD-2025-SPATIAL",
+    "sourceId": "ACUSIM-DRYAD-2025",
+    "exactArtifactUrl": "https://doi.org/10.5061/dryad.zs7h44jkz",
+    "declaredPointCount": 174,
+    "spatialScope": "cervicocranial acupoints on synthetic anatomical models",
+    "licenseGate": "PASS",
+    "registrationGate": "BLOCKED",
+    "coordinateEvidence": {
+      "fields": [
+        "2D keypoint coordinates",
+        "3D keypoint coordinates",
+        "visibility weights",
+        "meridian category indices"
+      ],
+      "frame": "AcuSim synthetic-model / rendered-view annotation frame",
+      "verifiedCanonical3d": false,
+      "verifiedSurfaceAnchors": false
+    },
+    "canonicalCoordinateSystem": null,
+    "bodypartsTransform": null,
+    "surfaceAnchorMapping": null,
+    "runtimeEligible": false,
+    "auditedAt": "2026-09-21",
+    "reason": "Dryad metadata documents 2D/3D keypoint annotations, but no audited transform from the AcuSim synthetic body models to the BodyParts3D canonical frame or BodyParts3D surface anchors has been validated."
+  }
+]

@@ -1,0 +1,38 @@
+name: HIU YHCT 3D Atlas CI
+on:
+  push:
+    branches: [feature-hiu-yhct-3d-atlas]
+  pull_request:
+    branches: [main]
+concurrency:
+  group: hiu-atlas-ci-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.13.0'
+          cache: npm
+      - run: npm ci
+      - run: npm run content:validate
+      - run: npm run source:furia:validate
+      - run: npm run content:build
+      - run: npm run check
+      - run: node scripts/validate-atlas.mjs
+      - run: node --experimental-strip-types scripts/validate-interactions.mjs
+      - run: npm test
+      - run: npm run build
+      - run: npm run verify:pages
+      - run: node scripts/browser-smoke.mjs
+      - run: npm run build:pages
+      - run: npm run verify:pages
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: browser-smoke-evidence
+          path: artifacts/
+          if-no-files-found: warn

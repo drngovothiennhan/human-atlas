@@ -1,0 +1,29 @@
+{
+  "repository": "FuriaRozkwit/acupuncture-3d",
+  "commit": "1fc9ec98d365c9fb035844e2775c1be05a0a05fc",
+  "retrievedAt": "2026-09-21",
+  "files": {
+    "data/points.json": {
+      "license": "MIT",
+      "runtimeImport": "reduced anchor fields only"
+    },
+    "data/meridians.json": {
+      "license": "MIT",
+      "runtimeImport": "topology candidate"
+    },
+    "data/rig.json": {
+      "license": "MIT",
+      "runtimeImport": "procedural proportional resolver"
+    },
+    "data/structures.json": {
+      "blobSha": "860034f73e9cd875ec7cc5cafba1d65a6c7981b0",
+      "license": "CC BY-SA 4.0",
+      "runtimeImport": "structural reference metadata; retain ShareAlike"
+    }
+  },
+  "exclusions": [
+    "point_meta.json",
+    "OCR/text from A Manual of Acupuncture",
+    "upstream clinical prose/categories/needling content"
+  ]
+}

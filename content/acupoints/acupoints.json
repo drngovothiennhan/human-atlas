@@ -1,0 +1,6139 @@
+[
+  {
+    "id": "LU-1",
+    "code": "LU-1",
+    "meridianId": "LU",
+    "sequence": 1,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/lung/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "LU-2",
+    "code": "LU-2",
+    "meridianId": "LU",
+    "sequence": 2,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/lung/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "LU-3",
+    "code": "LU-3",
+    "meridianId": "LU",
+    "sequence": 3,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/lung/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "LU-4",
+    "code": "LU-4",
+    "meridianId": "LU",
+    "sequence": 4,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/lung/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "LU-5",
+    "code": "LU-5",
+    "meridianId": "LU",
+    "sequence": 5,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/lung/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "LU-6",
+    "code": "LU-6",
+    "meridianId": "LU",
+    "sequence": 6,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/lung/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "LU-7",
+    "code": "LU-7",
+    "meridianId": "LU",
+    "sequence": 7,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/lung/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "LU-8",
+    "code": "LU-8",
+    "meridianId": "LU",
+    "sequence": 8,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/lung/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "LU-9",
+    "code": "LU-9",
+    "meridianId": "LU",
+    "sequence": 9,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/lung/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "LU-10",
+    "code": "LU-10",
+    "meridianId": "LU",
+    "sequence": 10,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/lung/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "LU-11",
+    "code": "LU-11",
+    "meridianId": "LU",
+    "sequence": 11,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/lung/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "LI-1",
+    "code": "LI-1",
+    "meridianId": "LI",
+    "sequence": 1,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/large-intestine/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "LI-2",
+    "code": "LI-2",
+    "meridianId": "LI",
+    "sequence": 2,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/large-intestine/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "LI-3",
+    "code": "LI-3",
+    "meridianId": "LI",
+    "sequence": 3,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/large-intestine/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "LI-4",
+    "code": "LI-4",
+    "meridianId": "LI",
+    "sequence": 4,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/large-intestine/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "LI-5",
+    "code": "LI-5",
+    "meridianId": "LI",
+    "sequence": 5,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/large-intestine/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "LI-6",
+    "code": "LI-6",
+    "meridianId": "LI",
+    "sequence": 6,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/large-intestine/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "LI-7",
+    "code": "LI-7",
+    "meridianId": "LI",
+    "sequence": 7,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/large-intestine/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "LI-8",
+    "code": "LI-8",
+    "meridianId": "LI",
+    "sequence": 8,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/large-intestine/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "LI-9",
+    "code": "LI-9",
+    "meridianId": "LI",
+    "sequence": 9,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/large-intestine/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "LI-10",
+    "code": "LI-10",
+    "meridianId": "LI",
+    "sequence": 10,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/large-intestine/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "LI-11",
+    "code": "LI-11",
+    "meridianId": "LI",
+    "sequence": 11,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/large-intestine/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "LI-12",
+    "code": "LI-12",
+    "meridianId": "LI",
+    "sequence": 12,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/large-intestine/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "LI-13",
+    "code": "LI-13",
+    "meridianId": "LI",
+    "sequence": 13,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/large-intestine/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "LI-14",
+    "code": "LI-14",
+    "meridianId": "LI",
+    "sequence": 14,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/large-intestine/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "LI-15",
+    "code": "LI-15",
+    "meridianId": "LI",
+    "sequence": 15,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/large-intestine/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "LI-16",
+    "code": "LI-16",
+    "meridianId": "LI",
+    "sequence": 16,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/large-intestine/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "LI-17",
+    "code": "LI-17",
+    "meridianId": "LI",
+    "sequence": 17,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/large-intestine/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "LI-18",
+    "code": "LI-18",
+    "meridianId": "LI",
+    "sequence": 18,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/large-intestine/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "LI-19",
+    "code": "LI-19",
+    "meridianId": "LI",
+    "sequence": 19,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/large-intestine/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "LI-20",
+    "code": "LI-20",
+    "meridianId": "LI",
+    "sequence": 20,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/large-intestine/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "ST-1",
+    "code": "ST-1",
+    "meridianId": "ST",
+    "sequence": 1,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/stomach/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "ST-2",
+    "code": "ST-2",
+    "meridianId": "ST",
+    "sequence": 2,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/stomach/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "ST-3",
+    "code": "ST-3",
+    "meridianId": "ST",
+    "sequence": 3,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/stomach/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "ST-4",
+    "code": "ST-4",
+    "meridianId": "ST",
+    "sequence": 4,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/stomach/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "ST-5",
+    "code": "ST-5",
+    "meridianId": "ST",
+    "sequence": 5,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/stomach/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "ST-6",
+    "code": "ST-6",
+    "meridianId": "ST",
+    "sequence": 6,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/stomach/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "ST-7",
+    "code": "ST-7",
+    "meridianId": "ST",
+    "sequence": 7,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/stomach/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "ST-8",
+    "code": "ST-8",
+    "meridianId": "ST",
+    "sequence": 8,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/stomach/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "ST-9",
+    "code": "ST-9",
+    "meridianId": "ST",
+    "sequence": 9,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/stomach/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "ST-10",
+    "code": "ST-10",
+    "meridianId": "ST",
+    "sequence": 10,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/stomach/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "ST-11",
+    "code": "ST-11",
+    "meridianId": "ST",
+    "sequence": 11,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/stomach/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "ST-12",
+    "code": "ST-12",
+    "meridianId": "ST",
+    "sequence": 12,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/stomach/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "ST-13",
+    "code": "ST-13",
+    "meridianId": "ST",
+    "sequence": 13,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/stomach/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "ST-14",
+    "code": "ST-14",
+    "meridianId": "ST",
+    "sequence": 14,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/stomach/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "ST-15",
+    "code": "ST-15",
+    "meridianId": "ST",
+    "sequence": 15,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/stomach/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "ST-16",
+    "code": "ST-16",
+    "meridianId": "ST",
+    "sequence": 16,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/stomach/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "ST-17",
+    "code": "ST-17",
+    "meridianId": "ST",
+    "sequence": 17,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/stomach/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "ST-18",
+    "code": "ST-18",
+    "meridianId": "ST",
+    "sequence": 18,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/stomach/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "ST-19",
+    "code": "ST-19",
+    "meridianId": "ST",
+    "sequence": 19,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/stomach/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "ST-20",
+    "code": "ST-20",
+    "meridianId": "ST",
+    "sequence": 20,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/stomach/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "ST-21",
+    "code": "ST-21",
+    "meridianId": "ST",
+    "sequence": 21,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/stomach/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "ST-22",
+    "code": "ST-22",
+    "meridianId": "ST",
+    "sequence": 22,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/stomach/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "ST-23",
+    "code": "ST-23",
+    "meridianId": "ST",
+    "sequence": 23,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/stomach/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "ST-24",
+    "code": "ST-24",
+    "meridianId": "ST",
+    "sequence": 24,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/stomach/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "ST-25",
+    "code": "ST-25",
+    "meridianId": "ST",
+    "sequence": 25,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/stomach/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "ST-26",
+    "code": "ST-26",
+    "meridianId": "ST",
+    "sequence": 26,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/stomach/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "ST-27",
+    "code": "ST-27",
+    "meridianId": "ST",
+    "sequence": 27,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/stomach/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "ST-28",
+    "code": "ST-28",
+    "meridianId": "ST",
+    "sequence": 28,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/stomach/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "ST-29",
+    "code": "ST-29",
+    "meridianId": "ST",
+    "sequence": 29,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/stomach/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "ST-30",
+    "code": "ST-30",
+    "meridianId": "ST",
+    "sequence": 30,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/stomach/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "ST-31",
+    "code": "ST-31",
+    "meridianId": "ST",
+    "sequence": 31,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/stomach/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "ST-32",
+    "code": "ST-32",
+    "meridianId": "ST",
+    "sequence": 32,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/stomach/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "ST-33",
+    "code": "ST-33",
+    "meridianId": "ST",
+    "sequence": 33,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/stomach/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "ST-34",
+    "code": "ST-34",
+    "meridianId": "ST",
+    "sequence": 34,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/stomach/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "ST-35",
+    "code": "ST-35",
+    "meridianId": "ST",
+    "sequence": 35,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/stomach/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "ST-36",
+    "code": "ST-36",
+    "meridianId": "ST",
+    "sequence": 36,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/stomach/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "ST-37",
+    "code": "ST-37",
+    "meridianId": "ST",
+    "sequence": 37,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/stomach/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "ST-38",
+    "code": "ST-38",
+    "meridianId": "ST",
+    "sequence": 38,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/stomach/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "ST-39",
+    "code": "ST-39",
+    "meridianId": "ST",
+    "sequence": 39,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/stomach/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "ST-40",
+    "code": "ST-40",
+    "meridianId": "ST",
+    "sequence": 40,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/stomach/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "ST-41",
+    "code": "ST-41",
+    "meridianId": "ST",
+    "sequence": 41,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/stomach/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "ST-42",
+    "code": "ST-42",
+    "meridianId": "ST",
+    "sequence": 42,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/stomach/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "ST-43",
+    "code": "ST-43",
+    "meridianId": "ST",
+    "sequence": 43,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/stomach/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "ST-44",
+    "code": "ST-44",
+    "meridianId": "ST",
+    "sequence": 44,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/stomach/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "ST-45",
+    "code": "ST-45",
+    "meridianId": "ST",
+    "sequence": 45,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/stomach/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "SP-1",
+    "code": "SP-1",
+    "meridianId": "SP",
+    "sequence": 1,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/spleen/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "SP-2",
+    "code": "SP-2",
+    "meridianId": "SP",
+    "sequence": 2,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/spleen/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "SP-3",
+    "code": "SP-3",
+    "meridianId": "SP",
+    "sequence": 3,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/spleen/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "SP-4",
+    "code": "SP-4",
+    "meridianId": "SP",
+    "sequence": 4,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/spleen/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "SP-5",
+    "code": "SP-5",
+    "meridianId": "SP",
+    "sequence": 5,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/spleen/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "SP-6",
+    "code": "SP-6",
+    "meridianId": "SP",
+    "sequence": 6,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/spleen/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "SP-7",
+    "code": "SP-7",
+    "meridianId": "SP",
+    "sequence": 7,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/spleen/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "SP-8",
+    "code": "SP-8",
+    "meridianId": "SP",
+    "sequence": 8,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/spleen/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "SP-9",
+    "code": "SP-9",
+    "meridianId": "SP",
+    "sequence": 9,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/spleen/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "SP-10",
+    "code": "SP-10",
+    "meridianId": "SP",
+    "sequence": 10,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/spleen/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "SP-11",
+    "code": "SP-11",
+    "meridianId": "SP",
+    "sequence": 11,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/spleen/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "SP-12",
+    "code": "SP-12",
+    "meridianId": "SP",
+    "sequence": 12,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/spleen/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "SP-13",
+    "code": "SP-13",
+    "meridianId": "SP",
+    "sequence": 13,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/spleen/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "SP-14",
+    "code": "SP-14",
+    "meridianId": "SP",
+    "sequence": 14,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/spleen/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "SP-15",
+    "code": "SP-15",
+    "meridianId": "SP",
+    "sequence": 15,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/spleen/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "SP-16",
+    "code": "SP-16",
+    "meridianId": "SP",
+    "sequence": 16,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/spleen/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "SP-17",
+    "code": "SP-17",
+    "meridianId": "SP",
+    "sequence": 17,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/spleen/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "SP-18",
+    "code": "SP-18",
+    "meridianId": "SP",
+    "sequence": 18,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/spleen/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "SP-19",
+    "code": "SP-19",
+    "meridianId": "SP",
+    "sequence": 19,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/spleen/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "SP-20",
+    "code": "SP-20",
+    "meridianId": "SP",
+    "sequence": 20,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/spleen/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "SP-21",
+    "code": "SP-21",
+    "meridianId": "SP",
+    "sequence": 21,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/spleen/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "HT-1",
+    "code": "HT-1",
+    "meridianId": "HT",
+    "sequence": 1,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/heart/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "HT-2",
+    "code": "HT-2",
+    "meridianId": "HT",
+    "sequence": 2,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/heart/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "HT-3",
+    "code": "HT-3",
+    "meridianId": "HT",
+    "sequence": 3,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/heart/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "HT-4",
+    "code": "HT-4",
+    "meridianId": "HT",
+    "sequence": 4,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/heart/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "HT-5",
+    "code": "HT-5",
+    "meridianId": "HT",
+    "sequence": 5,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/heart/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "HT-6",
+    "code": "HT-6",
+    "meridianId": "HT",
+    "sequence": 6,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/heart/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "HT-7",
+    "code": "HT-7",
+    "meridianId": "HT",
+    "sequence": 7,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/heart/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "HT-8",
+    "code": "HT-8",
+    "meridianId": "HT",
+    "sequence": 8,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/heart/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "HT-9",
+    "code": "HT-9",
+    "meridianId": "HT",
+    "sequence": 9,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/heart/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "SI-1",
+    "code": "SI-1",
+    "meridianId": "SI",
+    "sequence": 1,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/small-intestine/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "SI-2",
+    "code": "SI-2",
+    "meridianId": "SI",
+    "sequence": 2,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/small-intestine/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "SI-3",
+    "code": "SI-3",
+    "meridianId": "SI",
+    "sequence": 3,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/small-intestine/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "SI-4",
+    "code": "SI-4",
+    "meridianId": "SI",
+    "sequence": 4,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/small-intestine/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "SI-5",
+    "code": "SI-5",
+    "meridianId": "SI",
+    "sequence": 5,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/small-intestine/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "SI-6",
+    "code": "SI-6",
+    "meridianId": "SI",
+    "sequence": 6,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/small-intestine/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "SI-7",
+    "code": "SI-7",
+    "meridianId": "SI",
+    "sequence": 7,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/small-intestine/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "SI-8",
+    "code": "SI-8",
+    "meridianId": "SI",
+    "sequence": 8,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/small-intestine/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "SI-9",
+    "code": "SI-9",
+    "meridianId": "SI",
+    "sequence": 9,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/small-intestine/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "SI-10",
+    "code": "SI-10",
+    "meridianId": "SI",
+    "sequence": 10,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/small-intestine/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "SI-11",
+    "code": "SI-11",
+    "meridianId": "SI",
+    "sequence": 11,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/small-intestine/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "SI-12",
+    "code": "SI-12",
+    "meridianId": "SI",
+    "sequence": 12,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/small-intestine/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "SI-13",
+    "code": "SI-13",
+    "meridianId": "SI",
+    "sequence": 13,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/small-intestine/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "SI-14",
+    "code": "SI-14",
+    "meridianId": "SI",
+    "sequence": 14,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/small-intestine/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "SI-15",
+    "code": "SI-15",
+    "meridianId": "SI",
+    "sequence": 15,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/small-intestine/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "SI-16",
+    "code": "SI-16",
+    "meridianId": "SI",
+    "sequence": 16,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/small-intestine/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "SI-17",
+    "code": "SI-17",
+    "meridianId": "SI",
+    "sequence": 17,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/small-intestine/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "SI-18",
+    "code": "SI-18",
+    "meridianId": "SI",
+    "sequence": 18,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/small-intestine/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "SI-19",
+    "code": "SI-19",
+    "meridianId": "SI",
+    "sequence": 19,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/small-intestine/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-1",
+    "code": "BL-1",
+    "meridianId": "BL",
+    "sequence": 1,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-2",
+    "code": "BL-2",
+    "meridianId": "BL",
+    "sequence": 2,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-3",
+    "code": "BL-3",
+    "meridianId": "BL",
+    "sequence": 3,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-4",
+    "code": "BL-4",
+    "meridianId": "BL",
+    "sequence": 4,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-5",
+    "code": "BL-5",
+    "meridianId": "BL",
+    "sequence": 5,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-6",
+    "code": "BL-6",
+    "meridianId": "BL",
+    "sequence": 6,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-7",
+    "code": "BL-7",
+    "meridianId": "BL",
+    "sequence": 7,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-8",
+    "code": "BL-8",
+    "meridianId": "BL",
+    "sequence": 8,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-9",
+    "code": "BL-9",
+    "meridianId": "BL",
+    "sequence": 9,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-10",
+    "code": "BL-10",
+    "meridianId": "BL",
+    "sequence": 10,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-11",
+    "code": "BL-11",
+    "meridianId": "BL",
+    "sequence": 11,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-12",
+    "code": "BL-12",
+    "meridianId": "BL",
+    "sequence": 12,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-13",
+    "code": "BL-13",
+    "meridianId": "BL",
+    "sequence": 13,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-14",
+    "code": "BL-14",
+    "meridianId": "BL",
+    "sequence": 14,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-15",
+    "code": "BL-15",
+    "meridianId": "BL",
+    "sequence": 15,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-16",
+    "code": "BL-16",
+    "meridianId": "BL",
+    "sequence": 16,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-17",
+    "code": "BL-17",
+    "meridianId": "BL",
+    "sequence": 17,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-18",
+    "code": "BL-18",
+    "meridianId": "BL",
+    "sequence": 18,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-19",
+    "code": "BL-19",
+    "meridianId": "BL",
+    "sequence": 19,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-20",
+    "code": "BL-20",
+    "meridianId": "BL",
+    "sequence": 20,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-21",
+    "code": "BL-21",
+    "meridianId": "BL",
+    "sequence": 21,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-22",
+    "code": "BL-22",
+    "meridianId": "BL",
+    "sequence": 22,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-23",
+    "code": "BL-23",
+    "meridianId": "BL",
+    "sequence": 23,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-24",
+    "code": "BL-24",
+    "meridianId": "BL",
+    "sequence": 24,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-25",
+    "code": "BL-25",
+    "meridianId": "BL",
+    "sequence": 25,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-26",
+    "code": "BL-26",
+    "meridianId": "BL",
+    "sequence": 26,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-27",
+    "code": "BL-27",
+    "meridianId": "BL",
+    "sequence": 27,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-28",
+    "code": "BL-28",
+    "meridianId": "BL",
+    "sequence": 28,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-29",
+    "code": "BL-29",
+    "meridianId": "BL",
+    "sequence": 29,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-30",
+    "code": "BL-30",
+    "meridianId": "BL",
+    "sequence": 30,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-31",
+    "code": "BL-31",
+    "meridianId": "BL",
+    "sequence": 31,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-32",
+    "code": "BL-32",
+    "meridianId": "BL",
+    "sequence": 32,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-33",
+    "code": "BL-33",
+    "meridianId": "BL",
+    "sequence": 33,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-34",
+    "code": "BL-34",
+    "meridianId": "BL",
+    "sequence": 34,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-35",
+    "code": "BL-35",
+    "meridianId": "BL",
+    "sequence": 35,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-36",
+    "code": "BL-36",
+    "meridianId": "BL",
+    "sequence": 36,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-37",
+    "code": "BL-37",
+    "meridianId": "BL",
+    "sequence": 37,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-38",
+    "code": "BL-38",
+    "meridianId": "BL",
+    "sequence": 38,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-39",
+    "code": "BL-39",
+    "meridianId": "BL",
+    "sequence": 39,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-40",
+    "code": "BL-40",
+    "meridianId": "BL",
+    "sequence": 40,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-41",
+    "code": "BL-41",
+    "meridianId": "BL",
+    "sequence": 41,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-42",
+    "code": "BL-42",
+    "meridianId": "BL",
+    "sequence": 42,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-43",
+    "code": "BL-43",
+    "meridianId": "BL",
+    "sequence": 43,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-44",
+    "code": "BL-44",
+    "meridianId": "BL",
+    "sequence": 44,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-45",
+    "code": "BL-45",
+    "meridianId": "BL",
+    "sequence": 45,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-46",
+    "code": "BL-46",
+    "meridianId": "BL",
+    "sequence": 46,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-47",
+    "code": "BL-47",
+    "meridianId": "BL",
+    "sequence": 47,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-48",
+    "code": "BL-48",
+    "meridianId": "BL",
+    "sequence": 48,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-49",
+    "code": "BL-49",
+    "meridianId": "BL",
+    "sequence": 49,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-50",
+    "code": "BL-50",
+    "meridianId": "BL",
+    "sequence": 50,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-51",
+    "code": "BL-51",
+    "meridianId": "BL",
+    "sequence": 51,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-52",
+    "code": "BL-52",
+    "meridianId": "BL",
+    "sequence": 52,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-53",
+    "code": "BL-53",
+    "meridianId": "BL",
+    "sequence": 53,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-54",
+    "code": "BL-54",
+    "meridianId": "BL",
+    "sequence": 54,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-55",
+    "code": "BL-55",
+    "meridianId": "BL",
+    "sequence": 55,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-56",
+    "code": "BL-56",
+    "meridianId": "BL",
+    "sequence": 56,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-57",
+    "code": "BL-57",
+    "meridianId": "BL",
+    "sequence": 57,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-58",
+    "code": "BL-58",
+    "meridianId": "BL",
+    "sequence": 58,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-59",
+    "code": "BL-59",
+    "meridianId": "BL",
+    "sequence": 59,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-60",
+    "code": "BL-60",
+    "meridianId": "BL",
+    "sequence": 60,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-61",
+    "code": "BL-61",
+    "meridianId": "BL",
+    "sequence": 61,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-62",
+    "code": "BL-62",
+    "meridianId": "BL",
+    "sequence": 62,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-63",
+    "code": "BL-63",
+    "meridianId": "BL",
+    "sequence": 63,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-64",
+    "code": "BL-64",
+    "meridianId": "BL",
+    "sequence": 64,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-65",
+    "code": "BL-65",
+    "meridianId": "BL",
+    "sequence": 65,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-66",
+    "code": "BL-66",
+    "meridianId": "BL",
+    "sequence": 66,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "BL-67",
+    "code": "BL-67",
+    "meridianId": "BL",
+    "sequence": 67,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/bladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "KI-1",
+    "code": "KI-1",
+    "meridianId": "KI",
+    "sequence": 1,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/kidney/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "KI-2",
+    "code": "KI-2",
+    "meridianId": "KI",
+    "sequence": 2,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/kidney/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "KI-3",
+    "code": "KI-3",
+    "meridianId": "KI",
+    "sequence": 3,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/kidney/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "KI-4",
+    "code": "KI-4",
+    "meridianId": "KI",
+    "sequence": 4,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/kidney/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "KI-5",
+    "code": "KI-5",
+    "meridianId": "KI",
+    "sequence": 5,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/kidney/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "KI-6",
+    "code": "KI-6",
+    "meridianId": "KI",
+    "sequence": 6,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/kidney/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "KI-7",
+    "code": "KI-7",
+    "meridianId": "KI",
+    "sequence": 7,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/kidney/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "KI-8",
+    "code": "KI-8",
+    "meridianId": "KI",
+    "sequence": 8,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/kidney/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "KI-9",
+    "code": "KI-9",
+    "meridianId": "KI",
+    "sequence": 9,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/kidney/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "KI-10",
+    "code": "KI-10",
+    "meridianId": "KI",
+    "sequence": 10,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/kidney/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "KI-11",
+    "code": "KI-11",
+    "meridianId": "KI",
+    "sequence": 11,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/kidney/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "KI-12",
+    "code": "KI-12",
+    "meridianId": "KI",
+    "sequence": 12,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/kidney/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "KI-13",
+    "code": "KI-13",
+    "meridianId": "KI",
+    "sequence": 13,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/kidney/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "KI-14",
+    "code": "KI-14",
+    "meridianId": "KI",
+    "sequence": 14,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/kidney/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "KI-15",
+    "code": "KI-15",
+    "meridianId": "KI",
+    "sequence": 15,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/kidney/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "KI-16",
+    "code": "KI-16",
+    "meridianId": "KI",
+    "sequence": 16,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/kidney/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "KI-17",
+    "code": "KI-17",
+    "meridianId": "KI",
+    "sequence": 17,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/kidney/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "KI-18",
+    "code": "KI-18",
+    "meridianId": "KI",
+    "sequence": 18,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/kidney/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "KI-19",
+    "code": "KI-19",
+    "meridianId": "KI",
+    "sequence": 19,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/kidney/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "KI-20",
+    "code": "KI-20",
+    "meridianId": "KI",
+    "sequence": 20,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/kidney/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "KI-21",
+    "code": "KI-21",
+    "meridianId": "KI",
+    "sequence": 21,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/kidney/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "KI-22",
+    "code": "KI-22",
+    "meridianId": "KI",
+    "sequence": 22,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/kidney/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "KI-23",
+    "code": "KI-23",
+    "meridianId": "KI",
+    "sequence": 23,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/kidney/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "KI-24",
+    "code": "KI-24",
+    "meridianId": "KI",
+    "sequence": 24,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/kidney/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "KI-25",
+    "code": "KI-25",
+    "meridianId": "KI",
+    "sequence": 25,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/kidney/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "KI-26",
+    "code": "KI-26",
+    "meridianId": "KI",
+    "sequence": 26,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/kidney/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "KI-27",
+    "code": "KI-27",
+    "meridianId": "KI",
+    "sequence": 27,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/kidney/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "PC-1",
+    "code": "PC-1",
+    "meridianId": "PC",
+    "sequence": 1,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/pericardium/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "PC-2",
+    "code": "PC-2",
+    "meridianId": "PC",
+    "sequence": 2,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/pericardium/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "PC-3",
+    "code": "PC-3",
+    "meridianId": "PC",
+    "sequence": 3,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/pericardium/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "PC-4",
+    "code": "PC-4",
+    "meridianId": "PC",
+    "sequence": 4,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/pericardium/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "PC-5",
+    "code": "PC-5",
+    "meridianId": "PC",
+    "sequence": 5,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/pericardium/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "PC-6",
+    "code": "PC-6",
+    "meridianId": "PC",
+    "sequence": 6,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/pericardium/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "PC-7",
+    "code": "PC-7",
+    "meridianId": "PC",
+    "sequence": 7,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/pericardium/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "PC-8",
+    "code": "PC-8",
+    "meridianId": "PC",
+    "sequence": 8,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/pericardium/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "PC-9",
+    "code": "PC-9",
+    "meridianId": "PC",
+    "sequence": 9,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/pericardium/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "TE-1",
+    "code": "TE-1",
+    "meridianId": "TE",
+    "sequence": 1,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/triple-energizer/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "TE-2",
+    "code": "TE-2",
+    "meridianId": "TE",
+    "sequence": 2,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/triple-energizer/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "TE-3",
+    "code": "TE-3",
+    "meridianId": "TE",
+    "sequence": 3,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/triple-energizer/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "TE-4",
+    "code": "TE-4",
+    "meridianId": "TE",
+    "sequence": 4,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/triple-energizer/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "TE-5",
+    "code": "TE-5",
+    "meridianId": "TE",
+    "sequence": 5,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/triple-energizer/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "TE-6",
+    "code": "TE-6",
+    "meridianId": "TE",
+    "sequence": 6,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/triple-energizer/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "TE-7",
+    "code": "TE-7",
+    "meridianId": "TE",
+    "sequence": 7,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/triple-energizer/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "TE-8",
+    "code": "TE-8",
+    "meridianId": "TE",
+    "sequence": 8,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/triple-energizer/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "TE-9",
+    "code": "TE-9",
+    "meridianId": "TE",
+    "sequence": 9,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/triple-energizer/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "TE-10",
+    "code": "TE-10",
+    "meridianId": "TE",
+    "sequence": 10,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/triple-energizer/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "TE-11",
+    "code": "TE-11",
+    "meridianId": "TE",
+    "sequence": 11,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/triple-energizer/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "TE-12",
+    "code": "TE-12",
+    "meridianId": "TE",
+    "sequence": 12,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/triple-energizer/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "TE-13",
+    "code": "TE-13",
+    "meridianId": "TE",
+    "sequence": 13,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/triple-energizer/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "TE-14",
+    "code": "TE-14",
+    "meridianId": "TE",
+    "sequence": 14,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/triple-energizer/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "TE-15",
+    "code": "TE-15",
+    "meridianId": "TE",
+    "sequence": 15,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/triple-energizer/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "TE-16",
+    "code": "TE-16",
+    "meridianId": "TE",
+    "sequence": 16,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/triple-energizer/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "TE-17",
+    "code": "TE-17",
+    "meridianId": "TE",
+    "sequence": 17,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/triple-energizer/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "TE-18",
+    "code": "TE-18",
+    "meridianId": "TE",
+    "sequence": 18,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/triple-energizer/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "TE-19",
+    "code": "TE-19",
+    "meridianId": "TE",
+    "sequence": 19,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/triple-energizer/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "TE-20",
+    "code": "TE-20",
+    "meridianId": "TE",
+    "sequence": 20,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/triple-energizer/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "TE-21",
+    "code": "TE-21",
+    "meridianId": "TE",
+    "sequence": 21,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/triple-energizer/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "TE-22",
+    "code": "TE-22",
+    "meridianId": "TE",
+    "sequence": 22,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/triple-energizer/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "TE-23",
+    "code": "TE-23",
+    "meridianId": "TE",
+    "sequence": 23,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/triple-energizer/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GB-1",
+    "code": "GB-1",
+    "meridianId": "GB",
+    "sequence": 1,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/gallbladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GB-2",
+    "code": "GB-2",
+    "meridianId": "GB",
+    "sequence": 2,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/gallbladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GB-3",
+    "code": "GB-3",
+    "meridianId": "GB",
+    "sequence": 3,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/gallbladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GB-4",
+    "code": "GB-4",
+    "meridianId": "GB",
+    "sequence": 4,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/gallbladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GB-5",
+    "code": "GB-5",
+    "meridianId": "GB",
+    "sequence": 5,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/gallbladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GB-6",
+    "code": "GB-6",
+    "meridianId": "GB",
+    "sequence": 6,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/gallbladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GB-7",
+    "code": "GB-7",
+    "meridianId": "GB",
+    "sequence": 7,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/gallbladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GB-8",
+    "code": "GB-8",
+    "meridianId": "GB",
+    "sequence": 8,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/gallbladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GB-9",
+    "code": "GB-9",
+    "meridianId": "GB",
+    "sequence": 9,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/gallbladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GB-10",
+    "code": "GB-10",
+    "meridianId": "GB",
+    "sequence": 10,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/gallbladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GB-11",
+    "code": "GB-11",
+    "meridianId": "GB",
+    "sequence": 11,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/gallbladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GB-12",
+    "code": "GB-12",
+    "meridianId": "GB",
+    "sequence": 12,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/gallbladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GB-13",
+    "code": "GB-13",
+    "meridianId": "GB",
+    "sequence": 13,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/gallbladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GB-14",
+    "code": "GB-14",
+    "meridianId": "GB",
+    "sequence": 14,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/gallbladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GB-15",
+    "code": "GB-15",
+    "meridianId": "GB",
+    "sequence": 15,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/gallbladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GB-16",
+    "code": "GB-16",
+    "meridianId": "GB",
+    "sequence": 16,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/gallbladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GB-17",
+    "code": "GB-17",
+    "meridianId": "GB",
+    "sequence": 17,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/gallbladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GB-18",
+    "code": "GB-18",
+    "meridianId": "GB",
+    "sequence": 18,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/gallbladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GB-19",
+    "code": "GB-19",
+    "meridianId": "GB",
+    "sequence": 19,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/gallbladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GB-20",
+    "code": "GB-20",
+    "meridianId": "GB",
+    "sequence": 20,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/gallbladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GB-21",
+    "code": "GB-21",
+    "meridianId": "GB",
+    "sequence": 21,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/gallbladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GB-22",
+    "code": "GB-22",
+    "meridianId": "GB",
+    "sequence": 22,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/gallbladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GB-23",
+    "code": "GB-23",
+    "meridianId": "GB",
+    "sequence": 23,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/gallbladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GB-24",
+    "code": "GB-24",
+    "meridianId": "GB",
+    "sequence": 24,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/gallbladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GB-25",
+    "code": "GB-25",
+    "meridianId": "GB",
+    "sequence": 25,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/gallbladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GB-26",
+    "code": "GB-26",
+    "meridianId": "GB",
+    "sequence": 26,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/gallbladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GB-27",
+    "code": "GB-27",
+    "meridianId": "GB",
+    "sequence": 27,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/gallbladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GB-28",
+    "code": "GB-28",
+    "meridianId": "GB",
+    "sequence": 28,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/gallbladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GB-29",
+    "code": "GB-29",
+    "meridianId": "GB",
+    "sequence": 29,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/gallbladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GB-30",
+    "code": "GB-30",
+    "meridianId": "GB",
+    "sequence": 30,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/gallbladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GB-31",
+    "code": "GB-31",
+    "meridianId": "GB",
+    "sequence": 31,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/gallbladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GB-32",
+    "code": "GB-32",
+    "meridianId": "GB",
+    "sequence": 32,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/gallbladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GB-33",
+    "code": "GB-33",
+    "meridianId": "GB",
+    "sequence": 33,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/gallbladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GB-34",
+    "code": "GB-34",
+    "meridianId": "GB",
+    "sequence": 34,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/gallbladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GB-35",
+    "code": "GB-35",
+    "meridianId": "GB",
+    "sequence": 35,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/gallbladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GB-36",
+    "code": "GB-36",
+    "meridianId": "GB",
+    "sequence": 36,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/gallbladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GB-37",
+    "code": "GB-37",
+    "meridianId": "GB",
+    "sequence": 37,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/gallbladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GB-38",
+    "code": "GB-38",
+    "meridianId": "GB",
+    "sequence": 38,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/gallbladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GB-39",
+    "code": "GB-39",
+    "meridianId": "GB",
+    "sequence": 39,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/gallbladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GB-40",
+    "code": "GB-40",
+    "meridianId": "GB",
+    "sequence": 40,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/gallbladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GB-41",
+    "code": "GB-41",
+    "meridianId": "GB",
+    "sequence": 41,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/gallbladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GB-42",
+    "code": "GB-42",
+    "meridianId": "GB",
+    "sequence": 42,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/gallbladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GB-43",
+    "code": "GB-43",
+    "meridianId": "GB",
+    "sequence": 43,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/gallbladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GB-44",
+    "code": "GB-44",
+    "meridianId": "GB",
+    "sequence": 44,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/gallbladder/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "LR-1",
+    "code": "LR-1",
+    "meridianId": "LR",
+    "sequence": 1,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/liver/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "LR-2",
+    "code": "LR-2",
+    "meridianId": "LR",
+    "sequence": 2,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/liver/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "LR-3",
+    "code": "LR-3",
+    "meridianId": "LR",
+    "sequence": 3,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/liver/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "LR-4",
+    "code": "LR-4",
+    "meridianId": "LR",
+    "sequence": 4,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/liver/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "LR-5",
+    "code": "LR-5",
+    "meridianId": "LR",
+    "sequence": 5,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/liver/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "LR-6",
+    "code": "LR-6",
+    "meridianId": "LR",
+    "sequence": 6,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/liver/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "LR-7",
+    "code": "LR-7",
+    "meridianId": "LR",
+    "sequence": 7,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/liver/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "LR-8",
+    "code": "LR-8",
+    "meridianId": "LR",
+    "sequence": 8,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/liver/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "LR-9",
+    "code": "LR-9",
+    "meridianId": "LR",
+    "sequence": 9,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/liver/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "LR-10",
+    "code": "LR-10",
+    "meridianId": "LR",
+    "sequence": 10,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/liver/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "LR-11",
+    "code": "LR-11",
+    "meridianId": "LR",
+    "sequence": 11,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/liver/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "LR-12",
+    "code": "LR-12",
+    "meridianId": "LR",
+    "sequence": 12,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/liver/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "LR-13",
+    "code": "LR-13",
+    "meridianId": "LR",
+    "sequence": 13,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/liver/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "LR-14",
+    "code": "LR-14",
+    "meridianId": "LR",
+    "sequence": 14,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/liver/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GV-1",
+    "code": "GV-1",
+    "meridianId": "GV",
+    "sequence": 1,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/governing-vessel/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GV-2",
+    "code": "GV-2",
+    "meridianId": "GV",
+    "sequence": 2,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/governing-vessel/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GV-3",
+    "code": "GV-3",
+    "meridianId": "GV",
+    "sequence": 3,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/governing-vessel/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GV-4",
+    "code": "GV-4",
+    "meridianId": "GV",
+    "sequence": 4,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/governing-vessel/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GV-5",
+    "code": "GV-5",
+    "meridianId": "GV",
+    "sequence": 5,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/governing-vessel/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GV-6",
+    "code": "GV-6",
+    "meridianId": "GV",
+    "sequence": 6,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/governing-vessel/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GV-7",
+    "code": "GV-7",
+    "meridianId": "GV",
+    "sequence": 7,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/governing-vessel/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GV-8",
+    "code": "GV-8",
+    "meridianId": "GV",
+    "sequence": 8,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/governing-vessel/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GV-9",
+    "code": "GV-9",
+    "meridianId": "GV",
+    "sequence": 9,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/governing-vessel/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GV-10",
+    "code": "GV-10",
+    "meridianId": "GV",
+    "sequence": 10,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/governing-vessel/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GV-11",
+    "code": "GV-11",
+    "meridianId": "GV",
+    "sequence": 11,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/governing-vessel/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GV-12",
+    "code": "GV-12",
+    "meridianId": "GV",
+    "sequence": 12,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/governing-vessel/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GV-13",
+    "code": "GV-13",
+    "meridianId": "GV",
+    "sequence": 13,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/governing-vessel/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GV-14",
+    "code": "GV-14",
+    "meridianId": "GV",
+    "sequence": 14,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/governing-vessel/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GV-15",
+    "code": "GV-15",
+    "meridianId": "GV",
+    "sequence": 15,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/governing-vessel/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GV-16",
+    "code": "GV-16",
+    "meridianId": "GV",
+    "sequence": 16,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/governing-vessel/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GV-17",
+    "code": "GV-17",
+    "meridianId": "GV",
+    "sequence": 17,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/governing-vessel/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GV-18",
+    "code": "GV-18",
+    "meridianId": "GV",
+    "sequence": 18,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/governing-vessel/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GV-19",
+    "code": "GV-19",
+    "meridianId": "GV",
+    "sequence": 19,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/governing-vessel/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GV-20",
+    "code": "GV-20",
+    "meridianId": "GV",
+    "sequence": 20,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/governing-vessel/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GV-21",
+    "code": "GV-21",
+    "meridianId": "GV",
+    "sequence": 21,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/governing-vessel/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GV-22",
+    "code": "GV-22",
+    "meridianId": "GV",
+    "sequence": 22,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/governing-vessel/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GV-23",
+    "code": "GV-23",
+    "meridianId": "GV",
+    "sequence": 23,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/governing-vessel/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GV-24",
+    "code": "GV-24",
+    "meridianId": "GV",
+    "sequence": 24,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/governing-vessel/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GV-25",
+    "code": "GV-25",
+    "meridianId": "GV",
+    "sequence": 25,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/governing-vessel/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GV-26",
+    "code": "GV-26",
+    "meridianId": "GV",
+    "sequence": 26,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/governing-vessel/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GV-27",
+    "code": "GV-27",
+    "meridianId": "GV",
+    "sequence": 27,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/governing-vessel/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "GV-28",
+    "code": "GV-28",
+    "meridianId": "GV",
+    "sequence": 28,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/governing-vessel/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "CV-1",
+    "code": "CV-1",
+    "meridianId": "CV",
+    "sequence": 1,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/conception-vessel/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "CV-2",
+    "code": "CV-2",
+    "meridianId": "CV",
+    "sequence": 2,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/conception-vessel/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "CV-3",
+    "code": "CV-3",
+    "meridianId": "CV",
+    "sequence": 3,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/conception-vessel/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "CV-4",
+    "code": "CV-4",
+    "meridianId": "CV",
+    "sequence": 4,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/conception-vessel/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "CV-5",
+    "code": "CV-5",
+    "meridianId": "CV",
+    "sequence": 5,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/conception-vessel/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "CV-6",
+    "code": "CV-6",
+    "meridianId": "CV",
+    "sequence": 6,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/conception-vessel/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "CV-7",
+    "code": "CV-7",
+    "meridianId": "CV",
+    "sequence": 7,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/conception-vessel/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "CV-8",
+    "code": "CV-8",
+    "meridianId": "CV",
+    "sequence": 8,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/conception-vessel/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "CV-9",
+    "code": "CV-9",
+    "meridianId": "CV",
+    "sequence": 9,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/conception-vessel/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "CV-10",
+    "code": "CV-10",
+    "meridianId": "CV",
+    "sequence": 10,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/conception-vessel/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "CV-11",
+    "code": "CV-11",
+    "meridianId": "CV",
+    "sequence": 11,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/conception-vessel/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "CV-12",
+    "code": "CV-12",
+    "meridianId": "CV",
+    "sequence": 12,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/conception-vessel/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "CV-13",
+    "code": "CV-13",
+    "meridianId": "CV",
+    "sequence": 13,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/conception-vessel/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "CV-14",
+    "code": "CV-14",
+    "meridianId": "CV",
+    "sequence": 14,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/conception-vessel/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "CV-15",
+    "code": "CV-15",
+    "meridianId": "CV",
+    "sequence": 15,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/conception-vessel/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "CV-16",
+    "code": "CV-16",
+    "meridianId": "CV",
+    "sequence": 16,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/conception-vessel/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "CV-17",
+    "code": "CV-17",
+    "meridianId": "CV",
+    "sequence": 17,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/conception-vessel/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "CV-18",
+    "code": "CV-18",
+    "meridianId": "CV",
+    "sequence": 18,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/conception-vessel/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "CV-19",
+    "code": "CV-19",
+    "meridianId": "CV",
+    "sequence": 19,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/conception-vessel/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "CV-20",
+    "code": "CV-20",
+    "meridianId": "CV",
+    "sequence": 20,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/conception-vessel/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "CV-21",
+    "code": "CV-21",
+    "meridianId": "CV",
+    "sequence": 21,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/conception-vessel/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "CV-22",
+    "code": "CV-22",
+    "meridianId": "CV",
+    "sequence": 22,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/conception-vessel/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "CV-23",
+    "code": "CV-23",
+    "meridianId": "CV",
+    "sequence": 23,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/conception-vessel/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  },
+  {
+    "id": "CV-24",
+    "code": "CV-24",
+    "meridianId": "CV",
+    "sequence": 24,
+    "reviewStatus": "SOURCE_VERIFIED",
+    "verificationStatus": "SOURCE_VERIFIED",
+    "sources": [
+      "HIU-STANDARD-NOMENCLATURE",
+      "ACUATLAS-361-2026"
+    ],
+    "references": [
+      "https://acupointatlas.com/meridians/conception-vessel/"
+    ],
+    "contentVersion": "0.3.0",
+    "spatialStatus": "UNREGISTERED"
+  }
+]

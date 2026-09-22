@@ -1,0 +1,188 @@
+{
+  "schemaVersion": "0.1.0",
+  "sourceId": "USER-NGO-TRUNG-TRIEU-HUYET-VI-KINH-LAC",
+  "document": {
+    "title": "Huyệt Vị Kinh Lạc Cơ Thể Người",
+    "author": "Ngô Trung Triều",
+    "publisher": "Nhà xuất bản Hồng Đức",
+    "pdfPages": 66,
+    "attachmentName": "huyet-vi-kinh-lac-co-the-nguoi-58728c04.pdf"
+  },
+  "policy": {
+    "usage": "PRIVATE_LLM_REFERENCE_AND_REVIEWER_AID",
+    "runtimeBundledDocument": false,
+    "displayLabel": "Theo tài liệu Ngô Trung Triều",
+    "spatialRule": "A 2D page/illustration reference may support reviewer-assisted registration but does not establish a verified BodyParts3D xyz/surface anchor by itself.",
+    "collateralRule": "Do not synthesize or label a lạc/collateral route unless that route is explicitly shown in the document and manually tagged; absence of a separate route is not evidence of absence."
+  },
+  "meridians": [
+    {
+      "meridianId": "LU",
+      "heading": "Thủ Thái Âm Phế Kinh",
+      "printedPageStart": 7,
+      "pdfPageRange": [
+        9,
+        11
+      ],
+      "label": "Theo tài liệu Ngô Trung Triều · PDF tr. 9–11",
+      "evidenceType": "VISUAL_LOCATION_REFERENCE",
+      "spatialStatus": "DOCUMENT_REFERENCED_2D"
+    },
+    {
+      "meridianId": "LI",
+      "heading": "Thủ Dương Minh Đại Trường Kinh",
+      "printedPageStart": 10,
+      "pdfPageRange": [
+        12,
+        14
+      ],
+      "label": "Theo tài liệu Ngô Trung Triều · PDF tr. 12–14",
+      "evidenceType": "VISUAL_LOCATION_REFERENCE",
+      "spatialStatus": "DOCUMENT_REFERENCED_2D"
+    },
+    {
+      "meridianId": "ST",
+      "heading": "Túc Dương Minh Vị Kinh",
+      "printedPageStart": 13,
+      "pdfPageRange": [
+        15,
+        20
+      ],
+      "label": "Theo tài liệu Ngô Trung Triều · PDF tr. 15–20",
+      "evidenceType": "VISUAL_LOCATION_REFERENCE",
+      "spatialStatus": "DOCUMENT_REFERENCED_2D"
+    },
+    {
+      "meridianId": "SP",
+      "heading": "Túc Thái Âm Tỳ Kinh",
+      "printedPageStart": 18,
+      "pdfPageRange": [
+        20,
+        23
+      ],
+      "label": "Theo tài liệu Ngô Trung Triều · PDF tr. 20–23",
+      "evidenceType": "VISUAL_LOCATION_REFERENCE",
+      "spatialStatus": "DOCUMENT_REFERENCED_2D"
+    },
+    {
+      "meridianId": "HT",
+      "heading": "Thủ Thiếu Âm Tâm Kinh",
+      "printedPageStart": 22,
+      "pdfPageRange": [
+        24,
+        25
+      ],
+      "label": "Theo tài liệu Ngô Trung Triều · PDF tr. 24–25",
+      "evidenceType": "VISUAL_LOCATION_REFERENCE",
+      "spatialStatus": "DOCUMENT_REFERENCED_2D"
+    },
+    {
+      "meridianId": "SI",
+      "heading": "Thủ Thái Dương Tiểu Trường Kinh",
+      "printedPageStart": 24,
+      "pdfPageRange": [
+        26,
+        28
+      ],
+      "label": "Theo tài liệu Ngô Trung Triều · PDF tr. 26–28",
+      "evidenceType": "VISUAL_LOCATION_REFERENCE",
+      "spatialStatus": "DOCUMENT_REFERENCED_2D"
+    },
+    {
+      "meridianId": "BL",
+      "heading": "Túc Thái Dương Bàng Quang Kinh",
+      "printedPageStart": 27,
+      "pdfPageRange": [
+        29,
+        36
+      ],
+      "label": "Theo tài liệu Ngô Trung Triều · PDF tr. 29–36",
+      "evidenceType": "VISUAL_LOCATION_REFERENCE",
+      "spatialStatus": "DOCUMENT_REFERENCED_2D"
+    },
+    {
+      "meridianId": "KI",
+      "heading": "Túc Thiếu Âm Thận Kinh",
+      "printedPageStart": 35,
+      "pdfPageRange": [
+        37,
+        41
+      ],
+      "label": "Theo tài liệu Ngô Trung Triều · PDF tr. 37–41",
+      "evidenceType": "VISUAL_LOCATION_REFERENCE",
+      "spatialStatus": "DOCUMENT_REFERENCED_2D"
+    },
+    {
+      "meridianId": "PC",
+      "heading": "Thủ Quyết Âm Tâm Bào Kinh",
+      "printedPageStart": 40,
+      "pdfPageRange": [
+        42,
+        44
+      ],
+      "label": "Theo tài liệu Ngô Trung Triều · PDF tr. 42–44",
+      "evidenceType": "VISUAL_LOCATION_REFERENCE",
+      "spatialStatus": "DOCUMENT_REFERENCED_2D"
+    },
+    {
+      "meridianId": "TE",
+      "heading": "Thủ Thiếu Dương Tam Tiêu Kinh",
+      "printedPageStart": 43,
+      "pdfPageRange": [
+        45,
+        48
+      ],
+      "label": "Theo tài liệu Ngô Trung Triều · PDF tr. 45–48",
+      "evidenceType": "VISUAL_LOCATION_REFERENCE",
+      "spatialStatus": "DOCUMENT_REFERENCED_2D"
+    },
+    {
+      "meridianId": "GB",
+      "heading": "Túc Thiếu Dương Đởm Kinh",
+      "printedPageStart": 47,
+      "pdfPageRange": [
+        49,
+        52
+      ],
+      "label": "Theo tài liệu Ngô Trung Triều · PDF tr. 49–52",
+      "evidenceType": "VISUAL_LOCATION_REFERENCE",
+      "spatialStatus": "DOCUMENT_REFERENCED_2D"
+    },
+    {
+      "meridianId": "LR",
+      "heading": "Túc Quyết Âm Can Kinh",
+      "printedPageStart": 51,
+      "pdfPageRange": [
+        53,
+        56
+      ],
+      "label": "Theo tài liệu Ngô Trung Triều · PDF tr. 53–56",
+      "evidenceType": "VISUAL_LOCATION_REFERENCE",
+      "spatialStatus": "DOCUMENT_REFERENCED_2D"
+    },
+    {
+      "meridianId": "CV",
+      "heading": "Nhâm Mạch",
+      "printedPageStart": 55,
+      "pdfPageRange": [
+        57,
+        60
+      ],
+      "label": "Theo tài liệu Ngô Trung Triều · PDF tr. 57–60",
+      "evidenceType": "VISUAL_LOCATION_REFERENCE",
+      "spatialStatus": "DOCUMENT_REFERENCED_2D"
+    },
+    {
+      "meridianId": "GV",
+      "heading": "Đốc Mạch",
+      "printedPageStart": 58,
+      "pdfPageRange": [
+        60,
+        64
+      ],
+      "label": "Theo tài liệu Ngô Trung Triều · PDF tr. 60–64",
+      "evidenceType": "VISUAL_LOCATION_REFERENCE",
+      "spatialStatus": "DOCUMENT_REFERENCED_2D"
+    }
+  ]
+}

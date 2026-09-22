@@ -1,0 +1,102 @@
+{
+  "schemaVersion": "0.1.0",
+  "coordinateSystem": "BodyParts3D-4.0-browser-meters-Y-up",
+  "policy": "Faculty-review staging only. No anchor in this file is eligible for runtime publication until independently reviewed. Reference-only material is linked, not copied.",
+  "pilot": [
+    {
+      "pointCode": "ST-36",
+      "meridianId": "ST",
+      "requiredSides": [
+        "LEFT",
+        "RIGHT"
+      ],
+      "geometrySource": "BODYPARTS3D-4.0",
+      "locationReferenceSources": [
+        "WHO-2008-ACUPOINT",
+        "USER-NGO-TRUNG-TRIEU-HUYET-VI-KINH-LAC"
+      ],
+      "referenceOnlyLabel": "WHO + Bộ Y tế + tài liệu kinh huyệt người dùng cung cấp; chỉ đối chiếu thủ công, không nhúng bản scan",
+      "status": "PENDING_CAPTURE",
+      "anchors": [],
+      "corroborationSources": [
+        "USER-BYT-2020-YHCT-GUIDELINE"
+      ]
+    },
+    {
+      "pointCode": "LI-4",
+      "meridianId": "LI",
+      "requiredSides": [
+        "LEFT",
+        "RIGHT"
+      ],
+      "geometrySource": "BODYPARTS3D-4.0",
+      "locationReferenceSources": [
+        "WHO-2008-ACUPOINT",
+        "USER-NGO-TRUNG-TRIEU-HUYET-VI-KINH-LAC"
+      ],
+      "referenceOnlyLabel": "WHO + Bộ Y tế + tài liệu kinh huyệt người dùng cung cấp; chỉ đối chiếu thủ công, không nhúng bản scan",
+      "status": "PENDING_CAPTURE",
+      "anchors": [],
+      "corroborationSources": [
+        "USER-BYT-2020-YHCT-GUIDELINE"
+      ]
+    },
+    {
+      "pointCode": "LU-5",
+      "meridianId": "LU",
+      "requiredSides": [
+        "LEFT",
+        "RIGHT"
+      ],
+      "geometrySource": "BODYPARTS3D-4.0",
+      "locationReferenceSources": [
+        "WHO-2008-ACUPOINT",
+        "USER-NGO-TRUNG-TRIEU-HUYET-VI-KINH-LAC"
+      ],
+      "referenceOnlyLabel": "WHO + Bộ Y tế + tài liệu kinh huyệt người dùng cung cấp; chỉ đối chiếu thủ công, không nhúng bản scan",
+      "status": "PENDING_CAPTURE",
+      "anchors": [],
+      "corroborationSources": [
+        "USER-BYT-2020-YHCT-GUIDELINE"
+      ]
+    },
+    {
+      "pointCode": "LU-9",
+      "meridianId": "LU",
+      "requiredSides": [
+        "LEFT",
+        "RIGHT"
+      ],
+      "geometrySource": "BODYPARTS3D-4.0",
+      "locationReferenceSources": [
+        "WHO-2008-ACUPOINT",
+        "USER-NGO-TRUNG-TRIEU-HUYET-VI-KINH-LAC"
+      ],
+      "referenceOnlyLabel": "WHO + Bộ Y tế + tài liệu kinh huyệt người dùng cung cấp; chỉ đối chiếu thủ công, không nhúng bản scan",
+      "status": "PENDING_CAPTURE",
+      "anchors": [],
+      "corroborationSources": [
+        "USER-BYT-2020-YHCT-GUIDELINE"
+      ]
+    },
+    {
+      "pointCode": "ST-41",
+      "meridianId": "ST",
+      "requiredSides": [
+        "LEFT",
+        "RIGHT"
+      ],
+      "geometrySource": "BODYPARTS3D-4.0",
+      "locationReferenceSources": [
+        "WHO-2008-ACUPOINT",
+        "USER-NGO-TRUNG-TRIEU-HUYET-VI-KINH-LAC"
+      ],
+      "referenceOnlyLabel": "WHO + Bộ Y tế + tài liệu kinh huyệt người dùng cung cấp; chỉ đối chiếu thủ công, không nhúng bản scan",
+      "status": "PENDING_CAPTURE",
+      "anchors": [],
+      "corroborationSources": [
+        "USER-BYT-2020-YHCT-GUIDELINE"
+      ]
+    }
+  ]
+}

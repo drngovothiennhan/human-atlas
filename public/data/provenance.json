@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedFor": "HIU YHCT 3D Atlas",
+  "generatedAt": "2026-09-21",
+  "assets": [
+    {
+      "id": "bodyparts3d-4.0-browser-adaptation",
+      "kind": "anatomy-model-chunks",
+      "source": "BodyParts3D 4.0",
+      "version": "4.0",
+      "license": "CC-BY-4.0",
+      "originalUrl": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/download.html",
+      "processing": [
+        "axes/units converted to browser coordinate frame",
+        "geometry simplified with meshoptimizer per repository documentation",
+        "normals quantized",
+        "packed into binary chunks",
+        "gzip companion chunks"
+      ],
+      "checksum": null,
+      "checksumStatus": "NOT_RECOMPUTED_THIS_SESSION"
+    },
+    {
+      "id": "hiu-meridian-nomenclature-0.3.0",
+      "kind": "meridian-nomenclature-and-ordered-point-index",
+      "source": "HIU independently entered factual identifiers, cross-checked against AcuAtlas 361-point index",
+      "version": "0.3.0",
+      "license": "CC0-1.0 + AcuAtlas CC-BY-4.0 attribution for cross-check/source index",
+      "originalUrl": "https://acupointatlas.com/meridians/",
+      "processing": [
+        "14 standard meridians",
+        "361 standard point identifiers assigned in verified numeric order",
+        "No 3D coordinates",
+        "No copied clinical/location prose"
+      ],
+      "checksum": null,
+      "checksumStatus": "BUILD_GENERATES_SOURCE_HASHES"
+    },
+    {
+      "id": "hiu-acupoint-catalogue-0.3.0",
+      "kind": "acupoint-identifier-catalogue",
+      "source": "AcuAtlas 361-point reference index + HIU standard nomenclature compilation",
+      "version": "0.3.0",
+      "license": "CC-BY-4.0 / CC0-1.0 compilation",
+      "originalUrl": "https://acupointatlas.com/acupuncture-points/",
+      "processing": [
+        "Imported point codes, meridian membership and numeric ordering only",
+        "Excluded mapped x/y coordinates from 3D runtime",
+        "Excluded location, depth, indications and clinical claims",
+        "All position3d fields remain absent until BodyParts3D registration passes"
+      ],
+      "checksum": null,
+      "checksumStatus": "BUILD_GENERATES_SOURCE_HASHES"
+    }
+  ]
+}
