@@ -16,7 +16,7 @@ import {type MeridianFocusTarget,type MeridianOverlayState} from './meridian-ove
 import {type RenderQualityMode} from './render-quality';
 import {type AcupointAnchorDraft,type RegistrationSide,type SurfaceCapture} from '../src/acupoints/registration/coordinate-system';
 import {normalizeAtlasSystems,DEFAULT_VISIBLE,SYSTEMS,EXPLANATIONS,anatomyName,explanation,isMeridianLandmarkMuscle,type Atlas,type Concept,type SceneState,type SystemId,type View} from './anatomy';
-import {ARTICULAR_SOURCE,DETAILED_MUSCLE_SOURCE,SKELETAL_SOURCE} from './head-muscles';
+import {ARTICULAR_SOURCE,SKELETAL_SOURCE} from './head-muscles';
 const initial:SceneState={headMuscles:false,explode:0,visible:DEFAULT_VISIBLE,selected:[],isolate:false,view:'three-quarter',rotate:false,reset:0};
 const REGISTRATION_STORAGE_KEY='hiu-yhct-registration-drafts-v0.1';
 const RENDER_QUALITY_STORAGE_KEY='hiu-atlas-render-quality-v1';
