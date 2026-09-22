@@ -25,6 +25,7 @@ export type MeridianScenePath={
 export type MeridianOverlayState={
   enabled:boolean;
   meridianId:string|null;
+  selectedPointCode?:string|null;
   side:MeridianOverlaySide;
   anchors:MeridianSceneAnchor[];
   paths:MeridianScenePath[];

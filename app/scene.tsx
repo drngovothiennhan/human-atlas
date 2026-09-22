@@ -55,7 +55,10 @@ export default function AnatomyScene({atlas,state,onSelect,onProgress,onError,re
   const reduceMeridianMotion=window.matchMedia?.('(prefers-reduced-motion: reduce)').matches??false;
   type MeridianFlowParticle={mesh:T.Mesh;curve:T.CatmullRomCurve3;offset:number};
   let meridianMarkers:T.Mesh[]=[],meridianPulseMarkers:T.Mesh[]=[],meridianFlowParticles:MeridianFlowParticle[]=[];
-  const meridianColors:Record<string,number>={LU:0x2563eb,LI:0xf97316,ST:0xa16207,SP:0x8b5cf6,HT:0xdc2626,SI:0x0ea5e9,BL:0x475569,KI:0x0f766e,PC:0xdb2777,TE:0x0e7490,GB:0x65a30d,LR:0x16a34a,CV:0x7c3aed,GV:0xb91c1c};
+  const meridianColors:Record<string,number>={LU:0x1d4ed8,LI:0xc2410c,ST:0x854d0e,SP:0x6d28d9,HT:0xb91c1c,SI:0x0369a1,BL:0x334155,KI:0x0f766e,PC:0xbe185d,TE:0x0e7490,GB:0x4d7c0f,LR:0x15803d,CV:0x6d28d9,GV:0x991b1b};
+  const MERIDIAN_LINE_EDGE_RADIUS=.0024,MERIDIAN_LINE_CORE_RADIUS=.0017;
+  const MERIDIAN_LINE_EDGE_OPACITY=.42,MERIDIAN_LINE_CORE_OPACITY=.78;
+  const ACUPOINT_RADIUS_SCHEMATIC=.0062,ACUPOINT_RADIUS_LOCAL=.0067,ACUPOINT_RADIUS_PUBLISHED=.0072,ACUPOINT_RADIUS_SELECTED=.0082;
   const disposeOverlay=()=>{
    meridianMarkers=[];meridianPulseMarkers=[];meridianFlowParticles=[];
    while(meridianGroup.children.length){
@@ -67,16 +70,23 @@ export default function AnatomyScene({atlas,state,onSelect,onProgress,onError,re
   };
   const rebuildOverlay=(value:MeridianOverlayState|undefined)=>{
    renderer.domElement.dataset.meridianId=value?.enabled?(value.meridianId??''):'';
-   disposeOverlay();renderer.domElement.dataset.meridianAnchors='0';renderer.domElement.dataset.meridianPaths='0';renderer.domElement.dataset.meridianSchematicAnchors='0';renderer.domElement.dataset.meridianSchematicPaths='0';renderer.domElement.dataset.meridianPulseMarkers='0';renderer.domElement.dataset.meridianFlowParticles='0';renderer.domElement.dataset.meridianEffect=value?.enabled?(reduceMeridianMotion?'reduced':'flow'):'off';if(!value?.enabled)return;
-   const color=meridianColors[value.meridianId??'']??0x0f766e;let trustedAnchors=0,schematicAnchors=0,schematicPaths=0,trustedPaths=0;
+   renderer.domElement.dataset.meridianSelectedPoint=value?.selectedPointCode??'';
+   renderer.domElement.dataset.meridianLineOuterRadius=String(MERIDIAN_LINE_EDGE_RADIUS);
+   renderer.domElement.dataset.meridianLineCoreRadius=String(MERIDIAN_LINE_CORE_RADIUS);
+   renderer.domElement.dataset.meridianLineCoreOpacity=String(MERIDIAN_LINE_CORE_OPACITY);
+   renderer.domElement.dataset.meridianLineTransparent='true';
+   renderer.domElement.dataset.meridianPointMinRadius=String(ACUPOINT_RADIUS_SCHEMATIC);
+   disposeOverlay();renderer.domElement.dataset.meridianAnchors='0';renderer.domElement.dataset.meridianPaths='0';renderer.domElement.dataset.meridianSchematicAnchors='0';renderer.domElement.dataset.meridianSchematicPaths='0';renderer.domElement.dataset.meridianPulseMarkers='0';renderer.domElement.dataset.meridianSelectedMarkers='0';renderer.domElement.dataset.meridianFlowParticles='0';renderer.domElement.dataset.meridianEffect=value?.enabled?(reduceMeridianMotion?'reduced':'flow'):'off';if(!value?.enabled)return;
+   const color=meridianColors[value.meridianId??'']??0x0f766e,lineColor=new T.Color(color).offsetHSL(0,.04,-.12);let trustedAnchors=0,schematicAnchors=0,schematicPaths=0,trustedPaths=0,selectedMarkers=0;
    for(const anchor of value.effects?.acupoints===false?[]:value.anchors){
     if(![anchor.x,anchor.y,anchor.z].every(Number.isFinite))continue;
-    const schematic=anchor.sourceKind==='LICENSED_SCHEMATIC';
-    const baseOpacity=anchor.sourceKind==='PUBLISHED'?1:schematic?.9:.92;
-    const material=new T.MeshBasicMaterial({color,transparent:true,opacity:baseOpacity,depthTest:false});
-    const marker=new T.Mesh(new T.SphereGeometry(anchor.sourceKind==='PUBLISHED'?.006:schematic?.0048:.0055,18,14),material);
-    marker.position.set(anchor.x,anchor.y,anchor.z);marker.renderOrder=24;marker.userData.pointCode=anchor.pointCode;marker.userData.side=anchor.side;marker.userData.verificationStatus=anchor.verificationStatus;marker.userData.sourceKind=anchor.sourceKind;marker.userData.baseOpacity=baseOpacity;
-    meridianGroup.add(marker);meridianMarkers.push(marker);meridianPulseMarkers.push(marker);if(schematic)schematicAnchors++;else trustedAnchors++;
+    const schematic=anchor.sourceKind==='LICENSED_SCHEMATIC',selected=value.selectedPointCode===anchor.pointCode;
+    const baseOpacity=selected?1:anchor.sourceKind==='PUBLISHED'?.98:schematic?.94:.96;
+    const material=new T.MeshBasicMaterial({color,transparent:true,opacity:baseOpacity,depthTest:false,depthWrite:false});
+    const radius=selected?ACUPOINT_RADIUS_SELECTED:anchor.sourceKind==='PUBLISHED'?ACUPOINT_RADIUS_PUBLISHED:schematic?ACUPOINT_RADIUS_SCHEMATIC:ACUPOINT_RADIUS_LOCAL;
+    const marker=new T.Mesh(new T.SphereGeometry(radius,18,14),material);
+    marker.position.set(anchor.x,anchor.y,anchor.z);marker.renderOrder=selected?26:24;marker.userData.pointCode=anchor.pointCode;marker.userData.side=anchor.side;marker.userData.verificationStatus=anchor.verificationStatus;marker.userData.sourceKind=anchor.sourceKind;marker.userData.baseOpacity=baseOpacity;marker.userData.selected=selected;
+    meridianGroup.add(marker);meridianMarkers.push(marker);meridianPulseMarkers.push(marker);if(selected)selectedMarkers++;if(schematic)schematicAnchors++;else trustedAnchors++;
    }
    renderer.domElement.dataset.meridianAnchors=String(trustedAnchors);renderer.domElement.dataset.meridianSchematicAnchors=String(schematicAnchors);
    for(const path of value.effects?.meridians===false?[]:value.paths){
@@ -87,20 +97,20 @@ export default function AnatomyScene({atlas,state,onSelect,onProgress,onError,re
     const points=path.points.map(point=>new T.Vector3(point[0],point[1],point[2]));
     const curve=new T.CatmullRomCurve3(points,false,'centripetal');
     const segments=Math.max(24,points.length*12);
-    // A dark edge and opaque core remain legible against skin and bone.
-    const edge=new T.Mesh(new T.TubeGeometry(curve,segments,.0048,8,false),new T.MeshBasicMaterial({color:0x263238,depthTest:false,depthWrite:false}));
+    // Thin semi-transparent channels stay legible without masking anatomy.
+    const edge=new T.Mesh(new T.TubeGeometry(curve,segments,MERIDIAN_LINE_EDGE_RADIUS,8,false),new T.MeshBasicMaterial({color:0x17212b,transparent:true,opacity:MERIDIAN_LINE_EDGE_OPACITY,depthTest:false,depthWrite:false}));
     edge.renderOrder=21;meridianGroup.add(edge);
-    const tube=new T.Mesh(new T.TubeGeometry(curve,segments,.0034,8,false),new T.MeshBasicMaterial({color,depthTest:false,depthWrite:false}));
+    const tube=new T.Mesh(new T.TubeGeometry(curve,segments,MERIDIAN_LINE_CORE_RADIUS,8,false),new T.MeshBasicMaterial({color:lineColor,transparent:true,opacity:MERIDIAN_LINE_CORE_OPACITY,depthTest:false,depthWrite:false}));
     tube.renderOrder=22;meridianGroup.add(tube);
     // Several moving lights make motion visible along long channels, not only at one end.
     for(let i=0;i<5;i++){
-     const particle=new T.Mesh(new T.SphereGeometry(.0058,12,10),new T.MeshBasicMaterial({color:0xffffff,depthTest:false,depthWrite:false}));
+     const particle=new T.Mesh(new T.SphereGeometry(.0029,12,10),new T.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:.9,depthTest:false,depthWrite:false}));
      const offset=i/5;particle.position.copy(curve.getPointAt(offset));particle.renderOrder=25;
      meridianGroup.add(particle);meridianFlowParticles.push({mesh:particle,curve,offset});
     }
     if(schematic)schematicPaths++;else trustedPaths++;
    }
-   renderer.domElement.dataset.meridianPaths=String(trustedPaths);renderer.domElement.dataset.meridianSchematicPaths=String(schematicPaths);renderer.domElement.dataset.meridianPulseMarkers=String(meridianPulseMarkers.length);renderer.domElement.dataset.meridianFlowParticles=String(meridianFlowParticles.length);
+   renderer.domElement.dataset.meridianPaths=String(trustedPaths);renderer.domElement.dataset.meridianSchematicPaths=String(schematicPaths);renderer.domElement.dataset.meridianPulseMarkers=String(meridianPulseMarkers.length);renderer.domElement.dataset.meridianSelectedMarkers=String(selectedMarkers);renderer.domElement.dataset.meridianFlowParticles=String(meridianFlowParticles.length);
   };
   const hover=document.createElement('div');hover.className='part-hover';hover.setAttribute('role','tooltip');hover.hidden=true;el.appendChild(hover);
   type Target={index:number;x:number;y:number;left:number;right:number;top:number;bottom:number};let targets:Target[]=[];
@@ -186,14 +196,14 @@ export default function AnatomyScene({atlas,state,onSelect,onProgress,onError,re
    if(disposed)return;frame=requestAnimationFrame(animate);const dt=Math.min(clock.getDelta(),.05),s=latest.current;
    const overlayValue=overlay.current;
    const overlayKey=overlayValue?.enabled
-    ?[overlayValue.meridianId,overlayValue.side,overlayValue.effects?.meridians,overlayValue.effects?.acupoints,overlayValue.anchors.map(anchor=>[anchor.pointCode,anchor.side,anchor.x.toFixed(5),anchor.y.toFixed(5),anchor.z.toFixed(5),anchor.verificationStatus].join(':')).join('|'),overlayValue.paths.map(path=>path.meridianId+':'+path.verificationStatus+':'+path.points.length).join('|')].join('::')
+    ?[overlayValue.meridianId,overlayValue.side,overlayValue.selectedPointCode??'',overlayValue.effects?.meridians,overlayValue.effects?.acupoints,overlayValue.anchors.map(anchor=>[anchor.pointCode,anchor.side,anchor.x.toFixed(5),anchor.y.toFixed(5),anchor.z.toFixed(5),anchor.verificationStatus].join(':')).join('|'),overlayValue.paths.map(path=>path.meridianId+':'+path.verificationStatus+':'+path.points.length).join('|')].join('::')
     :'off';
    if(overlayKey!==lastOverlayKey){rebuildOverlay(overlayValue);lastOverlayKey=overlayKey;dirty=true;}
    if(overlayValue?.enabled&&overlayValue.effects?.motion!==false&&!reduceMeridianMotion&&(meridianFlowParticles.length||meridianPulseMarkers.length)){
     const effectFrame=Math.floor(clock.elapsedTime*30);
     if(effectFrame!==lastMeridianEffectFrame){
      meridianFlowParticles.forEach((entry,index)=>{entry.curve.getPointAt((clock.elapsedTime*.18+entry.offset+index*.07)%1,entry.mesh.position);entry.mesh.scale.setScalar(1+.12*(.5+.5*Math.sin(clock.elapsedTime*7+index)));});
-     meridianPulseMarkers.forEach((marker,index)=>{const wave=.5+.5*Math.sin(clock.elapsedTime*5.4+index*.43),pulse=1+.14*wave;marker.scale.setScalar(pulse);const material=marker.material as T.MeshBasicMaterial;const base=Number(marker.userData.baseOpacity??.9);material.opacity=Math.min(1,base*(.84+.18*wave));});
+     meridianPulseMarkers.forEach((marker,index)=>{const wave=.5+.5*Math.sin(clock.elapsedTime*5.4+index*.43),selected=Boolean(marker.userData.selected),pulse=1+(selected?.2:.075)*wave;marker.scale.setScalar(pulse);const material=marker.material as T.MeshBasicMaterial,base=Number(marker.userData.baseOpacity??.94);material.opacity=Math.min(1,base*(selected?.92+.08*wave:.88+.1*wave));});
      renderer.domElement.dataset.meridianEffect='flow';renderer.domElement.dataset.meridianEffectFrame=String(effectFrame);lastMeridianEffectFrame=effectFrame;dirty=true;
     }
    }else {renderer.domElement.dataset.meridianEffect=!overlayValue?.enabled?'off':reduceMeridianMotion?'reduced':'paused';}

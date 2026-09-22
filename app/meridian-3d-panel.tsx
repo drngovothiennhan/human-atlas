@@ -94,7 +94,7 @@ export default function Meridian3DPanel({drafts,selectedPointCode,onOverlayChang
     return schematic.paths.filter(p=>p.meridianId===activeMeridian&&(side==='BOTH'||p.side===side||p.side==='MIDLINE'||p.side==='UNKNOWN'));
   },[publishedPaths,schematic.paths,activeMeridian,side]);
 
-  useEffect(()=>{onOverlayChange({enabled,meridianId:activeMeridian,side,anchors:visibleAnchors,paths:visiblePaths,effects:{motion,meridians:showMeridians,acupoints:showPoints,collaterals:showCollaterals}})},[enabled,activeMeridian,side,visibleAnchors,visiblePaths,motion,showMeridians,showPoints,showCollaterals,onOverlayChange]);
+  useEffect(()=>{onOverlayChange({enabled,meridianId:activeMeridian,side,selectedPointCode:selected,anchors:visibleAnchors,paths:visiblePaths,effects:{motion,meridians:showMeridians,acupoints:showPoints,collaterals:showCollaterals}})},[enabled,activeMeridian,side,selected,visibleAnchors,visiblePaths,motion,showMeridians,showPoints,showCollaterals,onOverlayChange]);
 
   const meridianName=(m:Meridian|undefined)=>{
     if(!m)return activeMeridian;

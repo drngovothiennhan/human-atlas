@@ -167,6 +167,9 @@ try{
   await waitFor(()=>evaluate("Number(document.querySelector('canvas')?.dataset.meridianEffectFrame||0)>"+effectFrameBefore),{timeout:30000,label:'meridian animation frame advances'});
   const effectFrameAfter=await evaluate("Number(document.querySelector('canvas')?.dataset.meridianEffectFrame||0)");
   console.log('SMOKE_MERIDIAN_FLOW_EFFECT_PASS '+JSON.stringify({effectFrameBefore,effectFrameAfter,pulseMarkers:await evaluate("Number(document.querySelector('canvas')?.dataset.meridianPulseMarkers||0)"),flowParticles:await evaluate("Number(document.querySelector('canvas')?.dataset.meridianFlowParticles||0)")}));
+  const meridianVisualMetrics=await evaluate("(()=>{const d=document.querySelector('canvas')?.dataset||{};return{outer:Number(d.meridianLineOuterRadius),core:Number(d.meridianLineCoreRadius),opacity:Number(d.meridianLineCoreOpacity),transparent:d.meridianLineTransparent==='true',point:Number(d.meridianPointMinRadius)}})()");
+  if(!(meridianVisualMetrics.outer<=.0024&&meridianVisualMetrics.core<=.0017&&meridianVisualMetrics.opacity<1&&meridianVisualMetrics.transparent&&meridianVisualMetrics.point>meridianVisualMetrics.outer*2))throw new Error('Meridian visual hierarchy assertion failed: '+JSON.stringify(meridianVisualMetrics));
+  console.log('SMOKE_MERIDIAN_VISUAL_HIERARCHY_PASS '+JSON.stringify(meridianVisualMetrics));
   await evaluate("document.querySelector('[data-effect-motion=true]').click()");
   await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.meridianEffect==='paused'"),{label:'motion toggle pauses scene'});
   const pausedFrame=await evaluate("document.querySelector('canvas').dataset.meridianEffectFrame");
@@ -210,6 +213,7 @@ try{
   await waitFor(()=>evaluate("!!document.querySelector('[data-meridian3d-point=\\\"ST-36\\\"]')"),{label:'3D meridian ST36 search'});
   await evaluate("document.querySelector('[data-meridian3d-point=\\\"ST-36\\\"]')?.click()");
   await waitFor(()=>evaluate("document.querySelector('[data-meridian3d-detail=true]')?.innerText.includes('Chưa có tọa độ BodyParts3D')"),{label:'3D unregistered point gate'});
+  await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.meridianSelectedPoint==='ST-36'&&Number(document.querySelector('canvas')?.dataset.meridianSelectedMarkers||0)>0"),{label:'selected acupoint stronger 3D state'});
   await screenshot('desktop-meridian3d-panel.png');
   await evaluate("document.querySelector('[data-meridian3d-panel=true] [aria-label=\\\"Đóng mô hình kinh lạc 3D\\\"]')?.click()");
 
@@ -235,6 +239,22 @@ try{
   await sleep(500);
   const pinchAfter=await screenshot('tablet-after-pinch.png');
   if(pinchAfter===pinchBefore)throw new Error('Tablet pinch zoom did not change rendered screenshot');
+
+  await send('Emulation.setDeviceMetricsOverride',{width:390,height:844,deviceScaleFactor:1,mobile:true,screenWidth:390,screenHeight:844});
+  await send('Emulation.setTouchEmulationEnabled',{enabled:true,maxTouchPoints:5});
+  await sleep(250);
+  await evaluate("document.querySelector('[data-meridian3d-launch=true]')?.click()");
+  await waitFor(()=>evaluate("!!document.querySelector('[data-meridian3d-panel=true]')"),{label:'mobile meridian panel'});
+  const mobileLayout=await evaluate("(()=>{const p=document.querySelector('[data-meridian3d-panel=true]')?.getBoundingClientRect(),v=document.querySelector('.view-controls')?.getBoundingClientRect();return{vw:innerWidth,vh:innerHeight,panel:p&&{left:p.left,right:p.right,top:p.top,bottom:p.bottom,height:p.height},views:v&&{left:v.left,right:v.right,top:v.top,bottom:v.bottom}}})()");
+  if(!mobileLayout.panel||mobileLayout.panel.left<0||mobileLayout.panel.right>mobileLayout.vw||mobileLayout.panel.top<0||mobileLayout.panel.bottom>mobileLayout.vh||mobileLayout.panel.height>mobileLayout.vh*.62)throw new Error('Mobile meridian layout overflow: '+JSON.stringify(mobileLayout));
+  if(!mobileLayout.views||mobileLayout.views.left<0||mobileLayout.views.right>mobileLayout.vw)throw new Error('Mobile view controls overflow: '+JSON.stringify(mobileLayout));
+  await screenshot('mobile-meridian3d-layout.png');
+  await evaluate("document.querySelector('[data-meridian3d-panel=true] [aria-label=\"Đóng mô hình kinh lạc 3D\"]')?.click()");
+  console.log('SMOKE_MOBILE_MERIDIAN_LAYOUT_PASS '+JSON.stringify(mobileLayout));
+
+  await send('Emulation.setDeviceMetricsOverride',{width:1024,height:768,deviceScaleFactor:1,mobile:false,screenWidth:1024,screenHeight:768});
+  await send('Emulation.setTouchEmulationEnabled',{enabled:true,maxTouchPoints:5});
+  await sleep(250);
 
   await send('Page.navigate',{url:base+'?register=1'});
   await waitFor(()=>evaluate("document.readyState==='complete'&&!!document.querySelector('[data-registration-panel=true]')"),{timeout:30000,label:'registration workspace'});
