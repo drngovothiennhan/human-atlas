@@ -1,3 +1,18 @@
+# CURRENT CHECKPOINT — browser smoke repaired + CI verified (2026-09-22)
+
+- Branch: `feature-hiu-yhct-3d-atlas`; PR #1 remains draft/open; `main` is untouched.
+- CI-verified code candidate: `714f36f01c99152d8aad3644a801abfbe1ccb462` (`test: align local draft smoke assertion with Vietnamese UI`).
+- The prior browser-smoke failure was an outdated UI assertion: the product now says `nháp trên máy`, while the smoke test still expected `nháp local`. Only that assertion was aligned; no spatial data, clinical content, or runtime coordinate gate was weakened.
+- Push CI #167, run `35669458877`: attempt 1 passed content validation/build, TypeScript, anatomy/interactions validators, 21 unit tests, production/static builds and full browser smoke; only GitHub artifact finalization returned transient HTTP 403. Failed job was retried without code changes; attempt 2 completed SUCCESS.
+- PR CI #168, run `35669462184`: SUCCESS.
+- Browser evidence: load-failure recovery PASS; moving meridian flow PASS; effect controls PASS; all 14 schematic meridians PASS; local ST-36 capture remains UNVERIFIED; no fabricated reviewed path; desktop/tablet interactions and offline reload PASS; consoleErrors=[].
+- Browser artifacts: push `10671101163` (sha256 `646e6cdfa234012a5f6dc7188f5858728bef2eb4c564a3851c3c0d1abc560b6c`); PR `10670990113` (sha256 `318c707ee3785c0206f5da1ff0907712450be11996238163805579347d5434ac`).
+- The motion/readability/Vietnamese-primary patch is therefore CI verified. It is not yet claimed live on Render until the existing preview service is observed serving this commit/assets.
+- Next approved action: inspect automatic deployment of the existing `hiu-yhct-3d-atlas-preview` service; do not create another service or merge main. After live provenance is confirmed, run direct Preview checks for visible motion, thinner points/clearer paths, Vietnamese-primary labels, point focus, and load retry.
+- Faculty-reviewed BodyParts3D coordinates, published clinical spatial paths, physical-device QA, and fresh reference parity remain separate gates; do not fabricate or claim them complete.
+
+---
+
 # CURRENT CHECKPOINT — motion, readability and Vietnamese UI (2026-09-21)
 
 This section supersedes the historical UI checkpoint below.
