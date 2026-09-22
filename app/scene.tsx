@@ -8,7 +8,7 @@ import {mergeGeometries} from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 import {createExplosionLayout} from './explosion-layout';
 import {decodeModelResponse} from './model-download';
 import {PointerTap} from './pointer-tap';
-import {SYSTEMS,type Atlas,type SceneState} from './anatomy';
+import {SYSTEMS,isMeridianLandmarkMuscle,type Atlas,type SceneState} from './anatomy';
 import {BODY_CANONICAL_COORDINATE_SYSTEM,type SurfaceCapture} from '../src/acupoints/registration/coordinate-system';
 import type {MeridianFocusTarget,MeridianOverlayState} from './meridian-overlay';
 import {ARTICULAR_SOURCE,DETAILED_MUSCLE_SOURCE,HEAD_MUSCLE_SOURCE,HEAD_MUSCLE_SOURCE_NODES,SKELETAL_SOURCE} from './head-muscles';
@@ -78,7 +78,7 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
   renderer.domElement.dataset.detailedMuscleExpected=String(DETAILED_MUSCLE_SOURCE.expectedMeshCount);
   renderer.domElement.dataset.articularStatus='idle';
   renderer.domElement.dataset.articularExpected=String(ARTICULAR_SOURCE.expectedMeshCount);
-  renderer.domElement.dataset.skeletalReferenceStatus='idle';renderer.domElement.dataset.skeletalReferenceExpected=String(SKELETAL_SOURCE.expectedMeshCount);renderer.domElement.dataset.anatomyAlignmentPolicy='source-world-transform';renderer.domElement.dataset.anatomyOcclusionPolicy='opaque-depth-tested';
+  renderer.domElement.dataset.skeletalReferenceStatus='idle';renderer.domElement.dataset.skeletalReferenceExpected=String(SKELETAL_SOURCE.expectedMeshCount);renderer.domElement.dataset.anatomyAlignmentPolicy='source-world-transform';renderer.domElement.dataset.anatomyOcclusionPolicy='opaque-depth-tested';renderer.domElement.dataset.musclePolicy='meridian-landmarks';renderer.domElement.dataset.muscleLandmarkCount=String(atlas.parts.filter(p=>p.system==='muscular'&&isMeridianLandmarkMuscle(p.name)).length);renderer.domElement.dataset.fullDetailedMusclesRuntime=DETAILED_MUSCLE_SOURCE.runtimeEnabled?'enabled':'disabled';
   const clearGroup=(group:T.Group)=>{while(group.children.length)group.remove(group.children[0]);};
   const bakeStaticGeometry=(mesh:T.Mesh)=>{
    const baked=mesh.geometry.index?mesh.geometry.toNonIndexed():mesh.geometry.clone();
@@ -349,7 +349,7 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
     camera.position.lerpVectors(cameraMotion.fromPosition,cameraMotion.toPosition,e);controls.target.lerpVectors(cameraMotion.fromTarget,cameraMotion.toTarget,e);controls.update();dirty=true;
     if(t>=1){cameraMotion=null;renderer.domElement.dataset.cameraMotion='idle';}
    }
-   const muscleLayerVisible=s.visible.includes('muscular')&&!s.isolate&&s.explode<.01,detailedMusclesWanted=muscleLayerVisible;bodyMuscleGroup.visible=detailedMusclesWanted;
+   const muscleLayerVisible=s.visible.includes('muscular')&&!s.isolate&&s.explode<.01,detailedMusclesWanted=muscleLayerVisible&&DETAILED_MUSCLE_SOURCE.runtimeEnabled;bodyMuscleGroup.visible=detailedMusclesWanted;
    const headWanted=detailedMusclesWanted;if(detailedMusclesWanted)ensureDetailedMuscles();
    if(headWanted!==lastHeadMuscles){headMuscleGroup.visible=headWanted;renderer.domElement.dataset.headMusclesActive=String(headWanted);lastHeadMuscles=headWanted;dirty=true;}
    const detailedReplacement=detailedMusclesWanted&&detailedMuscleStatus==='ready';renderer.domElement.dataset.detailedMusclesActive=String(detailedMusclesWanted);renderer.domElement.dataset.detailedMusclesReplacement=String(detailedReplacement);renderer.domElement.dataset.detailedMuscleVisibleCount=String(detailedReplacement?DETAILED_MUSCLE_SOURCE.expectedMeshCount:0);
@@ -360,7 +360,7 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
    if(moving){amount=T.MathUtils.damp(amount,s.explode,8,dt);dirty=true;}
    if(changed||moving||lastExtent<0){
     const visible=new Set(s.visible),selection=new Set(s.selected);
-    const visibleParts=atlas.parts.filter(p=>s.isolate?selection.has(p.id):visible.has(p.system)||selection.has(p.id));
+    const visibleParts=atlas.parts.filter(p=>{const selected=selection.has(p.id);if(s.isolate)return selected;if(p.system==='muscular'&&!selected&&!isMeridianLandmarkMuscle(p.name))return false;return visible.has(p.system)||selected;});
     const nextLayoutKey=visibleParts.map(p=>p.id).join(',')+':'+camera.aspect.toFixed(3);
     if(nextLayoutKey!==layoutKey){const layout=createExplosionLayout(visibleParts,camera.aspect);packingWidth=layout.width;packingHeight=layout.height;atlas.parts.forEach((p,i)=>{const cell=layout.cells.get(p.id);offsets[i]=cell?new T.Vector3(cell.x,cell.y+.85,0):centers[i].clone();});layoutKey=nextLayoutKey;if(amount>.05&&!s.isolate)fit(s.view,Math.max(0,(amount-.3)/.7));}
 
@@ -368,7 +368,7 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
      const c=centers[i],destination=offsets[i];let dx=0,dy=0,dz=0;
      if(amount<=.45){const t=amount/.45;const group=SYSTEMS.findIndex(sys=>sys.id===p.system);const angle=group/SYSTEMS.length*Math.PI*2;dx=Math.sin(angle)*t*.48;dy=(c.y-.85)*t*.28;dz=Math.cos(angle)*t*.48;}
      else {const t=(amount-.45)/.55,group=SYSTEMS.findIndex(sys=>sys.id===p.system),angle=group/SYSTEMS.length*Math.PI*2;dx=T.MathUtils.lerp(Math.sin(angle)*.48,destination.x-c.x,t);dy=T.MathUtils.lerp((c.y-.85)*.28,destination.y-c.y,t);dz=T.MathUtils.lerp(Math.cos(angle)*.48,-c.z,t);}
-     const selected=selection.has(p.id),baseVisible=s.isolate?selected:visible.has(p.system)||selected,replaced=!selected&&((p.system==='muscular'&&detailedReplacement)||(p.system==='articular'&&articularReplacement)||(p.system==='skeletal'&&skeletalReplacement));data.set([dx,dy,dz,baseVisible&&!replaced?1:0],i*4);selectedData[i*4]=selected?255:0;
+     const selected=selection.has(p.id),muscleAllowed=p.system!=='muscular'||selected||isMeridianLandmarkMuscle(p.name),baseVisible=muscleAllowed&&(s.isolate?selected:visible.has(p.system)||selected),replaced=!selected&&((p.system==='muscular'&&detailedReplacement)||(p.system==='articular'&&articularReplacement)||(p.system==='skeletal'&&skeletalReplacement));data.set([dx,dy,dz,baseVisible&&!replaced?1:0],i*4);selectedData[i*4]=selected?255:0;
      markerPositions.set(data[i*4+3]>.5?[c.x+dx,c.y+dy,c.z+dz]:[10000,10000,10000],i*3);const mesh=pickers[i];if(mesh){mesh.position.set(dx,dy,dz);mesh.updateMatrix();mesh.updateMatrixWorld(true);}
     });partTexture.needsUpdate=true;selectionTexture.needsUpdate=true;markerGeometry.attributes.position.needsUpdate=true;lastState=s;lastExtent=amount;dirty=true;
    }
