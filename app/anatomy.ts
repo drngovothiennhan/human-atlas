@@ -22,7 +22,7 @@ export interface Concept {id:string;name:string;elements:string[]}
 export interface Atlas {version:string;sex?:'male';source?:string;scope?:string;parts:Part[];concepts:Concept[];chunks:{url:string;bytes:number;gzip?:string;gzipBytes?:number}[];triangles:number}
 export type View = 'three-quarter'|'front'|'back'|'side';
 export interface SceneState {inspectorOpen?:boolean;headMuscles?:boolean;explode:number;visible:SystemId[];selected:string[];isolate:boolean;view:View;rotate:boolean;reset:number}
-export const DEFAULT_VISIBLE:SystemId[] = ['muscular'];
+export const DEFAULT_VISIBLE:SystemId[] = ['integumentary'];
 export const EXPLANATIONS:Record<string,string> = {
  'heart':'Bơm cơ trong lồng ngực. Tim phải đưa máu tới phổi; tim trái đưa máu vào tuần hoàn hệ thống.',
  'liver':'Cơ quan lớn dưới bên phải cơ hoành, xử lý dưỡng chất, tạo mật và tổng hợp nhiều protein huyết tương.',
@@ -39,6 +39,21 @@ export function explanation(name:string,system:SystemId){return EXPLANATIONS[nam
 const ANATOMY_VI:Record<string,string>={'heart': 'Tim', 'liver': 'Gan', 'brain': 'Não', 'stomach': 'Dạ dày', 'spleen': 'Lách', 'pancreas': 'Tụy', 'urinary bladder': 'Bàng quang', 'trachea': 'Khí quản', 'diaphragm': 'Cơ hoành'};
 export const anatomyName=(name:string)=>ANATOMY_VI[name.toLowerCase()]?ANATOMY_VI[name.toLowerCase()]+" · "+name:name;
 
+
+// Meridian-first profile: render only a compact set of superficial/landmark muscles by default.
+// All atlas structures remain searchable and can still be selected individually.
+const MERIDIAN_LANDMARK_MUSCLE_TERMS=[
+ 'frontalis','occipitalis','temporalis','masseter','orbicularis oculi','orbicularis oris','zygomaticus major','buccinator','mentalis',
+ 'sternocleidomastoid','trapezius','latissimus dorsi','splenius capitis','deltoid','pectoralis major','serratus anterior','rectus abdominis','external oblique',
+ 'biceps brachii','triceps brachii','brachialis','brachioradialis','pronator teres','palmaris longus','flexor carpi radialis','flexor carpi ulnaris','extensor carpi radialis','extensor carpi ulnaris','extensor digitorum',
+ 'gluteus maximus','gluteus medius','tensor fasciae latae','sartorius','adductor longus','gracilis','rectus femoris','vastus medialis','vastus lateralis','biceps femoris','semitendinosus','semimembranosus',
+ 'tibialis anterior','gastrocnemius','soleus','fibularis longus','fibularis brevis','peroneus longus','peroneus brevis','extensor digitorum longus','flexor digitorum longus','extensor hallucis longus','flexor hallucis longus','abductor hallucis'
+] as const;
+export function isMeridianLandmarkMuscle(name:string){
+ const n=name.toLowerCase();
+ if((n.includes('fascia')&&!n.includes('tensor fasciae latae'))||/(tendon|ligament|aponeuros|retinaculum|bursa|sheath|septum)/.test(n))return false;
+ return MERIDIAN_LANDMARK_MUSCLE_TERMS.some(term=>n.includes(term));
+}
 
 // Source atlas labels incorrectly group these named lower-leg muscles as bone.
 const LEG_MUSCLE_IDS=new Set(["FJ1409","FJ1409M","FJ1410","FJ1410M","FJ1411","FJ1411M","FJ1439","FJ1439M","FJ1440","FJ1440M"]);
