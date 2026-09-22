@@ -191,6 +191,11 @@ try{
   await evaluate("document.querySelector('[data-head-muscles-toggle=true]').click()");
   await waitFor(()=>evaluate("document.querySelector('[data-head-muscles-toggle=true]')?.getAttribute('aria-pressed')==='true'&&document.querySelector('canvas')?.dataset.headMusclesActive==='true'&&document.querySelector('canvas')?.dataset.headMuscleCount==='78'"),{label:'head muscle toggle restores 78 meshes'});
   await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.footMuscleCount==='4'&&document.querySelector('canvas')?.dataset.neckMuscleCount==='1'"),{label:'missing foot/neck meshes loaded'});
+  await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.detailedMusclesStatus==='ready'&&document.querySelector('canvas')?.dataset.detailedMuscleCount==='484'"),{timeout:90000,label:'484 detailed muscle meshes'});
+  await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.articularStatus==='ready'&&document.querySelector('canvas')?.dataset.articularCount==='413'"),{timeout:90000,label:'413 articular meshes'});
+  const detailedAnatomyMetrics=await evaluate("(()=>{const d=document.querySelector('canvas')?.dataset||{};return{muscleStatus:d.detailedMusclesStatus,muscleCount:d.detailedMuscleCount,muscleExpected:d.detailedMuscleExpected,muscleBounds:d.detailedMuscleBounds,articularStatus:d.articularStatus,articularCount:d.articularCount,articularExpected:d.articularExpected,articularBounds:d.articularBounds,articularActive:d.articularActive}})()");
+  if(detailedAnatomyMetrics.muscleCount!=='484'||detailedAnatomyMetrics.muscleExpected!=='484'||detailedAnatomyMetrics.articularCount!=='413'||detailedAnatomyMetrics.articularExpected!=='413'||detailedAnatomyMetrics.articularActive!=='true')throw new Error('Detailed anatomy verification failed: '+JSON.stringify(detailedAnatomyMetrics));
+  console.log('SMOKE_DETAILED_ANATOMY_PASS '+JSON.stringify(detailedAnatomyMetrics));
   const regionalQaHashes=[];
   for(const [region,yFraction] of [['head',.20],['foot',.80]]){
     for(const [label,suffix] of [['Mặt trước','front'],['Mặt bên','side'],['Mặt sau','back']]){
