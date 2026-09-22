@@ -2,6 +2,8 @@ import {useEffect,useRef} from 'react';
 import * as T from 'three';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls.js';
 import {RoomEnvironment} from 'three/examples/jsm/environments/RoomEnvironment.js';
+import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader.js';
+import {DRACOLoader} from 'three/examples/jsm/loaders/DRACOLoader.js';
 import {mergeGeometries} from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 import {createExplosionLayout} from './explosion-layout';
 import {decodeModelResponse} from './model-download';
@@ -9,6 +11,7 @@ import {PointerTap} from './pointer-tap';
 import {SYSTEMS,type Atlas,type SceneState} from './anatomy';
 import {BODY_CANONICAL_COORDINATE_SYSTEM,type SurfaceCapture} from '../src/acupoints/registration/coordinate-system';
 import type {MeridianFocusTarget,MeridianOverlayState} from './meridian-overlay';
+import {HEAD_MUSCLE_SOURCE,HEAD_MUSCLE_SOURCE_NODES} from './head-muscles';
 interface Props {atlas:Atlas;state:SceneState;onSelect:(id:string)=>void;onProgress:(n:number)=>void;onError:(s:string)=>void;registrationMode?:boolean;onRegisterSurface?:(capture:SurfaceCapture)=>void;meridianOverlay?:MeridianOverlayState;focusAcupoint?:MeridianFocusTarget|null;onSelectAcupoint?:(pointCode:string)=>void}
 const assetUrl=(url:string)=>url.startsWith('/')?import.meta.env.BASE_URL+url.slice(1):url;
 export default function AnatomyScene({atlas,state,onSelect,onProgress,onError,registrationMode=false,onRegisterSurface,meridianOverlay,focusAcupoint,onSelectAcupoint}:Props){
@@ -52,6 +55,39 @@ export default function AnatomyScene({atlas,state,onSelect,onProgress,onError,re
   const markers=new T.Points(markerGeometry,markerMaterial);markers.frustumCulled=false;markers.renderOrder=10;markers.visible=false;scene.add(markers);
   const registrationMarker=new T.Mesh(new T.SphereGeometry(.009,18,12),new T.MeshBasicMaterial({color:0x0f766e,depthTest:false}));registrationMarker.visible=false;registrationMarker.renderOrder=30;scene.add(registrationMarker);
   const meridianGroup=new T.Group();meridianGroup.name='hiu-meridian-overlay';scene.add(meridianGroup);
+  const headMuscleGroup=new T.Group();headMuscleGroup.name='hiu-head-muscles';headMuscleGroup.visible=false;scene.add(headMuscleGroup);
+  const headMuscleMaterial=new T.MeshStandardMaterial({color:0xa94f45,metalness:.02,roughness:.62,transparent:true,opacity:.98,side:T.DoubleSide});
+  const headMuscleAllowed=new Set(HEAD_MUSCLE_SOURCE_NODES.map(name=>T.PropertyBinding.sanitizeNodeName(name)));
+  let headMuscleStatus:'idle'|'loading'|'ready'|'error'='idle',lastHeadMuscles=false;
+  renderer.domElement.dataset.headMusclesStatus='idle';
+  renderer.domElement.dataset.headMuscleExpected=String(HEAD_MUSCLE_SOURCE.expectedMeshCount);
+  renderer.domElement.dataset.headMuscleSource=HEAD_MUSCLE_SOURCE.repository;
+  renderer.domElement.dataset.headMuscleLicense=HEAD_MUSCLE_SOURCE.license;
+  const clearHeadMuscles=()=>{while(headMuscleGroup.children.length)headMuscleGroup.remove(headMuscleGroup.children[0]);};
+  const ensureHeadMuscles=()=>{
+   if(headMuscleStatus==='loading'||headMuscleStatus==='ready')return;
+   headMuscleStatus='loading';renderer.domElement.dataset.headMusclesStatus='loading';dirty=true;
+   const draco=new DRACOLoader();draco.setDecoderPath(assetUrl('/draco/'));
+   const loader=new GLTFLoader();loader.setDRACOLoader(draco);
+   loader.loadAsync(assetUrl(HEAD_MUSCLE_SOURCE.runtimeAsset)).then(gltf=>{
+    if(disposed)return;
+    gltf.scene.updateMatrixWorld(true);clearHeadMuscles();const box=new T.Box3();let count=0;
+    gltf.scene.traverse(object=>{
+     if(!(object instanceof T.Mesh))return;
+     const clean=T.PropertyBinding.sanitizeNodeName(object.name);
+     if(!headMuscleAllowed.has(clean))return;
+     if(!object.geometry.boundingBox)object.geometry.computeBoundingBox();
+     const worldBox=object.geometry.boundingBox?.clone().applyMatrix4(object.matrixWorld);if(worldBox)box.union(worldBox);
+     const mesh=new T.Mesh(object.geometry,headMuscleMaterial);mesh.name='hiu-head:'+object.name;mesh.matrixAutoUpdate=false;mesh.matrix.copy(object.matrixWorld);mesh.frustumCulled=false;mesh.renderOrder=12;headMuscleGroup.add(mesh);count++;
+    });
+    if(count!==HEAD_MUSCLE_SOURCE.expectedMeshCount){clearHeadMuscles();throw new Error('Head muscle source mismatch: '+count+'/'+HEAD_MUSCLE_SOURCE.expectedMeshCount);}
+    headMuscleStatus='ready';renderer.domElement.dataset.headMusclesStatus='ready';renderer.domElement.dataset.headMuscleCount=String(count);
+    renderer.domElement.dataset.headMuscleBounds=[box.min.x,box.min.y,box.min.z,box.max.x,box.max.y,box.max.z].map(v=>v.toFixed(4)).join(',');
+    headMuscleGroup.visible=Boolean(latest.current.headMuscles);dirty=true;
+   }).catch(error=>{
+    if(disposed)return;headMuscleStatus='error';clearHeadMuscles();renderer.domElement.dataset.headMusclesStatus='error';renderer.domElement.dataset.headMuscleError=error instanceof Error?error.message:'load failed';console.error('[head-muscles]',error);dirty=true;
+   }).finally(()=>draco.dispose());
+  };
   const reduceMeridianMotion=window.matchMedia?.('(prefers-reduced-motion: reduce)').matches??false;
   type MeridianFlowParticle={mesh:T.Mesh;curve:T.CatmullRomCurve3;offset:number};
   let meridianMarkers:T.Mesh[]=[],meridianPulseMarkers:T.Mesh[]=[],meridianFlowParticles:MeridianFlowParticle[]=[];
@@ -217,7 +253,9 @@ export default function AnatomyScene({atlas,state,onSelect,onProgress,onError,re
     camera.position.lerpVectors(cameraMotion.fromPosition,cameraMotion.toPosition,e);controls.target.lerpVectors(cameraMotion.fromTarget,cameraMotion.toTarget,e);controls.update();dirty=true;
     if(t>=1){cameraMotion=null;renderer.domElement.dataset.cameraMotion='idle';}
    }
-   const changed=lastState?.visible!==s.visible||lastState?.selected!==s.selected||lastState?.isolate!==s.isolate;
+   const headWanted=Boolean(s.headMuscles);
+   if(headWanted!==lastHeadMuscles){headMuscleGroup.visible=headWanted;if(headWanted)ensureHeadMuscles();renderer.domElement.dataset.headMusclesActive=String(headWanted);lastHeadMuscles=headWanted;dirty=true;}
+   const changed=lastState?.visible!==s.visible||lastState?.selected!==s.selected||lastState?.isolate!==s.isolate||lastState?.headMuscles!==s.headMuscles;
    const moving=Math.abs(amount-s.explode)>.0001;
    if(moving){amount=T.MathUtils.damp(amount,s.explode,8,dt);dirty=true;}
    if(changed||moving||lastExtent<0){
@@ -248,7 +286,7 @@ export default function AnatomyScene({atlas,state,onSelect,onProgress,onError,re
 
   };animate();
   const contextLost=(e:Event)=>{e.preventDefault();onError('Thiết bị đã tạm dừng phiên 3D. Bấm tải lại để tiếp tục.');};renderer.domElement.addEventListener('webglcontextlost',contextLost);
-  return()=>{disposed=true;abort.abort();cancelAnimationFrame(frame);observer.disconnect();controls.dispose();disposeOverlay();geometries.forEach(g=>g.dispose());materials.forEach(m=>m.dispose());scene.traverse(o=>{if(o instanceof T.Mesh&&!geometries.includes(o.geometry)){o.geometry.dispose();const ms=Array.isArray(o.material)?o.material:[o.material];ms.forEach(m=>m.dispose());}});env.dispose();partTexture.dispose();selectionTexture.dispose();markerGeometry.dispose();markerMaterial.dispose();hover.remove();renderer.dispose();renderer.domElement.remove();};
+  return()=>{disposed=true;abort.abort();cancelAnimationFrame(frame);observer.disconnect();controls.dispose();disposeOverlay();geometries.forEach(g=>g.dispose());materials.forEach(m=>m.dispose());scene.traverse(o=>{if(o instanceof T.Mesh&&!geometries.includes(o.geometry)&&!o.name.startsWith('hiu-head:')){o.geometry.dispose();const ms=Array.isArray(o.material)?o.material:[o.material];ms.forEach(m=>m.dispose());}});headMuscleGroup.traverse(o=>{if(o instanceof T.Mesh)o.geometry.dispose();});headMuscleMaterial.dispose();env.dispose();partTexture.dispose();selectionTexture.dispose();markerGeometry.dispose();markerMaterial.dispose();hover.remove();renderer.dispose();renderer.domElement.remove();};
  },[atlas]);
  return <div className="scene" ref={host}/>;
 }
