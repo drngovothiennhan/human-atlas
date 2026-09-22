@@ -125,7 +125,7 @@ export default function YhctStudyPanel({localDraftCount,onStudyCommand}:Props){
       const owned=points.filter(p=>p.meridianId===exactMeridian.id).sort((a,b)=>a.sequence-b.sequence);
       setAnswer(q.includes('huyet')
         ?`${exactMeridian.vietnameseName} có ${owned.length} huyệt trong catalog: ${owned.map(p=>p.code).join(', ')}. Đây là thứ tự danh mục, không phải hướng dẫn châm cứu.`
-        :`${exactMeridian.code} · ${exactMeridian.vietnameseName} (${exactMeridian.englishName}). Catalog: ${exactMeridian.pointIds.length} huyệt. Trạng thái dữ liệu nguồn: ${exactMeridian.spatialStatus}. Đường mô phỏng 3D được gắn nhãn UNVERIFIED nếu chưa qua thẩm định.`);
+        :`${exactMeridian.code} · ${exactMeridian.vietnameseName} (${exactMeridian.englishName}). Catalog: ${exactMeridian.pointIds.length} huyệt; điểm đầu ${exactMeridian.pointIds[0]}, điểm cuối ${exactMeridian.pointIds.at(-1)}. Trạng thái dữ liệu nguồn: ${exactMeridian.spatialStatus}. Đường mô phỏng 3D được gắn nhãn UNVERIFIED nếu chưa qua thẩm định.`);
       return;
     }
     setAnswer('Không tìm thấy trong cơ sở dữ liệu cục bộ. Liên kết Google chỉ mở tham khảo bên ngoài; ứng dụng không tự chép kết quả tìm kiếm vào catalog.');
@@ -191,7 +191,7 @@ export default function YhctStudyPanel({localDraftCount,onStudyCommand}:Props){
             ?<article key={(row as Meridian).id}>
               <b>{(row as Meridian).code}</b>
               <span>{(row as Meridian).vietnameseName||(row as Meridian).englishName}</span>
-              <small>{(row as Meridian).pointIds?.length||0} huyệt · chuỗi học tập đã có</small>
+              <small>{(row as Meridian).pointIds?.length||0} huyệt · đầu {(row as Meridian).pointIds?.[0]||'—'} · cuối {(row as Meridian).pointIds?.at(-1)||'—'}</small>
               <p className="yhct-sequence">{(row as Meridian).pointIds?.length?`${(row as Meridian).pointIds.slice(0,4).join(' → ')} → … → ${(row as Meridian).pointIds.at(-1)}`:'Chưa có chuỗi huyệt.'}</p>
               <div className="yhct-links">
                 <button type="button" data-study-meridian={(row as Meridian).id} onClick={()=>{const p=points.find(point=>point.meridianId===(row as Meridian).id);if(p)focusPoint(p,`Mở ${(row as Meridian).vietnameseName} trên mô hình 3D.`)}}>Xem 3D</button>
