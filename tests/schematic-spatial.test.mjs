@@ -10,12 +10,15 @@ test('licensed schematic spatial dataset stays unverified and complete',async()=
   assert.match(data.source.license,/MIT/);
   assert.match(data.source.license,/CC BY-SA/);
   assert.equal(data.coordinateSystem,'BodyParts3D-4.0-browser-meters-Y-up');
-  assert.equal(data.anchors.length,675);
   assert.deepEqual(data.omittedTopology,['BL-39']);
   const codes=new Set(data.anchors.map(x=>x.pointCode));
   assert.equal(codes.size,361);
   const catalogue=JSON.parse(await readFile(new URL('../content/acupoints/acupoints.json',import.meta.url),'utf8'));
   const meridians=JSON.parse(await readFile(new URL('../content/meridians/meridians.json',import.meta.url),'utf8'));
+  const midlineCodes=new Set(meridians.filter(m=>['CV','GV'].includes(m.id)).flatMap(m=>m.pointIds));
+  const expectedAnchorCount=catalogue.reduce((count,p)=>count+(midlineCodes.has(p.code)?1:2),0);
+  assert.equal(expectedAnchorCount,670,'361-point catalogue must resolve to bilateral non-midline anchors plus one anchor for each CV/GV point');
+  assert.equal(data.anchors.length,expectedAnchorCount);
   assert.deepEqual([...codes].sort(),catalogue.map(p=>p.code).sort(),'schematic point codes must join the actual UI catalogue');
   for(const meridian of meridians){
     assert.ok(data.anchors.some(a=>a.meridianId===meridian.id),'missing markers: '+meridian.id);
