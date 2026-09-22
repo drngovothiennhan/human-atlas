@@ -1,5 +1,6 @@
 import {useEffect,useMemo,useState} from 'react';
 import {Button} from '@/components/ui/button';
+import type {StudyCommand} from './yhct-study-panel';
 import type {AcupointAnchorDraft} from '../src/acupoints/registration/coordinate-system';
 import {
   draftToSceneAnchor,
@@ -17,13 +18,13 @@ type SchematicSpatial={anchors:MeridianSceneAnchor[];paths:MeridianScenePath[];s
 type PointDocumentReference={pointCode:string;meridianId:string;label:string;heading:string;pdfPageRange:number[];spatialStatus:string};
 type PointDocumentReferences={points:PointDocumentReference[]};
 
-interface Props{drafts:AcupointAnchorDraft[];selectedPointCode:string|null;onOverlayChange:(overlay:MeridianOverlayState)=>void;onFocus:(target:MeridianFocusTarget|null)=>void}
+interface Props{drafts:AcupointAnchorDraft[];selectedPointCode:string|null;studyCommand:(StudyCommand&{seq:number})|null;onOverlayChange:(overlay:MeridianOverlayState)=>void;onFocus:(target:MeridianFocusTarget|null)=>void}
 
 const norm=(value:string)=>value.normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d').replace(/Đ/g,'D').toLowerCase().trim();
 const sideLabel=(side:MeridianOverlaySide)=>side==='BOTH'?'Hai bên':side==='LEFT'?'Trái':'Phải';
 const MERIDIAN_ZH:Record<string,string>={LU:'手太阴肺经',LI:'手阳明大肠经',ST:'足阳明胃经',SP:'足太阴脾经',HT:'手少阴心经',SI:'手太阳小肠经',BL:'足太阳膀胱经',KI:'足少阴肾经',PC:'手厥阴心包经',TE:'手少阳三焦经',GB:'足少阳胆经',LR:'足厥阴肝经',CV:'任脉',GV:'督脉'};
 
-export default function Meridian3DPanel({drafts,selectedPointCode,onOverlayChange,onFocus}:Props){
+export default function Meridian3DPanel({drafts,selectedPointCode,studyCommand,onOverlayChange,onFocus}:Props){
   const [open,setOpen]=useState(false),[enabled,setEnabled]=useState(false);
   const [motion,setMotion]=useState(true),[showMeridians,setShowMeridians]=useState(true),[showPoints,setShowPoints]=useState(true),[showCollaterals,setShowCollaterals]=useState(false);
   const [language,setLanguage]=useState<Language>('vi');
@@ -86,6 +87,27 @@ export default function Meridian3DPanel({drafts,selectedPointCode,onOverlayChang
     publishedAnchors.forEach(a=>byKey.set(a.pointCode+':'+a.side,a));
     return [...byKey.values()];
   },[schematic.anchors,draftAnchors,publishedAnchors]);
+
+  useEffect(()=>{
+    if(!studyCommand)return;
+    const command=studyCommand;
+    const point=command.pointCode?points.find(item=>item.code===command.pointCode):undefined;
+    const meridianId=command.meridianId??point?.meridianId;
+    if(meridianId)setActiveMeridian(meridianId);
+    if(command.effects){
+      if(typeof command.effects.motion==='boolean')setMotion(command.effects.motion);
+      if(typeof command.effects.meridians==='boolean')setShowMeridians(command.effects.meridians);
+      if(typeof command.effects.acupoints==='boolean')setShowPoints(command.effects.acupoints);
+      if(typeof command.effects.collaterals==='boolean')setShowCollaterals(command.effects.collaterals);
+    }
+    setEnabled(true);setOpen(true);
+    if(point){
+      setSelected(point.code);setQuery('');
+      const candidates=allAnchors.filter(a=>a.pointCode===point.code),anchor=candidates[0];
+      if(anchor)onFocus({key:'study:'+studyCommand.seq+':'+point.code+':'+anchor.side,pointCode:point.code,x:anchor.x,y:anchor.y,z:anchor.z});
+      else onFocus(null);
+    }
+  },[studyCommand?.seq,points,allAnchors,onFocus]);
 
   const visibleAnchors=useMemo(()=>allAnchors.filter(a=>a.meridianId===activeMeridian&&(side==='BOTH'||a.side===side||a.side==='MIDLINE'||a.side==='UNKNOWN')),[allAnchors,activeMeridian,side]);
   const visiblePaths=useMemo(()=>{

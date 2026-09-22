@@ -10,6 +10,9 @@ permissions:
 concurrency:
   group: github-pages-hiu-atlas
   cancel-in-progress: true
+env:
+  VITE_BUILD_SHA: ${{ github.sha }}
+
 jobs:
   deploy:
     runs-on: ubuntu-latest

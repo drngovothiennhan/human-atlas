@@ -7,6 +7,9 @@ on:
 concurrency:
   group: hiu-atlas-ci-${{ github.event_name }}-${{ github.ref }}
   cancel-in-progress: true
+env:
+  VITE_BUILD_SHA: ${{ github.sha }}
+
 jobs:
   verify:
     runs-on: ubuntu-latest
