@@ -70,6 +70,13 @@ try{
     const payload=JSON.stringify({x,y,deltaY});
     return evaluate("(()=>{const p="+payload+",el=document.elementFromPoint(p.x,p.y)||document.querySelector('canvas');if(!el)return false;el.dispatchEvent(new WheelEvent('wheel',{bubbles:true,cancelable:true,clientX:p.x,clientY:p.y,deltaX:0,deltaY:p.deltaY,deltaMode:0}));return true})()");
   };
+  const setViewport=async(width,height,{touch=false}={})=>{
+    const info=await send('Browser.getWindowForTarget',{targetId:target.id},15000);
+    await send('Browser.setWindowBounds',{windowId:info.windowId,bounds:{width,height}},20000);
+    await waitFor(()=>evaluate("Math.abs(innerWidth-"+width+")<=2&&Math.abs(innerHeight-"+height+")<=2"),{timeout:15000,label:'viewport '+width+'x'+height});
+    await send('Emulation.setTouchEmulationEnabled',{enabled:touch,maxTouchPoints:touch?5:1},15000);
+    return evaluate("({w:innerWidth,h:innerHeight})");
+  };
   await mkdir('artifacts',{recursive:true});
   await send('Page.enable');await send('Runtime.enable');await send('Network.enable');
   await send('Network.setBlockedURLs',{urls:['*data/schematic-spatial.json*']});
@@ -413,8 +420,7 @@ try{
   await waitFor(()=>evaluate("document.querySelector('[data-meridian3d-launch=true]')?.getAttribute('aria-pressed')==='false'&&document.querySelector('canvas')?.dataset.meridianEffect==='off'&&document.querySelector('canvas')?.dataset.meridianFlowParticles==='0'"),{label:'exit meridian mode clears animation'});
   console.log('SMOKE_MERIDIAN_MODE_EXIT_PASS '+JSON.stringify({effectFrameBeforePanelClose}));
 
-  await send('Emulation.setDeviceMetricsOverride',{width:1024,height:768,deviceScaleFactor:1,mobile:false,screenWidth:1024,screenHeight:768});
-  await send('Emulation.setTouchEmulationEnabled',{enabled:true,maxTouchPoints:5});
+  await setViewport(1024,768,{touch:true});
   await sleep(300);
   const tabletViewport=await evaluate("({w:innerWidth,h:innerHeight,canvas:!!document.querySelector('canvas'),panel:!!document.querySelector('.yhct-panel')})");
   if(tabletViewport.w!==1024||tabletViewport.h!==768||!tabletViewport.canvas)throw new Error('Tablet viewport assertion failed: '+JSON.stringify(tabletViewport));
@@ -436,8 +442,7 @@ try{
   const pinchAfter=await screenshot('tablet-after-pinch.png');
   if(pinchAfter===pinchBefore)throw new Error('Tablet pinch zoom did not change rendered screenshot');
 
-  await send('Emulation.setDeviceMetricsOverride',{width:390,height:844,deviceScaleFactor:1,mobile:true,screenWidth:390,screenHeight:844});
-  await send('Emulation.setTouchEmulationEnabled',{enabled:true,maxTouchPoints:5});
+  await setViewport(390,844,{touch:true});
   await sleep(250);
   await evaluate("document.querySelector('[data-meridian3d-launch=true]')?.click()");
   await waitFor(()=>evaluate("!!document.querySelector('[data-meridian3d-panel=true]')"),{label:'mobile meridian panel'});
@@ -483,8 +488,7 @@ try{
   await evaluate("document.querySelector('.yhct-head>button')?.click()");
   console.log('SMOKE_MOBILE_YHCT_LAYOUT_PASS '+JSON.stringify(mobileStudyLayout));
 
-  await send('Emulation.setDeviceMetricsOverride',{width:1024,height:768,deviceScaleFactor:1,mobile:false,screenWidth:1024,screenHeight:768});
-  await send('Emulation.setTouchEmulationEnabled',{enabled:true,maxTouchPoints:5});
+  await setViewport(1024,768,{touch:true});
   await sleep(250);
 
   await send('Page.navigate',{url:base+'?register=1'});
