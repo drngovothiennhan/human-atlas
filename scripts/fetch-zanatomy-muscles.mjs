@@ -8,7 +8,6 @@ const SOURCE_REPO='Nurkan1/Anatria-3D';
 const SOURCE_COMMIT='949ac80cc9763539afc48e60b5246132f00468db';
 const RAW='https://raw.githubusercontent.com/'+SOURCE_REPO+'/'+SOURCE_COMMIT+'/';
 const files=[
-  ['public/anatomy/muscular_male.glb','public/models/z-muscular-male.glb'],
   ['public/anatomy/articular_male.glb','public/models/z-articular-male.glb'],
   ['public/anatomy/skeletal_male.glb','public/models/z-skeletal-male.glb'],
   ['public/draco/draco_decoder.js','public/draco/draco_decoder.js'],
@@ -41,37 +40,16 @@ async function fetchJsonPinned(source){
 const fetched=[];
 for(const pair of files)fetched.push(await fetchPinned(...pair));
 
-const [muscularReport,articularReport,skeletalReport]=await Promise.all([
-  fetchJsonPinned('tools/asset-pipeline/vendor/reports/muscular.json'),
+const [articularReport,skeletalReport]=await Promise.all([
   fetchJsonPinned('tools/asset-pipeline/vendor/reports/articular.json'),
   fetchJsonPinned('tools/asset-pipeline/vendor/reports/skeletal.json')
 ]);
-if(muscularReport.object_count!==1388||muscularReport.objects.length!==1388)throw new Error('Muscular source object count drift');
 if(articularReport.object_count!==413||articularReport.objects.length!==413)throw new Error('Articular source object count drift');
 if(skeletalReport.object_count!==335||skeletalReport.objects.length!==335)throw new Error('Skeletal source object count drift');
 
-// Keep actual muscle meshes only. Z-Anatomy deliberately stores attachment markings,
-// bursae, fascia and tendon/support structures in the same source collection; those
-// are not muscle bellies and must not be rendered as if they were muscles.
-const supportName=/(bursa|aponeuros|retinaculum|tarsus|trochlea|tendon|tendinous|ligament|tract|linea alba|sheath|septum)/i;
-const muscleObjects=muscularReport.objects.filter(object=>
-  !object.path.some(part=>/muscular insertions/i.test(part))&&
-  object.path.some(part=>/\bmuscles?\b/i.test(part))&&
-  !supportName.test(object.name)
-);
-if(muscleObjects.length!==484)throw new Error('Muscle-belly manifest drift: '+muscleObjects.length+'/484');
-
+// Meridian-first runtime deliberately does not fetch or bundle the 11.9 MB full muscular GLB.
+// Muscle landmarks come from the existing BodyParts3D atlas; Z-Anatomy remains reference-only.
 const writeManifest=async(name,payload)=>writeFile(join(ROOT,'public/models',name),JSON.stringify(payload,null,2)+'\n');
-await writeManifest('z-muscles-manifest.json',{
-  schemaVersion:'1.0.0',
-  sourceRepository:SOURCE_REPO,
-  sourceCommit:SOURCE_COMMIT,
-  sourceReport:'tools/asset-pipeline/vendor/reports/muscular.json',
-  sourceObjectCount:muscularReport.object_count,
-  excludedMuscularInsertions:muscularReport.objects.filter(object=>object.path.some(part=>/muscular insertions/i.test(part))).length,
-  meshCount:muscleObjects.length,
-  nodes:muscleObjects.map(object=>object.name)
-});
 await writeManifest('z-skeletal-manifest.json',{
   schemaVersion:'1.0.0',sourceRepository:SOURCE_REPO,sourceCommit:SOURCE_COMMIT,sourceReport:'tools/asset-pipeline/vendor/reports/skeletal.json',meshCount:skeletalReport.object_count,nodes:skeletalReport.objects.map(object=>object.name)
 });
@@ -84,25 +62,10 @@ await writeManifest('z-articular-manifest.json',{
   nodes:articularReport.objects.map(object=>object.name)
 });
 
-const provenance={
-  sourceRepository:SOURCE_REPO,
-  sourceCommit:SOURCE_COMMIT,
-  sourceAssets:['public/anatomy/muscular_male.glb','public/anatomy/articular_male.glb','public/anatomy/skeletal_male.glb'],
-  derivedFrom:['Z-Anatomy','BodyParts3D'],
-  license:'CC BY-SA 4.0',
-  upstreamMuscularObjectCount:1388,
-  renderedMuscleMeshCount:muscleObjects.length,
-  articularMeshCount:articularReport.object_count,
-  skeletalMeshCount:skeletalReport.object_count,
-  use:'High-detail male muscle-belly and articular teaching layers. Muscle insertion markings and non-muscle support sheets are excluded from the muscle-belly layer.',
-  attribution:'Anatria3D adaptation of Z-Anatomy / BodyParts3D. Preserve CC BY-SA 4.0 attribution when redistributing the derived mesh assets.'
-};
-await writeFile(join(ROOT,'public/models/z-muscles-provenance.json'),JSON.stringify(provenance,null,2)+'\n');
 console.log('Z_ANATOMY_SOURCE_READY '+JSON.stringify({
   sourceCommit:SOURCE_COMMIT,
   files:fetched.map(({dest,bytes,cached})=>({dest,bytes,cached})),
-  muscleMeshes:muscleObjects.length,
-  excludedMuscularInsertions:provenance.upstreamMuscularObjectCount-muscularReport.objects.filter(object=>!object.path.some(part=>/muscular insertions/i.test(part))).length,
+  fullMuscularRuntime:'disabled-meridian-first',
   articularMeshes:articularReport.object_count,
   skeletalMeshes:skeletalReport.object_count
 }));
