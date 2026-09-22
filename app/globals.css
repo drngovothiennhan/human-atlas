@@ -212,3 +212,21 @@ body:has(.registration-panel) .meridian3d-launch{left:376px}body:has(.registrati
 .quality-control select{width:100%;min-height:34px;border:1px solid rgba(15,23,42,.16);border-radius:9px;background:rgba(255,255,255,.72);padding:0 10px;color:inherit}
 .quality-control small{line-height:1.35;opacity:.68}
 @media(max-width:767px){.quality-control{padding:9px 10px}.quality-control select{min-height:38px}}
+
+
+/* Functional YHCT learning modes and compact mobile-safe controls. */
+.yhct-links button{border:0;background:transparent;padding:0;color:#356a78;font:inherit;font-size:9px;cursor:pointer;text-decoration:underline;text-underline-offset:2px}
+.yhct-modes button.active{background:#dfeceb!important;color:#145e58!important;box-shadow:inset 0 0 0 1px #0f766e25}
+.yhct-mode-panel{flex:0 1 auto;max-height:34%;overflow:auto;overscroll-behavior:contain;margin-top:8px;padding:10px;border-radius:10px;background:#f4f7f7;border:1px solid #18253610;display:grid;gap:7px;font-size:11px}
+.yhct-mode-panel>strong{font-size:12px}.yhct-mode-panel p{margin:0;line-height:1.45;color:#60707b}
+.yhct-mode-panel label{display:grid;gap:4px;font-size:9px;color:#6c7984}.yhct-mode-panel select{min-height:38px;border:1px solid #18253618;border-radius:8px;background:#fff;padding:0 8px}
+.yhct-mode-panel button,.quiz-options button,.simulation-controls button{min-height:38px;border:0;border-radius:8px;background:#e8edef;color:#334955;padding:6px 9px;font-size:10px;cursor:pointer}
+.yhct-mode-panel>div,.quiz-options,.simulation-controls{display:flex;flex-wrap:wrap;gap:6px}
+.simulation-controls button[aria-pressed="true"]{background:#d9ebe8;color:#0f6159;box-shadow:inset 0 0 0 1px #0f766e28}
+.yhct-mode-message{margin:7px 0 0;font-size:10px;line-height:1.4;color:#4f6974}
+@media(max-width:767px){
+ .yhct-panel{max-height:min(62dvh,560px);bottom:calc(132px + env(safe-area-inset-bottom));padding:13px}
+ .yhct-list{flex:1}.yhct-mode-panel{max-height:40%;flex-shrink:1}
+ .yhct-links button,.yhct-links a{font-size:10px;min-height:30px;display:inline-flex;align-items:center}
+ .yhct-panel footer{max-height:42px;overflow:auto;flex-shrink:0}
+}
