@@ -296,11 +296,11 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
    adaptations++;renderer.domElement.dataset.renderQualityMode=quality.current;renderer.domElement.dataset.renderQualityProfile=qualityProfile;renderer.domElement.dataset.renderPixelRatio=renderer.getPixelRatio().toFixed(2);renderer.domElement.dataset.renderShadows=String(qualityConfig.shadows);renderer.domElement.dataset.renderTubeSegments=String(qualityConfig.tubeRadialSegments);renderer.domElement.dataset.renderFlowParticlesPerPath=String(qualityConfig.flowParticlesPerPath);renderer.domElement.dataset.renderAdaptations=String(adaptations);renderer.domElement.dataset.renderAdaptationReason=reason;lastOverlayKey='';dirty=true;
   };
   const sampleAdaptiveQuality=(now:number)=>{
-   const interval=now-lastFrameSample;lastFrameSample=now;if(interval>0&&interval<1000){frameSamples.push(interval);if(frameSamples.length>120)frameSamples=frameSamples.slice(-120);}
+   const interval=now-lastFrameSample;lastFrameSample=now;if(interval>0&&interval<30000){frameSamples.push(Math.min(interval,1000));if(frameSamples.length>120)frameSamples=frameSamples.slice(-120);}
    if(quality.current!==lastQualityMode){lastQualityMode=quality.current;slowWindows=0;fastWindows=0;frameSamples=[];lastAdaptAt=now;applyQualityProfile(selectInitialProfile(quality.current,capabilities),'manual-mode');}
    if(quality.current!=='auto')return;
    if(frameSamples.length>=5&&now-lastMetricAt>=2000){const metric=frameSamples.slice(-Math.min(30,frameSamples.length)),metricMean=metric.reduce((sum,value)=>sum+value,0)/metric.length;renderer.domElement.dataset.renderFrameMeanMs=metricMean.toFixed(2);renderer.domElement.dataset.renderFrameSampleCount=String(metric.length);lastMetricAt=now;}
-   if(frameSamples.length<45||now-lastAdaptAt<6000)return;
+   const adaptiveSampleReady=frameSamples.length>=45||(frameSamples.length>=8&&now-lastAdaptAt>=10000);if(!adaptiveSampleReady||now-lastAdaptAt<6000)return;
    const sample=frameSamples.splice(0,frameSamples.length),mean=sample.reduce((sum,value)=>sum+value,0)/sample.length;renderer.domElement.dataset.renderFrameMeanMs=mean.toFixed(2);
    if(mean>28){slowWindows++;fastWindows=0;}else if(mean<16){fastWindows++;slowWindows=0;}else{slowWindows=0;fastWindows=0;}
    if(slowWindows>=2||fastWindows>=3){const next=stepAdaptiveProfile(qualityProfile,mean);slowWindows=0;fastWindows=0;lastAdaptAt=now;if(next!==qualityProfile)applyQualityProfile(next,mean>28?'measured-slow':'measured-fast');}
