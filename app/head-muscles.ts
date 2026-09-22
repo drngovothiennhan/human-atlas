@@ -1,3 +1,23 @@
+export const DETAILED_MUSCLE_SOURCE = {
+  repository:'Nurkan1/Anatria-3D',
+  commit:'949ac80cc9763539afc48e60b5246132f00468db',
+  runtimeAsset:'/models/z-muscular-male.glb',
+  runtimeManifest:'/models/z-muscles-manifest.json',
+  license:'CC BY-SA 4.0',
+  expectedMeshCount:484,
+  scope:'Actual muscle meshes selected from the pinned Z-Anatomy hierarchy. Muscular insertion markings and non-muscle support structures are excluded.'
+} as const;
+
+export const ARTICULAR_SOURCE = {
+  repository:'Nurkan1/Anatria-3D',
+  commit:'949ac80cc9763539afc48e60b5246132f00468db',
+  runtimeAsset:'/models/z-articular-male.glb',
+  runtimeManifest:'/models/z-articular-manifest.json',
+  license:'CC BY-SA 4.0',
+  expectedMeshCount:413,
+  scope:'Pinned articular-system meshes including joint capsules, discs, menisci and ligaments where present in the source hierarchy.'
+} as const;
+
 export const HEAD_MUSCLE_SOURCE = {
   repository:'Nurkan1/Anatria-3D',
   commit:'949ac80cc9763539afc48e60b5246132f00468db',
