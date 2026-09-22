@@ -235,7 +235,7 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
    if(found<0&&amount>.45)found=findTarget(e.clientX-rect.left,e.clientY-rect.top,e.pointerType==='touch'?24:16);if(found>=0){hover.hidden=true;select.current(atlas.parts[found].id);}
   };
   renderer.domElement.addEventListener('pointerdown',down);renderer.domElement.addEventListener('pointermove',move);renderer.domElement.addEventListener('pointerup',up);renderer.domElement.addEventListener('pointercancel',cancel);
-  const clock=new T.Clock();let lastExtent=-1,lastOverlayKey='',lastFocusKey='',lastMeridianEffectFrame=-1,lastFrameSample=performance.now(),lastAdaptAt=performance.now(),slowWindows=0,fastWindows=0,adaptations=0;let frameSamples:number[]=[];
+  const clock=new T.Clock();let lastExtent=-1,lastOverlayKey='',lastFocusKey='',lastMeridianEffectFrame=-1,lastFrameSample=performance.now(),lastAdaptAt=performance.now(),lastMetricAt=performance.now(),slowWindows=0,fastWindows=0,adaptations=0;let frameSamples:number[]=[];
   const applyQualityProfile=(next:RenderQualityProfile,reason:string)=>{
    if(next===qualityProfile){renderer.domElement.dataset.renderQualityMode=quality.current;return;}
    qualityProfile=next;qualityConfig=QUALITY_CONFIG[next];renderer.setPixelRatio(Math.min(devicePixelRatio,qualityConfig.pixelRatioCap));renderer.shadowMap.enabled=qualityConfig.shadows;key.castShadow=qualityConfig.shadows;ground.receiveShadow=qualityConfig.shadows;
@@ -245,7 +245,9 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
   const sampleAdaptiveQuality=(now:number)=>{
    const interval=now-lastFrameSample;lastFrameSample=now;if(interval>0&&interval<1000){frameSamples.push(interval);if(frameSamples.length>120)frameSamples=frameSamples.slice(-120);}
    if(quality.current!==lastQualityMode){lastQualityMode=quality.current;slowWindows=0;fastWindows=0;frameSamples=[];lastAdaptAt=now;applyQualityProfile(selectInitialProfile(quality.current,capabilities),'manual-mode');}
-   if(quality.current!=='auto'||frameSamples.length<45||now-lastAdaptAt<6000)return;
+   if(quality.current!=='auto')return;
+   if(frameSamples.length>=5&&now-lastMetricAt>=2000){const metric=frameSamples.slice(-Math.min(30,frameSamples.length)),metricMean=metric.reduce((sum,value)=>sum+value,0)/metric.length;renderer.domElement.dataset.renderFrameMeanMs=metricMean.toFixed(2);renderer.domElement.dataset.renderFrameSampleCount=String(metric.length);lastMetricAt=now;}
+   if(frameSamples.length<45||now-lastAdaptAt<6000)return;
    const sample=frameSamples.splice(0,frameSamples.length),mean=sample.reduce((sum,value)=>sum+value,0)/sample.length;renderer.domElement.dataset.renderFrameMeanMs=mean.toFixed(2);
    if(mean>28){slowWindows++;fastWindows=0;}else if(mean<16){fastWindows++;slowWindows=0;}else{slowWindows=0;fastWindows=0;}
    if(slowWindows>=2||fastWindows>=3){const next=stepAdaptiveProfile(qualityProfile,mean);slowWindows=0;fastWindows=0;lastAdaptAt=now;if(next!==qualityProfile)applyQualityProfile(next,mean>28?'measured-slow':'measured-fast');}
