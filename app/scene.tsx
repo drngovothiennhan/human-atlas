@@ -25,7 +25,7 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
   let qualityProfile:RenderQualityProfile=selectInitialProfile(renderQuality,capabilities),lastQualityMode:RenderQualityMode=renderQuality,qualityConfig=QUALITY_CONFIG[qualityProfile];
   let renderer:T.WebGLRenderer;
   try{renderer=new T.WebGLRenderer({antialias:qualityConfig.antialias,alpha:false,powerPreference:'high-performance'});}catch{onError('Không khởi động được mô hình 3D. Vui lòng dùng trình duyệt có hỗ trợ WebGL.');return;}
-  renderer.setPixelRatio(Math.min(devicePixelRatio,qualityConfig.pixelRatioCap));renderer.setClearColor('#f2f3f3');renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1.12;renderer.shadowMap.enabled=qualityConfig.shadows;renderer.shadowMap.type=T.PCFSoftShadowMap;el.appendChild(renderer.domElement);
+  renderer.setPixelRatio(Math.min(devicePixelRatio,qualityConfig.pixelRatioCap));renderer.setClearColor('#f2f3f3');renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1.12;renderer.shadowMap.enabled=qualityConfig.shadows;renderer.shadowMap.type=T.PCFSoftShadowMap;renderer.domElement.style.touchAction='none';renderer.domElement.style.userSelect='none';el.appendChild(renderer.domElement);
   renderer.domElement.dataset.renderQualityMode=renderQuality;renderer.domElement.dataset.renderQualityProfile=qualityProfile;renderer.domElement.dataset.renderPixelRatio=renderer.getPixelRatio().toFixed(2);renderer.domElement.dataset.renderAntialias=String(renderer.getContext().getContextAttributes()?.antialias??false);renderer.domElement.dataset.renderShadows=String(qualityConfig.shadows);renderer.domElement.dataset.renderTubeSegments=String(qualityConfig.tubeRadialSegments);renderer.domElement.dataset.renderFlowParticlesPerPath=String(qualityConfig.flowParticlesPerPath);renderer.domElement.dataset.renderSuspended='false';renderer.domElement.dataset.renderCount='0';renderer.domElement.dataset.renderAdaptations='0';renderer.domElement.dataset.renderCapabilities=JSON.stringify({webgl:capabilities.webgl,webgl2:capabilities.webgl2,maxTextureSize:capabilities.maxTextureSize,hardwareConcurrency:capabilities.hardwareConcurrency,deviceMemoryGb:capabilities.deviceMemoryGb,devicePixelRatio:capabilities.devicePixelRatio,viewportPixels:capabilities.viewportPixels});
   renderer.domElement.setAttribute('aria-label','Giải phẫu tương tác: kéo để xoay, chụm hoặc cuộn để thu phóng, chạm để xem cấu trúc.');
   const scene=new T.Scene(),camera=new T.PerspectiveCamera(34,1,.005,100),controls=new OrbitControls(camera,renderer.domElement);
@@ -64,9 +64,9 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
   const skeletalReferenceGroup=new T.Group();skeletalReferenceGroup.name='hiu-skeletal-reference';skeletalReferenceGroup.visible=false;scene.add(skeletalReferenceGroup);
   const legacyFootMuscles=new Set(['Extensor digitorum brevis.l','Extensor digitorum brevis.r','Dorsal interossei muscles of foot.l','Dorsal interossei muscles of foot.r'].map(name=>T.PropertyBinding.sanitizeNodeName(name)));
   const legacyNeckMuscles=new Set(['Longus colli muscle.r'].map(name=>T.PropertyBinding.sanitizeNodeName(name)));
-  const detailedMuscleMaterial=new T.MeshStandardMaterial({color:0xa94f45,metalness:.02,roughness:.62,transparent:true,opacity:.98,side:T.DoubleSide,polygonOffset:true,polygonOffsetFactor:-.35,polygonOffsetUnits:-.35});
-  const jointMaterial=new T.MeshStandardMaterial({color:0xc6b98f,metalness:.02,roughness:.68,transparent:true,opacity:.9,side:T.DoubleSide});
-  const skeletalReferenceMaterial=new T.MeshStandardMaterial({color:0xe2d9ba,metalness:.02,roughness:.7,transparent:true,opacity:.96,side:T.DoubleSide,polygonOffset:true,polygonOffsetFactor:-.2,polygonOffsetUnits:-.2});
+  const detailedMuscleMaterial=new T.MeshStandardMaterial({color:0xa94f45,metalness:.02,roughness:.62,transparent:false,opacity:1,depthWrite:true,side:T.DoubleSide,polygonOffset:true,polygonOffsetFactor:-.35,polygonOffsetUnits:-.35});
+  const jointMaterial=new T.MeshStandardMaterial({color:0xc6b98f,metalness:.02,roughness:.68,transparent:false,opacity:1,depthWrite:true,side:T.DoubleSide});
+  const skeletalReferenceMaterial=new T.MeshStandardMaterial({color:0xe2d9ba,metalness:.02,roughness:.7,transparent:false,opacity:1,depthWrite:true,side:T.DoubleSide,polygonOffset:true,polygonOffsetFactor:-.2,polygonOffsetUnits:-.2});
   const headMuscleAllowed=new Set(HEAD_MUSCLE_SOURCE_NODES.map(name=>T.PropertyBinding.sanitizeNodeName(name)));
   type RuntimeNodeManifest={meshCount:number;nodes:string[]};
   let detailedMuscleStatus:'idle'|'loading'|'ready'|'error'='idle',jointStatus:'idle'|'loading'|'ready'|'error'='idle',skeletalStatus:'idle'|'loading'|'ready'|'error'='idle',lastHeadMuscles=false;
@@ -78,7 +78,7 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
   renderer.domElement.dataset.detailedMuscleExpected=String(DETAILED_MUSCLE_SOURCE.expectedMeshCount);
   renderer.domElement.dataset.articularStatus='idle';
   renderer.domElement.dataset.articularExpected=String(ARTICULAR_SOURCE.expectedMeshCount);
-  renderer.domElement.dataset.skeletalReferenceStatus='idle';renderer.domElement.dataset.skeletalReferenceExpected=String(SKELETAL_SOURCE.expectedMeshCount);
+  renderer.domElement.dataset.skeletalReferenceStatus='idle';renderer.domElement.dataset.skeletalReferenceExpected=String(SKELETAL_SOURCE.expectedMeshCount);renderer.domElement.dataset.anatomyAlignmentPolicy='source-world-transform';renderer.domElement.dataset.anatomyOcclusionPolicy='opaque-depth-tested';
   const clearGroup=(group:T.Group)=>{while(group.children.length)group.remove(group.children[0]);};
   const bakeStaticGeometry=(mesh:T.Mesh)=>{
    const baked=mesh.geometry.index?mesh.geometry.toNonIndexed():mesh.geometry.clone();
@@ -274,9 +274,11 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
   };
   const resize=()=>{layoutKey='';lastState=null;renderer.setPixelRatio(Math.min(devicePixelRatio,qualityConfig.pixelRatioCap));renderer.domElement.dataset.renderPixelRatio=renderer.getPixelRatio().toFixed(2);camera.aspect=el.clientWidth/el.clientHeight;camera.updateProjectionMatrix();renderer.setSize(el.clientWidth,el.clientHeight);fit(latest.current.view,amount);};const observer=new ResizeObserver(resize);observer.observe(el);
   const raycaster=new T.Raycaster(),pointer=new T.Vector2(),tap=new PointerTap(),worldBox=new T.Box3(),hitPoint=new T.Vector3();
-  const down=(e:PointerEvent)=>{hover.hidden=true;tap.down(e.pointerId,e.clientX,e.clientY,e.pointerType==='touch'?12:5);};
+  const capturePointer=(e:PointerEvent)=>{try{if(!renderer.domElement.hasPointerCapture(e.pointerId))renderer.domElement.setPointerCapture(e.pointerId);}catch{}};
+  const releasePointer=(e:PointerEvent)=>{try{if(renderer.domElement.hasPointerCapture(e.pointerId))renderer.domElement.releasePointerCapture(e.pointerId);}catch{}};
+  const down=(e:PointerEvent)=>{hover.hidden=true;capturePointer(e);tap.down(e.pointerId,e.clientX,e.clientY,e.pointerType==='touch'?12:5);};
   const move=(e:PointerEvent)=>{tap.move(e.pointerId,e.clientX,e.clientY);if(registration.current){hover.hidden=true;renderer.domElement.style.cursor='crosshair';return;}if(e.buttons||amount<.5||e.pointerType==='touch'){hover.hidden=true;return;}const rect=el.getBoundingClientRect(),x=e.clientX-rect.left,y=e.clientY-rect.top,index=findTarget(x,y,12);hover.hidden=index<0;renderer.domElement.style.cursor=index<0?'grab':'pointer';if(index>=0){hover.textContent=atlas.parts[index].name;hover.style.left=`${Math.max(8,Math.min(x+14,el.clientWidth-260))}px`;hover.style.top=`${Math.max(8,Math.min(y+18,el.clientHeight-55))}px`;}};
-  const cancel=(e:PointerEvent)=>tap.cancel(e.pointerId);
+  const cancel=(e:PointerEvent)=>{tap.cancel(e.pointerId);releasePointer(e);};
   const makeSurfaceCapture=(partIndex:number,mesh:T.Mesh,hit:T.Intersection):SurfaceCapture|null=>{
    const faceIndex=hit.faceIndex;if(faceIndex==null)return null;
    const geometry=mesh.geometry as T.BufferGeometry,index=geometry.getIndex(),position=geometry.getAttribute('position');if(!index||!position)return null;
@@ -288,7 +290,7 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
    return {x:local.x,y:local.y,z:local.z,coordinateSystem:BODY_CANONICAL_COORDINATE_SYSTEM,surfaceStructureId:atlas.parts[partIndex].id,surfaceStructureName:atlas.parts[partIndex].name,triangleIndex:faceIndex,barycentric:[bary.x,bary.y,bary.z],nearestSurfaceDistance:0};
   };
   const up=(e:PointerEvent)=>{
-   const validTap=tap.up(e.pointerId,e.clientX,e.clientY);if(!validTap||!ready)return;const rect=renderer.domElement.getBoundingClientRect();pointer.set((e.clientX-rect.left)/rect.width*2-1,-(e.clientY-rect.top)/rect.height*2+1);raycaster.setFromCamera(pointer,camera);
+   const validTap=tap.up(e.pointerId,e.clientX,e.clientY);releasePointer(e);if(!validTap||!ready)return;const rect=renderer.domElement.getBoundingClientRect();pointer.set((e.clientX-rect.left)/rect.width*2-1,-(e.clientY-rect.top)/rect.height*2+1);raycaster.setFromCamera(pointer,camera);
    if(!registration.current&&meridianMarkers.length){
     const markerHit=raycaster.intersectObjects(meridianMarkers,false)[0];
     const pointCode=markerHit?.object?.userData?.pointCode;
