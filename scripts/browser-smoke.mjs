@@ -66,6 +66,10 @@ try{
     await writeFile('artifacts/'+name.replace(/\\.png$/i,'.state.json'),JSON.stringify(state,null,2));
     return createHash('sha256').update(JSON.stringify(stable)).digest('hex');
   };
+  const dispatchWheel=async(x,y,deltaY)=>{
+    const payload=JSON.stringify({x,y,deltaY});
+    return evaluate("(()=>{const p="+payload+",el=document.elementFromPoint(p.x,p.y)||document.querySelector('canvas');if(!el)return false;el.dispatchEvent(new WheelEvent('wheel',{bubbles:true,cancelable:true,clientX:p.x,clientY:p.y,deltaX:0,deltaY:p.deltaY,deltaMode:0}));return true})()");
+  };
   await mkdir('artifacts',{recursive:true});
   await send('Page.enable');await send('Runtime.enable');await send('Network.enable');
   await send('Network.setBlockedURLs',{urls:['*data/schematic-spatial.json*']});
@@ -143,7 +147,7 @@ try{
   await sleep(500);
   const rotateHash=await screenshot('desktop-rotated.png');
   if(rotateHash===desktopBefore)console.warn('SMOKE_DESKTOP_POINTER_ROTATE_NO_STATE_DELTA');
-  await send('Input.dispatchMouseEvent',{type:'mouseWheel',x,y,deltaX:0,deltaY:-420});
+  await dispatchWheel(x,y,-420);
   await sleep(500);
   const zoomHash=await screenshot('desktop-zoomed.png');
   if(zoomHash===rotateHash)console.warn('SMOKE_DESKTOP_WHEEL_NO_STATE_DELTA');
@@ -188,8 +192,8 @@ try{
 
   console.log('SMOKE_DETAILED_ANATOMY_START');
   await waitFor(()=>evaluate("(()=>{const d=document.querySelector('canvas')?.dataset||{};return d.detailedMusclesStatus==='ready'&&d.detailedMuscleCount==='484'&&d.detailedMuscleVisibleCount==='484'&&d.detailedMusclesReplacement==='true'&&d.headMuscleCount==='78'&&d.headMusclesActive==='true'&&d.articularStatus==='ready'&&d.articularCount==='413'&&d.articularReplacement==='true'&&d.skeletalReferenceStatus==='ready'&&d.skeletalReferenceCount==='335'&&d.skeletalReferenceReplacement==='true'})()"),{timeout:120000,label:'aligned muscle/skeleton/joint replacements in composite view'});
-  const alignedCompositeMetrics=await evaluate("(()=>{const d=document.querySelector('canvas')?.dataset||{};return{muscleStatus:d.detailedMusclesStatus,muscleCount:d.detailedMuscleCount,muscleVisibleCount:d.detailedMuscleVisibleCount,muscleReplacement:d.detailedMusclesReplacement,muscleDrawCalls:d.detailedMuscleDrawCalls,headCount:d.headMuscleCount,headActive:d.headMusclesActive,headBounds:d.headMuscleBounds,footCount:d.footMuscleCount,neckCount:d.neckMuscleCount,skeletonCount:d.skeletalReferenceCount,skeletonReplacement:d.skeletalReferenceReplacement,skeletonDrawCalls:d.skeletalReferenceDrawCalls,skeletonBounds:d.skeletalReferenceBounds,articularCount:d.articularCount,articularReplacement:d.articularReplacement,articularDrawCalls:d.articularDrawCalls}})()");
-  if(alignedCompositeMetrics.muscleCount!=='484'||alignedCompositeMetrics.muscleVisibleCount!=='484'||alignedCompositeMetrics.muscleReplacement!=='true'||alignedCompositeMetrics.headCount!=='78'||alignedCompositeMetrics.headActive!=='true'||alignedCompositeMetrics.skeletonCount!=='335'||alignedCompositeMetrics.skeletonReplacement!=='true'||alignedCompositeMetrics.articularCount!=='413'||alignedCompositeMetrics.articularReplacement!=='true'||alignedCompositeMetrics.muscleDrawCalls!=='2'||alignedCompositeMetrics.skeletonDrawCalls!=='1'||alignedCompositeMetrics.articularDrawCalls!=='1')throw new Error('Aligned composite anatomy verification failed: '+JSON.stringify(alignedCompositeMetrics));
+  const alignedCompositeMetrics=await evaluate("(()=>{const d=document.querySelector('canvas')?.dataset||{};return{alignmentPolicy:d.anatomyAlignmentPolicy,occlusionPolicy:d.anatomyOcclusionPolicy,muscleStatus:d.detailedMusclesStatus,muscleCount:d.detailedMuscleCount,muscleVisibleCount:d.detailedMuscleVisibleCount,muscleReplacement:d.detailedMusclesReplacement,muscleDrawCalls:d.detailedMuscleDrawCalls,headCount:d.headMuscleCount,headActive:d.headMusclesActive,headBounds:d.headMuscleBounds,footCount:d.footMuscleCount,neckCount:d.neckMuscleCount,skeletonCount:d.skeletalReferenceCount,skeletonReplacement:d.skeletalReferenceReplacement,skeletonDrawCalls:d.skeletalReferenceDrawCalls,skeletonBounds:d.skeletalReferenceBounds,articularCount:d.articularCount,articularReplacement:d.articularReplacement,articularDrawCalls:d.articularDrawCalls}})()");
+  if(alignedCompositeMetrics.alignmentPolicy!=='source-world-transform'||alignedCompositeMetrics.occlusionPolicy!=='opaque-depth-tested'||alignedCompositeMetrics.muscleCount!=='484'||alignedCompositeMetrics.muscleVisibleCount!=='484'||alignedCompositeMetrics.muscleReplacement!=='true'||alignedCompositeMetrics.headCount!=='78'||alignedCompositeMetrics.headActive!=='true'||alignedCompositeMetrics.skeletonCount!=='335'||alignedCompositeMetrics.skeletonReplacement!=='true'||alignedCompositeMetrics.articularCount!=='413'||alignedCompositeMetrics.articularReplacement!=='true'||alignedCompositeMetrics.muscleDrawCalls!=='2'||alignedCompositeMetrics.skeletonDrawCalls!=='1'||alignedCompositeMetrics.articularDrawCalls!=='1')throw new Error('Aligned composite anatomy verification failed: '+JSON.stringify(alignedCompositeMetrics));
   const headMetrics=await evaluate("(()=>{const d=document.querySelector('canvas')?.dataset||{};return{active:d.headMusclesActive,status:d.headMusclesStatus,count:d.headMuscleCount,expected:d.headMuscleExpected,source:d.headMuscleSource,license:d.headMuscleLicense,bounds:d.headMuscleBounds}})()");
   if(headMetrics.active!=='true'||headMetrics.status!=='ready'||headMetrics.count!=='78'||headMetrics.expected!=='78'||!headMetrics.source?.includes('Nurkan1/Anatria-3D')||!headMetrics.license?.includes('CC BY-SA 4.0'))throw new Error('Head muscle verification failed: '+JSON.stringify(headMetrics));
   await writeFile('artifacts/aligned-composite-metrics.json',JSON.stringify(alignedCompositeMetrics,null,2));
@@ -217,7 +221,7 @@ try{
     await waitFor(()=>evaluate("Number(document.querySelector('canvas')?.dataset.cameraMotionSeq||0)>"+seq),{label:'skeletal '+region+' camera motion'});
     await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.cameraMotion==='idle'"),{timeout:30000,label:'skeletal '+region+' camera settled'});
     const rc=await evaluate("(()=>{const r=document.querySelector('canvas').getBoundingClientRect();return{x:r.x,y:r.y,w:r.width,h:r.height}})()");
-    for(let i=0;i<3;i++)await send('Input.dispatchMouseEvent',{type:'mouseWheel',x:rc.x+rc.w*.5,y:rc.y+rc.h*yFraction,deltaX:0,deltaY:-300});
+    for(let i=0;i<3;i++)await dispatchWheel(rc.x+rc.w*.5,rc.y+rc.h*yFraction,-300);
     await sleep(350);
     skeletalRegionalHashes.push(await screenshot('desktop-skeleton-'+region+'-front-enlarged.png'));
     if(!await clickAria('Đặt lại góc nhìn và lớp'))throw new Error('Missing reset during skeletal '+region+' QA');
@@ -241,7 +245,7 @@ try{
       await waitFor(()=>evaluate("Number(document.querySelector('canvas')?.dataset.cameraMotionSeq||0)>"+seq),{label:region+' '+label+' camera motion'});
       await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.cameraMotion==='idle'"),{timeout:30000,label:region+' '+label+' camera settled'});
       const rc=await evaluate("(()=>{const r=document.querySelector('canvas').getBoundingClientRect();return{x:r.x,y:r.y,w:r.width,h:r.height}})()");
-      for(let i=0;i<3;i++)await send('Input.dispatchMouseEvent',{type:'mouseWheel',x:rc.x+rc.w*.5,y:rc.y+rc.h*yFraction,deltaX:0,deltaY:-300});
+      for(let i=0;i<3;i++)await dispatchWheel(rc.x+rc.w*.5,rc.y+rc.h*yFraction,-300);
       await sleep(350);
       regionalQaHashes.push(await screenshot('desktop-'+region+'-'+suffix+'-enlarged.png'));
       if(!await clickAria('Đặt lại góc nhìn và lớp'))throw new Error('Missing reset during regional QA');
