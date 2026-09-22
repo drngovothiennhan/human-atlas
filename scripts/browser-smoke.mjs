@@ -93,6 +93,37 @@ try{
   await waitFor(()=>responses.filter(r=>r.url.includes('/models/')&&!r.url.includes('/models/atlas.json')&&r.status===200).length>0,{timeout:30000,label:'3D binary model response'});
   await sleep(1200);
 
+  const qualityInitial=await evaluate("(()=>{const c=document.querySelector('canvas'),s=document.querySelector('[data-render-quality-control=true] select');return{mode:c?.dataset.renderQualityMode,profile:c?.dataset.renderQualityProfile,pixelRatio:Number(c?.dataset.renderPixelRatio),antialias:c?.dataset.renderAntialias,capabilities:JSON.parse(c?.dataset.renderCapabilities||'{}'),control:s?.value,canvasCount:document.querySelectorAll('canvas').length}})()");
+  if(qualityInitial.control!=='auto'||qualityInitial.mode!=='auto'||qualityInitial.canvasCount!==1||!qualityInitial.capabilities.webgl)throw new Error('Adaptive quality initial state invalid: '+JSON.stringify(qualityInitial));
+  const setQuality=async mode=>{
+    await evaluate("(()=>{const s=document.querySelector('[data-render-quality-control=true] select');const set=Object.getOwnPropertyDescriptor(HTMLSelectElement.prototype,'value').set;set.call(s,"+JSON.stringify(mode)+");s.dispatchEvent(new Event('change',{bubbles:true}));return true})()");
+    await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.renderQualityMode==="+JSON.stringify(mode)),{label:'quality mode '+mode});
+    await sleep(300);
+    return await evaluate("(()=>{const d=document.querySelector('canvas').dataset;return{mode:d.renderQualityMode,profile:d.renderQualityProfile,pixelRatio:Number(d.renderPixelRatio),shadows:d.renderShadows==='true',tubeSegments:Number(d.renderTubeSegments),flowParticles:Number(d.renderFlowParticlesPerPath),adaptations:Number(d.renderAdaptations||0),canvasCount:document.querySelectorAll('canvas').length}})()");
+  };
+  const economyMetrics=await setQuality('economy');
+  if(economyMetrics.profile!=='economy'||economyMetrics.pixelRatio>1.01||economyMetrics.shadows||economyMetrics.flowParticles!==2||economyMetrics.canvasCount!==1)throw new Error('Economy quality profile invalid: '+JSON.stringify(economyMetrics));
+  const highMetrics=await setQuality('high');
+  if(highMetrics.profile!=='high'||highMetrics.pixelRatio<economyMetrics.pixelRatio||!highMetrics.shadows||highMetrics.flowParticles!==5||highMetrics.tubeSegments<economyMetrics.tubeSegments||highMetrics.canvasCount!==1)throw new Error('High quality profile invalid: '+JSON.stringify(highMetrics));
+  await setQuality('economy');
+  await sleep(500);
+  const stationaryRenderCount=await evaluate("Number(document.querySelector('canvas')?.dataset.renderCount||0)");
+  await sleep(800);
+  const stationaryRenderCountAfter=await evaluate("Number(document.querySelector('canvas')?.dataset.renderCount||0)");
+  if(stationaryRenderCountAfter!==stationaryRenderCount)throw new Error('Stationary scene performed redundant renders: '+JSON.stringify({stationaryRenderCount,stationaryRenderCountAfter}));
+  await evaluate("Object.defineProperty(document,'hidden',{configurable:true,get:()=>true});document.dispatchEvent(new Event('visibilitychange'));true");
+  await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.renderSuspended==='true'"),{label:'hidden document suspends renderer'});
+  const hiddenRenderCount=await evaluate("Number(document.querySelector('canvas')?.dataset.renderCount||0)");
+  await sleep(700);
+  if(await evaluate("Number(document.querySelector('canvas')?.dataset.renderCount||0)")!==hiddenRenderCount)throw new Error('Hidden document continued render work');
+  await evaluate("delete document.hidden;document.dispatchEvent(new Event('visibilitychange'));true");
+  await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.renderSuspended==='false'"),{label:'visible document resumes renderer'});
+  await setQuality('auto');
+  await waitFor(()=>evaluate("Number(document.querySelector('canvas')?.dataset.renderFrameMeanMs||0)>0"),{timeout:15000,label:'measured frame-time quality sample'});
+  const adaptiveMetrics=await evaluate("(()=>{const d=document.querySelector('canvas').dataset;return{mode:d.renderQualityMode,profile:d.renderQualityProfile,meanFrameMs:Number(d.renderFrameMeanMs),adaptations:Number(d.renderAdaptations||0),reason:d.renderAdaptationReason||'',capabilities:JSON.parse(d.renderCapabilities||'{}')}})()");
+  if(adaptiveMetrics.mode!=='auto'||!Number.isFinite(adaptiveMetrics.meanFrameMs)||adaptiveMetrics.meanFrameMs<=0)throw new Error('Automatic measured quality sample missing: '+JSON.stringify(adaptiveMetrics));
+  console.log('SMOKE_ADAPTIVE_RENDER_QUALITY_PASS '+JSON.stringify({initial:qualityInitial,economy:economyMetrics,high:highMetrics,adaptive:adaptiveMetrics,stationaryRenderCount,hiddenRenderCount}));
+
   const canvas=await evaluate("(()=>{const r=document.querySelector('canvas').getBoundingClientRect();return{x:r.x,y:r.y,w:r.width,h:r.height}})()");
   const x=canvas.x+canvas.w*0.5,y=canvas.y+canvas.h*0.45;
   const desktopBefore=await screenshot('desktop-before.png');
@@ -174,7 +205,7 @@ try{
   if(new Set(regionalQaHashes).size<4)throw new Error('Regional head/foot visual QA screenshots did not vary as expected');
   console.log('SMOKE_REGIONAL_MUSCLE_QA_PASS '+JSON.stringify({headViews:3,footViews:3,footMeshes:4,neckMeshes:1}));
   console.log('SMOKE_HEAD_MUSCLES_78_PASS '+JSON.stringify(headMetrics));
-  const performanceSample=await evaluate("new Promise(resolve=>{const intervals=[];let last=performance.now(),start=last,done=false,raf=0;const finish=()=>{if(done)return;done=true;cancelAnimationFrame(raf);const end=performance.now();resolve({environment:'GitHub/Linux headless Chromium SwiftShader, not physical device',elapsedMs:end-start,frames:intervals.length,meanFrameMs:intervals.length?intervals.reduce((a,b)=>a+b,0)/intervals.length:null,loadMs:performance.getEntriesByType('navigation')[0]?.loadEventEnd,resources:performance.getEntriesByType('resource').length,renderStats:document.querySelector('canvas')?.dataset.renderCount??null,sampleBounded:true})};const timer=setTimeout(finish,2600);const tick=now=>{if(done)return;intervals.push(now-last);last=now;if(now-start>=2000){clearTimeout(timer);finish()}else raf=requestAnimationFrame(tick)};raf=requestAnimationFrame(tick)})");
+  const performanceSample=await evaluate("new Promise(resolve=>{const intervals=[];let last=performance.now(),start=last,done=false,raf=0;const finish=()=>{if(done)return;done=true;cancelAnimationFrame(raf);const end=performance.now();resolve({environment:'GitHub/Linux headless Chromium SwiftShader, not physical device',elapsedMs:end-start,frames:intervals.length,meanFrameMs:intervals.length?intervals.reduce((a,b)=>a+b,0)/intervals.length:null,loadMs:performance.getEntriesByType('navigation')[0]?.loadEventEnd,resources:performance.getEntriesByType('resource').length,renderStats:document.querySelector('canvas')?.dataset.renderCount??null,quality:{mode:document.querySelector('canvas')?.dataset.renderQualityMode,profile:document.querySelector('canvas')?.dataset.renderQualityProfile,pixelRatio:document.querySelector('canvas')?.dataset.renderPixelRatio,measuredMeanFrameMs:document.querySelector('canvas')?.dataset.renderFrameMeanMs},sampleBounded:true})};const timer=setTimeout(finish,2600);const tick=now=>{if(done)return;intervals.push(now-last);last=now;if(now-start>=2000){clearTimeout(timer);finish()}else raf=requestAnimationFrame(tick)};raf=requestAnimationFrame(tick)})");
   await writeFile('artifacts/performance-sample.json',JSON.stringify(performanceSample,null,2));
   console.log('PERFORMANCE_SAMPLE '+JSON.stringify(performanceSample));
 

@@ -204,3 +204,11 @@ body:has(.registration-panel) .meridian3d-launch{left:376px}body:has(.registrati
  .view-controls{right:10px;padding:4px}
  .view-controls button{width:42px;height:42px}
 }
+
+
+/* Adaptive renderer: compact, secondary control so the main atlas stays uncluttered. */
+.quality-control{display:grid;gap:5px;padding:10px 12px;border-top:1px solid color-mix(in srgb,currentColor 10%,transparent);font-size:12px}
+.quality-control>span{font-weight:650}
+.quality-control select{width:100%;min-height:34px;border:1px solid rgba(15,23,42,.16);border-radius:9px;background:rgba(255,255,255,.72);padding:0 10px;color:inherit}
+.quality-control small{line-height:1.35;opacity:.68}
+@media(max-width:767px){.quality-control{padding:9px 10px}.quality-control select{min-height:38px}}
