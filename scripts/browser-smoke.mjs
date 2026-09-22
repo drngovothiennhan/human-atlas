@@ -77,7 +77,10 @@ try{
   await send('Network.setBlockedURLs',{urls:['*data/schematic-spatial.json*']});
   await send('Page.navigate',{url:base});
   await waitFor(()=>evaluate("document.readyState==='complete'&&document.body.innerText.includes('HIU YHCT Atlas')"),{timeout:30000,label:'HIU Atlas UI'});
-  await waitFor(()=>evaluate("document.querySelector('[data-meridian3d-launch=true]')?.getAttribute('aria-pressed')==='false'"),{label:'default anatomy mode'});
+  const buildSha=await evaluate("document.querySelector('[data-build-sha]')?.dataset.buildSha||''");
+  if(process.env.GITHUB_SHA&&buildSha!==process.env.GITHUB_SHA.slice(0,12))throw new Error('Displayed build SHA mismatch: '+JSON.stringify({displayed:buildSha,expected:process.env.GITHUB_SHA.slice(0,12)}));
+  console.log('SMOKE_BUILD_SHA_PASS '+JSON.stringify({displayed:buildSha,expected:(process.env.GITHUB_SHA||'dev').slice(0,12)}));
+  await waitFor(()=>evaluate("document.querySelector('[data-meridian3d-launch=true]')?.getAttribute('aria-pressed')==='false'&&document.querySelector('canvas')?.dataset.meridianEffect==='off'"),{label:'default anatomy mode with meridians off'});
   await evaluate("document.querySelector('[data-meridian3d-launch=true]').click()");
   await waitFor(()=>evaluate("!!document.querySelector('[data-meridian3d-load-error=true]')"),{label:'meridian load failure is visible'});
   await send('Network.setBlockedURLs',{urls:[]});
