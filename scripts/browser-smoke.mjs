@@ -225,11 +225,16 @@ try{
   await waitFor(()=>evaluate("!document.querySelector('.about-sheet')"),{label:'information sheet closes'});
 
   const explodeBefore=await screenshot('desktop-explode-before.png');
-  const sliderBox=await evaluate("(()=>{const s=document.querySelector('[data-slot=slider]');if(!s)return null;const r=s.getBoundingClientRect();return{x:r.x,y:r.y,w:r.width,h:r.height}})()");
-  if(!sliderBox||!sliderBox.w||!sliderBox.h)throw new Error('Explode slider missing');
-  await send('Input.dispatchMouseEvent',{type:'mousePressed',button:'left',clickCount:1,x:sliderBox.x+sliderBox.w*.35,y:sliderBox.y+sliderBox.h*.5});
-  await send('Input.dispatchMouseEvent',{type:'mouseReleased',button:'left',clickCount:1,x:sliderBox.x+sliderBox.w*.35,y:sliderBox.y+sliderBox.h*.5});
-  await waitFor(()=>evaluate("Number(document.querySelector('[data-slot=slider-thumb]')?.getAttribute('aria-valuenow')||0)>0"),{label:'explode slider changes'});
+  const explodeValueBefore=await evaluate("document.querySelector('.explode-control output')?.textContent||''");
+  const sliderThumbBox=await evaluate("(()=>{const s=document.querySelector('[data-slot=slider-thumb]');if(!s)return null;const r=s.getBoundingClientRect();return{x:r.x,y:r.y,w:r.width,h:r.height}})()");
+  if(!sliderThumbBox||!sliderThumbBox.w||!sliderThumbBox.h)throw new Error('Explode slider thumb missing');
+  const sx=sliderThumbBox.x+sliderThumbBox.w*.5,sy=sliderThumbBox.y+sliderThumbBox.h*.5;
+  await send('Input.dispatchMouseEvent',{type:'mousePressed',button:'left',buttons:1,clickCount:1,x:sx,y:sy});
+  await send('Input.dispatchMouseEvent',{type:'mouseMoved',button:'left',buttons:1,x:sx+180,y:sy});
+  await send('Input.dispatchMouseEvent',{type:'mouseReleased',button:'left',buttons:0,clickCount:1,x:sx+180,y:sy});
+  await waitFor(()=>evaluate("(()=>{const t=document.querySelector('.explode-control output')?.textContent||'';return t&&t!=='0%'})()"),{label:'explode slider changes'});
+  const explodeValueAfter=await evaluate("document.querySelector('.explode-control output')?.textContent||''");
+  if(!explodeValueBefore||explodeValueAfter===explodeValueBefore)throw new Error('Explode slider output did not change: '+JSON.stringify({explodeValueBefore,explodeValueAfter}));
   await sleep(450);
   const explodeAfter=await screenshot('desktop-explode-after.png');
   if(explodeAfter===explodeBefore)throw new Error('Explode slider did not change rendered view');
