@@ -22,7 +22,7 @@ export interface Concept {id:string;name:string;elements:string[]}
 export interface Atlas {version:string;sex?:'male';source?:string;scope?:string;parts:Part[];concepts:Concept[];chunks:{url:string;bytes:number;gzip?:string;gzipBytes?:number}[];triangles:number}
 export type View = 'three-quarter'|'front'|'back'|'side';
 export interface SceneState {inspectorOpen?:boolean;headMuscles?:boolean;explode:number;visible:SystemId[];selected:string[];isolate:boolean;view:View;rotate:boolean;reset:number}
-export const DEFAULT_VISIBLE:SystemId[] = ['articular','cardiac','sensory','skeletal','muscular','arterial','venous','nervous','respiratory','digestive','urinary','lymphatic','endocrine','reproductive','connective'];
+export const DEFAULT_VISIBLE:SystemId[] = ['muscular'];
 export const EXPLANATIONS:Record<string,string> = {
  'heart':'Bơm cơ trong lồng ngực. Tim phải đưa máu tới phổi; tim trái đưa máu vào tuần hoàn hệ thống.',
  'liver':'Cơ quan lớn dưới bên phải cơ hoành, xử lý dưỡng chất, tạo mật và tổng hợp nhiều protein huyết tương.',
