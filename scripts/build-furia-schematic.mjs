@@ -133,30 +133,66 @@ function scalpCast(a){
 }
 const resolveRight=a=>'struct'in a?structuralCast(a):'arc_cun'in a?scalpCast(a):segmentCast(a);
 const round=x=>Math.round(x*1e6)/1e6;
+const sourceSideWarnings=pointDoc.points
+  .filter(point=>['CV','GV'].includes(canonicalChannel(point.channel))&&point.side!=='midline')
+  .map(point=>({
+    pointCode:canonicalCode(point.code),
+    sourcePointCode:point.code,
+    sourceSide:point.side,
+    normalizedSide:'MIDLINE',
+    reason:'Upstream side metadata is bilateral, but CV/GV are canonical midline channels; one midline anchor is emitted while the original side is retained here for provenance.'
+  }));
 const anchorOut=[];
 for(const point of pointDoc.points){
-  const right=resolveRight(point.anchor),records=point.side==='midline'?[['MIDLINE',[0,right[1],right[2]]]]:[['RIGHT',right],['LEFT',[-right[0],right[1],right[2]]]];
-  for(const [side,src] of records){const p=toBrowser(src);anchorOut.push({pointCode:canonicalCode(point.code),meridianId:canonicalChannel(point.channel),sourcePointCode:point.code,sourceMeridianId:point.channel,sequence:point.index,side,x:round(p[0]),y:round(p[1]),z:round(p[2]),verificationStatus:'UNVERIFIED',sourceKind:'LICENSED_SCHEMATIC',accuracy:point.accuracy,projection:'BodyParts3D FMA7163 surface raycast'})}
+  const right=resolveRight(point.anchor),meridianId=canonicalChannel(point.channel),canonicalMidline=meridianId==='CV'||meridianId==='GV';
+  const records=canonicalMidline||point.side==='midline'
+    ?[['MIDLINE',[0,right[1],right[2]]]]
+    :[['RIGHT',right],['LEFT',[-right[0],right[1],right[2]]]];
+  for(const [side,src] of records){const p=toBrowser(src);anchorOut.push({pointCode:canonicalCode(point.code),meridianId,sourcePointCode:point.code,sourceMeridianId:point.channel,sequence:point.index,side,x:round(p[0]),y:round(p[1]),z:round(p[2]),verificationStatus:'UNVERIFIED',sourceKind:'LICENSED_SCHEMATIC',accuracy:point.accuracy,projection:'BodyParts3D FMA7163 surface raycast'})}
 }
 const byKey=new Map(anchorOut.map(a=>[a.pointCode+':'+a.side,a]));
+if(byKey.size!==anchorOut.length)throw new Error('Duplicate generated acupoint anchor key');
+const anchorPointCodes=new Set(anchorOut.map(anchor=>anchor.pointCode));
+const catalogCodes=new Set(pointDoc.points.map(point=>canonicalCode(point.code)));
+const missingAnchorCodes=[...catalogCodes].filter(code=>!anchorPointCodes.has(code)).sort();
+if(missingAnchorCodes.length)throw new Error('Generated acupoint anchor coverage drift: '+JSON.stringify(missingAnchorCodes));
 const paths=[];
-const seq=n=>Number((n.match(/-(\d+)$/)||[])[1]||0);
 for(const [sourceMeridianId,groups] of Object.entries(topology.paths)){
   const meridianId=canonicalChannel(sourceMeridianId);
   const mid=meridianId==='CV'||meridianId==='GV',sides=mid?['MIDLINE']:['RIGHT','LEFT'];
   for(const side of sides)for(let gi=0;gi<groups.length;gi++){
     let chunk=[];const flush=()=>{if(chunk.length>=2){paths.push({meridianId,side,groupIndex:gi,pointCodes:chunk.map(x=>x.pointCode),points:chunk.map(x=>[x.x,x.y,x.z]),verificationStatus:'UNVERIFIED',sourceKind:'LICENSED_SCHEMATIC'})}chunk=[]};
-    let prev=null;
-    for(const sourceCode of groups[gi]){const code=canonicalCode(sourceCode),a=byKey.get(code+':'+side);if(!a){flush();prev=null;continue}if(prev&&seq(code)-seq(prev)>1)flush();chunk.push(a);prev=code}
+    // The vendor topology explicitly defines adjacency. Do not infer continuity from
+    // numeric point codes: BL intentionally jumps 38→40→55 in one source branch.
+    for(const sourceCode of groups[gi]){const code=canonicalCode(sourceCode),a=byKey.get(code+':'+side);if(!a){flush();continue}chunk.push(a)}
     flush();
   }
 }
 const codes=new Set(pointDoc.points.map(p=>canonicalCode(p.code))),topologyCodes=new Set(Object.values(topology.paths).flat(2).map(canonicalCode));
 const omitted=[...codes].filter(c=>!topologyCodes.has(c)).sort();
-// Do not silently alter the five upstream bilateral records in midline channels.
-const sourceSideWarnings=pointDoc.points.filter(p=>['CV','GV'].includes(canonicalChannel(p.channel))&&p.side!=='midline').map(p=>({pointCode:canonicalCode(p.code),sourcePointCode:p.code,sourceSide:p.side,reason:'Upstream bilateral record excluded from midline path pending review'}));
+const generatedPathCodes=new Set(paths.flatMap(path=>path.pointCodes));
+const missingGenerated=[...topologyCodes].filter(code=>!generatedPathCodes.has(code)).sort();
+const extraGenerated=[...generatedPathCodes].filter(code=>!topologyCodes.has(code)).sort();
+if(missingGenerated.length||extraGenerated.length)throw new Error('Generated meridian topology drift: '+JSON.stringify({missingGenerated,extraGenerated}));
+const endpointAudit={};
+for(const sourceMeridianId of Object.keys(topology.paths)){
+  const meridianId=canonicalChannel(sourceMeridianId),records=pointDoc.points.filter(point=>point.channel===sourceMeridianId).sort((a,b)=>a.index-b.index);
+  if(!records.length)throw new Error('No point records for '+sourceMeridianId);
+  const start=canonicalCode(records[0].code),end=canonicalCode(records.at(-1).code),sides=meridianId==='CV'||meridianId==='GV'?['MIDLINE']:['RIGHT','LEFT'];
+  endpointAudit[meridianId]={start,end,count:records.length,sides:{}};
+  for(const side of sides){
+    const sideCodes=new Set(paths.filter(path=>path.meridianId===meridianId&&path.side===side).flatMap(path=>path.pointCodes));
+    const startPresent=sideCodes.has(start),endPresent=sideCodes.has(end);
+    endpointAudit[meridianId].sides[side]={startPresent,endPresent};
+    if(!startPresent||!endPresent)throw new Error('Generated meridian endpoint drift: '+JSON.stringify({meridianId,side,start,end,startPresent,endPresent}));
+  }
+}
+
 const out={schemaVersion:'1.0.0',coordinateSystem:'BodyParts3D-4.0-browser-meters-Y-up',verificationStatus:'UNVERIFIED',source:{repository:'FuriaRozkwit/acupuncture-3d',commit:'1fc9ec98d365c9fb035844e2775c1be05a0a05fc',license:'MIT anchors/code; CC BY-SA calibrated anatomy metadata',skin:'BodyParts3D FMA7163'},anchors:anchorOut,paths,omittedTopology:omitted,generatedBy:'scripts/build-furia-schematic.mjs'};
 out.channelAliases=channelAliases;out.sourceSideWarnings=sourceSideWarnings;
+out.anchorCoverage={catalogPoints:catalogCodes.size,generatedPointCodes:anchorPointCodes.size,generatedAnchors:anchorOut.length,missingAnchorCodes};
+out.pathCoverage={catalogPoints:codes.size,sourceTopologyPoints:topologyCodes.size,generatedTopologyPoints:generatedPathCodes.size,missingGenerated,extraGenerated};
+out.endpointAudit=endpointAudit;
 await mkdir(path.join(ROOT,'public','data'),{recursive:true});
 await writeFile(path.join(ROOT,'public','data','schematic-spatial.json'),JSON.stringify(out,null,2)+'\n');
-console.log('FURIA_SCHEMATIC_BUILD '+JSON.stringify({anchors:anchorOut.length,paths:paths.length,omitted}));
+console.log('FURIA_SCHEMATIC_BUILD '+JSON.stringify({anchors:anchorOut.length,paths:paths.length,omitted,anchorCoverage:out.anchorCoverage,pathCoverage:out.pathCoverage,endpoints:endpointAudit,normalizedMidlineSides:sourceSideWarnings.length}));

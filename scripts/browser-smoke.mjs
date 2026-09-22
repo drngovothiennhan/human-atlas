@@ -61,7 +61,7 @@ try{
     let lastError;
     for(let attempt=1;attempt<=3;attempt++){
       try{
-        const shot=await send('Page.captureScreenshot',{format:'png',captureBeyondViewport:false});
+        const shot=await send('Page.captureScreenshot',{format:'png',captureBeyondViewport:false,optimizeForSpeed:true});
         const bytes=Buffer.from(shot.data,'base64');
         await writeFile('artifacts/'+name,bytes);
         return createHash('sha256').update(bytes).digest('hex');
@@ -132,6 +132,9 @@ try{
   const adaptiveMetrics=await evaluate("(()=>{const d=document.querySelector('canvas').dataset;return{mode:d.renderQualityMode,profile:d.renderQualityProfile,meanFrameMs:Number(d.renderFrameMeanMs),adaptations:Number(d.renderAdaptations||0),reason:d.renderAdaptationReason||'',capabilities:JSON.parse(d.renderCapabilities||'{}')}})()");
   if(adaptiveMetrics.mode!=='auto'||!Number.isFinite(adaptiveMetrics.meanFrameMs)||adaptiveMetrics.meanFrameMs<=0)throw new Error('Automatic measured quality sample missing: '+JSON.stringify(adaptiveMetrics));
   console.log('SMOKE_ADAPTIVE_RENDER_QUALITY_PASS '+JSON.stringify({initial:qualityInitial,economy:economyMetrics,high:highMetrics,adaptive:adaptiveMetrics,stationaryRenderCount,hiddenRenderCount}));
+  // Keep the verification scope intact while preventing SwiftShader from spending CI time on shadows/high-cost rendering during the heavy anatomy visual suite.
+  const heavyVisualQuality=await setQuality('economy');
+  console.log('SMOKE_HEAVY_VISUAL_QUALITY '+JSON.stringify(heavyVisualQuality));
 
   const canvas=await evaluate("(()=>{const r=document.querySelector('canvas').getBoundingClientRect();return{x:r.x,y:r.y,w:r.width,h:r.height}})()");
   const x=canvas.x+canvas.w*0.5,y=canvas.y+canvas.h*0.45;
@@ -185,6 +188,7 @@ try{
   const allHash=await screenshot('desktop-all-layers.png');
   if(allHash===skeletonHash)throw new Error('All layer preset did not change rendered screenshot');
 
+  console.log('SMOKE_DETAILED_ANATOMY_START');
   const headToggle=await evaluate("document.querySelector('[data-head-muscles-toggle=true]')?.getAttribute('aria-pressed')==='true'");
   if(!headToggle)throw new Error('Head muscle toggle missing');
   await waitFor(()=>evaluate("document.querySelector('[data-head-muscles-toggle=true]')?.getAttribute('aria-pressed')==='true'"),{label:'head muscle toggle on'});
@@ -197,6 +201,26 @@ try{
   await evaluate("document.querySelector('[data-head-muscles-toggle=true]').click()");
   await waitFor(()=>evaluate("document.querySelector('[data-head-muscles-toggle=true]')?.getAttribute('aria-pressed')==='true'&&document.querySelector('canvas')?.dataset.headMusclesActive==='true'&&document.querySelector('canvas')?.dataset.headMuscleCount==='78'"),{label:'head muscle toggle restores 78 meshes'});
   await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.footMuscleCount==='4'&&document.querySelector('canvas')?.dataset.neckMuscleCount==='1'"),{label:'missing foot/neck meshes loaded'});
+  await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.detailedMusclesStatus==='ready'&&document.querySelector('canvas')?.dataset.detailedMuscleCount==='484'"),{timeout:90000,label:'484 detailed muscle meshes'});
+  console.log('SMOKE_DETAILED_MUSCLES_READY');
+  const articularPreset=await evaluate("(()=>{const b=[...document.querySelectorAll('.layer-presets button')].find(x=>x.textContent.trim()==='Khớp');if(!b)return false;b.click();return true})()");
+  if(!articularPreset)throw new Error('Articular layer preset missing');
+  await waitFor(()=>evaluate("(()=>{const b=[...document.querySelectorAll('.layer-presets button')].find(x=>x.textContent.trim()==='Khớp');return b?.getAttribute('aria-pressed')==='true'})()"),{label:'articular layer preset'});
+  await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.articularStatus==='ready'&&document.querySelector('canvas')?.dataset.articularCount==='413'&&document.querySelector('canvas')?.dataset.articularReplacement==='true'"),{timeout:90000,label:'413 articular meshes replacing base layer'});
+  const detailedAnatomyMetrics=await evaluate("(()=>{const d=document.querySelector('canvas')?.dataset||{};return{muscleStatus:d.detailedMusclesStatus,muscleCount:d.detailedMuscleCount,muscleExpected:d.detailedMuscleExpected,muscleBounds:d.detailedMuscleBounds,articularStatus:d.articularStatus,articularCount:d.articularCount,articularExpected:d.articularExpected,articularBounds:d.articularBounds,articularActive:d.articularActive,articularReplacement:d.articularReplacement}})()");
+  if(detailedAnatomyMetrics.muscleCount!=='484'||detailedAnatomyMetrics.muscleExpected!=='484'||detailedAnatomyMetrics.articularCount!=='413'||detailedAnatomyMetrics.articularExpected!=='413'||detailedAnatomyMetrics.articularActive!=='true'||detailedAnatomyMetrics.articularReplacement!=='true')throw new Error('Detailed anatomy verification failed: '+JSON.stringify(detailedAnatomyMetrics));
+  console.log('SMOKE_ARTICULAR_READY');
+  const skeletonPresetForReference=await evaluate("(()=>{const b=[...document.querySelectorAll('.layer-presets button')].find(x=>x.textContent.trim()==='Bộ xương');if(!b)return false;b.click();return true})()");
+  if(!skeletonPresetForReference)throw new Error('Skeleton layer preset missing before reference verification');
+  await waitFor(()=>evaluate("(()=>{const b=[...document.querySelectorAll('.layer-presets button')].find(x=>x.textContent.trim()==='Bộ xương');return b?.getAttribute('aria-pressed')==='true'})()"),{label:'skeleton reference layer preset'});
+  await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.skeletalReferenceStatus==='ready'&&document.querySelector('canvas')?.dataset.skeletalReferenceCount==='335'&&document.querySelector('canvas')?.dataset.skeletalReferenceReplacement==='true'"),{timeout:90000,label:'335 aligned skeletal reference meshes replacing base layer'});
+  const skeletalReferenceMetrics=await evaluate("(()=>{const d=document.querySelector('canvas')?.dataset||{};return{status:d.skeletalReferenceStatus,count:d.skeletalReferenceCount,expected:d.skeletalReferenceExpected,bounds:d.skeletalReferenceBounds,active:d.skeletalReferenceActive,replacement:d.skeletalReferenceReplacement}})()");
+  if(skeletalReferenceMetrics.status!=='ready'||skeletalReferenceMetrics.count!=='335'||skeletalReferenceMetrics.expected!=='335'||skeletalReferenceMetrics.active!=='true'||skeletalReferenceMetrics.replacement!=='true'||!skeletalReferenceMetrics.bounds)throw new Error('Skeletal reference verification failed: '+JSON.stringify(skeletalReferenceMetrics));
+  console.log('SMOKE_DETAILED_ANATOMY_PASS '+JSON.stringify({detailedAnatomyMetrics,skeletalReferenceMetrics}));
+  const musclePresetForQa=await evaluate("(()=>{const b=[...document.querySelectorAll('.layer-presets button')].find(x=>x.textContent.trim()==='Cơ toàn thân');if(!b)return false;b.click();return true})()");
+  if(!musclePresetForQa)throw new Error('Muscle layer preset missing before regional QA');
+  await waitFor(()=>evaluate("(()=>{const b=[...document.querySelectorAll('.layer-presets button')].find(x=>x.textContent.trim()==='Cơ toàn thân');return b?.getAttribute('aria-pressed')==='true'})()"),{label:'muscle layer preset for regional QA'});
+  await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.detailedMusclesReplacement==='true'"),{label:'aligned detailed muscle layer replaces base muscle geometry'});
   const regionalQaHashes=[];
   for(const [region,yFraction] of [['head',.20],['foot',.80]]){
     for(const [label,suffix] of [['Mặt trước','front'],['Mặt bên','side'],['Mặt sau','back']]){
