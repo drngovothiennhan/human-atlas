@@ -148,6 +148,7 @@ try{
   if(panHash===zoomHash)throw new Error('Desktop pan did not change rendered screenshot');
 
   const clickAria=async label=>evaluate("(()=>{const b=document.querySelector('[aria-label=\\\""+label+"\\\"]');if(!b)return false;b.click();return true})()");
+  const typeText=async text=>{for(const ch of text){await send('Input.dispatchKeyEvent',{type:'keyDown',key:ch,text:ch});await send('Input.dispatchKeyEvent',{type:'keyUp',key:ch})}};
   for(const [label,file] of [['Mặt trước','desktop-front.png'],['Mặt sau','desktop-back.png'],['Mặt bên','desktop-side.png']]){
     const motionSeqBefore=await evaluate("Number(document.querySelector('canvas')?.dataset.cameraMotionSeq||0)");
     if(!await clickAria(label))throw new Error('Missing camera control: '+label);
@@ -245,22 +246,22 @@ try{
   await waitFor(()=>evaluate("!!document.querySelector('.yhct-panel')"),{label:'YHCT drawer'});
   await waitFor(()=>evaluate("document.querySelector('[data-yhct-spatial-counts=true]')?.innerText.includes('vị trí mô phỏng')&&!document.querySelector('[data-yhct-spatial-counts=true]')?.innerText.includes('anchor 3D')"),{label:'honest spatial counts'});
   if(!await evaluate("(()=>{const i=document.querySelector('.yhct-search');if(!i)return false;i.focus();return document.activeElement===i})()"))throw new Error('YHCT meridian search input missing');
-  await send('Input.insertText',{text:'Phế'});
-  await waitFor(()=>evaluate("document.querySelector('.yhct-search')?.value==='Phế'"),{label:'local meridian search input'});
+  await typeText('LU');
+  await waitFor(()=>evaluate("document.querySelector('.yhct-search')?.value==='LU'"),{label:'local meridian search input'});
   await waitFor(()=>evaluate("document.querySelector('.yhct-list')?.innerText.includes('LU')"),{label:'local meridian search'});
   const catalogueCount=await evaluate("document.querySelector('.yhct-launch')?.innerText||''");
   if(!catalogueCount.includes('361 huyệt'))throw new Error('361-point catalogue count not visible: '+catalogueCount);
   await evaluate("(()=>{const buttons=[...document.querySelectorAll('.yhct-tabs button')];buttons.find(b=>b.textContent.includes('Huyệt'))?.click();return true})()");
   await sleep(100);
   if(!await evaluate("(()=>{const i=document.querySelector('.yhct-search');if(!i)return false;i.focus();return document.activeElement===i})()"))throw new Error('YHCT point search input missing');
-  await send('Input.insertText',{text:'ST36'});
+  await typeText('ST36');
   await waitFor(()=>evaluate("document.querySelector('.yhct-search')?.value==='ST36'"),{label:'ST36 search input'});
   await waitFor(()=>evaluate("document.querySelector('.yhct-list')?.innerText.includes('ST-36')"),{label:'ST36 catalogue search'});
   await evaluate("(()=>{const buttons=[...document.querySelectorAll('.yhct-tabs button')];buttons.find(b=>b.textContent.includes('Trợ lý'))?.click();return true})()");
   await sleep(100);
   if(!await evaluate("(()=>{const t=document.querySelector('.yhct-assistant textarea');if(!t)return false;t.focus();return document.activeElement===t})()"))throw new Error('YHCT assistant input missing');
-  await send('Input.insertText',{text:'ST36 thuộc kinh nào?'});
-  await waitFor(()=>evaluate("document.querySelector('.yhct-assistant textarea')?.value==='ST36 thuộc kinh nào?'"),{label:'assistant question input'});
+  await typeText('ST36');
+  await waitFor(()=>evaluate("document.querySelector('.yhct-assistant textarea')?.value==='ST36'"),{label:'assistant question input'});
   if(!await evaluate("(()=>{const b=document.querySelector('.yhct-assistant>button');if(!b)return false;b.click();return true})()"))throw new Error('YHCT assistant submit missing');
   await waitFor(()=>evaluate("document.querySelector('.yhct-assistant p')?.innerText.includes('Kinh Vị')&&document.querySelector('.yhct-assistant small')?.innerText.includes('không phải LLM')"),{label:'local study assistant ST36 and provenance'});
   await evaluate("(()=>{const buttons=[...document.querySelectorAll('.yhct-tabs button')];buttons.find(b=>b.textContent.includes('Giải phẫu'))?.click();return true})()");
