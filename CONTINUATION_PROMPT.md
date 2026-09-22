@@ -1,3 +1,20 @@
+# VERIFIED CHECKPOINT — 78 head meshes + 14 meridians + Render remote QA (2026-09-22 11:47 ICT)
+
+- Preserved runtime branch state: `feature-hiu-yhct-3d-atlas@bde8cbefac200dd2ce5617d68da1aa1fde9b1781`.
+- Dedicated checkpoint branch: `checkpoint/verified-preview-20260922-1147`; `main` remains untouched and PR #1 remains draft/open.
+- Push CI #185, run `35687033860`: SUCCESS. Full gate passed including content validation/build, source validation, TypeScript/check, anatomy/interactions validators, 21 unit tests, production build, static verification, browser smoke, and Pages static build verification.
+- PR CI #186, run `35687036152`: SUCCESS.
+- Browser smoke artifact: `10677356357`.
+- Browser evidence includes `SMOKE_HEAD_MUSCLES_78_PASS`, moving meridian flow, line/point visual hierarchy, effect controls, all 14 schematic meridians, mobile meridian layout, desktop/tablet camera/touch/pinch interactions, load retry, and `consoleErrors=[]`.
+- Head layer provenance reported by the app/tests: 78 expected/78 active meshes; source `Nurkan1/Anatria-3D`; license `CC BY-SA 4.0`.
+- Isolated Render remote QA branch `qa/render-preview-bde8cb@590c514930402e22a7808c560fbbfaed1f8cee29` passed workflow `QA Render Preview bde8cb` run `35687326245`.
+- Remote preview verification: https://hiu-atlas-3d-preview-bde8cb.onrender.com/ -> `REMOTE_PREVIEW_PASS`, head count 78/78, meridianCount 14. Remote evidence artifact: `10677178605`.
+- Earlier GitHub Pages preview-only runs #13/#14 failed on the isolated `preview/652fff-head-muscles` branch; they are not the accepted delivery path and do not invalidate the verified Render preview.
+- This checkpoint is evidence-preserving only. It does not promote UNVERIFIED acupoint coordinates or clinical paths and does not claim physical-device acceptance.
+- Next cleanup scope: preserve this checkpoint and current feature branch; retire only temporary preview/QA build scaffolding that is not required for reproducibility. Do not touch `main`, source/license gates, or reviewed-data gates.
+
+---
+
 # CURRENT CHECKPOINT — browser smoke repaired + CI verified (2026-09-22)
 
 - Branch: `feature-hiu-yhct-3d-atlas`; PR #1 remains draft/open; `main` is untouched.
