@@ -218,8 +218,9 @@ try{
   await waitFor(()=>evaluate("document.querySelector('.anatomy-search-results')?.innerText.includes('Tim')"),{label:'anatomy search actual result'});
   if(!await clickAria('Đóng tìm kiếm'))throw new Error('Anatomy search close missing');
 
-  if(!await clickAria('Thông tin ứng dụng'))throw new Error('Information control missing');
-  await waitFor(()=>evaluate("document.body.innerText.includes('Thông tin ứng dụng')&&document.body.innerText.includes('Tọa độ và hiệu ứng mô phỏng')"),{label:'information sheet'});
+  const informationOpened=await evaluate("(()=>{const b=document.querySelector('.top-actions [aria-label=\\\"Thông tin ứng dụng\\\"]');if(!b)return false;b.click();return true})()");
+  if(!informationOpened)throw new Error('Information control missing');
+  await waitFor(()=>evaluate("(()=>{const sheet=document.querySelector('.about-sheet');const text=sheet?.textContent||'';return !!sheet&&text.includes('Thông tin ứng dụng')&&text.includes('Tọa độ và hiệu ứng mô phỏng')})()"),{label:'information sheet'});
   await send('Input.dispatchKeyEvent',{type:'keyDown',key:'Escape',code:'Escape'});await send('Input.dispatchKeyEvent',{type:'keyUp',key:'Escape',code:'Escape'});
   await waitFor(()=>evaluate("!document.querySelector('.about-sheet')"),{label:'information sheet closes'});
 
