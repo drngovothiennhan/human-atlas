@@ -9,7 +9,7 @@ import {Switch} from '@/components/ui/switch';
 import {Sheet,SheetContent,SheetTitle,SheetDescription} from '@/components/ui/sheet';
 import {Combobox,ComboboxInput,ComboboxContent,ComboboxList,ComboboxItem,ComboboxEmpty} from '@/components/ui/combobox';
 import AnatomyScene from './scene';
-import YhctStudyPanel from './yhct-study-panel';
+import YhctStudyPanel,{type StudyCommand} from './yhct-study-panel';
 import RegistrationPanel from './registration-panel';
 import Meridian3DPanel from './meridian-3d-panel';
 import {type MeridianFocusTarget,type MeridianOverlayState} from './meridian-overlay';
@@ -27,6 +27,7 @@ export default function Home(){
  const [registrationEnabled,setRegistrationEnabled]=useState(false),[registrationTarget,setRegistrationTarget]=useState<{pointCode:string;side:RegistrationSide}>({pointCode:'ST-36',side:'LEFT'}),[registrationCapture,setRegistrationCapture]=useState<SurfaceCapture|null>(null);
  const [registrationDrafts,setRegistrationDrafts]=useState<AcupointAnchorDraft[]>([]),[meridianOverlay,setMeridianOverlay]=useState<MeridianOverlayState>(emptyMeridianOverlay),[meridianFocus,setMeridianFocus]=useState<MeridianFocusTarget|null>(null),[selectedMeridianPoint,setSelectedMeridianPoint]=useState<string|null>(null);
  const [renderQuality,setRenderQuality]=useState<RenderQualityMode>(readRenderQuality);
+ const studyCommandSeq=useRef(0),[studyCommand,setStudyCommand]=useState<(StudyCommand&{seq:number})|null>(null);
  useEffect(()=>{const abort=new AbortController();const timeout=setTimeout(()=>{setError('Tải danh mục quá thời gian. Kiểm tra kết nối và tải lại.');abort.abort();},20000);setProgress(0);setError('');setAtlas(null);setChosen(null);setDetails(false);setState({...initial,visible:DEFAULT_VISIBLE});fetch(import.meta.env.BASE_URL+'models/atlas.json',{signal:abort.signal}).then(r=>{if(!r.ok)throw new Error('Không tải được danh mục giải phẫu.');return r.json();}).then(data=>{clearTimeout(timeout);setAtlas(normalizeAtlasSystems(data as Atlas));}).catch(e=>{clearTimeout(timeout);if(e.name!=='AbortError')setError(e.message);});return()=>{clearTimeout(timeout);abort.abort();};},[]);
  useEffect(()=>{const key=(e:KeyboardEvent)=>{if(e.key==='/'&&!(e.target instanceof HTMLInputElement)&&!(e.target instanceof HTMLTextAreaElement)){e.preventDefault();setPanel('search');setDetails(false);}};window.addEventListener('keydown',key);return()=>window.removeEventListener('keydown',key);},[]);
  useEffect(()=>{const enabled=new URLSearchParams(window.location.search).get('register')==='1';setRegistrationEnabled(enabled);if(enabled)setState(s=>({...s,explode:0,isolate:false,rotate:false,visible:s.visible.includes('integumentary')?s.visible:[...s.visible,'integumentary']}));},[]);
@@ -60,12 +61,17 @@ export default function Home(){
  const toggle=(id:SystemId)=>{setDetails(false);setState(s=>({...s,selected:[],isolate:false,visible:s.visible.includes(id)?s.visible.filter(x=>x!==id):[...s.visible,id]}));};
  const reset=()=>{setState(s=>({...initial,visible:DEFAULT_VISIBLE,reset:s.reset+1}));setChosen(null);setDetails(false);setPanel(null);};
  const openPanel=(next:'layers'|'search')=>{setDetails(false);setPanel(p=>p===next?null:next);};
+ const handleStudyCommand=(command:StudyCommand)=>{
+  if(command.view)setState(s=>({...s,view:command.view!,reset:s.reset+1,rotate:false}));
+  const {view:_,...overlayCommand}=command;
+  if(overlayCommand.meridianId||overlayCommand.pointCode||overlayCommand.effects)setStudyCommand({...overlayCommand,seq:++studyCommandSeq.current});
+ };
  return <main className="studio">
   {atlas&&<AnatomyScene atlas={atlas} state={{...state,inspectorOpen:details&&selectedParts.length>0}} renderQuality={renderQuality} onSelect={choosePart} onProgress={n=>{setProgress(n);if(n===100)setError('');}} onError={setError} registrationMode={registrationEnabled} onRegisterSurface={setRegistrationCapture} meridianOverlay={meridianOverlay} focusAcupoint={meridianFocus} onSelectAcupoint={setSelectedMeridianPoint}/>} 
   <div className="vignette"/>
   <header className="identity"><div className="eyebrow"><span className="status-dot"/> HIU CLB YHCT · ATLAS GIÁO DỤC</div><h1>HIU YHCT Atlas<Badge variant="outline" className="edition">3D</Badge></h1><div className="identity-meta">{atlas?atlas.parts.length.toLocaleString():'2,234'} cấu trúc giải phẫu <span>·</span> BodyParts3D</div></header>
-  <YhctStudyPanel/>
-  <Meridian3DPanel drafts={registrationDrafts} selectedPointCode={selectedMeridianPoint} onOverlayChange={setMeridianOverlay} onFocus={setMeridianFocus}/>
+  <YhctStudyPanel localDraftCount={registrationDrafts.length} onStudyCommand={handleStudyCommand}/>
+  <Meridian3DPanel drafts={registrationDrafts} selectedPointCode={selectedMeridianPoint} studyCommand={studyCommand} onOverlayChange={setMeridianOverlay} onFocus={setMeridianFocus}/>
   {registrationEnabled&&<RegistrationPanel target={registrationTarget} capture={registrationCapture} onTargetChange={next=>{setRegistrationTarget(next);setRegistrationCapture(null);}} onDraftsChange={setRegistrationDrafts}/>} 
   <nav className="top-actions" aria-label="Bảng điều khiển"><Button variant="ghost" className={panel==='search'?'active':''} onClick={()=>openPanel('search')} aria-label="Tìm giải phẫu"><Search size={18}/><span>Tìm cấu trúc</span><kbd>/</kbd></Button><Button variant="ghost" className="icon-button" aria-label="Thông tin ứng dụng" onClick={()=>{setDetails(false);setPanel(null);setAbout(true);}}><Info size={18}/></Button></nav>
   <section className={`layers-panel glass ${panel==='layers'?'mobile-open':''}`} aria-label="Lớp giải phẫu">
