@@ -52,11 +52,12 @@ export default function Home(){
   });
  },[meridianOverlay.enabled,state.explode,state.isolate,state.rotate,state.visible]);
  const parts=useMemo(()=>new Map(atlas?.parts.map(p=>[p.id,p])),[atlas]);
- const counts=useMemo(()=>Object.fromEntries(SYSTEMS.map(s=>{const base=atlas?.parts.filter(p=>p.system===s.id).length??0;if(s.id==='articular')return[s.id,ARTICULAR_SOURCE.expectedMeshCount];if(s.id==='muscular')return[s.id,Math.max(base,DETAILED_MUSCLE_SOURCE.expectedMeshCount)];return[s.id,base]})),[atlas]);
+ const counts=useMemo(()=>Object.fromEntries(SYSTEMS.map(s=>{const base=atlas?.parts.filter(p=>p.system===s.id).length??0;if(s.id==='skeletal')return[s.id,SKELETAL_SOURCE.expectedMeshCount];if(s.id==='articular')return[s.id,ARTICULAR_SOURCE.expectedMeshCount];if(s.id==='muscular')return[s.id,DETAILED_MUSCLE_SOURCE.expectedMeshCount];return[s.id,base]})),[atlas]);
  const activeSystems=SYSTEMS.filter(s=>counts[s.id]>0);
  const selectedParts=state.selected.map(id=>parts.get(id)).filter(p=>!!p),selected=selectedParts[0],system=SYSTEMS.find(s=>s.id===selected?.system);
  const visibleBaseCount=atlas?.parts.filter(p=>state.isolate?state.selected.includes(p.id):state.visible.includes(p.system)||state.selected.includes(p.id)).length??0;
- const visibleCount=visibleBaseCount+(!state.isolate&&state.visible.includes('articular')?ARTICULAR_SOURCE.expectedMeshCount:0);
+ const focusedReplacementCount=!state.isolate&&state.explode<.01&&state.visible.length===1?(state.visible[0]==='skeletal'?SKELETAL_SOURCE.expectedMeshCount:state.visible[0]==='articular'?ARTICULAR_SOURCE.expectedMeshCount:state.visible[0]==='muscular'?DETAILED_MUSCLE_SOURCE.expectedMeshCount:null):null;
+ const visibleCount=focusedReplacementCount??visibleBaseCount;
  const results=useMemo(()=>{if(!atlas)return[];const term=query.toLowerCase().trim();if(!term)return ['heart','brain','liver','stomach','spleen','pancreas','urinary bladder','trachea'].map(name=>atlas.concepts.find(c=>c.name.toLowerCase()===name)).filter((x):x is Concept=>!!x);return atlas.concepts.filter(c=>anatomyName(c.name).toLowerCase().includes(term)||c.id.toLowerCase().includes(term)).sort((a,b)=>a.name.length-b.name.length).slice(0,80);},[atlas,query]);
  const choose=(c:Concept)=>{setChosen(c);setState(s=>({...s,selected:c.elements,isolate:false,rotate:false}));setDetails(true);setPanel(null);};
  useEffect(()=>{if(!atlas)return;return registerAtlasTools(atlas,c=>flushSync(()=>choose(c)));},[atlas]);
