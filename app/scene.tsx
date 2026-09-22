@@ -111,7 +111,7 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
     renderer.domElement.dataset.footMuscleCount=String(footCount);renderer.domElement.dataset.neckMuscleCount=String(neckCount);
     renderer.domElement.dataset.headMuscleBounds=[headBox.min.x,headBox.min.y,headBox.min.z,headBox.max.x,headBox.max.y,headBox.max.z].map(v=>v.toFixed(4)).join(',');
     renderer.domElement.dataset.detailedMuscleBounds=[allBox.min.x,allBox.min.y,allBox.min.z,allBox.max.x,allBox.max.y,allBox.max.z].map(v=>v.toFixed(4)).join(',');
-    const s=latest.current;bodyMuscleGroup.visible=s.visible.includes('muscular')&&!s.isolate&&s.explode<.01;headMuscleGroup.visible=Boolean(s.headMuscles)&&bodyMuscleGroup.visible;dirty=true;
+    const s=latest.current,muscleLayerVisible=s.visible.includes('muscular')&&!s.isolate&&s.explode<.01;bodyMuscleGroup.visible=muscleLayerVisible&&s.visible.length===1;headMuscleGroup.visible=Boolean(s.headMuscles)&&muscleLayerVisible;dirty=true;
    }).catch(error=>{
     if(disposed)return;detailedMuscleStatus='error';clearGroup(headMuscleGroup);clearGroup(bodyMuscleGroup);renderer.domElement.dataset.detailedMusclesStatus='error';renderer.domElement.dataset.headMusclesStatus='error';renderer.domElement.dataset.headMuscleError=error instanceof Error?error.message:'load failed';console.error('[detailed-muscles]',error);dirty=true;
    }).finally(()=>draco.dispose());
@@ -131,7 +131,7 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
     });
     if(count!==ARTICULAR_SOURCE.expectedMeshCount)throw new Error('Articular source mismatch: '+count+'/'+ARTICULAR_SOURCE.expectedMeshCount);
     jointStatus='ready';renderer.domElement.dataset.articularStatus='ready';renderer.domElement.dataset.articularCount=String(count);renderer.domElement.dataset.articularBounds=[box.min.x,box.min.y,box.min.z,box.max.x,box.max.y,box.max.z].map(v=>v.toFixed(4)).join(',');
-    const s=latest.current;jointGroup.visible=s.visible.includes('articular')&&!s.isolate&&s.explode<.01;dirty=true;
+    const s=latest.current;jointGroup.visible=s.visible.length===1&&s.visible[0]==='articular'&&!s.isolate&&s.explode<.01;dirty=true;
    }).catch(error=>{
     if(disposed)return;jointStatus='error';clearGroup(jointGroup);renderer.domElement.dataset.articularStatus='error';renderer.domElement.dataset.articularError=error instanceof Error?error.message:'load failed';console.error('[articular]',error);dirty=true;
    }).finally(()=>draco.dispose());
@@ -146,7 +146,7 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
     gltf.scene.traverse(object=>{if(!(object instanceof T.Mesh))return;const clean=T.PropertyBinding.sanitizeNodeName(object.name);if(!allowed.has(clean))return;if(!object.geometry.boundingBox)object.geometry.computeBoundingBox();const worldBox=object.geometry.boundingBox?.clone().applyMatrix4(object.matrixWorld);if(worldBox)box.union(worldBox);const mesh=new T.Mesh(object.geometry,skeletalReferenceMaterial);mesh.name='hiu-skeleton:'+object.name;mesh.matrixAutoUpdate=false;mesh.matrix.copy(object.matrixWorld);mesh.frustumCulled=false;mesh.castShadow=qualityConfig.shadows;mesh.renderOrder=10;skeletalReferenceGroup.add(mesh);count++;});
     if(count!==SKELETAL_SOURCE.expectedMeshCount)throw new Error('Skeletal source mismatch: '+count+'/'+SKELETAL_SOURCE.expectedMeshCount);
     skeletalStatus='ready';renderer.domElement.dataset.skeletalReferenceStatus='ready';renderer.domElement.dataset.skeletalReferenceCount=String(count);renderer.domElement.dataset.skeletalReferenceBounds=[box.min.x,box.min.y,box.min.z,box.max.x,box.max.y,box.max.z].map(v=>v.toFixed(4)).join(',');
-    const s=latest.current;skeletalReferenceGroup.visible=s.visible.includes('skeletal')&&!s.isolate&&s.explode<.01;dirty=true;
+    const s=latest.current;skeletalReferenceGroup.visible=s.visible.length===1&&s.visible[0]==='skeletal'&&!s.isolate&&s.explode<.01;dirty=true;
    }).catch(error=>{if(disposed)return;skeletalStatus='error';clearGroup(skeletalReferenceGroup);renderer.domElement.dataset.skeletalReferenceStatus='error';renderer.domElement.dataset.skeletalReferenceError=error instanceof Error?error.message:'load failed';console.error('[skeletal-reference]',error);dirty=true;}).finally(()=>draco.dispose());
   };
   const reduceMeridianMotion=window.matchMedia?.('(prefers-reduced-motion: reduce)').matches??false;
@@ -330,11 +330,12 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
     camera.position.lerpVectors(cameraMotion.fromPosition,cameraMotion.toPosition,e);controls.target.lerpVectors(cameraMotion.fromTarget,cameraMotion.toTarget,e);controls.update();dirty=true;
     if(t>=1){cameraMotion=null;renderer.domElement.dataset.cameraMotion='idle';}
    }
-   const musclesWanted=s.visible.includes('muscular')&&!s.isolate&&s.explode<.01;bodyMuscleGroup.visible=musclesWanted;if(musclesWanted)ensureDetailedMuscles();
-   const headWanted=Boolean(s.headMuscles)&&musclesWanted;
-   if(headWanted!==lastHeadMuscles){headMuscleGroup.visible=headWanted;if(headWanted)ensureDetailedMuscles();renderer.domElement.dataset.headMusclesActive=String(headWanted);lastHeadMuscles=headWanted;dirty=true;}
-   const jointsWanted=s.visible.includes('articular')&&!s.isolate&&s.explode<.01;jointGroup.visible=jointsWanted;if(jointsWanted)ensureJoints();renderer.domElement.dataset.articularActive=String(jointsWanted);
-   const skeletalWanted=s.visible.includes('skeletal')&&!s.isolate&&s.explode<.01;skeletalReferenceGroup.visible=skeletalWanted;if(skeletalWanted)ensureSkeletalReference();renderer.domElement.dataset.skeletalReferenceActive=String(skeletalWanted);
+   const muscleLayerVisible=s.visible.includes('muscular')&&!s.isolate&&s.explode<.01,detailedMusclesWanted=muscleLayerVisible&&s.visible.length===1;bodyMuscleGroup.visible=detailedMusclesWanted;
+   const headWanted=Boolean(s.headMuscles)&&muscleLayerVisible;if(headWanted||detailedMusclesWanted)ensureDetailedMuscles();
+   if(headWanted!==lastHeadMuscles){headMuscleGroup.visible=headWanted;renderer.domElement.dataset.headMusclesActive=String(headWanted);lastHeadMuscles=headWanted;dirty=true;}
+   renderer.domElement.dataset.detailedMusclesActive=String(detailedMusclesWanted);
+   const jointsWanted=s.visible.length===1&&s.visible[0]==='articular'&&!s.isolate&&s.explode<.01;jointGroup.visible=jointsWanted;if(jointsWanted)ensureJoints();renderer.domElement.dataset.articularActive=String(jointsWanted);
+   const skeletalWanted=s.visible.length===1&&s.visible[0]==='skeletal'&&!s.isolate&&s.explode<.01;skeletalReferenceGroup.visible=skeletalWanted;if(skeletalWanted)ensureSkeletalReference();renderer.domElement.dataset.skeletalReferenceActive=String(skeletalWanted);
    const changed=lastState?.visible!==s.visible||lastState?.selected!==s.selected||lastState?.isolate!==s.isolate||lastState?.headMuscles!==s.headMuscles;
    const moving=Math.abs(amount-s.explode)>.0001;
    if(moving){amount=T.MathUtils.damp(amount,s.explode,8,dt);dirty=true;}
