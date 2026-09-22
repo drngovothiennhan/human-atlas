@@ -239,7 +239,7 @@ try{
   const explodeAfter=await screenshot('desktop-explode-after.png');
   if(explodeAfter===explodeBefore)throw new Error('Explode slider did not change rendered view');
   if(!await clickAria('Ghép và đặt lại'))throw new Error('Dock reset missing after explode');
-  await waitFor(()=>evaluate("Number(document.querySelector('[role=slider]')?.getAttribute('aria-valuenow')||0)===0"),{label:'explode reset'});
+  await waitFor(()=>evaluate("document.querySelector('.explode-control output')?.textContent==='0%'"),{label:'explode reset'});
 
   await evaluate("document.querySelector('.yhct-launch').click()");
   await waitFor(()=>evaluate("!!document.querySelector('.yhct-panel')"),{label:'YHCT drawer'});
