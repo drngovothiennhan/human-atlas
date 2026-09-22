@@ -172,11 +172,12 @@
     "attribution": "Preserve upstream MIT notice and CC BY-SA 4.0 attribution for calibrated/structural metadata",
     "shareAlike": true,
     "commercialRestriction": false,
-    "status": "DIRECT_USE_SCHEMATIC",
+    "status": "DIRECT_USE",
     "auditedVersion": "Pinned commit 1fc9ec98d365c9fb035844e2775c1be05a0a05fc; licenses re-verified 2026-09-22",
-    "spatialRegistrationStatus": "PROJECTED_TO_BODYPARTS3D_UNVERIFIED",
+    "spatialRegistrationStatus": "BLOCKED",
     "runtimeBundled": true,
-    "note": "Active full-body schematic source. HIU projects the authored anchors onto BodyParts3D FMA7163 and renders 361 point codes / 14 meridians as LICENSED_SCHEMATIC / UNVERIFIED. Never auto-promote to faculty-reviewed clinical coordinates; BL-39 is absent from upstream path topology."
+    "note": "Active full-body schematic source. HIU projects the authored anchors onto BodyParts3D FMA7163 and renders 361 point codes / 14 meridians as LICENSED_SCHEMATIC / UNVERIFIED. SpatialRegistrationStatus remains BLOCKED so this source cannot be promoted into published position3d records automatically; BL-39 is absent from upstream path topology.",
+    "schematicRuntimeEligible": true
   },
   {
     "id": "METACUPOINT-ZENODO-2025",
