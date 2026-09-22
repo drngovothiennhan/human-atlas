@@ -12,18 +12,21 @@ import {SYSTEMS,type Atlas,type SceneState} from './anatomy';
 import {BODY_CANONICAL_COORDINATE_SYSTEM,type SurfaceCapture} from '../src/acupoints/registration/coordinate-system';
 import type {MeridianFocusTarget,MeridianOverlayState} from './meridian-overlay';
 import {HEAD_MUSCLE_SOURCE,HEAD_MUSCLE_SOURCE_NODES} from './head-muscles';
-interface Props {atlas:Atlas;state:SceneState;onSelect:(id:string)=>void;onProgress:(n:number)=>void;onError:(s:string)=>void;registrationMode?:boolean;onRegisterSurface?:(capture:SurfaceCapture)=>void;meridianOverlay?:MeridianOverlayState;focusAcupoint?:MeridianFocusTarget|null;onSelectAcupoint?:(pointCode:string)=>void}
+import {detectRenderCapabilities,QUALITY_CONFIG,selectInitialProfile,stepAdaptiveProfile,type RenderQualityMode,type RenderQualityProfile} from './render-quality';
+interface Props {atlas:Atlas;state:SceneState;renderQuality:RenderQualityMode;onSelect:(id:string)=>void;onProgress:(n:number)=>void;onError:(s:string)=>void;registrationMode?:boolean;onRegisterSurface?:(capture:SurfaceCapture)=>void;meridianOverlay?:MeridianOverlayState;focusAcupoint?:MeridianFocusTarget|null;onSelectAcupoint?:(pointCode:string)=>void}
 const assetUrl=(url:string)=>url.startsWith('/')?import.meta.env.BASE_URL+url.slice(1):url;
-export default function AnatomyScene({atlas,state,onSelect,onProgress,onError,registrationMode=false,onRegisterSurface,meridianOverlay,focusAcupoint,onSelectAcupoint}:Props){
- const host=useRef<HTMLDivElement>(null),latest=useRef(state),select=useRef(onSelect),registration=useRef(registrationMode),registerSurface=useRef(onRegisterSurface),overlay=useRef(meridianOverlay),focus=useRef(focusAcupoint),selectAcupoint=useRef(onSelectAcupoint);
- latest.current=state;select.current=onSelect;registration.current=registrationMode;registerSurface.current=onRegisterSurface;overlay.current=meridianOverlay;focus.current=focusAcupoint;selectAcupoint.current=onSelectAcupoint;
+export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgress,onError,registrationMode=false,onRegisterSurface,meridianOverlay,focusAcupoint,onSelectAcupoint}:Props){
+ const host=useRef<HTMLDivElement>(null),latest=useRef(state),quality=useRef(renderQuality),select=useRef(onSelect),registration=useRef(registrationMode),registerSurface=useRef(onRegisterSurface),overlay=useRef(meridianOverlay),focus=useRef(focusAcupoint),selectAcupoint=useRef(onSelectAcupoint);
+ latest.current=state;quality.current=renderQuality;select.current=onSelect;registration.current=registrationMode;registerSurface.current=onRegisterSurface;overlay.current=meridianOverlay;focus.current=focusAcupoint;selectAcupoint.current=onSelectAcupoint;
  useEffect(()=>{
-  const el=host.current!;let disposed=false,frame=0,dirty=true,ready=false,lastView='',lastReset=-1,lastIsolate='',layoutKey='',amount=0;
+  const el=host.current!;let disposed=false,frame=0,dirty=true,ready=false,lastView='',lastReset=-1,lastIsolate='',layoutKey='',amount=0,renderCount=0;
   let lastState:SceneState|null=null;
-  const abort=new AbortController();
+  const abort=new AbortController(),capabilities=detectRenderCapabilities();
+  let qualityProfile:RenderQualityProfile=selectInitialProfile(renderQuality,capabilities),lastQualityMode:RenderQualityMode=renderQuality,qualityConfig=QUALITY_CONFIG[qualityProfile];
   let renderer:T.WebGLRenderer;
-  try{renderer=new T.WebGLRenderer({antialias:true,alpha:false,powerPreference:'high-performance'});}catch{onError('Không khởi động được mô hình 3D. Vui lòng dùng trình duyệt có hỗ trợ WebGL.');return;}
-  renderer.setPixelRatio(Math.min(devicePixelRatio,innerWidth<768?1.5:2));renderer.setClearColor('#f2f3f3');renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1.12;el.appendChild(renderer.domElement);
+  try{renderer=new T.WebGLRenderer({antialias:qualityConfig.antialias,alpha:false,powerPreference:'high-performance'});}catch{onError('Không khởi động được mô hình 3D. Vui lòng dùng trình duyệt có hỗ trợ WebGL.');return;}
+  renderer.setPixelRatio(Math.min(devicePixelRatio,qualityConfig.pixelRatioCap));renderer.setClearColor('#f2f3f3');renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1.12;renderer.shadowMap.enabled=qualityConfig.shadows;renderer.shadowMap.type=T.PCFSoftShadowMap;el.appendChild(renderer.domElement);
+  renderer.domElement.dataset.renderQualityMode=renderQuality;renderer.domElement.dataset.renderQualityProfile=qualityProfile;renderer.domElement.dataset.renderPixelRatio=renderer.getPixelRatio().toFixed(2);renderer.domElement.dataset.renderAntialias=String(renderer.getContext().getContextAttributes()?.antialias??false);renderer.domElement.dataset.renderSuspended='false';renderer.domElement.dataset.renderCount='0';renderer.domElement.dataset.renderAdaptations='0';renderer.domElement.dataset.renderCapabilities=JSON.stringify({webgl:capabilities.webgl,webgl2:capabilities.webgl2,maxTextureSize:capabilities.maxTextureSize,hardwareConcurrency:capabilities.hardwareConcurrency,deviceMemoryGb:capabilities.deviceMemoryGb,devicePixelRatio:capabilities.devicePixelRatio,viewportPixels:capabilities.viewportPixels});
   renderer.domElement.setAttribute('aria-label','Giải phẫu tương tác: kéo để xoay, chụm hoặc cuộn để thu phóng, chạm để xem cấu trúc.');
   const scene=new T.Scene(),camera=new T.PerspectiveCamera(34,1,.005,100),controls=new OrbitControls(camera,renderer.domElement);
   camera.position.set(1.4,1.05,3.6);controls.target.set(0,.85,0);controls.enableDamping=true;controls.dampingFactor=.085;controls.minDistance=.07;controls.maxDistance=40;controls.maxPolarAngle=Math.PI*.96;controls.zoomToCursor=true;renderer.domElement.dataset.cameraMotion='idle';renderer.domElement.dataset.cameraMotionSeq='0';
@@ -38,9 +41,9 @@ export default function AnatomyScene({atlas,state,onSelect,onProgress,onError,re
   controls.addEventListener('change',()=>{dirty=true;});
   const pmrem=new T.PMREMGenerator(renderer),room=new RoomEnvironment(),env=pmrem.fromScene(room,.04);scene.environment=env.texture;room.dispose();pmrem.dispose();
   scene.add(new T.HemisphereLight(0xffffff,0xa7acb2,1.05));
-  const key=new T.DirectionalLight(0xfffaf4,2.3);key.position.set(-2,4,3);scene.add(key);
+  const key=new T.DirectionalLight(0xfffaf4,2.3);key.position.set(-2,4,3);key.castShadow=qualityConfig.shadows;key.shadow.mapSize.set(1024,1024);scene.add(key);
   const rim=new T.DirectionalLight(0xe9f0ff,1.8);rim.position.set(2,2,-3);scene.add(rim);
-  const ground=new T.Mesh(new T.CircleGeometry(30,96),new T.MeshStandardMaterial({color:0xd5d9dc,roughness:1}));ground.rotation.x=-Math.PI/2;ground.position.y=-.019;scene.add(ground);
+  const ground=new T.Mesh(new T.CircleGeometry(30,96),new T.MeshStandardMaterial({color:0xd5d9dc,roughness:1}));ground.rotation.x=-Math.PI/2;ground.position.y=-.019;ground.receiveShadow=qualityConfig.shadows;scene.add(ground);
   const platform=new T.Mesh(new T.CylinderGeometry(.68,.7,.028,100),new T.MeshStandardMaterial({color:0xeeeeec,metalness:.12,roughness:.67}));platform.position.y=-.016;scene.add(platform);
   const ring=new T.Mesh(new T.RingGeometry(.63,.632,128),new T.MeshBasicMaterial({color:0x8c969f,transparent:true,opacity:.4,side:T.DoubleSide}));ring.rotation.x=-Math.PI/2;ring.position.y=.001;scene.add(ring);
   const innerRing=new T.Mesh(new T.RingGeometry(.55,.551,128),new T.MeshBasicMaterial({color:0xa4aeb8,transparent:true,opacity:.16,side:T.DoubleSide}));innerRing.rotation.x=-Math.PI/2;innerRing.position.y=.001;scene.add(innerRing);
