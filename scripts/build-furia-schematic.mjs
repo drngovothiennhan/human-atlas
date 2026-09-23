@@ -142,7 +142,7 @@ const spatialOverrides={
   'GB-1':{struct:'Anterior segment of eyeball',along:.5,dir:'anterior',shift:{lateral:13}},
   'CV-24':{struct:'Mandible',along:.5,dir:'anterior',shift:{up:19}},
   'GV-28':{struct:'Maxilla',along:.35,dir:'anterior',shift:{down:7}},
-  'ST-45':{struct:'Distal phalanx of second finger of foot',along:.95,dir:'dorsal',shift:{lateral:3},region:'foot'}
+  'ST-45':{struct:'Distal phalanx of second finger of foot',along:.93,dir:'lateral',shift:{dorsal:2,distal:1},region:'foot'}
 };
 const documentEvidenceByMeridian=new Map(documentReference.meridians.map(item=>[item.meridianId,item]));
 for(const pointCode of Object.keys(spatialOverrides)){
