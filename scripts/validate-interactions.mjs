@@ -31,6 +31,14 @@ for (const file of ['atlas.json']) {
   assert.throws(()=>find.execute({query:' '}));
   console.log(`${file}: packing at desktop/mobile aspect ratios and search/inspection contracts passed.`);
 }
+const pageSource=await readFile(new URL('../app/page.tsx',import.meta.url),'utf8');
+const cssSource=await readFile(new URL('../app/globals.css',import.meta.url),'utf8');
+assert.ok(!pageSource.includes(">Khớp</Button>"),'Meridian-first layer menu must not expose the retired Khớp preset');
+assert.ok(pageSource.includes("s.id!=='articular'"),'Articular layer must stay hidden from the compact study menu');
+assert.ok(cssSource.includes('compact meridian-first layer menu'),'Mobile layer menu overflow guard is required');
+assert.ok(cssSource.includes('grid-template-columns:repeat(2,minmax(0,1fr))'),'Layer presets must use a compact two-column grid');
+console.log('Meridian-first compact layer menu checks passed.');
+
 const tap=new PointerTap();
 tap.down(1,10,10,5);assert.equal(tap.up(1,12,11),true);
 tap.down(1,10,10,5);tap.move(1,40,10);assert.equal(tap.up(1,10,10),false);
