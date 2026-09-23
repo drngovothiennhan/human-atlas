@@ -41,6 +41,17 @@ const reference=await read('app/reference-anatomy.ts');
 if(!reference.includes('SKELETAL_SOURCE')||!reference.includes('ARTICULAR_SOURCE'))fail('reference anatomy must keep skeletal and articular sources');
 if(/MUSCLE|muscular|z-muscular/i.test(reference))fail('reference anatomy must not contain retired muscle runtime sources');
 
+
+const ciWorkflow=await read('.github/workflows/hiu-atlas-ci.yml');
+if(ciWorkflow.includes('feature-hiu-yhct-3d-atlas'))fail('legacy feature branch is still a CI push target');
+
+for(const path of ['PROJECT_STATE.md','CONTINUATION_PROMPT.md','docs/CHECKBOARD.md']){
+  const operational=await read(path);
+  for(const token of ['feature-hiu-yhct-3d-atlas','main is untouched','main unchanged','PR #1 remains draft/open','human-atlas-seven.vercel.app']){
+    if(operational.includes(token))fail(path+' contains stale operational instruction: '+token);
+  }
+}
+
 const pkg=JSON.parse(await read('package.json'));
 const contentBuild=String(pkg.scripts?.['content:build']??'');
 if(!contentBuild.includes('fetch-reference-anatomy.mjs'))fail('content build must use fetch-reference-anatomy.mjs');
