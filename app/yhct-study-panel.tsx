@@ -37,6 +37,7 @@ export type StudyCommand={
   meridianId?:string;
   pointCode?:string;
   view?:'three-quarter'|'front'|'side'|'back';
+  anatomyPreset?:'surface'|'muscle-landmarks'|'skeleton';
   effects?:Partial<{motion:boolean;meridians:boolean;acupoints:boolean;collaterals:boolean}>;
 };
 

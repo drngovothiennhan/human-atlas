@@ -18,7 +18,7 @@ type SchematicSpatial={anchors:MeridianSceneAnchor[];paths:MeridianScenePath[];s
 type PointDocumentReference={pointCode:string;meridianId:string;label:string;heading:string;pdfPageRange:number[];spatialStatus:string};
 type PointDocumentReferences={points:PointDocumentReference[]};
 
-interface Props{drafts:AcupointAnchorDraft[];selectedPointCode:string|null;studyCommand:(StudyCommand&{seq:number})|null;onOverlayChange:(overlay:MeridianOverlayState)=>void;onFocus:(target:MeridianFocusTarget|null)=>void}
+interface Props{drafts:AcupointAnchorDraft[];selectedPointCode:string|null;studyCommand:(StudyCommand&{seq:number})|null;onStudyAction:(command:StudyCommand)=>void;onOverlayChange:(overlay:MeridianOverlayState)=>void;onFocus:(target:MeridianFocusTarget|null)=>void}
 
 const norm=(value:string)=>value.normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d').replace(/Đ/g,'D').toLowerCase().trim();
 const sideLabel=(side:MeridianOverlaySide)=>side==='BOTH'?'Hai bên':side==='LEFT'?'Trái':'Phải';
@@ -27,7 +27,7 @@ const MAIN_MERIDIAN_IDS=['LU','LI','ST','SP','HT','SI','BL','KI','PC','TE','GB',
 const MIDLINE_MERIDIAN_IDS=['CV','GV'] as const;
 const ALL_MAIN_MERIDIANS='ALL';
 
-export default function Meridian3DPanel({drafts,selectedPointCode,studyCommand,onOverlayChange,onFocus}:Props){
+export default function Meridian3DPanel({drafts,selectedPointCode,studyCommand,onStudyAction,onOverlayChange,onFocus}:Props){
   const [open,setOpen]=useState(false),[enabled,setEnabled]=useState(false);
   const [motion,setMotion]=useState(true),[showMeridians,setShowMeridians]=useState(true),[showPoints,setShowPoints]=useState(true),[showCollaterals,setShowCollaterals]=useState(false);
   const [language,setLanguage]=useState<Language>('vi');
@@ -185,12 +185,16 @@ export default function Meridian3DPanel({drafts,selectedPointCode,studyCommand,o
         <span>{visiblePaths.length?visiblePaths.length+' đường/đoạn 3D đang hiển thị'+(schematicPaths?' · THAM CHIẾU HỌC TẬP':''):'Chưa có đường kinh 3D — không tự nối điểm'}</span>
         {showCollaterals&&<span role="status">Chưa có dữ liệu đường lạc phù hợp để hiển thị.</span>}
       </div>
-      <Button variant="ghost" data-exit-meridians="true" onClick={()=>{setEnabled(false);setOpen(false);onFocus(null)}}>Về giải phẫu</Button>
+      <div className="meridian3d-model-controls" data-meridian3d-model-controls="true">
+        <div><span>Góc nhìn</span><button type="button" data-meridian-view="three-quarter" onClick={()=>onStudyAction({view:'three-quarter'})}>¾</button><button type="button" data-meridian-view="front" onClick={()=>onStudyAction({view:'front'})}>Trước</button><button type="button" data-meridian-view="side" onClick={()=>onStudyAction({view:'side'})}>Bên</button><button type="button" data-meridian-view="back" onClick={()=>onStudyAction({view:'back'})}>Sau</button></div>
+        <div><span>Nền giải phẫu</span><button type="button" data-anatomy-preset="surface" onClick={()=>onStudyAction({anatomyPreset:'surface'})}>Bề mặt</button><button type="button" data-anatomy-preset="muscle-landmarks" onClick={()=>onStudyAction({anatomyPreset:'muscle-landmarks'})}>Cơ mốc</button><button type="button" data-anatomy-preset="skeleton" onClick={()=>onStudyAction({anatomyPreset:'skeleton'})}>Xương</button></div>
+      </div>
+      <Button variant="ghost" data-exit-meridians="true" onClick={()=>{setEnabled(false);setOpen(false);onFocus(null);onStudyAction({anatomyPreset:'surface',view:'three-quarter'})}}>Về giải phẫu</Button>
       <div className="meridian3d-effect-controls" data-meridian3d-effect-controls="true" aria-label="Điều khiển hiệu ứng kinh lạc">
         <button type="button" data-effect-master="true" aria-pressed={enabled} className={enabled?'active':''} onClick={()=>setEnabled(v=>!v)}>Hiệu ứng: {enabled?'Bật':'Tắt'}</button>
         <button type="button" data-effect-motion="true" aria-pressed={motion} className={motion?'active':''} onClick={()=>setMotion(v=>!v)}>Chuyển động</button>
         <button type="button" data-effect-meridian="true" aria-pressed={showMeridians} className={showMeridians?'active':''} onClick={()=>setShowMeridians(v=>!v)}>Kinh</button>
-        <button type="button" data-effect-collateral="true" aria-pressed={showCollaterals} className={showCollaterals?'active':''} onClick={()=>setShowCollaterals(v=>!v)}>Lạc</button>
+        <button type="button" data-effect-collateral="true" aria-disabled="true" disabled title="Chưa có dữ liệu đường lạc đã thẩm định để hiển thị">Lạc · chưa dữ liệu</button>
         <button type="button" data-effect-acupoint="true" aria-pressed={showPoints} className={showPoints?'active':''} onClick={()=>setShowPoints(v=>!v)}>Huyệt</button>
       </div>
       <div className="meridian3d-effect-note" aria-label="Chú giải hiệu ứng 3D"><span><i className="effect-dot"/>Huyệt nhịp</span><span><i className="effect-flow"/>Dòng kinh</span><span>Chạm huyệt → phóng tới vị trí</span></div>

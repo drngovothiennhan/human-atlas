@@ -283,6 +283,8 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
   };
   const animate=()=>{
    if(disposed||document.hidden){frame=0;renderer.domElement.dataset.renderSuspended=String(document.hidden);return;}frame=requestAnimationFrame(animate);const now=performance.now();sampleAdaptiveQuality(now);const dt=Math.min(clock.getDelta(),.05),s=latest.current;
+   renderer.domElement.dataset.sceneView=s.view;
+   renderer.domElement.dataset.visibleSystems=s.visible.join(',');
    const overlayValue=overlay.current;
    const overlayKey=overlayValue?.enabled
     ?[qualityProfile,overlayValue.meridianId,overlayValue.side,overlayValue.selectedPointCode??'',overlayValue.effects?.meridians,overlayValue.effects?.acupoints,overlayValue.anchors.map(anchor=>[anchor.pointCode,anchor.side,anchor.x.toFixed(5),anchor.y.toFixed(5),anchor.z.toFixed(5),anchor.verificationStatus].join(':')).join('|'),overlayValue.paths.map(path=>path.meridianId+':'+path.verificationStatus+':'+path.points.length).join('|')].join('::')
