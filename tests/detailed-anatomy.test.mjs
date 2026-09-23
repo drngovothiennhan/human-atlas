@@ -1,21 +1,30 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import {HEAD_MUSCLE_SOURCE_NODES} from '../app/head-muscles.ts';
+import {DETAILED_MUSCLE_SOURCE} from '../app/head-muscles.ts';
+import {isMeridianLandmarkMuscle,normalizeAtlasSystems} from '../app/anatomy.ts';
 
 const read=name=>JSON.parse(fs.readFileSync(new URL('../public/models/'+name,import.meta.url),'utf8'));
 
-test('pinned detailed anatomy manifests keep complete source coverage',()=>{
-  const muscles=read('z-muscles-manifest.json'),joints=read('z-articular-manifest.json'),skeleton=read('z-skeletal-manifest.json');
-  assert.equal(muscles.meshCount,484);assert.equal(new Set(muscles.nodes).size,484);
-  assert.equal(joints.meshCount,413);assert.equal(new Set(joints.nodes).size,413);
-  assert.equal(skeleton.meshCount,335);assert.equal(new Set(skeleton.nodes).size,335);
-  for(const name of HEAD_MUSCLE_SOURCE_NODES)assert.ok(muscles.nodes.includes(name),'missing head muscle '+name);
+test('meridian-first runtime keeps full detailed muscle source disabled',()=>{
+  assert.equal(DETAILED_MUSCLE_SOURCE.runtimeEnabled,false);
+  assert.equal(DETAILED_MUSCLE_SOURCE.expectedMeshCount,484);
 });
 
-test('muscle layer excludes attachment and support structures',()=>{
-  const muscles=read('z-muscles-manifest.json');
-  const prohibited=/(\.e\d*[lr]$|\.o[lr]$|bursa|aponeuros|retinaculum|tarsus|trochlea|tendon|tendinous|ligament|tract|linea alba|sheath|septum)/i;
-  assert.deepEqual(muscles.nodes.filter(name=>prohibited.test(name)),[]);
-  assert.equal(muscles.excludedMuscularInsertions,705);
+test('meridian landmark muscle profile is a bounded subset of BodyParts3D',()=>{
+  const atlas=normalizeAtlasSystems(read('atlas.json'));
+  const muscles=atlas.parts.filter(part=>part.system==='muscular');
+  const landmarks=muscles.filter(part=>isMeridianLandmarkMuscle(part.name));
+  assert.equal(muscles.length,412);
+  assert.ok(landmarks.length>=20,'too few landmark muscles: '+landmarks.length);
+  assert.ok(landmarks.length<muscles.length/2,'landmark profile is still too broad: '+landmarks.length+'/'+muscles.length);
+  const prohibited=/(tendon|ligament|aponeuros|retinaculum|bursa|sheath|septum)/i;
+  assert.deepEqual(landmarks.filter(part=>prohibited.test(part.name)),[]);
+  assert.deepEqual(landmarks.filter(part=>/fascia/i.test(part.name)&&!/tensor fasciae latae/i.test(part.name)),[]);
+});
+
+test('optional skeletal and articular reference manifests remain pinned',()=>{
+  const joints=read('z-articular-manifest.json'),skeleton=read('z-skeletal-manifest.json');
+  assert.equal(joints.meshCount,413);assert.equal(new Set(joints.nodes).size,413);
+  assert.equal(skeleton.meshCount,335);assert.equal(new Set(skeleton.nodes).size,335);
 });
