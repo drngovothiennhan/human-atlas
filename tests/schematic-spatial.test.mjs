@@ -42,6 +42,7 @@ test('licensed schematic spatial dataset stays unverified and complete',async()=
   assert.ok(data.paths.every(p=>p.verificationStatus==='UNVERIFIED'&&p.sourceKind==='LICENSED_SCHEMATIC'&&p.points.length>=2));
   assert.ok(!data.paths.some(p=>p.pointCodes.includes('BL-39')),'omitted BL-39 must not be invented into topology');
   assert.equal(data.routeOrigins?.ST?.notAnAcupoint,true,'ST route origin must remain a non-acupoint meridian landmark');
+  assert.ok(data.spatialOverrides?.includes('ST-45'),'ST-45 lateral nail-corner override must remain enabled');
   const stPath=data.paths.find(p=>p.meridianId==='ST'&&p.pointCodes?.includes('ST-1'));
   assert.ok(stPath,'ST path containing ST-1 must exist');
   assert.deepEqual(stPath.pointCodes.slice(0,2),['ST-ROUTE-ORIGIN','ST-1'],'ST route must begin at lateral-nose origin before ST-1');
@@ -55,6 +56,9 @@ test('licensed schematic spatial dataset stays unverified and complete',async()=
     assert.ok(anchors.every(a=>a.documentEvidence?.sourceId==='USER-NGO-TRUNG-TRIEU-HUYET-VI-KINH-LAC'),'document source gate missing: '+code);
     assert.ok(anchors.every(a=>Array.isArray(a.documentEvidence?.pdfPageRange)&&a.documentEvidence.pdfPageRange.length===2),'document page range missing: '+code);
     assert.ok(anchors.every(a=>a.documentEvidence?.spatialStatus==='DOCUMENT_REFERENCED_2D'),'document spatial status missing: '+code);
+    if(code==='ST-45'){
+      assert.ok(anchors.every(a=>a.projection==='BodyParts3D FMA7163 surface raycast'),'ST-45 must stay surface-projected');
+    }
   }
   const spPaths=data.paths.filter(p=>p.meridianId==='SP');
   assert.ok(spPaths.length>=2,'SP bilateral paths must exist');
