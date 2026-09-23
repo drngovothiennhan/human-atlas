@@ -176,7 +176,8 @@ export default function Meridian3DPanel({drafts,selectedPointCode,studyCommand,o
         <div><span>Góc nhìn</span><button type="button" data-meridian-view="three-quarter" onClick={()=>onStudyAction({view:'three-quarter'})}>¾</button><button type="button" data-meridian-view="front" onClick={()=>onStudyAction({view:'front'})}>Trước</button><button type="button" data-meridian-view="side" onClick={()=>onStudyAction({view:'side'})}>Bên</button><button type="button" data-meridian-view="back" onClick={()=>onStudyAction({view:'back'})}>Sau</button></div>
         <div><span>Nền giải phẫu</span><button type="button" data-anatomy-preset="surface" onClick={()=>onStudyAction({anatomyPreset:'surface'})}>Bề mặt</button><button type="button" data-anatomy-preset="muscle-landmarks" onClick={()=>onStudyAction({anatomyPreset:'muscle-landmarks'})}>Cơ mốc</button><button type="button" data-anatomy-preset="skeleton" onClick={()=>onStudyAction({anatomyPreset:'skeleton'})}>Xương</button></div>
       </div>
-      <Button variant="ghost" data-exit-meridians="true" onClick={()=>{setEnabled(false);setOpen(false);onFocus(null);onStudyAction({anatomyPreset:'surface',view:'three-quarter'})}}>Về giải phẫu</Button>
+      <div className="meridian3d-exit-row"><Button variant="ghost" data-exit-meridians="true" onClick={()=>{setEnabled(false);setOpen(false);onFocus(null);onStudyAction({anatomyPreset:'surface',view:'three-quarter'})}}>Về giải phẫu</Button></div>
+      <div className="meridian3d-section-label">Hiệu ứng đường kinh</div>
       <div className="meridian3d-effect-controls" data-meridian3d-effect-controls="true" aria-label="Điều khiển hiệu ứng kinh lạc">
         <button type="button" data-effect-master="true" aria-pressed={enabled} className={enabled?'active':''} onClick={()=>setEnabled(v=>!v)}>Hiệu ứng: {enabled?'Bật':'Tắt'}</button>
         <button type="button" data-effect-motion="true" aria-pressed={motion} className={motion?'active':''} onClick={()=>setMotion(v=>!v)}>Chuyển động</button>
@@ -192,7 +193,7 @@ export default function Meridian3DPanel({drafts,selectedPointCode,studyCommand,o
         <strong>{selectedRecord.code} · {pointName(selectedRecord)}</strong>
         <div className="meridian3d-facts">
           <span><small>Kinh</small><b>{meridianName(meridians.find(m=>m.id===selectedRecord.meridianId))}</b></span>
-          <span><small>Thứ tự</small><b>{selectedRecord.sequence}</b></span><span><small>Mã huyệt</small><b>{selectedRecord.code}</b></span>
+          <span><small>Thứ tự</small><b>{selectedRecord.sequence}</b></span><span><small>Mã huyệt</small><b>{selectedRecord.code}</b></span><span data-anatomical-location="true"><small>Vùng cơ thể</small><b>{selectedRecord.anatomicalLocation?.surfaceRegionVi||selectedRecord.anatomicalLocation?.surfaceRegionEn||'—'}</b></span>
           <span><small>Vị trí đang có</small><b>{selectedAnchors.length}</b></span>
           <span><small>Trạng thái</small><b>{selectedAnchors.length?'Đã có tọa độ 3D trên mô hình':'Chưa có tọa độ 3D'}</b></span>
         </div>
@@ -201,7 +202,7 @@ export default function Meridian3DPanel({drafts,selectedPointCode,studyCommand,o
           <span>{selectedIndex>=0?selectedIndex+1:0}/{selectedMeridianPoints.length}</span>
           <button type="button" onClick={()=>moveSelected(1)} disabled={selectedMeridianPoints.length<2}>Huyệt sau →</button>
         </div>
-        <span>{selectedAnchors.length?selectedAnchors.map(a=>a.side+': '+(a.sourceKind==='PUBLISHED'?'tọa độ 3D đã duyệt':a.sourceKind==='LOCAL_DRAFT'?'nháp trên máy':'tọa độ 3D đã hiệu chỉnh')).join(' · '):'Chưa có vị trí trên mô hình.'}</span>
+        {selectedRecord.anatomicalLocation?.landmarks?.length&&<small data-anatomical-landmarks="true">Mốc giải phẫu: {selectedRecord.anatomicalLocation.landmarks.slice(0,4).map(item=>item.label).join(' · ')}</small>}<span>{selectedAnchors.length?selectedAnchors.map(a=>a.side+': '+(a.sourceKind==='PUBLISHED'?'tọa độ 3D đã duyệt':a.sourceKind==='LOCAL_DRAFT'?'nháp trên máy':'tọa độ 3D đã hiệu chỉnh')).join(' · '):'Chưa có vị trí trên mô hình.'}</span>
       </div>}
       <details className="meridian3d-info" data-spatial-source-license="true"><summary>Thông tin & nguồn tham khảo</summary><p><b>Tài liệu đối chiếu:</b> {schematic.calibration?.documentTitle??'Huyệt Vị Kinh Lạc Cơ Thể Người — Ngô Trung Triều, NXB Hồng Đức'}.</p><p><b>Mô hình giải phẫu:</b> BodyParts3D 4.0. Tọa độ huyệt được tính từ mốc giải phẫu, quy đổi theo thốn/tỷ lệ vùng khi có, sau đó chiếu ray lên bề mặt da BodyParts3D FMA7163.</p><p><b>Dữ liệu anchor/topology:</b> {schematic.source?.repository??'FuriaRozkwit/acupuncture-3d'}; giấy phép {schematic.source?.license??'MIT / CC BY-SA theo thành phần'}.</p><p>361 huyệt thuộc 12 chính kinh + Nhâm/Đốc đều có tọa độ 3D. Kinh Vị có mốc khởi đường kinh ở vùng ngoài cánh mũi trước ST-1 Thừa khấp; mốc này không phải huyệt. ST-45 Lệ đoài được hiệu chỉnh sát góc ngoài móng ngón II hơn. BL-39 có tọa độ huyệt nhưng nguồn topology hiện không cung cấp đoạn nối nên ứng dụng không tự bịa đường nối qua BL-39.</p></details>
     </aside>}
