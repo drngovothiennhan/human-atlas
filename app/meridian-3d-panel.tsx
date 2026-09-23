@@ -13,7 +13,7 @@ import {
 
 type Language='vi'|'en'|'zh';
 type Meridian={id:string;code:string;vietnameseName:string;englishName:string;chineseName?:string|null;pointIds:string[];path3d:number[][];reviewStatus:string;spatialStatus:string};
-type Acupoint={code:string;meridianId:string;sequence:number;vietnameseName?:string|null;englishName?:string|null;chineseName?:string|null;pinyin?:string|null;position3d?:{x:number;y:number;z:number;coordinateSystem?:string;source?:string}|null;reviewStatus?:string;verificationStatus?:string};
+type Acupoint={code:string;meridianId:string;sequence:number;vietnameseName?:string|null;englishName?:string|null;chineseName?:string|null;pinyin?:string|null;snomedCtRef?:string|null;anatomicalLocation?:{surfaceRegionEn?:string|null;surfaceRegionVi?:string|null;landmarks?:{label:string;uri?:string|null}[]}|null;position3d?:{x:number;y:number;z:number;coordinateSystem?:string;source?:string}|null;reviewStatus?:string;verificationStatus?:string};
 type SchematicSpatial={anchors:MeridianSceneAnchor[];paths:MeridianScenePath[];source?:{repository?:string;commit?:string;license?:string};calibration?:{status?:string;method?:string;documentTitle?:string;documentSourceId?:string};omittedTopology?:string[];sourceSideWarnings?:{pointCode:string;reason:string}[]};
 
 interface Props{drafts:AcupointAnchorDraft[];selectedPointCode:string|null;studyCommand:(StudyCommand&{seq:number})|null;onStudyAction:(command:StudyCommand)=>void;onOverlayChange:(overlay:MeridianOverlayState)=>void;onFocus:(target:MeridianFocusTarget|null)=>void}
@@ -124,7 +124,7 @@ export default function Meridian3DPanel({drafts,selectedPointCode,studyCommand,o
     return p.vietnameseName||('Huyệt '+p.code);
   };
 
-  const filteredPoints=useMemo(()=>{const q=norm(query),codeQuery=q.replace(/[-\s]/g,'');return points.filter(p=>q?p.code.toLowerCase().replace(/-/g,'').includes(codeQuery)||[p.vietnameseName??'',p.englishName??'',p.chineseName??'',p.pinyin??''].some(v=>norm(v).includes(q)):activeMeridianIds.includes(p.meridianId)).slice(0,80)},[points,activeMeridianIds,query]);
+  const filteredPoints=useMemo(()=>{const q=norm(query),codeQuery=q.replace(/[-\s]/g,'');return points.filter(p=>q?p.code.toLowerCase().replace(/-/g,'').includes(codeQuery)||[p.vietnameseName??'',p.englishName??'',p.chineseName??'',p.pinyin??'',p.anatomicalLocation?.surfaceRegionVi??'',p.anatomicalLocation?.surfaceRegionEn??''].some(v=>norm(v).includes(q)):activeMeridianIds.includes(p.meridianId)).slice(0,80)},[points,activeMeridianIds,query]);
   const active=meridians.find(m=>m.id===activeMeridian),selectedRecord=points.find(p=>p.code===selected),selectedAnchors=allAnchors.filter(a=>a.pointCode===selected);
   const activePointCount=points.filter(p=>activeMeridianIds.includes(p.meridianId)).length;
   const activeLabel=activeMeridian===ALL_MAIN_MERIDIANS?'12 chính kinh':meridianName(active);
