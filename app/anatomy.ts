@@ -71,11 +71,11 @@ export const anatomyName=(name:string)=>{
 // Meridian-first profile: render only a compact set of superficial/landmark muscles by default.
 // All atlas structures remain searchable and can still be selected individually.
 const MERIDIAN_LANDMARK_MUSCLE_TERMS=[
- 'frontalis','temporalis','masseter','orbicularis oculi','orbicularis oris',
- 'sternocleidomastoid','trapezius','deltoid','pectoralis major','latissimus dorsi','serratus anterior','rectus abdominis','external oblique',
- 'biceps brachii','triceps brachii','brachioradialis','flexor carpi radialis','extensor digitorum',
- 'gluteus maximus','gluteus medius','tensor fasciae latae','sartorius','adductor longus','rectus femoris','vastus medialis','vastus lateralis','biceps femoris','semitendinosus',
- 'tibialis anterior','gastrocnemius','soleus','fibularis longus','peroneus longus','abductor hallucis'
+ 'masseter','orbicularis oculi','orbicularis oris',
+ 'sternocleidomastoid','trapezius','deltoid','pectoralis major','latissimus dorsi','rectus abdominis','external oblique',
+ 'biceps brachii','triceps brachii','brachioradialis',
+ 'gluteus maximus','sartorius','rectus femoris','vastus medialis',
+ 'tibialis anterior','gastrocnemius','soleus'
 ] as const;
 export function isMeridianLandmarkMuscle(name:string){
  const n=name.toLowerCase();
