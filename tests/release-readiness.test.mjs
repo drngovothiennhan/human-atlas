@@ -61,3 +61,18 @@ test('catalogue does not publish unreviewed finite xyz as authoritative position
     assert.ok([p.position3d.x,p.position3d.y,p.position3d.z].every(Number.isFinite),p.code+' has invalid xyz');
   }
 });
+
+
+test('anatomical metadata covers all 361 canonical acupoints',async()=>{
+  const [points,anatomy]=await Promise.all([
+    load('../content/acupoints/acupoints.json'),
+    load('../content/acupoints/anatomical-locations.json')
+  ]);
+  const catalogue=points.map(p=>p.code).sort();
+  const anatomyCodes=anatomy.points.map(p=>p.code).sort();
+  assert.equal(anatomy.count,361);
+  assert.equal(new Set(anatomyCodes).size,361,'duplicate anatomical metadata code');
+  assert.deepEqual(anatomyCodes,catalogue,'anatomical metadata catalogue drift');
+  assert.ok(anatomy.points.every(p=>p.surfaceRegionVi||p.surfaceRegionEn),'anatomical region missing');
+  assert.ok(anatomy.points.every(p=>Array.isArray(p.landmarks)),'anatomical landmarks must be arrays');
+});
