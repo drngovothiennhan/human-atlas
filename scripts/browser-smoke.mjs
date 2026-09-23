@@ -337,8 +337,14 @@ try{
   console.log('SMOKE_EFFECT_CONTROLS_PASS');
   const schematicCoverage=[];
   const meridianCodes=await evaluate("[...document.querySelectorAll('.meridian3d-controls select')[0].options].map(o=>o.value)");
-  if(meridianCodes.length!==14)throw new Error('Expected 14 meridians');
-  for(const code of meridianCodes){
+  if(meridianCodes.length!==15||meridianCodes[0]!=='ALL')throw new Error('Expected all-main option plus 14 meridians');
+  if(!await evaluate("document.querySelector('[data-meridian-scope=ALL]')&&document.querySelectorAll('[data-meridian-scope]').length===15"))throw new Error('Expected quick selector for 12 main meridians plus CV/GV');
+  await evaluate("(()=>{const s=document.querySelectorAll('.meridian3d-controls select')[0];s.value='ALL';s.dispatchEvent(new Event('change',{bubbles:true}));})()");
+  await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.meridianId==='ALL'&&Number(document.querySelector('canvas')?.dataset.meridianSchematicAnchors)>0&&Number(document.querySelector('canvas')?.dataset.meridianSchematicPaths)>=12"),{label:'simultaneous 12 main meridians'});
+  console.log('SMOKE_ALL_12_MAIN_MERIDIANS_PASS');
+  const channelCodes=meridianCodes.filter(code=>code!=='ALL');
+  if(channelCodes.length!==14)throw new Error('Expected 14 individual meridians');
+  for(const code of channelCodes){
     await evaluate("(()=>{const s=document.querySelectorAll('.meridian3d-controls select')[0];s.value="+JSON.stringify(code)+";s.dispatchEvent(new Event('change',{bubbles:true}));})()");
     await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.meridianId==="+JSON.stringify(code)+"&&Number(document.querySelector('canvas')?.dataset.meridianSchematicAnchors)>0&&Number(document.querySelector('canvas')?.dataset.meridianSchematicPaths)>0"),{label:code+' schematic markers and paths'});
     schematicCoverage.push({code,...await evaluate("({...document.querySelector('canvas').dataset})")});
