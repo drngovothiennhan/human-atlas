@@ -1048,7 +1048,7 @@
       "accuracy": "structural",
       "anchor": {
         "struct": "Distal phalanx of second finger of foot",
-        "along": 0.95,
+        "along": 0.8,
         "dir": "dorsal",
         "shift": {
           "lateral": 3
