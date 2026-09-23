@@ -60,6 +60,15 @@ test('licensed schematic spatial dataset stays unverified and complete',async()=
       assert.ok(anchors.every(a=>a.projection==='BodyParts3D FMA7163 surface raycast'),'ST-45 must stay surface-projected');
     }
   }
+  const liPaths=data.paths.filter(p=>p.meridianId==='LI');
+  assert.ok(liPaths.length>=2,'LI bilateral paths must exist');
+  for(const p of liPaths){
+    assert.equal(p.surfaceProjection,'BodyParts3D FMA7163 facial surface-following','LI facial path must be surface-projected');
+    assert.ok(p.points.length>p.pointCodes.length,'LI facial render path must include surface-following points');
+  }
+  const li20=data.anchors.filter(a=>a.pointCode==='LI-20');
+  assert.equal(li20.length,2,'LI-20 must remain bilateral');
+  assert.ok(li20.every(a=>a.calibrationOverride==='HIU_DOCUMENT_ANATOMY_QC'),'LI-20 must keep HIU document calibration');
   const spPaths=data.paths.filter(p=>p.meridianId==='SP');
   assert.ok(spPaths.length>=2,'SP bilateral paths must exist');
   for(const p of spPaths){
