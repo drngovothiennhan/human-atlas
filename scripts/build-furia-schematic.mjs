@@ -132,7 +132,10 @@ function scalpCast(a){
   if(a.lat){const h=segments.head,tt=tForZ(h,p[2]),face=p[1]>=axisPoint(h,tt)[1]?'anterior':'posterior';p=segmentCast({seg:'head',t:tt,lat:a.lat,face})}
   return p;
 }
-const resolveRight=a=>'struct'in a?structuralCast(a):'arc_cun'in a?scalpCast(a):segmentCast(a);
+const spatialOverrides={
+  'ST-45':{struct:'Distal phalanx of second finger of foot',along:.95,dir:'dorsal',shift:{lateral:3},region:'foot'}
+};
+const resolveRight=(a,pointCode)=>{const anchor=spatialOverrides[pointCode]??a;return 'struct'in anchor?structuralCast(anchor):'arc_cun'in anchor?scalpCast(anchor):segmentCast(anchor)};
 const round=x=>Math.round(x*1e6)/1e6;
 const sourceSideWarnings=pointDoc.points
   .filter(point=>['CV','GV'].includes(canonicalChannel(point.channel))&&point.side!=='midline')
@@ -145,11 +148,11 @@ const sourceSideWarnings=pointDoc.points
   }));
 const anchorOut=[];
 for(const point of pointDoc.points){
-  const right=resolveRight(point.anchor),meridianId=canonicalChannel(point.channel),canonicalMidline=meridianId==='CV'||meridianId==='GV';
+  const canonicalPointCode=canonicalCode(point.code),right=resolveRight(point.anchor,canonicalPointCode),meridianId=canonicalChannel(point.channel),canonicalMidline=meridianId==='CV'||meridianId==='GV';
   const records=canonicalMidline||point.side==='midline'
     ?[['MIDLINE',[0,right[1],right[2]]]]
     :[['RIGHT',right],['LEFT',[-right[0],right[1],right[2]]]];
-  for(const [side,src] of records){const p=toBrowser(src);anchorOut.push({pointCode:canonicalCode(point.code),meridianId,sourcePointCode:point.code,sourceMeridianId:point.channel,sequence:point.index,side,x:round(p[0]),y:round(p[1]),z:round(p[2]),verificationStatus:'UNVERIFIED',sourceKind:'LICENSED_SCHEMATIC',accuracy:point.accuracy,projection:'BodyParts3D FMA7163 surface raycast'})}
+  for(const [side,src] of records){const p=toBrowser(src);anchorOut.push({pointCode:canonicalPointCode,meridianId,sourcePointCode:point.code,sourceMeridianId:point.channel,sequence:point.index,side,x:round(p[0]),y:round(p[1]),z:round(p[2]),verificationStatus:'UNVERIFIED',sourceKind:'LICENSED_SCHEMATIC',accuracy:point.accuracy,projection:'BodyParts3D FMA7163 surface raycast',calibrationOverride:spatialOverrides[canonicalPointCode]?'HIU_DOCUMENT_ANATOMY_QC':undefined})}
 }
 const byKey=new Map(anchorOut.map(a=>[a.pointCode+':'+a.side,a]));
 if(byKey.size!==anchorOut.length)throw new Error('Duplicate generated acupoint anchor key');
@@ -197,7 +200,7 @@ for(const sourceMeridianId of Object.keys(topology.paths)){
 
 const routeOrigins={ST:{label:'Điểm khởi đường Kinh Vị',description:'Khởi từ vùng ngoài cánh mũi trước khi đi tới huyệt ST-1 Thừa khấp; đây là mốc đường kinh, không phải huyệt.',notAnAcupoint:true}};
 const out={schemaVersion:'1.2.0',coordinateSystem:'BodyParts3D-4.0-browser-meters-Y-up',verificationStatus:'UNVERIFIED',calibrationStatus:'DOCUMENT_CORROBORATED_3D',calibration:{status:'DOCUMENT_CORROBORATED_3D',method:'Anatomical anchors and cun/region proportions are projected by raycast to the BodyParts3D FMA7163 skin surface; user-provided meridian illustrations are used to cross-check channel sequence, body region and endpoint orientation.',documentSourceId:documentReference.sourceId,documentTitle:documentReference.document.title+' — '+documentReference.document.author,documentPages:documentReference.document.pdfPages},source:{repository:'FuriaRozkwit/acupuncture-3d',commit:'1fc9ec98d365c9fb035844e2775c1be05a0a05fc',license:'MIT anchors/code; CC BY-SA calibrated anatomy metadata',skin:'BodyParts3D FMA7163'},anchors:anchorOut,paths,omittedTopology:omitted,generatedBy:'scripts/build-furia-schematic.mjs'};
-out.channelAliases=channelAliases;out.sourceSideWarnings=sourceSideWarnings;out.routeOrigins=routeOrigins;
+out.channelAliases=channelAliases;out.sourceSideWarnings=sourceSideWarnings;out.routeOrigins=routeOrigins;out.spatialOverrides=Object.keys(spatialOverrides);
 out.anchorCoverage={catalogPoints:catalogCodes.size,generatedPointCodes:anchorPointCodes.size,generatedAnchors:anchorOut.length,missingAnchorCodes};
 out.pathCoverage={catalogPoints:codes.size,sourceTopologyPoints:topologyCodes.size,generatedTopologyPoints:generatedPathCodes.size,missingGenerated,extraGenerated};
 out.endpointAudit=endpointAudit;
