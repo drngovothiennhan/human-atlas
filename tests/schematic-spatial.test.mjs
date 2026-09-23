@@ -52,6 +52,9 @@ test('licensed schematic spatial dataset stays unverified and complete',async()=
     const anchors=data.anchors.filter(a=>a.pointCode===code);
     assert.ok(anchors.length>=1,'missing calibrated anchor: '+code);
     assert.ok(anchors.every(a=>a.calibrationOverride==='HIU_DOCUMENT_ANATOMY_QC'),'calibration marker missing: '+code);
+    assert.ok(anchors.every(a=>a.documentEvidence?.sourceId==='USER-NGO-TRUNG-TRIEU-HUYET-VI-KINH-LAC'),'document source gate missing: '+code);
+    assert.ok(anchors.every(a=>Array.isArray(a.documentEvidence?.pdfPageRange)&&a.documentEvidence.pdfPageRange.length===2),'document page range missing: '+code);
+    assert.ok(anchors.every(a=>a.documentEvidence?.spatialStatus==='DOCUMENT_REFERENCED_2D'),'document spatial status missing: '+code);
   }
   const blLowerBranch=data.paths.find(p=>p.meridianId==='BL'&&p.pointCodes.includes('BL-38')&&p.pointCodes.includes('BL-40'));
   assert.ok(blLowerBranch,'vendor-defined BL lower branch must preserve the explicit BL-38 → BL-40 adjacency');
