@@ -56,6 +56,13 @@ test('licensed schematic spatial dataset stays unverified and complete',async()=
     assert.ok(anchors.every(a=>Array.isArray(a.documentEvidence?.pdfPageRange)&&a.documentEvidence.pdfPageRange.length===2),'document page range missing: '+code);
     assert.ok(anchors.every(a=>a.documentEvidence?.spatialStatus==='DOCUMENT_REFERENCED_2D'),'document spatial status missing: '+code);
   }
+  const spPaths=data.paths.filter(p=>p.meridianId==='SP');
+  assert.ok(spPaths.length>=2,'SP bilateral paths must exist');
+  for(const p of spPaths){
+    assert.equal(p.surfaceProjection,'BodyParts3D FMA7163 surface-following densification','SP path must be surface-projected');
+    assert.ok(p.points.length>p.pointCodes.length,'SP render path must be denser than catalogue anchors');
+    assert.ok(p.points.every(v=>v.length===3&&v.every(Number.isFinite)),'SP surface-projected render points must be finite xyz');
+  }
   const blLowerBranch=data.paths.find(p=>p.meridianId==='BL'&&p.pointCodes.includes('BL-38')&&p.pointCodes.includes('BL-40'));
   assert.ok(blLowerBranch,'vendor-defined BL lower branch must preserve the explicit BL-38 → BL-40 adjacency');
   const bl38Index=blLowerBranch.pointCodes.indexOf('BL-38');
