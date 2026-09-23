@@ -30,3 +30,20 @@ test('meridian scene uses slower flow, smooth camera motion and no model base',a
   assert.match(source,/t\*t\*t\*\(t\*\(t\*6-15\)\+10\)/);
   assert.match(source,/ground\.visible=platform\.visible=ring\.visible=innerRing\.visible=false/);
 });
+
+
+test('meridian overlay uses anatomy depth occlusion and separated controls',async()=>{
+  const [scene,panel,css]=await Promise.all([
+    readFile(new URL('../app/scene.tsx',import.meta.url),'utf8'),
+    readFile(new URL('../app/meridian-3d-panel.tsx',import.meta.url),'utf8'),
+    readFile(new URL('../app/globals.css',import.meta.url),'utf8')
+  ]);
+  assert.ok(scene.includes("meridianDepthOcclusion='anatomy-surface'"));
+  assert.match(scene,/depthTest:true,depthWrite:false/);
+  assert.match(scene,/opacity:system==='integumentary'\?\.12:1,depthWrite:true/);
+  assert.ok(panel.includes('meridian3d-exit-row'));
+  assert.ok(panel.includes('meridian3d-section-label'));
+  assert.ok(panel.includes('data-anatomical-location="true"'));
+  assert.ok(panel.includes('data-anatomical-landmarks="true"'));
+  assert.ok(css.includes('P0 display hotfix: separate exit/effect rows'));
+});
