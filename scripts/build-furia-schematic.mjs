@@ -133,6 +133,15 @@ function scalpCast(a){
   return p;
 }
 const spatialOverrides={
+  // HIU document/anatomy QC overrides. These refine only the derived runtime anchors;
+  // pinned vendor source files remain immutable and provenance is preserved.
+  'LI-20':{struct:'Nasal bone',along:1,dir:'anterior',shift:{down:10,lateral:12}},
+  'ST-1':{struct:'Anterior segment of eyeball',along:.5,dir:'anterior',shift:{down:11}},
+  'BL-1':{struct:'Anterior segment of eyeball',along:.5,dir:'anterior',shift:{medial:10}},
+  'TE-23':{struct:'Anterior segment of eyeball',along:.5,dir:'anterior',shift:{lateral:14,up:14}},
+  'GB-1':{struct:'Anterior segment of eyeball',along:.5,dir:'anterior',shift:{lateral:13}},
+  'CV-24':{struct:'Mandible',along:.5,dir:'anterior',shift:{up:19}},
+  'GV-28':{struct:'Maxilla',along:.35,dir:'anterior',shift:{down:7}},
   'ST-45':{struct:'Distal phalanx of second finger of foot',along:.95,dir:'dorsal',shift:{lateral:3},region:'foot'}
 };
 const resolveRight=(a,pointCode)=>{const anchor=spatialOverrides[pointCode]??a;return 'struct'in anchor?structuralCast(anchor):'arc_cun'in anchor?scalpCast(anchor):segmentCast(anchor)};
