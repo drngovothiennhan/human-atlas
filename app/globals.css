@@ -268,4 +268,4 @@ body:has(.registration-panel) .meridian3d-launch{left:376px}body:has(.registrati
 .meridian3d-model-controls button{min-height:31px;border:1px solid #18253616;border-radius:7px;background:#fff;color:#3f4e58;font-size:8.5px;cursor:pointer}
 .meridian3d-model-controls button:active{background:#e6f0ef;color:#145e58}
 .meridian3d-effect-controls button:disabled{opacity:.48;cursor:not-allowed;background:#f3f4f4!important;color:#78838b!important}
-@media(max-width:767px){.meridian3d-model-controls{padding:7px}.meridian3d-model-controls>div,.meridian3d-model-controls>div:last-child{grid-template-columns:66px repeat(3,minmax(0,1fr))}.meridian3d-model-controls>div:first-child button:first-of-type{grid-column:2}.meridian3d-model-controls button{min-height:36px}}
+@media(max-width:767px){.meridian3d-model-controls{padding:7px}.meridian3d-model-controls>div{grid-template-columns:62px repeat(4,minmax(0,1fr))}.meridian3d-model-controls>div:last-child{grid-template-columns:62px repeat(3,minmax(0,1fr))}.meridian3d-model-controls button{min-height:36px;padding-inline:3px}}
