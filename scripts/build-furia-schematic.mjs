@@ -135,7 +135,7 @@ function scalpCast(a){
 const spatialOverrides={
   // HIU document/anatomy QC overrides. These refine only the derived runtime anchors;
   // pinned vendor source files remain immutable and provenance is preserved.
-  'LI-20':{struct:'Nasal bone',along:1,dir:'anterior',shift:{down:10,lateral:12}},
+  'LI-20':{struct:'Nasal bone',along:1,dir:'anterior',shift:{down:10,lateral:9}},
   'ST-1':{struct:'Anterior segment of eyeball',along:.5,dir:'anterior',shift:{down:11}},
   'BL-1':{struct:'Anterior segment of eyeball',along:.5,dir:'anterior',shift:{medial:10}},
   'TE-23':{struct:'Anterior segment of eyeball',along:.5,dir:'anterior',shift:{lateral:14,up:14}},
@@ -212,6 +212,28 @@ const spSegmentForPair=(a,b)=>{
 };
 function numericPointSequenceForBuild(code){
   const m=String(code||'').match(/-(\d+)$/);return m?Number(m[1]):Number.MAX_SAFE_INTEGER;
+}
+
+// Keep the facial end of the Large Intestine channel on the visible body surface.
+// LI-18→LI-20 is densified only for rendering; catalogue adjacency stays unchanged.
+for(const pathItem of paths.filter(item=>item.meridianId==='LI')){
+  const dense=[];
+  for(let i=0;i<pathItem.pointCodes.length-1;i++){
+    const codeA=pathItem.pointCodes[i],codeB=pathItem.pointCodes[i+1],a=pathItem.points[i],b=pathItem.points[i+1];
+    if(i===0)dense.push(a);
+    const seqA=numericPointSequenceForBuild(codeA),seqB=numericPointSequenceForBuild(codeB),facial=seqA>=18&&seqB>=19;
+    if(facial){
+      for(const fraction of [.25,.5,.75]){
+        const p=[a[0]+(b[0]-a[0])*fraction,a[1]+(b[1]-a[1])*fraction,a[2]+(b[2]-a[2])*fraction];
+        const segName=codeA==='LI-18'&&fraction<.5?'neck':'head';
+        dense.push(projectBrowserToSegmentSurface(p,segName).map(round));
+      }
+    }
+    dense.push(b);
+  }
+  if(pathItem.pointCodes.length===1)dense.push(pathItem.points[0]);
+  pathItem.points=dense;
+  pathItem.surfaceProjection='BodyParts3D FMA7163 facial surface-following';
 }
 for(const pathItem of paths.filter(item=>item.meridianId==='SP')){
   const dense=[];
