@@ -201,7 +201,7 @@ export default function Meridian3DPanel({drafts,selectedPointCode,studyCommand,o
           <span>{selectedIndex>=0?selectedIndex+1:0}/{selectedMeridianPoints.length}</span>
           <button type="button" onClick={()=>moveSelected(1)} disabled={selectedMeridianPoints.length<2}>Huyệt sau →</button>
         </div>
-        <span>{selectedAnchors.length?selectedAnchors.map(a=>a.side+': tọa độ 3D').join(' · '):'Chưa có vị trí trên mô hình.'}</span>
+        <span>{selectedAnchors.length?selectedAnchors.map(a=>a.side+': '+(a.sourceKind==='PUBLISHED'?'tọa độ 3D đã duyệt':a.sourceKind==='LOCAL_DRAFT'?'nháp trên máy':'tọa độ 3D đã hiệu chỉnh')).join(' · '):'Chưa có vị trí trên mô hình.'}</span>
       </div>}
       <details className="meridian3d-info" data-spatial-source-license="true"><summary>Thông tin & nguồn tham khảo</summary><p><b>Tài liệu đối chiếu:</b> {schematic.calibration?.documentTitle??'Huyệt Vị Kinh Lạc Cơ Thể Người — Ngô Trung Triều, NXB Hồng Đức'}.</p><p><b>Mô hình giải phẫu:</b> BodyParts3D 4.0. Tọa độ huyệt được tính từ mốc giải phẫu, quy đổi theo thốn/tỷ lệ vùng khi có, sau đó chiếu ray lên bề mặt da BodyParts3D FMA7163.</p><p><b>Dữ liệu anchor/topology:</b> {schematic.source?.repository??'FuriaRozkwit/acupuncture-3d'}; giấy phép {schematic.source?.license??'MIT / CC BY-SA theo thành phần'}.</p><p>361 huyệt thuộc 12 chính kinh + Nhâm/Đốc đều có tọa độ 3D. BL-39 có tọa độ huyệt nhưng nguồn topology hiện không cung cấp đoạn nối nên ứng dụng không tự bịa đường nối qua BL-39.</p></details>
     </aside>}
