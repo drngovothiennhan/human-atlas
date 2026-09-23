@@ -124,7 +124,7 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
   const reduceMeridianMotion=window.matchMedia?.('(prefers-reduced-motion: reduce)').matches??false;
   type MeridianFlowParticle={mesh:T.Mesh;curve:T.CatmullRomCurve3;offset:number;speed:number};
   let meridianMarkers:T.Mesh[]=[],meridianPulseMarkers:T.Mesh[]=[],meridianFlowParticles:MeridianFlowParticle[]=[];
-  const meridianColors:Record<string,number>={LU:0x1d4ed8,LI:0xc2410c,ST:0x854d0e,SP:0x6d28d9,HT:0xb91c1c,SI:0x0369a1,BL:0x334155,KI:0x0f766e,PC:0xbe185d,TE:0x0e7490,GB:0x4d7c0f,LR:0x15803d,CV:0x6d28d9,GV:0x991b1b};
+  const meridianColors:Record<string,number>={LU:0x1d4ed8,LI:0xc2410c,ST:0x854d0e,SP:0x84cc16,HT:0xb91c1c,SI:0x0369a1,BL:0x334155,KI:0x0f766e,PC:0xbe185d,TE:0x0e7490,GB:0x4d7c0f,LR:0x15803d,CV:0x6d28d9,GV:0x991b1b};
   const MERIDIAN_LINE_EDGE_RADIUS=.00185,MERIDIAN_LINE_CORE_RADIUS=.00115;
   const MERIDIAN_LINE_EDGE_OPACITY=.28,MERIDIAN_LINE_CORE_OPACITY=.86;
   const MERIDIAN_FLOW_WORLD_SPEED=.075;
