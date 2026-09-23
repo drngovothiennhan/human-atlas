@@ -335,3 +335,9 @@ body:has(.registration-panel) .meridian3d-launch{left:376px}body:has(.registrati
  .meridian3d-effect-controls{grid-template-columns:repeat(2,minmax(0,1fr))!important}
  .meridian3d-effect-controls button{min-height:40px!important;font-size:9.5px!important}
 }
+/* Independent opacity controls for each anatomical layer. */
+.system-entry{padding:2px 0 5px;border-bottom:1px solid #1825360a}
+.layer-opacity{display:grid;grid-template-columns:48px minmax(0,1fr) 38px;align-items:center;gap:7px;padding:0 3px 0 13px;color:#7b8791;font-size:10px}
+.layer-opacity input{width:100%;min-width:0;min-height:24px;margin:0;accent-color:#0f766e;touch-action:pan-y}
+.layer-opacity output{text-align:right;font-size:10px;font-variant-numeric:tabular-nums;color:#53616b}
+@media(max-width:767px){.layer-opacity{grid-template-columns:52px minmax(0,1fr) 38px;min-height:32px;font-size:11px}.layer-opacity input{min-height:30px}}
