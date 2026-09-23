@@ -26,6 +26,7 @@ npm run dev
 ```sh
 npm run content:validate
 npm run source:furia:validate
+npm run architecture:validate
 npm run check
 node scripts/validate-atlas.mjs
 node --experimental-strip-types scripts/validate-interactions.mjs

@@ -1,7 +1,7 @@
 name: HIU YHCT 3D Atlas CI
 on:
   push:
-    branches: [main, feature-hiu-yhct-3d-atlas]
+    branches: [main]
   pull_request:
     branches: [main]
 concurrency:
@@ -24,6 +24,7 @@ jobs:
       - run: npm run content:validate
       - run: npm run source:furia:validate
       - run: npm run content:build
+      - run: npm run architecture:validate
       - run: npm run check
       - run: node scripts/validate-atlas.mjs
       - run: node --experimental-strip-types scripts/validate-interactions.mjs

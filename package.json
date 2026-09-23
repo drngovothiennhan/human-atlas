@@ -17,7 +17,8 @@
     "test": "npm run test:unit",
     "verify:pages": "node scripts/verify-pages-assets.mjs",
     "source:furia:validate": "node scripts/validate-furia-source.mjs",
-    "source:anatomy:fetch": "node scripts/fetch-reference-anatomy.mjs"
+    "source:anatomy:fetch": "node scripts/fetch-reference-anatomy.mjs",
+    "architecture:validate": "node scripts/validate-architecture.mjs"
   },
   "dependencies": {
     "@base-ui/react": "1.7.0",
