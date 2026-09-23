@@ -41,6 +41,13 @@ test('licensed schematic spatial dataset stays unverified and complete',async()=
   assert.ok(data.paths.length>=28);
   assert.ok(data.paths.every(p=>p.verificationStatus==='UNVERIFIED'&&p.sourceKind==='LICENSED_SCHEMATIC'&&p.points.length>=2));
   assert.ok(!data.paths.some(p=>p.pointCodes.includes('BL-39')),'omitted BL-39 must not be invented into topology');
+  assert.equal(data.routeOrigins?.ST?.notAnAcupoint,true,'ST route origin must remain a non-acupoint meridian landmark');
+  const stPath=data.paths.find(p=>p.meridianId==='ST'&&p.pointCodes?.includes('ST-1'));
+  assert.ok(stPath,'ST path containing ST-1 must exist');
+  assert.deepEqual(stPath.pointCodes.slice(0,2),['ST-ROUTE-ORIGIN','ST-1'],'ST route must begin at lateral-nose origin before ST-1');
+  assert.equal(stPath.points.length,stPath.pointCodes.length,'ST route origin must have a matching 3D point');
+  const st45=data.anchors.find(a=>a.pointCode==='ST-45'&&a.side==='RIGHT');
+  assert.equal(st45?.calibrationOverride,'HIU_DOCUMENT_ANATOMY_QC','ST-45 must use the HIU document/anatomy calibration override');
   const blLowerBranch=data.paths.find(p=>p.meridianId==='BL'&&p.pointCodes.includes('BL-38')&&p.pointCodes.includes('BL-40'));
   assert.ok(blLowerBranch,'vendor-defined BL lower branch must preserve the explicit BL-38 → BL-40 adjacency');
   const bl38Index=blLowerBranch.pointCodes.indexOf('BL-38');
