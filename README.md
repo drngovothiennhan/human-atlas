@@ -43,4 +43,4 @@ BodyParts3D là nguồn chính cho mô hình cơ thể và cơ mốc bề mặt.
 
 ## Triển khai
 
-Production được build và kiểm tra bằng GitHub Actions, sau đó phát hành qua GitHub Pages.
+Production dùng một GitHub Actions pipeline duy nhất: verify/build/browser-smoke trước, sau đó deploy đúng artifact đã được kiểm tra lên GitHub Pages.
