@@ -253,6 +253,8 @@ try{
   await waitFor(()=>evaluate("document.querySelector('.yhct-launch')?.innerText.includes('14 kinh · 361 huyệt')"),{timeout:30000,label:'YHCT catalog ready before drawer'});
   await evaluate("document.querySelector('.yhct-launch').click()");
   await waitFor(()=>evaluate("!!document.querySelector('.yhct-panel')"),{label:'YHCT drawer'});
+  const yhctOverflow=await evaluate("(()=>{const panel=document.querySelector('.yhct-panel');if(!panel)return{missing:true};const bad=[...panel.querySelectorAll('button,select,input,textarea')].filter(el=>el.scrollWidth>el.clientWidth+2).map(el=>(el.textContent||el.getAttribute('aria-label')||el.tagName).trim().slice(0,80));return{panel:panel.scrollWidth>panel.clientWidth+2,bad}})()");
+  if(yhctOverflow.missing||yhctOverflow.panel||yhctOverflow.bad.length)throw new Error('YHCT control overflow: '+JSON.stringify(yhctOverflow));
   await waitFor(()=>evaluate("document.querySelector('[data-yhct-spatial-counts=true]')?.innerText.includes('vị trí mô phỏng')&&!document.querySelector('[data-yhct-spatial-counts=true]')?.innerText.includes('anchor 3D')"),{label:'honest spatial counts'});
   if(!await evaluate("(()=>{const i=document.querySelector('.yhct-search');if(!i)return false;i.focus();return document.activeElement===i})()"))throw new Error('YHCT meridian search input missing');
   if(!await setControlledText('.yhct-search','LU'))throw new Error('Unable to set meridian search');
@@ -313,6 +315,8 @@ try{
   await waitFor(()=>evaluate("document.querySelector('[data-meridian3d-launch=true]')?.getAttribute('aria-pressed')==='false'"),{label:'study mode exits meridian overlay'});
   await evaluate("document.querySelector('[data-meridian3d-launch=true]')?.click()");
   await waitFor(()=>evaluate("!!document.querySelector('[data-meridian3d-panel=true]')"),{label:'3D meridian panel'});
+  const meridianOverflow=await evaluate("(()=>{const panel=document.querySelector('[data-meridian3d-panel=true]');if(!panel)return{missing:true};const bad=[...panel.querySelectorAll('button,select,input')].filter(el=>el.scrollWidth>el.clientWidth+2).map(el=>(el.textContent||el.getAttribute('aria-label')||el.tagName).trim().slice(0,80));return{panel:panel.scrollWidth>panel.clientWidth+2,bad}})()");
+  if(meridianOverflow.missing||meridianOverflow.panel||meridianOverflow.bad.length)throw new Error('Meridian control overflow: '+JSON.stringify(meridianOverflow));
   await waitFor(()=>evaluate("document.querySelector('[data-meridian3d-panel=true]')?.innerText.includes('Kinh Vị')&&document.querySelector('[data-meridian3d-panel=true]')?.innerText.includes('vị trí 3D đã hiệu chỉnh')"),{label:'3D calibrated meridian gate'});
   await waitFor(()=>evaluate("document.querySelector('[data-spatial-source-license=true]')?.textContent.includes('FuriaRozkwit/acupuncture-3d')&&document.querySelector('[data-spatial-source-license=true]')?.textContent.includes('MIT')&&document.querySelector('[data-spatial-source-license=true]')?.textContent.includes('CC BY-SA')"),{label:'dedicated source information available'});
   await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.meridianEffect==='flow'&&Number(document.querySelector('canvas')?.dataset.meridianPulseMarkers||0)>0&&Number(document.querySelector('canvas')?.dataset.meridianFlowParticles||0)>0"),{label:'animated meridian flow and pulse effect'});
