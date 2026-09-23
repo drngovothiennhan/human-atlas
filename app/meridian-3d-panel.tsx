@@ -23,6 +23,9 @@ interface Props{drafts:AcupointAnchorDraft[];selectedPointCode:string|null;study
 const norm=(value:string)=>value.normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d').replace(/Đ/g,'D').toLowerCase().trim();
 const sideLabel=(side:MeridianOverlaySide)=>side==='BOTH'?'Hai bên':side==='LEFT'?'Trái':'Phải';
 const MERIDIAN_ZH:Record<string,string>={LU:'手太阴肺经',LI:'手阳明大肠经',ST:'足阳明胃经',SP:'足太阴脾经',HT:'手少阴心经',SI:'手太阳小肠经',BL:'足太阳膀胱经',KI:'足少阴肾经',PC:'手厥阴心包经',TE:'手少阳三焦经',GB:'足少阳胆经',LR:'足厥阴肝经',CV:'任脉',GV:'督脉'};
+const MAIN_MERIDIAN_IDS=['LU','LI','ST','SP','HT','SI','BL','KI','PC','TE','GB','LR'] as const;
+const MIDLINE_MERIDIAN_IDS=['CV','GV'] as const;
+const ALL_MAIN_MERIDIANS='ALL';
 
 export default function Meridian3DPanel({drafts,selectedPointCode,studyCommand,onOverlayChange,onFocus}:Props){
   const [open,setOpen]=useState(false),[enabled,setEnabled]=useState(false);
@@ -31,7 +34,7 @@ export default function Meridian3DPanel({drafts,selectedPointCode,studyCommand,o
   const [meridians,setMeridians]=useState<Meridian[]>([]),[points,setPoints]=useState<Acupoint[]>([]);
   const [schematic,setSchematic]=useState<SchematicSpatial>({anchors:[],paths:[]});
   const [documentRefs,setDocumentRefs]=useState<PointDocumentReference[]>([]);
-  const [activeMeridian,setActiveMeridian]=useState('ST'),[side,setSide]=useState<MeridianOverlaySide>('BOTH');
+  const [activeMeridian,setActiveMeridian]=useState(ALL_MAIN_MERIDIANS),[side,setSide]=useState<MeridianOverlaySide>('BOTH');
   const [query,setQuery]=useState(''),[selected,setSelected]=useState<string|null>(null);
   const [loading,setLoading]=useState(true),[loadError,setLoadError]=useState(''),[loadAttempt,setLoadAttempt]=useState(0);
 
@@ -109,12 +112,14 @@ export default function Meridian3DPanel({drafts,selectedPointCode,studyCommand,o
     }
   },[studyCommand?.seq,points,allAnchors,onFocus]);
 
-  const visibleAnchors=useMemo(()=>allAnchors.filter(a=>a.meridianId===activeMeridian&&(side==='BOTH'||a.side===side||a.side==='MIDLINE'||a.side==='UNKNOWN')),[allAnchors,activeMeridian,side]);
-  const visiblePaths=useMemo(()=>{
-    const reviewed=publishedPaths.filter(p=>p.meridianId===activeMeridian);
+  const activeMeridianIds=useMemo(()=>activeMeridian===ALL_MAIN_MERIDIANS?[...MAIN_MERIDIAN_IDS]:[activeMeridian],[activeMeridian]);
+  const matchesSide=(candidate:MeridianOverlaySide|'MIDLINE'|'UNKNOWN'|undefined)=>side==='BOTH'||candidate===side||candidate==='MIDLINE'||candidate==='UNKNOWN'||candidate===undefined;
+  const visibleAnchors=useMemo(()=>allAnchors.filter(a=>activeMeridianIds.includes(a.meridianId)&&matchesSide(a.side)),[allAnchors,activeMeridianIds,side]);
+  const visiblePaths=useMemo(()=>activeMeridianIds.flatMap(id=>{
+    const reviewed=publishedPaths.filter(p=>p.meridianId===id&&matchesSide(p.side));
     if(reviewed.length)return reviewed;
-    return schematic.paths.filter(p=>p.meridianId===activeMeridian&&(side==='BOTH'||p.side===side||p.side==='MIDLINE'||p.side==='UNKNOWN'));
-  },[publishedPaths,schematic.paths,activeMeridian,side]);
+    return schematic.paths.filter(p=>p.meridianId===id&&matchesSide(p.side));
+  }),[publishedPaths,schematic.paths,activeMeridianIds,side]);
 
   useEffect(()=>{onOverlayChange({enabled,meridianId:activeMeridian,side,selectedPointCode:selected,anchors:visibleAnchors,paths:visiblePaths,effects:{motion,meridians:showMeridians,acupoints:showPoints,collaterals:showCollaterals}})},[enabled,activeMeridian,side,selected,visibleAnchors,visiblePaths,motion,showMeridians,showPoints,showCollaterals,onOverlayChange]);
 
@@ -130,12 +135,17 @@ export default function Meridian3DPanel({drafts,selectedPointCode,studyCommand,o
     return p.vietnameseName||('Huyệt '+p.code);
   };
 
-  const filteredPoints=useMemo(()=>{const q=norm(query),codeQuery=q.replace(/[-\s]/g,'');return points.filter(p=>q?p.code.toLowerCase().replace(/-/g,'').includes(codeQuery)||[p.vietnameseName??'',p.englishName??'',p.chineseName??'',p.pinyin??''].some(v=>norm(v).includes(q)):p.meridianId===activeMeridian).slice(0,80)},[points,activeMeridian,query]);
+  const filteredPoints=useMemo(()=>{const q=norm(query),codeQuery=q.replace(/[-\s]/g,'');return points.filter(p=>q?p.code.toLowerCase().replace(/-/g,'').includes(codeQuery)||[p.vietnameseName??'',p.englishName??'',p.chineseName??'',p.pinyin??''].some(v=>norm(v).includes(q)):activeMeridianIds.includes(p.meridianId)).slice(0,80)},[points,activeMeridianIds,query]);
   const active=meridians.find(m=>m.id===activeMeridian),selectedRecord=points.find(p=>p.code===selected),selectedAnchors=allAnchors.filter(a=>a.pointCode===selected);
   const selectedDocumentRef=documentRefs.find(r=>r.pointCode===selected);
-  const publishedCount=publishedAnchors.filter(a=>a.meridianId===activeMeridian).length,draftCount=draftAnchors.filter(a=>a.meridianId===activeMeridian).length,schematicCount=schematic.anchors.filter(a=>a.meridianId===activeMeridian).length;
+  const activePointCount=points.filter(p=>activeMeridianIds.includes(p.meridianId)).length;
+  const activeLabel=activeMeridian===ALL_MAIN_MERIDIANS?'12 chính kinh':meridianName(active);
+  const publishedCount=publishedAnchors.filter(a=>activeMeridianIds.includes(a.meridianId)).length,draftCount=draftAnchors.filter(a=>activeMeridianIds.includes(a.meridianId)).length,schematicCount=schematic.anchors.filter(a=>activeMeridianIds.includes(a.meridianId)).length;
   const schematicPaths=visiblePaths.filter(p=>p.sourceKind==='LICENSED_SCHEMATIC').length;
+  const selectedMeridianPoints=selectedRecord?points.filter(p=>p.meridianId===selectedRecord.meridianId).sort((a,b)=>a.sequence-b.sequence):[];
+  const selectedIndex=selectedRecord?selectedMeridianPoints.findIndex(p=>p.code===selectedRecord.code):-1;
 
+  const selectMeridian=(id:string)=>{setActiveMeridian(id);setEnabled(true);setMotion(true);setShowMeridians(true);setQuery('');setSelected(null);onFocus(null)};
   const focusPoint=(point:Acupoint)=>{
     setSelected(point.code);setActiveMeridian(point.meridianId);setEnabled(true);
     const candidates=allAnchors.filter(a=>a.pointCode===point.code);
@@ -143,25 +153,36 @@ export default function Meridian3DPanel({drafts,selectedPointCode,studyCommand,o
     if(!anchor){onFocus(null);return}
     onFocus({key:point.code+':'+anchor.side+':'+Date.now(),pointCode:point.code,x:anchor.x,y:anchor.y,z:anchor.z});
   };
+  const moveSelected=(delta:number)=>{
+    if(!selectedMeridianPoints.length||selectedIndex<0)return;
+    const next=selectedMeridianPoints[(selectedIndex+delta+selectedMeridianPoints.length)%selectedMeridianPoints.length];
+    if(next)focusPoint(next);
+  };
 
   return <>
     <Button variant="ghost" className={'meridian3d-launch '+(enabled?'active':'')} onClick={()=>open?setOpen(false):(setOpen(true),setEnabled(true))} aria-pressed={enabled} aria-expanded={open} aria-label="Mở mô hình kinh lạc 3D" data-meridian3d-launch="true">
-      <strong>Kinh lạc 3D</strong>
-      <span>{loading?'Đang tải dữ liệu…':loadError?'Chưa tải được dữ liệu — bấm để thử lại':`${points.length} huyệt · ${meridians.length} kinh · ${schematic.anchors.length} vị trí 3D sơ đồ`}</span>
+      <strong>Đồ hình Kinh lạc 3D</strong>
+      <span>{loading?'Đang tải dữ liệu…':loadError?'Chưa tải được dữ liệu — bấm để thử lại':`${points.length} huyệt · 12 chính kinh + Nhâm/Đốc · tìm huyệt và bay tới 3D`}</span>
     </Button>
     {open&&<aside className="meridian3d-panel glass" data-meridian3d-panel="true" aria-label="Mô hình kinh lạc và huyệt vị 3D">
-      <div className="meridian3d-head"><div><strong>Mô hình kinh lạc · huyệt vị 3D</strong><small>Chế độ học tập · theo giáo trình và nguồn tham chiếu. Tọa độ huyệt và đường kinh 3D là mô phỏng phục vụ học tập, chưa được thẩm định vị trí giải phẫu.</small></div><Button variant="ghost" onClick={()=>setOpen(false)} aria-label="Đóng mô hình kinh lạc 3D">×</Button></div>
+      <div className="meridian3d-head"><div><strong>Đồ hình Kinh lạc 3D · HIU</strong><small>Xoay mô hình, xem đồng thời 12 chính kinh, chọn từng kinh hoặc tìm huyệt để bay tới vị trí. Lớp tọa độ chưa duyệt vẫn được gắn nhãn tham chiếu học tập.</small></div><Button variant="ghost" onClick={()=>setOpen(false)} aria-label="Đóng mô hình kinh lạc 3D">×</Button></div>
       {loading&&<p role="status">Đang tải dữ liệu huyệt và kinh lạc…</p>}
       {loadError&&<div role="alert" data-meridian3d-load-error="true"><p>{loadError}</p><Button variant="ghost" disabled={loading} onClick={()=>setLoadAttempt(v=>v+1)}>Thử tải lại dữ liệu</Button></div>}
       <div className="meridian3d-controls">
-        <label>Kinh<select value={activeMeridian} onChange={e=>{setActiveMeridian(e.target.value);setEnabled(true);setMotion(true);setShowMeridians(true);setQuery('');setSelected(null);onFocus(null)}}>{meridians.map(m=><option key={m.id} value={m.id}>{m.code} · {meridianName(m)}</option>)}</select></label>
+        <label>Kinh<select value={activeMeridian} onChange={e=>selectMeridian(e.target.value)}><option value={ALL_MAIN_MERIDIANS}>12 chính kinh · Hiển thị đồng thời</option>{meridians.map(m=><option key={m.id} value={m.id}>{m.code} · {meridianName(m)}</option>)}</select></label>
         <label>Bên<select value={side} onChange={e=>setSide(e.target.value as MeridianOverlaySide)}><option value="BOTH">Hai bên</option><option value="LEFT">Trái</option><option value="RIGHT">Phải</option></select></label>
         <label>Ngôn ngữ phụ<select value={language} onChange={e=>setLanguage(e.target.value as Language)} data-meridian-language="true"><option value="vi">Chỉ tiếng Việt</option><option value="en">Kèm tiếng Anh</option><option value="zh">Kèm tiếng Trung</option></select></label>
       </div>
+      <div className="meridian3d-quick" aria-label="Chọn nhanh đường kinh">
+        <button type="button" data-meridian-scope="ALL" className={activeMeridian===ALL_MAIN_MERIDIANS?'active primary':''} onClick={()=>selectMeridian(ALL_MAIN_MERIDIANS)}>12 chính kinh</button>
+        {MAIN_MERIDIAN_IDS.map(id=>{const m=meridians.find(item=>item.id===id);return <button type="button" key={id} data-meridian-scope={id} className={activeMeridian===id?'active':''} onClick={()=>selectMeridian(id)}><b>{id}</b><span>{m?.vietnameseName?.replace(/^Kinh\s+/,'')||id}</span></button>})}
+        <small>Mạch giữa thân</small>
+        {MIDLINE_MERIDIAN_IDS.map(id=>{const m=meridians.find(item=>item.id===id);return <button type="button" key={id} data-meridian-scope={id} className={activeMeridian===id?'active':''} onClick={()=>selectMeridian(id)}><b>{id}</b><span>{m?.vietnameseName?.replace(/^Kinh\s+/,'')||id}</span></button>})}
+      </div>
       <div className="meridian3d-summary">
-        <strong>{meridianName(active)}</strong>
-        <span>{active?.pointIds.length??filteredPoints.length} huyệt · {sideLabel(side)} · {schematicCount} vị trí mô phỏng · {publishedCount} vị trí đã đăng ký · {draftCount} vị trí nháp trên máy</span>
-        <span>{publishedPaths.some(p=>p.meridianId===activeMeridian)?'Có đường kinh 3D đã đăng ký':schematicPaths?schematicPaths+' đoạn đường kinh sơ đồ nguồn mở · THAM CHIẾU HỌC TẬP':'Chưa có đường kinh 3D — không tự nối điểm'}</span>
+        <strong>{activeLabel}</strong>
+        <span>{activePointCount} huyệt · {sideLabel(side)} · {schematicCount} vị trí mô phỏng · {publishedCount} vị trí đã đăng ký · {draftCount} vị trí nháp trên máy</span>
+        <span>{visiblePaths.length?visiblePaths.length+' đường/đoạn 3D đang hiển thị'+(schematicPaths?' · THAM CHIẾU HỌC TẬP':''):'Chưa có đường kinh 3D — không tự nối điểm'}</span>
         {showCollaterals&&<span role="status">Chưa có dữ liệu đường lạc phù hợp để hiển thị.</span>}
       </div>
       <Button variant="ghost" data-exit-meridians="true" onClick={()=>{setEnabled(false);setOpen(false);onFocus(null)}}>Về giải phẫu</Button>
@@ -183,6 +204,11 @@ export default function Meridian3DPanel({drafts,selectedPointCode,studyCommand,o
           <span><small>Thứ tự</small><b>{selectedRecord.sequence}</b></span>
           <span><small>Vị trí đang có</small><b>{selectedAnchors.length}</b></span>
           <span><small>Trạng thái</small><b>{selectedAnchors.some(a=>a.sourceKind==='PUBLISHED')?'Đã đăng ký 3D':'Tham chiếu học tập'}</b></span>
+        </div>
+        <div className="meridian3d-point-nav" aria-label="Điều hướng huyệt trong cùng đường kinh">
+          <button type="button" onClick={()=>moveSelected(-1)} disabled={selectedMeridianPoints.length<2}>← Huyệt trước</button>
+          <span>{selectedIndex>=0?selectedIndex+1:0}/{selectedMeridianPoints.length}</span>
+          <button type="button" onClick={()=>moveSelected(1)} disabled={selectedMeridianPoints.length<2}>Huyệt sau →</button>
         </div>
         {selectedDocumentRef&&<small className="meridian3d-source-label" data-document-reference="true">{selectedDocumentRef.label} · {selectedDocumentRef.heading}</small>}
         {selectedAnchors.some(a=>a.sourceKind==='LICENSED_SCHEMATIC')&&<small className="meridian3d-source-label" data-spatial-provenance="true">Nguồn tọa độ sơ đồ 3D: {schematic.source?.repository??'FuriaRozkwit/acupuncture-3d'} · {schematic.source?.license??'MIT anchors; CC BY-SA dữ liệu hiệu chỉnh'} · CHƯA THẨM ĐỊNH</small>}
