@@ -33,7 +33,7 @@ Checkpoint bảo toàn trước kiểm tra: `checkpoint/2026-09-23-dabd37f-stabl
 1. **Danh mục và topology: PASS 14/14** — mã huyệt đầu/cuối trong `content/meridians/meridians.json` khớp topology nguồn đang dùng.
 2. **BL-39: KHÔNG ĐƯỢC TỰ NỐI** — topology nguồn không chứa BL-39. Nhánh hiện có giữ nguyên BL-38 → BL-40 → BL-55. Đây là thiếu dữ liệu hình học nguồn, không được suy diễn.
 3. **Tọa độ 3D: CHƯA ĐƯỢC NÂNG TRẠNG THÁI** — các anchor nguồn vẫn phải giữ `UNVERIFIED / LICENSED_SCHEMATIC` cho tới khi đối chiếu trực quan từng huyệt với hình trong tài liệu và mốc giải phẫu BodyParts3D.
-4. **Điểm cần QC ưu tiên:** vùng mặt và các điểm có anchor dùng cấu trúc thay thế, đặc biệt GV-28; tiếp theo CV-24, LI-20, ST-1, TE-23, GB-1, BL-1. Không sửa tọa độ chỉ dựa trên tên xương proxy.
+4. **QC vùng mặt — đợt hiệu chỉnh HIU tiếp theo:** LI-20, ST-1, BL-1, TE-23, GB-1, CV-24 và GV-28 đã được chuyển sang override giải phẫu riêng để bám sát mốc trên hình/tài liệu hơn; vendor gốc không bị sửa. Các điểm này vẫn giữ trạng thái `UNVERIFIED` cho đến khi browser smoke và đối chiếu trực quan trên mô hình thật hoàn tất.
 5. **Quy tắc phát hành:** chỉ merge thay đổi vị trí khi có bằng chứng trang/hình + mốc giải phẫu + kiểm thử browser; không gán nhãn “verified” từ hình 2D một mình.
 
 ## Regression guard
