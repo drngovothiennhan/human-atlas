@@ -144,6 +144,11 @@ const spatialOverrides={
   'GV-28':{struct:'Maxilla',along:.35,dir:'anterior',shift:{down:7}},
   'ST-45':{struct:'Distal phalanx of second finger of foot',along:.95,dir:'dorsal',shift:{lateral:3},region:'foot'}
 };
+const documentEvidenceByMeridian=new Map(documentReference.meridians.map(item=>[item.meridianId,item]));
+for(const pointCode of Object.keys(spatialOverrides)){
+  const meridianId=pointCode.match(/^([A-Z]+)-/)?.[1];
+  if(!meridianId||!documentEvidenceByMeridian.has(meridianId))throw new Error('Spatial override missing document evidence: '+pointCode);
+}
 const resolveRight=(a,pointCode)=>{const anchor=spatialOverrides[pointCode]??a;return 'struct'in anchor?structuralCast(anchor):'arc_cun'in anchor?scalpCast(anchor):segmentCast(anchor)};
 const round=x=>Math.round(x*1e6)/1e6;
 const sourceSideWarnings=pointDoc.points
@@ -161,7 +166,7 @@ for(const point of pointDoc.points){
   const records=canonicalMidline||point.side==='midline'
     ?[['MIDLINE',[0,right[1],right[2]]]]
     :[['RIGHT',right],['LEFT',[-right[0],right[1],right[2]]]];
-  for(const [side,src] of records){const p=toBrowser(src);anchorOut.push({pointCode:canonicalPointCode,meridianId,sourcePointCode:point.code,sourceMeridianId:point.channel,sequence:point.index,side,x:round(p[0]),y:round(p[1]),z:round(p[2]),verificationStatus:'UNVERIFIED',sourceKind:'LICENSED_SCHEMATIC',accuracy:point.accuracy,projection:'BodyParts3D FMA7163 surface raycast',calibrationOverride:spatialOverrides[canonicalPointCode]?'HIU_DOCUMENT_ANATOMY_QC':undefined})}
+  for(const [side,src] of records){const p=toBrowser(src),doc=documentEvidenceByMeridian.get(meridianId);anchorOut.push({pointCode:canonicalPointCode,meridianId,sourcePointCode:point.code,sourceMeridianId:point.channel,sequence:point.index,side,x:round(p[0]),y:round(p[1]),z:round(p[2]),verificationStatus:'UNVERIFIED',sourceKind:'LICENSED_SCHEMATIC',accuracy:point.accuracy,projection:'BodyParts3D FMA7163 surface raycast',calibrationOverride:spatialOverrides[canonicalPointCode]?'HIU_DOCUMENT_ANATOMY_QC':undefined,documentEvidence:spatialOverrides[canonicalPointCode]?{sourceId:documentReference.sourceId,pdfPageRange:doc?.pdfPageRange??null,label:doc?.label??null,evidenceType:doc?.evidenceType??null,spatialStatus:doc?.spatialStatus??null}:undefined})}
 }
 const byKey=new Map(anchorOut.map(a=>[a.pointCode+':'+a.side,a]));
 if(byKey.size!==anchorOut.length)throw new Error('Duplicate generated acupoint anchor key');
