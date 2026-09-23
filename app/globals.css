@@ -236,11 +236,11 @@ body:has(.registration-panel) .meridian3d-launch{left:376px}body:has(.registrati
 
 
 /* P0 2026-09-22: keep every visible atlas control touchable above the 3D canvas. */
-.view-controls{z-index:28;pointer-events:auto}
+.view-controls{z-index:40;pointer-events:auto}
 .bottom-dock{z-index:22;pointer-events:auto}
 .view-controls button,.bottom-dock button{pointer-events:auto;touch-action:manipulation}
 @media(max-width:767px){
- .view-controls{top:max(112px,calc(env(safe-area-inset-top) + 94px));left:12px;right:12px;transform:none;flex-direction:row;justify-content:center;width:fit-content;max-width:calc(100% - 24px);margin-inline:auto;padding:4px;z-index:28;touch-action:manipulation}
+ .view-controls{top:max(112px,calc(env(safe-area-inset-top) + 94px));left:12px;right:12px;transform:none;flex-direction:row;justify-content:center;width:fit-content;max-width:calc(100% - 24px);margin-inline:auto;padding:4px;z-index:40;touch-action:manipulation}
  .view-controls button{width:44px;height:44px;min-width:44px;min-height:44px}
  .bottom-dock{z-index:22;pointer-events:auto}
 }
