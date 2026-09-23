@@ -273,7 +273,7 @@ body:has(.registration-panel) .meridian3d-launch{left:376px}body:has(.registrati
 
 /* 2026-09-23: compact meridian-first layer menu; prevent mobile overflow. */
 .layer-presets{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px!important;overflow:visible!important;padding:4px!important}
-.layer-presets button{width:100%!important;min-width:0!important;min-height:38px!important;padding:0 8px!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.layer-presets button{width:100%!important;min-width:0!important;min-height:38px!important;padding:0 8px!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;touch-action:manipulation}
 .system-list{overscroll-behavior:contain}
 @media(max-width:767px){
  .layers-panel{left:12px!important;right:12px!important;width:auto!important;max-width:none!important;overflow:hidden!important}
