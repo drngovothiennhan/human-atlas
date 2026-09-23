@@ -187,8 +187,8 @@ export default function YhctStudyPanel({localDraftCount,onStudyCommand}:Props){
     {open&&<aside id="yhct-study-panel" ref={node=>{panelDrag.ref.current=node}} className="yhct-panel glass" aria-label="Huyệt vị, kinh lạc và trợ lý học tập">
       <div className="yhct-head">
         <div><strong>Huyệt vị · Kinh lạc</strong><small>HIU CLB YHCT · tra cứu cục bộ · nguồn có kiểm soát</small></div>
-        <button type="button" className="drag-grip" onPointerDown={panelDrag.onPointerDown} aria-label="Kéo bảng học"><Move size={14}/></button>
         <button onClick={()=>setOpen(false)} aria-label="Đóng bảng YHCT">×</button>
+        <button type="button" className="drag-grip" onPointerDown={panelDrag.onPointerDown} aria-label="Kéo bảng học"><Move size={14}/></button>
       </div>
       <div className="yhct-stats" data-yhct-spatial-counts="true">
         <span>{points.length}/361 huyệt catalog</span>
