@@ -43,3 +43,10 @@ Checkpoint bảo toàn trước kiểm tra: `checkpoint/2026-09-23-dabd37f-stabl
 - ánh xạ SJ→TE, REN→CV, DU→GV;
 - không được tự phát sinh BL-39 vào topology;
 - bảo toàn chuỗi nhánh BL-38 → BL-40 → BL-55 của nguồn hiện hành.
+
+
+## Đợt đối chiếu tiếp theo — cổng bằng chứng tài liệu
+
+- Mọi `spatialOverride` của HIU hiện bắt buộc phải có `documentEvidence` trỏ tới tài liệu Ngô Trung Triều và dải trang của đúng kinh; thiếu mapping thì build dừng.
+- Đã xác nhận trực tiếp từ bản OCR cùng đầu sách: **LI-20 Nghinh hương** nằm tại giao điểm đường ngang chân cánh mũi với rãnh mũi–miệng; **ST-45 Lệ đoài** ở cạnh ngoài gốc móng ngón chân II; **LU-11 Thiếu thương** ở bờ ngoài ngón cái, cách góc móng khoảng 0,1 tấc; **SP-1 Ẩn bạch** ở bờ trong ngón cái chân gần góc móng. Những điểm này phù hợp hướng giải phẫu đang dùng nên không phát sinh sửa vendor.
+- Các huyệt chưa đọc được mô tả vị trí trực tiếp từ tài liệu trong phiên này không được tự thêm override chỉ vì tên huyệt hoặc topology.
