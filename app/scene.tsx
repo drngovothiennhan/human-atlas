@@ -143,7 +143,7 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
    renderer.domElement.dataset.meridianLineOuterRadius=String(MERIDIAN_LINE_EDGE_RADIUS);
    renderer.domElement.dataset.meridianLineCoreRadius=String(MERIDIAN_LINE_CORE_RADIUS);
    renderer.domElement.dataset.meridianLineCoreOpacity=String(MERIDIAN_LINE_CORE_OPACITY);
-   renderer.domElement.dataset.meridianLineTransparent='true';
+   renderer.domElement.dataset.meridianLineTransparent='true';renderer.domElement.dataset.meridianDepthOcclusion='anatomy-surface';
    renderer.domElement.dataset.meridianPointMinRadius=String(ACUPOINT_RADIUS_SCHEMATIC);
    disposeOverlay();renderer.domElement.dataset.meridianAnchors='0';renderer.domElement.dataset.meridianPaths='0';renderer.domElement.dataset.meridianSchematicAnchors='0';renderer.domElement.dataset.meridianSchematicPaths='0';renderer.domElement.dataset.meridianPulseMarkers='0';renderer.domElement.dataset.meridianSelectedMarkers='0';renderer.domElement.dataset.meridianFlowParticles='0';renderer.domElement.dataset.meridianEffect=value?.enabled?(reduceMeridianMotion?'reduced':'flow'):'off';if(!value?.enabled)return;
    const fallbackColor=0x0f766e;let trustedAnchors=0,schematicAnchors=0,schematicPaths=0,trustedPaths=0,selectedMarkers=0;
@@ -152,7 +152,7 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
     const schematic=anchor.sourceKind==='LICENSED_SCHEMATIC',selected=value.selectedPointCode===anchor.pointCode;
     const color=meridianColors[anchor.meridianId]??fallbackColor;
     const baseOpacity=selected?1:anchor.sourceKind==='PUBLISHED'?.98:schematic?.94:.96;
-    const material=new T.MeshBasicMaterial({color,transparent:true,opacity:baseOpacity,depthTest:false,depthWrite:false});
+    const material=new T.MeshBasicMaterial({color,transparent:true,opacity:baseOpacity,depthTest:true,depthWrite:false});
     const radius=selected?ACUPOINT_RADIUS_SELECTED:anchor.sourceKind==='PUBLISHED'?ACUPOINT_RADIUS_PUBLISHED:schematic?ACUPOINT_RADIUS_SCHEMATIC:ACUPOINT_RADIUS_LOCAL;
     const marker=new T.Mesh(new T.SphereGeometry(radius,qualityConfig.markerSegments,Math.max(8,qualityConfig.markerSegments-4)),material);
     marker.position.set(anchor.x,anchor.y,anchor.z);marker.renderOrder=selected?26:24;marker.userData.pointCode=anchor.pointCode;marker.userData.side=anchor.side;marker.userData.verificationStatus=anchor.verificationStatus;marker.userData.sourceKind=anchor.sourceKind;marker.userData.baseOpacity=baseOpacity;marker.userData.selected=selected;
@@ -169,13 +169,13 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
     const curve=new T.CatmullRomCurve3(points,false,'centripetal');
     const segments=Math.max(36,points.length*18);
     // Thin semi-transparent channels stay legible without masking anatomy.
-    const edge=new T.Mesh(new T.TubeGeometry(curve,segments,MERIDIAN_LINE_EDGE_RADIUS,qualityConfig.tubeRadialSegments,false),new T.MeshBasicMaterial({color:0x17212b,transparent:true,opacity:MERIDIAN_LINE_EDGE_OPACITY,depthTest:false,depthWrite:false}));
+    const edge=new T.Mesh(new T.TubeGeometry(curve,segments,MERIDIAN_LINE_EDGE_RADIUS,qualityConfig.tubeRadialSegments,false),new T.MeshBasicMaterial({color:0x17212b,transparent:true,opacity:MERIDIAN_LINE_EDGE_OPACITY,depthTest:true,depthWrite:false}));
     edge.renderOrder=21;meridianGroup.add(edge);
-    const tube=new T.Mesh(new T.TubeGeometry(curve,segments,MERIDIAN_LINE_CORE_RADIUS,qualityConfig.tubeRadialSegments,false),new T.MeshBasicMaterial({color:lineColor,transparent:true,opacity:MERIDIAN_LINE_CORE_OPACITY,depthTest:false,depthWrite:false}));
+    const tube=new T.Mesh(new T.TubeGeometry(curve,segments,MERIDIAN_LINE_CORE_RADIUS,qualityConfig.tubeRadialSegments,false),new T.MeshBasicMaterial({color:lineColor,transparent:true,opacity:MERIDIAN_LINE_CORE_OPACITY,depthTest:true,depthWrite:false}));
     tube.renderOrder=22;meridianGroup.add(tube);
     // Several moving lights make motion visible along long channels, not only at one end.
     for(let i=0;i<qualityConfig.flowParticlesPerPath;i++){
-     const particle=new T.Mesh(new T.SphereGeometry(.0029,Math.max(8,qualityConfig.markerSegments-2),8),new T.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:.9,depthTest:false,depthWrite:false}));
+     const particle=new T.Mesh(new T.SphereGeometry(.0029,Math.max(8,qualityConfig.markerSegments-2),8),new T.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:.9,depthTest:true,depthWrite:false}));
      const offset=i/qualityConfig.flowParticlesPerPath;particle.position.copy(curve.getPointAt(offset));particle.renderOrder=25;
      meridianGroup.add(particle);meridianFlowParticles.push({mesh:particle,curve,offset});
     }
@@ -192,7 +192,7 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
    return best;
   };
   const materialFor=(system:string)=>{
-   const m=new T.MeshStandardMaterial({color:SYSTEMS.find(s=>s.id===system)?.color??'#aebbb8',metalness:.08,roughness:.53,side:T.DoubleSide,transparent:system==='integumentary',opacity:system==='integumentary'?.1:1,depthWrite:system!=='integumentary'});
+   const m=new T.MeshStandardMaterial({color:SYSTEMS.find(s=>s.id===system)?.color??'#aebbb8',metalness:.08,roughness:.53,side:T.DoubleSide,transparent:system==='integumentary',opacity:system==='integumentary'?.12:1,depthWrite:true});
    m.onBeforeCompile=shader=>{
     shader.uniforms.partState={value:partTexture};shader.uniforms.selectionState={value:selectionTexture};shader.uniforms.stateWidth={value:width};
     shader.vertexShader='attribute float partIndex; uniform sampler2D partState; uniform sampler2D selectionState; uniform float stateWidth; varying float partVisible; varying float partSelected;\n'+shader.vertexShader;
