@@ -67,7 +67,12 @@ export default function Home(){
  const openPanel=(next:'layers'|'search')=>{setDetails(false);setPanel(p=>p===next?null:next);};
  const handleStudyCommand=(command:StudyCommand)=>{
   if(command.view)setState(s=>({...s,view:command.view!,reset:s.reset+1,rotate:false}));
-  const {view:_,...overlayCommand}=command;
+  if(command.anatomyPreset){
+   const visible:SystemId[]=command.anatomyPreset==='surface'?['integumentary']:command.anatomyPreset==='skeleton'?['skeletal']:['muscular'];
+   setDetails(false);setPanel(null);setChosen(null);
+   setState(s=>({...s,visible,selected:[],isolate:false,explode:0,rotate:false,reset:s.reset+1}));
+  }
+  const {view:_,anatomyPreset:__,...overlayCommand}=command;
   if(overlayCommand.meridianId||overlayCommand.pointCode||overlayCommand.effects)setStudyCommand({...overlayCommand,seq:++studyCommandSeq.current});
  };
  return <main className="studio">
@@ -75,7 +80,7 @@ export default function Home(){
   <div className="vignette"/>
   <header className="identity"><div className="eyebrow"><span className="status-dot"/> HIU CLB YHCT · ATLAS GIÁO DỤC</div><h1>HIU YHCT Atlas<Badge variant="outline" className="edition">3D</Badge></h1><div className="identity-meta">{atlas?atlas.parts.length.toLocaleString():'2,234'} cấu trúc giải phẫu <span>·</span> BodyParts3D</div></header>
   <YhctStudyPanel localDraftCount={registrationDrafts.length} onStudyCommand={handleStudyCommand}/>
-  <Meridian3DPanel drafts={registrationDrafts} selectedPointCode={selectedMeridianPoint} studyCommand={studyCommand} onOverlayChange={setMeridianOverlay} onFocus={setMeridianFocus}/>
+  <Meridian3DPanel drafts={registrationDrafts} selectedPointCode={selectedMeridianPoint} studyCommand={studyCommand} onStudyAction={handleStudyCommand} onOverlayChange={setMeridianOverlay} onFocus={setMeridianFocus}/>
   {registrationEnabled&&<RegistrationPanel target={registrationTarget} capture={registrationCapture} onTargetChange={next=>{setRegistrationTarget(next);setRegistrationCapture(null);}} onDraftsChange={setRegistrationDrafts}/>} 
   <nav className="top-actions" aria-label="Bảng điều khiển"><Button variant="ghost" className={panel==='search'?'active':''} onClick={()=>openPanel('search')} aria-label="Tìm giải phẫu"><Search size={18}/><span>Tìm cấu trúc</span><kbd>/</kbd></Button><Button variant="ghost" className="icon-button" aria-label="Thông tin ứng dụng" onClick={()=>{setDetails(false);setPanel(null);setAbout(true);}}><Info size={18}/></Button></nav>
   <section className={`layers-panel glass ${panel==='layers'?'mobile-open':''}`} aria-label="Lớp giải phẫu">
