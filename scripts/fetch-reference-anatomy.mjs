@@ -47,8 +47,6 @@ const [articularReport,skeletalReport]=await Promise.all([
 if(articularReport.object_count!==413||articularReport.objects.length!==413)throw new Error('Articular source object count drift');
 if(skeletalReport.object_count!==335||skeletalReport.objects.length!==335)throw new Error('Skeletal source object count drift');
 
-// Meridian-first runtime deliberately does not fetch or bundle the 11.9 MB full muscular GLB.
-// Muscle landmarks come from the existing BodyParts3D atlas; Z-Anatomy remains reference-only.
 const writeManifest=async(name,payload)=>writeFile(join(ROOT,'public/models',name),JSON.stringify(payload,null,2)+'\n');
 await writeManifest('z-skeletal-manifest.json',{
   schemaVersion:'1.0.0',sourceRepository:SOURCE_REPO,sourceCommit:SOURCE_COMMIT,sourceReport:'tools/asset-pipeline/vendor/reports/skeletal.json',meshCount:skeletalReport.object_count,nodes:skeletalReport.objects.map(object=>object.name)
@@ -62,10 +60,9 @@ await writeManifest('z-articular-manifest.json',{
   nodes:articularReport.objects.map(object=>object.name)
 });
 
-console.log('Z_ANATOMY_SOURCE_READY '+JSON.stringify({
+console.log('REFERENCE_ANATOMY_SOURCE_READY '+JSON.stringify({
   sourceCommit:SOURCE_COMMIT,
   files:fetched.map(({dest,bytes,cached})=>({dest,bytes,cached})),
-  fullMuscularRuntime:'disabled-meridian-first',
   articularMeshes:articularReport.object_count,
   skeletalMeshes:skeletalReport.object_count
 }));
