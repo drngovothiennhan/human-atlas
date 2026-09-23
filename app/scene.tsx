@@ -8,7 +8,7 @@ import {mergeGeometries} from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 import {createExplosionLayout} from './explosion-layout';
 import {decodeModelResponse} from './model-download';
 import {PointerTap} from './pointer-tap';
-import {SYSTEMS,isMeridianLandmarkMuscle,type Atlas,type SceneState} from './anatomy';
+import {SYSTEMS,DEFAULT_LAYER_OPACITY,isMeridianLandmarkMuscle,type Atlas,type SceneState} from './anatomy';
 import {BODY_CANONICAL_COORDINATE_SYSTEM,type SurfaceCapture} from '../src/acupoints/registration/coordinate-system';
 import type {MeridianFocusTarget,MeridianOverlayState} from './meridian-overlay';
 import {ARTICULAR_SOURCE,SKELETAL_SOURCE} from './reference-anatomy';
@@ -312,10 +312,11 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
    const detailedReplacement=false;
    const jointsWanted=s.visible.includes('articular')&&!s.isolate&&s.explode<.01;jointGroup.visible=jointsWanted;if(jointsWanted)ensureJoints();const articularReplacement=jointsWanted&&jointStatus==='ready';renderer.domElement.dataset.articularActive=String(jointsWanted);renderer.domElement.dataset.articularReplacement=String(articularReplacement);
    const skeletalWanted=s.visible.includes('skeletal')&&!s.isolate&&s.explode<.01;skeletalReferenceGroup.visible=skeletalWanted;if(skeletalWanted)ensureSkeletalReference();const skeletalReplacement=skeletalWanted&&skeletalStatus==='ready';renderer.domElement.dataset.skeletalReferenceActive=String(skeletalWanted);renderer.domElement.dataset.skeletalReferenceReplacement=String(skeletalReplacement);
-   const changed=lastState?.visible!==s.visible||lastState?.selected!==s.selected||lastState?.isolate!==s.isolate;
+   const changed=lastState?.visible!==s.visible||lastState?.opacity!==s.opacity||lastState?.selected!==s.selected||lastState?.isolate!==s.isolate;
    const moving=Math.abs(amount-s.explode)>.0001;
    if(moving){amount=T.MathUtils.damp(amount,s.explode,8,dt);dirty=true;}
    if(changed||moving||lastExtent<0){
+    if(lastState?.opacity!==s.opacity){for(const system of SYSTEMS){const material=mats.get(system.id);if(!material)continue;const alpha=(s.opacity?.[system.id]??DEFAULT_LAYER_OPACITY[system.id])/100;material.opacity=alpha;material.transparent=alpha<1;material.depthWrite=alpha>=1;material.needsUpdate=true;}jointMaterial.opacity=(s.opacity?.articular??100)/100;jointMaterial.transparent=jointMaterial.opacity<1;jointMaterial.depthWrite=jointMaterial.opacity>=1;skeletalReferenceMaterial.opacity=(s.opacity?.skeletal??100)/100;skeletalReferenceMaterial.transparent=skeletalReferenceMaterial.opacity<1;skeletalReferenceMaterial.depthWrite=skeletalReferenceMaterial.opacity>=1;}
     const visible=new Set(s.visible),selection=new Set(s.selected);
     const visibleParts=atlas.parts.filter(p=>{const selected=selection.has(p.id);if(s.isolate)return selected;if(p.system==='muscular'&&!selected&&!isMeridianLandmarkMuscle(p.name))return false;return visible.has(p.system)||selected;});
     const nextLayoutKey=visibleParts.map(p=>p.id).join(',')+':'+camera.aspect.toFixed(3);

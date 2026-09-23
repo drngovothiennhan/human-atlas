@@ -58,3 +58,20 @@ test('auto-rotate remains available while the meridian overlay is enabled',async
   assert.ok(!meridianGuard.includes('rotate:false'),'meridian overlay must not continuously force auto-rotate off');
   assert.ok(page.includes("aria-label={state.rotate?'Dừng xoay':'Xoay mô hình'}"));
 });
+
+test('anatomical layers expose independent opacity controls wired to Three.js materials',async()=>{
+  const [page,scene,anatomy,css]=await Promise.all([
+    readFile(new URL('../app/page.tsx',import.meta.url),'utf8'),
+    readFile(new URL('../app/scene.tsx',import.meta.url),'utf8'),
+    readFile(new URL('../app/anatomy.ts',import.meta.url),'utf8'),
+    readFile(new URL('../app/globals.css',import.meta.url),'utf8')
+  ]);
+  assert.ok(anatomy.includes('DEFAULT_LAYER_OPACITY'));
+  assert.ok(anatomy.includes("system.id==='integumentary'?12:100"));
+  assert.ok(page.includes('aria-label={`Độ mờ lớp ${s.name.toLowerCase()}`}'));
+  assert.ok(page.includes('opacity:{...v.opacity,[s.id]:value}'));
+  assert.ok(scene.includes('lastState?.opacity!==s.opacity'));
+  assert.ok(scene.includes('material.transparent=alpha<1'));
+  assert.ok(scene.includes('material.depthWrite=alpha>=1'));
+  assert.ok(css.includes('.layer-opacity input'));
+});
