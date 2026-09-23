@@ -24,9 +24,37 @@ test('meridian scene uses slower flow, smooth camera motion and no model base',a
   const source=await readFile(new URL('../app/scene.tsx',import.meta.url),'utf8');
   assert.match(source,/MERIDIAN_LINE_EDGE_RADIUS=\.00185/);
   assert.match(source,/MERIDIAN_LINE_CORE_RADIUS=\.00115/);
-  assert.match(source,/clock\.elapsedTime\*\.105/);
+  assert.match(source,/MERIDIAN_FLOW_WORLD_SPEED=\.075/);
+  assert.match(source,/clock\.elapsedTime\*entry\.speed/);
+  assert.match(source,/meridianFlowDirection='source-order'/);
   assert.match(source,/duration=\.92/);
   assert.match(source,/startCameraMotion\(point,destination,1\.08\)/);
   assert.match(source,/t\*t\*t\*\(t\*\(t\*6-15\)\+10\)/);
   assert.match(source,/ground\.visible=platform\.visible=ring\.visible=innerRing\.visible=false/);
+});
+
+
+test('meridian overlay uses anatomy depth occlusion and separated controls',async()=>{
+  const [scene,panel,css]=await Promise.all([
+    readFile(new URL('../app/scene.tsx',import.meta.url),'utf8'),
+    readFile(new URL('../app/meridian-3d-panel.tsx',import.meta.url),'utf8'),
+    readFile(new URL('../app/globals.css',import.meta.url),'utf8')
+  ]);
+  assert.ok(scene.includes("meridianDepthOcclusion='anatomy-surface'"));
+  assert.match(scene,/depthTest:true,depthWrite:false/);
+  assert.match(scene,/opacity:system==='integumentary'\?\.12:1,depthWrite:true/);
+  assert.ok(panel.includes('meridian3d-exit-row'));
+  assert.ok(panel.includes('meridian3d-section-label'));
+  assert.ok(panel.includes('data-anatomical-location="true"'));
+  assert.ok(panel.includes('data-anatomical-landmarks="true"'));
+  assert.ok(css.includes('P0 display hotfix: separate exit/effect rows'));
+});
+
+
+test('auto-rotate remains available while the meridian overlay is enabled',async()=>{
+  const page=await readFile(new URL('../app/page.tsx',import.meta.url),'utf8');
+  const meridianGuard=page.slice(page.indexOf("if(!meridianOverlay.enabled)return;"),page.indexOf("const parts=useMemo",page.indexOf("if(!meridianOverlay.enabled)return;")));
+  assert.ok(meridianGuard.length>0,'meridian overlay guard missing');
+  assert.ok(!meridianGuard.includes('rotate:false'),'meridian overlay must not continuously force auto-rotate off');
+  assert.ok(page.includes("aria-label={state.rotate?'Dừng xoay':'Xoay mô hình'}"));
 });

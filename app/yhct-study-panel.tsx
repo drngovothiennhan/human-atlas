@@ -28,6 +28,9 @@ type Acupoint={
   reviewStatus?:string;
   verificationStatus?:string;
   nomenclatureSource?:string;
+  terminologySource?:string;
+  snomedCtRef?:string|null;
+  anatomicalLocation?:{surfaceRegionEn?:string|null;surfaceRegionVi?:string|null;landmarks?:{label:string;uri?:string|null}[]}|null;
 };
 type SchematicAnchor={pointCode:string;meridianId:string;sequence:number;side:string;x:number;y:number;z:number;sourceKind?:string;verificationStatus?:string};
 type SchematicSpatial={anchors:SchematicAnchor[];paths:{meridianId:string;points:number[][]}[]};
@@ -125,7 +128,7 @@ export default function YhctStudyPanel({localDraftCount,onStudyCommand}:Props){
     const exactPoint=points.find(p=>canonicalPointCode(p.code)===canonical||q.includes(norm(p.code))||Boolean(p.vietnameseName&&q.includes(norm(p.vietnameseName))));
     if(exactPoint){
       const m=meridians.find(x=>x.id===exactPoint.meridianId),isReviewed=Boolean(exactPoint.position3d)&&['FACULTY_REVIEWED','PUBLISHED'].includes(exactPoint.reviewStatus??exactPoint.verificationStatus??'');
-      setAnswer(`${exactPoint.code}${exactPoint.vietnameseName?' · '+exactPoint.vietnameseName:''} thuộc ${m?.vietnameseName||exactPoint.meridianId}. Vị trí BodyParts3D đã duyệt: ${isReviewed?'có':'chưa có'}. Lớp mô phỏng 3D nếu hiện chỉ là tham chiếu học tập. Nguồn catalog: ${(exactPoint.sources||[]).join(', ')||'record cục bộ đã kiểm tra'}.`);
+      const location=exactPoint.anatomicalLocation?.surfaceRegionVi||exactPoint.anatomicalLocation?.surfaceRegionEn||'chưa có vùng giải phẫu';const landmarks=(exactPoint.anatomicalLocation?.landmarks||[]).slice(0,3).map(x=>x.label).join(', ');setAnswer(`${exactPoint.code}${exactPoint.vietnameseName?' · '+exactPoint.vietnameseName:''} thuộc ${m?.vietnameseName||exactPoint.meridianId}. Vùng: ${location}${landmarks?' · mốc: '+landmarks:''}. Vị trí BodyParts3D đã duyệt: ${isReviewed?'có':'chưa có'}; điểm sơ đồ 3D nếu hiện vẫn được gắn nhãn tham chiếu học tập.`);
       return;
     }
     const exactMeridian=meridians.find(m=>q.includes(norm(m.code))||q.includes(norm(m.vietnameseName))||q.includes(norm(m.englishName)));
@@ -213,7 +216,7 @@ export default function YhctStudyPanel({localDraftCount,onStudyCommand}:Props){
             :<article key={(row as Acupoint).id}>
               <b>{(row as Acupoint).code}</b>
               <span>{(row as Acupoint).vietnameseName||(row as Acupoint).pinyin||(row as Acupoint).englishName||`${(row as Acupoint).code} · huyệt thứ ${(row as Acupoint).sequence} của ${(row as Acupoint).meridianId}`}</span>
-              <small>{(row as Acupoint).meridianId} · {(row as Acupoint).chineseName?`${(row as Acupoint).chineseName} · `:''}{schematic.anchors.some(a=>a.pointCode===(row as Acupoint).code)?'có vị trí mô phỏng':'chưa có vị trí mô phỏng'} · {Boolean((row as Acupoint).position3d)?'có dữ liệu BodyParts3D':'chưa có BodyParts3D đã duyệt'}</small>
+              <small>{(row as Acupoint).meridianId} · {(row as Acupoint).anatomicalLocation?.surfaceRegionVi?`${(row as Acupoint).anatomicalLocation!.surfaceRegionVi} · `:''}{(row as Acupoint).chineseName?`${(row as Acupoint).chineseName} · `:''}{schematic.anchors.some(a=>a.pointCode===(row as Acupoint).code)?'có điểm 3D':'chưa có điểm 3D'}</small>
               <div className="yhct-links">
                 <button type="button" data-study-point={(row as Acupoint).code} onClick={()=>focusPoint(row as Acupoint,`Đã mở ${(row as Acupoint).code} trong Kinh lạc 3D.`)}>Bay tới 3D</button>
                 <a href={(row as Acupoint).references?.[0]||'https://acupointatlas.com/acupuncture-points/'} target="_blank" rel="noreferrer">Nguồn catalog ↗</a>

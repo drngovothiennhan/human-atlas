@@ -205,7 +205,7 @@ try{
   if(!musclePreset)throw new Error('Meridian landmark muscle preset missing');
   await waitFor(()=>evaluate("(()=>{const b=[...document.querySelectorAll('.layer-presets button')].find(x=>x.textContent.trim()==='Cơ mốc');return b?.getAttribute('aria-pressed')==='true'})()"),{label:'meridian landmark muscle preset'});
   const landmarkMetrics=await evaluate("(()=>{const d=document.querySelector('canvas')?.dataset||{};return{profile:d.anatomyProfile,policy:d.musclePolicy,landmarkCount:Number(d.muscleLandmarkCount||0)}})()");
-  if(landmarkMetrics.profile!=='meridian-first'||landmarkMetrics.policy!=='meridian-landmarks'||landmarkMetrics.landmarkCount<20||landmarkMetrics.landmarkCount>=206)throw new Error('Meridian-first muscle policy failed: '+JSON.stringify(landmarkMetrics));
+  if(landmarkMetrics.profile!=='meridian-first'||landmarkMetrics.policy!=='meridian-landmarks'||landmarkMetrics.landmarkCount<20||landmarkMetrics.landmarkCount>58)throw new Error('Meridian-first muscle policy failed: '+JSON.stringify(landmarkMetrics));
   await sleep(250);
   const landmarkHash=await screenshot('desktop-meridian-landmark-muscles.png');
   if(landmarkHash===resetHash)throw new Error('Landmark muscle preset did not change rendered screenshot');
@@ -253,6 +253,8 @@ try{
   await waitFor(()=>evaluate("document.querySelector('.yhct-launch')?.innerText.includes('14 kinh · 361 huyệt')"),{timeout:30000,label:'YHCT catalog ready before drawer'});
   await evaluate("document.querySelector('.yhct-launch').click()");
   await waitFor(()=>evaluate("!!document.querySelector('.yhct-panel')"),{label:'YHCT drawer'});
+  const yhctOverflow=await evaluate("(()=>{const panel=document.querySelector('.yhct-panel');if(!panel)return{missing:true};const bad=[...panel.querySelectorAll('button,select,input,textarea')].filter(el=>el.scrollWidth>el.clientWidth+2).map(el=>(el.textContent||el.getAttribute('aria-label')||el.tagName).trim().slice(0,80));return{panel:panel.scrollWidth>panel.clientWidth+2,bad}})()");
+  if(yhctOverflow.missing||yhctOverflow.panel||yhctOverflow.bad.length)throw new Error('YHCT control overflow: '+JSON.stringify(yhctOverflow));
   await waitFor(()=>evaluate("document.querySelector('[data-yhct-spatial-counts=true]')?.innerText.includes('vị trí mô phỏng')&&!document.querySelector('[data-yhct-spatial-counts=true]')?.innerText.includes('anchor 3D')"),{label:'honest spatial counts'});
   if(!await evaluate("(()=>{const i=document.querySelector('.yhct-search');if(!i)return false;i.focus();return document.activeElement===i})()"))throw new Error('YHCT meridian search input missing');
   if(!await setControlledText('.yhct-search','LU'))throw new Error('Unable to set meridian search');
@@ -313,6 +315,8 @@ try{
   await waitFor(()=>evaluate("document.querySelector('[data-meridian3d-launch=true]')?.getAttribute('aria-pressed')==='false'"),{label:'study mode exits meridian overlay'});
   await evaluate("document.querySelector('[data-meridian3d-launch=true]')?.click()");
   await waitFor(()=>evaluate("!!document.querySelector('[data-meridian3d-panel=true]')"),{label:'3D meridian panel'});
+  const meridianOverflow=await evaluate("(()=>{const panel=document.querySelector('[data-meridian3d-panel=true]');if(!panel)return{missing:true};const bad=[...panel.querySelectorAll('button,select,input')].filter(el=>el.scrollWidth>el.clientWidth+2).map(el=>(el.textContent||el.getAttribute('aria-label')||el.tagName).trim().slice(0,80));return{panel:panel.scrollWidth>panel.clientWidth+2,bad}})()");
+  if(meridianOverflow.missing||meridianOverflow.panel||meridianOverflow.bad.length)throw new Error('Meridian control overflow: '+JSON.stringify(meridianOverflow));
   await waitFor(()=>evaluate("document.querySelector('[data-meridian3d-panel=true]')?.innerText.includes('Kinh Vị')&&document.querySelector('[data-meridian3d-panel=true]')?.innerText.includes('vị trí 3D đã hiệu chỉnh')"),{label:'3D calibrated meridian gate'});
   await waitFor(()=>evaluate("document.querySelector('[data-spatial-source-license=true]')?.textContent.includes('FuriaRozkwit/acupuncture-3d')&&document.querySelector('[data-spatial-source-license=true]')?.textContent.includes('MIT')&&document.querySelector('[data-spatial-source-license=true]')?.textContent.includes('CC BY-SA')"),{label:'dedicated source information available'});
   await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.meridianEffect==='flow'&&Number(document.querySelector('canvas')?.dataset.meridianPulseMarkers||0)>0&&Number(document.querySelector('canvas')?.dataset.meridianFlowParticles||0)>0"),{label:'animated meridian flow and pulse effect'});
@@ -382,6 +386,7 @@ try{
   await evaluate("(()=>{const i=document.querySelector('.meridian3d-search');const s=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;s.call(i,'ST-36');i.dispatchEvent(new Event('input',{bubbles:true}));return true})()");
   await waitFor(()=>evaluate("!!document.querySelector('[data-meridian3d-point=\\\"ST-36\\\"]')"),{label:'3D meridian ST36 search'});
   await evaluate("document.querySelector('[data-meridian3d-point=\\\"ST-36\\\"]')?.click()");
+  await waitFor(()=>evaluate("document.querySelector('[data-anatomical-location=true]')?.textContent?.includes('Cẳng chân')&&document.querySelector('[data-anatomical-landmarks=true]')?.textContent?.length>10"),{label:'ST36 anatomical location metadata'});
   await waitFor(()=>evaluate("document.querySelector('[data-meridian3d-detail=true]')?.innerText.includes('Đã có tọa độ 3D trên mô hình')"),{label:'3D calibrated coordinate status'});
   await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.meridianSelectedPoint==='ST-36'&&Number(document.querySelector('canvas')?.dataset.meridianSelectedMarkers||0)>0"),{label:'selected acupoint stronger 3D state'});
   if(!await evaluate("!!document.querySelector('[data-spatial-source-license=true]')&&document.querySelector('[data-spatial-source-license=true] summary')?.textContent.includes('Thông tin & nguồn tham khảo')"))throw new Error('Dedicated information/source section missing');
@@ -425,6 +430,8 @@ try{
   const mobileLayout=await evaluate("(()=>{const p=document.querySelector('[data-meridian3d-panel=true]')?.getBoundingClientRect(),v=document.querySelector('.view-controls')?.getBoundingClientRect();return{vw:innerWidth,vh:innerHeight,panel:p&&{left:p.left,right:p.right,top:p.top,bottom:p.bottom,height:p.height},views:v&&{left:v.left,right:v.right,top:v.top,bottom:v.bottom}}})()");
   if(!mobileLayout.panel||mobileLayout.panel.left<0||mobileLayout.panel.right>mobileLayout.vw||mobileLayout.panel.top<0||mobileLayout.panel.bottom>mobileLayout.vh||mobileLayout.panel.height>mobileLayout.vh*.62)throw new Error('Mobile meridian layout overflow: '+JSON.stringify(mobileLayout));
   if(!mobileLayout.views||mobileLayout.views.left<0||mobileLayout.views.right>mobileLayout.vw)throw new Error('Mobile view controls overflow: '+JSON.stringify(mobileLayout));
+  const mobileMeridianControlsOverflow=await evaluate("(()=>[...document.querySelectorAll('[data-meridian3d-panel=true] button')].filter(el=>el.scrollWidth>el.clientWidth+2).map(el=>(el.textContent||el.getAttribute('aria-label')||'button').trim().slice(0,80)))()");
+  if(mobileMeridianControlsOverflow.length)throw new Error('Mobile meridian button overflow: '+JSON.stringify(mobileMeridianControlsOverflow));
   await screenshot('mobile-meridian3d-layout.png');
   await evaluate("document.querySelector('[data-meridian3d-panel=true] [aria-label=\"Đóng mô hình kinh lạc 3D\"]')?.click()");
   console.log('SMOKE_MOBILE_MERIDIAN_LAYOUT_PASS '+JSON.stringify(mobileLayout));
@@ -460,6 +467,8 @@ try{
   const mobileStudyLayout=await evaluate("(()=>{const p=document.querySelector('.yhct-panel')?.getBoundingClientRect(),m=document.querySelector('[data-mode-panel=quiz]')?.getBoundingClientRect();return{vw:innerWidth,vh:innerHeight,panel:p&&{left:p.left,right:p.right,top:p.top,bottom:p.bottom,height:p.height,scrollHeight:document.querySelector('.yhct-panel').scrollHeight,clientHeight:document.querySelector('.yhct-panel').clientHeight},mode:m&&{left:m.left,right:m.right,top:m.top,bottom:m.bottom}}})()");
   if(!mobileStudyLayout.panel||mobileStudyLayout.panel.left<0||mobileStudyLayout.panel.right>mobileStudyLayout.vw||mobileStudyLayout.panel.top<0||mobileStudyLayout.panel.bottom>mobileStudyLayout.vh||mobileStudyLayout.panel.height>mobileStudyLayout.vh*.62)throw new Error('Mobile YHCT layout overflow: '+JSON.stringify(mobileStudyLayout));
   if(!mobileStudyLayout.mode||mobileStudyLayout.mode.left<mobileStudyLayout.panel.left||mobileStudyLayout.mode.right>mobileStudyLayout.panel.right)throw new Error('Mobile study mode overflow: '+JSON.stringify(mobileStudyLayout));
+  const mobileYhctControlsOverflow=await evaluate("(()=>[...document.querySelectorAll('.yhct-panel button')].filter(el=>el.scrollWidth>el.clientWidth+2).map(el=>(el.textContent||el.getAttribute('aria-label')||'button').trim().slice(0,80)))()");
+  if(mobileYhctControlsOverflow.length)throw new Error('Mobile YHCT button overflow: '+JSON.stringify(mobileYhctControlsOverflow));
   await screenshot('mobile-yhct-quiz-layout.png');
   await evaluate("document.querySelector('.yhct-head>button')?.click()");
   console.log('SMOKE_MOBILE_YHCT_LAYOUT_PASS '+JSON.stringify(mobileStudyLayout));
