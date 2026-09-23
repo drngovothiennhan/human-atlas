@@ -37,3 +37,26 @@ This project reproduces interaction capabilities, not proprietary models, stylin
 - No proprietary kinhlac.online 3D assets, source code, layout, or bulk text are copied.
 - No unverified 3D coordinate is promoted to FACULTY_REVIEWED/PUBLISHED.
 - Clinical needling depth, angle, and treatment claims are not generated from missing data.
+
+
+## Nguồn mở rộng và nguyên tắc áp dụng chọn lọc — 2026-09-23
+
+Các nguồn dưới đây chỉ dùng để đối chiếu phương pháp, vùng giải phẫu, topology hoặc trải nghiệm công khai; không sao chép tài sản/mã nguồn độc quyền.
+
+| Nguồn | Vai trò trong HIU Atlas | Chính sách |
+| --- | --- | --- |
+| kinhlac.online/xem-3d | Tham khảo UX công khai: xoay, chọn kinh, chọn huyệt, bay camera, mô hình ưu tiên kinh–huyệt | Chỉ học mô hình tương tác; không sao chép mã, mesh, layout hoặc nội dung |
+| WHO Standard Acupuncture Point Locations in the Western Pacific Region (2008) | Chuẩn phương pháp xác định 361 huyệt: mốc giải phẫu + B-cun + bề mặt cơ thể | Ưu tiên cao nhất cho quy tắc vị trí, nhưng không tự chuyển văn bản 2D thành “verified 3D” |
+| TARA Acupoints Ontology / SciCrunch | Vùng bề mặt và mốc giải phẫu có URI cho 361 huyệt | Dùng làm evidence metadata và kiểm tra chéo vùng/mốc |
+| BodyParts3D FMA7163 | Bề mặt da 3D và hệ quy chiếu giải phẫu | Điểm/đường được chiếu lên bề mặt; không thay thế chuẩn huyệt |
+| Kim & Kang 2014, PMID 24761187 | Phương pháp dựng 361 huyệt trên mô hình da/xương 3D từ mốc và tỷ lệ | Tham khảo phương pháp |
+| Kim & Kang 2015, PMID 26101534 | Phân nhóm điểm giải phẫu/tỷ lệ/hình thái trên đầu 3D | Tham khảo phương pháp cho vùng đầu–mặt |
+
+### Thay đổi engine được áp dụng
+
+- Flow của đường kinh chạy theo **thứ tự topology nguồn** từ điểm đầu đến điểm cuối của từng nhánh; không đảo chiều theo camera.
+- Tốc độ particle dùng **vận tốc không gian mục tiêu** thay vì cùng một chu kỳ chuẩn hóa cho mọi kinh, giúp kinh dài không chạy quá nhanh.
+- Đường/huyệt phía sau cơ thể dùng depth occlusion để không xuyên qua thân khi nhìn bên.
+- Auto-rotate được làm chậm, có damping và vẫn hoạt động khi lớp kinh lạc đang bật.
+- Mỗi anchor schematic mang `anatomicalEvidence` từ TARA; các override HIU vẫn cần `documentEvidence`.
+- Bất kỳ tọa độ nào chưa qua thẩm định vẫn giữ `UNVERIFIED`; metadata nhiều nguồn không tự động nâng trạng thái.
