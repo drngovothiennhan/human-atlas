@@ -10,6 +10,10 @@ test('licensed schematic spatial dataset stays unverified and complete',async()=
   assert.match(data.source.license,/MIT/);
   assert.match(data.source.license,/CC BY-SA/);
   assert.equal(data.coordinateSystem,'BodyParts3D-4.0-browser-meters-Y-up');
+  assert.equal(data.calibrationStatus,'DOCUMENT_CORROBORATED_3D');
+  assert.equal(data.calibration.status,'DOCUMENT_CORROBORATED_3D');
+  assert.match(data.calibration.documentTitle,/Ngô Trung Triều/);
+  assert.match(data.calibration.method,/BodyParts3D FMA7163/);
   assert.deepEqual(data.omittedTopology,['BL-39']);
   const codes=new Set(data.anchors.map(x=>x.pointCode));
   assert.equal(codes.size,361);
