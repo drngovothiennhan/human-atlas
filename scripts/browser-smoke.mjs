@@ -291,8 +291,10 @@ try{
   await waitFor(()=>evaluate("!!document.querySelector('[data-mode-panel=quiz]')&&document.querySelectorAll('.quiz-options button').length>=2"),{label:'Quiz 3D flow'});
   const quizTarget=await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.meridianSelectedPoint||''"),{label:'Quiz selected 3D target'});
   // Click the option whose code matches the actual selected 3D target.
-  await evaluate("(()=>{const code=document.querySelector('canvas')?.dataset.meridianSelectedPoint;const b=[...document.querySelectorAll('.quiz-options button')].find(x=>x.textContent.trim()===code);if(!b)return false;b.click();return true})()");
-  await waitFor(()=>evaluate("document.querySelector('[data-quiz-result=true]')?.innerText.startsWith('Đúng:')"),{label:'Quiz validates correct answer'});
+  await waitFor(()=>evaluate("(()=>{const code=document.querySelector('canvas')?.dataset.meridianSelectedPoint;return Boolean(code&&[...document.querySelectorAll('.quiz-options button')].some(x=>x.textContent.trim()===code))})()"),{label:'Quiz option matches selected 3D target'});
+  const quizClicked=await evaluate("(()=>{const code=document.querySelector('canvas')?.dataset.meridianSelectedPoint;const b=[...document.querySelectorAll('.quiz-options button')].find(x=>x.textContent.trim()===code);if(!b)return false;b.click();return true})()");
+  if(!quizClicked)throw new Error('Quiz correct option could not be clicked: '+quizTarget);
+  await waitFor(()=>evaluate("document.querySelector('[data-quiz-result=true]')?.innerText.startsWith('Đúng:')"),{timeout:45000,label:'Quiz validates correct answer'});
   await evaluate("document.querySelector('[data-yhct-mode=simulation]')?.click()");
   await waitFor(()=>evaluate("!!document.querySelector('[data-mode-panel=simulation]')"),{label:'Simulation Lab opens'});
   await evaluate("(()=>{const b=[...document.querySelectorAll('.simulation-controls button')].find(x=>x.textContent.includes('Đường kinh'));b?.click();return Boolean(b)})()");
