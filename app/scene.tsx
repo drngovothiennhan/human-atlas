@@ -29,11 +29,11 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
   renderer.domElement.dataset.renderQualityMode=renderQuality;renderer.domElement.dataset.renderQualityProfile=qualityProfile;renderer.domElement.dataset.renderPixelRatio=renderer.getPixelRatio().toFixed(2);renderer.domElement.dataset.renderAntialias=String(renderer.getContext().getContextAttributes()?.antialias??false);renderer.domElement.dataset.renderShadows=String(qualityConfig.shadows);renderer.domElement.dataset.renderTubeSegments=String(qualityConfig.tubeRadialSegments);renderer.domElement.dataset.renderFlowParticlesPerPath=String(qualityConfig.flowParticlesPerPath);renderer.domElement.dataset.renderSuspended='false';renderer.domElement.dataset.renderCount='0';renderer.domElement.dataset.renderAdaptations='0';renderer.domElement.dataset.renderCapabilities=JSON.stringify({webgl:capabilities.webgl,webgl2:capabilities.webgl2,maxTextureSize:capabilities.maxTextureSize,hardwareConcurrency:capabilities.hardwareConcurrency,deviceMemoryGb:capabilities.deviceMemoryGb,devicePixelRatio:capabilities.devicePixelRatio,viewportPixels:capabilities.viewportPixels});
   renderer.domElement.setAttribute('aria-label','Giải phẫu tương tác: kéo để xoay, chụm hoặc cuộn để thu phóng, chạm để xem cấu trúc.');
   const scene=new T.Scene(),camera=new T.PerspectiveCamera(34,1,.005,100),controls=new OrbitControls(camera,renderer.domElement);
-  camera.position.set(1.4,1.05,3.6);controls.target.set(0,.85,0);controls.enableDamping=true;controls.dampingFactor=.085;controls.minDistance=.07;controls.maxDistance=40;controls.maxPolarAngle=Math.PI*.96;controls.zoomToCursor=true;renderer.domElement.dataset.cameraMotion='idle';renderer.domElement.dataset.cameraMotionSeq='0';
+  camera.position.set(1.4,1.05,3.6);controls.target.set(0,.85,0);controls.enableDamping=true;controls.dampingFactor=.065;controls.minDistance=.07;controls.maxDistance=40;controls.maxPolarAngle=Math.PI*.96;controls.zoomToCursor=true;renderer.domElement.dataset.cameraMotion='idle';renderer.domElement.dataset.cameraMotionSeq='0';
   let cameraMotionSeq=0;
   type CameraMotion={startedAt:number;duration:number;fromPosition:T.Vector3;fromTarget:T.Vector3;toPosition:T.Vector3;toTarget:T.Vector3};
   let cameraMotion:CameraMotion|null=null;
-  const startCameraMotion=(toTarget:T.Vector3,toPosition:T.Vector3,duration=.68)=>{
+  const startCameraMotion=(toTarget:T.Vector3,toPosition:T.Vector3,duration=.92)=>{
    cameraMotion={startedAt:performance.now(),duration,fromPosition:camera.position.clone(),fromTarget:controls.target.clone(),toPosition:toPosition.clone(),toTarget:toTarget.clone()};
    cameraMotionSeq++;renderer.domElement.dataset.cameraMotionSeq=String(cameraMotionSeq);renderer.domElement.dataset.cameraMotion='active';dirty=true;
   };
@@ -125,8 +125,8 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
   type MeridianFlowParticle={mesh:T.Mesh;curve:T.CatmullRomCurve3;offset:number};
   let meridianMarkers:T.Mesh[]=[],meridianPulseMarkers:T.Mesh[]=[],meridianFlowParticles:MeridianFlowParticle[]=[];
   const meridianColors:Record<string,number>={LU:0x1d4ed8,LI:0xc2410c,ST:0x854d0e,SP:0x6d28d9,HT:0xb91c1c,SI:0x0369a1,BL:0x334155,KI:0x0f766e,PC:0xbe185d,TE:0x0e7490,GB:0x4d7c0f,LR:0x15803d,CV:0x6d28d9,GV:0x991b1b};
-  const MERIDIAN_LINE_EDGE_RADIUS=.0024,MERIDIAN_LINE_CORE_RADIUS=.0017;
-  const MERIDIAN_LINE_EDGE_OPACITY=.42,MERIDIAN_LINE_CORE_OPACITY=.78;
+  const MERIDIAN_LINE_EDGE_RADIUS=.00185,MERIDIAN_LINE_CORE_RADIUS=.00115;
+  const MERIDIAN_LINE_EDGE_OPACITY=.28,MERIDIAN_LINE_CORE_OPACITY=.86;
   const ACUPOINT_RADIUS_SCHEMATIC=.0062,ACUPOINT_RADIUS_LOCAL=.0067,ACUPOINT_RADIUS_PUBLISHED=.0072,ACUPOINT_RADIUS_SELECTED=.0082;
   const disposeOverlay=()=>{
    meridianMarkers=[];meridianPulseMarkers=[];meridianFlowParticles=[];
@@ -167,7 +167,7 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
     const color=meridianColors[path.meridianId]??fallbackColor,lineColor=new T.Color(color).offsetHSL(0,.04,-.12);
     const points=path.points.map(point=>new T.Vector3(point[0],point[1],point[2]));
     const curve=new T.CatmullRomCurve3(points,false,'centripetal');
-    const segments=Math.max(24,points.length*12);
+    const segments=Math.max(36,points.length*18);
     // Thin semi-transparent channels stay legible without masking anatomy.
     const edge=new T.Mesh(new T.TubeGeometry(curve,segments,MERIDIAN_LINE_EDGE_RADIUS,qualityConfig.tubeRadialSegments,false),new T.MeshBasicMaterial({color:0x17212b,transparent:true,opacity:MERIDIAN_LINE_EDGE_OPACITY,depthTest:false,depthWrite:false}));
     edge.renderOrder=21;meridianGroup.add(edge);
@@ -293,7 +293,7 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
    if(overlayValue?.enabled&&overlayValue.effects?.motion!==false&&!reduceMeridianMotion&&(meridianFlowParticles.length||meridianPulseMarkers.length)){
     const effectFrame=Math.floor(clock.elapsedTime*30);
     if(effectFrame!==lastMeridianEffectFrame){
-     meridianFlowParticles.forEach((entry,index)=>{entry.curve.getPointAt((clock.elapsedTime*.18+entry.offset+index*.07)%1,entry.mesh.position);entry.mesh.scale.setScalar(1+.12*(.5+.5*Math.sin(clock.elapsedTime*7+index)));});
+     meridianFlowParticles.forEach((entry,index)=>{entry.curve.getPointAt((clock.elapsedTime*.105+entry.offset+index*.055)%1,entry.mesh.position);entry.mesh.scale.setScalar(1+.12*(.5+.5*Math.sin(clock.elapsedTime*7+index)));});
      meridianPulseMarkers.forEach((marker,index)=>{const wave=.5+.5*Math.sin(clock.elapsedTime*5.4+index*.43),selected=Boolean(marker.userData.selected),pulse=1+(selected?.2:.075)*wave;marker.scale.setScalar(pulse);const material=marker.material as T.MeshBasicMaterial,base=Number(marker.userData.baseOpacity??.94);material.opacity=Math.min(1,base*(selected?.92+.08*wave:.88+.1*wave));});
      renderer.domElement.dataset.meridianEffect='flow';renderer.domElement.dataset.meridianEffectFrame=String(effectFrame);lastMeridianEffectFrame=effectFrame;dirty=true;
     }
@@ -301,10 +301,10 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
    const focusValue=focus.current;
    if(focusValue?.key&&focusValue.key!==lastFocusKey){
     const point=new T.Vector3(focusValue.x,focusValue.y,focusValue.z),destination=point.clone().add(new T.Vector3(.28,.12,.42).normalize().multiplyScalar(.48));
-    camera.clearViewOffset();startCameraMotion(point,destination,.78);lastFocusKey=focusValue.key;dirty=true;
+    camera.clearViewOffset();startCameraMotion(point,destination,1.08);lastFocusKey=focusValue.key;dirty=true;
    }
    if(cameraMotion){
-    const t=Math.min(1,(performance.now()-cameraMotion.startedAt)/(cameraMotion.duration*1000)),e=t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+    const t=Math.min(1,(performance.now()-cameraMotion.startedAt)/(cameraMotion.duration*1000)),e=t*t*t*(t*(t*6-15)+10);
     camera.position.lerpVectors(cameraMotion.fromPosition,cameraMotion.toPosition,e);controls.target.lerpVectors(cameraMotion.fromTarget,cameraMotion.toTarget,e);controls.update();dirty=true;
     if(t>=1){cameraMotion=null;renderer.domElement.dataset.cameraMotion='idle';}
    }
@@ -337,7 +337,7 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
     }else if(lastIsolate){camera.clearViewOffset();fit(s.view,amount,true);}
     lastIsolate=isolateKey;
    }
-   controls.enableRotate=amount<.8;controls.mouseButtons.LEFT=amount<.8?T.MOUSE.ROTATE:T.MOUSE.PAN;controls.touches.ONE=amount<.8?T.TOUCH.ROTATE:T.TOUCH.PAN;ground.visible=platform.visible=ring.visible=innerRing.visible=amount<.5&&!s.isolate;markers.visible=amount>.75;controls.autoRotate=s.rotate&&!s.isolate&&amount<.4&&!cameraMotion;controls.autoRotateSpeed=.65;controls.update();if(controls.autoRotate||cameraMotion)dirty=true;
+   controls.enableRotate=amount<.8;controls.mouseButtons.LEFT=amount<.8?T.MOUSE.ROTATE:T.MOUSE.PAN;controls.touches.ONE=amount<.8?T.TOUCH.ROTATE:T.TOUCH.PAN;ground.visible=platform.visible=ring.visible=innerRing.visible=false;markers.visible=amount>.75;controls.autoRotate=s.rotate&&!s.isolate&&amount<.4&&!cameraMotion;controls.autoRotateSpeed=.65;controls.update();if(controls.autoRotate||cameraMotion)dirty=true;
    if(dirty){renderer.domElement.dataset.cameraPosition=[camera.position.x,camera.position.y,camera.position.z].map(v=>v.toFixed(6)).join(',');renderer.domElement.dataset.cameraTarget=[controls.target.x,controls.target.y,controls.target.z].map(v=>v.toFixed(6)).join(',');renderer.render(scene,camera);renderCount++;renderer.domElement.dataset.renderCount=String(renderCount);targets=[];if(amount>.45){const hasSolid=atlas.parts.some((p,i)=>p.system!=='integumentary'&&data[i*4+3]>.5);atlas.parts.forEach((p,i)=>{if(data[i*4+3]<.5||(hasSolid&&p.system==='integumentary'))return;let left=Infinity,right=-Infinity,top=Infinity,bottom=-Infinity;for(let corner=0;corner<8;corner++){projected.set(p.bounds[(corner&1)?1:0][0]+data[i*4],p.bounds[(corner&2)?1:0][1]+data[i*4+1],p.bounds[(corner&4)?1:0][2]+data[i*4+2]).project(camera);const x=(projected.x+1)*el.clientWidth/2,y=(1-projected.y)*el.clientHeight/2;left=Math.min(left,x);right=Math.max(right,x);top=Math.min(top,y);bottom=Math.max(bottom,y);}projected.copy(centers[i]).add(new T.Vector3(data[i*4],data[i*4+1],data[i*4+2])).project(camera);if(projected.z< -1||projected.z>1)return;targets.push({index:i,x:(projected.x+1)*el.clientWidth/2,y:(1-projected.y)*el.clientHeight/2,left,right,top,bottom});});}dirty=false;}
 
   };
