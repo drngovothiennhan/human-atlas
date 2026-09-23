@@ -4,6 +4,7 @@ import {readFile} from 'node:fs/promises';
 
 test('licensed schematic spatial dataset stays unverified and complete',async()=>{
   const data=JSON.parse(await readFile(new URL('../public/data/schematic-spatial.json',import.meta.url),'utf8'));
+  assert.equal(data.schemaVersion,'1.3.0');
   assert.equal(data.verificationStatus,'UNVERIFIED');
   assert.equal(data.source.repository,'FuriaRozkwit/acupuncture-3d');
   assert.equal(data.source.commit,'1fc9ec98d365c9fb035844e2775c1be05a0a05fc');
@@ -37,9 +38,18 @@ test('licensed schematic spatial dataset stays unverified and complete',async()=
     assert.equal(a.sourceKind,'LICENSED_SCHEMATIC');
     assert.ok([a.x,a.y,a.z].every(Number.isFinite));
     assert.ok(a.y>=-0.02&&a.y<=1.75,'height outside BodyParts3D: '+a.pointCode);
+    assert.equal(a.anatomicalEvidence?.sourceId,'TARA-ACUPOINT-ANATOMY-2026-09-08','TARA anatomy evidence missing: '+a.pointCode);
+    assert.ok(a.anatomicalEvidence?.surfaceRegionVi||a.anatomicalEvidence?.surfaceRegionEn,'surface anatomy region missing: '+a.pointCode);
   }
   assert.ok(data.paths.length>=28);
   assert.ok(data.paths.every(p=>p.verificationStatus==='UNVERIFIED'&&p.sourceKind==='LICENSED_SCHEMATIC'&&p.points.length>=2));
+  assert.deepEqual(data.methodology?.priority,['WHO_STANDARD_LOCATION_METHOD','TARA_ANATOMICAL_LANDMARKS','HIU_DOCUMENT_CORROBORATION','BODYPARTS3D_SKIN_PROJECTION']);
+  assert.deepEqual(data.methodology?.research,['PMID:24761187','PMID:26101534']);
+  for(const p of data.paths){
+    assert.equal(p.flowDirection,'SOURCE_ORDER','meridian flow must follow source topology order');
+    assert.equal(p.directionStart,p.pointCodes[0],'path direction start drift');
+    assert.equal(p.directionEnd,p.pointCodes.at(-1),'path direction end drift');
+  }
   assert.ok(!data.paths.some(p=>p.pointCodes.includes('BL-39')),'omitted BL-39 must not be invented into topology');
   assert.equal(data.routeOrigins?.ST?.notAnAcupoint,true,'ST route origin must remain a non-acupoint meridian landmark');
   assert.ok(data.spatialOverrides?.includes('ST-45'),'ST-45 lateral nail-corner override must remain enabled');
