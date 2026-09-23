@@ -283,3 +283,38 @@ body:has(.registration-panel) .meridian3d-launch{left:376px}body:has(.registrati
  .quality-control{padding-inline:4px}
  .meridian3d-detail{max-height:42%;overflow:auto;overscroll-behavior:contain}
 }
+
+
+/* 2026-09-23 release hardening: no clipped/truncated controls in YHCT panels. */
+.yhct-panel,.meridian3d-panel,.registration-panel{max-width:calc(100vw - 24px)}
+.yhct-panel *,.meridian3d-panel *,.registration-panel *{min-width:0}
+.yhct-panel button,.meridian3d-panel button,.registration-panel button{max-width:100%;overflow-wrap:anywhere}
+.yhct-tabs,.yhct-modes,.yhct-links,.quiz-options,.simulation-controls,.meridian3d-effect-controls,.registration-actions{min-width:0}
+.yhct-tabs button,.yhct-modes button,.quiz-options button,.simulation-controls button,.meridian3d-effect-controls button,.registration-actions button{
+ white-space:normal;line-height:1.2;overflow-wrap:anywhere
+}
+.meridian3d-controls select,.meridian3d-model-controls button,.yhct-mode-panel select,.registration-panel select{min-width:0;width:100%;max-width:100%}
+.meridian3d-effect-controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;margin-top:8px}
+.meridian3d-effect-controls button{min-height:34px;padding:5px 4px;border:1px solid #18253614;border-radius:7px;background:#fff;font-size:8.5px}
+.meridian3d-model-controls>div{min-width:0}
+.meridian3d-model-controls span{overflow-wrap:anywhere}
+.meridian3d-list span,.meridian3d-list small,.yhct-list article span,.yhct-list article small,.yhct-sequence{overflow-wrap:anywhere}
+.panel-foot{gap:8px}.panel-foot>span{min-width:0;overflow-wrap:anywhere}.panel-foot button{flex:none}
+@media(max-width:767px){
+ .yhct-panel,.meridian3d-panel,.registration-panel{max-width:calc(100vw - 24px)}
+ .yhct-tabs{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .yhct-modes{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .meridian3d-effect-controls{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .meridian3d-model-controls>div,.meridian3d-model-controls>div:last-child{grid-template-columns:56px repeat(2,minmax(0,1fr))}
+ .meridian3d-model-controls>div button:nth-of-type(n+3){margin-top:2px}
+ .registration-panel .registration-actions{flex-wrap:wrap}
+ .registration-panel .registration-actions button{flex:1 1 120px}
+}
+@media(max-width:380px){
+ .meridian3d-quick{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .meridian3d-controls{grid-template-columns:1fr}
+ .meridian3d-controls label:last-child{grid-column:auto}
+ .meridian3d-model-controls>div,.meridian3d-model-controls>div:last-child{grid-template-columns:1fr 1fr}
+ .meridian3d-model-controls span{grid-column:1/-1}
+ .view-controls{overflow-x:auto;justify-content:flex-start}
+}
