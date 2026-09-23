@@ -380,8 +380,10 @@ try{
   await evaluate("(()=>{const i=document.querySelector('.meridian3d-search');const s=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;s.call(i,'ST-36');i.dispatchEvent(new Event('input',{bubbles:true}));return true})()");
   await waitFor(()=>evaluate("!!document.querySelector('[data-meridian3d-point=\\\"ST-36\\\"]')"),{label:'3D meridian ST36 search'});
   await evaluate("document.querySelector('[data-meridian3d-point=\\\"ST-36\\\"]')?.click()");
-  await waitFor(()=>evaluate("document.querySelector('[data-meridian3d-detail=true]')?.innerText.includes('Chưa có tọa độ BodyParts3D')"),{label:'3D unregistered point gate'});
+  await waitFor(()=>evaluate("document.querySelector('[data-meridian3d-detail=true]')?.innerText.includes('Đã có tọa độ 3D trên mô hình')"),{label:'3D calibrated coordinate status'});
   await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.meridianSelectedPoint==='ST-36'&&Number(document.querySelector('canvas')?.dataset.meridianSelectedMarkers||0)>0"),{label:'selected acupoint stronger 3D state'});
+  if(!await evaluate("!!document.querySelector('[data-spatial-source-license=true]')&&document.querySelector('[data-spatial-source-license=true] summary')?.textContent.includes('Thông tin & nguồn tham khảo')"))throw new Error('Dedicated information/source section missing');
+  if(await evaluate("!!document.querySelector('[data-document-reference=true], [data-spatial-provenance=true]')"))throw new Error('Per-point source labels must stay out of the learning UI');
   await screenshot('desktop-meridian3d-panel.png');
   const effectFrameBeforePanelClose=await evaluate("document.querySelector('canvas')?.dataset.meridianEffectFrame");
   await evaluate("document.querySelector('[data-meridian3d-panel=true] [aria-label=\\\"Đóng mô hình kinh lạc 3D\\\"]')?.click()");
@@ -496,7 +498,7 @@ try{
   await evaluate("(()=>{const i=document.querySelector('.meridian3d-search');const s=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;s.call(i,'ST-36');i.dispatchEvent(new Event('input',{bubbles:true}));return true})()");
   await waitFor(()=>evaluate("!!document.querySelector('[data-meridian3d-point=\\\"ST-36\\\"]')"),{label:'registration 3D ST36 result'});
   await evaluate("document.querySelector('[data-meridian3d-point=\\\"ST-36\\\"]')?.click()");
-  await waitFor(()=>evaluate("document.querySelector('[data-meridian3d-detail=true]')?.innerText.includes('nháp trên máy')&&document.querySelector('[data-meridian3d-detail=true]')?.innerText.includes('Tham chiếu học tập')"),{label:'local draft remains unverified in 3D viewer'});
+  await waitFor(()=>evaluate("document.querySelector('[data-meridian3d-detail=true]')?.innerText.includes('nháp trên máy')&&document.querySelector('[data-meridian3d-detail=true]')?.innerText.includes('Đã có tọa độ 3D trên mô hình')"),{label:'local draft remains distinct from calibrated 3D coordinates'});
   await screenshot('tablet-meridian3d-local-anchor.png');
   await evaluate("document.querySelector('[data-meridian3d-panel=true] [aria-label=\\\"Đóng mô hình kinh lạc 3D\\\"]')?.click()");
   await waitFor(()=>evaluate("document.querySelector('[data-registration-next-missing=true]')?.innerText.includes('ST-36 · RIGHT')"),{label:'next missing pilot anchor'});
