@@ -146,10 +146,11 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
    renderer.domElement.dataset.meridianLineTransparent='true';
    renderer.domElement.dataset.meridianPointMinRadius=String(ACUPOINT_RADIUS_SCHEMATIC);
    disposeOverlay();renderer.domElement.dataset.meridianAnchors='0';renderer.domElement.dataset.meridianPaths='0';renderer.domElement.dataset.meridianSchematicAnchors='0';renderer.domElement.dataset.meridianSchematicPaths='0';renderer.domElement.dataset.meridianPulseMarkers='0';renderer.domElement.dataset.meridianSelectedMarkers='0';renderer.domElement.dataset.meridianFlowParticles='0';renderer.domElement.dataset.meridianEffect=value?.enabled?(reduceMeridianMotion?'reduced':'flow'):'off';if(!value?.enabled)return;
-   const color=meridianColors[value.meridianId??'']??0x0f766e,lineColor=new T.Color(color).offsetHSL(0,.04,-.12);let trustedAnchors=0,schematicAnchors=0,schematicPaths=0,trustedPaths=0,selectedMarkers=0;
+   const fallbackColor=0x0f766e;let trustedAnchors=0,schematicAnchors=0,schematicPaths=0,trustedPaths=0,selectedMarkers=0;
    for(const anchor of value.effects?.acupoints===false?[]:value.anchors){
     if(![anchor.x,anchor.y,anchor.z].every(Number.isFinite))continue;
     const schematic=anchor.sourceKind==='LICENSED_SCHEMATIC',selected=value.selectedPointCode===anchor.pointCode;
+    const color=meridianColors[anchor.meridianId]??fallbackColor;
     const baseOpacity=selected?1:anchor.sourceKind==='PUBLISHED'?.98:schematic?.94:.96;
     const material=new T.MeshBasicMaterial({color,transparent:true,opacity:baseOpacity,depthTest:false,depthWrite:false});
     const radius=selected?ACUPOINT_RADIUS_SELECTED:anchor.sourceKind==='PUBLISHED'?ACUPOINT_RADIUS_PUBLISHED:schematic?ACUPOINT_RADIUS_SCHEMATIC:ACUPOINT_RADIUS_LOCAL;
@@ -163,6 +164,7 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
     const schematic=path.sourceKind==='LICENSED_SCHEMATIC'&&path.verificationStatus==='UNVERIFIED';
     const reviewed=['FACULTY_REVIEWED','PUBLISHED'].includes(path.verificationStatus);
     if(!schematic&&!reviewed)continue;
+    const color=meridianColors[path.meridianId]??fallbackColor,lineColor=new T.Color(color).offsetHSL(0,.04,-.12);
     const points=path.points.map(point=>new T.Vector3(point[0],point[1],point[2]));
     const curve=new T.CatmullRomCurve3(points,false,'centripetal');
     const segments=Math.max(24,points.length*12);
