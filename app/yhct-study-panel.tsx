@@ -27,6 +27,7 @@ type Acupoint={
   spatialStatus?:string;
   reviewStatus?:string;
   verificationStatus?:string;
+  nomenclatureSource?:string;
 };
 type SchematicAnchor={pointCode:string;meridianId:string;sequence:number;side:string;x:number;y:number;z:number;sourceKind?:string;verificationStatus?:string};
 type SchematicSpatial={anchors:SchematicAnchor[];paths:{meridianId:string;points:number[][]}[]};
@@ -213,8 +214,8 @@ export default function YhctStudyPanel({localDraftCount,onStudyCommand}:Props){
             </article>
             :<article key={(row as Acupoint).id}>
               <b>{(row as Acupoint).code}</b>
-              <span>{(row as Acupoint).vietnameseName||(row as Acupoint).pinyin||(row as Acupoint).englishName||'Tên chi tiết đang chờ nguồn tái sử dụng phù hợp'}</span>
-              <small>{(row as Acupoint).meridianId} · {schematic.anchors.some(a=>a.pointCode===(row as Acupoint).code)?'có vị trí mô phỏng':'chưa có vị trí mô phỏng'} · {Boolean((row as Acupoint).position3d)?'có dữ liệu BodyParts3D':'chưa có BodyParts3D đã duyệt'}</small>
+              <span>{(row as Acupoint).vietnameseName||(row as Acupoint).pinyin||(row as Acupoint).englishName||`${(row as Acupoint).code} · huyệt thứ ${(row as Acupoint).sequence} của ${(row as Acupoint).meridianId}`}</span>
+              <small>{(row as Acupoint).meridianId} · {(row as Acupoint).chineseName?`${(row as Acupoint).chineseName} · `:''}{schematic.anchors.some(a=>a.pointCode===(row as Acupoint).code)?'có vị trí mô phỏng':'chưa có vị trí mô phỏng'} · {Boolean((row as Acupoint).position3d)?'có dữ liệu BodyParts3D':'chưa có BodyParts3D đã duyệt'}</small>
               <div className="yhct-links">
                 <button type="button" data-study-point={(row as Acupoint).code} onClick={()=>focusPoint(row as Acupoint,`Đã mở ${(row as Acupoint).code} trong Kinh lạc 3D.`)}>Bay tới 3D</button>
                 <a href={(row as Acupoint).references?.[0]||'https://acupointatlas.com/acupuncture-points/'} target="_blank" rel="noreferrer">Nguồn catalog ↗</a>
@@ -279,7 +280,7 @@ export default function YhctStudyPanel({localDraftCount,onStudyCommand}:Props){
       </section>}
 
       {modeMessage&&mode!=='quiz'&&<p className="yhct-mode-message" role="status">{modeMessage}</p>}
-      <footer>Catalog 361 huyệt dùng cho học tập. Lớp 3D sơ đồ được ghi rõ mô phỏng/UNVERIFIED; vị trí BodyParts3D chỉ được gọi là đã duyệt khi có trạng thái FACULTY_REVIEWED hoặc PUBLISHED.</footer>
+      <footer>Catalog 361 huyệt dùng cho học tập. Danh pháp Pinyin/Hán tự được đối chiếu nguồn chuẩn hóa; tên Việt ưu tiên nguồn Bộ Y tế khi được nạp và kiểm tra.  Lớp 3D sơ đồ được ghi rõ mô phỏng/UNVERIFIED; vị trí BodyParts3D chỉ được gọi là đã duyệt khi có trạng thái FACULTY_REVIEWED hoặc PUBLISHED.</footer>
     </aside>}
   </>;
 }

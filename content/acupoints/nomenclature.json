@@ -1,0 +1,1819 @@
+{
+  "schemaVersion": "0.1.0",
+  "source": {
+    "id": "TARA-ACUPOINT-NOMENCLATURE-2026-09-08",
+    "repository": "SciCrunch/TARA-Ontology-Repository",
+    "path": "curated-data/acupoints/acupoints.csv",
+    "commit": "ad64e24eccc1f683bd25706c6ad1bc74a3b8eb51",
+    "use": "STANDARD_NAME_REFERENCE",
+    "note": "Runtime copies only point code, pinyin label and Chinese label; clinical/location text is not copied."
+  },
+  "count": 361,
+  "points": [
+    {
+      "code": "LU-1",
+      "pinyin": "Zhongfu",
+      "chineseName": "中府"
+    },
+    {
+      "code": "LU-2",
+      "pinyin": "Yunmen",
+      "chineseName": "雲(云)門(门)"
+    },
+    {
+      "code": "LU-3",
+      "pinyin": "Tianfu",
+      "chineseName": "天府"
+    },
+    {
+      "code": "LU-4",
+      "pinyin": "Xiabai",
+      "chineseName": "俠(侠)白"
+    },
+    {
+      "code": "LU-5",
+      "pinyin": "Chize",
+      "chineseName": "尺澤(泽,沢)"
+    },
+    {
+      "code": "LU-6",
+      "pinyin": "Kongzui",
+      "chineseName": "孔最"
+    },
+    {
+      "code": "LU-7",
+      "pinyin": "Lieque",
+      "chineseName": "列缺"
+    },
+    {
+      "code": "LU-8",
+      "pinyin": "Jingqu",
+      "chineseName": "經(经,経)渠"
+    },
+    {
+      "code": "LU-9",
+      "pinyin": "Taiyuan",
+      "chineseName": "太淵(渊)"
+    },
+    {
+      "code": "LU-10",
+      "pinyin": "Yuji",
+      "chineseName": "魚(鱼)際(际)"
+    },
+    {
+      "code": "LU-11",
+      "pinyin": "Shaoshang",
+      "chineseName": "少商"
+    },
+    {
+      "code": "LI-1",
+      "pinyin": "Shangyang",
+      "chineseName": "商陽(阳)"
+    },
+    {
+      "code": "LI-2",
+      "pinyin": "Erjian",
+      "chineseName": "二間(间)"
+    },
+    {
+      "code": "LI-3",
+      "pinyin": "Sanjian",
+      "chineseName": "三間(间)"
+    },
+    {
+      "code": "LI-4",
+      "pinyin": "Hegu, Hoku",
+      "chineseName": "合谷"
+    },
+    {
+      "code": "LI-5",
+      "pinyin": "Yangxi",
+      "chineseName": "陽(阳)谿(溪)"
+    },
+    {
+      "code": "LI-6",
+      "pinyin": "Pianli",
+      "chineseName": "偏歷(历)"
+    },
+    {
+      "code": "LI-7",
+      "pinyin": "Wenliu",
+      "chineseName": "溫(温)溜"
+    },
+    {
+      "code": "LI-8",
+      "pinyin": "Xialian",
+      "chineseName": "下廉"
+    },
+    {
+      "code": "LI-9",
+      "pinyin": "Shanglian",
+      "chineseName": "上廉"
+    },
+    {
+      "code": "LI-10",
+      "pinyin": "Shousanli",
+      "chineseName": "手三里"
+    },
+    {
+      "code": "LI-11",
+      "pinyin": "Quchi",
+      "chineseName": "曲池"
+    },
+    {
+      "code": "LI-12",
+      "pinyin": "Zhouliao",
+      "chineseName": "肘髎(髎)"
+    },
+    {
+      "code": "LI-13",
+      "pinyin": "Shouwuli",
+      "chineseName": "手五里"
+    },
+    {
+      "code": "LI-14",
+      "pinyin": "Binao",
+      "chineseName": "臂臑"
+    },
+    {
+      "code": "LI-15",
+      "pinyin": "Jianyu",
+      "chineseName": "肩髃(髃)"
+    },
+    {
+      "code": "LI-16",
+      "pinyin": "Jugu",
+      "chineseName": "巨骨(骨)"
+    },
+    {
+      "code": "LI-17",
+      "pinyin": "Tianding",
+      "chineseName": "天鼎"
+    },
+    {
+      "code": "LI-18",
+      "pinyin": "Futu",
+      "chineseName": "扶突"
+    },
+    {
+      "code": "LI-19",
+      "pinyin": "Kouheliao",
+      "chineseName": "口禾髎(髎)"
+    },
+    {
+      "code": "LI-20",
+      "pinyin": "Yingxiang",
+      "chineseName": "迎(迎)香"
+    },
+    {
+      "code": "ST-1",
+      "pinyin": "Chengqi",
+      "chineseName": "承泣"
+    },
+    {
+      "code": "ST-2",
+      "pinyin": "Sibai",
+      "chineseName": "四白"
+    },
+    {
+      "code": "ST-3",
+      "pinyin": "Juliao",
+      "chineseName": "巨髎(髎)"
+    },
+    {
+      "code": "ST-4",
+      "pinyin": "Dicang",
+      "chineseName": "地倉(仓)"
+    },
+    {
+      "code": "ST-5",
+      "pinyin": "Daying",
+      "chineseName": "大迎(迎)"
+    },
+    {
+      "code": "ST-6",
+      "pinyin": "Jiache",
+      "chineseName": "頰(颊)車(车)"
+    },
+    {
+      "code": "ST-7",
+      "pinyin": "Xiaguan",
+      "chineseName": "下關(关,関)"
+    },
+    {
+      "code": "ST-8",
+      "pinyin": "Touwei",
+      "chineseName": "頭(头)維(维)"
+    },
+    {
+      "code": "ST-9",
+      "pinyin": "Renying",
+      "chineseName": "人迎(迎)"
+    },
+    {
+      "code": "ST-10",
+      "pinyin": "Shuitu",
+      "chineseName": "水突"
+    },
+    {
+      "code": "ST-11",
+      "pinyin": "Qishe",
+      "chineseName": "氣(气,気)舍(舎)"
+    },
+    {
+      "code": "ST-12",
+      "pinyin": "Quepen",
+      "chineseName": "缺盆"
+    },
+    {
+      "code": "ST-13",
+      "pinyin": "Qihu",
+      "chineseName": "氣(气,気)戶"
+    },
+    {
+      "code": "ST-14",
+      "pinyin": "Kufang",
+      "chineseName": "庫(库)房"
+    },
+    {
+      "code": "ST-15",
+      "pinyin": "Wuyi",
+      "chineseName": "屋翳"
+    },
+    {
+      "code": "ST-16",
+      "pinyin": "Yingchuang",
+      "chineseName": "膺窗(窓)"
+    },
+    {
+      "code": "ST-17",
+      "pinyin": null,
+      "chineseName": null
+    },
+    {
+      "code": "ST-18",
+      "pinyin": null,
+      "chineseName": null
+    },
+    {
+      "code": "ST-19",
+      "pinyin": "Burong",
+      "chineseName": "不容"
+    },
+    {
+      "code": "ST-20",
+      "pinyin": "Chengman",
+      "chineseName": "承滿(满,満)"
+    },
+    {
+      "code": "ST-21",
+      "pinyin": "Liangmen",
+      "chineseName": "梁門(门)"
+    },
+    {
+      "code": "ST-22",
+      "pinyin": "Guanmen",
+      "chineseName": "關(关,関)門(门)"
+    },
+    {
+      "code": "ST-23",
+      "pinyin": "Taiyi",
+      "chineseName": "太乙"
+    },
+    {
+      "code": "ST-24",
+      "pinyin": "Huaroumen",
+      "chineseName": "滑(滑)肉門(门)"
+    },
+    {
+      "code": "ST-25",
+      "pinyin": "Tianshu",
+      "chineseName": "天樞(枢)"
+    },
+    {
+      "code": "ST-26",
+      "pinyin": "Wailing",
+      "chineseName": "外陵"
+    },
+    {
+      "code": "ST-27",
+      "pinyin": "Daju",
+      "chineseName": "大巨"
+    },
+    {
+      "code": "ST-28",
+      "pinyin": "Shuidao",
+      "chineseName": "水道(道)"
+    },
+    {
+      "code": "ST-29",
+      "pinyin": "Guilai",
+      "chineseName": "歸(归,帰)來(来)"
+    },
+    {
+      "code": "ST-30",
+      "pinyin": "Qichong",
+      "chineseName": "氣(气,気)衝(冲)"
+    },
+    {
+      "code": "ST-31",
+      "pinyin": "Biguan",
+      "chineseName": "髀(髀)關(关,関)"
+    },
+    {
+      "code": "ST-32",
+      "pinyin": "Futu",
+      "chineseName": "伏兎(兔)"
+    },
+    {
+      "code": "ST-33",
+      "pinyin": "Yinshi",
+      "chineseName": "陰(阴)市"
+    },
+    {
+      "code": "ST-34",
+      "pinyin": "Liangqiu",
+      "chineseName": "梁丘"
+    },
+    {
+      "code": "ST-35",
+      "pinyin": "Dubi",
+      "chineseName": "犢(犊)鼻"
+    },
+    {
+      "code": "ST-36",
+      "pinyin": "Zusanli",
+      "chineseName": "足三里"
+    },
+    {
+      "code": "ST-37",
+      "pinyin": "Shangjuxu",
+      "chineseName": "上巨虛(虚)"
+    },
+    {
+      "code": "ST-38",
+      "pinyin": "Tiaokou",
+      "chineseName": "條(条)口"
+    },
+    {
+      "code": "ST-39",
+      "pinyin": "Xiajuxu",
+      "chineseName": "下巨虛(虚)"
+    },
+    {
+      "code": "ST-40",
+      "pinyin": "Fenglong",
+      "chineseName": "豐(丰,豊)隆(隆)"
+    },
+    {
+      "code": "ST-41",
+      "pinyin": "Jiexi",
+      "chineseName": "解谿(溪)"
+    },
+    {
+      "code": "ST-42",
+      "pinyin": "Chongyang",
+      "chineseName": "衝(冲)陽(阳)"
+    },
+    {
+      "code": "ST-43",
+      "pinyin": "Xiangu",
+      "chineseName": "陷(陥)谷"
+    },
+    {
+      "code": "ST-44",
+      "pinyin": "Neiting",
+      "chineseName": "内庭"
+    },
+    {
+      "code": "ST-45",
+      "pinyin": "Lidui",
+      "chineseName": "厲(厉)兌(兑)"
+    },
+    {
+      "code": "SP-1",
+      "pinyin": "Yinbai",
+      "chineseName": "隱(隐,隠)白"
+    },
+    {
+      "code": "SP-2",
+      "pinyin": "Dadu",
+      "chineseName": "大都(都)"
+    },
+    {
+      "code": "SP-3",
+      "pinyin": "Taibai",
+      "chineseName": "太白"
+    },
+    {
+      "code": "SP-4",
+      "pinyin": "Gongsun",
+      "chineseName": "公孫(孙)"
+    },
+    {
+      "code": "SP-5",
+      "pinyin": "Shangqiu",
+      "chineseName": "商丘"
+    },
+    {
+      "code": "SP-6",
+      "pinyin": "Sanyinjiao",
+      "chineseName": "三陰(阴)交"
+    },
+    {
+      "code": "SP-7",
+      "pinyin": "Lougu",
+      "chineseName": "漏谷"
+    },
+    {
+      "code": "SP-8",
+      "pinyin": "Diji",
+      "chineseName": "地機(机)"
+    },
+    {
+      "code": "SP-9",
+      "pinyin": "Yinlingquan",
+      "chineseName": "陰(阴)陵泉"
+    },
+    {
+      "code": "SP-10",
+      "pinyin": "Xuehai",
+      "chineseName": "血海(海)"
+    },
+    {
+      "code": "SP-11",
+      "pinyin": "Jimen",
+      "chineseName": "箕門(门)"
+    },
+    {
+      "code": "SP-12",
+      "pinyin": "Chongmen",
+      "chineseName": "衝(冲)門(门)"
+    },
+    {
+      "code": "SP-13",
+      "pinyin": "Fushe",
+      "chineseName": "府舍(舎)"
+    },
+    {
+      "code": "SP-14",
+      "pinyin": "Fujie",
+      "chineseName": "腹結(结)"
+    },
+    {
+      "code": "SP-15",
+      "pinyin": "Daheng",
+      "chineseName": "大橫"
+    },
+    {
+      "code": "SP-16",
+      "pinyin": "Fuai",
+      "chineseName": "腹哀"
+    },
+    {
+      "code": "SP-17",
+      "pinyin": "Shidou",
+      "chineseName": "食竇(窦)"
+    },
+    {
+      "code": "SP-18",
+      "pinyin": "Tianxi",
+      "chineseName": "天谿(溪)"
+    },
+    {
+      "code": "SP-19",
+      "pinyin": "Xiongxiang",
+      "chineseName": "胸鄉(乡,郷)"
+    },
+    {
+      "code": "SP-20",
+      "pinyin": "Zhourong",
+      "chineseName": "周榮(荣,栄)"
+    },
+    {
+      "code": "SP-21",
+      "pinyin": "Dabao",
+      "chineseName": "大包(包)"
+    },
+    {
+      "code": "HT-1",
+      "pinyin": "Jiquan",
+      "chineseName": "極(极)泉"
+    },
+    {
+      "code": "HT-2",
+      "pinyin": "Qingling",
+      "chineseName": "靑(青)靈(灵,霊)"
+    },
+    {
+      "code": "HT-3",
+      "pinyin": "Shaohai",
+      "chineseName": "少海(海)"
+    },
+    {
+      "code": "HT-4",
+      "pinyin": "Lingdao",
+      "chineseName": "靈(灵,霊)道(道)"
+    },
+    {
+      "code": "HT-5",
+      "pinyin": "Tongli",
+      "chineseName": "通(通)里"
+    },
+    {
+      "code": "HT-6",
+      "pinyin": "Yinxi",
+      "chineseName": "陰(阴)郄"
+    },
+    {
+      "code": "HT-7",
+      "pinyin": "Shenmen",
+      "chineseName": "神(神)門(门)"
+    },
+    {
+      "code": "HT-8",
+      "pinyin": "Shaofu",
+      "chineseName": "少府"
+    },
+    {
+      "code": "HT-9",
+      "pinyin": "Shaochong",
+      "chineseName": "少衝(冲)"
+    },
+    {
+      "code": "SI-1",
+      "pinyin": "Shaoze",
+      "chineseName": "少澤(泽,沢)"
+    },
+    {
+      "code": "SI-2",
+      "pinyin": "Qiangu",
+      "chineseName": "前谷"
+    },
+    {
+      "code": "SI-3",
+      "pinyin": "Houxi",
+      "chineseName": "後(后)谿(溪)"
+    },
+    {
+      "code": "SI-4",
+      "pinyin": "Wangu",
+      "chineseName": "腕骨(骨)"
+    },
+    {
+      "code": "SI-5",
+      "pinyin": "Yanggu",
+      "chineseName": "陽(阳)谷"
+    },
+    {
+      "code": "SI-6",
+      "pinyin": "Yanglao",
+      "chineseName": "養(养)老"
+    },
+    {
+      "code": "SI-7",
+      "pinyin": "Zhizheng",
+      "chineseName": "支正"
+    },
+    {
+      "code": "SI-8",
+      "pinyin": "Xiaohai",
+      "chineseName": "小海(海)"
+    },
+    {
+      "code": "SI-9",
+      "pinyin": "Jianzhen",
+      "chineseName": "肩貞(贞)"
+    },
+    {
+      "code": "SI-10",
+      "pinyin": "Naoshu",
+      "chineseName": "臑兪(俞)"
+    },
+    {
+      "code": "SI-11",
+      "pinyin": "Tianzong",
+      "chineseName": "天宗"
+    },
+    {
+      "code": "SI-12",
+      "pinyin": "Bingfeng",
+      "chineseName": "秉風(风)"
+    },
+    {
+      "code": "SI-13",
+      "pinyin": "Quyuan",
+      "chineseName": "曲垣"
+    },
+    {
+      "code": "SI-14",
+      "pinyin": "Jianwaishu",
+      "chineseName": "肩外兪(俞)"
+    },
+    {
+      "code": "SI-15",
+      "pinyin": "Jianzhongshu",
+      "chineseName": "肩中兪(俞)"
+    },
+    {
+      "code": "SI-16",
+      "pinyin": "Tianchuang",
+      "chineseName": "天窗(窓)"
+    },
+    {
+      "code": "SI-17",
+      "pinyin": "Tianrong",
+      "chineseName": "天容"
+    },
+    {
+      "code": "SI-18",
+      "pinyin": "Quanliao",
+      "chineseName": "顴(颧)髎(髎)"
+    },
+    {
+      "code": "SI-19",
+      "pinyin": "Tinggong",
+      "chineseName": "聽(听,聴)宮(宫)"
+    },
+    {
+      "code": "BL-1",
+      "pinyin": "Jingming",
+      "chineseName": "睛(睛)明"
+    },
+    {
+      "code": "BL-2",
+      "pinyin": "Zanzhu",
+      "chineseName": "攢(攒,攅)竹"
+    },
+    {
+      "code": "BL-3",
+      "pinyin": "Meichong",
+      "chineseName": "眉衝(冲)"
+    },
+    {
+      "code": "BL-4",
+      "pinyin": "Qucha",
+      "chineseName": "曲差"
+    },
+    {
+      "code": "BL-5",
+      "pinyin": "Wuchu",
+      "chineseName": "五處(处,処)"
+    },
+    {
+      "code": "BL-6",
+      "pinyin": "Chengguang",
+      "chineseName": "承光"
+    },
+    {
+      "code": "BL-7",
+      "pinyin": "Tongtian",
+      "chineseName": "通(通)天"
+    },
+    {
+      "code": "BL-8",
+      "pinyin": "Luoque",
+      "chineseName": "絡(络)卻(却)"
+    },
+    {
+      "code": "BL-9",
+      "pinyin": "Yuzhen",
+      "chineseName": "玉枕"
+    },
+    {
+      "code": "BL-10",
+      "pinyin": "Tianzhu",
+      "chineseName": "天柱"
+    },
+    {
+      "code": "BL-11",
+      "pinyin": "Dazhu",
+      "chineseName": "大杼"
+    },
+    {
+      "code": "BL-12",
+      "pinyin": "Fengmen",
+      "chineseName": "風(风)門(门)"
+    },
+    {
+      "code": "BL-13",
+      "pinyin": "Feishu",
+      "chineseName": "肺兪(俞)"
+    },
+    {
+      "code": "BL-14",
+      "pinyin": "Jueyinshu",
+      "chineseName": "厥陰(阴)兪(俞)"
+    },
+    {
+      "code": "BL-15",
+      "pinyin": "Xinshu",
+      "chineseName": "心兪(俞)"
+    },
+    {
+      "code": "BL-16",
+      "pinyin": "Dushu",
+      "chineseName": "督兪(俞)"
+    },
+    {
+      "code": "BL-17",
+      "pinyin": "Geshu",
+      "chineseName": "膈兪(俞)"
+    },
+    {
+      "code": "BL-18",
+      "pinyin": "Ganshu",
+      "chineseName": "肝兪(俞)"
+    },
+    {
+      "code": "BL-19",
+      "pinyin": "Danshu",
+      "chineseName": "膽兪(俞)"
+    },
+    {
+      "code": "BL-20",
+      "pinyin": "Pishu",
+      "chineseName": "脾兪(俞)"
+    },
+    {
+      "code": "BL-21",
+      "pinyin": "Weishu",
+      "chineseName": "胃兪(俞)"
+    },
+    {
+      "code": "BL-22",
+      "pinyin": "Sanjiaoshu",
+      "chineseName": "三焦兪(俞)"
+    },
+    {
+      "code": "BL-23",
+      "pinyin": "Shenshu",
+      "chineseName": "腎兪(俞)"
+    },
+    {
+      "code": "BL-24",
+      "pinyin": "Qihaishu",
+      "chineseName": "氣(气,気)海(海)兪(俞)"
+    },
+    {
+      "code": "BL-25",
+      "pinyin": "Dachangshu",
+      "chineseName": "大腸兪(俞)"
+    },
+    {
+      "code": "BL-26",
+      "pinyin": "Guanyuanshu",
+      "chineseName": "關(关,関)元兪(俞)"
+    },
+    {
+      "code": "BL-27",
+      "pinyin": "Xiaochangshu",
+      "chineseName": "小腸(肠)兪(俞)"
+    },
+    {
+      "code": "BL-28",
+      "pinyin": "Pangguangshu",
+      "chineseName": "膀胱兪(俞)"
+    },
+    {
+      "code": "BL-29",
+      "pinyin": "Zhonglushu",
+      "chineseName": "中膂兪(俞)"
+    },
+    {
+      "code": "BL-30",
+      "pinyin": "Baihuanshu",
+      "chineseName": "白環(环)兪(俞)"
+    },
+    {
+      "code": "BL-31",
+      "pinyin": "Shangliao",
+      "chineseName": "上髎(髎)"
+    },
+    {
+      "code": "BL-32",
+      "pinyin": "Chiliao",
+      "chineseName": "次髎(髎)"
+    },
+    {
+      "code": "BL-33",
+      "pinyin": "Zhongliao",
+      "chineseName": "中髎(髎)"
+    },
+    {
+      "code": "BL-34",
+      "pinyin": "Xialiao",
+      "chineseName": "下髎(髎)"
+    },
+    {
+      "code": "BL-35",
+      "pinyin": "Huiyang",
+      "chineseName": "會(会)陽(阳)"
+    },
+    {
+      "code": "BL-36",
+      "pinyin": "Chengfu",
+      "chineseName": "承扶"
+    },
+    {
+      "code": "BL-37",
+      "pinyin": "Yinmen",
+      "chineseName": "殷門(门)"
+    },
+    {
+      "code": "BL-38",
+      "pinyin": "Fuxi",
+      "chineseName": "(浮)郄"
+    },
+    {
+      "code": "BL-39",
+      "pinyin": "Weiyang",
+      "chineseName": "委陽(阳)"
+    },
+    {
+      "code": "BL-40",
+      "pinyin": "Weizhong",
+      "chineseName": "委中"
+    },
+    {
+      "code": "BL-41",
+      "pinyin": "Fufen",
+      "chineseName": "附分"
+    },
+    {
+      "code": "BL-42",
+      "pinyin": "Pohu",
+      "chineseName": "魄户"
+    },
+    {
+      "code": "BL-43",
+      "pinyin": "Gaohuang",
+      "chineseName": "膏肓"
+    },
+    {
+      "code": "BL-44",
+      "pinyin": "Shentang",
+      "chineseName": "神(神)堂"
+    },
+    {
+      "code": "BL-45",
+      "pinyin": "Yixi",
+      "chineseName": "譩譆"
+    },
+    {
+      "code": "BL-46",
+      "pinyin": "Geguan",
+      "chineseName": "膈關(关,関)"
+    },
+    {
+      "code": "BL-47",
+      "pinyin": "Hunmen",
+      "chineseName": "魂門(门)"
+    },
+    {
+      "code": "BL-48",
+      "pinyin": "Yanggang",
+      "chineseName": "陽(阳)綱(纲)"
+    },
+    {
+      "code": "BL-49",
+      "pinyin": "Yishe",
+      "chineseName": "意舍(舎)"
+    },
+    {
+      "code": "BL-50",
+      "pinyin": "Weicang",
+      "chineseName": "胃倉(仓)"
+    },
+    {
+      "code": "BL-51",
+      "pinyin": "Huangmen",
+      "chineseName": "肓門(门)"
+    },
+    {
+      "code": "BL-52",
+      "pinyin": "Zhishi",
+      "chineseName": "志室"
+    },
+    {
+      "code": "BL-53",
+      "pinyin": "Baohuang",
+      "chineseName": "胞(胞)肓"
+    },
+    {
+      "code": "BL-54",
+      "pinyin": "Zhibian",
+      "chineseName": "秩邊(边,辺)"
+    },
+    {
+      "code": "BL-55",
+      "pinyin": "Heyang",
+      "chineseName": "合陽(阳)"
+    },
+    {
+      "code": "BL-56",
+      "pinyin": "Chengjin",
+      "chineseName": "承筋"
+    },
+    {
+      "code": "BL-57",
+      "pinyin": "Chengshan",
+      "chineseName": "承山"
+    },
+    {
+      "code": "BL-58",
+      "pinyin": "Feiyang",
+      "chineseName": "飛(飞)揚(扬)"
+    },
+    {
+      "code": "BL-59",
+      "pinyin": "Fuyang",
+      "chineseName": "跗陽(阳)"
+    },
+    {
+      "code": "BL-60",
+      "pinyin": "Kunlun",
+      "chineseName": "崑(昆)崙(侖,仑)"
+    },
+    {
+      "code": "BL-61",
+      "pinyin": "Pucan, Pushen",
+      "chineseName": "僕(仆)參(参)"
+    },
+    {
+      "code": "BL-62",
+      "pinyin": "Shenmai",
+      "chineseName": "申脈(脉)"
+    },
+    {
+      "code": "BL-63",
+      "pinyin": "Jinmen",
+      "chineseName": "金門(门)"
+    },
+    {
+      "code": "BL-64",
+      "pinyin": "Jinggu",
+      "chineseName": "京骨(骨)"
+    },
+    {
+      "code": "BL-65",
+      "pinyin": "Shugu",
+      "chineseName": "束骨(骨)"
+    },
+    {
+      "code": "BL-66",
+      "pinyin": "Zutonggu",
+      "chineseName": "足通(通)谷"
+    },
+    {
+      "code": "BL-67",
+      "pinyin": "Zhiyin",
+      "chineseName": "至陰(阴)"
+    },
+    {
+      "code": "KI-1",
+      "pinyin": "Yongquan",
+      "chineseName": "湧(涌)泉"
+    },
+    {
+      "code": "KI-2",
+      "pinyin": "Rangu",
+      "chineseName": "然谷"
+    },
+    {
+      "code": "KI-3",
+      "pinyin": "Taixi",
+      "chineseName": "太谿(溪)"
+    },
+    {
+      "code": "KI-4",
+      "pinyin": "Dazhong",
+      "chineseName": "大鍾(钟)"
+    },
+    {
+      "code": "KI-5",
+      "pinyin": "Shuiquan",
+      "chineseName": "水泉"
+    },
+    {
+      "code": "KI-6",
+      "pinyin": "Zhaohai",
+      "chineseName": "照海(海)"
+    },
+    {
+      "code": "KI-7",
+      "pinyin": "Fuliu",
+      "chineseName": "復(复)溜"
+    },
+    {
+      "code": "KI-8",
+      "pinyin": "Jiaoxin",
+      "chineseName": "交信"
+    },
+    {
+      "code": "KI-9",
+      "pinyin": "Zhubin",
+      "chineseName": "築(筑)賓(宾)"
+    },
+    {
+      "code": "KI-10",
+      "pinyin": "Yingu",
+      "chineseName": "陰(阴)谷"
+    },
+    {
+      "code": "KI-11",
+      "pinyin": "Henggu",
+      "chineseName": "橫骨(骨)"
+    },
+    {
+      "code": "KI-12",
+      "pinyin": "Dahe",
+      "chineseName": "大赫"
+    },
+    {
+      "code": "KI-13",
+      "pinyin": "Qixue",
+      "chineseName": "氣(气,気)穴"
+    },
+    {
+      "code": "KI-14",
+      "pinyin": "Siman",
+      "chineseName": "四滿(满,満)"
+    },
+    {
+      "code": "KI-15",
+      "pinyin": "Zhongzhu",
+      "chineseName": "中注"
+    },
+    {
+      "code": "KI-16",
+      "pinyin": "Huangshu",
+      "chineseName": "肓兪(俞)"
+    },
+    {
+      "code": "KI-17",
+      "pinyin": "Shangqu",
+      "chineseName": "商曲"
+    },
+    {
+      "code": "KI-18",
+      "pinyin": "Shiguan",
+      "chineseName": "石關(关,関)"
+    },
+    {
+      "code": "KI-19",
+      "pinyin": "Yindu",
+      "chineseName": "陰(阴)都(都)"
+    },
+    {
+      "code": "KI-20",
+      "pinyin": "Futonggu",
+      "chineseName": "腹通(通)谷"
+    },
+    {
+      "code": "KI-21",
+      "pinyin": "Youmen",
+      "chineseName": "幽門(门)"
+    },
+    {
+      "code": "KI-22",
+      "pinyin": "Bulang",
+      "chineseName": "步(歩)廊"
+    },
+    {
+      "code": "KI-23",
+      "pinyin": "Shengfeng",
+      "chineseName": "神(神)封"
+    },
+    {
+      "code": "KI-24",
+      "pinyin": "Lingxu",
+      "chineseName": "靈(灵,霊)墟(墟)"
+    },
+    {
+      "code": "KI-25",
+      "pinyin": "Shencang",
+      "chineseName": "神(神)藏(蔵)"
+    },
+    {
+      "code": "KI-26",
+      "pinyin": "Yuzhong",
+      "chineseName": "彧中"
+    },
+    {
+      "code": "KI-27",
+      "pinyin": "Shufu",
+      "chineseName": "兪(俞)府"
+    },
+    {
+      "code": "PC-1",
+      "pinyin": "Tianchi",
+      "chineseName": "天池"
+    },
+    {
+      "code": "PC-2",
+      "pinyin": "Tianquan",
+      "chineseName": "天泉"
+    },
+    {
+      "code": "PC-3",
+      "pinyin": "Quze",
+      "chineseName": "曲澤(泽,沢)"
+    },
+    {
+      "code": "PC-4",
+      "pinyin": "Ximen",
+      "chineseName": "郄門(门)"
+    },
+    {
+      "code": "PC-5",
+      "pinyin": "Jianshi",
+      "chineseName": "間(间)使"
+    },
+    {
+      "code": "PC-6",
+      "pinyin": "Neiguan",
+      "chineseName": "內關(关,関)"
+    },
+    {
+      "code": "PC-7",
+      "pinyin": "Daling",
+      "chineseName": "大陵"
+    },
+    {
+      "code": "PC-8",
+      "pinyin": "Laogong",
+      "chineseName": "勞(劳,労)宮(宫)"
+    },
+    {
+      "code": "PC-9",
+      "pinyin": "Zhongchong",
+      "chineseName": "中衝(冲)"
+    },
+    {
+      "code": "TE-1",
+      "pinyin": "Guanchong",
+      "chineseName": "關(关,関)衝(冲)"
+    },
+    {
+      "code": "TE-2",
+      "pinyin": "Yemen",
+      "chineseName": "液門(门)"
+    },
+    {
+      "code": "TE-3",
+      "pinyin": "Zhongzhu",
+      "chineseName": "中渚(渚)"
+    },
+    {
+      "code": "TE-4",
+      "pinyin": "Yangchi",
+      "chineseName": "陽(阳)池"
+    },
+    {
+      "code": "TE-5",
+      "pinyin": "Waiguan",
+      "chineseName": "外關(关,関)"
+    },
+    {
+      "code": "TE-6",
+      "pinyin": "Zhigou",
+      "chineseName": "支溝(沟)"
+    },
+    {
+      "code": "TE-7",
+      "pinyin": "Huizong",
+      "chineseName": "會(会)宗"
+    },
+    {
+      "code": "TE-8",
+      "pinyin": "Sanyangluo",
+      "chineseName": "三陽(阳)絡(络)"
+    },
+    {
+      "code": "TE-9",
+      "pinyin": "Sidu",
+      "chineseName": "四瀆(渎)"
+    },
+    {
+      "code": "TE-10",
+      "pinyin": "Tianjing",
+      "chineseName": "天井"
+    },
+    {
+      "code": "TE-11",
+      "pinyin": "Qinglengyuan",
+      "chineseName": "淸(清)冷(令)淵(渊)"
+    },
+    {
+      "code": "TE-12",
+      "pinyin": "Xiaoluo",
+      "chineseName": "消濼(泺)"
+    },
+    {
+      "code": "TE-13",
+      "pinyin": "Naohui",
+      "chineseName": "臑會(会)"
+    },
+    {
+      "code": "TE-14",
+      "pinyin": "Jianliao",
+      "chineseName": "肩髎(髎)"
+    },
+    {
+      "code": "TE-15",
+      "pinyin": "Tianliao",
+      "chineseName": "天髎(髎)"
+    },
+    {
+      "code": "TE-16",
+      "pinyin": "Tianyou",
+      "chineseName": "天牖"
+    },
+    {
+      "code": "TE-17",
+      "pinyin": "Yifeng",
+      "chineseName": "翳風(风)"
+    },
+    {
+      "code": "TE-18",
+      "pinyin": "Chimai, Qimai",
+      "chineseName": "瘈脈(脉)"
+    },
+    {
+      "code": "TE-19",
+      "pinyin": "Luxi",
+      "chineseName": "顱(颅)息"
+    },
+    {
+      "code": "TE-20",
+      "pinyin": "Jiaosun",
+      "chineseName": "角孫(孙)"
+    },
+    {
+      "code": "TE-21",
+      "pinyin": "Ermen",
+      "chineseName": "耳門(门)"
+    },
+    {
+      "code": "TE-22",
+      "pinyin": "Erheliao",
+      "chineseName": "耳和髎(髎)"
+    },
+    {
+      "code": "TE-23",
+      "pinyin": "Sizhukong",
+      "chineseName": "絲(丝)竹空"
+    },
+    {
+      "code": "GB-1",
+      "pinyin": "Tongziliao",
+      "chineseName": "瞳子髎(髎)"
+    },
+    {
+      "code": "GB-2",
+      "pinyin": "Tinghui",
+      "chineseName": "聽(听,聴)會(会)"
+    },
+    {
+      "code": "GB-3",
+      "pinyin": "Shangguan",
+      "chineseName": "上關(关,関)"
+    },
+    {
+      "code": "GB-4",
+      "pinyin": "Hanyan",
+      "chineseName": "頷(颔)厭(厌)"
+    },
+    {
+      "code": "GB-5",
+      "pinyin": "Xuanlu",
+      "chineseName": "懸(悬)顱(颅)"
+    },
+    {
+      "code": "GB-6",
+      "pinyin": "Xuanli",
+      "chineseName": "懸(悬)釐(厘)"
+    },
+    {
+      "code": "GB-7",
+      "pinyin": "Qubin",
+      "chineseName": "曲鬢(鬓)"
+    },
+    {
+      "code": "GB-8",
+      "pinyin": "Shuaigu",
+      "chineseName": "率谷"
+    },
+    {
+      "code": "GB-9",
+      "pinyin": "Tianchong",
+      "chineseName": "天衝(冲)"
+    },
+    {
+      "code": "GB-10",
+      "pinyin": "Fubai",
+      "chineseName": "(浮)白"
+    },
+    {
+      "code": "GB-11",
+      "pinyin": "Touqiaoyin",
+      "chineseName": "頭(头)竅(窍)陰(阴)"
+    },
+    {
+      "code": "GB-12",
+      "pinyin": "Wangu",
+      "chineseName": "完骨(骨)"
+    },
+    {
+      "code": "GB-13",
+      "pinyin": "Benshen",
+      "chineseName": "本神(神)"
+    },
+    {
+      "code": "GB-14",
+      "pinyin": "Yangbai",
+      "chineseName": "陽(阳)白"
+    },
+    {
+      "code": "GB-15",
+      "pinyin": "Toulinqi",
+      "chineseName": "頭(头)臨(临)泣"
+    },
+    {
+      "code": "GB-16",
+      "pinyin": "Muchuang",
+      "chineseName": "目窗(窓)"
+    },
+    {
+      "code": "GB-17",
+      "pinyin": "Zhengying",
+      "chineseName": "正營(营,営)"
+    },
+    {
+      "code": "GB-18",
+      "pinyin": "Chengling",
+      "chineseName": "承靈(灵,霊)"
+    },
+    {
+      "code": "GB-19",
+      "pinyin": "Naokong",
+      "chineseName": "腦(脑,脳)空"
+    },
+    {
+      "code": "GB-20",
+      "pinyin": "Fengchi",
+      "chineseName": "風(风)池"
+    },
+    {
+      "code": "GB-21",
+      "pinyin": "Jianjing",
+      "chineseName": "肩井"
+    },
+    {
+      "code": "GB-22",
+      "pinyin": "Yuanye",
+      "chineseName": "淵(渊)液"
+    },
+    {
+      "code": "GB-23",
+      "pinyin": "Zhejin",
+      "chineseName": "輒(辄)筋"
+    },
+    {
+      "code": "GB-24",
+      "pinyin": null,
+      "chineseName": null
+    },
+    {
+      "code": "GB-25",
+      "pinyin": "Jingmen",
+      "chineseName": "京門(门)"
+    },
+    {
+      "code": "GB-26",
+      "pinyin": "Daimai",
+      "chineseName": "帶(带,帯)脈(脉)"
+    },
+    {
+      "code": "GB-27",
+      "pinyin": "Wushu",
+      "chineseName": "五樞(枢)"
+    },
+    {
+      "code": "GB-28",
+      "pinyin": "Weidao",
+      "chineseName": "維(维)道(道)"
+    },
+    {
+      "code": "GB-29",
+      "pinyin": "Juliao",
+      "chineseName": "居髎(髎)"
+    },
+    {
+      "code": "GB-30",
+      "pinyin": "Huantiao",
+      "chineseName": "環(环)跳"
+    },
+    {
+      "code": "GB-31",
+      "pinyin": "Fengshi",
+      "chineseName": "風(风)市"
+    },
+    {
+      "code": "GB-32",
+      "pinyin": "Zhongdu",
+      "chineseName": "中瀆(渎)"
+    },
+    {
+      "code": "GB-33",
+      "pinyin": "Xiyangguan",
+      "chineseName": "膝陽(阳)關(关,関)"
+    },
+    {
+      "code": "GB-34",
+      "pinyin": "Yanglingquan",
+      "chineseName": "陽(阳)陵泉"
+    },
+    {
+      "code": "GB-35",
+      "pinyin": "Yangjiao",
+      "chineseName": "陽(阳)交"
+    },
+    {
+      "code": "GB-36",
+      "pinyin": "Waiqiu",
+      "chineseName": "外丘(邱)"
+    },
+    {
+      "code": "GB-37",
+      "pinyin": "Guangming",
+      "chineseName": "光明"
+    },
+    {
+      "code": "GB-38",
+      "pinyin": "Yangfu",
+      "chineseName": "陽(阳)輔(辅)"
+    },
+    {
+      "code": "GB-39",
+      "pinyin": "Xuanzhong",
+      "chineseName": "懸(悬)鍾(钟)"
+    },
+    {
+      "code": "GB-40",
+      "pinyin": "Qiuxu",
+      "chineseName": "丘(坵)墟(墟)"
+    },
+    {
+      "code": "GB-41",
+      "pinyin": "Zulinqi",
+      "chineseName": "足臨(临)泣"
+    },
+    {
+      "code": "GB-42",
+      "pinyin": "Diwuhui",
+      "chineseName": "地五會(会)"
+    },
+    {
+      "code": "GB-43",
+      "pinyin": "Xiaxi",
+      "chineseName": "俠(侠)谿(溪)"
+    },
+    {
+      "code": "GB-44",
+      "pinyin": "Zuqiaoyin",
+      "chineseName": "足竅(窍)陰(阴)"
+    },
+    {
+      "code": "LR-1",
+      "pinyin": "Dadun",
+      "chineseName": "大敦"
+    },
+    {
+      "code": "LR-2",
+      "pinyin": "Xingjian",
+      "chineseName": "行間(间)"
+    },
+    {
+      "code": "LR-3",
+      "pinyin": "Taichong",
+      "chineseName": "太衝(冲)"
+    },
+    {
+      "code": "LR-4",
+      "pinyin": "Zhongfeng",
+      "chineseName": "中封"
+    },
+    {
+      "code": "LR-5",
+      "pinyin": "Ligou",
+      "chineseName": "蠡溝(沟)"
+    },
+    {
+      "code": "LR-6",
+      "pinyin": "Zhongdu",
+      "chineseName": "中都(都)"
+    },
+    {
+      "code": "LR-7",
+      "pinyin": "Xiguan",
+      "chineseName": "膝關(关,関)"
+    },
+    {
+      "code": "LR-8",
+      "pinyin": "Ququan",
+      "chineseName": "曲泉"
+    },
+    {
+      "code": "LR-9",
+      "pinyin": "Yinbao",
+      "chineseName": "陰(阴)包(包)"
+    },
+    {
+      "code": "LR-10",
+      "pinyin": "Zuwuli",
+      "chineseName": "足五里"
+    },
+    {
+      "code": "LR-11",
+      "pinyin": "Yinlian",
+      "chineseName": "陰(阴)廉"
+    },
+    {
+      "code": "LR-12",
+      "pinyin": "Jimai",
+      "chineseName": "急脈(脉)"
+    },
+    {
+      "code": "LR-13",
+      "pinyin": "Zhangmen",
+      "chineseName": "章門(门)"
+    },
+    {
+      "code": "LR-14",
+      "pinyin": null,
+      "chineseName": null
+    },
+    {
+      "code": "GV-1",
+      "pinyin": "Changqiang",
+      "chineseName": "長(长)強"
+    },
+    {
+      "code": "GV-2",
+      "pinyin": "Yaoshu",
+      "chineseName": "腰兪(俞)"
+    },
+    {
+      "code": "GV-3",
+      "pinyin": "Yaoyangguan",
+      "chineseName": "腰陽(阳)關(关,関)"
+    },
+    {
+      "code": "GV-4",
+      "pinyin": "Mingmen",
+      "chineseName": "命門(门)"
+    },
+    {
+      "code": "GV-5",
+      "pinyin": "Xuanshu",
+      "chineseName": "懸(悬)樞(枢)"
+    },
+    {
+      "code": "GV-6",
+      "pinyin": "Jizhong",
+      "chineseName": "脊中"
+    },
+    {
+      "code": "GV-7",
+      "pinyin": "Zhongshu",
+      "chineseName": "中樞(枢)"
+    },
+    {
+      "code": "GV-8",
+      "pinyin": "Jinsuo",
+      "chineseName": "筋縮(缩)"
+    },
+    {
+      "code": "GV-9",
+      "pinyin": "Zhiyang",
+      "chineseName": "至陽(阳)"
+    },
+    {
+      "code": "GV-10",
+      "pinyin": "Lingtai",
+      "chineseName": "靈(灵,霊)臺(台)"
+    },
+    {
+      "code": "GV-11",
+      "pinyin": "Shendao",
+      "chineseName": "神(神)道(道)"
+    },
+    {
+      "code": "GV-12",
+      "pinyin": "Shenzhu",
+      "chineseName": "身柱"
+    },
+    {
+      "code": "GV-13",
+      "pinyin": "Taodao",
+      "chineseName": "陶道(道)"
+    },
+    {
+      "code": "GV-14",
+      "pinyin": "Dazhui",
+      "chineseName": "大椎"
+    },
+    {
+      "code": "GV-15",
+      "pinyin": "Yamen",
+      "chineseName": "瘂(哑)門(门)"
+    },
+    {
+      "code": "GV-16",
+      "pinyin": "Fengfu",
+      "chineseName": "風(风)府"
+    },
+    {
+      "code": "GV-17",
+      "pinyin": "Naohu",
+      "chineseName": "腦(脑,脳)戶"
+    },
+    {
+      "code": "GV-18",
+      "pinyin": "Qiangjian",
+      "chineseName": "強間(间)"
+    },
+    {
+      "code": "GV-19",
+      "pinyin": "Houding",
+      "chineseName": "後(后)頂(顶)"
+    },
+    {
+      "code": "GV-20",
+      "pinyin": "Baihui",
+      "chineseName": "百會(会)"
+    },
+    {
+      "code": "GV-21",
+      "pinyin": "Qianding",
+      "chineseName": "前頂(顶)"
+    },
+    {
+      "code": "GV-22",
+      "pinyin": "Xinhui",
+      "chineseName": "顖(囟)會(会)"
+    },
+    {
+      "code": "GV-23",
+      "pinyin": "Shangxing",
+      "chineseName": "上星"
+    },
+    {
+      "code": "GV-24",
+      "pinyin": "Shenting",
+      "chineseName": "神(神)庭"
+    },
+    {
+      "code": "GV-25",
+      "pinyin": "Suliao",
+      "chineseName": "素髎(髎)"
+    },
+    {
+      "code": "GV-26",
+      "pinyin": "Shuigou, Renzhong",
+      "chineseName": "水溝(沟)"
+    },
+    {
+      "code": "GV-27",
+      "pinyin": "Duiduan",
+      "chineseName": "兌(兑)端"
+    },
+    {
+      "code": "GV-28",
+      "pinyin": "Yinjiao",
+      "chineseName": "齦(龈)交"
+    },
+    {
+      "code": "CV-1",
+      "pinyin": null,
+      "chineseName": null
+    },
+    {
+      "code": "CV-2",
+      "pinyin": "Qugu",
+      "chineseName": "曲骨(骨)"
+    },
+    {
+      "code": "CV-3",
+      "pinyin": "Zhongji",
+      "chineseName": "中極(极)"
+    },
+    {
+      "code": "CV-4",
+      "pinyin": "Guanyuan",
+      "chineseName": "關(关,関)元"
+    },
+    {
+      "code": "CV-5",
+      "pinyin": "Shimen",
+      "chineseName": "石門(门)"
+    },
+    {
+      "code": "CV-6",
+      "pinyin": "Qihai",
+      "chineseName": "氣(气,気)海(海)"
+    },
+    {
+      "code": "CV-7",
+      "pinyin": "Yinjiao",
+      "chineseName": "陰(阴)交"
+    },
+    {
+      "code": "CV-8",
+      "pinyin": "Shenque",
+      "chineseName": "神(神)闕(阙)"
+    },
+    {
+      "code": "CV-9",
+      "pinyin": "Shuifen",
+      "chineseName": "水分"
+    },
+    {
+      "code": "CV-10",
+      "pinyin": "Xiawan",
+      "chineseName": "下脘"
+    },
+    {
+      "code": "CV-11",
+      "pinyin": "Jianli",
+      "chineseName": "建里"
+    },
+    {
+      "code": "CV-12",
+      "pinyin": "Zhongwan",
+      "chineseName": "中脘"
+    },
+    {
+      "code": "CV-13",
+      "pinyin": "Shangwan",
+      "chineseName": "上脘"
+    },
+    {
+      "code": "CV-14",
+      "pinyin": "Juque",
+      "chineseName": "巨闕(阙)"
+    },
+    {
+      "code": "CV-15",
+      "pinyin": "Jiuwei",
+      "chineseName": "鳩(鸠)尾"
+    },
+    {
+      "code": "CV-16",
+      "pinyin": "Zhongting",
+      "chineseName": "中庭"
+    },
+    {
+      "code": "CV-17",
+      "pinyin": "Tanzhong",
+      "chineseName": "膻中"
+    },
+    {
+      "code": "CV-18",
+      "pinyin": "Yutang",
+      "chineseName": "玉堂"
+    },
+    {
+      "code": "CV-19",
+      "pinyin": "Zigong",
+      "chineseName": "紫宮(宫)"
+    },
+    {
+      "code": "CV-20",
+      "pinyin": "Huagai",
+      "chineseName": "華(华)蓋(盖)"
+    },
+    {
+      "code": "CV-21",
+      "pinyin": "Xuanji",
+      "chineseName": "璇璣(玑)"
+    },
+    {
+      "code": "CV-22",
+      "pinyin": "Tiantu",
+      "chineseName": "天突"
+    },
+    {
+      "code": "CV-23",
+      "pinyin": "Lianquan",
+      "chineseName": "廉泉"
+    },
+    {
+      "code": "CV-24",
+      "pinyin": "Chengjiang",
+      "chineseName": "承漿(浆)"
+    }
+  ]
+}

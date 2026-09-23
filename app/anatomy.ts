@@ -43,11 +43,11 @@ export const anatomyName=(name:string)=>ANATOMY_VI[name.toLowerCase()]?ANATOMY_V
 // Meridian-first profile: render only a compact set of superficial/landmark muscles by default.
 // All atlas structures remain searchable and can still be selected individually.
 const MERIDIAN_LANDMARK_MUSCLE_TERMS=[
- 'frontalis','occipitalis','temporalis','masseter','orbicularis oculi','orbicularis oris','zygomaticus major','buccinator','mentalis',
- 'sternocleidomastoid','trapezius','latissimus dorsi','splenius capitis','deltoid','pectoralis major','serratus anterior','rectus abdominis','external oblique',
- 'biceps brachii','triceps brachii','brachialis','brachioradialis','pronator teres','palmaris longus','flexor carpi radialis','flexor carpi ulnaris','extensor carpi radialis','extensor carpi ulnaris','extensor digitorum',
- 'gluteus maximus','gluteus medius','tensor fasciae latae','sartorius','adductor longus','gracilis','rectus femoris','vastus medialis','vastus lateralis','biceps femoris','semitendinosus','semimembranosus',
- 'tibialis anterior','gastrocnemius','soleus','fibularis longus','fibularis brevis','peroneus longus','peroneus brevis','extensor digitorum longus','flexor digitorum longus','extensor hallucis longus','flexor hallucis longus','abductor hallucis'
+ 'frontalis','temporalis','masseter','orbicularis oculi','orbicularis oris',
+ 'sternocleidomastoid','trapezius','deltoid','pectoralis major','latissimus dorsi','serratus anterior','rectus abdominis','external oblique',
+ 'biceps brachii','triceps brachii','brachioradialis','flexor carpi radialis','extensor digitorum',
+ 'gluteus maximus','gluteus medius','tensor fasciae latae','sartorius','adductor longus','rectus femoris','vastus medialis','vastus lateralis','biceps femoris','semitendinosus',
+ 'tibialis anterior','gastrocnemius','soleus','fibularis longus','peroneus longus','abductor hallucis'
 ] as const;
 export function isMeridianLandmarkMuscle(name:string){
  const n=name.toLowerCase();

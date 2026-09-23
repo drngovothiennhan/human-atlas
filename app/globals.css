@@ -269,3 +269,17 @@ body:has(.registration-panel) .meridian3d-launch{left:376px}body:has(.registrati
 .meridian3d-model-controls button:active{background:#e6f0ef;color:#145e58}
 .meridian3d-effect-controls button:disabled{opacity:.48;cursor:not-allowed;background:#f3f4f4!important;color:#78838b!important}
 @media(max-width:767px){.meridian3d-model-controls{padding:7px}.meridian3d-model-controls>div{grid-template-columns:62px repeat(4,minmax(0,1fr))}.meridian3d-model-controls>div:last-child{grid-template-columns:62px repeat(3,minmax(0,1fr))}.meridian3d-model-controls button{min-height:36px;padding-inline:3px}}
+
+
+/* 2026-09-23: compact meridian-first layer menu; prevent mobile overflow. */
+.layer-presets{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px!important;overflow:visible!important;padding:4px!important}
+.layer-presets button{width:100%!important;min-width:0!important;min-height:38px!important;padding:0 8px!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.system-list{overscroll-behavior:contain}
+@media(max-width:767px){
+ .layers-panel{left:12px!important;right:12px!important;width:auto!important;max-width:none!important;overflow:hidden!important}
+ .layers-panel .panel-heading{padding-inline:2px}
+ .layer-presets{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ .system-row{min-width:0}.system-name{min-width:0!important}
+ .quality-control{padding-inline:4px}
+ .meridian3d-detail{max-height:42%;overflow:auto;overscroll-behavior:contain}
+}
