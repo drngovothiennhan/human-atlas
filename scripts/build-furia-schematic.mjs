@@ -9,12 +9,13 @@ const readJson=async p=>JSON.parse(await readFile(p,'utf8'));
 const channelAliases={SJ:'TE',REN:'CV',DU:'GV'};
 const canonicalChannel=id=>channelAliases[id]??id;
 const canonicalCode=code=>code.replace(/^[A-Z]+/,canonicalChannel);
-const [pointDoc,fit,structuresDoc,topology,atlas]=await Promise.all([
+const [pointDoc,fit,structuresDoc,topology,atlas,documentReference]=await Promise.all([
   readJson(path.join(VENDOR,'points.anchors.json')),
   readJson(path.join(VENDOR,'rig_fitted.json')),
   readJson(path.join(VENDOR,'structures.json')),
   readJson(path.join(VENDOR,'meridians.json')),
-  readJson(path.join(ROOT,'public','models','atlas.json'))
+  readJson(path.join(ROOT,'public','models','atlas.json')),
+  readJson(path.join(ROOT,'content','references','ngo-trung-trieu-huyet-vi-kinh-lac.json'))
 ]);
 
 const add=(a,b)=>[a[0]+b[0],a[1]+b[1],a[2]+b[2]],sub=(a,b)=>[a[0]-b[0],a[1]-b[1],a[2]-b[2]],mul=(a,s)=>[a[0]*s,a[1]*s,a[2]*s];
@@ -188,7 +189,7 @@ for(const sourceMeridianId of Object.keys(topology.paths)){
   }
 }
 
-const out={schemaVersion:'1.0.0',coordinateSystem:'BodyParts3D-4.0-browser-meters-Y-up',verificationStatus:'UNVERIFIED',source:{repository:'FuriaRozkwit/acupuncture-3d',commit:'1fc9ec98d365c9fb035844e2775c1be05a0a05fc',license:'MIT anchors/code; CC BY-SA calibrated anatomy metadata',skin:'BodyParts3D FMA7163'},anchors:anchorOut,paths,omittedTopology:omitted,generatedBy:'scripts/build-furia-schematic.mjs'};
+const out={schemaVersion:'1.1.0',coordinateSystem:'BodyParts3D-4.0-browser-meters-Y-up',verificationStatus:'UNVERIFIED',calibrationStatus:'DOCUMENT_CORROBORATED_3D',calibration:{status:'DOCUMENT_CORROBORATED_3D',method:'Anatomical anchors and cun/region proportions are projected by raycast to the BodyParts3D FMA7163 skin surface; user-provided meridian illustrations are used to cross-check channel sequence, body region and endpoint orientation.',documentSourceId:documentReference.sourceId,documentTitle:documentReference.document.title+' — '+documentReference.document.author,documentPages:documentReference.document.pdfPages},source:{repository:'FuriaRozkwit/acupuncture-3d',commit:'1fc9ec98d365c9fb035844e2775c1be05a0a05fc',license:'MIT anchors/code; CC BY-SA calibrated anatomy metadata',skin:'BodyParts3D FMA7163'},anchors:anchorOut,paths,omittedTopology:omitted,generatedBy:'scripts/build-furia-schematic.mjs'};
 out.channelAliases=channelAliases;out.sourceSideWarnings=sourceSideWarnings;
 out.anchorCoverage={catalogPoints:catalogCodes.size,generatedPointCodes:anchorPointCodes.size,generatedAnchors:anchorOut.length,missingAnchorCodes};
 out.pathCoverage={catalogPoints:codes.size,sourceTopologyPoints:topologyCodes.size,generatedTopologyPoints:generatedPathCodes.size,missingGenerated,extraGenerated};
