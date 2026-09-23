@@ -13,7 +13,7 @@ import {
 
 type Language='vi'|'en'|'zh';
 type Meridian={id:string;code:string;vietnameseName:string;englishName:string;chineseName?:string|null;pointIds:string[];path3d:number[][];reviewStatus:string;spatialStatus:string};
-type Acupoint={code:string;meridianId:string;sequence:number;vietnameseName?:string|null;englishName?:string|null;chineseName?:string|null;pinyin?:string|null;position3d?:{x:number;y:number;z:number;coordinateSystem?:string;source?:string}|null;reviewStatus?:string;verificationStatus?:string};
+type Acupoint={code:string;meridianId:string;sequence:number;vietnameseName?:string|null;englishName?:string|null;chineseName?:string|null;pinyin?:string|null;snomedCtRef?:string|null;anatomicalLocation?:{surfaceRegionEn?:string|null;surfaceRegionVi?:string|null;landmarks?:{label:string;uri?:string|null}[]}|null;position3d?:{x:number;y:number;z:number;coordinateSystem?:string;source?:string}|null;reviewStatus?:string;verificationStatus?:string};
 type SchematicSpatial={anchors:MeridianSceneAnchor[];paths:MeridianScenePath[];source?:{repository?:string;commit?:string;license?:string};omittedTopology?:string[];sourceSideWarnings?:{pointCode:string;reason:string}[]};
 type PointDocumentReference={pointCode:string;meridianId:string;label:string;heading:string;pdfPageRange:number[];spatialStatus:string};
 type PointDocumentReferences={points:PointDocumentReference[]};
@@ -135,7 +135,7 @@ export default function Meridian3DPanel({drafts,selectedPointCode,studyCommand,o
     return p.vietnameseName||p.pinyin||('Huyệt '+p.code);
   };
 
-  const filteredPoints=useMemo(()=>{const q=norm(query),codeQuery=q.replace(/[-\s]/g,'');return points.filter(p=>q?p.code.toLowerCase().replace(/-/g,'').includes(codeQuery)||[p.vietnameseName??'',p.englishName??'',p.chineseName??'',p.pinyin??''].some(v=>norm(v).includes(q)):activeMeridianIds.includes(p.meridianId)).slice(0,80)},[points,activeMeridianIds,query]);
+  const filteredPoints=useMemo(()=>{const q=norm(query),codeQuery=q.replace(/[-\s]/g,'');return points.filter(p=>q?p.code.toLowerCase().replace(/-/g,'').includes(codeQuery)||[p.vietnameseName??'',p.englishName??'',p.chineseName??'',p.pinyin??'',p.anatomicalLocation?.surfaceRegionVi??'',p.anatomicalLocation?.surfaceRegionEn??''].some(v=>norm(v).includes(q)):activeMeridianIds.includes(p.meridianId)).slice(0,80)},[points,activeMeridianIds,query]);
   const active=meridians.find(m=>m.id===activeMeridian),selectedRecord=points.find(p=>p.code===selected),selectedAnchors=allAnchors.filter(a=>a.pointCode===selected);
   const selectedDocumentRef=documentRefs.find(r=>r.pointCode===selected);
   const activePointCount=points.filter(p=>activeMeridianIds.includes(p.meridianId)).length;
@@ -205,7 +205,7 @@ export default function Meridian3DPanel({drafts,selectedPointCode,studyCommand,o
         <strong>{selectedRecord.code} · {pointName(selectedRecord)}</strong>
         <div className="meridian3d-facts">
           <span><small>Kinh</small><b>{meridianName(meridians.find(m=>m.id===selectedRecord.meridianId))}</b></span>
-          <span><small>Thứ tự</small><b>{selectedRecord.sequence}</b></span><span><small>Danh pháp</small><b>{selectedRecord.pinyin||'—'}{selectedRecord.chineseName?' · '+selectedRecord.chineseName:''}</b></span>
+          <span><small>Thứ tự</small><b>{selectedRecord.sequence}</b></span><span><small>Danh pháp</small><b>{selectedRecord.pinyin||'—'}{selectedRecord.chineseName?' · '+selectedRecord.chineseName:''}</b></span><span data-anatomical-location="true"><small>Vùng cơ thể</small><b>{selectedRecord.anatomicalLocation?.surfaceRegionVi||selectedRecord.anatomicalLocation?.surfaceRegionEn||'—'}</b></span>
           <span><small>Vị trí đang có</small><b>{selectedAnchors.length}</b></span>
           <span><small>Trạng thái</small><b>{selectedAnchors.some(a=>a.sourceKind==='PUBLISHED')?'Đã đăng ký 3D':'Tham chiếu học tập'}</b></span>
         </div>
@@ -214,7 +214,7 @@ export default function Meridian3DPanel({drafts,selectedPointCode,studyCommand,o
           <span>{selectedIndex>=0?selectedIndex+1:0}/{selectedMeridianPoints.length}</span>
           <button type="button" onClick={()=>moveSelected(1)} disabled={selectedMeridianPoints.length<2}>Huyệt sau →</button>
         </div>
-        {selectedRecord.pinyin&&<small className="meridian3d-source-label">Danh pháp quốc tế đã được đối chiếu; không tự động suy diễn nội dung lâm sàng.</small>}{selectedDocumentRef&&<small className="meridian3d-source-label" data-document-reference="true">{selectedDocumentRef.label} · {selectedDocumentRef.heading}</small>}
+        {selectedRecord.anatomicalLocation?.landmarks?.length&&<small data-anatomical-landmarks="true">Mốc giải phẫu: {selectedRecord.anatomicalLocation.landmarks.slice(0,4).map(item=>item.label).join(' · ')}</small>}{selectedRecord.pinyin&&<small className="meridian3d-source-label">Danh pháp quốc tế đã được đối chiếu; không tự động suy diễn nội dung lâm sàng.</small>}{selectedDocumentRef&&<small className="meridian3d-source-label" data-document-reference="true">{selectedDocumentRef.label} · {selectedDocumentRef.heading}</small>}
         {selectedAnchors.some(a=>a.sourceKind==='LICENSED_SCHEMATIC')&&<small className="meridian3d-source-label" data-spatial-provenance="true">Nguồn tọa độ sơ đồ 3D: {schematic.source?.repository??'FuriaRozkwit/acupuncture-3d'} · {schematic.source?.license??'MIT anchors; CC BY-SA dữ liệu hiệu chỉnh'} · CHƯA THẨM ĐỊNH</small>}
         {schematic.sourceSideWarnings?.some(w=>w.pointCode===selectedRecord.code)&&<small role="status">Nguồn sơ đồ có dữ liệu hai bên không thống nhất với kinh giữa thân tại huyệt này; giữ nhãn tham chiếu học tập.</small>}
         <span>{selectedAnchors.some(a=>a.sourceKind==='PUBLISHED')?'Có tọa độ BodyParts3D đã đăng ký.':'Chưa có tọa độ BodyParts3D đã đăng ký. '}{selectedAnchors.length?selectedAnchors.map(a=>a.side+': '+(a.sourceKind==='PUBLISHED'?'đã đăng ký':a.sourceKind==='LOCAL_DRAFT'?'nháp trên máy':'sơ đồ nguồn mở')).join(' · '):'Chưa có vị trí trên mô hình.'}</span>
