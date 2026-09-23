@@ -9,13 +9,14 @@ const readJson=async p=>JSON.parse(await readFile(p,'utf8'));
 const channelAliases={SJ:'TE',REN:'CV',DU:'GV'};
 const canonicalChannel=id=>channelAliases[id]??id;
 const canonicalCode=code=>code.replace(/^[A-Z]+/,canonicalChannel);
-const [pointDoc,fit,structuresDoc,topology,atlas,documentReference]=await Promise.all([
+const [pointDoc,fit,structuresDoc,topology,atlas,documentReference,anatomyLocationDoc]=await Promise.all([
   readJson(path.join(VENDOR,'points.anchors.json')),
   readJson(path.join(VENDOR,'rig_fitted.json')),
   readJson(path.join(VENDOR,'structures.json')),
   readJson(path.join(VENDOR,'meridians.json')),
   readJson(path.join(ROOT,'public','models','atlas.json')),
-  readJson(path.join(ROOT,'content','references','ngo-trung-trieu-huyet-vi-kinh-lac.json'))
+  readJson(path.join(ROOT,'content','references','ngo-trung-trieu-huyet-vi-kinh-lac.json')),
+  readJson(path.join(ROOT,'content','acupoints','anatomical-locations.json'))
 ]);
 
 const add=(a,b)=>[a[0]+b[0],a[1]+b[1],a[2]+b[2]],sub=(a,b)=>[a[0]-b[0],a[1]-b[1],a[2]-b[2]],mul=(a,s)=>[a[0]*s,a[1]*s,a[2]*s];
@@ -145,6 +146,8 @@ const spatialOverrides={
   'ST-45':{struct:'Distal phalanx of second finger of foot',along:.93,dir:'lateral',shift:{dorsal:2,distal:1},region:'foot'}
 };
 const documentEvidenceByMeridian=new Map(documentReference.meridians.map(item=>[item.meridianId,item]));
+const anatomyEvidenceByCode=new Map(anatomyLocationDoc.points.map(item=>[item.code,item]));
+if(anatomyEvidenceByCode.size!==361)throw new Error('Expected 361 TARA anatomical-location records');
 for(const pointCode of Object.keys(spatialOverrides)){
   const meridianId=pointCode.match(/^([A-Z]+)-/)?.[1];
   if(!meridianId||!documentEvidenceByMeridian.has(meridianId))throw new Error('Spatial override missing document evidence: '+pointCode);
@@ -166,7 +169,7 @@ for(const point of pointDoc.points){
   const records=canonicalMidline||point.side==='midline'
     ?[['MIDLINE',[0,right[1],right[2]]]]
     :[['RIGHT',right],['LEFT',[-right[0],right[1],right[2]]]];
-  for(const [side,src] of records){const p=toBrowser(src),doc=documentEvidenceByMeridian.get(meridianId);anchorOut.push({pointCode:canonicalPointCode,meridianId,sourcePointCode:point.code,sourceMeridianId:point.channel,sequence:point.index,side,x:round(p[0]),y:round(p[1]),z:round(p[2]),verificationStatus:'UNVERIFIED',sourceKind:'LICENSED_SCHEMATIC',accuracy:point.accuracy,projection:'BodyParts3D FMA7163 surface raycast',calibrationOverride:spatialOverrides[canonicalPointCode]?'HIU_DOCUMENT_ANATOMY_QC':undefined,documentEvidence:spatialOverrides[canonicalPointCode]?{sourceId:documentReference.sourceId,pdfPageRange:doc?.pdfPageRange??null,label:doc?.label??null,evidenceType:doc?.evidenceType??null,spatialStatus:doc?.spatialStatus??null}:undefined})}
+  for(const [side,src] of records){const p=toBrowser(src),doc=documentEvidenceByMeridian.get(meridianId),anatomy=anatomyEvidenceByCode.get(canonicalPointCode);if(!anatomy)throw new Error('Missing TARA anatomy evidence: '+canonicalPointCode);anchorOut.push({pointCode:canonicalPointCode,meridianId,sourcePointCode:point.code,sourceMeridianId:point.channel,sequence:point.index,side,x:round(p[0]),y:round(p[1]),z:round(p[2]),verificationStatus:'UNVERIFIED',sourceKind:'LICENSED_SCHEMATIC',accuracy:point.accuracy,projection:'BodyParts3D FMA7163 surface raycast',calibrationOverride:spatialOverrides[canonicalPointCode]?'HIU_DOCUMENT_ANATOMY_QC':undefined,anatomicalEvidence:{sourceId:anatomyLocationDoc.source.id,surfaceRegionVi:anatomy.surfaceRegionVi??null,surfaceRegionEn:anatomy.surfaceRegionEn??null,landmarks:(anatomy.landmarks??[]).map(item=>({label:item.label,uri:item.uri??null}))},documentEvidence:spatialOverrides[canonicalPointCode]?{sourceId:documentReference.sourceId,pdfPageRange:doc?.pdfPageRange??null,label:doc?.label??null,evidenceType:doc?.evidenceType??null,spatialStatus:doc?.spatialStatus??null}:undefined})}
 }
 const byKey=new Map(anchorOut.map(a=>[a.pointCode+':'+a.side,a]));
 if(byKey.size!==anchorOut.length)throw new Error('Duplicate generated acupoint anchor key');
@@ -179,7 +182,7 @@ for(const [sourceMeridianId,groups] of Object.entries(topology.paths)){
   const meridianId=canonicalChannel(sourceMeridianId);
   const mid=meridianId==='CV'||meridianId==='GV',sides=mid?['MIDLINE']:['RIGHT','LEFT'];
   for(const side of sides)for(let gi=0;gi<groups.length;gi++){
-    let chunk=[];const flush=()=>{if(chunk.length>=2){paths.push({meridianId,side,groupIndex:gi,pointCodes:chunk.map(x=>x.pointCode),points:chunk.map(x=>[x.x,x.y,x.z]),verificationStatus:'UNVERIFIED',sourceKind:'LICENSED_SCHEMATIC'})}chunk=[]};
+    let chunk=[];const flush=()=>{if(chunk.length>=2){const pointCodes=chunk.map(x=>x.pointCode);paths.push({meridianId,side,groupIndex:gi,pointCodes,points:chunk.map(x=>[x.x,x.y,x.z]),verificationStatus:'UNVERIFIED',sourceKind:'LICENSED_SCHEMATIC',flowDirection:'SOURCE_ORDER',directionStart:pointCodes[0],directionEnd:pointCodes.at(-1)})}chunk=[]};
     // The vendor topology explicitly defines adjacency. Do not infer continuity from
     // numeric point codes: BL intentionally jumps 38→40→55 in one source branch.
     for(const sourceCode of groups[gi]){const code=canonicalCode(sourceCode),a=byKey.get(code+':'+side);if(!a){flush();continue}chunk.push(a)}
@@ -272,7 +275,7 @@ for(const sourceMeridianId of Object.keys(topology.paths)){
 }
 
 const routeOrigins={ST:{label:'Điểm khởi đường Kinh Vị',description:'Khởi từ vùng ngoài cánh mũi trước khi đi tới huyệt ST-1 Thừa khấp; đây là mốc đường kinh, không phải huyệt.',notAnAcupoint:true}};
-const out={schemaVersion:'1.2.0',coordinateSystem:'BodyParts3D-4.0-browser-meters-Y-up',verificationStatus:'UNVERIFIED',calibrationStatus:'DOCUMENT_CORROBORATED_3D',calibration:{status:'DOCUMENT_CORROBORATED_3D',method:'Anatomical anchors and cun/region proportions are projected by raycast to the BodyParts3D FMA7163 skin surface; user-provided meridian illustrations are used to cross-check channel sequence, body region and endpoint orientation.',documentSourceId:documentReference.sourceId,documentTitle:documentReference.document.title+' — '+documentReference.document.author,documentPages:documentReference.document.pdfPages},source:{repository:'FuriaRozkwit/acupuncture-3d',commit:'1fc9ec98d365c9fb035844e2775c1be05a0a05fc',license:'MIT anchors/code; CC BY-SA calibrated anatomy metadata',skin:'BodyParts3D FMA7163'},anchors:anchorOut,paths,omittedTopology:omitted,generatedBy:'scripts/build-furia-schematic.mjs'};
+const out={schemaVersion:'1.3.0',coordinateSystem:'BodyParts3D-4.0-browser-meters-Y-up',verificationStatus:'UNVERIFIED',calibrationStatus:'DOCUMENT_CORROBORATED_3D',calibration:{status:'DOCUMENT_CORROBORATED_3D',method:'Anatomical landmarks first; proportional cun/region rules second; final positions are raycast to the BodyParts3D FMA7163 skin. Two-dimensional references corroborate region/course but never promote a point to verified 3D.',documentSourceId:documentReference.sourceId,documentTitle:documentReference.document.title+' — '+documentReference.document.author,documentPages:documentReference.document.pdfPages},methodology:{priority:['WHO_STANDARD_LOCATION_METHOD','TARA_ANATOMICAL_LANDMARKS','HIU_DOCUMENT_CORROBORATION','BODYPARTS3D_SKIN_PROJECTION'],whoStandard:'WHO Standard Acupuncture Point Locations in the Western Pacific Region (2008)',taraSource:anatomyLocationDoc.source.id,research:['PMID:24761187','PMID:26101534'],flowDirection:'canonical/source topology order'},source:{repository:'FuriaRozkwit/acupuncture-3d',commit:'1fc9ec98d365c9fb035844e2775c1be05a0a05fc',license:'MIT anchors/code; CC BY-SA calibrated anatomy metadata',skin:'BodyParts3D FMA7163'},anchors:anchorOut,paths,omittedTopology:omitted,generatedBy:'scripts/build-furia-schematic.mjs'};
 out.channelAliases=channelAliases;out.sourceSideWarnings=sourceSideWarnings;out.routeOrigins=routeOrigins;out.spatialOverrides=Object.keys(spatialOverrides);
 out.anchorCoverage={catalogPoints:catalogCodes.size,generatedPointCodes:anchorPointCodes.size,generatedAnchors:anchorOut.length,missingAnchorCodes};
 out.pathCoverage={catalogPoints:codes.size,sourceTopologyPoints:topologyCodes.size,generatedTopologyPoints:generatedPathCodes.size,missingGenerated,extraGenerated};
