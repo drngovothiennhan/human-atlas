@@ -1,0 +1,5628 @@
+{
+  "schemaVersion": "0.1.0",
+  "source": {
+    "id": "TARA-ACUPOINT-ANATOMY-2026-09-08",
+    "repository": "SciCrunch/TARA-Ontology-Repository",
+    "path": "curated-data/acupoints/acupoints-locations.csv",
+    "commit": "ad64e24eccc1f683bd25706c6ad1bc74a3b8eb51",
+    "use": "CONTROLLED_ANATOMY_REFERENCE",
+    "note": "Stores only controlled surface-region and landmark labels/URIs; WHO prose and clinical/needling text are not copied."
+  },
+  "count": 361,
+  "points": [
+    {
+      "code": "LU-1",
+      "surfaceRegionEn": "Anterior Thoracic Region",
+      "surfaceRegionVi": "Ngực trước",
+      "landmarks": [
+        {
+          "label": "First Intercostal Space",
+          "uri": "http://uri.interlex.org/base/ilx_0795283"
+        },
+        {
+          "label": "Infraclavicular Fossa",
+          "uri": "http://uri.interlex.org/base/ilx_0795284"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "LU-2",
+      "surfaceRegionEn": "Anterior Thoracic Region",
+      "surfaceRegionVi": "Ngực trước",
+      "landmarks": [
+        {
+          "label": "Infraclavicular Fossa",
+          "uri": "http://uri.interlex.org/base/ilx_0795284"
+        },
+        {
+          "label": "Coracoid Process Of The Scapula",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0006633"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        },
+        {
+          "label": "Clavipectoral Triangle",
+          "uri": "http://uri.interlex.org/base/ilx_0795286"
+        }
+      ]
+    },
+    {
+      "code": "LU-3",
+      "surfaceRegionEn": "Arm",
+      "surfaceRegionVi": "Cánh tay",
+      "landmarks": [
+        {
+          "label": "Biceps Brachii Muscle",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001507"
+        },
+        {
+          "label": "Anterior Axillary Fold",
+          "uri": "http://uri.interlex.org/base/ilx_0795287"
+        }
+      ]
+    },
+    {
+      "code": "LU-4",
+      "surfaceRegionEn": "Arm",
+      "surfaceRegionVi": "Cánh tay",
+      "landmarks": [
+        {
+          "label": "Biceps Brachii Muscle",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001507"
+        },
+        {
+          "label": "Anterior Axillary Fold",
+          "uri": "http://uri.interlex.org/base/ilx_0795287"
+        }
+      ]
+    },
+    {
+      "code": "LU-5",
+      "surfaceRegionEn": "Elbow",
+      "surfaceRegionVi": "Khuỷu tay",
+      "landmarks": [
+        {
+          "label": "Biceps Brachii Tendon",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0008188"
+        },
+        {
+          "label": "Cubital Crease",
+          "uri": "http://uri.interlex.org/base/ilx_0795332"
+        }
+      ]
+    },
+    {
+      "code": "LU-6",
+      "surfaceRegionEn": "Forearm",
+      "surfaceRegionVi": "Cẳng tay",
+      "landmarks": [
+        {
+          "label": "Palmar Wrist Crease",
+          "uri": "http://uri.interlex.org/base/ilx_0795334"
+        }
+      ]
+    },
+    {
+      "code": "LU-7",
+      "surfaceRegionEn": "Forearm",
+      "surfaceRegionVi": "Cẳng tay",
+      "landmarks": [
+        {
+          "label": "Abductor Pollicis Longus Tendon",
+          "uri": "http://uri.interlex.org/base/ilx_0795335"
+        },
+        {
+          "label": "extensor pollicis brevis muscle",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0017618"
+        },
+        {
+          "label": "Palmar Wrist Crease",
+          "uri": "http://uri.interlex.org/base/ilx_0795334"
+        }
+      ]
+    },
+    {
+      "code": "LU-8",
+      "surfaceRegionEn": "Forearm",
+      "surfaceRegionVi": "Cẳng tay",
+      "landmarks": [
+        {
+          "label": "Radial Styloid Process",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_7500078"
+        },
+        {
+          "label": "Radial Artery",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001404"
+        },
+        {
+          "label": "Palmar Wrist Crease",
+          "uri": "http://uri.interlex.org/base/ilx_0795334"
+        }
+      ]
+    },
+    {
+      "code": "LU-9",
+      "surfaceRegionEn": "Wrist",
+      "surfaceRegionVi": "Cổ tay",
+      "landmarks": [
+        {
+          "label": "Radial Styloid Process",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_7500078"
+        },
+        {
+          "label": "Scaphoid Bone",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001427"
+        },
+        {
+          "label": "Abductor Pollicis Longus Tendon",
+          "uri": "http://uri.interlex.org/base/ilx_0795335"
+        },
+        {
+          "label": "Palmar Wrist Crease",
+          "uri": "http://uri.interlex.org/base/ilx_0795334"
+        },
+        {
+          "label": "Radial Artery",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001404"
+        }
+      ]
+    },
+    {
+      "code": "LU-10",
+      "surfaceRegionEn": "Palm",
+      "surfaceRegionVi": "Lòng bàn tay",
+      "landmarks": [
+        {
+          "label": "First Metacarpal Bone",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0003645"
+        }
+      ]
+    },
+    {
+      "code": "LU-11",
+      "surfaceRegionEn": "Thumb",
+      "surfaceRegionVi": "Ngón cái",
+      "landmarks": [
+        {
+          "label": "Distal Phalanx",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004300"
+        },
+        {
+          "label": "Thumb Nail",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0011273"
+        }
+      ]
+    },
+    {
+      "code": "LI-1",
+      "surfaceRegionEn": "Index Finger",
+      "surfaceRegionVi": "Ngón trỏ",
+      "landmarks": [
+        {
+          "label": "Distal Phalanx",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004300"
+        },
+        {
+          "label": "nail of manual digit 2",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0011274"
+        }
+      ]
+    },
+    {
+      "code": "LI-2",
+      "surfaceRegionEn": "Index Finger",
+      "surfaceRegionVi": "Ngón trỏ",
+      "landmarks": [
+        {
+          "label": "Metacarpophalangeal Joint",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0003695"
+        }
+      ]
+    },
+    {
+      "code": "LI-3",
+      "surfaceRegionEn": "Dorsum Of The Hand",
+      "surfaceRegionVi": "Mu bàn tay",
+      "landmarks": [
+        {
+          "label": "Metacarpophalangeal Joint",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0003695"
+        }
+      ]
+    },
+    {
+      "code": "LI-4",
+      "surfaceRegionEn": "Dorsum Of The Hand",
+      "surfaceRegionVi": "Mu bàn tay",
+      "landmarks": [
+        {
+          "label": "Second Metacarpal Bone",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0003646"
+        }
+      ]
+    },
+    {
+      "code": "LI-5",
+      "surfaceRegionEn": "Wrist",
+      "surfaceRegionVi": "Cổ tay",
+      "landmarks": [
+        {
+          "label": "Dorsal Wrist Crease",
+          "uri": "http://uri.interlex.org/base/ilx_0795333"
+        },
+        {
+          "label": "Radial Styloid Process",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_7500078"
+        },
+        {
+          "label": "Radial Fossa",
+          "uri": "http://uri.interlex.org/base/ilx_0795289"
+        },
+        {
+          "label": "Extensor Pollicis Longus Tendon",
+          "uri": "http://uri.interlex.org/base/ilx_0795337"
+        },
+        {
+          "label": "Extensor Pollicis Brevis Tendon",
+          "uri": "http://uri.interlex.org/base/ilx_0795336"
+        }
+      ]
+    },
+    {
+      "code": "LI-6",
+      "surfaceRegionEn": "Forearm",
+      "surfaceRegionVi": "Cẳng tay",
+      "landmarks": [
+        {
+          "label": "Dorsal Wrist Crease",
+          "uri": "http://uri.interlex.org/base/ilx_0795333"
+        }
+      ]
+    },
+    {
+      "code": "LI-7",
+      "surfaceRegionEn": "Forearm",
+      "surfaceRegionVi": "Cẳng tay",
+      "landmarks": [
+        {
+          "label": "Dorsal Wrist Crease",
+          "uri": "http://uri.interlex.org/base/ilx_0795333"
+        }
+      ]
+    },
+    {
+      "code": "LI-8",
+      "surfaceRegionEn": "Forearm",
+      "surfaceRegionVi": "Cẳng tay",
+      "landmarks": [
+        {
+          "label": "Cubital Crease",
+          "uri": "http://uri.interlex.org/base/ilx_0795332"
+        }
+      ]
+    },
+    {
+      "code": "LI-9",
+      "surfaceRegionEn": "Forearm",
+      "surfaceRegionVi": "Cẳng tay",
+      "landmarks": [
+        {
+          "label": "Cubital Crease",
+          "uri": "http://uri.interlex.org/base/ilx_0795332"
+        }
+      ]
+    },
+    {
+      "code": "LI-10",
+      "surfaceRegionEn": "Forearm",
+      "surfaceRegionVi": "Cẳng tay",
+      "landmarks": [
+        {
+          "label": "Cubital Crease",
+          "uri": "http://uri.interlex.org/base/ilx_0795332"
+        }
+      ]
+    },
+    {
+      "code": "LI-11",
+      "surfaceRegionEn": "Elbow",
+      "surfaceRegionVi": "Khuỷu tay",
+      "landmarks": [
+        {
+          "label": "Lateral Epicondyle",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0006807"
+        },
+        {
+          "label": "Cubital Crease",
+          "uri": "http://uri.interlex.org/base/ilx_0795332"
+        }
+      ]
+    },
+    {
+      "code": "LI-12",
+      "surfaceRegionEn": "Elbow",
+      "surfaceRegionVi": "Khuỷu tay",
+      "landmarks": [
+        {
+          "label": "Lateral Epicondyle",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0006807"
+        },
+        {
+          "label": "Lateral Supraepicondylar Ridge",
+          "uri": "http://uri.interlex.org/base/ilx_0795338"
+        }
+      ]
+    },
+    {
+      "code": "LI-13",
+      "surfaceRegionEn": "Arm",
+      "surfaceRegionVi": "Cánh tay",
+      "landmarks": [
+        {
+          "label": "Cubital Crease",
+          "uri": "http://uri.interlex.org/base/ilx_0795332"
+        }
+      ]
+    },
+    {
+      "code": "LI-14",
+      "surfaceRegionEn": "Arm",
+      "surfaceRegionVi": "Cánh tay",
+      "landmarks": [
+        {
+          "label": "Deltoid Muscle",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001476"
+        }
+      ]
+    },
+    {
+      "code": "LI-15",
+      "surfaceRegionEn": "Shoulder Girdle",
+      "surfaceRegionVi": "Vai",
+      "landmarks": [
+        {
+          "label": "Acromion",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0002497"
+        },
+        {
+          "label": "Greater Tubercle Of The Humerus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0011187"
+        }
+      ]
+    },
+    {
+      "code": "LI-16",
+      "surfaceRegionEn": "Shoulder Girdle",
+      "surfaceRegionVi": "Vai",
+      "landmarks": [
+        {
+          "label": "Clavicle",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001105"
+        },
+        {
+          "label": "Scapula",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0006849"
+        },
+        {
+          "label": "Suprascapular Fossa",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_4200020"
+        }
+      ]
+    },
+    {
+      "code": "LI-17",
+      "surfaceRegionEn": "Neck",
+      "surfaceRegionVi": "Cổ",
+      "landmarks": [
+        {
+          "label": "Cricoid Cartilage",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0002375"
+        },
+        {
+          "label": "Sternocleidomastoid Muscle",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001128"
+        }
+      ]
+    },
+    {
+      "code": "LI-18",
+      "surfaceRegionEn": "Neck",
+      "surfaceRegionVi": "Cổ",
+      "landmarks": [
+        {
+          "label": "Thyroid Cartilage",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001738"
+        },
+        {
+          "label": "Sternocleidomastoid Muscle",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001128"
+        }
+      ]
+    },
+    {
+      "code": "LI-19",
+      "surfaceRegionEn": "Face",
+      "surfaceRegionVi": "Mặt",
+      "landmarks": [
+        {
+          "label": "Philtrum",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0005402"
+        },
+        {
+          "label": "Nostril",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0005928"
+        }
+      ]
+    },
+    {
+      "code": "LI-20",
+      "surfaceRegionEn": "Face",
+      "surfaceRegionVi": "Mặt",
+      "landmarks": [
+        {
+          "label": "Ala Of Nose",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0006906"
+        },
+        {
+          "label": "Nasolabial Sulcus",
+          "uri": "http://uri.interlex.org/base/ilx_0795290"
+        }
+      ]
+    },
+    {
+      "code": "ST-1",
+      "surfaceRegionEn": "Face",
+      "surfaceRegionVi": "Mặt",
+      "landmarks": [
+        {
+          "label": "Eyeball",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0010230"
+        },
+        {
+          "label": "Infraorbital Margin",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0035848"
+        },
+        {
+          "label": "Pupil",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001771"
+        }
+      ]
+    },
+    {
+      "code": "ST-2",
+      "surfaceRegionEn": "Face",
+      "surfaceRegionVi": "Mặt",
+      "landmarks": [
+        {
+          "label": "Infraorbital Foramen",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0018407"
+        }
+      ]
+    },
+    {
+      "code": "ST-3",
+      "surfaceRegionEn": "Face",
+      "surfaceRegionVi": "Mặt",
+      "landmarks": [
+        {
+          "label": "Pupil",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001771"
+        },
+        {
+          "label": "Ala Of Nose",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0006906"
+        }
+      ]
+    },
+    {
+      "code": "ST-4",
+      "surfaceRegionEn": "Face",
+      "surfaceRegionVi": "Mặt",
+      "landmarks": [
+        {
+          "label": "Mouth",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0000165"
+        },
+        {
+          "label": "Nasolabial Sulcus",
+          "uri": "http://uri.interlex.org/base/ilx_0795290"
+        }
+      ]
+    },
+    {
+      "code": "ST-5",
+      "surfaceRegionEn": "Face",
+      "surfaceRegionVi": "Mặt",
+      "landmarks": [
+        {
+          "label": "Mandible",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001684"
+        },
+        {
+          "label": "Masseter",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001597"
+        },
+        {
+          "label": "Facial Artery",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001612"
+        }
+      ]
+    },
+    {
+      "code": "ST-6",
+      "surfaceRegionEn": "Face",
+      "surfaceRegionVi": "Mặt",
+      "landmarks": [
+        {
+          "label": "Mandible",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001684"
+        },
+        {
+          "label": "Masseter",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001597"
+        }
+      ]
+    },
+    {
+      "code": "ST-7",
+      "surfaceRegionEn": "Face",
+      "surfaceRegionVi": "Mặt",
+      "landmarks": [
+        {
+          "label": "Zygomatic Arch",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0002500"
+        },
+        {
+          "label": "Mandibular Notch",
+          "uri": "http://uri.interlex.org/base/ilx_0795291"
+        }
+      ]
+    },
+    {
+      "code": "ST-8",
+      "surfaceRegionEn": "Head",
+      "surfaceRegionVi": "Đầu",
+      "landmarks": [
+        {
+          "label": "Anterior Hairline",
+          "uri": "http://uri.interlex.org/base/ilx_0795292"
+        },
+        {
+          "label": "Forehead",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0008200"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "ST-9",
+      "surfaceRegionEn": "Neck",
+      "surfaceRegionVi": "Cổ",
+      "landmarks": [
+        {
+          "label": "Thyroid Cartilage",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001738"
+        },
+        {
+          "label": "Sternocleidomastoid Muscle",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001128"
+        },
+        {
+          "label": "Common Carotid Artery",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0010197"
+        }
+      ]
+    },
+    {
+      "code": "ST-10",
+      "surfaceRegionEn": "Neck",
+      "surfaceRegionVi": "Cổ",
+      "landmarks": [
+        {
+          "label": "Cricoid Cartilage",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0002375"
+        },
+        {
+          "label": "Sternocleidomastoid Muscle",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001128"
+        }
+      ]
+    },
+    {
+      "code": "ST-11",
+      "surfaceRegionEn": "Neck",
+      "surfaceRegionVi": "Cổ",
+      "landmarks": [
+        {
+          "label": "Lesser Supraclavicular Fossa",
+          "uri": "http://uri.interlex.org/base/ilx_0795293"
+        },
+        {
+          "label": "Clavicle",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001105"
+        },
+        {
+          "label": "Sternocleidomastoid Muscle",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001128"
+        }
+      ]
+    },
+    {
+      "code": "ST-12",
+      "surfaceRegionEn": "Neck",
+      "surfaceRegionVi": "Cổ",
+      "landmarks": [
+        {
+          "label": "Greater Supraclavicular Fossa",
+          "uri": "http://uri.interlex.org/base/ilx_0795294"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        },
+        {
+          "label": "Clavicle",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001105"
+        }
+      ]
+    },
+    {
+      "code": "ST-13",
+      "surfaceRegionEn": "Anterior Thoracic Region",
+      "surfaceRegionVi": "Ngực trước",
+      "landmarks": [
+        {
+          "label": "Clavicle",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001105"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "ST-14",
+      "surfaceRegionEn": "Anterior Thoracic Region",
+      "surfaceRegionVi": "Ngực trước",
+      "landmarks": [
+        {
+          "label": "First Intercostal Space",
+          "uri": "http://uri.interlex.org/base/ilx_0795283"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "ST-15",
+      "surfaceRegionEn": "Anterior Thoracic Region",
+      "surfaceRegionVi": "Ngực trước",
+      "landmarks": [
+        {
+          "label": "Second Intercostal Space",
+          "uri": "http://uri.interlex.org/base/ilx_0795295"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        },
+        {
+          "label": "Second Rib",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004602"
+        },
+        {
+          "label": "Sternal Angle",
+          "uri": "http://uri.interlex.org/base/ilx_0795296"
+        }
+      ]
+    },
+    {
+      "code": "ST-16",
+      "surfaceRegionEn": "Anterior Thoracic Region",
+      "surfaceRegionVi": "Ngực trước",
+      "landmarks": [
+        {
+          "label": "Third Intercostal Space",
+          "uri": "http://uri.interlex.org/base/ilx_0795297"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "ST-17",
+      "surfaceRegionEn": "Anterior Thoracic Region",
+      "surfaceRegionVi": "Ngực trước",
+      "landmarks": [
+        {
+          "label": "Nipple",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0002030"
+        },
+        {
+          "label": "Fourth Intercostal Space",
+          "uri": "http://uri.interlex.org/base/ilx_0795298"
+        }
+      ]
+    },
+    {
+      "code": "ST-18",
+      "surfaceRegionEn": "Anterior Thoracic Region",
+      "surfaceRegionVi": "Ngực trước",
+      "landmarks": [
+        {
+          "label": "Fifth Intercostal Space",
+          "uri": "http://uri.interlex.org/base/ilx_0795299"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        },
+        {
+          "label": "Nipple Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795300"
+        },
+        {
+          "label": "inframammary fold",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0013692"
+        }
+      ]
+    },
+    {
+      "code": "ST-19",
+      "surfaceRegionEn": "Upper Abdomen",
+      "surfaceRegionVi": "Bụng trên",
+      "landmarks": [
+        {
+          "label": "Umbilicus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0007118"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        },
+        {
+          "label": "Infrasternal Angle",
+          "uri": "http://uri.interlex.org/base/ilx_0795302"
+        },
+        {
+          "label": "Rib",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0002228"
+        }
+      ]
+    },
+    {
+      "code": "ST-20",
+      "surfaceRegionEn": "Upper Abdomen",
+      "surfaceRegionVi": "Bụng trên",
+      "landmarks": [
+        {
+          "label": "Umbilicus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0007118"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "ST-21",
+      "surfaceRegionEn": "Upper Abdomen",
+      "surfaceRegionVi": "Bụng trên",
+      "landmarks": [
+        {
+          "label": "Umbilicus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0007118"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "ST-22",
+      "surfaceRegionEn": "Upper Abdomen",
+      "surfaceRegionVi": "Bụng trên",
+      "landmarks": [
+        {
+          "label": "Umbilicus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0007118"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "ST-23",
+      "surfaceRegionEn": "Upper Abdomen",
+      "surfaceRegionVi": "Bụng trên",
+      "landmarks": [
+        {
+          "label": "Umbilicus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0007118"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "ST-24",
+      "surfaceRegionEn": "Upper Abdomen",
+      "surfaceRegionVi": "Bụng trên",
+      "landmarks": [
+        {
+          "label": "Umbilicus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0007118"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "ST-25",
+      "surfaceRegionEn": "Upper Abdomen",
+      "surfaceRegionVi": "Bụng trên",
+      "landmarks": [
+        {
+          "label": "Umbilicus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0007118"
+        }
+      ]
+    },
+    {
+      "code": "ST-26",
+      "surfaceRegionEn": "Lower Abdomen",
+      "surfaceRegionVi": "Bụng dưới",
+      "landmarks": [
+        {
+          "label": "Umbilicus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0007118"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "ST-27",
+      "surfaceRegionEn": "Lower Abdomen",
+      "surfaceRegionVi": "Bụng dưới",
+      "landmarks": [
+        {
+          "label": "Umbilicus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0007118"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "ST-28",
+      "surfaceRegionEn": "Lower Abdomen",
+      "surfaceRegionVi": "Bụng dưới",
+      "landmarks": [
+        {
+          "label": "Umbilicus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0007118"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "ST-29",
+      "surfaceRegionEn": "Lower Abdomen",
+      "surfaceRegionVi": "Bụng dưới",
+      "landmarks": [
+        {
+          "label": "Umbilicus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0007118"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "ST-30",
+      "surfaceRegionEn": "Groin Region",
+      "surfaceRegionVi": "Bẹn",
+      "landmarks": [
+        {
+          "label": "Pubic Symphysis",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0003699"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        },
+        {
+          "label": "Femoral Artery",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0002060"
+        }
+      ]
+    },
+    {
+      "code": "ST-31",
+      "surfaceRegionEn": "Thigh",
+      "surfaceRegionVi": "Đùi",
+      "landmarks": [
+        {
+          "label": "Rectus Femoris Muscle",
+          "uri": "http://uri.interlex.org/base/ilx_0795304"
+        },
+        {
+          "label": "Sartorius Muscle",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001373"
+        },
+        {
+          "label": "Tensor Fasciae Latae Muscle",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001376"
+        },
+        {
+          "label": "Patella",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0002446"
+        },
+        {
+          "label": "Anterior Superior Iliac Spine",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0013708"
+        },
+        {
+          "label": "Pubic Symphysis",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0003699"
+        }
+      ]
+    },
+    {
+      "code": "ST-32",
+      "surfaceRegionEn": "Thigh",
+      "surfaceRegionVi": "Đùi",
+      "landmarks": [
+        {
+          "label": "Patella",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0002446"
+        },
+        {
+          "label": "Anterior Superior Iliac Spine",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0013708"
+        }
+      ]
+    },
+    {
+      "code": "ST-33",
+      "surfaceRegionEn": "Thigh",
+      "surfaceRegionVi": "Đùi",
+      "landmarks": [
+        {
+          "label": "Tendon Of Quadriceps Femoris",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0014848"
+        },
+        {
+          "label": "Patella",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0002446"
+        }
+      ]
+    },
+    {
+      "code": "ST-34",
+      "surfaceRegionEn": "Thigh",
+      "surfaceRegionVi": "Đùi",
+      "landmarks": [
+        {
+          "label": "Vastus Lateralis Muscle",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001379"
+        },
+        {
+          "label": "Tendon Of Quadriceps Femoris",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0014848"
+        },
+        {
+          "label": "Patella",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0002446"
+        }
+      ]
+    },
+    {
+      "code": "ST-35",
+      "surfaceRegionEn": "Knee",
+      "surfaceRegionVi": "Gối",
+      "landmarks": [
+        {
+          "label": "Patellar Ligament",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0003676"
+        },
+        {
+          "label": "Patella",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0002446"
+        }
+      ]
+    },
+    {
+      "code": "ST-36",
+      "surfaceRegionEn": "Leg",
+      "surfaceRegionVi": "Cẳng chân",
+      "landmarks": [
+        {
+          "label": "Tibialis Anterior Muscle",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001385"
+        }
+      ]
+    },
+    {
+      "code": "ST-37",
+      "surfaceRegionEn": "Leg",
+      "surfaceRegionVi": "Cẳng chân",
+      "landmarks": [
+        {
+          "label": "Tibialis Anterior Muscle",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001385"
+        }
+      ]
+    },
+    {
+      "code": "ST-38",
+      "surfaceRegionEn": "Leg",
+      "surfaceRegionVi": "Cẳng chân",
+      "landmarks": [
+        {
+          "label": "Tibialis Anterior Muscle",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001385"
+        }
+      ]
+    },
+    {
+      "code": "ST-39",
+      "surfaceRegionEn": "Leg",
+      "surfaceRegionVi": "Cẳng chân",
+      "landmarks": [
+        {
+          "label": "Tibialis Anterior Muscle",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001385"
+        }
+      ]
+    },
+    {
+      "code": "ST-40",
+      "surfaceRegionEn": "Leg",
+      "surfaceRegionVi": "Cẳng chân",
+      "landmarks": [
+        {
+          "label": "Tibialis Anterior Muscle",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001385"
+        },
+        {
+          "label": "Lateral Malleolus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0012291"
+        }
+      ]
+    },
+    {
+      "code": "ST-41",
+      "surfaceRegionEn": "Ankle",
+      "surfaceRegionVi": "Cổ chân",
+      "landmarks": [
+        {
+          "label": "Ankle Joint",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0012076"
+        },
+        {
+          "label": "Tendon of extensor hallucis longus",
+          "uri": "http://uri.interlex.org/base/ilx_0795503"
+        },
+        {
+          "label": "Tendon of extensor digitorum longus",
+          "uri": "http://uri.interlex.org/base/ilx_0795504"
+        },
+        {
+          "label": "LATERAL MALLEOLUS",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0012291"
+        }
+      ]
+    },
+    {
+      "code": "ST-42",
+      "surfaceRegionEn": "Foot",
+      "surfaceRegionVi": "Bàn chân",
+      "landmarks": [
+        {
+          "label": "Second Metatarsal Bone",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0003651"
+        },
+        {
+          "label": "Intermediate Cuneiform Bone",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001453"
+        },
+        {
+          "label": "Dorsalis Pedis Artery",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001539"
+        }
+      ]
+    },
+    {
+      "code": "ST-43",
+      "surfaceRegionEn": "Foot",
+      "surfaceRegionVi": "Bàn chân",
+      "landmarks": [
+        {
+          "label": "Second Metatarsal Bone",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0003651"
+        },
+        {
+          "label": "Third Metatarsal Bone",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0003652"
+        },
+        {
+          "label": "metatarsophalangeal joint of pedal digit 2",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0007753"
+        }
+      ]
+    },
+    {
+      "code": "ST-44",
+      "surfaceRegionEn": "Foot",
+      "surfaceRegionVi": "Bàn chân",
+      "landmarks": [
+        {
+          "label": "Second Toe",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0003632"
+        },
+        {
+          "label": "Third Toe",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0003633"
+        }
+      ]
+    },
+    {
+      "code": "ST-45",
+      "surfaceRegionEn": "Second Toe",
+      "surfaceRegionVi": "Ngón chân II",
+      "landmarks": [
+        {
+          "label": "Distal Phalanx",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004300"
+        },
+        {
+          "label": "Nail Of The Second Toe",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0011279"
+        }
+      ]
+    },
+    {
+      "code": "SP-1",
+      "surfaceRegionEn": "Great Toe",
+      "surfaceRegionVi": "Ngón chân cái",
+      "landmarks": [
+        {
+          "label": "Distal Phalanx",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004300"
+        },
+        {
+          "label": "Toenail",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0009567"
+        }
+      ]
+    },
+    {
+      "code": "SP-2",
+      "surfaceRegionEn": "Great Toe",
+      "surfaceRegionVi": "Ngón chân cái",
+      "landmarks": [
+        {
+          "label": "First Metatarsophalangeal Joint",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0007750"
+        }
+      ]
+    },
+    {
+      "code": "SP-3",
+      "surfaceRegionEn": "Foot",
+      "surfaceRegionVi": "Bàn chân",
+      "landmarks": [
+        {
+          "label": "First Metatarsophalangeal Joint",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0007750"
+        }
+      ]
+    },
+    {
+      "code": "SP-4",
+      "surfaceRegionEn": "Foot",
+      "surfaceRegionVi": "Bàn chân",
+      "landmarks": [
+        {
+          "label": "First Metatarsal Bone",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0003650"
+        }
+      ]
+    },
+    {
+      "code": "SP-5",
+      "surfaceRegionEn": "Foot",
+      "surfaceRegionVi": "Bàn chân",
+      "landmarks": [
+        {
+          "label": "Medial Malleolus",
+          "uri": "http://uri.interlex.org/base/ilx_0795305"
+        },
+        {
+          "label": "Navicular Bone",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0010759"
+        }
+      ]
+    },
+    {
+      "code": "SP-6",
+      "surfaceRegionEn": "Leg",
+      "surfaceRegionVi": "Cẳng chân",
+      "landmarks": [
+        {
+          "label": "Tibia",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0000979"
+        },
+        {
+          "label": "Medial Malleolus",
+          "uri": "http://uri.interlex.org/base/ilx_0795305"
+        }
+      ]
+    },
+    {
+      "code": "SP-7",
+      "surfaceRegionEn": "Leg",
+      "surfaceRegionVi": "Cẳng chân",
+      "landmarks": [
+        {
+          "label": "Tibia",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0000979"
+        },
+        {
+          "label": "Medial Malleolus",
+          "uri": "http://uri.interlex.org/base/ilx_0795305"
+        }
+      ]
+    },
+    {
+      "code": "SP-8",
+      "surfaceRegionEn": "Leg",
+      "surfaceRegionVi": "Cẳng chân",
+      "landmarks": [
+        {
+          "label": "Tibia",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0000979"
+        },
+        {
+          "label": "Patella",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0002446"
+        },
+        {
+          "label": "Medial Malleolus",
+          "uri": "http://uri.interlex.org/base/ilx_0795305"
+        }
+      ]
+    },
+    {
+      "code": "SP-9",
+      "surfaceRegionEn": "Leg",
+      "surfaceRegionVi": "Cẳng chân",
+      "landmarks": [
+        {
+          "label": "Medial Condyle Of The Tibia",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0009990"
+        },
+        {
+          "label": "Tibia",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0000979"
+        },
+        {
+          "label": "Knee Joint",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001485"
+        }
+      ]
+    },
+    {
+      "code": "SP-10",
+      "surfaceRegionEn": "Thigh",
+      "surfaceRegionVi": "Đùi",
+      "landmarks": [
+        {
+          "label": "Vastus Medialis Muscle",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001380"
+        },
+        {
+          "label": "Patella",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0002446"
+        }
+      ]
+    },
+    {
+      "code": "SP-11",
+      "surfaceRegionEn": "Thigh",
+      "surfaceRegionVi": "Đùi",
+      "landmarks": [
+        {
+          "label": "Patella",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0002446"
+        },
+        {
+          "label": "Sartorius Muscle",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001373"
+        },
+        {
+          "label": "Adductor Longus Muscle",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0000303"
+        },
+        {
+          "label": "Femoral Artery",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0002060"
+        }
+      ]
+    },
+    {
+      "code": "SP-12",
+      "surfaceRegionEn": "Groin Region",
+      "surfaceRegionVi": "Bẹn",
+      "landmarks": [
+        {
+          "label": "Inguinal Crease",
+          "uri": "http://uri.interlex.org/base/ilx_0795329"
+        },
+        {
+          "label": "Femoral Artery",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0002060"
+        }
+      ]
+    },
+    {
+      "code": "SP-13",
+      "surfaceRegionEn": "Lower Abdomen",
+      "surfaceRegionVi": "Bụng dưới",
+      "landmarks": [
+        {
+          "label": "Umbilicus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0007118"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "SP-14",
+      "surfaceRegionEn": "Lower Abdomen",
+      "surfaceRegionVi": "Bụng dưới",
+      "landmarks": [
+        {
+          "label": "Umbilicus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0007118"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "SP-15",
+      "surfaceRegionEn": "Upper Abdomen",
+      "surfaceRegionVi": "Bụng trên",
+      "landmarks": [
+        {
+          "label": "Umbilicus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0007118"
+        }
+      ]
+    },
+    {
+      "code": "SP-16",
+      "surfaceRegionEn": "Upper Abdomen",
+      "surfaceRegionVi": "Bụng trên",
+      "landmarks": [
+        {
+          "label": "Umbilicus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0007118"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "SP-17",
+      "surfaceRegionEn": "Anterior Thoracic Region",
+      "surfaceRegionVi": "Ngực trước",
+      "landmarks": [
+        {
+          "label": "Fifth Intercostal Space",
+          "uri": "http://uri.interlex.org/base/ilx_0795299"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "SP-18",
+      "surfaceRegionEn": "Anterior Thoracic Region",
+      "surfaceRegionVi": "Ngực trước",
+      "landmarks": [
+        {
+          "label": "Fourth Intercostal Space",
+          "uri": "http://uri.interlex.org/base/ilx_0795298"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "SP-19",
+      "surfaceRegionEn": "Anterior Thoracic Region",
+      "surfaceRegionVi": "Ngực trước",
+      "landmarks": [
+        {
+          "label": "Third Intercostal Space",
+          "uri": "http://uri.interlex.org/base/ilx_0795297"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "SP-20",
+      "surfaceRegionEn": "Anterior Thoracic Region",
+      "surfaceRegionVi": "Ngực trước",
+      "landmarks": [
+        {
+          "label": "Second Intercostal Space",
+          "uri": "http://uri.interlex.org/base/ilx_0795295"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "SP-21",
+      "surfaceRegionEn": "Lateral Thoracic Region",
+      "surfaceRegionVi": "Ngực bên",
+      "landmarks": [
+        {
+          "label": "Sixth Intercostal Space",
+          "uri": "http://uri.interlex.org/base/ilx_0795307"
+        },
+        {
+          "label": "Midaxillary Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795308"
+        }
+      ]
+    },
+    {
+      "code": "HT-1",
+      "surfaceRegionEn": "Axilla",
+      "surfaceRegionVi": "Nách",
+      "landmarks": [
+        {
+          "label": "Axillary Fossa",
+          "uri": "http://uri.interlex.org/base/ilx_0795309"
+        },
+        {
+          "label": "Axillary Artery",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001394"
+        }
+      ]
+    },
+    {
+      "code": "HT-2",
+      "surfaceRegionEn": "Arm",
+      "surfaceRegionVi": "Cánh tay",
+      "landmarks": [
+        {
+          "label": "Biceps Brachii Muscle",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001507"
+        },
+        {
+          "label": "Cubital Crease",
+          "uri": "http://uri.interlex.org/base/ilx_0795332"
+        }
+      ]
+    },
+    {
+      "code": "HT-3",
+      "surfaceRegionEn": "Elbow",
+      "surfaceRegionVi": "Khuỷu tay",
+      "landmarks": [
+        {
+          "label": "Medial Epicondyle",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0006806"
+        },
+        {
+          "label": "Cubital Crease",
+          "uri": "http://uri.interlex.org/base/ilx_0795332"
+        }
+      ]
+    },
+    {
+      "code": "HT-4",
+      "surfaceRegionEn": "Forearm",
+      "surfaceRegionVi": "Cẳng tay",
+      "landmarks": [
+        {
+          "label": "Tendon of flexor carpi ulnaris",
+          "uri": "http://uri.interlex.org/base/ilx_0795501"
+        },
+        {
+          "label": "Palmar Wrist Crease",
+          "uri": "http://uri.interlex.org/base/ilx_0795334"
+        },
+        {
+          "label": "Ulna",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001424"
+        },
+        {
+          "label": "Pisiform Bone",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001429"
+        }
+      ]
+    },
+    {
+      "code": "HT-5",
+      "surfaceRegionEn": "Forearm",
+      "surfaceRegionVi": "Cẳng tay",
+      "landmarks": [
+        {
+          "label": "Tendon of flexor carpi ulnaris",
+          "uri": "http://uri.interlex.org/base/ilx_0795501"
+        },
+        {
+          "label": "Palmar Wrist Crease",
+          "uri": "http://uri.interlex.org/base/ilx_0795334"
+        },
+        {
+          "label": "Ulna",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001424"
+        },
+        {
+          "label": "Pisiform Bone",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001429"
+        }
+      ]
+    },
+    {
+      "code": "HT-6",
+      "surfaceRegionEn": "Forearm",
+      "surfaceRegionVi": "Cẳng tay",
+      "landmarks": [
+        {
+          "label": "Tendon of flexor carpi ulnaris",
+          "uri": "http://uri.interlex.org/base/ilx_0795501"
+        },
+        {
+          "label": "Palmar Wrist Crease",
+          "uri": "http://uri.interlex.org/base/ilx_0795334"
+        },
+        {
+          "label": "Ulna",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001424"
+        },
+        {
+          "label": "Pisiform Bone",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001429"
+        }
+      ]
+    },
+    {
+      "code": "HT-7",
+      "surfaceRegionEn": "Wrist",
+      "surfaceRegionVi": "Cổ tay",
+      "landmarks": [
+        {
+          "label": "Tendon of flexor carpi ulnaris",
+          "uri": "http://uri.interlex.org/base/ilx_0795501"
+        },
+        {
+          "label": "Palmar Wrist Crease",
+          "uri": "http://uri.interlex.org/base/ilx_0795334"
+        },
+        {
+          "label": "Pisiform Bone",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001429"
+        }
+      ]
+    },
+    {
+      "code": "HT-8",
+      "surfaceRegionEn": "Palm",
+      "surfaceRegionVi": "Lòng bàn tay",
+      "landmarks": [
+        {
+          "label": "FOURTH METACARPAL BONE",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0003648"
+        },
+        {
+          "label": "FIFTH METACARPAL BONE",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0003649"
+        },
+        {
+          "label": "metacarpophalangeal joint of manual digit 5",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0007747"
+        },
+        {
+          "label": "Little Finger",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0003625"
+        }
+      ]
+    },
+    {
+      "code": "HT-9",
+      "surfaceRegionEn": "Little Finger",
+      "surfaceRegionVi": "Ngón út",
+      "landmarks": [
+        {
+          "label": "Distal Phalanx",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004300"
+        },
+        {
+          "label": "Nail Of Manual Digit 5",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0011277"
+        }
+      ]
+    },
+    {
+      "code": "SI-1",
+      "surfaceRegionEn": "Little Finger",
+      "surfaceRegionVi": "Ngón út",
+      "landmarks": [
+        {
+          "label": "Distal Phalanx",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004300"
+        },
+        {
+          "label": "Nail Of Manual Digit 5",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0011277"
+        }
+      ]
+    },
+    {
+      "code": "SI-2",
+      "surfaceRegionEn": "Little Finger",
+      "surfaceRegionVi": "Ngón út",
+      "landmarks": [
+        {
+          "label": "Distal Phalanx",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004300"
+        },
+        {
+          "label": "Nail Of Manual Digit 5",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0011277"
+        }
+      ]
+    },
+    {
+      "code": "SI-3",
+      "surfaceRegionEn": "Little Finger",
+      "surfaceRegionVi": "Ngón út",
+      "landmarks": [
+        {
+          "label": "Distal Phalanx",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004300"
+        },
+        {
+          "label": "Nail Of Manual Digit 5",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0011277"
+        }
+      ]
+    },
+    {
+      "code": "SI-4",
+      "surfaceRegionEn": "Wrist",
+      "surfaceRegionVi": "Cổ tay",
+      "landmarks": [
+        {
+          "label": "Fifth Metacarpal Bone",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0003649"
+        },
+        {
+          "label": "Triquetrum",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0002445"
+        }
+      ]
+    },
+    {
+      "code": "SI-5",
+      "surfaceRegionEn": "Wrist",
+      "surfaceRegionVi": "Cổ tay",
+      "landmarks": [
+        {
+          "label": "Triquetrum",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0002445"
+        },
+        {
+          "label": "Ulnar Styloid Process",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0011575"
+        }
+      ]
+    },
+    {
+      "code": "SI-6",
+      "surfaceRegionEn": "Forearm",
+      "surfaceRegionVi": "Cẳng tay",
+      "landmarks": [
+        {
+          "label": "Dorsal Wrist Crease",
+          "uri": "http://uri.interlex.org/base/ilx_0795333"
+        },
+        {
+          "label": "ulna",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001424"
+        }
+      ]
+    },
+    {
+      "code": "SI-7",
+      "surfaceRegionEn": "Forearm",
+      "surfaceRegionVi": "Cẳng tay",
+      "landmarks": [
+        {
+          "label": "ulna",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001424"
+        },
+        {
+          "label": "Flexor Carpi Ulnaris Muscle",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001522"
+        },
+        {
+          "label": "Dorsal Wrist Crease",
+          "uri": "http://uri.interlex.org/base/ilx_0795333"
+        }
+      ]
+    },
+    {
+      "code": "SI-8",
+      "surfaceRegionEn": "Elbow",
+      "surfaceRegionVi": "Khuỷu tay",
+      "landmarks": [
+        {
+          "label": "Olecranon",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0006810"
+        },
+        {
+          "label": "Medial Epicondyle",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0006806"
+        },
+        {
+          "label": "Humerus Bone",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0000976"
+        },
+        {
+          "label": "Ulnar Nerve",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001494"
+        }
+      ]
+    },
+    {
+      "code": "SI-9",
+      "surfaceRegionEn": "Shoulder Girdle",
+      "surfaceRegionVi": "Vai",
+      "landmarks": [
+        {
+          "label": "Shoulder Joint",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001470"
+        },
+        {
+          "label": "Posterior Axillary Fold",
+          "uri": "http://uri.interlex.org/base/ilx_0795311"
+        },
+        {
+          "label": "Deltoid Muscle",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001476"
+        }
+      ]
+    },
+    {
+      "code": "SI-10",
+      "surfaceRegionEn": "Shoulder Girdle",
+      "surfaceRegionVi": "Vai",
+      "landmarks": [
+        {
+          "label": "Posterior Axillary Fold",
+          "uri": "http://uri.interlex.org/base/ilx_0795311"
+        },
+        {
+          "label": "Scapula Spine",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004651"
+        }
+      ]
+    },
+    {
+      "code": "SI-11",
+      "surfaceRegionEn": "Scapular Region",
+      "surfaceRegionVi": "Vùng bả vai",
+      "landmarks": [
+        {
+          "label": "Scapula",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0006849"
+        },
+        {
+          "label": "Scapula Spine",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004651"
+        }
+      ]
+    },
+    {
+      "code": "SI-12",
+      "surfaceRegionEn": "Scapular Region",
+      "surfaceRegionVi": "Vùng bả vai",
+      "landmarks": [
+        {
+          "label": "Scapula",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0006849"
+        },
+        {
+          "label": "Supraspinatus Fossa",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0006849"
+        },
+        {
+          "label": "Scapula Spine",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004651"
+        }
+      ]
+    },
+    {
+      "code": "SI-13",
+      "surfaceRegionEn": "Scapular Region",
+      "surfaceRegionVi": "Vùng bả vai",
+      "landmarks": [
+        {
+          "label": "Scapula",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0006849"
+        },
+        {
+          "label": "Scapula Spine",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004651"
+        },
+        {
+          "label": "Second Thoracic Vertebra",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004627"
+        }
+      ]
+    },
+    {
+      "code": "SI-14",
+      "surfaceRegionEn": "Upper Back",
+      "surfaceRegionVi": "Lưng trên",
+      "landmarks": [
+        {
+          "label": "First Thoracic Vertebra",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004626"
+        },
+        {
+          "label": "Posterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795312"
+        },
+        {
+          "label": "Scapula Spine",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004651"
+        }
+      ]
+    },
+    {
+      "code": "SI-15",
+      "surfaceRegionEn": "Upper Back",
+      "surfaceRegionVi": "Lưng trên",
+      "landmarks": [
+        {
+          "label": "Seventh Cervical Vertebra",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004616"
+        },
+        {
+          "label": "Posterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795312"
+        },
+        {
+          "label": "Scapula",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0006849"
+        }
+      ]
+    },
+    {
+      "code": "SI-16",
+      "surfaceRegionEn": "Neck",
+      "surfaceRegionVi": "Cổ",
+      "landmarks": [
+        {
+          "label": "Sternocleidomastoid Muscle",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001128"
+        },
+        {
+          "label": "Thyroid Cartilage",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001738"
+        }
+      ]
+    },
+    {
+      "code": "SI-17",
+      "surfaceRegionEn": "Neck",
+      "surfaceRegionVi": "Cổ",
+      "landmarks": [
+        {
+          "label": "Mandible",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001684"
+        },
+        {
+          "label": "Sternocleidomastoid Muscle",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001128"
+        }
+      ]
+    },
+    {
+      "code": "SI-18",
+      "surfaceRegionEn": "Face",
+      "surfaceRegionVi": "Mặt",
+      "landmarks": [
+        {
+          "label": "Zygomatic Bone",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001683"
+        },
+        {
+          "label": "Outer Canthus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0006726"
+        },
+        {
+          "label": "Eye",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0000019"
+        }
+      ]
+    },
+    {
+      "code": "SI-19",
+      "surfaceRegionEn": "Face",
+      "surfaceRegionVi": "Mặt",
+      "landmarks": [
+        {
+          "label": "Tragus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0010887"
+        },
+        {
+          "label": "Mandible Condylar Process",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004657"
+        }
+      ]
+    },
+    {
+      "code": "BL-1",
+      "surfaceRegionEn": "Face",
+      "surfaceRegionVi": "Mặt",
+      "landmarks": [
+        {
+          "label": "Inner Canthus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0005611"
+        },
+        {
+          "label": "Eye",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0000019"
+        },
+        {
+          "label": "Orbital Cavity",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004867"
+        }
+      ]
+    },
+    {
+      "code": "BL-2",
+      "surfaceRegionEn": "Head",
+      "surfaceRegionVi": "Đầu",
+      "landmarks": [
+        {
+          "label": "Eyebrow",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0010163"
+        },
+        {
+          "label": "Frontal Notch",
+          "uri": "http://uri.interlex.org/base/ilx_0741726"
+        }
+      ]
+    },
+    {
+      "code": "BL-3",
+      "surfaceRegionEn": "Head",
+      "surfaceRegionVi": "Đầu",
+      "landmarks": [
+        {
+          "label": "Frontal Notch",
+          "uri": "http://uri.interlex.org/base/ilx_0741726"
+        },
+        {
+          "label": "Anterior Hairline",
+          "uri": "http://uri.interlex.org/base/ilx_0795292"
+        }
+      ]
+    },
+    {
+      "code": "BL-4",
+      "surfaceRegionEn": "Head",
+      "surfaceRegionVi": "Đầu",
+      "landmarks": [
+        {
+          "label": "Anterior Hairline",
+          "uri": "http://uri.interlex.org/base/ilx_0795292"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "BL-5",
+      "surfaceRegionEn": "Head",
+      "surfaceRegionVi": "Đầu",
+      "landmarks": [
+        {
+          "label": "Anterior Hairline",
+          "uri": "http://uri.interlex.org/base/ilx_0795292"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "BL-6",
+      "surfaceRegionEn": "Head",
+      "surfaceRegionVi": "Đầu",
+      "landmarks": [
+        {
+          "label": "Anterior Hairline",
+          "uri": "http://uri.interlex.org/base/ilx_0795292"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "BL-7",
+      "surfaceRegionEn": "Head",
+      "surfaceRegionVi": "Đầu",
+      "landmarks": [
+        {
+          "label": "Anterior Hairline",
+          "uri": "http://uri.interlex.org/base/ilx_0795292"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "BL-8",
+      "surfaceRegionEn": "Head",
+      "surfaceRegionVi": "Đầu",
+      "landmarks": [
+        {
+          "label": "Anterior Hairline",
+          "uri": "http://uri.interlex.org/base/ilx_0795292"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "BL-9",
+      "surfaceRegionEn": "Head",
+      "surfaceRegionVi": "Đầu",
+      "landmarks": [
+        {
+          "label": "External Occipital Protuberance",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0013469"
+        },
+        {
+          "label": "Posterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795312"
+        },
+        {
+          "label": "Trapezius Muscle",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0002380"
+        }
+      ]
+    },
+    {
+      "code": "BL-10",
+      "surfaceRegionEn": "Neck",
+      "surfaceRegionVi": "Cổ",
+      "landmarks": [
+        {
+          "label": "Second Cervical Vertebra",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001093"
+        },
+        {
+          "label": "Trapezius Muscle",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0002380"
+        }
+      ]
+    },
+    {
+      "code": "BL-11",
+      "surfaceRegionEn": "Upper Back",
+      "surfaceRegionVi": "Lưng trên",
+      "landmarks": [
+        {
+          "label": "First Thoracic Vertebra",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004626"
+        },
+        {
+          "label": "Posterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795312"
+        }
+      ]
+    },
+    {
+      "code": "BL-12",
+      "surfaceRegionEn": "Upper Back",
+      "surfaceRegionVi": "Lưng trên",
+      "landmarks": [
+        {
+          "label": "Second Thoracic Vertebra",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004627"
+        },
+        {
+          "label": "Posterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795312"
+        }
+      ]
+    },
+    {
+      "code": "BL-13",
+      "surfaceRegionEn": "Upper Back",
+      "surfaceRegionVi": "Lưng trên",
+      "landmarks": [
+        {
+          "label": "Third Thoracic Vertebra",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004628"
+        },
+        {
+          "label": "Posterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795312"
+        }
+      ]
+    },
+    {
+      "code": "BL-14",
+      "surfaceRegionEn": "Upper Back",
+      "surfaceRegionVi": "Lưng trên",
+      "landmarks": [
+        {
+          "label": "Fourth Thoracic Vertebra",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004629"
+        },
+        {
+          "label": "Posterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795312"
+        }
+      ]
+    },
+    {
+      "code": "BL-15",
+      "surfaceRegionEn": "Upper Back",
+      "surfaceRegionVi": "Lưng trên",
+      "landmarks": [
+        {
+          "label": "Fifth Thoracic Vertebra",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004630"
+        },
+        {
+          "label": "Posterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795312"
+        }
+      ]
+    },
+    {
+      "code": "BL-16",
+      "surfaceRegionEn": "Upper Back",
+      "surfaceRegionVi": "Lưng trên",
+      "landmarks": [
+        {
+          "label": "Sixth Thoracic Vertebra",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004631"
+        },
+        {
+          "label": "Posterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795312"
+        }
+      ]
+    },
+    {
+      "code": "BL-17",
+      "surfaceRegionEn": "Upper Back",
+      "surfaceRegionVi": "Lưng trên",
+      "landmarks": [
+        {
+          "label": "Seventh Thoracic Vertebra",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004632"
+        },
+        {
+          "label": "Posterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795312"
+        },
+        {
+          "label": "Scapula",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0006849"
+        }
+      ]
+    },
+    {
+      "code": "BL-18",
+      "surfaceRegionEn": "Upper Back",
+      "surfaceRegionVi": "Lưng trên",
+      "landmarks": [
+        {
+          "label": "Ninth Thoracic Vertebra",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004633"
+        },
+        {
+          "label": "Posterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795312"
+        }
+      ]
+    },
+    {
+      "code": "BL-19",
+      "surfaceRegionEn": "Upper Back",
+      "surfaceRegionVi": "Lưng trên",
+      "landmarks": [
+        {
+          "label": "Tenth Thoracic Vertebra",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004634"
+        },
+        {
+          "label": "Posterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795312"
+        }
+      ]
+    },
+    {
+      "code": "BL-20",
+      "surfaceRegionEn": "Upper Back",
+      "surfaceRegionVi": "Lưng trên",
+      "landmarks": [
+        {
+          "label": "Eleventh Thoracic Vertebra",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004635"
+        },
+        {
+          "label": "Posterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795312"
+        }
+      ]
+    },
+    {
+      "code": "BL-21",
+      "surfaceRegionEn": "Upper Back",
+      "surfaceRegionVi": "Lưng trên",
+      "landmarks": [
+        {
+          "label": "Twelfth Thoracic Vertebra",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004636"
+        },
+        {
+          "label": "Posterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795312"
+        }
+      ]
+    },
+    {
+      "code": "BL-22",
+      "surfaceRegionEn": "Lumbar Region",
+      "surfaceRegionVi": "Thắt lưng",
+      "landmarks": [
+        {
+          "label": "First Lumbar Vertebra",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004617"
+        },
+        {
+          "label": "Posterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795312"
+        }
+      ]
+    },
+    {
+      "code": "BL-23",
+      "surfaceRegionEn": "Lumbar Region",
+      "surfaceRegionVi": "Thắt lưng",
+      "landmarks": [
+        {
+          "label": "Second Lumbar Vertebra",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004618"
+        },
+        {
+          "label": "Posterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795312"
+        }
+      ]
+    },
+    {
+      "code": "BL-24",
+      "surfaceRegionEn": "Lumbar Region",
+      "surfaceRegionVi": "Thắt lưng",
+      "landmarks": [
+        {
+          "label": "Third Lumbar Vertebra",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004619"
+        },
+        {
+          "label": "Posterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795312"
+        }
+      ]
+    },
+    {
+      "code": "BL-25",
+      "surfaceRegionEn": "Lumbar Region",
+      "surfaceRegionVi": "Thắt lưng",
+      "landmarks": [
+        {
+          "label": "Fourth Lumbar Vertebra",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004620"
+        },
+        {
+          "label": "Posterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795312"
+        }
+      ]
+    },
+    {
+      "code": "BL-26",
+      "surfaceRegionEn": "Lumbar Region",
+      "surfaceRegionVi": "Thắt lưng",
+      "landmarks": [
+        {
+          "label": "Fifth Lumbar Vertebra",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004621"
+        },
+        {
+          "label": "Posterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795312"
+        }
+      ]
+    },
+    {
+      "code": "BL-27",
+      "surfaceRegionEn": "Sacral Region",
+      "surfaceRegionVi": "Vùng cùng",
+      "landmarks": [
+        {
+          "label": "First Posterior Sacral Foramen",
+          "uri": "http://uri.interlex.org/base/ilx_0795313"
+        },
+        {
+          "label": "Median Sacral Crest",
+          "uri": "http://uri.interlex.org/base/ilx_0741680"
+        }
+      ]
+    },
+    {
+      "code": "BL-28",
+      "surfaceRegionEn": "Sacral Region",
+      "surfaceRegionVi": "Vùng cùng",
+      "landmarks": [
+        {
+          "label": "Second Posterior Sacral Foramen",
+          "uri": "http://uri.interlex.org/base/ilx_0795314"
+        },
+        {
+          "label": "Median Sacral Crest",
+          "uri": "http://uri.interlex.org/base/ilx_0741680"
+        }
+      ]
+    },
+    {
+      "code": "BL-29",
+      "surfaceRegionEn": "Sacral Region",
+      "surfaceRegionVi": "Vùng cùng",
+      "landmarks": [
+        {
+          "label": "Third Posterior Sacral Foramen",
+          "uri": "http://uri.interlex.org/base/ilx_0795315"
+        },
+        {
+          "label": "Median Sacral Crest",
+          "uri": "http://uri.interlex.org/base/ilx_0741680"
+        }
+      ]
+    },
+    {
+      "code": "BL-30",
+      "surfaceRegionEn": "Sacral Region",
+      "surfaceRegionVi": "Vùng cùng",
+      "landmarks": [
+        {
+          "label": "Fourth Posterior Sacral Foramen",
+          "uri": "http://uri.interlex.org/base/ilx_0795316"
+        },
+        {
+          "label": "Sacral Hiatus",
+          "uri": "http://uri.interlex.org/base/ilx_0741717"
+        },
+        {
+          "label": "Median Sacral Crest",
+          "uri": "http://uri.interlex.org/base/ilx_0741680"
+        }
+      ]
+    },
+    {
+      "code": "BL-31",
+      "surfaceRegionEn": "Sacral Region",
+      "surfaceRegionVi": "Vùng cùng",
+      "landmarks": [
+        {
+          "label": "First Posterior Sacral Foramen",
+          "uri": "http://uri.interlex.org/base/ilx_0795313"
+        }
+      ]
+    },
+    {
+      "code": "BL-32",
+      "surfaceRegionEn": "Sacral Region",
+      "surfaceRegionVi": "Vùng cùng",
+      "landmarks": [
+        {
+          "label": "Second Posterior Sacral Foramen",
+          "uri": "http://uri.interlex.org/base/ilx_0795314"
+        },
+        {
+          "label": "Posterior Superior Iliac Spine",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0013710"
+        },
+        {
+          "label": "Second Sacral Vertebra",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004623"
+        }
+      ]
+    },
+    {
+      "code": "BL-33",
+      "surfaceRegionEn": "Sacral Region",
+      "surfaceRegionVi": "Vùng cùng",
+      "landmarks": [
+        {
+          "label": "Third Posterior Sacral Foramen",
+          "uri": "http://uri.interlex.org/base/ilx_0795315"
+        }
+      ]
+    },
+    {
+      "code": "BL-34",
+      "surfaceRegionEn": "Sacral Region",
+      "surfaceRegionVi": "Vùng cùng",
+      "landmarks": [
+        {
+          "label": "Fourth Posterior Sacral Foramen",
+          "uri": "http://uri.interlex.org/base/ilx_0795316"
+        },
+        {
+          "label": "Sacral Hiatus",
+          "uri": "http://uri.interlex.org/base/ilx_0741717"
+        }
+      ]
+    },
+    {
+      "code": "BL-35",
+      "surfaceRegionEn": "Buttock",
+      "surfaceRegionVi": "Mông",
+      "landmarks": [
+        {
+          "label": "Coccyx",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001350"
+        }
+      ]
+    },
+    {
+      "code": "BL-36",
+      "surfaceRegionEn": "Buttock",
+      "surfaceRegionVi": "Mông",
+      "landmarks": [
+        {
+          "label": "Gluteal Fold",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0036014"
+        }
+      ]
+    },
+    {
+      "code": "BL-37",
+      "surfaceRegionEn": "Thigh",
+      "surfaceRegionVi": "Đùi",
+      "landmarks": [
+        {
+          "label": "Biceps Femoris",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001374"
+        },
+        {
+          "label": "Semitendinosus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001375"
+        },
+        {
+          "label": "Gluteal Fold",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0036014"
+        }
+      ]
+    },
+    {
+      "code": "BL-38",
+      "surfaceRegionEn": "Knee",
+      "surfaceRegionVi": "Gối",
+      "landmarks": [
+        {
+          "label": "Biceps Femoris Tendon",
+          "uri": "http://uri.interlex.org/base/ilx_0795317"
+        },
+        {
+          "label": "Popliteal Crease",
+          "uri": "http://uri.interlex.org/base/ilx_0795330"
+        },
+        {
+          "label": "Biceps Femoris",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001374"
+        }
+      ]
+    },
+    {
+      "code": "BL-39",
+      "surfaceRegionEn": "Knee",
+      "surfaceRegionVi": "Gối",
+      "landmarks": [
+        {
+          "label": "Biceps Femoris Tendon",
+          "uri": "http://uri.interlex.org/base/ilx_0795317"
+        },
+        {
+          "label": "Popliteal Crease",
+          "uri": "http://uri.interlex.org/base/ilx_0795330"
+        }
+      ]
+    },
+    {
+      "code": "BL-40",
+      "surfaceRegionEn": "Knee",
+      "surfaceRegionVi": "Gối",
+      "landmarks": [
+        {
+          "label": "Popliteal Crease",
+          "uri": "http://uri.interlex.org/base/ilx_0795330"
+        }
+      ]
+    },
+    {
+      "code": "BL-41",
+      "surfaceRegionEn": "Upper Back",
+      "surfaceRegionVi": "Lưng trên",
+      "landmarks": [
+        {
+          "label": "Second Thoracic Vertebra",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004627"
+        },
+        {
+          "label": "Posterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795312"
+        }
+      ]
+    },
+    {
+      "code": "BL-42",
+      "surfaceRegionEn": "Upper Back",
+      "surfaceRegionVi": "Lưng trên",
+      "landmarks": [
+        {
+          "label": "Third Thoracic Vertebra",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004628"
+        },
+        {
+          "label": "Posterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795312"
+        }
+      ]
+    },
+    {
+      "code": "BL-43",
+      "surfaceRegionEn": "Upper Back",
+      "surfaceRegionVi": "Lưng trên",
+      "landmarks": [
+        {
+          "label": "Fourth Thoracic Vertebra",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004629"
+        },
+        {
+          "label": "Posterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795312"
+        }
+      ]
+    },
+    {
+      "code": "BL-44",
+      "surfaceRegionEn": "Upper Back",
+      "surfaceRegionVi": "Lưng trên",
+      "landmarks": [
+        {
+          "label": "Fifth Thoracic Vertebra",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004630"
+        },
+        {
+          "label": "Posterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795312"
+        }
+      ]
+    },
+    {
+      "code": "BL-45",
+      "surfaceRegionEn": "Upper Back",
+      "surfaceRegionVi": "Lưng trên",
+      "landmarks": [
+        {
+          "label": "Sixth Thoracic Vertebra",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004631"
+        },
+        {
+          "label": "Posterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795312"
+        }
+      ]
+    },
+    {
+      "code": "BL-46",
+      "surfaceRegionEn": "Upper Back",
+      "surfaceRegionVi": "Lưng trên",
+      "landmarks": [
+        {
+          "label": "Seventh Thoracic Vertebra",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004632"
+        },
+        {
+          "label": "Posterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795312"
+        }
+      ]
+    },
+    {
+      "code": "BL-47",
+      "surfaceRegionEn": "Upper Back",
+      "surfaceRegionVi": "Lưng trên",
+      "landmarks": [
+        {
+          "label": "Ninth Thoracic Vertebra",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004633"
+        },
+        {
+          "label": "Posterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795312"
+        }
+      ]
+    },
+    {
+      "code": "BL-48",
+      "surfaceRegionEn": "Upper Back",
+      "surfaceRegionVi": "Lưng trên",
+      "landmarks": [
+        {
+          "label": "Tenth Thoracic Vertebra",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004634"
+        },
+        {
+          "label": "Posterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795312"
+        }
+      ]
+    },
+    {
+      "code": "BL-49",
+      "surfaceRegionEn": "Upper Back",
+      "surfaceRegionVi": "Lưng trên",
+      "landmarks": [
+        {
+          "label": "Eleventh Thoracic Vertebra",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004635"
+        },
+        {
+          "label": "Posterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795312"
+        }
+      ]
+    },
+    {
+      "code": "BL-50",
+      "surfaceRegionEn": "Upper Back",
+      "surfaceRegionVi": "Lưng trên",
+      "landmarks": [
+        {
+          "label": "Twelfth Thoracic Vertebra",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004636"
+        },
+        {
+          "label": "Posterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795312"
+        }
+      ]
+    },
+    {
+      "code": "BL-51",
+      "surfaceRegionEn": "Lumbar Region",
+      "surfaceRegionVi": "Thắt lưng",
+      "landmarks": [
+        {
+          "label": "First Lumbar Vertebra",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004617"
+        },
+        {
+          "label": "Posterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795312"
+        }
+      ]
+    },
+    {
+      "code": "BL-52",
+      "surfaceRegionEn": "Lumbar Region",
+      "surfaceRegionVi": "Thắt lưng",
+      "landmarks": [
+        {
+          "label": "Second Lumbar Vertebra",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004618"
+        },
+        {
+          "label": "Posterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795312"
+        }
+      ]
+    },
+    {
+      "code": "BL-53",
+      "surfaceRegionEn": "Buttock",
+      "surfaceRegionVi": "Mông",
+      "landmarks": [
+        {
+          "label": "Second Posterior Sacral Foramen",
+          "uri": "http://uri.interlex.org/base/ilx_0795314"
+        },
+        {
+          "label": "Median Sacral Crest",
+          "uri": "http://uri.interlex.org/base/ilx_0741680"
+        }
+      ]
+    },
+    {
+      "code": "BL-54",
+      "surfaceRegionEn": "Buttock",
+      "surfaceRegionVi": "Mông",
+      "landmarks": [
+        {
+          "label": "Fourth Posterior Sacral Foramen",
+          "uri": "http://uri.interlex.org/base/ilx_0795316"
+        },
+        {
+          "label": "Median Sacral Crest",
+          "uri": "http://uri.interlex.org/base/ilx_0741680"
+        },
+        {
+          "label": "Sacral Hiatus",
+          "uri": "http://uri.interlex.org/base/ilx_0741717"
+        }
+      ]
+    },
+    {
+      "code": "BL-55",
+      "surfaceRegionEn": "Leg",
+      "surfaceRegionVi": "Cẳng chân",
+      "landmarks": [
+        {
+          "label": "Gastrocnemius Muscle",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001388"
+        },
+        {
+          "label": "Popliteal Crease",
+          "uri": "http://uri.interlex.org/base/ilx_0795330"
+        }
+      ]
+    },
+    {
+      "code": "BL-56",
+      "surfaceRegionEn": "Leg",
+      "surfaceRegionVi": "Cẳng chân",
+      "landmarks": [
+        {
+          "label": "Gastrocnemius Muscle",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001388"
+        },
+        {
+          "label": "Popliteal Crease",
+          "uri": "http://uri.interlex.org/base/ilx_0795330"
+        }
+      ]
+    },
+    {
+      "code": "BL-57",
+      "surfaceRegionEn": "Leg",
+      "surfaceRegionVi": "Cẳng chân",
+      "landmarks": [
+        {
+          "label": "Calcaneal Tendon",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0003701"
+        },
+        {
+          "label": "Gastrocnemius Muscle",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001388"
+        }
+      ]
+    },
+    {
+      "code": "BL-58",
+      "surfaceRegionEn": "Leg",
+      "surfaceRegionVi": "Cẳng chân",
+      "landmarks": [
+        {
+          "label": "Gastrocnemius Muscle",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001388"
+        },
+        {
+          "label": "Calcaneal Tendon",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0003701"
+        }
+      ]
+    },
+    {
+      "code": "BL-59",
+      "surfaceRegionEn": "Leg",
+      "surfaceRegionVi": "Cẳng chân",
+      "landmarks": [
+        {
+          "label": "Fibula",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001446"
+        },
+        {
+          "label": "Calcaneal Tendon",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0003701"
+        }
+      ]
+    },
+    {
+      "code": "BL-60",
+      "surfaceRegionEn": "Ankle",
+      "surfaceRegionVi": "Cổ chân",
+      "landmarks": [
+        {
+          "label": "Lateral Malleolus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0012291"
+        },
+        {
+          "label": "Calcaneal Tendon",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0003701"
+        }
+      ]
+    },
+    {
+      "code": "BL-61",
+      "surfaceRegionEn": "Foot",
+      "surfaceRegionVi": "Bàn chân",
+      "landmarks": [
+        {
+          "label": "Calcaneus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001450"
+        }
+      ]
+    },
+    {
+      "code": "BL-62",
+      "surfaceRegionEn": "Foot",
+      "surfaceRegionVi": "Bàn chân",
+      "landmarks": [
+        {
+          "label": "Lateral Malleolus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0012291"
+        },
+        {
+          "label": "Calcaneus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001450"
+        }
+      ]
+    },
+    {
+      "code": "BL-63",
+      "surfaceRegionEn": "Foot",
+      "surfaceRegionVi": "Bàn chân",
+      "landmarks": [
+        {
+          "label": "Lateral Malleolus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0012291"
+        },
+        {
+          "label": "Fifth Metatarsal Bone",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0003654"
+        },
+        {
+          "label": "Cuboid Bone",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001455"
+        }
+      ]
+    },
+    {
+      "code": "BL-64",
+      "surfaceRegionEn": "Foot",
+      "surfaceRegionVi": "Bàn chân",
+      "landmarks": [
+        {
+          "label": "Fifth Metatarsal Bone",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0003654"
+        },
+        {
+          "label": "Metatarsophalangeal Joint Of Pedal Digit 5",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0007762"
+        }
+      ]
+    },
+    {
+      "code": "BL-65",
+      "surfaceRegionEn": "Foot",
+      "surfaceRegionVi": "Bàn chân",
+      "landmarks": [
+        {
+          "label": "Metatarsophalangeal Joint Of Pedal Digit 5",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0007762"
+        }
+      ]
+    },
+    {
+      "code": "BL-66",
+      "surfaceRegionEn": "Little Toe",
+      "surfaceRegionVi": "Ngón chân út",
+      "landmarks": [
+        {
+          "label": "Metatarsophalangeal Joint Of Pedal Digit 5",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0007762"
+        }
+      ]
+    },
+    {
+      "code": "BL-67",
+      "surfaceRegionEn": "Little Toe",
+      "surfaceRegionVi": "Ngón chân út",
+      "landmarks": [
+        {
+          "label": "Toenail",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0009567"
+        }
+      ]
+    },
+    {
+      "code": "KI-1",
+      "surfaceRegionEn": "Sole Of The Foot",
+      "surfaceRegionVi": "Lòng bàn chân",
+      "landmarks": [
+        {
+          "label": "Pedal Digit 2",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0003632"
+        },
+        {
+          "label": "Pedal Digit 3",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0003633"
+        }
+      ]
+    },
+    {
+      "code": "KI-2",
+      "surfaceRegionEn": "Foot",
+      "surfaceRegionVi": "Bàn chân",
+      "landmarks": [
+        {
+          "label": "Navicular Bone",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0010759"
+        }
+      ]
+    },
+    {
+      "code": "KI-3",
+      "surfaceRegionEn": "Ankle",
+      "surfaceRegionVi": "Cổ chân",
+      "landmarks": [
+        {
+          "label": "Medial Malleolus",
+          "uri": "http://uri.interlex.org/base/ilx_0795305"
+        },
+        {
+          "label": "Calcaneal Tendon",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0003701"
+        }
+      ]
+    },
+    {
+      "code": "KI-4",
+      "surfaceRegionEn": "Foot",
+      "surfaceRegionVi": "Bàn chân",
+      "landmarks": [
+        {
+          "label": "Medial Malleolus",
+          "uri": "http://uri.interlex.org/base/ilx_0795305"
+        },
+        {
+          "label": "Calcaneus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001450"
+        },
+        {
+          "label": "Calcaneal Tendon",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0003701"
+        }
+      ]
+    },
+    {
+      "code": "KI-5",
+      "surfaceRegionEn": "Foot",
+      "surfaceRegionVi": "Bàn chân",
+      "landmarks": [
+        {
+          "label": "Calcaneal Tuberosity",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_7500094"
+        }
+      ]
+    },
+    {
+      "code": "KI-6",
+      "surfaceRegionEn": "Foot",
+      "surfaceRegionVi": "Bàn chân",
+      "landmarks": [
+        {
+          "label": "Medial Malleolus",
+          "uri": "http://uri.interlex.org/base/ilx_0795305"
+        }
+      ]
+    },
+    {
+      "code": "KI-7",
+      "surfaceRegionEn": "Leg",
+      "surfaceRegionVi": "Cẳng chân",
+      "landmarks": [
+        {
+          "label": "Calcaneal Tendon",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0003701"
+        },
+        {
+          "label": "Medial Malleolus",
+          "uri": "http://uri.interlex.org/base/ilx_0795305"
+        }
+      ]
+    },
+    {
+      "code": "KI-8",
+      "surfaceRegionEn": "Leg",
+      "surfaceRegionVi": "Cẳng chân",
+      "landmarks": [
+        {
+          "label": "Tibia",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0000979"
+        },
+        {
+          "label": "Medial Malleolus",
+          "uri": "http://uri.interlex.org/base/ilx_0795305"
+        }
+      ]
+    },
+    {
+      "code": "KI-9",
+      "surfaceRegionEn": "Leg",
+      "surfaceRegionVi": "Cẳng chân",
+      "landmarks": [
+        {
+          "label": "Soleus Muscle",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001389"
+        },
+        {
+          "label": "Calcaneal Tendon",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0003701"
+        },
+        {
+          "label": "Medial Malleolus",
+          "uri": "http://uri.interlex.org/base/ilx_0795305"
+        },
+        {
+          "label": "Tibia",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0000979"
+        }
+      ]
+    },
+    {
+      "code": "KI-10",
+      "surfaceRegionEn": "Knee",
+      "surfaceRegionVi": "Gối",
+      "landmarks": [
+        {
+          "label": "Semitendinosus Tendon",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_8480009"
+        },
+        {
+          "label": "Popliteal Crease",
+          "uri": "http://uri.interlex.org/base/ilx_0795330"
+        }
+      ]
+    },
+    {
+      "code": "KI-11",
+      "surfaceRegionEn": "Lower Abdomen",
+      "surfaceRegionVi": "Bụng dưới",
+      "landmarks": [
+        {
+          "label": "Umbilicus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0007118"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "KI-12",
+      "surfaceRegionEn": "Lower Abdomen",
+      "surfaceRegionVi": "Bụng dưới",
+      "landmarks": [
+        {
+          "label": "Umbilicus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0007118"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "KI-13",
+      "surfaceRegionEn": "Lower Abdomen",
+      "surfaceRegionVi": "Bụng dưới",
+      "landmarks": [
+        {
+          "label": "Umbilicus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0007118"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "KI-14",
+      "surfaceRegionEn": "Lower Abdomen",
+      "surfaceRegionVi": "Bụng dưới",
+      "landmarks": [
+        {
+          "label": "Umbilicus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0007118"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "KI-15",
+      "surfaceRegionEn": "Lower Abdomen",
+      "surfaceRegionVi": "Bụng dưới",
+      "landmarks": [
+        {
+          "label": "Umbilicus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0007118"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "KI-16",
+      "surfaceRegionEn": "Upper Abdomen",
+      "surfaceRegionVi": "Bụng trên",
+      "landmarks": [
+        {
+          "label": "Umbilicus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0007118"
+        }
+      ]
+    },
+    {
+      "code": "KI-17",
+      "surfaceRegionEn": "Upper Abdomen",
+      "surfaceRegionVi": "Bụng trên",
+      "landmarks": [
+        {
+          "label": "Umbilicus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0007118"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "KI-18",
+      "surfaceRegionEn": "Upper Abdomen",
+      "surfaceRegionVi": "Bụng trên",
+      "landmarks": [
+        {
+          "label": "Umbilicus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0007118"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "KI-19",
+      "surfaceRegionEn": "Upper Abdomen",
+      "surfaceRegionVi": "Bụng trên",
+      "landmarks": [
+        {
+          "label": "Umbilicus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0007118"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "KI-20",
+      "surfaceRegionEn": "Upper Abdomen",
+      "surfaceRegionVi": "Bụng trên",
+      "landmarks": [
+        {
+          "label": "Umbilicus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0007118"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "KI-21",
+      "surfaceRegionEn": "Upper Abdomen",
+      "surfaceRegionVi": "Bụng trên",
+      "landmarks": [
+        {
+          "label": "Umbilicus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0007118"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "KI-22",
+      "surfaceRegionEn": "Anterior Thoracic Region",
+      "surfaceRegionVi": "Ngực trước",
+      "landmarks": [
+        {
+          "label": "Fifth Intercostal Space",
+          "uri": "http://uri.interlex.org/base/ilx_0795299"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "KI-23",
+      "surfaceRegionEn": "Anterior Thoracic Region",
+      "surfaceRegionVi": "Ngực trước",
+      "landmarks": [
+        {
+          "label": "Fourth Intercostal Space",
+          "uri": "http://uri.interlex.org/base/ilx_0795298"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "KI-24",
+      "surfaceRegionEn": "Anterior Thoracic Region",
+      "surfaceRegionVi": "Ngực trước",
+      "landmarks": [
+        {
+          "label": "Third Intercostal Space",
+          "uri": "http://uri.interlex.org/base/ilx_0795297"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "KI-25",
+      "surfaceRegionEn": "Anterior Thoracic Region",
+      "surfaceRegionVi": "Ngực trước",
+      "landmarks": [
+        {
+          "label": "Second Intercostal Space",
+          "uri": "http://uri.interlex.org/base/ilx_0795295"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "KI-26",
+      "surfaceRegionEn": "Anterior Thoracic Region",
+      "surfaceRegionVi": "Ngực trước",
+      "landmarks": [
+        {
+          "label": "First Intercostal Space",
+          "uri": "http://uri.interlex.org/base/ilx_0795283"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "KI-27",
+      "surfaceRegionEn": "Anterior Thoracic Region",
+      "surfaceRegionVi": "Ngực trước",
+      "landmarks": [
+        {
+          "label": "Clavicle",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001105"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "PC-1",
+      "surfaceRegionEn": "Anterior Thoracic Region",
+      "surfaceRegionVi": "Ngực trước",
+      "landmarks": [
+        {
+          "label": "Fourth Intercostal Space",
+          "uri": "http://uri.interlex.org/base/ilx_0795298"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "PC-2",
+      "surfaceRegionEn": "Arm",
+      "surfaceRegionVi": "Cánh tay",
+      "landmarks": [
+        {
+          "label": "Biceps Brachii Muscle",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001507"
+        },
+        {
+          "label": "Anterior Axillary Fold",
+          "uri": "http://uri.interlex.org/base/ilx_0795287"
+        }
+      ]
+    },
+    {
+      "code": "PC-3",
+      "surfaceRegionEn": "Elbow",
+      "surfaceRegionVi": "Khuỷu tay",
+      "landmarks": [
+        {
+          "label": "Cubital Crease",
+          "uri": "http://uri.interlex.org/base/ilx_0795332"
+        },
+        {
+          "label": "Biceps Brachii Tendon",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0008188"
+        }
+      ]
+    },
+    {
+      "code": "PC-4",
+      "surfaceRegionEn": "Forearm",
+      "surfaceRegionVi": "Cẳng tay",
+      "landmarks": [
+        {
+          "label": "Palmaris Longus Tendon",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0016496"
+        },
+        {
+          "label": "Tendon of flexor carpi radialis",
+          "uri": "http://uri.interlex.org/base/ilx_0795500"
+        },
+        {
+          "label": "Palmar Wrist Crease",
+          "uri": "http://uri.interlex.org/base/ilx_0795334"
+        }
+      ]
+    },
+    {
+      "code": "PC-5",
+      "surfaceRegionEn": "Forearm",
+      "surfaceRegionVi": "Cẳng tay",
+      "landmarks": [
+        {
+          "label": "Palmaris Longus Tendon",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0016496"
+        },
+        {
+          "label": "Tendon of flexor carpi radialis",
+          "uri": "http://uri.interlex.org/base/ilx_0795500"
+        },
+        {
+          "label": "Palmar Wrist Crease",
+          "uri": "http://uri.interlex.org/base/ilx_0795334"
+        }
+      ]
+    },
+    {
+      "code": "PC-6",
+      "surfaceRegionEn": "Forearm",
+      "surfaceRegionVi": "Cẳng tay",
+      "landmarks": [
+        {
+          "label": "Palmaris Longus Tendon",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0016496"
+        },
+        {
+          "label": "Tendon of flexor carpi radialis",
+          "uri": "http://uri.interlex.org/base/ilx_0795500"
+        },
+        {
+          "label": "Palmar Wrist Crease",
+          "uri": "http://uri.interlex.org/base/ilx_0795334"
+        }
+      ]
+    },
+    {
+      "code": "PC-7",
+      "surfaceRegionEn": "Wrist",
+      "surfaceRegionVi": "Cổ tay",
+      "landmarks": [
+        {
+          "label": "Palmaris Longus Tendon",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0016496"
+        },
+        {
+          "label": "Tendon of flexor carpi radialis",
+          "uri": "http://uri.interlex.org/base/ilx_0795500"
+        },
+        {
+          "label": "Palmar Wrist Crease",
+          "uri": "http://uri.interlex.org/base/ilx_0795334"
+        }
+      ]
+    },
+    {
+      "code": "PC-8",
+      "surfaceRegionEn": "Palm",
+      "surfaceRegionVi": "Lòng bàn tay",
+      "landmarks": [
+        {
+          "label": "Second Metacarpal Bone",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0003646"
+        },
+        {
+          "label": "Third Metacarpal Bone",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0003647"
+        },
+        {
+          "label": "Fourth Metacarpal Bone",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0003648"
+        },
+        {
+          "label": "METACARPOPHALANGEAL JOINT",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0003695"
+        }
+      ]
+    },
+    {
+      "code": "PC-9",
+      "surfaceRegionEn": "Middle Finger",
+      "surfaceRegionVi": "Ngón giữa",
+      "landmarks": [
+        {
+          "label": "Nail Of Manual Digit 3",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0009565"
+        }
+      ]
+    },
+    {
+      "code": "TE-1",
+      "surfaceRegionEn": "Ring Finger",
+      "surfaceRegionVi": "Ngón áp út",
+      "landmarks": [
+        {
+          "label": "Distal Phalanx",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004300"
+        },
+        {
+          "label": "Nail Of Manual Digit 4",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0011276"
+        }
+      ]
+    },
+    {
+      "code": "TE-2",
+      "surfaceRegionEn": "Dorsum Of The Hand",
+      "surfaceRegionVi": "Mu bàn tay",
+      "landmarks": [
+        {
+          "label": "Ring Finger",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0003624"
+        },
+        {
+          "label": "Little Finger",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0003625"
+        }
+      ]
+    },
+    {
+      "code": "TE-3",
+      "surfaceRegionEn": "Dorsum Of The Hand",
+      "surfaceRegionVi": "Mu bàn tay",
+      "landmarks": [
+        {
+          "label": "Fourth Metacarpal Bone",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0003648"
+        },
+        {
+          "label": "Fifth Metacarpal Bone",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0003649"
+        },
+        {
+          "label": "Metacarpophalangeal Joint Of Manual Digit 4",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0007744"
+        }
+      ]
+    },
+    {
+      "code": "TE-4",
+      "surfaceRegionEn": "Wrist",
+      "surfaceRegionVi": "Cổ tay",
+      "landmarks": [
+        {
+          "label": "Tendon of extensor digitorum",
+          "uri": "http://uri.interlex.org/base/ilx_0795502"
+        },
+        {
+          "label": "Dorsal Wrist Crease",
+          "uri": "http://uri.interlex.org/base/ilx_0795333"
+        },
+        {
+          "label": "Fifth Metacarpal Bone",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0003649"
+        },
+        {
+          "label": "Fourth Metacarpal Bone",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0003648"
+        }
+      ]
+    },
+    {
+      "code": "TE-5",
+      "surfaceRegionEn": "Forearm",
+      "surfaceRegionVi": "Cẳng tay",
+      "landmarks": [
+        {
+          "label": "Interosseous Muscle Of Autopod",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0006508"
+        },
+        {
+          "label": "Radius",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001423"
+        },
+        {
+          "label": "Ulna",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001424"
+        },
+        {
+          "label": "Dorsal Wrist Crease",
+          "uri": "http://uri.interlex.org/base/ilx_0795333"
+        }
+      ]
+    },
+    {
+      "code": "TE-6",
+      "surfaceRegionEn": "Forearm",
+      "surfaceRegionVi": "Cẳng tay",
+      "landmarks": [
+        {
+          "label": "Interosseous Muscle Of Autopod",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0006508"
+        },
+        {
+          "label": "Radius",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001423"
+        },
+        {
+          "label": "Ulna",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001424"
+        },
+        {
+          "label": "Dorsal Wrist Crease",
+          "uri": "http://uri.interlex.org/base/ilx_0795333"
+        }
+      ]
+    },
+    {
+      "code": "TE-7",
+      "surfaceRegionEn": "Forearm",
+      "surfaceRegionVi": "Cẳng tay",
+      "landmarks": [
+        {
+          "label": "Ulna",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001424"
+        },
+        {
+          "label": "Dorsal Wrist Crease",
+          "uri": "http://uri.interlex.org/base/ilx_0795333"
+        }
+      ]
+    },
+    {
+      "code": "TE-8",
+      "surfaceRegionEn": "Forearm",
+      "surfaceRegionVi": "Cẳng tay",
+      "landmarks": [
+        {
+          "label": "Radius",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001423"
+        },
+        {
+          "label": "Ulna",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001424"
+        },
+        {
+          "label": "Elbow",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001461"
+        },
+        {
+          "label": "Dorsal Wrist Crease",
+          "uri": "http://uri.interlex.org/base/ilx_0795333"
+        }
+      ]
+    },
+    {
+      "code": "TE-9",
+      "surfaceRegionEn": "Forearm",
+      "surfaceRegionVi": "Cẳng tay",
+      "landmarks": [
+        {
+          "label": "Interosseous Muscle Of Autopod",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0006508"
+        },
+        {
+          "label": "Radius",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001423"
+        },
+        {
+          "label": "Ulna",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001424"
+        },
+        {
+          "label": "Olecranon",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0006810"
+        }
+      ]
+    },
+    {
+      "code": "TE-10",
+      "surfaceRegionEn": "Elbow",
+      "surfaceRegionVi": "Khuỷu tay",
+      "landmarks": [
+        {
+          "label": "Olecranon",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0006810"
+        },
+        {
+          "label": "Olecranon Fossa",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0012130"
+        }
+      ]
+    },
+    {
+      "code": "TE-11",
+      "surfaceRegionEn": "Arm",
+      "surfaceRegionVi": "Cánh tay",
+      "landmarks": [
+        {
+          "label": "Olecranon",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0006810"
+        },
+        {
+          "label": "Elbow",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001461"
+        }
+      ]
+    },
+    {
+      "code": "TE-12",
+      "surfaceRegionEn": "Arm",
+      "surfaceRegionVi": "Cánh tay",
+      "landmarks": [
+        {
+          "label": "Olecranon",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0006810"
+        }
+      ]
+    },
+    {
+      "code": "TE-13",
+      "surfaceRegionEn": "Arm",
+      "surfaceRegionVi": "Cánh tay",
+      "landmarks": [
+        {
+          "label": "Deltoid Muscle",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001476"
+        }
+      ]
+    },
+    {
+      "code": "TE-14",
+      "surfaceRegionEn": "Shoulder Girdle",
+      "surfaceRegionVi": "Vai",
+      "landmarks": [
+        {
+          "label": "Acromion",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0002497"
+        },
+        {
+          "label": "Greater Tubercle Of The Humerus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0011187"
+        }
+      ]
+    },
+    {
+      "code": "TE-15",
+      "surfaceRegionEn": "Scapular Region",
+      "surfaceRegionVi": "Vùng bả vai",
+      "landmarks": [
+        {
+          "label": "Scapula",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0006849"
+        }
+      ]
+    },
+    {
+      "code": "TE-16",
+      "surfaceRegionEn": "Neck",
+      "surfaceRegionVi": "Cổ",
+      "landmarks": [
+        {
+          "label": "Mandible",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001684"
+        },
+        {
+          "label": "Sternocleidomastoid Muscle",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001128"
+        }
+      ]
+    },
+    {
+      "code": "TE-17",
+      "surfaceRegionEn": "Neck",
+      "surfaceRegionVi": "Cổ",
+      "landmarks": [
+        {
+          "label": "Ear Lobe",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001847"
+        },
+        {
+          "label": "Mastoid Process",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0011220"
+        }
+      ]
+    },
+    {
+      "code": "TE-18",
+      "surfaceRegionEn": "Head",
+      "surfaceRegionVi": "Đầu",
+      "landmarks": [
+        {
+          "label": "Mastoid Process",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0011220"
+        }
+      ]
+    },
+    {
+      "code": "TE-19",
+      "surfaceRegionEn": "Head",
+      "surfaceRegionVi": "Đầu",
+      "landmarks": []
+    },
+    {
+      "code": "TE-20",
+      "surfaceRegionEn": "Head",
+      "surfaceRegionVi": "Đầu",
+      "landmarks": [
+        {
+          "label": "ear",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001690"
+        }
+      ]
+    },
+    {
+      "code": "TE-21",
+      "surfaceRegionEn": "Face",
+      "surfaceRegionVi": "Mặt",
+      "landmarks": [
+        {
+          "label": "supratragic notch",
+          "uri": null
+        },
+        {
+          "label": "Condyloid Process",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004657"
+        }
+      ]
+    },
+    {
+      "code": "TE-22",
+      "surfaceRegionEn": "Head",
+      "surfaceRegionVi": "Đầu",
+      "landmarks": [
+        {
+          "label": "Hairline",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004104"
+        },
+        {
+          "label": "Superficial Temporal Artery",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001614"
+        }
+      ]
+    },
+    {
+      "code": "TE-23",
+      "surfaceRegionEn": "Head",
+      "surfaceRegionVi": "Đầu",
+      "landmarks": [
+        {
+          "label": "Eyebrow",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0010163"
+        }
+      ]
+    },
+    {
+      "code": "GB-1",
+      "surfaceRegionEn": "Head",
+      "surfaceRegionVi": "Đầu",
+      "landmarks": [
+        {
+          "label": "Outer Canthus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0006726"
+        },
+        {
+          "label": "Eye",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0000970"
+        }
+      ]
+    },
+    {
+      "code": "GB-2",
+      "surfaceRegionEn": "Face",
+      "surfaceRegionVi": "Mặt",
+      "landmarks": [
+        {
+          "label": "Intertragic Notch",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0036212"
+        },
+        {
+          "label": "Condyloid Process",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004657"
+        }
+      ]
+    },
+    {
+      "code": "GB-3",
+      "surfaceRegionEn": "Head",
+      "surfaceRegionVi": "Đầu",
+      "landmarks": [
+        {
+          "label": "Zygomatic Arch",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0002500"
+        }
+      ]
+    },
+    {
+      "code": "GB-4",
+      "surfaceRegionEn": "Head",
+      "surfaceRegionVi": "Đầu",
+      "landmarks": []
+    },
+    {
+      "code": "GB-5",
+      "surfaceRegionEn": "Head",
+      "surfaceRegionVi": "Đầu",
+      "landmarks": []
+    },
+    {
+      "code": "GB-6",
+      "surfaceRegionEn": "Head",
+      "surfaceRegionVi": "Đầu",
+      "landmarks": []
+    },
+    {
+      "code": "GB-7",
+      "surfaceRegionEn": "Head",
+      "surfaceRegionVi": "Đầu",
+      "landmarks": [
+        {
+          "label": "Hairline",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004104"
+        },
+        {
+          "label": "ear",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001690"
+        }
+      ]
+    },
+    {
+      "code": "GB-8",
+      "surfaceRegionEn": "Head",
+      "surfaceRegionVi": "Đầu",
+      "landmarks": [
+        {
+          "label": "ear",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001690"
+        },
+        {
+          "label": "Hairline",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004104"
+        }
+      ]
+    },
+    {
+      "code": "GB-9",
+      "surfaceRegionEn": "Head",
+      "surfaceRegionVi": "Đầu",
+      "landmarks": [
+        {
+          "label": "Hairline",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004104"
+        }
+      ]
+    },
+    {
+      "code": "GB-10",
+      "surfaceRegionEn": "Head",
+      "surfaceRegionVi": "Đầu",
+      "landmarks": [
+        {
+          "label": "Mastoid Process",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0011220"
+        },
+        {
+          "label": "ear",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001690"
+        },
+        {
+          "label": "Hairline",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004104"
+        }
+      ]
+    },
+    {
+      "code": "GB-11",
+      "surfaceRegionEn": "Head",
+      "surfaceRegionVi": "Đầu",
+      "landmarks": [
+        {
+          "label": "Mastoid Process",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0011220"
+        }
+      ]
+    },
+    {
+      "code": "GB-12",
+      "surfaceRegionEn": "Neck",
+      "surfaceRegionVi": "Cổ",
+      "landmarks": [
+        {
+          "label": "Mastoid Process",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0011220"
+        }
+      ]
+    },
+    {
+      "code": "GB-13",
+      "surfaceRegionEn": "Head",
+      "surfaceRegionVi": "Đầu",
+      "landmarks": [
+        {
+          "label": "Anterior Hairline",
+          "uri": "http://uri.interlex.org/base/ilx_0795292"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "GB-14",
+      "surfaceRegionEn": "Head",
+      "surfaceRegionVi": "Đầu",
+      "landmarks": [
+        {
+          "label": "Eyebrow",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0010163"
+        },
+        {
+          "label": "Pupil",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001771"
+        }
+      ]
+    },
+    {
+      "code": "GB-15",
+      "surfaceRegionEn": "Head",
+      "surfaceRegionVi": "Đầu",
+      "landmarks": [
+        {
+          "label": "Anterior Hairline",
+          "uri": "http://uri.interlex.org/base/ilx_0795292"
+        },
+        {
+          "label": "Pupil",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001771"
+        }
+      ]
+    },
+    {
+      "code": "GB-16",
+      "surfaceRegionEn": "Head",
+      "surfaceRegionVi": "Đầu",
+      "landmarks": [
+        {
+          "label": "Anterior Hairline",
+          "uri": "http://uri.interlex.org/base/ilx_0795292"
+        },
+        {
+          "label": "Pupil",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001771"
+        }
+      ]
+    },
+    {
+      "code": "GB-17",
+      "surfaceRegionEn": "Head",
+      "surfaceRegionVi": "Đầu",
+      "landmarks": [
+        {
+          "label": "Anterior Hairline",
+          "uri": "http://uri.interlex.org/base/ilx_0795292"
+        },
+        {
+          "label": "Pupil",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001771"
+        }
+      ]
+    },
+    {
+      "code": "GB-18",
+      "surfaceRegionEn": "Head",
+      "surfaceRegionVi": "Đầu",
+      "landmarks": [
+        {
+          "label": "Anterior Hairline",
+          "uri": "http://uri.interlex.org/base/ilx_0795292"
+        },
+        {
+          "label": "Pupil",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001771"
+        }
+      ]
+    },
+    {
+      "code": "GB-19",
+      "surfaceRegionEn": "Head",
+      "surfaceRegionVi": "Đầu",
+      "landmarks": [
+        {
+          "label": "External Occipital Protuberance",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0013469"
+        }
+      ]
+    },
+    {
+      "code": "GB-20",
+      "surfaceRegionEn": "Neck",
+      "surfaceRegionVi": "Cổ",
+      "landmarks": [
+        {
+          "label": "Occipital Bone",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001676"
+        },
+        {
+          "label": "Sternocleidomastoid",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001128"
+        },
+        {
+          "label": "Trapezius",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0002380"
+        }
+      ]
+    },
+    {
+      "code": "GB-21",
+      "surfaceRegionEn": "Neck",
+      "surfaceRegionVi": "Cổ",
+      "landmarks": [
+        {
+          "label": "Seventh Cervical Vertebra",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004616"
+        },
+        {
+          "label": "Acromion",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0002497"
+        }
+      ]
+    },
+    {
+      "code": "GB-22",
+      "surfaceRegionEn": "Lateral Thoracic Region",
+      "surfaceRegionVi": "Ngực bên",
+      "landmarks": [
+        {
+          "label": "Fourth Intercostal Space",
+          "uri": "http://uri.interlex.org/base/ilx_0795298"
+        },
+        {
+          "label": "Midaxillary Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795308"
+        }
+      ]
+    },
+    {
+      "code": "GB-23",
+      "surfaceRegionEn": "Lateral Thoracic Region",
+      "surfaceRegionVi": "Ngực bên",
+      "landmarks": [
+        {
+          "label": "Fourth Intercostal Space",
+          "uri": "http://uri.interlex.org/base/ilx_0795298"
+        },
+        {
+          "label": "Midaxillary Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795308"
+        }
+      ]
+    },
+    {
+      "code": "GB-24",
+      "surfaceRegionEn": "Anterior Thoracic Region",
+      "surfaceRegionVi": "Ngực trước",
+      "landmarks": [
+        {
+          "label": "Seventh Intercostal Space",
+          "uri": "http://uri.interlex.org/base/ilx_0795321"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        },
+        {
+          "label": "Nipple",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0002030"
+        },
+        {
+          "label": "Midclavicular Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795322"
+        }
+      ]
+    },
+    {
+      "code": "GB-25",
+      "surfaceRegionEn": "Abdomen",
+      "surfaceRegionVi": "Bụng",
+      "landmarks": [
+        {
+          "label": "Twelfth Rib",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004611"
+        },
+        {
+          "label": "Costal Arch",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0002225"
+        },
+        {
+          "label": "Posterior Axillary Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795323"
+        }
+      ]
+    },
+    {
+      "code": "GB-26",
+      "surfaceRegionEn": "Abdomen",
+      "surfaceRegionVi": "Bụng",
+      "landmarks": [
+        {
+          "label": "Eleventh Rib",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004610"
+        },
+        {
+          "label": "Umbilicus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0007118"
+        },
+        {
+          "label": "Costal Arch",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0002225"
+        }
+      ]
+    },
+    {
+      "code": "GB-27",
+      "surfaceRegionEn": "Lower Abdomen",
+      "surfaceRegionVi": "Bụng dưới",
+      "landmarks": [
+        {
+          "label": "Umbilicus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0007118"
+        },
+        {
+          "label": "Anterior Superior Iliac Spine",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0013708"
+        }
+      ]
+    },
+    {
+      "code": "GB-28",
+      "surfaceRegionEn": "Lower Abdomen",
+      "surfaceRegionVi": "Bụng dưới",
+      "landmarks": [
+        {
+          "label": "Anterior Superior Iliac Spine",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0013708"
+        }
+      ]
+    },
+    {
+      "code": "GB-29",
+      "surfaceRegionEn": "Buttock",
+      "surfaceRegionVi": "Mông",
+      "landmarks": [
+        {
+          "label": "Anterior Superior Iliac Spine",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0013708"
+        },
+        {
+          "label": "Greater Trochanter",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0002503"
+        }
+      ]
+    },
+    {
+      "code": "GB-30",
+      "surfaceRegionEn": "Buttock",
+      "surfaceRegionVi": "Mông",
+      "landmarks": [
+        {
+          "label": "Greater Trochanter",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0002503"
+        },
+        {
+          "label": "Sacral Hiatus",
+          "uri": "http://uri.interlex.org/base/ilx_0741717"
+        },
+        {
+          "label": "Anterior Superior Iliac Spine",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0013708"
+        }
+      ]
+    },
+    {
+      "code": "GB-31",
+      "surfaceRegionEn": "Thigh",
+      "surfaceRegionVi": "Đùi",
+      "landmarks": [
+        {
+          "label": "Iliotibial Band",
+          "uri": "http://uri.interlex.org/base/ilx_0795324"
+        }
+      ]
+    },
+    {
+      "code": "GB-32",
+      "surfaceRegionEn": "Thigh",
+      "surfaceRegionVi": "Đùi",
+      "landmarks": [
+        {
+          "label": "Iliotibial Band",
+          "uri": "http://uri.interlex.org/base/ilx_0795324"
+        },
+        {
+          "label": "Popliteal Crease",
+          "uri": "http://uri.interlex.org/base/ilx_0795330"
+        }
+      ]
+    },
+    {
+      "code": "GB-33",
+      "surfaceRegionEn": "Knee",
+      "surfaceRegionVi": "Gối",
+      "landmarks": [
+        {
+          "label": "Biceps Femoris Tendon",
+          "uri": "http://uri.interlex.org/base/ilx_0795317"
+        },
+        {
+          "label": "Iliotibial Band",
+          "uri": "http://uri.interlex.org/base/ilx_0795324"
+        },
+        {
+          "label": "Femur",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0000981"
+        }
+      ]
+    },
+    {
+      "code": "GB-34",
+      "surfaceRegionEn": "Leg",
+      "surfaceRegionVi": "Cẳng chân",
+      "landmarks": [
+        {
+          "label": "Fibula",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001446"
+        }
+      ]
+    },
+    {
+      "code": "GB-35",
+      "surfaceRegionEn": "Leg",
+      "surfaceRegionVi": "Cẳng chân",
+      "landmarks": [
+        {
+          "label": "Fibula",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001446"
+        },
+        {
+          "label": "Lateral Malleolus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0012291"
+        },
+        {
+          "label": "Popliteal Crease",
+          "uri": "http://uri.interlex.org/base/ilx_0795330"
+        }
+      ]
+    },
+    {
+      "code": "GB-36",
+      "surfaceRegionEn": "Leg",
+      "surfaceRegionVi": "Cẳng chân",
+      "landmarks": [
+        {
+          "label": "Fibula",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001446"
+        },
+        {
+          "label": "Lateral Malleolus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0012291"
+        },
+        {
+          "label": "Popliteal Crease",
+          "uri": "http://uri.interlex.org/base/ilx_0795330"
+        }
+      ]
+    },
+    {
+      "code": "GB-37",
+      "surfaceRegionEn": "Leg",
+      "surfaceRegionVi": "Cẳng chân",
+      "landmarks": [
+        {
+          "label": "Fibula",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001446"
+        },
+        {
+          "label": "Lateral Malleolus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0012291"
+        }
+      ]
+    },
+    {
+      "code": "GB-38",
+      "surfaceRegionEn": "Leg",
+      "surfaceRegionVi": "Cẳng chân",
+      "landmarks": [
+        {
+          "label": "Fibula",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001446"
+        },
+        {
+          "label": "Lateral Malleolus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0012291"
+        }
+      ]
+    },
+    {
+      "code": "GB-39",
+      "surfaceRegionEn": "Leg",
+      "surfaceRegionVi": "Cẳng chân",
+      "landmarks": [
+        {
+          "label": "Fibula",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001446"
+        },
+        {
+          "label": "Lateral Malleolus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0012291"
+        }
+      ]
+    },
+    {
+      "code": "GB-40",
+      "surfaceRegionEn": "Ankle",
+      "surfaceRegionVi": "Cổ chân",
+      "landmarks": [
+        {
+          "label": "Tendon of extensor digitorum longus",
+          "uri": "http://uri.interlex.org/base/ilx_0795504"
+        },
+        {
+          "label": "Lateral Malleolus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0012291"
+        }
+      ]
+    },
+    {
+      "code": "GB-41",
+      "surfaceRegionEn": "Foot",
+      "surfaceRegionVi": "Bàn chân",
+      "landmarks": [
+        {
+          "label": "Fourth Metatarsal Bone",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0003653"
+        },
+        {
+          "label": "Fifth Metatarsal Bone",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0003654"
+        },
+        {
+          "label": "Tendon of extensor digitorum longus",
+          "uri": "http://uri.interlex.org/base/ilx_0795504"
+        }
+      ]
+    },
+    {
+      "code": "GB-42",
+      "surfaceRegionEn": "Foot",
+      "surfaceRegionVi": "Bàn chân",
+      "landmarks": [
+        {
+          "label": "Fourth Metatarsal Bone",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0003653"
+        },
+        {
+          "label": "Fifth Metatarsal Bone",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0003654"
+        },
+        {
+          "label": "Metatarsophalangeal Joint Of Pedal Digit 4",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0007759"
+        }
+      ]
+    },
+    {
+      "code": "GB-43",
+      "surfaceRegionEn": "Foot",
+      "surfaceRegionVi": "Bàn chân",
+      "landmarks": [
+        {
+          "label": "Fourth Toe",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0003634"
+        },
+        {
+          "label": "Fifth Toe",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0003635"
+        }
+      ]
+    },
+    {
+      "code": "GB-44",
+      "surfaceRegionEn": "Fourth Toe",
+      "surfaceRegionVi": "Ngón chân IV",
+      "landmarks": [
+        {
+          "label": "Distal Phalanx",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004300"
+        },
+        {
+          "label": "Toenail",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0009567"
+        },
+        {
+          "label": "Nail Of Pedal Digit 4",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0011281"
+        }
+      ]
+    },
+    {
+      "code": "LR-1",
+      "surfaceRegionEn": "Great Toe",
+      "surfaceRegionVi": "Ngón chân cái",
+      "landmarks": [
+        {
+          "label": "Distal Phalanx",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004300"
+        },
+        {
+          "label": "Toenail",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0009567"
+        }
+      ]
+    },
+    {
+      "code": "LR-2",
+      "surfaceRegionEn": "Foot",
+      "surfaceRegionVi": "Bàn chân",
+      "landmarks": [
+        {
+          "label": "First Toe",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0003631"
+        },
+        {
+          "label": "Second Toe",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0003632"
+        }
+      ]
+    },
+    {
+      "code": "LR-3",
+      "surfaceRegionEn": "Foot",
+      "surfaceRegionVi": "Bàn chân",
+      "landmarks": [
+        {
+          "label": "First Metatarsal Bone",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0003650"
+        },
+        {
+          "label": "Second Metatarsal Bone",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0003651"
+        },
+        {
+          "label": "Dorsalis Pedis Artery",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001539"
+        }
+      ]
+    },
+    {
+      "code": "LR-4",
+      "surfaceRegionEn": "Ankle",
+      "surfaceRegionVi": "Cổ chân",
+      "landmarks": [
+        {
+          "label": "Tibialis Anterior Tendon",
+          "uri": "http://uri.interlex.org/base/ilx_0795325"
+        },
+        {
+          "label": "Medial Malleolus",
+          "uri": "http://uri.interlex.org/base/ilx_0795305"
+        }
+      ]
+    },
+    {
+      "code": "LR-5",
+      "surfaceRegionEn": "Leg",
+      "surfaceRegionVi": "Cẳng chân",
+      "landmarks": [
+        {
+          "label": "Tibia",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0000979"
+        },
+        {
+          "label": "Medial Malleolus",
+          "uri": "http://uri.interlex.org/base/ilx_0795305"
+        },
+        {
+          "label": "Patella",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0002446"
+        }
+      ]
+    },
+    {
+      "code": "LR-6",
+      "surfaceRegionEn": "Leg",
+      "surfaceRegionVi": "Cẳng chân",
+      "landmarks": [
+        {
+          "label": "Tibia",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0000979"
+        },
+        {
+          "label": "Medial Malleolus",
+          "uri": "http://uri.interlex.org/base/ilx_0795305"
+        },
+        {
+          "label": "Patella",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0002446"
+        }
+      ]
+    },
+    {
+      "code": "LR-7",
+      "surfaceRegionEn": "Leg",
+      "surfaceRegionVi": "Cẳng chân",
+      "landmarks": [
+        {
+          "label": "Medial Condyle Of The Tibia",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0009990"
+        }
+      ]
+    },
+    {
+      "code": "LR-8",
+      "surfaceRegionEn": "Knee",
+      "surfaceRegionVi": "Gối",
+      "landmarks": [
+        {
+          "label": "Semitendinosus Tendon",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_8480009"
+        },
+        {
+          "label": "Semimembranosus Muscle",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001381"
+        },
+        {
+          "label": "Popliteal Crease",
+          "uri": "http://uri.interlex.org/base/ilx_0795330"
+        }
+      ]
+    },
+    {
+      "code": "LR-9",
+      "surfaceRegionEn": "Thigh",
+      "surfaceRegionVi": "Đùi",
+      "landmarks": [
+        {
+          "label": "Gracilis Muscle",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0000950"
+        },
+        {
+          "label": "Sartorius Muscle",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001373"
+        },
+        {
+          "label": "Patella",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0002446"
+        }
+      ]
+    },
+    {
+      "code": "LR-10",
+      "surfaceRegionEn": "Thigh",
+      "surfaceRegionVi": "Đùi",
+      "landmarks": []
+    },
+    {
+      "code": "LR-11",
+      "surfaceRegionEn": "Thigh",
+      "surfaceRegionVi": "Đùi",
+      "landmarks": [
+        {
+          "label": "Adductor Longus Muscle",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0000303"
+        }
+      ]
+    },
+    {
+      "code": "LR-12",
+      "surfaceRegionEn": "Groin Region",
+      "surfaceRegionVi": "Bẹn",
+      "landmarks": [
+        {
+          "label": "Pubic Symphysis",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0003699"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "LR-13",
+      "surfaceRegionEn": "Abdomen",
+      "surfaceRegionVi": "Bụng",
+      "landmarks": [
+        {
+          "label": "Eleventh Rib",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004610"
+        },
+        {
+          "label": "Costal Arch",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0002225"
+        }
+      ]
+    },
+    {
+      "code": "LR-14",
+      "surfaceRegionEn": "Anterior Thoracic Region",
+      "surfaceRegionVi": "Ngực trước",
+      "landmarks": [
+        {
+          "label": "Sixth Intercostal Space",
+          "uri": "http://uri.interlex.org/base/ilx_0795307"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        },
+        {
+          "label": "Nipple",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0002030"
+        },
+        {
+          "label": "Midclavicular Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795322"
+        }
+      ]
+    },
+    {
+      "code": "GV-1",
+      "surfaceRegionEn": "Perineal Region",
+      "surfaceRegionVi": "Tầng sinh môn",
+      "landmarks": [
+        {
+          "label": "Coccyx",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001350"
+        },
+        {
+          "label": "Anus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001245"
+        }
+      ]
+    },
+    {
+      "code": "GV-2",
+      "surfaceRegionEn": "Sacral Region",
+      "surfaceRegionVi": "Vùng cùng",
+      "landmarks": [
+        {
+          "label": "Posterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795312"
+        },
+        {
+          "label": "Anal Cleft",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0036013"
+        }
+      ]
+    },
+    {
+      "code": "GV-3",
+      "surfaceRegionEn": "Lumbar Region",
+      "surfaceRegionVi": "Thắt lưng",
+      "landmarks": [
+        {
+          "label": "Fourth Lumbar Vertebra",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004620"
+        },
+        {
+          "label": "Posterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795312"
+        },
+        {
+          "label": "Iliac Crest",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0014437"
+        }
+      ]
+    },
+    {
+      "code": "GV-4",
+      "surfaceRegionEn": "Lumbar Region",
+      "surfaceRegionVi": "Thắt lưng",
+      "landmarks": [
+        {
+          "label": "Second Lumbar Vertebra",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004618"
+        },
+        {
+          "label": "Posterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795312"
+        }
+      ]
+    },
+    {
+      "code": "GV-5",
+      "surfaceRegionEn": "Lumbar Region",
+      "surfaceRegionVi": "Thắt lưng",
+      "landmarks": [
+        {
+          "label": "First Lumbar Vertebra",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004617"
+        },
+        {
+          "label": "Posterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795312"
+        }
+      ]
+    },
+    {
+      "code": "GV-6",
+      "surfaceRegionEn": "Upper Back",
+      "surfaceRegionVi": "Lưng trên",
+      "landmarks": [
+        {
+          "label": "Eleventh Thoracic Vertebra",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004635"
+        },
+        {
+          "label": "Posterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795312"
+        }
+      ]
+    },
+    {
+      "code": "GV-7",
+      "surfaceRegionEn": "Upper Back",
+      "surfaceRegionVi": "Lưng trên",
+      "landmarks": [
+        {
+          "label": "Tenth Thoracic Vertebra",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004634"
+        },
+        {
+          "label": "Posterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795312"
+        }
+      ]
+    },
+    {
+      "code": "GV-8",
+      "surfaceRegionEn": "Upper Back",
+      "surfaceRegionVi": "Lưng trên",
+      "landmarks": [
+        {
+          "label": "Ninth Thoracic Vertebra",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004633"
+        },
+        {
+          "label": "Posterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795312"
+        }
+      ]
+    },
+    {
+      "code": "GV-9",
+      "surfaceRegionEn": "Upper Back",
+      "surfaceRegionVi": "Lưng trên",
+      "landmarks": [
+        {
+          "label": "Seventh Thoracic Vertebra",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004632"
+        },
+        {
+          "label": "Posterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795312"
+        },
+        {
+          "label": "Scapula",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0006849"
+        }
+      ]
+    },
+    {
+      "code": "GV-10",
+      "surfaceRegionEn": "Upper Back",
+      "surfaceRegionVi": "Lưng trên",
+      "landmarks": [
+        {
+          "label": "Sixth Thoracic Vertebra",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004631"
+        },
+        {
+          "label": "Posterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795312"
+        }
+      ]
+    },
+    {
+      "code": "GV-11",
+      "surfaceRegionEn": "Upper Back",
+      "surfaceRegionVi": "Lưng trên",
+      "landmarks": [
+        {
+          "label": "Fifth Thoracic Vertebra",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004630"
+        },
+        {
+          "label": "Posterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795312"
+        }
+      ]
+    },
+    {
+      "code": "GV-12",
+      "surfaceRegionEn": "Upper Back",
+      "surfaceRegionVi": "Lưng trên",
+      "landmarks": [
+        {
+          "label": "Third Thoracic Vertebra",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004628"
+        },
+        {
+          "label": "Posterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795312"
+        },
+        {
+          "label": "Scapula",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0006849"
+        }
+      ]
+    },
+    {
+      "code": "GV-13",
+      "surfaceRegionEn": "Upper Back",
+      "surfaceRegionVi": "Lưng trên",
+      "landmarks": [
+        {
+          "label": "First Thoracic Vertebra",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004626"
+        },
+        {
+          "label": "Posterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795312"
+        }
+      ]
+    },
+    {
+      "code": "GV-14",
+      "surfaceRegionEn": "Neck",
+      "surfaceRegionVi": "Cổ",
+      "landmarks": [
+        {
+          "label": "Seventh Cervical Vertebra",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004616"
+        },
+        {
+          "label": "Posterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795312"
+        }
+      ]
+    },
+    {
+      "code": "GV-15",
+      "surfaceRegionEn": "Neck",
+      "surfaceRegionVi": "Cổ",
+      "landmarks": [
+        {
+          "label": "Second Cervical Vertebra",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001093"
+        },
+        {
+          "label": "Posterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795312"
+        }
+      ]
+    },
+    {
+      "code": "GV-16",
+      "surfaceRegionEn": "Neck",
+      "surfaceRegionVi": "Cổ",
+      "landmarks": [
+        {
+          "label": "External Occipital Protuberance",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0013469"
+        },
+        {
+          "label": "Trapezius",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0002380"
+        }
+      ]
+    },
+    {
+      "code": "GV-17",
+      "surfaceRegionEn": "Head",
+      "surfaceRegionVi": "Đầu",
+      "landmarks": [
+        {
+          "label": "External Occipital Protuberance",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0013469"
+        },
+        {
+          "label": "Posterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795312"
+        }
+      ]
+    },
+    {
+      "code": "GV-18",
+      "surfaceRegionEn": "Head",
+      "surfaceRegionVi": "Đầu",
+      "landmarks": [
+        {
+          "label": "Posterior Hairline",
+          "uri": "http://uri.interlex.org/base/ilx_0795326"
+        },
+        {
+          "label": "Posterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795312"
+        }
+      ]
+    },
+    {
+      "code": "GV-19",
+      "surfaceRegionEn": "Head",
+      "surfaceRegionVi": "Đầu",
+      "landmarks": [
+        {
+          "label": "Posterior Hairline",
+          "uri": "http://uri.interlex.org/base/ilx_0795326"
+        },
+        {
+          "label": "Posterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795312"
+        }
+      ]
+    },
+    {
+      "code": "GV-20",
+      "surfaceRegionEn": "Head",
+      "surfaceRegionVi": "Đầu",
+      "landmarks": [
+        {
+          "label": "Anterior Hairline",
+          "uri": "http://uri.interlex.org/base/ilx_0795292"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        },
+        {
+          "label": "Posterior Hairline",
+          "uri": "http://uri.interlex.org/base/ilx_0795326"
+        }
+      ]
+    },
+    {
+      "code": "GV-21",
+      "surfaceRegionEn": "Head",
+      "surfaceRegionVi": "Đầu",
+      "landmarks": [
+        {
+          "label": "Anterior Hairline",
+          "uri": "http://uri.interlex.org/base/ilx_0795292"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "GV-22",
+      "surfaceRegionEn": "Head",
+      "surfaceRegionVi": "Đầu",
+      "landmarks": [
+        {
+          "label": "Anterior Hairline",
+          "uri": "http://uri.interlex.org/base/ilx_0795292"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "GV-23",
+      "surfaceRegionEn": "Head",
+      "surfaceRegionVi": "Đầu",
+      "landmarks": [
+        {
+          "label": "Anterior Hairline",
+          "uri": "http://uri.interlex.org/base/ilx_0795292"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "GV-24",
+      "surfaceRegionEn": "Head",
+      "surfaceRegionVi": "Đầu",
+      "landmarks": [
+        {
+          "label": "Anterior Hairline",
+          "uri": "http://uri.interlex.org/base/ilx_0795292"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        },
+        {
+          "label": "Eyebrow",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0010163"
+        }
+      ]
+    },
+    {
+      "code": "GV-25",
+      "surfaceRegionEn": "Face",
+      "surfaceRegionVi": "Mặt",
+      "landmarks": [
+        {
+          "label": "Nose",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0000004"
+        },
+        {
+          "label": "Nose Tip",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0012128"
+        }
+      ]
+    },
+    {
+      "code": "GV-26",
+      "surfaceRegionEn": "Face",
+      "surfaceRegionVi": "Mặt",
+      "landmarks": [
+        {
+          "label": "Philtrum",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0005402"
+        }
+      ]
+    },
+    {
+      "code": "GV-27",
+      "surfaceRegionEn": "Face",
+      "surfaceRegionVi": "Mặt",
+      "landmarks": [
+        {
+          "label": "Upper Lip",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001834"
+        }
+      ]
+    },
+    {
+      "code": "GV-28",
+      "surfaceRegionEn": "Face",
+      "surfaceRegionVi": "Mặt",
+      "landmarks": [
+        {
+          "label": "Labial Frenulum",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0016910"
+        },
+        {
+          "label": "Upper Gum",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0011601"
+        }
+      ]
+    },
+    {
+      "code": "CV-1",
+      "surfaceRegionEn": "Perineal Region",
+      "surfaceRegionVi": "Tầng sinh môn",
+      "landmarks": [
+        {
+          "label": "Anus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001245"
+        },
+        {
+          "label": "Genital Organ",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0003133"
+        },
+        {
+          "label": "Scrotum",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001300"
+        },
+        {
+          "label": "Labium",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0004084"
+        }
+      ]
+    },
+    {
+      "code": "CV-2",
+      "surfaceRegionEn": "Lower Abdomen",
+      "surfaceRegionVi": "Bụng dưới",
+      "landmarks": [
+        {
+          "label": "Pubic Symphysis",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0003699"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "CV-3",
+      "surfaceRegionEn": "Lower Abdomen",
+      "surfaceRegionVi": "Bụng dưới",
+      "landmarks": [
+        {
+          "label": "Umbilicus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0007118"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "CV-4",
+      "surfaceRegionEn": "Lower Abdomen",
+      "surfaceRegionVi": "Bụng dưới",
+      "landmarks": [
+        {
+          "label": "Umbilicus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0007118"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "CV-5",
+      "surfaceRegionEn": "Lower Abdomen",
+      "surfaceRegionVi": "Bụng dưới",
+      "landmarks": [
+        {
+          "label": "Umbilicus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0007118"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "CV-6",
+      "surfaceRegionEn": "Lower Abdomen",
+      "surfaceRegionVi": "Bụng dưới",
+      "landmarks": [
+        {
+          "label": "Umbilicus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0007118"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "CV-7",
+      "surfaceRegionEn": "Lower Abdomen",
+      "surfaceRegionVi": "Bụng dưới",
+      "landmarks": [
+        {
+          "label": "Umbilicus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0007118"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "CV-8",
+      "surfaceRegionEn": "Upper Abdomen",
+      "surfaceRegionVi": "Bụng trên",
+      "landmarks": [
+        {
+          "label": "Umbilicus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0007118"
+        }
+      ]
+    },
+    {
+      "code": "CV-9",
+      "surfaceRegionEn": "Upper Abdomen",
+      "surfaceRegionVi": "Bụng trên",
+      "landmarks": [
+        {
+          "label": "Umbilicus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0007118"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "CV-10",
+      "surfaceRegionEn": "Upper Abdomen",
+      "surfaceRegionVi": "Bụng trên",
+      "landmarks": [
+        {
+          "label": "Umbilicus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0007118"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "CV-11",
+      "surfaceRegionEn": "Upper Abdomen",
+      "surfaceRegionVi": "Bụng trên",
+      "landmarks": [
+        {
+          "label": "Umbilicus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0007118"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "CV-12",
+      "surfaceRegionEn": "Upper Abdomen",
+      "surfaceRegionVi": "Bụng trên",
+      "landmarks": [
+        {
+          "label": "Umbilicus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0007118"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        },
+        {
+          "label": "Xiphisternal Junction",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0011124"
+        }
+      ]
+    },
+    {
+      "code": "CV-13",
+      "surfaceRegionEn": "Upper Abdomen",
+      "surfaceRegionVi": "Bụng trên",
+      "landmarks": [
+        {
+          "label": "Umbilicus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0007118"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "CV-14",
+      "surfaceRegionEn": "Upper Abdomen",
+      "surfaceRegionVi": "Bụng trên",
+      "landmarks": [
+        {
+          "label": "Umbilicus",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0007118"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "CV-15",
+      "surfaceRegionEn": "Upper Abdomen",
+      "surfaceRegionVi": "Bụng trên",
+      "landmarks": [
+        {
+          "label": "Xiphisternal Junction",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0011124"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "CV-16",
+      "surfaceRegionEn": "Anterior Thoracic Region",
+      "surfaceRegionVi": "Ngực trước",
+      "landmarks": [
+        {
+          "label": "Xiphisternal Junction",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0011124"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "CV-17",
+      "surfaceRegionEn": "Anterior Thoracic Region",
+      "surfaceRegionVi": "Ngực trước",
+      "landmarks": [
+        {
+          "label": "Fourth Intercostal Space",
+          "uri": "http://uri.interlex.org/base/ilx_0795298"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "CV-18",
+      "surfaceRegionEn": "Anterior Thoracic Region",
+      "surfaceRegionVi": "Ngực trước",
+      "landmarks": [
+        {
+          "label": "Third Intercostal Space",
+          "uri": "http://uri.interlex.org/base/ilx_0795297"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "CV-19",
+      "surfaceRegionEn": "Anterior Thoracic Region",
+      "surfaceRegionVi": "Ngực trước",
+      "landmarks": [
+        {
+          "label": "Second Intercostal Space",
+          "uri": "http://uri.interlex.org/base/ilx_0795295"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "CV-20",
+      "surfaceRegionEn": "Anterior Thoracic Region",
+      "surfaceRegionVi": "Ngực trước",
+      "landmarks": [
+        {
+          "label": "First Intercostal Space",
+          "uri": "http://uri.interlex.org/base/ilx_0795283"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "CV-21",
+      "surfaceRegionEn": "Anterior Thoracic Region",
+      "surfaceRegionVi": "Ngực trước",
+      "landmarks": [
+        {
+          "label": "Suprasternal Fossa",
+          "uri": "http://uri.interlex.org/base/ilx_0795331"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        }
+      ]
+    },
+    {
+      "code": "CV-22",
+      "surfaceRegionEn": "Neck",
+      "surfaceRegionVi": "Cổ",
+      "landmarks": [
+        {
+          "label": "Suprasternal Fossa",
+          "uri": "http://uri.interlex.org/base/ilx_0795331"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        },
+        {
+          "label": "Clavicle",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001105"
+        }
+      ]
+    },
+    {
+      "code": "CV-23",
+      "surfaceRegionEn": "Neck",
+      "surfaceRegionVi": "Cổ",
+      "landmarks": [
+        {
+          "label": "Thyroid Cartilage",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001738"
+        },
+        {
+          "label": "Hyoid Bone",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001685"
+        },
+        {
+          "label": "Anterior Median Line",
+          "uri": "http://uri.interlex.org/base/ilx_0795285"
+        },
+        {
+          "label": "Hyoid Tubercle",
+          "uri": "http://uri.interlex.org/base/ilx_0795328"
+        },
+        {
+          "label": "Mandible",
+          "uri": "http://purl.obolibrary.org/obo/UBERON_0001684"
+        }
+      ]
+    },
+    {
+      "code": "CV-24",
+      "surfaceRegionEn": "Face",
+      "surfaceRegionVi": "Mặt",
+      "landmarks": [
+        {
+          "label": "Mentolabial Sulcus",
+          "uri": "http://uri.interlex.org/base/ilx_0795327"
+        }
+      ]
+    }
+  ]
+}
