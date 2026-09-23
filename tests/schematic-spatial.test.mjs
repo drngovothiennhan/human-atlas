@@ -86,6 +86,15 @@ test('licensed schematic spatial dataset stays unverified and complete',async()=
     assert.ok(p.points.length>p.pointCodes.length,'SP render path must be denser than catalogue anchors');
     assert.ok(p.points.every(v=>v.length===3&&v.every(Number.isFinite)),'SP surface-projected render points must be finite xyz');
   }
+  for(const p of spPaths){
+    assert.equal(p.pointCodes[0],'SP-1','SP route must begin at the medial great toe');
+    assert.equal(p.pointCodes.at(-1),'SP-21','SP route must terminate at Dabao on the lateral thorax');
+    const sideAnchors=data.anchors.filter(a=>a.meridianId==='SP'&&a.side===p.side);
+    const sp20=sideAnchors.find(a=>a.pointCode==='SP-20');
+    const sp21=sideAnchors.find(a=>a.pointCode==='SP-21');
+    assert.ok(sp20&&sp21,'SP upper thorax endpoint anchors must exist on '+p.side);
+    assert.ok(sp21.y<sp20.y,'SP-21 must lie below SP-20 at the lateral chest, not rise onto the shoulder');
+  }
   const blLowerBranch=data.paths.find(p=>p.meridianId==='BL'&&p.pointCodes.includes('BL-38')&&p.pointCodes.includes('BL-40'));
   assert.ok(blLowerBranch,'vendor-defined BL lower branch must preserve the explicit BL-38 → BL-40 adjacency');
   const bl38Index=blLowerBranch.pointCodes.indexOf('BL-38');
