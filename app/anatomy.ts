@@ -36,8 +36,36 @@ export const EXPLANATIONS:Record<string,string> = {
 };
 export function explanation(name:string,system:SystemId){return EXPLANATIONS[name.toLowerCase()] ?? SYSTEMS.find(s=>s.id===system)?.description ?? '';}
 
-const ANATOMY_VI:Record<string,string>={'heart': 'Tim', 'liver': 'Gan', 'brain': 'Não', 'stomach': 'Dạ dày', 'spleen': 'Lách', 'pancreas': 'Tụy', 'urinary bladder': 'Bàng quang', 'trachea': 'Khí quản', 'diaphragm': 'Cơ hoành'};
-export const anatomyName=(name:string)=>ANATOMY_VI[name.toLowerCase()]?ANATOMY_VI[name.toLowerCase()]+" · "+name:name;
+const ANATOMY_VI:Record<string,string>={
+ 'heart':'Tim','liver':'Gan','brain':'Não','stomach':'Dạ dày','spleen':'Lách','pancreas':'Tụy','urinary bladder':'Bàng quang','trachea':'Khí quản','diaphragm':'Cơ hoành',
+ 'femur':'Xương đùi','tibia':'Xương chày','fibula':'Xương mác','patella':'Xương bánh chè','humerus':'Xương cánh tay','radius':'Xương quay','ulna':'Xương trụ',
+ 'clavicle':'Xương đòn','scapula':'Xương vai','sternum':'Xương ức','mandible':'Xương hàm dưới','maxilla':'Xương hàm trên','sacrum':'Xương cùng'
+};
+const STEM_VI:Record<string,string>={
+ 'femoral':'đùi','popliteal':'khoeo','tibial':'chày','fibular':'mác','peroneal':'mác','sciatic':'tọa','radial':'quay','ulnar':'trụ','median':'giữa',
+ 'brachial':'cánh tay','axillary':'nách','carotid':'cảnh','jugular':'cảnh','coronary':'vành','pulmonary':'phổi','iliac':'chậu','renal':'thận','hepatic':'gan',
+ 'facial':'mặt','temporal':'thái dương','occipital':'chẩm','ophthalmic':'mắt','lingual':'lưỡi','vagus':'lang thang','phrenic':'hoành',
+ 'deltoid':'delta','trapezius':'thang','masseter':'cắn','sternocleidomastoid':'ức-đòn-chũm','sartorius':'may','soleus':'dép',
+ 'gastrocnemius':'bụng chân','gluteus maximus':'mông lớn','gluteus medius':'mông nhỡ','pectoralis major':'ngực lớn','latissimus dorsi':'lưng rộng',
+ 'rectus abdominis':'thẳng bụng','biceps brachii':'nhị đầu cánh tay','triceps brachii':'tam đầu cánh tay','tibialis anterior':'chày trước'
+};
+const translateStem=(stem:string)=>STEM_VI[stem]??stem.split(/\s+/).map(token=>STEM_VI[token]??token).join(' ');
+const TYPE_RULES:[RegExp,string][]=[
+ [/^(.*) artery$/i,'Động mạch'],[/^(.*) vein$/i,'Tĩnh mạch'],[/^(.*) nerve$/i,'Thần kinh'],[/^(.*) muscle$/i,'Cơ'],[/^(.*) bone$/i,'Xương'],
+ [/^(.*) ligament$/i,'Dây chằng'],[/^(.*) tendon$/i,'Gân'],[/^(.*) fascia$/i,'Mạc'],[/^(.*) cartilage$/i,'Sụn'],[/^(.*) gland$/i,'Tuyến']
+];
+export const anatomyName=(name:string)=>{
+ const raw=name.trim(),lower=raw.toLowerCase();
+ if(ANATOMY_VI[lower])return ANATOMY_VI[lower];
+ const sideMatch=lower.match(/^(left|right)\s+(.+)$/),side=sideMatch?.[1],body=sideMatch?.[2]??lower;
+ for(const [pattern,prefix] of TYPE_RULES){
+  const match=body.match(pattern);if(!match)continue;
+  const stem=translateStem(match[1].trim()),sideVi=side==='left'?' trái':side==='right'?' phải':'';
+  return prefix+' '+stem+sideVi;
+ }
+ if(STEM_VI[body])return STEM_VI[body].charAt(0).toUpperCase()+STEM_VI[body].slice(1);
+ return raw;
+};
 
 
 // Meridian-first profile: render only a compact set of superficial/landmark muscles by default.
