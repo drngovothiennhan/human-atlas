@@ -314,6 +314,17 @@ try{
   await waitFor(()=>evaluate("document.querySelector('[data-meridian3d-panel=true]')?.innerText.includes('Kinh Vị')&&document.querySelector('[data-meridian3d-panel=true]')?.innerText.includes('THAM CHIẾU HỌC TẬP')"),{label:'3D meridian clean-room gate'});
   await waitFor(()=>evaluate("document.querySelector('[data-spatial-source-license=true]')?.innerText.includes('FuriaRozkwit/acupuncture-3d')&&document.querySelector('[data-spatial-source-license=true]')?.innerText.includes('MIT')&&document.querySelector('[data-spatial-source-license=true]')?.innerText.includes('CC BY-SA')"),{label:'licensed schematic provenance visible'});
   await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.meridianEffect==='flow'&&Number(document.querySelector('canvas')?.dataset.meridianPulseMarkers||0)>0&&Number(document.querySelector('canvas')?.dataset.meridianFlowParticles||0)>0"),{label:'animated meridian flow and pulse effect'});
+  if(!await evaluate("document.querySelector('[data-effect-collateral=true]')?.disabled===true"))throw new Error('Collateral control must not pretend to render unavailable data');
+  const viewMotionBefore=await evaluate("Number(document.querySelector('canvas')?.dataset.cameraMotionSeq||0)");
+  await evaluate("document.querySelector('[data-meridian-view=front]')?.click()");
+  await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.sceneView==='front'&&Number(document.querySelector('canvas')?.dataset.cameraMotionSeq||0)>"+viewMotionBefore),{label:'meridian front view control'});
+  await evaluate("document.querySelector('[data-anatomy-preset=muscle-landmarks]')?.click()");
+  await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.visibleSystems?.includes('muscular')&&document.querySelector('canvas')?.dataset.visibleSystems?.includes('integumentary')"),{label:'meridian muscle landmark background'});
+  await evaluate("document.querySelector('[data-anatomy-preset=skeleton]')?.click()");
+  await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.visibleSystems?.includes('skeletal')&&document.querySelector('canvas')?.dataset.visibleSystems?.includes('integumentary')&&document.querySelector('canvas')?.dataset.skeletalReferenceActive==='true'"),{label:'meridian skeletal reference background'});
+  await evaluate("document.querySelector('[data-anatomy-preset=surface]')?.click()");
+  await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.visibleSystems==='integumentary'"),{label:'meridian surface background restore'});
+  console.log('SMOKE_MERIDIAN_MODEL_CONTROLS_PASS');
   const effectFrameBefore=await evaluate("Number(document.querySelector('canvas')?.dataset.meridianEffectFrame||0)");
   await waitFor(()=>evaluate("Number(document.querySelector('canvas')?.dataset.meridianEffectFrame||0)>"+effectFrameBefore),{timeout:30000,label:'meridian animation frame advances'});
   const effectFrameAfter=await evaluate("Number(document.querySelector('canvas')?.dataset.meridianEffectFrame||0)");
@@ -378,7 +389,7 @@ try{
   await evaluate("document.querySelector('[data-meridian3d-launch=true]')?.click()");
   await waitFor(()=>evaluate("!!document.querySelector('[data-meridian3d-panel=true]')"),{label:'reopen active meridian mode'});
   await evaluate("document.querySelector('[data-exit-meridians=true]')?.click()");
-  await waitFor(()=>evaluate("document.querySelector('[data-meridian3d-launch=true]')?.getAttribute('aria-pressed')==='false'&&document.querySelector('canvas')?.dataset.meridianEffect==='off'&&document.querySelector('canvas')?.dataset.meridianFlowParticles==='0'"),{label:'exit meridian mode clears animation'});
+  await waitFor(()=>evaluate("document.querySelector('[data-meridian3d-launch=true]')?.getAttribute('aria-pressed')==='false'&&document.querySelector('canvas')?.dataset.meridianEffect==='off'&&document.querySelector('canvas')?.dataset.meridianFlowParticles==='0'&&document.querySelector('canvas')?.dataset.sceneView==='three-quarter'&&document.querySelector('canvas')?.dataset.visibleSystems==='integumentary'"),{label:'exit meridian mode clears animation and restores anatomy'});
   console.log('SMOKE_MERIDIAN_MODE_EXIT_PASS '+JSON.stringify({effectFrameBeforePanelClose}));
 
   await setViewport(1024,768,{touch:true});
