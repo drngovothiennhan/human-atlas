@@ -94,6 +94,8 @@ test('licensed schematic spatial dataset stays unverified and complete',async()=
     const sp21=sideAnchors.find(a=>a.pointCode==='SP-21');
     assert.ok(sp20&&sp21,'SP upper thorax endpoint anchors must exist on '+p.side);
     assert.ok(sp21.y<sp20.y,'SP-21 must lie below SP-20 at the lateral chest, not rise onto the shoulder');
+    const sideSign=p.side==='RIGHT'?1:-1;
+    assert.ok(p.points.every(([x])=>x*sideSign>0),`SP ${p.side} render path must stay on its own side of the body midline`);
   }
   const blLowerBranch=data.paths.find(p=>p.meridianId==='BL'&&p.pointCodes.includes('BL-38')&&p.pointCodes.includes('BL-40'));
   assert.ok(blLowerBranch,'vendor-defined BL lower branch must preserve the explicit BL-38 → BL-40 adjacency');

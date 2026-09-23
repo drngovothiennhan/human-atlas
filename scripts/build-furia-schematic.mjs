@@ -200,11 +200,17 @@ for(const [sourceMeridianId,groups] of Object.entries(topology.paths)){
 // untouched; only render-path interpolation is densified and re-projected to the
 // canonical BodyParts3D skin so layer visibility (surface vs skeleton) cannot make
 // the channel appear to cut through the limb/trunk.
-function projectBrowserToSegmentSurface(pointBrowser,segmentName){
-  const p=fromBrowser(pointBrowser),seg=segments[segmentName],axis=sub(seg.p1,seg.p0),den=dot(axis,axis)||1;
+function projectBrowserToSegmentSurface(pointBrowser,segmentName,side='RIGHT'){
+  // Segment templates are fitted on the body's +X (right) side. Mirror the
+  // left route into that half before surface projection, then mirror it back;
+  // otherwise left-side interpolation can raycast across the body midline.
+  const mirror=side==='LEFT';
+  const projectionPoint=mirror?[-pointBrowser[0],pointBrowser[1],pointBrowser[2]]:pointBrowser;
+  const p=fromBrowser(projectionPoint),seg=segments[segmentName],axis=sub(seg.p1,seg.p0),den=dot(axis,axis)||1;
   const t=clamp(dot(sub(p,seg.p0),axis)/den,0,1),base=interior(seg,t),ray=sub(p,base);
   if(norm(ray)<1e-7)return pointBrowser;
-  return toBrowser(castSource(base,ray,.65));
+  const projected=toBrowser(castSource(base,ray,.65));
+  return mirror?[-projected[0],projected[1],projected[2]]:projected;
 }
 const spSegmentForPair=(a,b)=>{
   const seq=Math.max(numericPointSequenceForBuild(a),numericPointSequenceForBuild(b));
@@ -245,7 +251,7 @@ for(const pathItem of paths.filter(item=>item.meridianId==='SP')){
     if(i===0)dense.push(a);
     for(const fraction of [.25,.5,.75]){
       const p=[a[0]+(b[0]-a[0])*fraction,a[1]+(b[1]-a[1])*fraction,a[2]+(b[2]-a[2])*fraction];
-      dense.push(projectBrowserToSegmentSurface(p,segName).map(round));
+      dense.push(projectBrowserToSegmentSurface(p,segName,pathItem.side).map(round));
     }
     dense.push(b);
   }
