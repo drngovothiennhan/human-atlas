@@ -1,7 +1,7 @@
 name: HIU YHCT 3D Atlas CI
 on:
   push:
-    branches: [main, feature-hiu-yhct-3d-atlas]
+    branches: [main]
   pull_request:
     branches: [main]
 concurrency:
