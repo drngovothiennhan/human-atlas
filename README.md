@@ -1,64 +1,45 @@
-# Human Atlas
+# HIU YHCT 3D Atlas
 
-An interactive 3D anatomy explorer built with React, Three.js, and shadcn/ui. Take the BodyParts3D adult male reference apart into **2,234 individually selectable meshes**, explore **15 anatomical systems**, and search **3,432 named concepts**.
+Nền tảng 3D học **kinh lạc – huyệt vị** cho sinh viên Y học cổ truyền HIU. Kiến trúc hiện tại ưu tiên bề mặt cơ thể và các mốc giải phẫu cần thiết thay vì tải toàn bộ hệ cơ chi tiết.
 
-**[Explore the live demo](https://human-atlas-seven.vercel.app)**
+**Live:** https://drngovothiennhan.github.io/human-atlas/
 
-## Explore
+## Phạm vi hiện tại
 
-- Orbit, zoom, and select structures directly on the body.
-- Toggle individual systems or use skeleton and organ presets.
-- Move from assembled anatomy to a spaced inventory of every visible piece.
-- Search anatomical names and source identifiers.
-- Isolate a selected structure and read its details.
-- Use compact controls and detail panels on mobile.
+- Hiển thị kinh lạc và huyệt vị trên mô hình 3D.
+- Lớp cơ dùng nhóm cơ mốc bề mặt chọn lọc từ BodyParts3D.
+- Xương và khớp là lớp tham chiếu, chỉ tải khi người học chủ động bật.
+- Có tìm kiếm, chọn cấu trúc, cô lập, xoay, phóng to/thu nhỏ và chế độ học YHCT.
+- Có kiểm tra nội dung, unit test, build, browser smoke và GitHub Pages gate trước khi phát hành.
 
-## Run locally
+## Chạy cục bộ
 
-Requires Node.js 22.13 or newer. No API keys or accounts are needed.
+Yêu cầu Node.js 22.13 trở lên.
 
 ```sh
 npm ci
 npm run dev
 ```
 
-Open http://localhost:3016. To build the static site, run `npm run build`; the output is in `dist/`.
-
-## Validate
+## Kiểm tra
 
 ```sh
+npm run content:validate
+npm run source:furia:validate
 npm run check
 node scripts/validate-atlas.mjs
-node scripts/validate-interactions.mjs
+node --experimental-strip-types scripts/validate-interactions.mjs
+npm test
 npm run build
+node scripts/browser-smoke.mjs
 ```
 
-Validation covers mesh buffers, names and concept membership, nonoverlapping exploded layouts at desktop and mobile aspect ratios, search and inspection contracts, and tap-versus-drag handling. Browser interaction checks have exercised selection, system controls, search, isolation, rotation, and 390×844, 320×568, and 844×390 layouts. Phone controls stay clear of the exploded inventory, and isolated structures fit the space above or beside the detail panel. Physical-device performance and real multitouch hardware have not been tested.
+## Dữ liệu và nguồn
 
-## Anatomy data
+BodyParts3D là nguồn chính cho mô hình cơ thể và cơ mốc bề mặt. Lớp xương và khớp tham chiếu dùng dữ liệu đã ghim theo commit và giấy phép được khai báo trong `app/reference-anatomy.ts` và hồ sơ attribution của dự án.
 
-The current viewer uses **BodyParts3D 4.0**, an adult male reference anatomy, licensed **CC BY 4.0**. It does not represent every human structure or variation. Individual source meshes are distinct from named concepts, which may group multiple meshes. Descriptions distinguish general system context from individual organ explanations.
+Ứng dụng phục vụ học tập, không dùng để chẩn đoán hoặc hướng dẫn thủ thuật trên người.
 
-Geometry is simplified for browser performance while retaining every source mesh. The packaged model contains 2,288,268 triangles and downloads approximately 33 MB of compressed geometry. Full credits, source links, and adaptation details are in [ATTRIBUTION.md](public/ATTRIBUTION.md).
+## Triển khai
 
-This is an educational explorer, not a diagnostic or surgical tool.
-
-## How it works
-
-Geometry is merged into batches. Per-structure GPU textures control translation, visibility, and selection, while component geometry supports accurate picking. Exploded layouts pack only the visible pieces. Rendering updates when the scene changes; orbit controls remain responsive without thousands of separate draw calls.
-
-The optional WebMCP tools expose anatomy search and inspection in compatible browsers. The visible interface works without them.
-
-## Rebuilding geometry
-
-The repository includes browser-ready geometry. Rebuilding it is optional: obtain the official BodyParts3D OBJ archive and English metadata tables, prepare the joined concepts and display-system mappings, run `scripts/convert-anatomy.py`, then `node scripts/optimize-anatomy.mjs` and `node scripts/compress-models.mjs`. Simplification uses a 0.2% relative error limit per structure.
-
-## Deploy
-
-Import this repository into Vercel as a Vite project. The included `vercel.json` configures `npm ci`, `npm run build`, and the `dist` output directory. It can also be served by a static host.
-
-## License
-
-Original application code is released under the [MIT License](LICENSE). **The anatomy data has its own CC BY 4.0 license**; preserve the attribution when redistributing it. Third-party dependencies retain their respective licenses.
-
-Issues and pull requests are welcome. Please include reproduction steps and browser/device details for interaction problems.
+Production được build và kiểm tra bằng GitHub Actions, sau đó phát hành qua GitHub Pages.
