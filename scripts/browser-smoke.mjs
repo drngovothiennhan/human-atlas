@@ -429,6 +429,8 @@ try{
   const mobileLayout=await evaluate("(()=>{const p=document.querySelector('[data-meridian3d-panel=true]')?.getBoundingClientRect(),v=document.querySelector('.view-controls')?.getBoundingClientRect();return{vw:innerWidth,vh:innerHeight,panel:p&&{left:p.left,right:p.right,top:p.top,bottom:p.bottom,height:p.height},views:v&&{left:v.left,right:v.right,top:v.top,bottom:v.bottom}}})()");
   if(!mobileLayout.panel||mobileLayout.panel.left<0||mobileLayout.panel.right>mobileLayout.vw||mobileLayout.panel.top<0||mobileLayout.panel.bottom>mobileLayout.vh||mobileLayout.panel.height>mobileLayout.vh*.62)throw new Error('Mobile meridian layout overflow: '+JSON.stringify(mobileLayout));
   if(!mobileLayout.views||mobileLayout.views.left<0||mobileLayout.views.right>mobileLayout.vw)throw new Error('Mobile view controls overflow: '+JSON.stringify(mobileLayout));
+  const mobileMeridianControlsOverflow=await evaluate("(()=>[...document.querySelectorAll('[data-meridian3d-panel=true] button')].filter(el=>el.scrollWidth>el.clientWidth+2).map(el=>(el.textContent||el.getAttribute('aria-label')||'button').trim().slice(0,80)))()");
+  if(mobileMeridianControlsOverflow.length)throw new Error('Mobile meridian button overflow: '+JSON.stringify(mobileMeridianControlsOverflow));
   await screenshot('mobile-meridian3d-layout.png');
   await evaluate("document.querySelector('[data-meridian3d-panel=true] [aria-label=\"Đóng mô hình kinh lạc 3D\"]')?.click()");
   console.log('SMOKE_MOBILE_MERIDIAN_LAYOUT_PASS '+JSON.stringify(mobileLayout));
@@ -464,6 +466,8 @@ try{
   const mobileStudyLayout=await evaluate("(()=>{const p=document.querySelector('.yhct-panel')?.getBoundingClientRect(),m=document.querySelector('[data-mode-panel=quiz]')?.getBoundingClientRect();return{vw:innerWidth,vh:innerHeight,panel:p&&{left:p.left,right:p.right,top:p.top,bottom:p.bottom,height:p.height,scrollHeight:document.querySelector('.yhct-panel').scrollHeight,clientHeight:document.querySelector('.yhct-panel').clientHeight},mode:m&&{left:m.left,right:m.right,top:m.top,bottom:m.bottom}}})()");
   if(!mobileStudyLayout.panel||mobileStudyLayout.panel.left<0||mobileStudyLayout.panel.right>mobileStudyLayout.vw||mobileStudyLayout.panel.top<0||mobileStudyLayout.panel.bottom>mobileStudyLayout.vh||mobileStudyLayout.panel.height>mobileStudyLayout.vh*.62)throw new Error('Mobile YHCT layout overflow: '+JSON.stringify(mobileStudyLayout));
   if(!mobileStudyLayout.mode||mobileStudyLayout.mode.left<mobileStudyLayout.panel.left||mobileStudyLayout.mode.right>mobileStudyLayout.panel.right)throw new Error('Mobile study mode overflow: '+JSON.stringify(mobileStudyLayout));
+  const mobileYhctControlsOverflow=await evaluate("(()=>[...document.querySelectorAll('.yhct-panel button')].filter(el=>el.scrollWidth>el.clientWidth+2).map(el=>(el.textContent||el.getAttribute('aria-label')||'button').trim().slice(0,80)))()");
+  if(mobileYhctControlsOverflow.length)throw new Error('Mobile YHCT button overflow: '+JSON.stringify(mobileYhctControlsOverflow));
   await screenshot('mobile-yhct-quiz-layout.png');
   await evaluate("document.querySelector('.yhct-head>button')?.click()");
   console.log('SMOKE_MOBILE_YHCT_LAYOUT_PASS '+JSON.stringify(mobileStudyLayout));
