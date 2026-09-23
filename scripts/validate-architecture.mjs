@@ -44,6 +44,10 @@ if(/MUSCLE|muscular|z-muscular/i.test(reference))fail('reference anatomy must no
 
 const ciWorkflow=await read('.github/workflows/hiu-atlas-ci.yml');
 if(ciWorkflow.includes('feature-hiu-yhct-3d-atlas'))fail('legacy feature branch is still a CI push target');
+if(await exists('.github/workflows/hiu-atlas-pages.yml'))fail('duplicate Pages workflow returned; deploy must stay in the single CI pipeline');
+if(!ciWorkflow.includes('actions/upload-pages-artifact@v4'))fail('single pipeline must upload the verified Pages artifact');
+if(!ciWorkflow.includes('actions/deploy-pages@v4'))fail('single pipeline must deploy Pages after verification');
+if(!ciWorkflow.includes('needs: verify'))fail('Pages deploy must depend on the verify job');
 
 for(const path of ['PROJECT_STATE.md','CONTINUATION_PROMPT.md','docs/CHECKBOARD.md']){
   const operational=await read(path);
