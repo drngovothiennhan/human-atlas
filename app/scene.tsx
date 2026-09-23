@@ -123,14 +123,14 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
   };
   const reduceMeridianMotion=window.matchMedia?.('(prefers-reduced-motion: reduce)').matches??false;
   type MeridianFlowParticle={mesh:T.Mesh;curve:T.CatmullRomCurve3;offset:number;speed:number};
-  let meridianMarkers:T.Mesh[]=[],meridianPulseMarkers:T.Mesh[]=[],meridianFlowParticles:MeridianFlowParticle[]=[];
+  let meridianMarkers:T.Mesh[]=[],meridianPulseMarkers:T.Mesh[]=[],meridianFlowParticles:MeridianFlowParticle[]=[],needleMesh:T.Mesh|null=null;
   const meridianColors:Record<string,number>={LU:0x1d4ed8,LI:0xc2410c,ST:0x854d0e,SP:0x84cc16,HT:0xb91c1c,SI:0x0369a1,BL:0x334155,KI:0x0f766e,PC:0xbe185d,TE:0x0e7490,GB:0x4d7c0f,LR:0x15803d,CV:0x6d28d9,GV:0x991b1b};
   const MERIDIAN_LINE_EDGE_RADIUS=.00185,MERIDIAN_LINE_CORE_RADIUS=.00115;
   const MERIDIAN_LINE_EDGE_OPACITY=.28,MERIDIAN_LINE_CORE_OPACITY=.86;
   const MERIDIAN_FLOW_WORLD_SPEED=.075;
   const ACUPOINT_RADIUS_SCHEMATIC=.0062,ACUPOINT_RADIUS_LOCAL=.0067,ACUPOINT_RADIUS_PUBLISHED=.0072,ACUPOINT_RADIUS_SELECTED=.0082;
   const disposeOverlay=()=>{
-   meridianMarkers=[];meridianPulseMarkers=[];meridianFlowParticles=[];
+   meridianMarkers=[];meridianPulseMarkers=[];meridianFlowParticles=[];needleMesh=null;
    while(meridianGroup.children.length){
     const child=meridianGroup.children.pop()!;
     const geometry=(child as T.Mesh).geometry as T.BufferGeometry|undefined;geometry?.dispose();
@@ -146,7 +146,7 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
    renderer.domElement.dataset.meridianLineCoreOpacity=String(MERIDIAN_LINE_CORE_OPACITY);renderer.domElement.dataset.meridianFlowDirection='source-order';renderer.domElement.dataset.meridianFlowWorldSpeed=String(MERIDIAN_FLOW_WORLD_SPEED);
    renderer.domElement.dataset.meridianLineTransparent='true';renderer.domElement.dataset.meridianDepthOcclusion='anatomy-surface';
    renderer.domElement.dataset.meridianPointMinRadius=String(ACUPOINT_RADIUS_SCHEMATIC);
-   disposeOverlay();renderer.domElement.dataset.meridianAnchors='0';renderer.domElement.dataset.meridianPaths='0';renderer.domElement.dataset.meridianSchematicAnchors='0';renderer.domElement.dataset.meridianSchematicPaths='0';renderer.domElement.dataset.meridianPulseMarkers='0';renderer.domElement.dataset.meridianSelectedMarkers='0';renderer.domElement.dataset.meridianFlowParticles='0';renderer.domElement.dataset.meridianEffect=value?.enabled?(reduceMeridianMotion?'reduced':'flow'):'off';if(!value?.enabled)return;
+   disposeOverlay();renderer.domElement.dataset.acupunctureSimulation='off';renderer.domElement.dataset.meridianAnchors='0';renderer.domElement.dataset.meridianPaths='0';renderer.domElement.dataset.meridianSchematicAnchors='0';renderer.domElement.dataset.meridianSchematicPaths='0';renderer.domElement.dataset.meridianPulseMarkers='0';renderer.domElement.dataset.meridianSelectedMarkers='0';renderer.domElement.dataset.meridianFlowParticles='0';renderer.domElement.dataset.meridianEffect=value?.enabled?(reduceMeridianMotion?'reduced':'flow'):'off';if(!value?.enabled)return;
    const fallbackColor=0x0f766e;let trustedAnchors=0,schematicAnchors=0,schematicPaths=0,trustedPaths=0,selectedMarkers=0;
    for(const anchor of value.effects?.acupoints===false?[]:value.anchors){
     if(![anchor.x,anchor.y,anchor.z].every(Number.isFinite))continue;
@@ -182,6 +182,27 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
     }
     if(schematic)schematicPaths++;else trustedPaths++;
    }
+   const needle=value.needleSimulation;
+   if(needle&&[needle.x,needle.y,needle.z,needle.angleDegrees,needle.visualLengthMm].every(Number.isFinite)){
+    const surface=new T.Vector3(needle.x,needle.y,needle.z);
+    const inward=new T.Vector3(-needle.x,0,-needle.z);
+    if(inward.lengthSq()<1e-8)inward.set(0,0,1);
+    inward.normalize();const needleNormal=inward.clone();
+    const tangent=new T.Vector3(0,1,0);
+    tangent.addScaledVector(inward,-tangent.dot(inward)).normalize();
+    const angle=T.MathUtils.degToRad(T.MathUtils.clamp(needle.angleDegrees,0,90));
+    const direction=needleNormal.clone().multiplyScalar(Math.cos(angle)).add(tangent.multiplyScalar(Math.sin(angle))).normalize();
+    const length=T.MathUtils.clamp(needle.visualLengthMm,8,120)/1000;
+    const start=surface.clone().addScaledVector(needleNormal,-.003);
+    const end=surface.clone().addScaledVector(direction,length);
+    const axis=end.clone().sub(start),needleObject=new T.Mesh(new T.CylinderGeometry(.0012,.0012,axis.length(),8),new T.MeshBasicMaterial({color:0xc87937,depthTest:true,depthWrite:false}));
+    needleObject.position.copy(start).add(end).multiplyScalar(.5);
+    needleObject.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),axis.clone().normalize());
+    needleObject.renderOrder=27;needleObject.userData.acupunctureSimulation=needle.pointCode;needleObject.userData.needleStart=start;needleObject.userData.needleDirection=direction.clone();needleObject.userData.needleLength=length;needleObject.userData.needleBaseQuaternion=needleObject.quaternion.clone();needleObject.userData.needleAction=needle.action;meridianGroup.add(needleObject);needleMesh=needleObject;
+    const gripDirection=tangent.clone().addScaledVector(direction,-tangent.dot(direction)).normalize();
+    const handle=new T.Mesh(new T.CylinderGeometry(.00055,.00055,.012,6),new T.MeshBasicMaterial({color:0x4b5563,depthTest:true,depthWrite:false}));handle.position.copy(start);handle.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),gripDirection);handle.renderOrder=28;meridianGroup.add(handle);needleObject.userData.needleHandle=handle;needleObject.userData.needleGripDirection=gripDirection;
+    renderer.domElement.dataset.acupunctureSimulation=needle.pointCode;
+   }else renderer.domElement.dataset.acupunctureSimulation='off';
    renderer.domElement.dataset.meridianPaths=String(trustedPaths);renderer.domElement.dataset.meridianSchematicPaths=String(schematicPaths);renderer.domElement.dataset.meridianPulseMarkers=String(meridianPulseMarkers.length);renderer.domElement.dataset.meridianSelectedMarkers=String(selectedMarkers);renderer.domElement.dataset.meridianFlowParticles=String(meridianFlowParticles.length);
   };
   const hover=document.createElement('div');hover.className='part-hover';hover.setAttribute('role','tooltip');hover.hidden=true;el.appendChild(hover);
@@ -288,7 +309,7 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
    renderer.domElement.dataset.visibleSystems=s.visible.join(',');
    const overlayValue=overlay.current;
    const overlayKey=overlayValue?.enabled
-    ?[qualityProfile,overlayValue.meridianId,overlayValue.side,overlayValue.selectedPointCode??'',overlayValue.effects?.meridians,overlayValue.effects?.acupoints,overlayValue.anchors.map(anchor=>[anchor.pointCode,anchor.side,anchor.x.toFixed(5),anchor.y.toFixed(5),anchor.z.toFixed(5),anchor.verificationStatus].join(':')).join('|'),overlayValue.paths.map(path=>path.meridianId+':'+path.verificationStatus+':'+path.points.length).join('|')].join('::')
+    ?[qualityProfile,overlayValue.meridianId,overlayValue.side,overlayValue.selectedPointCode??'',overlayValue.effects?.meridians,overlayValue.effects?.acupoints,overlayValue.needleSimulation?JSON.stringify(overlayValue.needleSimulation):'',overlayValue.anchors.map(anchor=>[anchor.pointCode,anchor.side,anchor.x.toFixed(5),anchor.y.toFixed(5),anchor.z.toFixed(5),anchor.verificationStatus].join(':')).join('|'),overlayValue.paths.map(path=>path.meridianId+':'+path.verificationStatus+':'+path.points.length).join('|')].join('::')
     :'off';
    if(overlayKey!==lastOverlayKey){rebuildOverlay(overlayValue);lastOverlayKey=overlayKey;dirty=true;}
    if(overlayValue?.enabled&&overlayValue.effects?.motion!==false&&!reduceMeridianMotion&&(meridianFlowParticles.length||meridianPulseMarkers.length)){
@@ -299,6 +320,10 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
      renderer.domElement.dataset.meridianEffect='flow';renderer.domElement.dataset.meridianEffectFrame=String(effectFrame);lastMeridianEffectFrame=effectFrame;dirty=true;
     }
    }else {renderer.domElement.dataset.meridianEffect=!overlayValue?.enabled?'off':reduceMeridianMotion?'reduced':'paused';}
+   if(needleMesh&&overlayValue?.needleSimulation?.animated&&!reduceMeridianMotion){
+    const cycle=.5+.5*Math.sin(clock.elapsedTime*3.2),base=Number(needleMesh.userData.needleLength),factor=overlayValue.needleSimulation.action==='insert'?.58+.42*cycle:overlayValue.needleSimulation.action==='lift-thrust'?.72+.24*cycle:1,length=base*factor,start=needleMesh.userData.needleStart as T.Vector3,direction=needleMesh.userData.needleDirection as T.Vector3,handle=needleMesh.userData.needleHandle as T.Mesh;
+    needleMesh.scale.y=factor;needleMesh.position.copy(start).addScaledVector(direction,length/2);handle.position.copy(start);if(overlayValue.needleSimulation.action==='twist'){const gripDirection=(needleMesh.userData.needleGripDirection as T.Vector3).clone().applyAxisAngle(direction,cycle*Math.PI*2);handle.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),gripDirection);needleMesh.quaternion.copy(needleMesh.userData.needleBaseQuaternion as T.Quaternion).multiply(new T.Quaternion().setFromAxisAngle(direction,cycle*Math.PI*2));}dirty=true;
+   }
    const focusValue=focus.current;
    if(focusValue?.key&&focusValue.key!==lastFocusKey){
     const point=new T.Vector3(focusValue.x,focusValue.y,focusValue.z),destination=point.clone().add(new T.Vector3(.28,.12,.42).normalize().multiplyScalar(.48));
@@ -350,4 +375,3 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
  },[atlas]);
  return <div className="scene" ref={host}/>;
 }
-

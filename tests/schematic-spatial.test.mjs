@@ -76,6 +76,10 @@ test('licensed schematic spatial dataset stays unverified and complete',async()=
     assert.equal(p.surfaceProjection,'BodyParts3D FMA7163 facial surface-following','LI facial path must be surface-projected');
     assert.ok(p.points.length>p.pointCodes.length,'LI facial render path must include surface-following points');
   }
+  for(const p of data.paths.filter(p=>['LEFT','RIGHT'].includes(p.side))){
+    const sideSign=p.side==='LEFT'?-1:1;
+    assert.ok(p.points.every(([x])=>x*sideSign>0),`${p.meridianId} ${p.side} route must stay on its own side of the body midline`);
+  }
   const li20=data.anchors.filter(a=>a.pointCode==='LI-20');
   assert.equal(li20.length,2,'LI-20 must remain bilateral');
   assert.ok(li20.every(a=>a.calibrationOverride==='HIU_DOCUMENT_ANATOMY_QC'),'LI-20 must keep HIU document calibration');

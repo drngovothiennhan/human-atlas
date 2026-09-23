@@ -35,6 +35,14 @@ export type MeridianOverlayState={
     acupoints:boolean;
     collaterals:boolean;
   };
+  needleSimulation?:{
+    pointCode:string;
+    x:number;y:number;z:number;
+    angleDegrees:number;
+    visualLengthMm:number;
+    animated:boolean;
+    action:'insert'|'twist'|'lift-thrust';
+  }|null;
 };
 
 export type MeridianFocusTarget={

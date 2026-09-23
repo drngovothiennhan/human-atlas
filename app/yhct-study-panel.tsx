@@ -1,4 +1,6 @@
 import {useEffect,useMemo,useState} from 'react';
+import {Move} from 'lucide-react';
+import {useDraggable} from './use-draggable';
 
 type Meridian={
   id:string;
@@ -77,6 +79,8 @@ export default function YhctStudyPanel({localDraftCount,onStudyCommand}:Props){
   const [quizIndex,setQuizIndex]=useState(0);
   const [quizResult,setQuizResult]=useState('');
   const [simulation,setSimulation]=useState({motion:true,meridians:true,acupoints:true});
+  const panelDrag=useDraggable('yhct-study');
+  const launchDrag=useDraggable('yhct-launch');
 
   useEffect(()=>{
     let alive=true;
@@ -176,12 +180,14 @@ export default function YhctStudyPanel({localDraftCount,onStudyCommand}:Props){
   const startSimulation=()=>{setMode('simulation');applySimulation(simulation);setModeMessage('Mô phỏng 3D điều khiển hiệu ứng hiển thị học tập; không mô phỏng dòng chảy sinh lý.')};
 
   return <>
-    <button className="yhct-launch glass" onClick={()=>setOpen(v=>!v)} aria-expanded={open} aria-controls="yhct-study-panel">
+    <button className="yhct-launch glass" ref={node=>{launchDrag.ref.current=node}} onClick={()=>setOpen(v=>!v)} aria-expanded={open} aria-controls="yhct-study-panel">
       YHCT <span>{meridians.length} kinh · {points.length} huyệt</span>
+      <span className="drag-grip yhct-launch-grip" onPointerDown={launchDrag.onPointerDown} onClick={e=>e.stopPropagation()} aria-hidden="true" title="Kéo nút học YHCT"><Move size={13}/></span>
     </button>
-    {open&&<aside id="yhct-study-panel" className="yhct-panel glass" aria-label="Huyệt vị, kinh lạc và trợ lý học tập">
+    {open&&<aside id="yhct-study-panel" ref={node=>{panelDrag.ref.current=node}} className="yhct-panel glass" aria-label="Huyệt vị, kinh lạc và trợ lý học tập">
       <div className="yhct-head">
         <div><strong>Huyệt vị · Kinh lạc</strong><small>HIU CLB YHCT · tra cứu cục bộ · nguồn có kiểm soát</small></div>
+        <button type="button" className="drag-grip" onPointerDown={panelDrag.onPointerDown} aria-label="Kéo bảng học"><Move size={14}/></button>
         <button onClick={()=>setOpen(false)} aria-label="Đóng bảng YHCT">×</button>
       </div>
       <div className="yhct-stats" data-yhct-spatial-counts="true">

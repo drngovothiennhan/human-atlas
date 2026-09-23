@@ -235,7 +235,7 @@ for(const pathItem of paths.filter(item=>item.meridianId==='LI')){
       for(const fraction of [.25,.5,.75]){
         const p=[a[0]+(b[0]-a[0])*fraction,a[1]+(b[1]-a[1])*fraction,a[2]+(b[2]-a[2])*fraction];
         const segName=codeA==='LI-18'&&fraction<.5?'neck':'head';
-        dense.push(projectBrowserToSegmentSurface(p,segName).map(round));
+        dense.push(projectBrowserToSegmentSurface(p,segName,pathItem.side).map(round));
       }
     }
     dense.push(b);
