@@ -16,7 +16,7 @@ Continue only from the current `main` of `drngovothiennhan/human-atlas`.
 
 For every change:
 
-`current main -> focused branch -> validation -> build -> browser smoke -> PR -> merge -> main CI -> Pages deploy -> live verification`
+`current main -> focused branch -> validation -> build -> browser smoke -> PR -> merge -> single main verify job -> deploy verified Pages artifact -> live verification`
 
 Do not skip gates and do not report success without evidence.
 

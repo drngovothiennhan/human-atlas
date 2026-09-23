@@ -11,7 +11,8 @@
 - [x] Legacy muscle loader/assets/state removed.
 - [x] GitHub Pages is the production path.
 - [x] Historical feature branch is not a CI push target.
-- [x] Architecture guard exists in CI and Pages workflow.
+- [x] One workflow owns verify + Pages deploy; no duplicate smoke pipeline.
+- [x] Architecture guard is enforced before deployment.
 
 ## Mandatory release gates
 
