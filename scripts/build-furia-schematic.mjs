@@ -192,6 +192,43 @@ for(const [sourceMeridianId,groups] of Object.entries(topology.paths)){
     flush();
   }
 }
+
+// Keep the Spleen channel visually on the body surface. The catalogue anchors stay
+// untouched; only render-path interpolation is densified and re-projected to the
+// canonical BodyParts3D skin so layer visibility (surface vs skeleton) cannot make
+// the channel appear to cut through the limb/trunk.
+function projectBrowserToSegmentSurface(pointBrowser,segmentName){
+  const p=fromBrowser(pointBrowser),seg=segments[segmentName],axis=sub(seg.p1,seg.p0),den=dot(axis,axis)||1;
+  const t=clamp(dot(sub(p,seg.p0),axis)/den,0,1),base=interior(seg,t),ray=sub(p,base);
+  if(norm(ray)<1e-7)return pointBrowser;
+  return toBrowser(castSource(base,ray,.65));
+}
+const spSegmentForPair=(a,b)=>{
+  const seq=Math.max(numericPointSequenceForBuild(a),numericPointSequenceForBuild(b));
+  if(seq<=5)return 'foot';
+  if(seq<=9)return 'shank';
+  if(seq<=11)return 'thigh';
+  return 'trunk';
+};
+function numericPointSequenceForBuild(code){
+  const m=String(code||'').match(/-(\d+)$/);return m?Number(m[1]):Number.MAX_SAFE_INTEGER;
+}
+for(const pathItem of paths.filter(item=>item.meridianId==='SP')){
+  const dense=[];
+  for(let i=0;i<pathItem.pointCodes.length-1;i++){
+    const a=pathItem.points[i],b=pathItem.points[i+1],segName=spSegmentForPair(pathItem.pointCodes[i],pathItem.pointCodes[i+1]);
+    if(i===0)dense.push(a);
+    for(const fraction of [.25,.5,.75]){
+      const p=[a[0]+(b[0]-a[0])*fraction,a[1]+(b[1]-a[1])*fraction,a[2]+(b[2]-a[2])*fraction];
+      dense.push(projectBrowserToSegmentSurface(p,segName).map(round));
+    }
+    dense.push(b);
+  }
+  if(pathItem.pointCodes.length===1)dense.push(pathItem.points[0]);
+  pathItem.points=dense;
+  pathItem.surfaceProjection='BodyParts3D FMA7163 surface-following densification';
+  pathItem.surfaceProjectionStep='quarter-segment';
+}
 const codes=new Set(pointDoc.points.map(p=>canonicalCode(p.code))),topologyCodes=new Set(Object.values(topology.paths).flat(2).map(canonicalCode));
 const omitted=[...codes].filter(c=>!topologyCodes.has(c)).sort();
 const generatedPathCodes=new Set(paths.flatMap(path=>path.pointCodes).filter(code=>code!=='ST-ROUTE-ORIGIN'));
