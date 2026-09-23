@@ -425,6 +425,8 @@ try{
 
   await setViewport(390,844,{touch:true});
   await sleep(250);
+  await evaluate("(()=>{const studio=document.querySelector('.studio');if(studio?.classList.contains('layout-mobile'))return true;const button=document.querySelector('[aria-label=\"Chuyển giao diện điện thoại\"]');if(!button)return false;button.click();return true})()");
+  await waitFor(()=>evaluate("document.querySelector('.studio')?.classList.contains('layout-mobile')"),{label:'mobile layout toggle'});
   await evaluate("document.querySelector('[data-meridian3d-launch=true]')?.click()");
   await waitFor(()=>evaluate("!!document.querySelector('[data-meridian3d-panel=true]')"),{label:'mobile meridian panel'});
   const mobileLayout=await evaluate("(()=>{const p=document.querySelector('[data-meridian3d-panel=true]')?.getBoundingClientRect(),v=document.querySelector('.view-controls')?.getBoundingClientRect();return{vw:innerWidth,vh:innerHeight,panel:p&&{left:p.left,right:p.right,top:p.top,bottom:p.bottom,height:p.height},views:v&&{left:v.left,right:v.right,top:v.top,bottom:v.bottom}}})()");
@@ -561,4 +563,3 @@ try{
   chrome?.kill('SIGTERM');
   vite.kill('SIGTERM');
 }
-
