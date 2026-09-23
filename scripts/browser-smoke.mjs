@@ -40,7 +40,6 @@ try{
     'Input.dispatchMouseEvent':45000,
     'Input.dispatchTouchEvent':45000,
     'Emulation.setDeviceMetricsOverride':30000,
-    'Emulation.setTouchEmulationEnabled':30000,
     'Network.emulateNetworkConditions':30000
   };
   const send=(method,params={},timeout=methodTimeouts[method]??30000)=>new Promise((resolve,reject)=>{
@@ -91,9 +90,8 @@ try{
       }
     }
     await waitFor(()=>evaluate("Math.abs(innerWidth-"+width+")<=2&&Math.abs(innerHeight-"+height+")<=2"),{timeout:20000,label:'viewport '+width+'x'+height+' via '+resizeMethod});
-    await send('Emulation.setTouchEmulationEnabled',{enabled:touch,maxTouchPoints:touch?5:1},15000);
     const current=await evaluate("({w:innerWidth,h:innerHeight})");
-    console.log('SMOKE_VIEWPORT_SET '+JSON.stringify({requested:{width,height},actual:current,resizeMethod}));
+    console.log('SMOKE_VIEWPORT_SET '+JSON.stringify({requested:{width,height},actual:current,resizeMethod,touchEvents:touch?'cdp-dispatch':'off'}));
     return current;
   };
   await mkdir('artifacts',{recursive:true});
