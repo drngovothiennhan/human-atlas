@@ -11,13 +11,13 @@
     "build:pages": "npm run content:build && vite build --base=./",
     "check": "tsc --noEmit",
     "content:validate": "node scripts/content-validate.mjs",
-    "content:build": "node scripts/content-build.mjs && node scripts/build-furia-schematic.mjs && node scripts/fetch-zanatomy-muscles.mjs",
+    "content:build": "node scripts/content-build.mjs && node scripts/build-furia-schematic.mjs && node scripts/fetch-reference-anatomy.mjs",
     "registration:validate-review": "node scripts/registration-review-validate.mjs",
     "test:unit": "node --experimental-strip-types --test tests/*.test.mjs",
     "test": "npm run test:unit",
     "verify:pages": "node scripts/verify-pages-assets.mjs",
     "source:furia:validate": "node scripts/validate-furia-source.mjs",
-    "source:muscles:fetch": "node scripts/fetch-zanatomy-muscles.mjs"
+    "source:anatomy:fetch": "node scripts/fetch-reference-anatomy.mjs"
   },
   "dependencies": {
     "@base-ui/react": "1.7.0",
