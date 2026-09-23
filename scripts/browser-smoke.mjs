@@ -205,7 +205,7 @@ try{
   if(!musclePreset)throw new Error('Meridian landmark muscle preset missing');
   await waitFor(()=>evaluate("(()=>{const b=[...document.querySelectorAll('.layer-presets button')].find(x=>x.textContent.trim()==='Cơ mốc');return b?.getAttribute('aria-pressed')==='true'})()"),{label:'meridian landmark muscle preset'});
   const landmarkMetrics=await evaluate("(()=>{const d=document.querySelector('canvas')?.dataset||{};return{profile:d.anatomyProfile,policy:d.musclePolicy,landmarkCount:Number(d.muscleLandmarkCount||0)}})()");
-  if(landmarkMetrics.profile!=='meridian-first'||landmarkMetrics.policy!=='meridian-landmarks'||landmarkMetrics.landmarkCount<20||landmarkMetrics.landmarkCount>=206)throw new Error('Meridian-first muscle policy failed: '+JSON.stringify(landmarkMetrics));
+  if(landmarkMetrics.profile!=='meridian-first'||landmarkMetrics.policy!=='meridian-landmarks'||landmarkMetrics.landmarkCount<20||landmarkMetrics.landmarkCount>58)throw new Error('Meridian-first muscle policy failed: '+JSON.stringify(landmarkMetrics));
   await sleep(250);
   const landmarkHash=await screenshot('desktop-meridian-landmark-muscles.png');
   if(landmarkHash===resetHash)throw new Error('Landmark muscle preset did not change rendered screenshot');
@@ -381,6 +381,7 @@ try{
   await waitFor(()=>evaluate("!!document.querySelector('[data-meridian3d-point=\\\"ST-36\\\"]')"),{label:'3D meridian ST36 search'});
   await evaluate("document.querySelector('[data-meridian3d-point=\\\"ST-36\\\"]')?.click()");
   await waitFor(()=>evaluate("document.querySelector('[data-meridian3d-detail=true]')?.innerText.includes('Chưa có tọa độ BodyParts3D')"),{label:'3D unregistered point gate'});
+  await waitFor(()=>evaluate("document.querySelector('[data-anatomical-location=true]')?.textContent?.includes('Cẳng chân')&&document.querySelector('[data-anatomical-landmarks=true]')?.textContent?.length>10"),{label:'ST36 anatomical location metadata'});
   await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.meridianSelectedPoint==='ST-36'&&Number(document.querySelector('canvas')?.dataset.meridianSelectedMarkers||0)>0"),{label:'selected acupoint stronger 3D state'});
   await screenshot('desktop-meridian3d-panel.png');
   const effectFrameBeforePanelClose=await evaluate("document.querySelector('canvas')?.dataset.meridianEffectFrame");
