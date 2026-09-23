@@ -27,11 +27,10 @@ The application is **meridian-first** for Traditional Medicine study.
 - `content/acupoints/acupoints.json`: acupoint content source.
 - `content/meridians/meridians.json`: meridian content source.
 - `scripts/validate-architecture.mjs`: architecture regression guard.
-- `.github/workflows/hiu-atlas-ci.yml`: CI gate.
-- `.github/workflows/hiu-atlas-pages.yml`: production deploy gate.
+- `.github/workflows/hiu-atlas-ci.yml`: single verification + GitHub Pages deployment pipeline.
 
 ## Release rule
 
-A change is not production-ready until content validation, architecture guard, TypeScript check, atlas validation, interaction validation, unit tests, build, Pages verification, and browser smoke all pass.
+A change is not production-ready until content validation, architecture guard, TypeScript check, atlas validation, interaction validation, unit tests, build, Pages verification, and browser smoke all pass; deployment then consumes the artifact produced by that same verified run.
 
 Do not develop from historical feature/checkpoint branches. Do not restore old deployment platforms or parallel anatomy runtimes.
