@@ -166,12 +166,18 @@ for(const [sourceMeridianId,groups] of Object.entries(topology.paths)){
     // The vendor topology explicitly defines adjacency. Do not infer continuity from
     // numeric point codes: BL intentionally jumps 38→40→55 in one source branch.
     for(const sourceCode of groups[gi]){const code=canonicalCode(sourceCode),a=byKey.get(code+':'+side);if(!a){flush();continue}chunk.push(a)}
+    if(meridianId==='ST'&&gi===0&&chunk.length){
+      const sign=side==='LEFT'?-1:1;
+      const originSource=structuralCast({struct:'Nasal bone',along:1,dir:'anterior',shift:{down:10,lateral:13}});
+      const originBrowser=toBrowser([Math.abs(originSource[0])*sign,originSource[1],originSource[2]]);
+      chunk.unshift({pointCode:'ST-ROUTE-ORIGIN',x:round(originBrowser[0]),y:round(originBrowser[1]),z:round(originBrowser[2])});
+    }
     flush();
   }
 }
 const codes=new Set(pointDoc.points.map(p=>canonicalCode(p.code))),topologyCodes=new Set(Object.values(topology.paths).flat(2).map(canonicalCode));
 const omitted=[...codes].filter(c=>!topologyCodes.has(c)).sort();
-const generatedPathCodes=new Set(paths.flatMap(path=>path.pointCodes));
+const generatedPathCodes=new Set(paths.flatMap(path=>path.pointCodes).filter(code=>code!=='ST-ROUTE-ORIGIN'));
 const missingGenerated=[...topologyCodes].filter(code=>!generatedPathCodes.has(code)).sort();
 const extraGenerated=[...generatedPathCodes].filter(code=>!topologyCodes.has(code)).sort();
 if(missingGenerated.length||extraGenerated.length)throw new Error('Generated meridian topology drift: '+JSON.stringify({missingGenerated,extraGenerated}));
@@ -189,8 +195,9 @@ for(const sourceMeridianId of Object.keys(topology.paths)){
   }
 }
 
-const out={schemaVersion:'1.1.0',coordinateSystem:'BodyParts3D-4.0-browser-meters-Y-up',verificationStatus:'UNVERIFIED',calibrationStatus:'DOCUMENT_CORROBORATED_3D',calibration:{status:'DOCUMENT_CORROBORATED_3D',method:'Anatomical anchors and cun/region proportions are projected by raycast to the BodyParts3D FMA7163 skin surface; user-provided meridian illustrations are used to cross-check channel sequence, body region and endpoint orientation.',documentSourceId:documentReference.sourceId,documentTitle:documentReference.document.title+' — '+documentReference.document.author,documentPages:documentReference.document.pdfPages},source:{repository:'FuriaRozkwit/acupuncture-3d',commit:'1fc9ec98d365c9fb035844e2775c1be05a0a05fc',license:'MIT anchors/code; CC BY-SA calibrated anatomy metadata',skin:'BodyParts3D FMA7163'},anchors:anchorOut,paths,omittedTopology:omitted,generatedBy:'scripts/build-furia-schematic.mjs'};
-out.channelAliases=channelAliases;out.sourceSideWarnings=sourceSideWarnings;
+const routeOrigins={ST:{label:'Điểm khởi đường Kinh Vị',description:'Khởi từ vùng ngoài cánh mũi trước khi đi tới huyệt ST-1 Thừa khấp; đây là mốc đường kinh, không phải huyệt.',notAnAcupoint:true}};
+const out={schemaVersion:'1.2.0',coordinateSystem:'BodyParts3D-4.0-browser-meters-Y-up',verificationStatus:'UNVERIFIED',calibrationStatus:'DOCUMENT_CORROBORATED_3D',calibration:{status:'DOCUMENT_CORROBORATED_3D',method:'Anatomical anchors and cun/region proportions are projected by raycast to the BodyParts3D FMA7163 skin surface; user-provided meridian illustrations are used to cross-check channel sequence, body region and endpoint orientation.',documentSourceId:documentReference.sourceId,documentTitle:documentReference.document.title+' — '+documentReference.document.author,documentPages:documentReference.document.pdfPages},source:{repository:'FuriaRozkwit/acupuncture-3d',commit:'1fc9ec98d365c9fb035844e2775c1be05a0a05fc',license:'MIT anchors/code; CC BY-SA calibrated anatomy metadata',skin:'BodyParts3D FMA7163'},anchors:anchorOut,paths,omittedTopology:omitted,generatedBy:'scripts/build-furia-schematic.mjs'};
+out.channelAliases=channelAliases;out.sourceSideWarnings=sourceSideWarnings;out.routeOrigins=routeOrigins;
 out.anchorCoverage={catalogPoints:catalogCodes.size,generatedPointCodes:anchorPointCodes.size,generatedAnchors:anchorOut.length,missingAnchorCodes};
 out.pathCoverage={catalogPoints:codes.size,sourceTopologyPoints:topologyCodes.size,generatedTopologyPoints:generatedPathCodes.size,missingGenerated,extraGenerated};
 out.endpointAudit=endpointAudit;
