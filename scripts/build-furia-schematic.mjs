@@ -133,8 +133,22 @@ function scalpCast(a){
   return p;
 }
 const spatialOverrides={
+  // HIU document/anatomy QC overrides. These refine only the derived runtime anchors;
+  // pinned vendor source files remain immutable and provenance is preserved.
+  'LI-20':{struct:'Nasal bone',along:1,dir:'anterior',shift:{down:10,lateral:12}},
+  'ST-1':{struct:'Anterior segment of eyeball',along:.5,dir:'anterior',shift:{down:11}},
+  'BL-1':{struct:'Anterior segment of eyeball',along:.5,dir:'anterior',shift:{medial:10}},
+  'TE-23':{struct:'Anterior segment of eyeball',along:.5,dir:'anterior',shift:{lateral:14,up:14}},
+  'GB-1':{struct:'Anterior segment of eyeball',along:.5,dir:'anterior',shift:{lateral:13}},
+  'CV-24':{struct:'Mandible',along:.5,dir:'anterior',shift:{up:19}},
+  'GV-28':{struct:'Maxilla',along:.35,dir:'anterior',shift:{down:7}},
   'ST-45':{struct:'Distal phalanx of second finger of foot',along:.95,dir:'dorsal',shift:{lateral:3},region:'foot'}
 };
+const documentEvidenceByMeridian=new Map(documentReference.meridians.map(item=>[item.meridianId,item]));
+for(const pointCode of Object.keys(spatialOverrides)){
+  const meridianId=pointCode.match(/^([A-Z]+)-/)?.[1];
+  if(!meridianId||!documentEvidenceByMeridian.has(meridianId))throw new Error('Spatial override missing document evidence: '+pointCode);
+}
 const resolveRight=(a,pointCode)=>{const anchor=spatialOverrides[pointCode]??a;return 'struct'in anchor?structuralCast(anchor):'arc_cun'in anchor?scalpCast(anchor):segmentCast(anchor)};
 const round=x=>Math.round(x*1e6)/1e6;
 const sourceSideWarnings=pointDoc.points
@@ -152,7 +166,7 @@ for(const point of pointDoc.points){
   const records=canonicalMidline||point.side==='midline'
     ?[['MIDLINE',[0,right[1],right[2]]]]
     :[['RIGHT',right],['LEFT',[-right[0],right[1],right[2]]]];
-  for(const [side,src] of records){const p=toBrowser(src);anchorOut.push({pointCode:canonicalPointCode,meridianId,sourcePointCode:point.code,sourceMeridianId:point.channel,sequence:point.index,side,x:round(p[0]),y:round(p[1]),z:round(p[2]),verificationStatus:'UNVERIFIED',sourceKind:'LICENSED_SCHEMATIC',accuracy:point.accuracy,projection:'BodyParts3D FMA7163 surface raycast',calibrationOverride:spatialOverrides[canonicalPointCode]?'HIU_DOCUMENT_ANATOMY_QC':undefined})}
+  for(const [side,src] of records){const p=toBrowser(src),doc=documentEvidenceByMeridian.get(meridianId);anchorOut.push({pointCode:canonicalPointCode,meridianId,sourcePointCode:point.code,sourceMeridianId:point.channel,sequence:point.index,side,x:round(p[0]),y:round(p[1]),z:round(p[2]),verificationStatus:'UNVERIFIED',sourceKind:'LICENSED_SCHEMATIC',accuracy:point.accuracy,projection:'BodyParts3D FMA7163 surface raycast',calibrationOverride:spatialOverrides[canonicalPointCode]?'HIU_DOCUMENT_ANATOMY_QC':undefined,documentEvidence:spatialOverrides[canonicalPointCode]?{sourceId:documentReference.sourceId,pdfPageRange:doc?.pdfPageRange??null,label:doc?.label??null,evidenceType:doc?.evidenceType??null,spatialStatus:doc?.spatialStatus??null}:undefined})}
 }
 const byKey=new Map(anchorOut.map(a=>[a.pointCode+':'+a.side,a]));
 if(byKey.size!==anchorOut.length)throw new Error('Duplicate generated acupoint anchor key');
@@ -177,6 +191,43 @@ for(const [sourceMeridianId,groups] of Object.entries(topology.paths)){
     }
     flush();
   }
+}
+
+// Keep the Spleen channel visually on the body surface. The catalogue anchors stay
+// untouched; only render-path interpolation is densified and re-projected to the
+// canonical BodyParts3D skin so layer visibility (surface vs skeleton) cannot make
+// the channel appear to cut through the limb/trunk.
+function projectBrowserToSegmentSurface(pointBrowser,segmentName){
+  const p=fromBrowser(pointBrowser),seg=segments[segmentName],axis=sub(seg.p1,seg.p0),den=dot(axis,axis)||1;
+  const t=clamp(dot(sub(p,seg.p0),axis)/den,0,1),base=interior(seg,t),ray=sub(p,base);
+  if(norm(ray)<1e-7)return pointBrowser;
+  return toBrowser(castSource(base,ray,.65));
+}
+const spSegmentForPair=(a,b)=>{
+  const seq=Math.max(numericPointSequenceForBuild(a),numericPointSequenceForBuild(b));
+  if(seq<=5)return 'foot';
+  if(seq<=9)return 'shank';
+  if(seq<=11)return 'thigh';
+  return 'trunk';
+};
+function numericPointSequenceForBuild(code){
+  const m=String(code||'').match(/-(\d+)$/);return m?Number(m[1]):Number.MAX_SAFE_INTEGER;
+}
+for(const pathItem of paths.filter(item=>item.meridianId==='SP')){
+  const dense=[];
+  for(let i=0;i<pathItem.pointCodes.length-1;i++){
+    const a=pathItem.points[i],b=pathItem.points[i+1],segName=spSegmentForPair(pathItem.pointCodes[i],pathItem.pointCodes[i+1]);
+    if(i===0)dense.push(a);
+    for(const fraction of [.25,.5,.75]){
+      const p=[a[0]+(b[0]-a[0])*fraction,a[1]+(b[1]-a[1])*fraction,a[2]+(b[2]-a[2])*fraction];
+      dense.push(projectBrowserToSegmentSurface(p,segName).map(round));
+    }
+    dense.push(b);
+  }
+  if(pathItem.pointCodes.length===1)dense.push(pathItem.points[0]);
+  pathItem.points=dense;
+  pathItem.surfaceProjection='BodyParts3D FMA7163 surface-following densification';
+  pathItem.surfaceProjectionStep='quarter-segment';
 }
 const codes=new Set(pointDoc.points.map(p=>canonicalCode(p.code))),topologyCodes=new Set(Object.values(topology.paths).flat(2).map(canonicalCode));
 const omitted=[...codes].filter(c=>!topologyCodes.has(c)).sort();

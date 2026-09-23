@@ -33,7 +33,7 @@ Checkpoint bảo toàn trước kiểm tra: `checkpoint/2026-09-23-dabd37f-stabl
 1. **Danh mục và topology: PASS 14/14** — mã huyệt đầu/cuối trong `content/meridians/meridians.json` khớp topology nguồn đang dùng.
 2. **BL-39: KHÔNG ĐƯỢC TỰ NỐI** — topology nguồn không chứa BL-39. Nhánh hiện có giữ nguyên BL-38 → BL-40 → BL-55. Đây là thiếu dữ liệu hình học nguồn, không được suy diễn.
 3. **Tọa độ 3D: CHƯA ĐƯỢC NÂNG TRẠNG THÁI** — các anchor nguồn vẫn phải giữ `UNVERIFIED / LICENSED_SCHEMATIC` cho tới khi đối chiếu trực quan từng huyệt với hình trong tài liệu và mốc giải phẫu BodyParts3D.
-4. **Điểm cần QC ưu tiên:** vùng mặt và các điểm có anchor dùng cấu trúc thay thế, đặc biệt GV-28; tiếp theo CV-24, LI-20, ST-1, TE-23, GB-1, BL-1. Không sửa tọa độ chỉ dựa trên tên xương proxy.
+4. **QC vùng mặt — đợt hiệu chỉnh HIU tiếp theo:** LI-20, ST-1, BL-1, TE-23, GB-1, CV-24 và GV-28 đã được chuyển sang override giải phẫu riêng để bám sát mốc trên hình/tài liệu hơn; vendor gốc không bị sửa. Các điểm này vẫn giữ trạng thái `UNVERIFIED` cho đến khi browser smoke và đối chiếu trực quan trên mô hình thật hoàn tất.
 5. **Quy tắc phát hành:** chỉ merge thay đổi vị trí khi có bằng chứng trang/hình + mốc giải phẫu + kiểm thử browser; không gán nhãn “verified” từ hình 2D một mình.
 
 ## Regression guard
@@ -43,3 +43,10 @@ Checkpoint bảo toàn trước kiểm tra: `checkpoint/2026-09-23-dabd37f-stabl
 - ánh xạ SJ→TE, REN→CV, DU→GV;
 - không được tự phát sinh BL-39 vào topology;
 - bảo toàn chuỗi nhánh BL-38 → BL-40 → BL-55 của nguồn hiện hành.
+
+
+## Đợt đối chiếu tiếp theo — cổng bằng chứng tài liệu
+
+- Mọi `spatialOverride` của HIU hiện bắt buộc phải có `documentEvidence` trỏ tới tài liệu Ngô Trung Triều và dải trang của đúng kinh; thiếu mapping thì build dừng.
+- Đã xác nhận trực tiếp từ bản OCR cùng đầu sách: **LI-20 Nghinh hương** nằm tại giao điểm đường ngang chân cánh mũi với rãnh mũi–miệng; **ST-45 Lệ đoài** ở cạnh ngoài gốc móng ngón chân II; **LU-11 Thiếu thương** ở bờ ngoài ngón cái, cách góc móng khoảng 0,1 tấc; **SP-1 Ẩn bạch** ở bờ trong ngón cái chân gần góc móng. Những điểm này phù hợp hướng giải phẫu đang dùng nên không phát sinh sửa vendor.
+- Các huyệt chưa đọc được mô tả vị trí trực tiếp từ tài liệu trong phiên này không được tự thêm override chỉ vì tên huyệt hoặc topology.
