@@ -53,7 +53,6 @@ const canonicalPointCode=(v:string)=>{
   const match=compact.match(/^([A-Z]+)(\d+)$/);
   return match?`${match[1]}-${Number(match[2])}`:compact;
 };
-const googleReference=(query:string)=>`https://www.google.com/search?q=${encodeURIComponent(query)}`;
 
 export default function YhctStudyPanel({localDraftCount,onStudyCommand}:Props){
   const [open,setOpen]=useState(false);
@@ -137,7 +136,7 @@ export default function YhctStudyPanel({localDraftCount,onStudyCommand}:Props){
         :`${exactMeridian.code} · ${exactMeridian.vietnameseName} (${exactMeridian.englishName}). Catalog: ${exactMeridian.pointIds.length} huyệt; điểm đầu ${exactMeridian.pointIds[0]}, điểm cuối ${exactMeridian.pointIds.at(-1)}. Trạng thái dữ liệu nguồn: ${exactMeridian.spatialStatus}. Đường mô phỏng 3D được gắn nhãn UNVERIFIED nếu chưa qua thẩm định.`);
       return;
     }
-    setAnswer('Không tìm thấy trong cơ sở dữ liệu cục bộ. Liên kết Google chỉ mở tham khảo bên ngoài; ứng dụng không tự chép kết quả tìm kiếm vào catalog.');
+    setAnswer('Không tìm thấy trong cơ sở dữ liệu cục bộ. Ứng dụng không tự bổ sung dữ liệu khi chưa có nguồn đã kiểm tra.');
   };
 
   const focusPoint=(point:Acupoint,message?:string)=>{onStudyCommand({meridianId:point.meridianId,pointCode:point.code});if(message)setModeMessage(message)};
@@ -171,7 +170,7 @@ export default function YhctStudyPanel({localDraftCount,onStudyCommand}:Props){
   const applySimulation=(next:typeof simulation)=>{
     setSimulation(next);onStudyCommand({meridianId:studyMeridian,pointCode:currentStudyPoint?.code??points.find(p=>p.meridianId===studyMeridian)?.code,effects:{motion:next.motion,meridians:next.meridians,acupoints:next.acupoints}});
   };
-  const startSimulation=()=>{setMode('simulation');applySimulation(simulation);setModeMessage('Simulation Lab điều khiển hiệu ứng hiển thị học tập; không mô phỏng dòng chảy sinh lý.')};
+  const startSimulation=()=>{setMode('simulation');applySimulation(simulation);setModeMessage('Mô phỏng 3D điều khiển hiệu ứng hiển thị học tập; không mô phỏng dòng chảy sinh lý.')};
 
   return <>
     <button className="yhct-launch glass" onClick={()=>setOpen(v=>!v)} aria-expanded={open} aria-controls="yhct-study-panel">
@@ -209,7 +208,6 @@ export default function YhctStudyPanel({localDraftCount,onStudyCommand}:Props){
               <div className="yhct-links">
                 <button type="button" data-study-meridian={(row as Meridian).id} onClick={()=>{const p=points.find(point=>point.meridianId===(row as Meridian).id);if(p)focusPoint(p,`Mở ${(row as Meridian).vietnameseName} trên mô hình 3D.`)}}>Xem 3D</button>
                 {(row as Meridian).referenceUrl&&<a href={(row as Meridian).referenceUrl!} target="_blank" rel="noreferrer">AcuAtlas ↗</a>}
-                <a href={googleReference(`${(row as Meridian).code} ${(row as Meridian).vietnameseName} acupuncture meridian`)} target="_blank" rel="noreferrer">Tham khảo Google ↗</a>
               </div>
             </article>
             :<article key={(row as Acupoint).id}>
@@ -219,7 +217,6 @@ export default function YhctStudyPanel({localDraftCount,onStudyCommand}:Props){
               <div className="yhct-links">
                 <button type="button" data-study-point={(row as Acupoint).code} onClick={()=>focusPoint(row as Acupoint,`Đã mở ${(row as Acupoint).code} trong Kinh lạc 3D.`)}>Bay tới 3D</button>
                 <a href={(row as Acupoint).references?.[0]||'https://acupointatlas.com/acupuncture-points/'} target="_blank" rel="noreferrer">Nguồn catalog ↗</a>
-                <a href={googleReference(`${(row as Acupoint).code} acupuncture point WHO`)} target="_blank" rel="noreferrer">Tham khảo Google ↗</a>
               </div>
             </article>)
             :<p>Không có record cục bộ phù hợp.</p>}
@@ -234,7 +231,7 @@ export default function YhctStudyPanel({localDraftCount,onStudyCommand}:Props){
 
       {tab==='assistant'&&<div className="yhct-assistant">
         <textarea value={question} onChange={e=>setQuestion(e.target.value)} placeholder="Ví dụ: ST36 thuộc kinh nào? / Kinh Phế có những huyệt nào?"/>
-        <button onClick={ask}>Tra cứu local</button>
+        <button onClick={ask}>Tra cứu nội bộ</button>
         <p>{answer}</p>
         <small>Đây là tra cứu cục bộ, không phải LLM. Không dùng API key, không gọi cloud AI và không bịa nội dung khi thiếu dữ liệu.</small>
       </div>}
@@ -243,7 +240,7 @@ export default function YhctStudyPanel({localDraftCount,onStudyCommand}:Props){
         <button data-yhct-mode="explore" className={mode==='explore'?'active':''} onClick={startExplore} disabled={!points.length}>Khám phá</button>
         <button data-yhct-mode="study" className={mode==='study'?'active':''} onClick={startStudy} disabled={!points.length}>Học theo kinh</button>
         <button data-yhct-mode="quiz" className={mode==='quiz'?'active':''} onClick={startQuiz} disabled={!quizCandidates.length}>Quiz 3D</button>
-        <button data-yhct-mode="simulation" className={mode==='simulation'?'active':''} onClick={startSimulation} disabled={!quizCandidates.length}>Simulation Lab</button>
+        <button data-yhct-mode="simulation" className={mode==='simulation'?'active':''} onClick={startSimulation} disabled={!quizCandidates.length}>Mô phỏng 3D</button>
       </div>
 
       {mode==='explore'&&<section className="yhct-mode-panel" data-mode-panel="explore">
@@ -260,14 +257,14 @@ export default function YhctStudyPanel({localDraftCount,onStudyCommand}:Props){
 
       {mode==='quiz'&&quizPoint&&<section className="yhct-mode-panel" data-mode-panel="quiz">
         <strong>Quiz 3D · nhận diện vị trí mô phỏng</strong>
-        <p>Camera đã bay tới một điểm trong lớp LICENSED_SCHEMATIC · UNVERIFIED. Chọn mã huyệt tương ứng.</p>
+        <p>Camera đã bay tới một điểm trong lớp tọa độ mô phỏng · chưa thẩm định. Chọn mã huyệt tương ứng.</p>
         <div className="quiz-options">{quizOptions.map(option=><button key={option.code} onClick={()=>answerQuiz(option.code)}>{option.code}</button>)}</div>
         {quizResult&&<p role="status" data-quiz-result="true">{quizResult}</p>}
         <button onClick={nextQuiz}>Câu tiếp theo</button>
       </section>}
 
       {mode==='simulation'&&<section className="yhct-mode-panel" data-mode-panel="simulation">
-        <strong>Simulation Lab · hiệu ứng học tập</strong>
+        <strong>Mô phỏng 3D · hiệu ứng học tập</strong>
         <p>Điều khiển hiển thị, không mô phỏng sinh lý và không xác nhận vị trí lâm sàng.</p>
         <div className="simulation-controls">
           <button aria-pressed={simulation.motion} onClick={()=>applySimulation({...simulation,motion:!simulation.motion})}>Chuyển động</button>
