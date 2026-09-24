@@ -347,7 +347,36 @@ body:has(.registration-panel) .meridian3d-launch{left:376px}body:has(.registrati
 .acupuncture-sim>p{margin:7px 0;color:#64727d}.acupuncture-sim label{display:grid;gap:5px;margin:10px 0;color:#53616b}.acupuncture-sim input[type=range]{width:100%;accent-color:#b36b35}.acupuncture-sim select{min-height:38px;padding:7px;border:1px solid #18253620;border-radius:6px;background:white}.acupuncture-warning{padding:9px;border-left:3px solid #c87937;background:#fcf5ed!important;color:#674a32!important}.acupuncture-sources{display:grid;gap:7px;margin-top:9px}.acupuncture-sources a{color:#386b78;text-decoration:underline;text-underline-offset:2px}
 .studio.layout-mobile .mobile-only{display:flex!important}.studio.layout-mobile .desktop-only{display:none!important}.studio.layout-mobile .layers-panel{display:none}.studio.layout-mobile .layers-panel.mobile-open{display:flex;z-index:30;top:auto;left:12px;right:12px;bottom:140px;width:auto;max-height:calc(100dvh - 270px)}.studio.layout-mobile .view-controls{right:12px;top:43%;padding:3px}.studio.layout-mobile .bottom-dock{bottom:30px;width:calc(100% - 24px);padding:13px;gap:15px}.studio.layout-mobile .studio-footer{justify-content:center}.studio.layout-mobile .studio-footer>span{display:none}
 .studio.layout-desktop .mobile-only{display:none!important}.studio.layout-desktop .desktop-only{display:flex!important}.studio.layout-desktop .layers-panel{display:flex;left:30px;right:auto;top:217px;bottom:175px;width:254px;max-height:654px}.studio.layout-desktop .layers-panel.mobile-open{left:30px;right:auto;top:217px;bottom:175px;width:254px;max-height:654px}
-@media(max-width:767px){.studio.layout-desktop .layers-panel{left:12px;top:105px;bottom:90px;width:min(254px,calc(100vw - 24px));max-height:none;padding:12px 12px 0;background:#fffffff5;z-index:30}.studio.layout-desktop .layers-panel .system-count{display:none}.studio.layout-desktop .layers-panel.mobile-open{left:12px;right:auto;top:105px;bottom:90px;width:min(254px,calc(100vw - 24px));max-height:none}.studio.layout-desktop .top-actions{right:8px;gap:0}.studio.layout-desktop .top-actions>button:not(.layout-toggle){display:none}.studio.layout-desktop .view-controls{right:8px}.studio.layout-desktop .bottom-dock{width:390px;max-width:calc(100% - 24px);bottom:30px}}
+@media(max-width:767px){.studio.layout-desktop .layers-panel{left:12px;top:105px;bottom:90px;width:min(254px,calc(100vw - 24px));max-height:none;padding:12px 12px 0;background:#fffffff5;z-index:30}.studio.layout-desktop .layers-panel .system-count{display:none}.studio.layout-desktop .layers-panel.mobile-open{left:12px;right:auto;top:105px;bottom:90px;width:min(254px,calc(100vw - 24px));max-height:none}.studio.layout-desktop .top-actions{right:8px;gap:0}.studio.layout-desktop .top-actions>button:not(.layout-toggle):not(.toggle-layers):not(.toggle-views){display:none}.studio.layout-desktop .view-controls{right:8px}.studio.layout-desktop .bottom-dock{width:390px;max-width:calc(100% - 24px);bottom:30px}}
 .meridian3d-launch{position:relative!important;padding-right:46px!important}.meridian-launch-grip{position:absolute;right:9px;top:9px}
 .acupuncture-sim>button{min-height:40px;margin:5px 0;border:1px solid #18253618!important;border-radius:7px!important;background:#fff!important;padding:7px 10px!important;font-size:11px!important;text-align:left}
 .yhct-launch{position:relative!important;padding-right:42px!important}.yhct-launch-grip{position:absolute;right:8px;top:8px}
+
+/* Resizable floating menus; dragging stays on the existing touch-safe drag grips. */
+[data-floating-menu]{resize:both;min-width:220px;min-height:120px;max-width:calc(100vw - 16px);max-height:calc(100dvh - 16px);overflow:auto;overscroll-behavior:contain}
+[data-floating-menu][data-floating-compact]{min-width:180px;min-height:44px}
+[data-floating-menu][data-floating-resized]{width:var(--floating-width);height:var(--floating-height);max-width:calc(100vw - 16px);max-height:calc(100dvh - 16px)}
+[data-floating-menu]::after{content:'';position:absolute;right:1px;bottom:1px;width:24px;height:24px;z-index:8;pointer-events:auto;touch-action:none;cursor:nwse-resize;background:linear-gradient(135deg,transparent 0 55%,#71808c33 56% 61%,transparent 62% 69%,#71808c55 70% 75%,transparent 76%)}
+.floating-menu-hidden{display:none!important}
+.registration-titlebar{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.registration-titlebar>button:last-child{width:36px;height:36px;border-radius:8px;font-size:19px;color:#71808c}
+@media(max-width:767px){[data-floating-menu]{min-width:min(220px,calc(100vw - 16px));min-height:96px;max-height:calc(100dvh - 160px)}[data-floating-menu][data-floating-compact]{min-width:180px;min-height:44px}.meridian3d-panel,.meridian3d-panel[data-floating-resized]{max-height:min(58dvh,calc(100dvh - 160px),520px)}}
+.needle-simulation{display:grid;gap:8px;min-width:0}
+.needle-3d-view{position:relative;height:208px;min-height:160px;overflow:hidden;border:1px solid #18253612;border-radius:9px;background:linear-gradient(145deg,#fff,#eef3f4)}
+.needle-3d-view canvas{display:block;width:100%;height:100%;outline:none}
+.needle-view-label{position:absolute;left:8px;top:7px;padding:4px 6px;border-radius:5px;background:#ffffffc7;color:#687681;font-size:8px;letter-spacing:.04em;pointer-events:none}
+.needle-webgl-fallback{position:absolute;inset:0;z-index:1;display:grid;place-items:center;padding:20px;text-align:center;background:#f3f6f6;color:#5e7079;font-size:11px;line-height:1.45}
+.needle-phase-controls{display:flex;flex-wrap:wrap;gap:5px}
+.needle-phase-controls button{min-height:36px;border:1px solid #18253616;border-radius:8px;background:#fff;color:#42545f;padding:5px 8px;font-size:9px;cursor:pointer}
+.needle-phase-controls button[aria-pressed="true"]{background:#e7efed;color:#145e58;border-color:#0f766e40}
+.needle-range{display:grid;grid-template-columns:1fr auto;gap:3px 8px;font-size:10px;color:#5b6974}
+.needle-range output{font-variant-numeric:tabular-nums;color:#314c57}
+.needle-range input{grid-column:1/-1;width:100%;accent-color:#558d88}
+.needle-response{display:flex;align-items:center;gap:7px;font-size:10px;color:#52666e}
+.needle-disclaimer{font-size:9px;line-height:1.4;color:#7c6c59}
+@media(max-width:767px){.needle-3d-view{height:185px}.needle-phase-controls button{flex:1 1 40%}}
+
+/* Keep persisted desktop resize dimensions inside the mobile viewport. */
+@media(max-width:767px){.meridian3d-panel[data-floating-resized]{top:max(126px,calc(env(safe-area-inset-top) + 112px));bottom:auto!important;height:min(58dvh,calc(100dvh - 160px),520px)!important;max-height:min(58dvh,calc(100dvh - 160px),520px)!important}body:has(.registration-panel) .meridian3d-panel[data-floating-resized]{top:max(172px,calc(env(safe-area-inset-top) + 160px))}}
+
+@media(max-width:767px){.yhct-panel[data-floating-menu]{top:max(126px,calc(env(safe-area-inset-top) + 112px));bottom:auto!important;height:min(var(--floating-height,58dvh),calc(100dvh - 160px),520px)!important;max-height:min(58dvh,calc(100dvh - 160px),520px)}}

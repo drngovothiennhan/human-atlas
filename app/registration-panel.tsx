@@ -1,5 +1,7 @@
 import {useEffect,useMemo,useState} from 'react';
+import {Move} from 'lucide-react';
 import {Button} from '@/components/ui/button';
+import {useDraggable} from './use-draggable';
 import {
   BODY_CANONICAL_COORDINATE_SYSTEM,
   type AcupointAnchorDraft,
@@ -21,14 +23,15 @@ type PilotFile={schemaVersion:string;coordinateSystem:string;policy:string;pilot
 type ReferenceEntry={sourceId:string;label:string;role:string;locator:string};
 type ReferenceEvidenceFile={schemaVersion:string;policy:string;pilot:Array<{pointCode:string;references:ReferenceEntry[]}>};
 type Target={pointCode:string;side:RegistrationSide};
-interface Props{target:Target;capture:SurfaceCapture|null;onTargetChange:(target:Target)=>void;onDraftsChange:(drafts:AcupointAnchorDraft[])=>void}
+interface Props{target:Target;capture:SurfaceCapture|null;onTargetChange:(target:Target)=>void;onDraftsChange:(drafts:AcupointAnchorDraft[])=>void;onClose:()=>void}
 
 const STORAGE_KEY='hiu-yhct-registration-drafts-v0.1';
 
-export default function RegistrationPanel({target,capture,onTargetChange,onDraftsChange}:Props){
+export default function RegistrationPanel({target,capture,onTargetChange,onDraftsChange,onClose}:Props){
   const [pilot,setPilot]=useState<PilotFile|null>(null);
   const [referenceEvidence,setReferenceEvidence]=useState<ReferenceEvidenceFile|null>(null);
   const [drafts,setDrafts]=useState<AcupointAnchorDraft[]>([]);
+  const panelDrag=useDraggable('registration');
 
   useEffect(()=>{
     let live=true;
@@ -118,8 +121,8 @@ export default function RegistrationPanel({target,capture,onTargetChange,onDraft
   const google='https://www.google.com/search?q='+
     encodeURIComponent((active?.pointCode??target.pointCode)+' acupuncture point location anatomy');
 
-  return <aside className="registration-panel" data-registration-panel="true" aria-label="BodyParts3D acupoint registration">
-    <div className="registration-kicker">Faculty review staging · không xuất bản runtime</div>
+  return <aside data-floating-menu="registration" className="registration-panel" ref={node=>{panelDrag.ref.current=node}} data-registration-panel="true" aria-label="BodyParts3D acupoint registration">
+    <div className="registration-titlebar"><button type="button" className="drag-grip" onPointerDown={panelDrag.onPointerDown} aria-label="Kéo bảng đăng ký"><Move size={14}/></button><div className="registration-kicker">Faculty review staging · không xuất bản runtime</div><Button variant="ghost" onClick={onClose} aria-label="Ẩn bảng đăng ký">×</Button></div>
     <h2>Đăng ký anchor BodyParts3D</h2>
     <p>Chạm trực tiếp lên bề mặt cơ thể để ghi triangle, barycentric và XYZ chuẩn BodyParts3D. Mọi điểm mới luôn ở trạng thái UNVERIFIED.</p>
     <div className="registration-grid">

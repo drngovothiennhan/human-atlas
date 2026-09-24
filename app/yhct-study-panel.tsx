@@ -1,6 +1,7 @@
 import {useEffect,useMemo,useState} from 'react';
 import {Move} from 'lucide-react';
 import {useDraggable} from './use-draggable';
+import NeedleSimulation from './needle-simulation';
 
 type Meridian={
   id:string;
@@ -184,7 +185,7 @@ export default function YhctStudyPanel({localDraftCount,onStudyCommand}:Props){
       YHCT <span>{meridians.length} kinh · {points.length} huyệt</span>
       <span className="drag-grip yhct-launch-grip" onPointerDown={launchDrag.onPointerDown} onClick={e=>e.stopPropagation()} aria-hidden="true" title="Kéo nút học YHCT"><Move size={13}/></span>
     </button>
-    {open&&<aside id="yhct-study-panel" ref={node=>{panelDrag.ref.current=node}} className="yhct-panel glass" aria-label="Huyệt vị, kinh lạc và trợ lý học tập">
+    {open&&<aside id="yhct-study-panel" data-floating-menu="study" ref={node=>{panelDrag.ref.current=node}} className="yhct-panel glass" aria-label="Huyệt vị, kinh lạc và trợ lý học tập">
       <div className="yhct-head">
         <div><strong>Huyệt vị · Kinh lạc</strong><small>HIU CLB YHCT · tra cứu cục bộ · nguồn có kiểm soát</small></div>
         <button onClick={()=>setOpen(false)} aria-label="Đóng bảng YHCT">×</button>
@@ -275,6 +276,7 @@ export default function YhctStudyPanel({localDraftCount,onStudyCommand}:Props){
       {mode==='simulation'&&<section className="yhct-mode-panel" data-mode-panel="simulation">
         <strong>Mô phỏng 3D · hiệu ứng học tập</strong>
         <p>Điều khiển hiển thị, không mô phỏng sinh lý và không xác nhận vị trí lâm sàng.</p>
+        <NeedleSimulation/>
         <div className="simulation-controls">
           <button aria-pressed={simulation.motion} onClick={()=>applySimulation({...simulation,motion:!simulation.motion})}>Chuyển động</button>
           <button aria-pressed={simulation.meridians} onClick={()=>applySimulation({...simulation,meridians:!simulation.meridians})}>Đường kinh</button>

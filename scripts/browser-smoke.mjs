@@ -460,7 +460,7 @@ try{
   if(!mobileSkeletonPreset)throw new Error('Mobile skeleton preset unavailable');
   await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.skeletalReferenceReplacement==='true'"),{timeout:90000,label:'mobile skeleton replacement'});
   await screenshot('mobile-controls-functional.png');
-  await touchControl('Đóng hệ cơ quan');
+  await touchControl('Ẩn bảng hệ cơ quan');
   console.log('SMOKE_MOBILE_CONTROLS_PASS');
   await evaluate("document.querySelector('.yhct-launch')?.click()");
   await waitFor(()=>evaluate("!!document.querySelector('.yhct-panel')"),{label:'mobile YHCT panel'});
