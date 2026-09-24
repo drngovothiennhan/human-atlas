@@ -57,7 +57,7 @@ test('licensed schematic spatial dataset stays unverified and complete',async()=
   assert.ok(stPath,'ST path containing ST-1 must exist');
   assert.deepEqual(stPath.pointCodes.slice(0,2),['ST-ROUTE-ORIGIN','ST-1'],'ST route must begin at lateral-nose origin before ST-1');
   assert.equal(stPath.points.length,stPath.pointCodes.length,'ST route origin must have a matching 3D point');
-  const calibratedCodes=['LI-20','ST-1','BL-1','TE-23','GB-1','CV-24','GV-28','ST-45'];
+  const calibratedCodes=['LU-11','LI-20','ST-1','BL-1','TE-23','GB-1','CV-24','GV-28','ST-45'];
   assert.deepEqual(data.spatialOverrides?.slice().sort(),calibratedCodes.slice().sort(),'HIU facial/endpoint calibration set must stay explicit');
   for(const code of calibratedCodes){
     const anchors=data.anchors.filter(a=>a.pointCode===code);
@@ -70,6 +70,20 @@ test('licensed schematic spatial dataset stays unverified and complete',async()=
       assert.ok(anchors.every(a=>a.projection==='BodyParts3D FMA7163 surface raycast'),'ST-45 must stay surface-projected');
     }
   }
+  const luPaths=data.paths.filter(p=>p.meridianId==='LU');
+  assert.ok(luPaths.length>=2,'LU bilateral paths must exist');
+  for(const p of luPaths){
+    assert.equal(p.surfaceProjection,'BodyParts3D FMA7163 lung-channel surface-following','LU path must stay surface-projected on the anterior/radial course');
+    assert.equal(p.surfaceProjectionStep,'fifth-segment','LU surface-following density must stay explicit');
+    assert.ok(p.points.length>p.pointCodes.length,'LU render path must include surface-following control points');
+    assert.equal(p.pointCodes[0],'LU-1','LU route must begin at Trung phủ');
+    assert.equal(p.pointCodes.at(-1),'LU-11','LU route must terminate at Thiếu thương');
+  }
+  const lu11=data.anchors.filter(a=>a.pointCode==='LU-11');
+  assert.equal(lu11.length,2,'LU-11 must remain bilateral');
+  assert.ok(lu11.every(a=>a.calibrationOverride==='HIU_DOCUMENT_ANATOMY_QC'),'LU-11 must use the HIU radial nail-edge calibration');
+  assert.ok(lu11.every(a=>a.anatomicalEvidence?.surfaceRegionEn==='Thumb'||a.anatomicalEvidence?.surfaceRegionVi==='Ngón cái'),'LU-11 must remain anchored to the thumb');
+
   const liPaths=data.paths.filter(p=>p.meridianId==='LI');
   assert.ok(liPaths.length>=2,'LI bilateral paths must exist');
   for(const p of liPaths){
