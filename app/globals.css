@@ -360,7 +360,7 @@ body:has(.registration-panel) .meridian3d-launch{left:376px}body:has(.registrati
 .floating-menu-hidden{display:none!important}
 .registration-titlebar{display:flex;align-items:center;justify-content:space-between;gap:8px}
 .registration-titlebar>button:last-child{width:36px;height:36px;border-radius:8px;font-size:19px;color:#71808c}
-@media(max-width:767px){[data-floating-menu]{min-width:min(220px,calc(100vw - 16px));min-height:96px}[data-floating-menu][data-floating-compact]{min-width:180px;min-height:44px}[data-floating-menu][data-floating-resized]{max-height:calc(100dvh - 160px)}.meridian3d-panel[data-floating-resized]{max-height:min(58dvh,calc(100dvh - 160px),520px)}}
+@media(max-width:767px){[data-floating-menu]{min-width:min(220px,calc(100vw - 16px));min-height:96px;max-height:calc(100dvh - 160px)}[data-floating-menu][data-floating-compact]{min-width:180px;min-height:44px}.meridian3d-panel,.meridian3d-panel[data-floating-resized]{max-height:min(58dvh,calc(100dvh - 160px),520px)}}
 .needle-simulation{display:grid;gap:8px;min-width:0}
 .needle-3d-view{position:relative;height:208px;min-height:160px;overflow:hidden;border:1px solid #18253612;border-radius:9px;background:linear-gradient(145deg,#fff,#eef3f4)}
 .needle-3d-view canvas{display:block;width:100%;height:100%;outline:none}
