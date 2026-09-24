@@ -158,7 +158,7 @@ export default function Meridian3DPanel({drafts,selectedPointCode,studyCommand,o
       <span>{loading?'Đang tải dữ liệu…':loadError?'Chưa tải được dữ liệu — bấm để thử lại':`${points.length} huyệt · 12 chính kinh + Nhâm/Đốc · tìm huyệt và bay tới 3D`}</span>
       <span className="drag-grip meridian-launch-grip" onPointerDown={launchDrag.onPointerDown} onClick={e=>e.stopPropagation()} title="Kéo nút mở kinh lạc" aria-hidden="true"><Move size={13}/></span>
     </Button>
-    {open&&<aside className="meridian3d-panel glass" ref={node=>{panelDrag.ref.current=node}} data-meridian3d-panel="true" aria-label="Mô hình kinh lạc và huyệt vị 3D">
+    {open&&<aside data-floating-menu="meridians" className="meridian3d-panel glass" ref={node=>{panelDrag.ref.current=node}} data-meridian3d-panel="true" aria-label="Mô hình kinh lạc và huyệt vị 3D">
       <div className="meridian3d-head"><div><strong>Đồ hình Kinh lạc 3D · HIU</strong><small>Xoay mô hình, xem đồng thời 12 chính kinh, chọn từng kinh hoặc tìm huyệt để bay tới vị trí 3D đã được hiệu chỉnh theo mốc giải phẫu.</small></div><Button variant="ghost" onClick={()=>setOpen(false)} aria-label="Đóng mô hình kinh lạc 3D">×</Button><button type="button" className="drag-grip" onPointerDown={panelDrag.onPointerDown} aria-label="Kéo bảng kinh lạc"><Move size={14}/></button></div>
       {loading&&<p role="status">Đang tải dữ liệu huyệt và kinh lạc…</p>}
       {loadError&&<div role="alert" data-meridian3d-load-error="true"><p>{loadError}</p><Button variant="ghost" disabled={loading} onClick={()=>setLoadAttempt(v=>v+1)}>Thử tải lại dữ liệu</Button></div>}

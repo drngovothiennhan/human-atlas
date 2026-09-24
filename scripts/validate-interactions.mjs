@@ -33,11 +33,26 @@ for (const file of ['atlas.json']) {
 }
 const pageSource=await readFile(new URL('../app/page.tsx',import.meta.url),'utf8');
 const cssSource=await readFile(new URL('../app/globals.css',import.meta.url),'utf8');
+const [studySource,meridianSource,registrationSource,resizeSource,needleSource]=await Promise.all([
+  readFile(new URL('../app/yhct-study-panel.tsx',import.meta.url),'utf8'),
+  readFile(new URL('../app/meridian-3d-panel.tsx',import.meta.url),'utf8'),
+  readFile(new URL('../app/registration-panel.tsx',import.meta.url),'utf8'),
+  readFile(new URL('../app/floating-menu.ts',import.meta.url),'utf8'),
+  readFile(new URL('../app/needle-simulation.tsx',import.meta.url),'utf8')
+]);
 assert.ok(!pageSource.includes(">Khớp</Button>"),'Meridian-first layer menu must not expose the retired Khớp preset');
 assert.ok(pageSource.includes("s.id!=='articular'"),'Articular layer must stay hidden from the compact study menu');
 assert.ok(cssSource.includes('compact meridian-first layer menu'),'Mobile layer menu overflow guard is required');
 assert.ok(cssSource.includes('grid-template-columns:repeat(2,minmax(0,1fr))'),'Layer presets must use a compact two-column grid');
 console.log('Meridian-first compact layer menu checks passed.');
+for(const [name,source] of [['layers/search',pageSource],['YHCT study',studySource],['meridian',meridianSource],['registration',registrationSource]]){
+  assert.ok(source.includes('data-floating-menu='),`${name} panel must be resizable`);
+}
+assert.ok(resizeSource.includes('setPointerCapture')&&resizeSource.includes('hiu-atlas-floating-menu-size-v1'),'Panel resizing must support touch pointers and persist dimensions');
+assert.ok(cssSource.includes('[data-floating-menu]{resize:both'),'Floating panels must retain the native resize affordance');
+assert.ok(pageSource.includes('setLayersVisible')&&pageSource.includes('setViewControlsVisible'),'Layer and view menus must expose hide/show controls');
+assert.ok(needleSource.includes('Góc đồ họa')&&needleSource.includes('Độ sâu minh họa')&&needleSource.includes('không phải thông số châm cứu'),'Needle lab must expose illustrative controls and clinical limits');
+console.log('Resizable panels, hide/show controls, and illustrative 3D needle controls checks passed.');
 
 const tap=new PointerTap();
 tap.down(1,10,10,5);assert.equal(tap.up(1,12,11),true);
