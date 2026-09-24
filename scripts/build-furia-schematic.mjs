@@ -136,9 +136,11 @@ function scalpCast(a){
 const spatialOverrides={
   // HIU document/anatomy QC overrides. These refine only the derived runtime anchors;
   // pinned vendor source files remain immutable and provenance is preserved.
-  // LU-11: Thiếu thương is on the radial nail edge of the thumb, not the dorsal
-  // centreline. Keep the point surface-projected from the distal thumb phalanx.
-  'LU-11':{struct:'Distal phalanx of first finger of hand',along:.93,dir:'radial',shift:{radial:2,dorsal:2,distal:1},region:'hand'},
+  // LU-10/LU-11 must stay on the thenar/thumb course. Use the first metacarpal
+  // and distal first digit as anatomical anchors, then cast to the palmar surface
+  // with a small radial offset so the route cannot drift onto the index finger.
+  'LU-10':{struct:'First metacarpal bone',along:.62,dir:'palmar',shift:{radial:6},region:'hand'},
+  'LU-11':{struct:'Distal phalanx of first finger of hand',along:.96,dir:'palmar',shift:{radial:6,distal:2},region:'hand'},
   'LI-20':{struct:'Nasal bone',along:1,dir:'anterior',shift:{down:10,lateral:9}},
   'ST-1':{struct:'Anterior segment of eyeball',along:.5,dir:'anterior',shift:{down:11}},
   'BL-1':{struct:'Anterior segment of eyeball',along:.5,dir:'anterior',shift:{medial:10}},
@@ -246,7 +248,12 @@ for(const pathItem of paths.filter(item=>item.meridianId==='LU')){
     if(i===0)dense.push(a);
     for(const fraction of [.2,.4,.6,.8]){
       const p=[a[0]+(b[0]-a[0])*fraction,a[1]+(b[1]-a[1])*fraction,a[2]+(b[2]-a[2])*fraction];
-      dense.push(projectBrowserToSegmentSurface(p,luSegmentForPair(codeA,codeB,fraction),pathItem.side).map(round));
+      const seqB=numericPointSequenceForBuild(codeB);
+      // LU-9 -> LU-10 -> LU-11 is a thumb-specific route. The generic hand
+      // segment axis runs through the metacarpal centre and can snap these
+      // interpolation points toward the index finger, which is anatomically wrong.
+      // Preserve interpolation between the already skin-projected thumb anchors.
+      dense.push((seqB>=10?p:projectBrowserToSegmentSurface(p,luSegmentForPair(codeA,codeB,fraction),pathItem.side)).map(round));
     }
     dense.push(b);
   }
@@ -254,7 +261,8 @@ for(const pathItem of paths.filter(item=>item.meridianId==='LU')){
   pathItem.points=dense;
   pathItem.surfaceProjection='BodyParts3D FMA7163 lung-channel surface-following';
   pathItem.surfaceProjectionStep='fifth-segment';
-  pathItem.courseRule='upper chest -> anterior-lateral upper arm -> radial forearm -> thenar/thumb radial nail edge';
+  pathItem.handProjection='anchor-preserving LU-9 -> LU-10 -> LU-11 thumb course';
+  pathItem.courseRule='upper chest -> anterior-lateral upper arm -> radial forearm -> thenar/thumb -> radial nail edge of thumb';
 }
 
 // Keep the facial end of the Large Intestine channel on the visible body surface.
