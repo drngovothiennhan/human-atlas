@@ -378,3 +378,5 @@ body:has(.registration-panel) .meridian3d-launch{left:376px}body:has(.registrati
 
 /* Keep persisted desktop resize dimensions inside the mobile viewport. */
 @media(max-width:767px){.meridian3d-panel[data-floating-resized]{top:max(126px,calc(env(safe-area-inset-top) + 112px));bottom:auto!important;height:min(58dvh,calc(100dvh - 160px),520px)!important;max-height:min(58dvh,calc(100dvh - 160px),520px)!important}body:has(.registration-panel) .meridian3d-panel[data-floating-resized]{top:max(172px,calc(env(safe-area-inset-top) + 160px))}}
+
+@media(max-width:767px){.yhct-panel[data-floating-menu]{top:max(126px,calc(env(safe-area-inset-top) + 112px));bottom:auto!important;height:min(var(--floating-height,58dvh),calc(100dvh - 160px),520px)!important;max-height:min(58dvh,calc(100dvh - 160px),520px)}}
