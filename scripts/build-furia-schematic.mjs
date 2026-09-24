@@ -136,6 +136,9 @@ function scalpCast(a){
 const spatialOverrides={
   // HIU document/anatomy QC overrides. These refine only the derived runtime anchors;
   // pinned vendor source files remain immutable and provenance is preserved.
+  // LU-11: Thiếu thương is on the radial nail edge of the thumb, not the dorsal
+  // centreline. Keep the point surface-projected from the distal thumb phalanx.
+  'LU-11':{struct:'Distal phalanx of first finger of hand',along:.93,dir:'radial',shift:{radial:2,dorsal:2,distal:1},region:'hand'},
   'LI-20':{struct:'Nasal bone',along:1,dir:'anterior',shift:{down:10,lateral:9}},
   'ST-1':{struct:'Anterior segment of eyeball',along:.5,dir:'anterior',shift:{down:11}},
   'BL-1':{struct:'Anterior segment of eyeball',along:.5,dir:'anterior',shift:{medial:10}},
@@ -221,6 +224,37 @@ const spSegmentForPair=(a,b)=>{
 };
 function numericPointSequenceForBuild(code){
   const m=String(code||'').match(/-(\d+)$/);return m?Number(m[1]):Number.MAX_SAFE_INTEGER;
+}
+const luSegmentForPair=(a,b,fraction)=>{
+  const seqA=numericPointSequenceForBuild(a),seqB=numericPointSequenceForBuild(b);
+  if(seqB<=2)return 'trunk';
+  // LU-2 -> LU-3 crosses from upper chest to the anterior-lateral arm.
+  // Keep the first control point on thoracic skin, then transition onto the arm.
+  if(seqA===2&&seqB===3)return fraction<=.25?'trunk':'upper_arm';
+  if(seqB<=4)return 'upper_arm';
+  if(seqB<=9)return 'forearm';
+  return 'hand';
+};
+
+// Keep the Lung channel on the visible anterior/radial surface shown in the HIU
+// teaching reference: upper chest -> anterior-lateral arm -> radial forearm ->
+// thenar/thumb -> radial nail edge. Catalogue topology remains LU-1 ... LU-11.
+for(const pathItem of paths.filter(item=>item.meridianId==='LU')){
+  const dense=[];
+  for(let i=0;i<pathItem.pointCodes.length-1;i++){
+    const codeA=pathItem.pointCodes[i],codeB=pathItem.pointCodes[i+1],a=pathItem.points[i],b=pathItem.points[i+1];
+    if(i===0)dense.push(a);
+    for(const fraction of [.2,.4,.6,.8]){
+      const p=[a[0]+(b[0]-a[0])*fraction,a[1]+(b[1]-a[1])*fraction,a[2]+(b[2]-a[2])*fraction];
+      dense.push(projectBrowserToSegmentSurface(p,luSegmentForPair(codeA,codeB,fraction),pathItem.side).map(round));
+    }
+    dense.push(b);
+  }
+  if(pathItem.pointCodes.length===1)dense.push(pathItem.points[0]);
+  pathItem.points=dense;
+  pathItem.surfaceProjection='BodyParts3D FMA7163 lung-channel surface-following';
+  pathItem.surfaceProjectionStep='fifth-segment';
+  pathItem.courseRule='upper chest -> anterior-lateral upper arm -> radial forearm -> thenar/thumb radial nail edge';
 }
 
 // Keep the facial end of the Large Intestine channel on the visible body surface.
