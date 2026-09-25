@@ -115,6 +115,7 @@ try{
   await evaluate("document.querySelector('[data-meridian3d-load-error=true] button').click()");
   await waitFor(()=>evaluate("!document.querySelector('[data-meridian3d-load-error=true]')&&document.querySelector('[data-meridian3d-launch=true]')?.innerText.includes('361 huyệt')"),{label:'meridian retry recovers data'});
   if(await evaluate("document.querySelectorAll('.meridian3d-controls select')[0]?.value")!=='SI')throw new Error('Meridian panel must open with the small-intestine route isolated');
+  if(await evaluate("document.querySelectorAll('.meridian3d-controls select')[1]?.value")!=='LEFT')throw new Error('Opening the SI panel must hide the opposite-side crossing by default');
   console.log('SMOKE_DEFAULT_SI_ROUTE_ISOLATION_PASS');
   console.log('SMOKE_LOAD_FAILURE_RECOVERY_PASS');
   await waitFor(()=>evaluate("!!document.querySelector('[data-effect-master=true]')"),{label:'effect master control'});
