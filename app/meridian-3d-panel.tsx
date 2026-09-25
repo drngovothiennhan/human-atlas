@@ -138,7 +138,7 @@ export default function Meridian3DPanel({drafts,selectedPointCode,studyCommand,o
   const selectedMeridianPoints=selectedRecord?points.filter(p=>p.meridianId===selectedRecord.meridianId).sort((a,b)=>a.sequence-b.sequence):[];
   const selectedIndex=selectedRecord?selectedMeridianPoints.findIndex(p=>p.code===selectedRecord.code):-1;
 
-  const selectMeridian=(id:string)=>{setActiveMeridian(id);setEnabled(true);setMotion(true);setShowMeridians(true);setQuery('');setSelected(null);onFocus(null)};
+  const selectMeridian=(id:string)=>{setActiveMeridian(id);setEnabled(true);setMotion(true);setShowMeridians(true);setQuery('');setSelected(null);onFocus(null);if(id==='SI')onStudyAction({view:'back'})};
   const focusPoint=(point:Acupoint)=>{
     setSelected(point.code);setActiveMeridian(point.meridianId);setEnabled(true);
     const candidates=allAnchors.filter(a=>a.pointCode===point.code);
@@ -153,7 +153,7 @@ export default function Meridian3DPanel({drafts,selectedPointCode,studyCommand,o
   };
 
   return <>
-    <Button variant="ghost" className={'meridian3d-launch '+(enabled?'active':'')} ref={node=>{launchDrag.ref.current=node}} onClick={()=>open?setOpen(false):(setOpen(true),setEnabled(true))} aria-pressed={enabled} aria-expanded={open} aria-label="Mở mô hình kinh lạc 3D" data-meridian3d-launch="true">
+    <Button variant="ghost" className={'meridian3d-launch '+(enabled?'active':'')} ref={node=>{launchDrag.ref.current=node}} onClick={()=>open?setOpen(false):(setOpen(true),setEnabled(true),activeMeridian==="SI"&&onStudyAction({view:"back"}))} aria-pressed={enabled} aria-expanded={open} aria-label="Mở mô hình kinh lạc 3D" data-meridian3d-launch="true">
       <strong>Đồ hình Kinh lạc 3D</strong>
       <span>{loading?'Đang tải dữ liệu…':loadError?'Chưa tải được dữ liệu — bấm để thử lại':`${points.length} huyệt · 12 chính kinh + Nhâm/Đốc · tìm huyệt và bay tới 3D`}</span>
       <span className="drag-grip meridian-launch-grip" onPointerDown={launchDrag.onPointerDown} onClick={e=>e.stopPropagation()} title="Kéo nút mở kinh lạc" aria-hidden="true"><Move size={13}/></span>
