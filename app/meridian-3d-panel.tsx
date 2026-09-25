@@ -1,4 +1,4 @@
-import {useEffect,useMemo,useState} from 'react';
+import {useEffect,useMemo,useRef,useState} from 'react';
 import {Move} from 'lucide-react';
 import {useDraggable} from './use-draggable';
 import {Button} from '@/components/ui/button';
@@ -34,6 +34,7 @@ export default function Meridian3DPanel({drafts,selectedPointCode,studyCommand,o
   const [meridians,setMeridians]=useState<Meridian[]>([]),[points,setPoints]=useState<Acupoint[]>([]);
   const [schematic,setSchematic]=useState<SchematicSpatial>({anchors:[],paths:[]});
   const [activeMeridian,setActiveMeridian]=useState('SI'),[side,setSide]=useState<MeridianOverlaySide>('BOTH');
+  const autoSiSide=useRef(false),previousSide=useRef<MeridianOverlaySide>('BOTH');
   const [query,setQuery]=useState(''),[selected,setSelected]=useState<string|null>(null);
   const [loading,setLoading]=useState(true),[loadError,setLoadError]=useState(''),[loadAttempt,setLoadAttempt]=useState(0);
   const panelDrag=useDraggable('meridian3d'),launchDrag=useDraggable('meridian3d-launch');
@@ -138,7 +139,7 @@ export default function Meridian3DPanel({drafts,selectedPointCode,studyCommand,o
   const selectedMeridianPoints=selectedRecord?points.filter(p=>p.meridianId===selectedRecord.meridianId).sort((a,b)=>a.sequence-b.sequence):[];
   const selectedIndex=selectedRecord?selectedMeridianPoints.findIndex(p=>p.code===selectedRecord.code):-1;
 
-  const prepareMeridianView=(id:string)=>{if(id!=='SI')return;setSide('LEFT');onStudyAction({view:'back'})};
+  const prepareMeridianView=(id:string)=>{if(id!=='SI'){if(autoSiSide.current){setSide(previousSide.current);autoSiSide.current=false}return}if(!autoSiSide.current)previousSide.current=side;setSide('LEFT');autoSiSide.current=true;onStudyAction({view:'back'})};
   const selectMeridian=(id:string)=>{setActiveMeridian(id);setEnabled(true);setMotion(true);setShowMeridians(true);setQuery('');setSelected(null);onFocus(null);prepareMeridianView(id)};
   const focusPoint=(point:Acupoint)=>{
     setSelected(point.code);setActiveMeridian(point.meridianId);setEnabled(true);
@@ -165,7 +166,7 @@ export default function Meridian3DPanel({drafts,selectedPointCode,studyCommand,o
       {loadError&&<div role="alert" data-meridian3d-load-error="true"><p>{loadError}</p><Button variant="ghost" disabled={loading} onClick={()=>setLoadAttempt(v=>v+1)}>Thử tải lại dữ liệu</Button></div>}
       <div className="meridian3d-controls">
         <label>Kinh<select value={activeMeridian} onChange={e=>selectMeridian(e.target.value)}><option value={ALL_MAIN_MERIDIANS}>12 chính kinh · Hiển thị đồng thời</option>{meridians.map(m=><option key={m.id} value={m.id}>{m.code} · {meridianName(m)}</option>)}</select></label>
-        <label>Bên<select value={side} onChange={e=>setSide(e.target.value as MeridianOverlaySide)}><option value="BOTH">Hai bên</option><option value="LEFT">Trái</option><option value="RIGHT">Phải</option></select></label>
+        <label>Bên<select value={side} onChange={e=>{autoSiSide.current=false;setSide(e.target.value as MeridianOverlaySide)}}><option value="BOTH">Hai bên</option><option value="LEFT">Trái</option><option value="RIGHT">Phải</option></select></label>
         <label>Ngôn ngữ phụ<select value={language} onChange={e=>setLanguage(e.target.value as Language)} data-meridian-language="true"><option value="vi">Chỉ tiếng Việt</option><option value="en">Kèm tiếng Anh</option><option value="zh">Kèm tiếng Trung</option></select></label>
       </div>
       <div className="meridian3d-quick" aria-label="Chọn nhanh đường kinh">
