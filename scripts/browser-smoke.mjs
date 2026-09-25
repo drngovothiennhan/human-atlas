@@ -369,7 +369,7 @@ try{
     await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.meridianId==="+JSON.stringify(code)+"&&Number(document.querySelector('canvas')?.dataset.meridianSchematicAnchors)>0&&Number(document.querySelector('canvas')?.dataset.meridianSchematicPaths)>0"),{label:code+' schematic markers and paths'});
     if(code==='SI'){
       const siRoute=await evaluate("({paths:Number(document.querySelector('canvas')?.dataset.meridianSchematicPaths||0),guidance:document.querySelector('[data-si-route-guidance=true]')?.textContent||''})");
-      if(siRoute.paths!==2||!siRoute.guidance.includes('SI-1 → SI-19')||!siRoute.guidance.includes('không nối với kinh Thận'))throw new Error('Small-intestine route isolation/guidance assertion failed: '+JSON.stringify(siRoute));
+      if(siRoute.paths!==1||!siRoute.guidance.includes('SI-1 → SI-19')||!siRoute.guidance.includes('không nối với kinh Thận')||!siRoute.guidance.includes('Mặc định chỉ hiện bên trái'))throw new Error('Small-intestine single-side route/guidance assertion failed: '+JSON.stringify(siRoute));
       console.log('SMOKE_SI_ROUTE_CONTINUITY_PASS '+JSON.stringify(siRoute));
     }
     schematicCoverage.push({code,...await evaluate("({...document.querySelector('canvas').dataset})")});
