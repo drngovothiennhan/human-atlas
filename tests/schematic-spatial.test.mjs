@@ -102,6 +102,20 @@ test('licensed schematic spatial dataset stays unverified and complete',async()=
     assert.equal(p.surfaceProjection,'BodyParts3D FMA7163 facial surface-following','LI facial path must be surface-projected');
     assert.ok(p.points.length>p.pointCodes.length,'LI facial render path must include surface-following points');
   }
+  const siPaths=data.paths.filter(p=>p.meridianId==='SI');
+  assert.equal(siPaths.length,2,'SI external course must remain bilateral');
+  for(const p of siPaths){
+    assert.equal(p.surfaceProjection,'BodyParts3D FMA7163 small-intestine channel surface-following','SI external course must follow the body surface');
+    assert.equal(p.surfaceProjectionStep,'fifth-segment','SI densification interval must remain explicit');
+    assert.equal(p.courseRule,'little finger → ulnar hand and forearm → posterior upper arm → shoulder and scapula → neck → cheek → anterior ear');
+    assert.equal(p.internalOrganBranch,'not rendered on the body surface','internal organ course must not be drawn as a skin path');
+    assert.deepEqual(p.pointCodes,meridians.find(m=>m.id==='SI').pointIds,'SI source order must remain SI-1 through SI-19');
+    assert.equal(p.points.length,p.pointCodes.length+(p.pointCodes.length-1)*4,'SI path must add four surface controls between each pair of authored anchors');
+    assert.ok(p.points.every(v=>v.length===3&&v.every(Number.isFinite)),'SI surface controls must have finite xyz');
+    const first=data.anchors.find(a=>a.pointCode==='SI-1'&&a.side===p.side),last=data.anchors.find(a=>a.pointCode==='SI-19'&&a.side===p.side);
+    assert.deepEqual(p.points[0],[first.x,first.y,first.z],'SI-1 anchor must remain fixed');
+    assert.deepEqual(p.points.at(-1),[last.x,last.y,last.z],'SI-19 anchor must remain fixed');
+  }
   for(const p of data.paths.filter(p=>['LEFT','RIGHT'].includes(p.side))){
     const sideSign=p.side==='LEFT'?-1:1;
     assert.ok(p.points.every(([x])=>x*sideSign>0),`${p.meridianId} ${p.side} route must stay on its own side of the body midline`);

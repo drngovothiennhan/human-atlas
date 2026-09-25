@@ -286,6 +286,41 @@ for(const pathItem of paths.filter(item=>item.meridianId==='LI')){
   pathItem.points=dense;
   pathItem.surfaceProjection='BodyParts3D FMA7163 facial surface-following';
 }
+const siSegmentForPair=(a,b,fraction)=>{
+  const seqA=numericPointSequenceForBuild(a),seqB=numericPointSequenceForBuild(b);
+  if(seqB<=5)return 'hand';
+  if(seqB<=8)return 'forearm';
+  if(seqA===8&&seqB===9)return 'upper_arm';
+  if(seqB<=15)return 'trunk';
+  if(seqA===15&&seqB===16)return fraction<=.5?'trunk':'neck';
+  if(seqB<=17)return 'neck';
+  if(seqA===17&&seqB===18)return fraction<=.4?'neck':'head';
+  return 'head';
+};
+// The SI channel is one continuous external course: little finger and ulnar
+// hand/forearm, posterior upper arm and shoulder/scapula, neck, cheek, ear.
+// Its sparse licensed anchors must not be joined by straight chords through
+// the torso, so densify between each authored point and raycast each sample
+// back to the corresponding BodyParts3D surface segment. Keep authored
+// endpoint anchors and source topology untouched; all remain UNVERIFIED.
+for(const pathItem of paths.filter(item=>item.meridianId==='SI')){
+  const dense=[];
+  for(let i=0;i<pathItem.pointCodes.length-1;i++){
+    const codeA=pathItem.pointCodes[i],codeB=pathItem.pointCodes[i+1],a=pathItem.points[i],b=pathItem.points[i+1];
+    if(i===0)dense.push(a);
+    for(const fraction of [.2,.4,.6,.8]){
+      const p=[a[0]+(b[0]-a[0])*fraction,a[1]+(b[1]-a[1])*fraction,a[2]+(b[2]-a[2])*fraction];
+      dense.push(projectBrowserToSegmentSurface(p,siSegmentForPair(codeA,codeB,fraction),pathItem.side).map(round));
+    }
+    dense.push(b);
+  }
+  if(pathItem.pointCodes.length===1)dense.push(pathItem.points[0]);
+  pathItem.points=dense;
+  pathItem.surfaceProjection='BodyParts3D FMA7163 small-intestine channel surface-following';
+  pathItem.surfaceProjectionStep='fifth-segment';
+  pathItem.courseRule='little finger → ulnar hand and forearm → posterior upper arm → shoulder and scapula → neck → cheek → anterior ear';
+  pathItem.internalOrganBranch='not rendered on the body surface';
+}
 for(const pathItem of paths.filter(item=>item.meridianId==='SP')){
   const dense=[];
   for(let i=0;i<pathItem.pointCodes.length-1;i++){
