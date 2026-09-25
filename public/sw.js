@@ -1,7 +1,7 @@
 const BASE=new URL('./',self.location.href).pathname;
 const asset=path=>BASE+path.replace(/^\//,'');
-const SHELL='hiu-yhct-atlas-shell-v0.3.5';
-const DATA='hiu-yhct-atlas-data-v0.3.5';
+const SHELL='hiu-yhct-atlas-shell-v0.3.6';
+const DATA='hiu-yhct-atlas-data-v0.3.6';
 const CORE=[BASE,asset('manifest.webmanifest'),asset('favicon.svg'),asset('data/meridians.json'),asset('data/acupoints.json'),asset('data/registration-pilot.json'),asset('data/provenance.json')];
 
 async function precacheShell(){
