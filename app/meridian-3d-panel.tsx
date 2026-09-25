@@ -77,13 +77,28 @@ export default function Meridian3DPanel({drafts,selectedPointCode,studyCommand,o
     return [{meridianId:meridian.id,side:meridian.id==='CV'||meridian.id==='GV'?'MIDLINE':'UNKNOWN',points:meridian.path3d.map(p=>[p[0],p[1],p[2]] as [number,number,number]),verificationStatus:meridian.reviewStatus as 'FACULTY_REVIEWED'|'PUBLISHED',sourceKind:'PUBLISHED'}];
   }),[meridians]);
 
+  const schematicDisplayAnchors=useMemo(()=>{
+    const visualPositions=new Map<string,[number,number,number]>();
+    for(const path of schematic.paths){
+      if(path.meridianId!=='SI'||path.displayAnchorStride!==5||!path.pointCodes?.length||!path.visualAnchorCodes?.length)continue;
+      for(const code of path.visualAnchorCodes){
+        const pointIndex=path.pointCodes.indexOf(code),renderPoint=pointIndex>=0?path.points[pointIndex*path.displayAnchorStride]:undefined;
+        if(renderPoint?.length===3&&renderPoint.every(Number.isFinite))visualPositions.set(code+':'+path.side,renderPoint);
+      }
+    }
+    return schematic.anchors.map(anchor=>{
+      const position=visualPositions.get(anchor.pointCode+':'+anchor.side);
+      return position?{...anchor,x:position[0],y:position[1],z:position[2]}:anchor;
+    });
+  },[schematic.anchors,schematic.paths]);
+
   const allAnchors=useMemo(()=>{
     const byKey=new Map<string,MeridianSceneAnchor>();
-    schematic.anchors.forEach(a=>byKey.set(a.pointCode+':'+a.side,a));
+    schematicDisplayAnchors.forEach(a=>byKey.set(a.pointCode+':'+a.side,a));
     draftAnchors.forEach(a=>byKey.set(a.pointCode+':'+a.side,a));
     publishedAnchors.forEach(a=>byKey.set(a.pointCode+':'+a.side,a));
     return [...byKey.values()];
-  },[schematic.anchors,draftAnchors,publishedAnchors]);
+  },[schematicDisplayAnchors,draftAnchors,publishedAnchors]);
 
   useEffect(()=>{
     if(!studyCommand)return;
