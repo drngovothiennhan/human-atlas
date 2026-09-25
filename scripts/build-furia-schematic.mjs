@@ -317,9 +317,13 @@ for(const pathItem of paths.filter(item=>item.meridianId==='SI')){
   for(let i=0;i<pathItem.pointCodes.length-1;i++){
     const codeA=pathItem.pointCodes[i],codeB=pathItem.pointCodes[i+1],a=pathItem.points[i],b=pathItem.points[i+1];
     if(i===0)dense.push(a);
+    const preserveUlnarHandEdge=numericPointSequenceForBuild(codeB)<=5;
     for(const fraction of [.2,.4,.6,.8]){
       const p=[a[0]+(b[0]-a[0])*fraction,a[1]+(b[1]-a[1])*fraction,a[2]+(b[2]-a[2])*fraction];
-      dense.push(projectBrowserToSegmentSurface(p,siSegmentForPair(codeA,codeB,fraction),pathItem.side).map(round));
+      // SI-1 through SI-5 already have anatomy-specific fifth-digit, ulnar
+      // metacarpal, and wrist anchors. Re-projecting their interpolants against
+      // the generic hand/forearm axis pulls the channel off the ulnar edge.
+      dense.push((preserveUlnarHandEdge?p:projectBrowserToSegmentSurface(p,siSegmentForPair(codeA,codeB,fraction),pathItem.side)).map(round));
     }
     dense.push(b);
   }
