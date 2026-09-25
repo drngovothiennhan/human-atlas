@@ -37,7 +37,7 @@ export default function Meridian3DPanel({drafts,selectedPointCode,studyCommand,o
   const [query,setQuery]=useState(''),[selected,setSelected]=useState<string|null>(null);
   const [loading,setLoading]=useState(true),[loadError,setLoadError]=useState(''),[loadAttempt,setLoadAttempt]=useState(0);
   const panelDrag=useDraggable('meridian3d'),launchDrag=useDraggable('meridian3d-launch');
-  const [needleMode,setNeedleMode]=useState(false),[needleAngle,setNeedleAngle]=useState(0),[needleLength,setNeedleLength]=useState(36),[needleAction,setNeedleAction]=useState<'insert'|'twist'|'lift-thrust'>('insert'),[needlePlaying,setNeedlePlaying]=useState(false);
+  const [needleMode,setNeedleMode]=useState(false),[needleAngle,setNeedleAngle]=useState(35),[needleLength,setNeedleLength]=useState(36),[needleAction,setNeedleAction]=useState<'insert'|'twist'|'lift-thrust'>('insert'),[needlePlaying,setNeedlePlaying]=useState(false);
 
   useEffect(()=>{
     let alive=true;
@@ -197,7 +197,7 @@ export default function Meridian3DPanel({drafts,selectedPointCode,studyCommand,o
         <p>Chọn huyệt có tọa độ rồi mô phỏng hướng kim, góc và chiều dài biểu diễn ngay trên mô hình 3D.</p>
         {!selectedRecord||!needleAnchor?<p role="status">Chọn một huyệt có vị trí 3D để bật mô phỏng.</p>:<>
           <Button variant="ghost" type="button" aria-pressed={needleMode} onClick={()=>{setNeedleMode(v=>!v);setEnabled(true)}}>{needleMode?'Tắt mô phỏng kim':'Hiện kim mô phỏng'} · {selectedRecord.code}</Button>
-          <label>Góc minh họa · {needleAngle}°<input type="range" min="0" max="90" step="5" value={needleAngle} onChange={e=>setNeedleAngle(Number(e.target.value))}/></label>
+          <label>Góc minh họa từ mặt da · {needleAngle}°<input type="range" min="5" max="90" step="5" value={needleAngle} onChange={e=>setNeedleAngle(Number(e.target.value))}/></label>
           <label>Chiều dài biểu diễn · {needleLength} mm<input type="range" min="8" max="120" step="2" value={needleLength} onChange={e=>setNeedleLength(Number(e.target.value))}/></label>
           <label>Động tác minh họa<select value={needleAction} onChange={e=>setNeedleAction(e.target.value as typeof needleAction)}><option value="insert">Tiến / lui kim</option><option value="twist">Xoay kim</option><option value="lift-thrust">Nâng / đẩy kim</option></select></label>
           <p>Động tác đang chọn: {needleAction==='insert'?'chuyển động dọc theo trục kim':needleAction==='twist'?'xoay trục kim': 'chuyển động nâng và đẩy'}. Phần trình diễn là khái quát trực quan, không tái hiện kỹ thuật lâm sàng.</p>
