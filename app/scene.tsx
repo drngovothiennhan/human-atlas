@@ -8,7 +8,7 @@ import {mergeGeometries} from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 import {createExplosionLayout} from './explosion-layout';
 import {decodeModelResponse} from './model-download';
 import {PointerTap} from './pointer-tap';
-import {SYSTEMS,DEFAULT_LAYER_OPACITY,isMeridianLandmarkMuscle,type Atlas,type SceneState} from './anatomy';
+import {SYSTEMS,DEFAULT_LAYER_OPACITY,isMeridianLandmarkMuscle,isPrimarySurfacePart,PRIMARY_SURFACE_CONCEPT_ID,type Atlas,type SceneState} from './anatomy';
 import {BODY_CANONICAL_COORDINATE_SYSTEM,type SurfaceCapture} from '../src/acupoints/registration/coordinate-system';
 import type {MeridianFocusTarget,MeridianOverlayState} from './meridian-overlay';
 import {ARTICULAR_SOURCE,SKELETAL_SOURCE} from './reference-anatomy';
@@ -19,7 +19,7 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
  const host=useRef<HTMLDivElement>(null),latest=useRef(state),quality=useRef(renderQuality),select=useRef(onSelect),registration=useRef(registrationMode),registerSurface=useRef(onRegisterSurface),overlay=useRef(meridianOverlay),focus=useRef(focusAcupoint),selectAcupoint=useRef(onSelectAcupoint);
  latest.current=state;quality.current=renderQuality;select.current=onSelect;registration.current=registrationMode;registerSurface.current=onRegisterSurface;overlay.current=meridianOverlay;focus.current=focusAcupoint;selectAcupoint.current=onSelectAcupoint;
  useEffect(()=>{
-  const el=host.current!;let disposed=false,frame=0,dirty=true,ready=false,lastView='',lastReset=-1,lastIsolate='',layoutKey='',amount=0,renderCount=0;
+  const el=host.current!;let disposed=false,frame=0,dirty=true,ready=false,lastView='',lastReset=-1,lastIsolate='',layoutKey='',lastRequestedChunkKey='',amount=0,renderCount=0;
   let lastState:SceneState|null=null;
   const abort=new AbortController(),capabilities=detectRenderCapabilities();
   let qualityProfile:RenderQualityProfile=selectInitialProfile(renderQuality,capabilities),lastQualityMode:RenderQualityMode=renderQuality,qualityConfig=QUALITY_CONFIG[qualityProfile];
@@ -66,7 +66,7 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
   let jointStatus:'idle'|'loading'|'ready'|'error'='idle',skeletalStatus:'idle'|'loading'|'ready'|'error'='idle';
   renderer.domElement.dataset.articularStatus='idle';
   renderer.domElement.dataset.articularExpected=String(ARTICULAR_SOURCE.expectedMeshCount);
-  renderer.domElement.dataset.skeletalReferenceStatus='idle';renderer.domElement.dataset.skeletalReferenceExpected=String(SKELETAL_SOURCE.expectedMeshCount);renderer.domElement.dataset.anatomyAlignmentPolicy='source-world-transform';renderer.domElement.dataset.anatomyOcclusionPolicy='opaque-depth-tested';renderer.domElement.dataset.musclePolicy='meridian-landmarks';renderer.domElement.dataset.muscleLandmarkCount=String(atlas.parts.filter(p=>p.system==='muscular'&&isMeridianLandmarkMuscle(p.name)).length);renderer.domElement.dataset.anatomyProfile='meridian-first';
+  renderer.domElement.dataset.skeletalReferenceStatus='idle';renderer.domElement.dataset.skeletalReferenceExpected=String(SKELETAL_SOURCE.expectedMeshCount);renderer.domElement.dataset.anatomyAlignmentPolicy='source-world-transform';renderer.domElement.dataset.anatomyOcclusionPolicy='opaque-depth-tested';renderer.domElement.dataset.musclePolicy='meridian-landmarks';renderer.domElement.dataset.muscleLandmarkCount=String(atlas.parts.filter(p=>p.system==='muscular'&&isMeridianLandmarkMuscle(p.name)).length);renderer.domElement.dataset.anatomyProfile='meridian-first';renderer.domElement.dataset.surfacePrimaryStructure=PRIMARY_SURFACE_CONCEPT_ID;renderer.domElement.dataset.surfaceStructureCount=String(atlas.parts.filter(p=>p.system==='integumentary'&&isPrimarySurfacePart(p)).length);renderer.domElement.dataset.surfaceFacePolicy='front-side-only';renderer.domElement.dataset.anatomyLoadPolicy='visible-chunks-on-demand';renderer.domElement.dataset.anatomyTotalChunks=String(atlas.chunks.length);
   const clearGroup=(group:T.Group)=>{while(group.children.length)group.remove(group.children[0]);};
   const bakeStaticGeometry=(mesh:T.Mesh)=>{
    const baked=mesh.geometry.index?mesh.geometry.toNonIndexed():mesh.geometry.clone();
@@ -215,7 +215,8 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
    return best;
   };
   const materialFor=(system:string)=>{
-   const m=new T.MeshStandardMaterial({color:SYSTEMS.find(s=>s.id===system)?.color??'#aebbb8',metalness:.08,roughness:.53,side:T.DoubleSide,transparent:system==='integumentary',opacity:system==='integumentary'?.12:1,depthWrite:true});
+   const surface=system==='integumentary';
+   const m=new T.MeshStandardMaterial({color:SYSTEMS.find(s=>s.id===system)?.color??'#aebbb8',metalness:.08,roughness:.53,side:surface?T.FrontSide:T.DoubleSide,transparent:surface,opacity:surface?.12:1,depthWrite:!surface});
    m.onBeforeCompile=shader=>{
     shader.uniforms.partState={value:partTexture};shader.uniforms.selectionState={value:selectionTexture};shader.uniforms.stateWidth={value:width};
     shader.vertexShader='attribute float partIndex; uniform sampler2D partState; uniform sampler2D selectionState; uniform float stateWidth; varying float partVisible; varying float partSelected;\n'+shader.vertexShader;
@@ -226,24 +227,55 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
    };materials.push(m);return m;
   };
   const mats=new Map(SYSTEMS.map(s=>[s.id,materialFor(s.id)]));
-  let loaded=0;
-  const loadChunk=async(ci:number)=>{
-   const timeout=new AbortController();const timer=setTimeout(()=>timeout.abort(),45000);
-   let buffer:ArrayBuffer;try{const chunk=atlas.chunks[ci],compressed=!!chunk.gzip&&typeof DecompressionStream!=='undefined';const response=await fetch(assetUrl(compressed?chunk.gzip!:chunk.url),{signal:AbortSignal.any([abort.signal,timeout.signal])});buffer=await decodeModelResponse(response,chunk.bytes,compressed);}finally{clearTimeout(timer);}if(disposed)return;
-   const groups=new Map<string,T.BufferGeometry[]>();
-   atlas.parts.forEach((p,i)=>{
-    if(p.chunk!==ci)return;
-    const g=new T.BufferGeometry();g.setAttribute('position',new T.BufferAttribute(new Float32Array(buffer,p.positions,p.vertexCount*3),3));
-    // GPU normalized signed-short normals keep the complete atlas compact in memory.
-    g.setAttribute('normal',new T.BufferAttribute(new Int16Array(buffer,p.normals,p.vertexCount*3),3,true));g.setIndex(new T.BufferAttribute(new Uint32Array(buffer,p.indices,p.indexCount),1));
-    g.boundingBox=bounds[i].clone();g.computeBoundingSphere();const pick=new T.Mesh(g);pick.matrixAutoUpdate=false;pickers[i]=pick;geometries.push(g);
-    g.setAttribute('partIndex',new T.BufferAttribute(new Float32Array(p.vertexCount).fill(i),1));
-    const list=groups.get(p.system)??[];list.push(g);groups.set(p.system,list);
+  const loadedChunks=new Set<number>(),loadingChunks=new Map<number,Promise<void>>();
+  const chunksForState=(s:SceneState)=>{
+   const visible=new Set(s.visible),selection=new Set(s.selected),chunks=new Set<number>();
+   atlas.parts.forEach(p=>{
+    const selected=selection.has(p.id);
+    if(!selected&&!isPrimarySurfacePart(p))return;
+    if(p.system==='muscular'&&!selected&&!isMeridianLandmarkMuscle(p.name))return;
+    if(selected||visible.has(p.system))chunks.add(p.chunk);
    });
-   groups.forEach((gs,system)=>{const geometry=mergeGeometries(gs,false);if(!geometry)throw new Error('Không ghép được hình học giải phẫu.');geometries.push(geometry);const mesh=new T.Mesh(geometry,mats.get(system as never));mesh.frustumCulled=false;mesh.castShadow=qualityConfig.shadows;scene.add(mesh);});
-   lastState=null;loaded++;onProgress(Math.round(loaded/atlas.chunks.length*100));dirty=true;
+   return [...chunks].sort((a,b)=>a-b);
   };
-  (async()=>{try{let cursor=0;await Promise.all(Array.from({length:3},async()=>{while(cursor<atlas.chunks.length){const i=cursor++;await loadChunk(i);}}));if(!disposed){ready=true;dirty=true;}}catch(e){if(!disposed)onError(e instanceof Error&&e.name==='AbortError'?'Tải mô hình quá thời gian. Vui lòng kiểm tra kết nối và tải lại.':e instanceof Error?e.message:'Không tải được mô hình giải phẫu.');}})();
+  const updateChunkMetrics=()=>{
+   renderer.domElement.dataset.anatomyLoadedChunks=String(loadedChunks.size);
+   renderer.domElement.dataset.anatomyLoadingChunks=String(loadingChunks.size);
+  };
+  const loadChunk=(ci:number)=>{
+   if(loadedChunks.has(ci))return Promise.resolve();
+   const existing=loadingChunks.get(ci);if(existing)return existing;
+   const task=(async()=>{
+    const timeout=new AbortController();const timer=setTimeout(()=>timeout.abort(),45000);
+    let buffer:ArrayBuffer;try{const chunk=atlas.chunks[ci],compressed=!!chunk.gzip&&typeof DecompressionStream!=='undefined';const response=await fetch(assetUrl(compressed?chunk.gzip!:chunk.url),{signal:AbortSignal.any([abort.signal,timeout.signal])});buffer=await decodeModelResponse(response,chunk.bytes,compressed);}finally{clearTimeout(timer);}if(disposed)return;
+    const groups=new Map<string,T.BufferGeometry[]>();
+    atlas.parts.forEach((p,i)=>{
+     if(p.chunk!==ci)return;
+     const g=new T.BufferGeometry();g.setAttribute('position',new T.BufferAttribute(new Float32Array(buffer,p.positions,p.vertexCount*3),3));
+     // GPU normalized signed-short normals keep the complete atlas compact in memory.
+     g.setAttribute('normal',new T.BufferAttribute(new Int16Array(buffer,p.normals,p.vertexCount*3),3,true));g.setIndex(new T.BufferAttribute(new Uint32Array(buffer,p.indices,p.indexCount),1));
+     g.boundingBox=bounds[i].clone();g.computeBoundingSphere();const pick=new T.Mesh(g);pick.matrixAutoUpdate=false;pickers[i]=pick;geometries.push(g);
+     g.setAttribute('partIndex',new T.BufferAttribute(new Float32Array(p.vertexCount).fill(i),1));
+     const list=groups.get(p.system)??[];list.push(g);groups.set(p.system,list);
+    });
+    groups.forEach((gs,system)=>{const geometry=mergeGeometries(gs,false);if(!geometry)throw new Error('Không ghép được hình học giải phẫu.');geometries.push(geometry);const mesh=new T.Mesh(geometry,mats.get(system as never));mesh.name='hiu-atlas-'+system+'-chunk-'+ci;mesh.frustumCulled=false;mesh.castShadow=qualityConfig.shadows;scene.add(mesh);});
+    loadedChunks.add(ci);lastState=null;dirty=true;
+   })();
+   loadingChunks.set(ci,task);updateChunkMetrics();
+   return task.finally(()=>{loadingChunks.delete(ci);updateChunkMetrics();});
+  };
+  const ensureStateChunks=(s:SceneState)=>{
+   const requested=chunksForState(s);renderer.domElement.dataset.anatomyRequestedChunks=requested.join(',');
+   return Promise.all(requested.map(loadChunk)).then(()=>undefined);
+  };
+  (async()=>{try{
+   const initialChunks=chunksForState(latest.current);
+   if(!initialChunks.length)throw new Error('Không tìm thấy lớp bề mặt ban đầu.');
+   renderer.domElement.dataset.initialAnatomyChunkCount=String(initialChunks.length);onProgress(0);
+   let completed=0;
+   await Promise.all(initialChunks.map(async ci=>{await loadChunk(ci);completed++;onProgress(Math.round(completed/initialChunks.length*100));}));
+   if(!disposed){ready=true;onProgress(100);dirty=true;}
+  }catch(e){if(!disposed)onError(e instanceof Error&&e.name==='AbortError'?'Tải mô hình quá thời gian. Vui lòng kiểm tra kết nối và tải lại.':e instanceof Error?e.message:'Không tải được mô hình giải phẫu.');}})();
   const fit=(view:string,extent=0,animated=false)=>{
    const aspect=camera.aspect,mobile=el.clientWidth<768,normalDistance=mobile?Math.max(4.5,1.8*el.clientHeight/Math.max(160,el.clientHeight-350)/(2*Math.tan(T.MathUtils.degToRad(camera.fov/2)))):4;
    const reservedHeight=mobile?350:270;const availableAspect=Math.max(.35,(el.clientWidth-(mobile?40:340))/Math.max(160,el.clientHeight-reservedHeight));const atlasDistance=Math.max(packingHeight,packingWidth/availableAspect)/(2*Math.tan(T.MathUtils.degToRad(camera.fov/2)))*(el.clientHeight/Math.max(160,el.clientHeight-reservedHeight))*1.08;
@@ -278,7 +310,7 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
    }
    if(registration.current){
     let nearest=Infinity,found=-1,bestHit:T.Intersection|null=null,bestMesh:T.Mesh|null=null;
-    for(let i=0;i<pickers.length;i++){const mesh=pickers[i];if(!mesh||atlas.parts[i].system!=='integumentary')continue;worldBox.copy(bounds[i]).translate(mesh.position);if(!raycaster.ray.intersectBox(worldBox,hitPoint))continue;const hit=raycaster.intersectObject(mesh,false)[0];if(hit&&hit.distance<nearest){nearest=hit.distance;found=i;bestHit=hit;bestMesh=mesh;}}
+    for(let i=0;i<pickers.length;i++){const mesh=pickers[i];if(!mesh||atlas.parts[i].system!=='integumentary'||!isPrimarySurfacePart(atlas.parts[i]))continue;worldBox.copy(bounds[i]).translate(mesh.position);if(!raycaster.ray.intersectBox(worldBox,hitPoint))continue;const hit=raycaster.intersectObject(mesh,false)[0];if(hit&&hit.distance<nearest){nearest=hit.distance;found=i;bestHit=hit;bestMesh=mesh;}}
     if(found>=0&&bestHit&&bestMesh){const capture=makeSurfaceCapture(found,bestMesh,bestHit);if(capture){registrationMarker.position.copy(bestHit.point);registrationMarker.visible=true;dirty=true;registerSurface.current?.(capture);}}
     return;
    }
@@ -308,6 +340,11 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
    if(disposed||document.hidden){frame=0;renderer.domElement.dataset.renderSuspended=String(document.hidden);return;}frame=requestAnimationFrame(animate);const now=performance.now();sampleAdaptiveQuality(now);const dt=Math.min(clock.getDelta(),.05),s=latest.current;
    renderer.domElement.dataset.sceneView=s.view;
    renderer.domElement.dataset.visibleSystems=s.visible.join(',');
+   const requestedChunks=chunksForState(s),requestedChunkKey=requestedChunks.join(',');
+   if(requestedChunkKey!==lastRequestedChunkKey){
+    lastRequestedChunkKey=requestedChunkKey;
+    void ensureStateChunks(s).catch(error=>{if(!disposed)onError(error instanceof Error&&error.name==='AbortError'?'Tải lớp giải phẫu quá thời gian.':error instanceof Error?error.message:'Không tải được lớp giải phẫu.');});
+   }
    const overlayValue=overlay.current;
    const overlayKey=overlayValue?.enabled
     ?[qualityProfile,overlayValue.meridianId,overlayValue.side,overlayValue.selectedPointCode??'',overlayValue.effects?.meridians,overlayValue.effects?.acupoints,overlayValue.needleSimulation?JSON.stringify(overlayValue.needleSimulation):'',overlayValue.anchors.map(anchor=>[anchor.pointCode,anchor.side,anchor.x.toFixed(5),anchor.y.toFixed(5),anchor.z.toFixed(5),anchor.verificationStatus].join(':')).join('|'),overlayValue.paths.map(path=>path.meridianId+':'+path.verificationStatus+':'+path.points.length).join('|')].join('::')
@@ -342,9 +379,9 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
    const moving=Math.abs(amount-s.explode)>.0001;
    if(moving){amount=T.MathUtils.damp(amount,s.explode,8,dt);dirty=true;}
    if(changed||moving||lastExtent<0){
-    if(lastState?.opacity!==s.opacity){for(const system of SYSTEMS){const material=mats.get(system.id);if(!material)continue;const alpha=(s.opacity?.[system.id]??DEFAULT_LAYER_OPACITY[system.id])/100;material.opacity=alpha;material.transparent=alpha<1;material.depthWrite=alpha>=1;material.needsUpdate=true;}jointMaterial.opacity=(s.opacity?.articular??100)/100;jointMaterial.transparent=jointMaterial.opacity<1;jointMaterial.depthWrite=jointMaterial.opacity>=1;skeletalReferenceMaterial.opacity=(s.opacity?.skeletal??100)/100;skeletalReferenceMaterial.transparent=skeletalReferenceMaterial.opacity<1;skeletalReferenceMaterial.depthWrite=skeletalReferenceMaterial.opacity>=1;}
+    if(lastState?.opacity!==s.opacity){for(const system of SYSTEMS){const material=mats.get(system.id);if(!material)continue;const alpha=(s.opacity?.[system.id]??DEFAULT_LAYER_OPACITY[system.id])/100;material.opacity=alpha;material.transparent=alpha<1;material.depthWrite=alpha>=1;material.side=system.id==='integumentary'?T.FrontSide:T.DoubleSide;material.needsUpdate=true;}jointMaterial.opacity=(s.opacity?.articular??100)/100;jointMaterial.transparent=jointMaterial.opacity<1;jointMaterial.depthWrite=jointMaterial.opacity>=1;skeletalReferenceMaterial.opacity=(s.opacity?.skeletal??100)/100;skeletalReferenceMaterial.transparent=skeletalReferenceMaterial.opacity<1;skeletalReferenceMaterial.depthWrite=skeletalReferenceMaterial.opacity>=1;}
     const visible=new Set(s.visible),selection=new Set(s.selected);
-    const visibleParts=atlas.parts.filter(p=>{const selected=selection.has(p.id);if(s.isolate)return selected;if(p.system==='muscular'&&!selected&&!isMeridianLandmarkMuscle(p.name))return false;return visible.has(p.system)||selected;});
+    const visibleParts=atlas.parts.filter(p=>{const selected=selection.has(p.id);if(s.isolate)return selected;if(!selected&&!isPrimarySurfacePart(p))return false;if(p.system==='muscular'&&!selected&&!isMeridianLandmarkMuscle(p.name))return false;return visible.has(p.system)||selected;});
     const nextLayoutKey=visibleParts.map(p=>p.id).join(',')+':'+camera.aspect.toFixed(3);
     if(nextLayoutKey!==layoutKey){const layout=createExplosionLayout(visibleParts,camera.aspect);packingWidth=layout.width;packingHeight=layout.height;atlas.parts.forEach((p,i)=>{const cell=layout.cells.get(p.id);offsets[i]=cell?new T.Vector3(cell.x,cell.y+.85,0):centers[i].clone();});layoutKey=nextLayoutKey;if(amount>.05&&!s.isolate)fit(s.view,Math.max(0,(amount-.3)/.7));}
 
@@ -352,7 +389,7 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
      const c=centers[i],destination=offsets[i];let dx=0,dy=0,dz=0;
      if(amount<=.45){const t=amount/.45;const group=SYSTEMS.findIndex(sys=>sys.id===p.system);const angle=group/SYSTEMS.length*Math.PI*2;dx=Math.sin(angle)*t*.48;dy=(c.y-.85)*t*.28;dz=Math.cos(angle)*t*.48;}
      else {const t=(amount-.45)/.55,group=SYSTEMS.findIndex(sys=>sys.id===p.system),angle=group/SYSTEMS.length*Math.PI*2;dx=T.MathUtils.lerp(Math.sin(angle)*.48,destination.x-c.x,t);dy=T.MathUtils.lerp((c.y-.85)*.28,destination.y-c.y,t);dz=T.MathUtils.lerp(Math.cos(angle)*.48,-c.z,t);}
-     const selected=selection.has(p.id),muscleAllowed=p.system!=='muscular'||selected||isMeridianLandmarkMuscle(p.name),baseVisible=muscleAllowed&&(s.isolate?selected:visible.has(p.system)||selected),replaced=!selected&&((p.system==='muscular'&&detailedReplacement)||(p.system==='articular'&&articularReplacement)||(p.system==='skeletal'&&skeletalReplacement));data.set([dx,dy,dz,baseVisible&&!replaced?1:0],i*4);selectedData[i*4]=selected?255:0;
+     const selected=selection.has(p.id),surfaceAllowed=selected||isPrimarySurfacePart(p),muscleAllowed=p.system!=='muscular'||selected||isMeridianLandmarkMuscle(p.name),baseVisible=surfaceAllowed&&muscleAllowed&&(s.isolate?selected:visible.has(p.system)||selected),replaced=!selected&&((p.system==='muscular'&&detailedReplacement)||(p.system==='articular'&&articularReplacement)||(p.system==='skeletal'&&skeletalReplacement));data.set([dx,dy,dz,baseVisible&&!replaced?1:0],i*4);selectedData[i*4]=selected?255:0;
      markerPositions.set(data[i*4+3]>.5?[c.x+dx,c.y+dy,c.z+dz]:[10000,10000,10000],i*3);const mesh=pickers[i];if(mesh){mesh.position.set(dx,dy,dz);mesh.updateMatrix();mesh.updateMatrixWorld(true);}
     });partTexture.needsUpdate=true;selectionTexture.needsUpdate=true;markerGeometry.attributes.position.needsUpdate=true;lastState=s;lastExtent=amount;dirty=true;
    }
