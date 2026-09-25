@@ -140,7 +140,7 @@ const spatialOverrides={
   // and distal first digit as anatomical anchors, then cast to the palmar surface
   // with a small radial offset so the route cannot drift onto the index finger.
   'LU-10':{struct:'First metacarpal bone',along:.62,dir:'palmar',shift:{radial:6},region:'hand'},
-  'LU-11':{struct:'Distal phalanx of first finger of hand',along:.96,dir:'palmar',shift:{radial:6,distal:2},region:'hand'},
+  'LU-11':{struct:'Distal phalanx of first finger of hand',along:.85,dir:'radial',region:'hand'},
   'LI-20':{struct:'Nasal bone',along:1,dir:'anterior',shift:{down:10,lateral:9}},
   'ST-1':{struct:'Anterior segment of eyeball',along:.5,dir:'anterior',shift:{down:11}},
   'BL-1':{struct:'Anterior segment of eyeball',along:.5,dir:'anterior',shift:{medial:10}},
