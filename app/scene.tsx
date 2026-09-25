@@ -190,17 +190,18 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
     inward.normalize();const needleNormal=inward.clone();
     const tangent=new T.Vector3(0,1,0);
     tangent.addScaledVector(inward,-tangent.dot(inward)).normalize();
-    const angle=T.MathUtils.degToRad(T.MathUtils.clamp(needle.angleDegrees,0,90));
-    const direction=needleNormal.clone().multiplyScalar(Math.cos(angle)).add(tangent.multiplyScalar(Math.sin(angle))).normalize();
+    const angle=T.MathUtils.degToRad(T.MathUtils.clamp(needle.angleDegrees,5,90));
+    const entryDirection=needleNormal.clone().multiplyScalar(Math.sin(angle)).add(tangent.clone().multiplyScalar(Math.cos(angle))).normalize();
+    const outward=entryDirection.clone().negate();
     const length=T.MathUtils.clamp(needle.visualLengthMm,8,120)/1000;
-    const start=surface.clone().addScaledVector(needleNormal,-.003);
-    const end=surface.clone().addScaledVector(direction,length);
+    const start=surface.clone();
+    const end=surface.clone().addScaledVector(outward,length);
     const axis=end.clone().sub(start),needleObject=new T.Mesh(new T.CylinderGeometry(.0012,.0012,axis.length(),8),new T.MeshBasicMaterial({color:0xc87937,depthTest:true,depthWrite:false}));
     needleObject.position.copy(start).add(end).multiplyScalar(.5);
     needleObject.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),axis.clone().normalize());
-    needleObject.renderOrder=27;needleObject.userData.acupunctureSimulation=needle.pointCode;needleObject.userData.needleStart=start;needleObject.userData.needleDirection=direction.clone();needleObject.userData.needleLength=length;needleObject.userData.needleBaseQuaternion=needleObject.quaternion.clone();needleObject.userData.needleAction=needle.action;meridianGroup.add(needleObject);needleMesh=needleObject;
-    const gripDirection=tangent.clone().addScaledVector(direction,-tangent.dot(direction)).normalize();
-    const handle=new T.Mesh(new T.CylinderGeometry(.00055,.00055,.012,6),new T.MeshBasicMaterial({color:0x4b5563,depthTest:true,depthWrite:false}));handle.position.copy(start);handle.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),gripDirection);handle.renderOrder=28;meridianGroup.add(handle);needleObject.userData.needleHandle=handle;needleObject.userData.needleGripDirection=gripDirection;
+    needleObject.renderOrder=27;needleObject.userData.acupunctureSimulation=needle.pointCode;needleObject.userData.needleStart=start;needleObject.userData.needleDirection=outward.clone();needleObject.userData.needleLength=length;needleObject.userData.needleBaseQuaternion=needleObject.quaternion.clone();needleObject.userData.needleAction=needle.action;meridianGroup.add(needleObject);needleMesh=needleObject;
+    const gripDirection=tangent.clone().addScaledVector(outward,-tangent.dot(outward)).normalize();
+    const handle=new T.Mesh(new T.CylinderGeometry(.00055,.00055,.012,6),new T.MeshBasicMaterial({color:0x4b5563,depthTest:true,depthWrite:false}));handle.position.copy(end);handle.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),gripDirection);handle.renderOrder=28;meridianGroup.add(handle);needleObject.userData.needleHandle=handle;needleObject.userData.needleGripDirection=gripDirection;
     renderer.domElement.dataset.acupunctureSimulation=needle.pointCode;
    }else renderer.domElement.dataset.acupunctureSimulation='off';
    renderer.domElement.dataset.meridianPaths=String(trustedPaths);renderer.domElement.dataset.meridianSchematicPaths=String(schematicPaths);renderer.domElement.dataset.meridianPulseMarkers=String(meridianPulseMarkers.length);renderer.domElement.dataset.meridianSelectedMarkers=String(selectedMarkers);renderer.domElement.dataset.meridianFlowParticles=String(meridianFlowParticles.length);
@@ -322,7 +323,7 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
    }else {renderer.domElement.dataset.meridianEffect=!overlayValue?.enabled?'off':reduceMeridianMotion?'reduced':'paused';}
    if(needleMesh&&overlayValue?.needleSimulation?.animated&&!reduceMeridianMotion){
     const cycle=.5+.5*Math.sin(clock.elapsedTime*3.2),base=Number(needleMesh.userData.needleLength),factor=overlayValue.needleSimulation.action==='insert'?.58+.42*cycle:overlayValue.needleSimulation.action==='lift-thrust'?.72+.24*cycle:1,length=base*factor,start=needleMesh.userData.needleStart as T.Vector3,direction=needleMesh.userData.needleDirection as T.Vector3,handle=needleMesh.userData.needleHandle as T.Mesh;
-    needleMesh.scale.y=factor;needleMesh.position.copy(start).addScaledVector(direction,length/2);handle.position.copy(start);if(overlayValue.needleSimulation.action==='twist'){const gripDirection=(needleMesh.userData.needleGripDirection as T.Vector3).clone().applyAxisAngle(direction,cycle*Math.PI*2);handle.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),gripDirection);needleMesh.quaternion.copy(needleMesh.userData.needleBaseQuaternion as T.Quaternion).multiply(new T.Quaternion().setFromAxisAngle(direction,cycle*Math.PI*2));}dirty=true;
+    needleMesh.scale.y=factor;needleMesh.position.copy(start).addScaledVector(direction,length/2);handle.position.copy(start).addScaledVector(direction,length);if(overlayValue.needleSimulation.action==='twist'){const gripDirection=(needleMesh.userData.needleGripDirection as T.Vector3).clone().applyAxisAngle(direction,cycle*Math.PI*2);handle.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),gripDirection);needleMesh.quaternion.copy(needleMesh.userData.needleBaseQuaternion as T.Quaternion).multiply(new T.Quaternion().setFromAxisAngle(direction,cycle*Math.PI*2));}dirty=true;
    }
    const focusValue=focus.current;
    if(focusValue?.key&&focusValue.key!==lastFocusKey){
