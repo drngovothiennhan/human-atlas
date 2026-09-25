@@ -24,6 +24,8 @@ export type View = 'three-quarter'|'front'|'back'|'side';
 export const DEFAULT_LAYER_OPACITY:Record<SystemId,number>=Object.fromEntries(SYSTEMS.map(system=>[system.id,system.id==='integumentary'?12:100])) as Record<SystemId,number>;
 export interface SceneState {inspectorOpen?:boolean;explode:number;visible:SystemId[];opacity:Record<SystemId,number>;selected:string[];isolate:boolean;view:View;rotate:boolean;reset:number}
 export const DEFAULT_VISIBLE:SystemId[] = ['integumentary'];
+export const PRIMARY_SURFACE_CONCEPT_ID='FMA7163';
+export function isPrimarySurfacePart(part:Part){return part.system!=='integumentary'||part.conceptId===PRIMARY_SURFACE_CONCEPT_ID;}
 export const EXPLANATIONS:Record<string,string> = {
  'heart':'Bơm cơ trong lồng ngực. Tim phải đưa máu tới phổi; tim trái đưa máu vào tuần hoàn hệ thống.',
  'liver':'Cơ quan lớn dưới bên phải cơ hoành, xử lý dưỡng chất, tạo mật và tổng hợp nhiều protein huyết tương.',
