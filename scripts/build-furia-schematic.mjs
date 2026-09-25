@@ -289,6 +289,12 @@ for(const pathItem of paths.filter(item=>item.meridianId==='LI')){
 const siSegmentForPair=(a,b,fraction)=>{
   const seqA=numericPointSequenceForBuild(a),seqB=numericPointSequenceForBuild(b);
   if(seqB<=5)return 'hand';
+  // SI-5 through SI-8 are authored on the ulnar wrist/forearm surface. The
+  // generic forearm-axis projection can snap these points to the opposite
+  // side of the limb and create the crossed route shown in the review image.
+  // Preserve the authored surface corridor here; the five-point interpolation
+  // below keeps it continuous without moving any acupoint anchor.
+  if(seqA>=5&&seqB<=8)return null;
   if(seqB<=8)return 'forearm';
   if(seqA===8&&seqB===9)return 'upper_arm';
   if(seqB<=15)return 'trunk';
@@ -310,7 +316,8 @@ for(const pathItem of paths.filter(item=>item.meridianId==='SI')){
     if(i===0)dense.push(a);
     for(const fraction of [.2,.4,.6,.8]){
       const p=[a[0]+(b[0]-a[0])*fraction,a[1]+(b[1]-a[1])*fraction,a[2]+(b[2]-a[2])*fraction];
-      dense.push(projectBrowserToSegmentSurface(p,siSegmentForPair(codeA,codeB,fraction),pathItem.side).map(round));
+      const segment=siSegmentForPair(codeA,codeB,fraction);
+      dense.push((segment?projectBrowserToSegmentSurface(p,segment,pathItem.side):p).map(round));
     }
     dense.push(b);
   }

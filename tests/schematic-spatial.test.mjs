@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
+import {Box3,CatmullRomCurve3,Vector3} from 'three';
 
 test('licensed schematic spatial dataset stays unverified and complete',async()=>{
   const data=JSON.parse(await readFile(new URL('../public/data/schematic-spatial.json',import.meta.url),'utf8'));
@@ -104,6 +105,9 @@ test('licensed schematic spatial dataset stays unverified and complete',async()=
   }
   const siPaths=data.paths.filter(p=>p.meridianId==='SI');
   assert.equal(siPaths.length,2,'SI external course must remain bilateral');
+  const atlas=JSON.parse(await readFile(new URL('../public/models/atlas.json',import.meta.url),'utf8'));
+  const kidneys=atlas.parts.filter(p=>p.system==='urinary'&&/kidney/i.test(p.name));
+  assert.equal(kidneys.length,2,'kidney anatomy bounds must be available for the SI route exclusion check');
   for(const p of siPaths){
     assert.equal(p.surfaceProjection,'BodyParts3D FMA7163 small-intestine channel surface-following','SI external course must follow the body surface');
     assert.equal(p.surfaceProjectionStep,'fifth-segment','SI densification interval must remain explicit');
@@ -112,6 +116,24 @@ test('licensed schematic spatial dataset stays unverified and complete',async()=
     assert.deepEqual(p.pointCodes,meridians.find(m=>m.id==='SI').pointIds,'SI source order must remain SI-1 through SI-19');
     assert.equal(p.points.length,p.pointCodes.length+(p.pointCodes.length-1)*4,'SI path must add four surface controls between each pair of authored anchors');
     assert.ok(p.points.every(v=>v.length===3&&v.every(Number.isFinite)),'SI surface controls must have finite xyz');
+    for(const anchorIndex of [4,5,6]){
+      const start=p.points[anchorIndex*5],end=p.points[(anchorIndex+1)*5];
+      for(let step=1;step<=4;step++){
+        const fraction=step/5,actual=p.points[anchorIndex*5+step];
+        const expected=start.map((value,axis)=>Math.round((value+(end[axis]-value)*fraction)*1e6)/1e6);
+        assert.deepEqual(actual,expected,`SI ${p.side} ${p.pointCodes[anchorIndex]} → ${p.pointCodes[anchorIndex+1]} must follow the authored ulnar wrist/forearm corridor without snapping across the limb`);
+      }
+    }
+    const curve=new CatmullRomCurve3(p.points.map(v=>new Vector3(...v)),false,'centripetal');
+    let nearestKidneyDistance=Infinity;
+    for(const kidney of kidneys){
+      const bounds=new Box3(new Vector3(...kidney.bounds[0]),new Vector3(...kidney.bounds[1]));
+      for(let i=0;i<=4000;i++){
+        const point=curve.getPointAt(i/4000),closest=point.clone().clamp(bounds.min,bounds.max);
+        nearestKidneyDistance=Math.min(nearestKidneyDistance,point.distanceTo(closest));
+      }
+    }
+    assert.ok(nearestKidneyDistance>.05,`SI ${p.side} external course must stay at least 5 cm from either kidney; found ${nearestKidneyDistance.toFixed(4)} m`);
     const first=data.anchors.find(a=>a.pointCode==='SI-1'&&a.side===p.side),last=data.anchors.find(a=>a.pointCode==='SI-19'&&a.side===p.side);
     assert.deepEqual(p.points[0],[first.x,first.y,first.z],'SI-1 anchor must remain fixed');
     assert.deepEqual(p.points.at(-1),[last.x,last.y,last.z],'SI-19 anchor must remain fixed');

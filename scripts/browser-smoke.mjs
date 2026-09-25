@@ -114,6 +114,8 @@ try{
   await evaluate("document.querySelector('.yhct-head>button').click()");
   await evaluate("document.querySelector('[data-meridian3d-load-error=true] button').click()");
   await waitFor(()=>evaluate("!document.querySelector('[data-meridian3d-load-error=true]')&&document.querySelector('[data-meridian3d-launch=true]')?.innerText.includes('361 huyệt')"),{label:'meridian retry recovers data'});
+  if(await evaluate("document.querySelectorAll('.meridian3d-controls select')[0]?.value")!=='SI')throw new Error('Meridian panel must open with the small-intestine route isolated');
+  console.log('SMOKE_DEFAULT_SI_ROUTE_ISOLATION_PASS');
   console.log('SMOKE_LOAD_FAILURE_RECOVERY_PASS');
   await waitFor(()=>evaluate("!!document.querySelector('[data-effect-master=true]')"),{label:'effect master control'});
   const effectToggleClicked=await evaluate("(()=>{const b=document.querySelector('[data-effect-master=true]');if(!b)return false;b.click();return true})()");
@@ -364,6 +366,11 @@ try{
   for(const code of channelCodes){
     await evaluate("(()=>{const s=document.querySelectorAll('.meridian3d-controls select')[0];s.value="+JSON.stringify(code)+";s.dispatchEvent(new Event('change',{bubbles:true}));})()");
     await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.meridianId==="+JSON.stringify(code)+"&&Number(document.querySelector('canvas')?.dataset.meridianSchematicAnchors)>0&&Number(document.querySelector('canvas')?.dataset.meridianSchematicPaths)>0"),{label:code+' schematic markers and paths'});
+    if(code==='SI'){
+      const siRoute=await evaluate("({paths:Number(document.querySelector('canvas')?.dataset.meridianSchematicPaths||0),guidance:document.querySelector('[data-si-route-guidance=true]')?.textContent||''})");
+      if(siRoute.paths!==2||!siRoute.guidance.includes('SI-1 → SI-19')||!siRoute.guidance.includes('không nối với kinh Thận'))throw new Error('Small-intestine route isolation/guidance assertion failed: '+JSON.stringify(siRoute));
+      console.log('SMOKE_SI_ROUTE_CONTINUITY_PASS '+JSON.stringify(siRoute));
+    }
     schematicCoverage.push({code,...await evaluate("({...document.querySelector('canvas').dataset})")});
   }
   console.log('SMOKE_ALL_14_SCHEMATIC_MERIDIANS_PASS '+JSON.stringify(schematicCoverage));
@@ -505,6 +512,8 @@ try{
   await waitFor(()=>evaluate("document.querySelector('[data-registration-progress=true]')?.innerText.includes('1/10')"),{label:'registration pilot progress after capture'});
   await evaluate("document.querySelector('[data-meridian3d-launch=true]')?.click()");
   await waitFor(()=>evaluate("!!document.querySelector('[data-meridian3d-panel=true]')"),{label:'registration 3D meridian panel'});
+  await evaluate("(()=>{const s=document.querySelectorAll('.meridian3d-controls select')[0];s.value='ST';s.dispatchEvent(new Event('change',{bubbles:true}));})()");
+  await waitFor(()=>evaluate("document.querySelector('.meridian3d-summary')?.innerText.includes('Kinh Vị')"),{label:'registration selects draft meridian'});
   await waitFor(()=>evaluate("document.querySelector('.meridian3d-summary')?.innerText.includes('1 vị trí nháp trên máy')"),{label:'3D meridian local draft count'});
   await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.meridianAnchors==='1'"),{label:'3D local anchor rendered'});
   await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.meridianPaths==='0'"),{label:'no fabricated 3D meridian path'});
