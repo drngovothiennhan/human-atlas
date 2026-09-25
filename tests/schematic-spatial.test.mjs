@@ -88,6 +88,13 @@ test('licensed schematic spatial dataset stays unverified and complete',async()=
   assert.equal(lu11.length,2,'LU-11 must remain bilateral');
   assert.ok(lu11.every(a=>a.calibrationOverride==='HIU_DOCUMENT_ANATOMY_QC'),'LU-11 must use the HIU radial nail-edge calibration');
   assert.ok(lu11.every(a=>a.anatomicalEvidence?.surfaceRegionEn==='Thumb'||a.anatomicalEvidence?.surfaceRegionVi==='Ngón cái'),'LU-11 must remain anchored to the thumb');
+  for(const a of lu11){
+    const li1=data.anchors.find(point=>point.pointCode==='LI-1'&&point.side===a.side);
+    assert.ok(li1,'LI-1 comparison anchor must exist for '+a.side);
+    const radialSign=a.side==='RIGHT'?1:-1;
+    assert.ok(a.x*radialSign>li1.x*radialSign,'LU-11 must remain radially outside LI-1 at the outer edge of the thumb nail');
+    assert.ok(a.anatomicalEvidence?.landmarks?.some(item=>/thumb nail/i.test(item.label)),'LU-11 must retain the thumbnail landmark');
+  }
 
   const liPaths=data.paths.filter(p=>p.meridianId==='LI');
   assert.ok(liPaths.length>=2,'LI bilateral paths must exist');
