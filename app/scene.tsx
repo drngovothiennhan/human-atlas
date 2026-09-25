@@ -146,7 +146,7 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
    renderer.domElement.dataset.meridianLineCoreOpacity=String(MERIDIAN_LINE_CORE_OPACITY);renderer.domElement.dataset.meridianFlowDirection='source-order';renderer.domElement.dataset.meridianFlowWorldSpeed=String(MERIDIAN_FLOW_WORLD_SPEED);
    renderer.domElement.dataset.meridianLineTransparent='true';renderer.domElement.dataset.meridianDepthOcclusion='anatomy-surface';
    renderer.domElement.dataset.meridianPointMinRadius=String(ACUPOINT_RADIUS_SCHEMATIC);
-   disposeOverlay();renderer.domElement.dataset.acupunctureSimulation='off';renderer.domElement.dataset.meridianAnchors='0';renderer.domElement.dataset.meridianPaths='0';renderer.domElement.dataset.meridianSchematicAnchors='0';renderer.domElement.dataset.meridianSchematicPaths='0';renderer.domElement.dataset.meridianPulseMarkers='0';renderer.domElement.dataset.meridianSelectedMarkers='0';renderer.domElement.dataset.meridianFlowParticles='0';renderer.domElement.dataset.meridianEffect=value?.enabled?(reduceMeridianMotion?'reduced':'flow'):'off';if(!value?.enabled)return;
+   disposeOverlay();renderer.domElement.dataset.acupunctureSimulation='off';renderer.domElement.dataset.acupunctureOperatorRig='off';renderer.domElement.dataset.meridianAnchors='0';renderer.domElement.dataset.meridianPaths='0';renderer.domElement.dataset.meridianSchematicAnchors='0';renderer.domElement.dataset.meridianSchematicPaths='0';renderer.domElement.dataset.meridianPulseMarkers='0';renderer.domElement.dataset.meridianSelectedMarkers='0';renderer.domElement.dataset.meridianFlowParticles='0';renderer.domElement.dataset.meridianEffect=value?.enabled?(reduceMeridianMotion?'reduced':'flow'):'off';if(!value?.enabled)return;
    const fallbackColor=0x0f766e;let trustedAnchors=0,schematicAnchors=0,schematicPaths=0,trustedPaths=0,selectedMarkers=0;
    for(const anchor of value.effects?.acupoints===false?[]:value.anchors){
     if(![anchor.x,anchor.y,anchor.z].every(Number.isFinite))continue;
@@ -237,7 +237,7 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
      addFingerSegment(base,bend,.0065);addFingerSegment(bend,tip,.006);
     }
     renderer.domElement.dataset.acupunctureSimulation=needle.pointCode;renderer.domElement.dataset.acupunctureOperatorRig='stylized-hand-arm';
-   }else renderer.domElement.dataset.acupunctureSimulation='off';
+   }else {renderer.domElement.dataset.acupunctureSimulation='off';renderer.domElement.dataset.acupunctureOperatorRig='off';}
    renderer.domElement.dataset.meridianPaths=String(trustedPaths);renderer.domElement.dataset.meridianSchematicPaths=String(schematicPaths);renderer.domElement.dataset.meridianPulseMarkers=String(meridianPulseMarkers.length);renderer.domElement.dataset.meridianSelectedMarkers=String(selectedMarkers);renderer.domElement.dataset.meridianFlowParticles=String(meridianFlowParticles.length);
   };
   const hover=document.createElement('div');hover.className='part-hover';hover.setAttribute('role','tooltip');hover.hidden=true;el.appendChild(hover);
