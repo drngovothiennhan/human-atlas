@@ -512,6 +512,8 @@ try{
   await waitFor(()=>evaluate("document.querySelector('[data-registration-progress=true]')?.innerText.includes('1/10')"),{label:'registration pilot progress after capture'});
   await evaluate("document.querySelector('[data-meridian3d-launch=true]')?.click()");
   await waitFor(()=>evaluate("!!document.querySelector('[data-meridian3d-panel=true]')"),{label:'registration 3D meridian panel'});
+  await evaluate("(()=>{const s=document.querySelectorAll('.meridian3d-controls select')[0];s.value='ST';s.dispatchEvent(new Event('change',{bubbles:true}));})()");
+  await waitFor(()=>evaluate("document.querySelector('.meridian3d-summary')?.innerText.includes('Kinh Vị')"),{label:'registration selects draft meridian'});
   await waitFor(()=>evaluate("document.querySelector('.meridian3d-summary')?.innerText.includes('1 vị trí nháp trên máy')"),{label:'3D meridian local draft count'});
   await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.meridianAnchors==='1'"),{label:'3D local anchor rendered'});
   await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.meridianPaths==='0'"),{label:'no fabricated 3D meridian path'});
