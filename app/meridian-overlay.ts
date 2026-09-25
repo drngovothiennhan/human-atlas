@@ -18,6 +18,11 @@ export type MeridianScenePath={
   meridianId:string;
   side?:'LEFT'|'RIGHT'|'MIDLINE'|'UNKNOWN';
   points:[number,number,number][];
+  pointCodes?:string[];
+  displayAnchorStride?:number;
+  visualAnchorCodes?:string[];
+  handProjection?:string;
+  anchorCoordinatePolicy?:string;
   verificationStatus:'UNVERIFIED'|'FACULTY_REVIEWED'|'PUBLISHED';
   sourceKind?:'LICENSED_SCHEMATIC'|'PUBLISHED';
 };

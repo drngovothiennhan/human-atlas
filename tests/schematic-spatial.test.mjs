@@ -97,6 +97,12 @@ test('licensed schematic spatial dataset stays unverified and complete',async()=
     assert.ok(a.anatomicalEvidence?.landmarks?.some(item=>/thumb nail/i.test(item.label)),'LU-11 must retain the thumbnail landmark');
   }
 
+  for(const code of ['SI-2','SI-3','SI-4']){
+    const canonical=data.anchors.filter(a=>a.pointCode===code);
+    assert.equal(canonical.length,2,code+' canonical anchors must remain bilateral');
+    assert.ok(canonical.every(a=>!a.calibrationOverride),code+' canonical source coordinates must not be overwritten by the visual corridor fix');
+  }
+
   const liPaths=data.paths.filter(p=>p.meridianId==='LI');
   assert.ok(liPaths.length>=2,'LI bilateral paths must exist');
   for(const p of liPaths){
@@ -117,12 +123,25 @@ test('licensed schematic spatial dataset stays unverified and complete',async()=
     assert.deepEqual(p.pointCodes,meridians.find(m=>m.id==='SI').pointIds,'SI source order must remain SI-1 through SI-19');
     assert.equal(p.points.length,p.pointCodes.length+(p.pointCodes.length-1)*4,'SI path must add four surface controls between each pair of authored anchors');
     assert.ok(p.points.every(v=>v.length===3&&v.every(Number.isFinite)),'SI surface controls must have finite xyz');
+    assert.equal(p.displayAnchorStride,5,'SI render anchors must remain addressable at every fifth path point');
+    assert.deepEqual(p.visualAnchorCodes,['SI-2','SI-3','SI-4'],'only the three intermediate hand markers may use render-only corridor positions');
+    assert.equal(p.handProjection,'reference-guided ulnar corridor SI-1 -> SI-5','SI hand path must use the supplied ulnar reference corridor');
+    assert.equal(p.anchorCoordinatePolicy,'canonical schematic anchors unchanged; SI-2..SI-4 use render-only surface corridor','SI canonical anchor coordinates must remain untouched');
+    const si1=data.anchors.find(a=>a.pointCode==='SI-1'&&a.side===p.side),si5=data.anchors.find(a=>a.pointCode==='SI-5'&&a.side===p.side);
+    assert.deepEqual(p.points[0],[si1.x,si1.y,si1.z],'SI-1 render endpoint must remain on its canonical anchor');
+    assert.deepEqual(p.points[4*5],[si5.x,si5.y,si5.z],'SI-5 render endpoint must remain on its canonical wrist anchor');
+    const handStart=new Vector3(...p.points[0]),handEnd=new Vector3(...p.points[4*5]),handAxis=handEnd.clone().sub(handStart),handAxisLengthSq=handAxis.lengthSq();
+    for(const routeIndex of [5,10,15]){
+      const point=new Vector3(...p.points[routeIndex]),t=Math.max(0,Math.min(1,point.clone().sub(handStart).dot(handAxis)/handAxisLengthSq));
+      const nearest=handStart.clone().addScaledVector(handAxis,t);
+      assert.ok(point.distanceTo(nearest)<.055,'SI-1 through SI-5 render corridor must not detour away from the ulnar hand edge');
+    }
     for(let segment=0;segment<4;segment++){
       const start=p.points[segment*5],end=p.points[(segment+1)*5];
       for(let sample=1;sample<5;sample++){
         const t=sample/5,actual=p.points[segment*5+sample];
         const expected=start.map((value,axis)=>Math.round((value+(end[axis]-value)*t)*1e6)/1e6);
-        assert.deepEqual(actual,expected,`SI-1 through SI-5 sample ${segment+1}.${sample} must preserve the authored ulnar hand/wrist course`);
+        assert.deepEqual(actual,expected,`SI-1 through SI-5 sample ${segment+1}.${sample} must stay inside the corrected ulnar corridor`);
       }
     }
     for(const anchorIndex of [4,5,6]){

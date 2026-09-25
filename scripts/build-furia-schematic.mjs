@@ -317,22 +317,39 @@ const siSegmentForPair=(a,b,fraction)=>{
 // back to the corresponding BodyParts3D surface segment. Keep authored
 // endpoint anchors and source topology untouched; all remain UNVERIFIED.
 for(const pathItem of paths.filter(item=>item.meridianId==='SI')){
+  // The supplied visual reference replaces the erroneous SI-1 -> SI-5 hand
+  // detour with one continuous ulnar-edge corridor. Preserve every canonical
+  // acupoint anchor in anchorOut; only the render path and render-only positions
+  // for SI-2/SI-3/SI-4 are corrected here.
+  const routeAnchors=pathItem.points.map(point=>point.slice());
+  if(pathItem.pointCodes.slice(0,5).join('|')==='SI-1|SI-2|SI-3|SI-4|SI-5'){
+    const start=routeAnchors[0],end=routeAnchors[4];
+    for(let i=1;i<4;i++){
+      const t=i/4;
+      const raw=[start[0]+(end[0]-start[0])*t,start[1]+(end[1]-start[1])*t,start[2]+(end[2]-start[2])*t];
+      routeAnchors[i]=projectBrowserToSegmentSurface(raw,'hand',pathItem.side).map(round);
+    }
+    pathItem.displayAnchorStride=5;
+    pathItem.visualAnchorCodes=['SI-2','SI-3','SI-4'];
+    pathItem.handProjection='reference-guided ulnar corridor SI-1 -> SI-5';
+    pathItem.anchorCoordinatePolicy='canonical schematic anchors unchanged; SI-2..SI-4 use render-only surface corridor';
+  }
   const dense=[];
   for(let i=0;i<pathItem.pointCodes.length-1;i++){
-    const codeA=pathItem.pointCodes[i],codeB=pathItem.pointCodes[i+1],a=pathItem.points[i],b=pathItem.points[i+1];
+    const codeA=pathItem.pointCodes[i],codeB=pathItem.pointCodes[i+1],a=routeAnchors[i],b=routeAnchors[i+1];
     if(i===0)dense.push(a);
     const preserveUlnarHandEdge=numericPointSequenceForBuild(codeB)<=5;
     for(const fraction of [.2,.4,.6,.8]){
       const p=[a[0]+(b[0]-a[0])*fraction,a[1]+(b[1]-a[1])*fraction,a[2]+(b[2]-a[2])*fraction];
-      // SI-1 through SI-5 already have anatomy-specific fifth-digit, ulnar
-      // metacarpal, and wrist anchors. Re-projecting their interpolants against
-      // the generic hand/forearm axis pulls the channel off the ulnar edge.
+      // The hand corridor is already constrained to the corrected ulnar route.
+      // Do not feed it back through the generic segment projection because that
+      // was the source of the large visual detour shown in the reference image.
       const segment=siSegmentForPair(codeA,codeB,fraction);
       dense.push((preserveUlnarHandEdge||!segment?p:projectBrowserToSegmentSurface(p,segment,pathItem.side)).map(round));
     }
     dense.push(b);
   }
-  if(pathItem.pointCodes.length===1)dense.push(pathItem.points[0]);
+  if(pathItem.pointCodes.length===1)dense.push(routeAnchors[0]);
   pathItem.points=dense;
   pathItem.surfaceProjection='BodyParts3D FMA7163 small-intestine channel surface-following';
   pathItem.surfaceProjectionStep='fifth-segment';
