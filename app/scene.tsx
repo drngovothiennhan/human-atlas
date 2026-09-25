@@ -146,7 +146,7 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
    renderer.domElement.dataset.meridianLineCoreOpacity=String(MERIDIAN_LINE_CORE_OPACITY);renderer.domElement.dataset.meridianFlowDirection='source-order';renderer.domElement.dataset.meridianFlowWorldSpeed=String(MERIDIAN_FLOW_WORLD_SPEED);
    renderer.domElement.dataset.meridianLineTransparent='true';renderer.domElement.dataset.meridianDepthOcclusion='anatomy-surface';
    renderer.domElement.dataset.meridianPointMinRadius=String(ACUPOINT_RADIUS_SCHEMATIC);
-   disposeOverlay();renderer.domElement.dataset.acupunctureSimulation='off';renderer.domElement.dataset.acupunctureOperatorRig='off';renderer.domElement.dataset.meridianAnchors='0';renderer.domElement.dataset.meridianPaths='0';renderer.domElement.dataset.meridianSchematicAnchors='0';renderer.domElement.dataset.meridianSchematicPaths='0';renderer.domElement.dataset.meridianPulseMarkers='0';renderer.domElement.dataset.meridianSelectedMarkers='0';renderer.domElement.dataset.meridianFlowParticles='0';renderer.domElement.dataset.meridianEffect=value?.enabled?(reduceMeridianMotion?'reduced':'flow'):'off';if(!value?.enabled)return;
+   disposeOverlay();renderer.domElement.dataset.acupunctureSimulation='off';renderer.domElement.dataset.acupunctureOperatorRig='off';renderer.domElement.dataset.acupunctureHandPartCount='0';renderer.domElement.dataset.meridianAnchors='0';renderer.domElement.dataset.meridianPaths='0';renderer.domElement.dataset.meridianSchematicAnchors='0';renderer.domElement.dataset.meridianSchematicPaths='0';renderer.domElement.dataset.meridianPulseMarkers='0';renderer.domElement.dataset.meridianSelectedMarkers='0';renderer.domElement.dataset.meridianFlowParticles='0';renderer.domElement.dataset.meridianEffect=value?.enabled?(reduceMeridianMotion?'reduced':'flow'):'off';if(!value?.enabled)return;
    const fallbackColor=0x0f766e;let trustedAnchors=0,schematicAnchors=0,schematicPaths=0,trustedPaths=0,selectedMarkers=0;
    for(const anchor of value.effects?.acupoints===false?[]:value.anchors){
     if(![anchor.x,anchor.y,anchor.z].every(Number.isFinite))continue;
@@ -207,11 +207,11 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
      const part=new T.Mesh(geometry,handSkin);part.position.copy(position);if(quaternion)part.quaternion.copy(quaternion);part.renderOrder=29;part.userData.needleHandRest=position.clone();meridianGroup.add(part);needleHandParts.push(part);return part;
     };
     const orientAlong=(axis:T.Vector3)=>new T.Quaternion().setFromUnitVectors(new T.Vector3(0,1,0),axis.clone().normalize());
-    const sideAxis=new T.Vector3().crossVectors(tangent,outward).normalize();
+    const sideAxis=new T.Vector3().crossVectors(outward,tangent).normalize();
     if(sideAxis.lengthSq()<1e-8)sideAxis.set(1,0,0);
     const grip=surface.clone().addScaledVector(outward,length*.72);
     const palmCenter=grip.clone().addScaledVector(tangent,.027);
-    const palm=handAdd(new T.SphereGeometry(.04,16,10),palmCenter);
+    const handFrame=new T.Matrix4().makeBasis(sideAxis,outward,tangent),palm=handAdd(new T.SphereGeometry(.04,16,10),palmCenter,new T.Quaternion().setFromRotationMatrix(handFrame));
     palm.scale.set(.78,.34,1.05);
     const forearmCenter=grip.clone().addScaledVector(tangent,.137);
     handAdd(new T.CapsuleGeometry(.021,.12,4,8),forearmCenter,orientAlong(tangent));
@@ -236,7 +236,7 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
      const tip=grip.clone().addScaledVector(sideAxis,offset*1.1).addScaledVector(tangent,.015);
      addFingerSegment(base,bend,.0065);addFingerSegment(bend,tip,.006);
     }
-    renderer.domElement.dataset.acupunctureSimulation=needle.pointCode;renderer.domElement.dataset.acupunctureOperatorRig='stylized-hand-arm';
+    renderer.domElement.dataset.acupunctureSimulation=needle.pointCode;renderer.domElement.dataset.acupunctureOperatorRig='stylized-hand-arm';renderer.domElement.dataset.acupunctureHandPartCount=String(needleHandParts.length);
    }else {renderer.domElement.dataset.acupunctureSimulation='off';renderer.domElement.dataset.acupunctureOperatorRig='off';}
    renderer.domElement.dataset.meridianPaths=String(trustedPaths);renderer.domElement.dataset.meridianSchematicPaths=String(schematicPaths);renderer.domElement.dataset.meridianPulseMarkers=String(meridianPulseMarkers.length);renderer.domElement.dataset.meridianSelectedMarkers=String(selectedMarkers);renderer.domElement.dataset.meridianFlowParticles=String(meridianFlowParticles.length);
   };
