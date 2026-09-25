@@ -33,7 +33,7 @@ export default function Meridian3DPanel({drafts,selectedPointCode,studyCommand,o
   const [language,setLanguage]=useState<Language>('vi');
   const [meridians,setMeridians]=useState<Meridian[]>([]),[points,setPoints]=useState<Acupoint[]>([]);
   const [schematic,setSchematic]=useState<SchematicSpatial>({anchors:[],paths:[]});
-  const [activeMeridian,setActiveMeridian]=useState(ALL_MAIN_MERIDIANS),[side,setSide]=useState<MeridianOverlaySide>('BOTH');
+  const [activeMeridian,setActiveMeridian]=useState('SI'),[side,setSide]=useState<MeridianOverlaySide>('BOTH');
   const [query,setQuery]=useState(''),[selected,setSelected]=useState<string|null>(null);
   const [loading,setLoading]=useState(true),[loadError,setLoadError]=useState(''),[loadAttempt,setLoadAttempt]=useState(0);
   const panelDrag=useDraggable('meridian3d'),launchDrag=useDraggable('meridian3d-launch');
@@ -177,6 +177,8 @@ export default function Meridian3DPanel({drafts,selectedPointCode,studyCommand,o
         <strong>{activeLabel}</strong>
         <span>{activePointCount} huyệt · {sideLabel(side)} · {schematicCount} vị trí 3D đã hiệu chỉnh · {publishedCount} vị trí đã duyệt · {draftCount} vị trí nháp trên máy</span>
         <span>{visiblePaths.length?visiblePaths.length+' đường/đoạn 3D đang hiển thị':'Chưa có đường kinh 3D — không tự nối điểm'}</span>
+        {activeMeridian==='SI'&&<span data-si-route-guidance="true">Lộ trình ngoài liên tục SI-1 → SI-19; không nối với kinh Thận. Nhánh nội tại không vẽ trên da.</span>}
+        {activeMeridian===ALL_MAIN_MERIDIANS&&<span data-all-meridian-guidance="true">Đang xem đồng thời 12 đường riêng; chỗ giao nhau không phải nối kinh. Chọn một kinh để xem riêng.</span>}
         {showCollaterals&&<span role="status">Chưa có dữ liệu đường lạc phù hợp để hiển thị.</span>}
       </div>
       <div className="meridian3d-model-controls" data-meridian3d-model-controls="true">
