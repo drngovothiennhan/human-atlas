@@ -298,6 +298,10 @@ for(const pathItem of paths.filter(item=>item.meridianId==='LI')){
 const siSegmentForPair=(a,b,fraction)=>{
   const seqA=numericPointSequenceForBuild(a),seqB=numericPointSequenceForBuild(b);
   if(seqB<=5)return 'hand';
+  // SI-5 through SI-8 are authored on the ulnar wrist/forearm surface. The
+  // generic forearm-axis projection can snap these controls across the limb.
+  // Preserve the authored corridor and keep its acupoint anchors fixed.
+  if(seqA>=5&&seqB<=8)return null;
   if(seqB<=8)return 'forearm';
   if(seqA===8&&seqB===9)return 'upper_arm';
   if(seqB<=15)return 'trunk';
@@ -323,7 +327,8 @@ for(const pathItem of paths.filter(item=>item.meridianId==='SI')){
       // SI-1 through SI-5 already have anatomy-specific fifth-digit, ulnar
       // metacarpal, and wrist anchors. Re-projecting their interpolants against
       // the generic hand/forearm axis pulls the channel off the ulnar edge.
-      dense.push((preserveUlnarHandEdge?p:projectBrowserToSegmentSurface(p,siSegmentForPair(codeA,codeB,fraction),pathItem.side)).map(round));
+      const segment=siSegmentForPair(codeA,codeB,fraction);
+      dense.push((preserveUlnarHandEdge||!segment?p:projectBrowserToSegmentSurface(p,segment,pathItem.side)).map(round));
     }
     dense.push(b);
   }
