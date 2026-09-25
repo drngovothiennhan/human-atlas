@@ -148,7 +148,16 @@ const spatialOverrides={
   'GB-1':{struct:'Anterior segment of eyeball',along:.5,dir:'anterior',shift:{lateral:13}},
   'CV-24':{struct:'Mandible',along:.5,dir:'anterior',shift:{up:19}},
   'GV-28':{struct:'Maxilla',along:.35,dir:'anterior',shift:{down:7}},
-  'ST-45':{struct:'Distal phalanx of second finger of foot',along:.93,dir:'lateral',shift:{dorsal:2,distal:1},region:'foot'}
+  'ST-45':{struct:'Distal phalanx of second finger of foot',along:.93,dir:'lateral',shift:{dorsal:2,distal:1},region:'foot'},
+  // Re-anchor the SI shoulder/scapular arc to the anatomical regions named by
+  // the point locations: SI-9 at the posterior axillary fold; SI-11 at T4 in
+  // the infraspinous fossa; SI-12/13 above it in the supraspinous fossa. The
+  // former proportional trunk-height guesses placed SI-11 near T6 and made
+  // the continuous route dip sharply below the scapula.
+  'SI-9':{seg:'upper_arm',t:.12,lat:.4,face:'posterior'},
+  'SI-11':{seg:'trunk',vertebra:'T4',lat:4,face:'posterior'},
+  'SI-12':{seg:'trunk',vertebra:'T2',lat:4,face:'posterior'},
+  'SI-13':{seg:'trunk',vertebra:'T2',lat:2.5,face:'posterior'}
 };
 const documentEvidenceByMeridian=new Map(documentReference.meridians.map(item=>[item.meridianId,item]));
 const anatomyEvidenceByCode=new Map(anatomyLocationDoc.points.map(item=>[item.code,item]));
