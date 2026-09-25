@@ -42,7 +42,10 @@ test('meridian overlay uses anatomy depth occlusion and separated controls',asyn
   ]);
   assert.ok(scene.includes("meridianDepthOcclusion='anatomy-surface'"));
   assert.match(scene,/depthTest:true,depthWrite:false/);
-  assert.match(scene,/opacity:system==='integumentary'\?\.12:1,depthWrite:true/);
+  assert.ok(scene.includes("side:surface?T.FrontSide:T.DoubleSide"));
+  assert.ok(scene.includes("opacity:surface?.12:1,depthWrite:!surface"));
+  assert.ok(scene.includes("surfaceFacePolicy='front-side-only'"));
+  assert.ok(scene.includes("anatomyLoadPolicy='visible-chunks-on-demand'"));
   assert.ok(panel.includes('meridian3d-exit-row'));
   assert.ok(panel.includes('meridian3d-section-label'));
   assert.ok(panel.includes('data-anatomical-location="true"'));
@@ -73,5 +76,8 @@ test('anatomical layers expose independent opacity controls wired to Three.js ma
   assert.ok(scene.includes('lastState?.opacity!==s.opacity'));
   assert.ok(scene.includes('material.transparent=alpha<1'));
   assert.ok(scene.includes('material.depthWrite=alpha>=1'));
+  assert.ok(scene.includes("material.side=system.id==='integumentary'?T.FrontSide:T.DoubleSide"));
+  assert.ok(scene.includes('const loadedChunks=new Set<number>()'));
+  assert.ok(scene.includes('initialAnatomyChunkCount'));
   assert.ok(css.includes('.layer-opacity input'));
 });
