@@ -138,7 +138,7 @@ export default function Meridian3DPanel({drafts,selectedPointCode,studyCommand,o
   const selectedMeridianPoints=selectedRecord?points.filter(p=>p.meridianId===selectedRecord.meridianId).sort((a,b)=>a.sequence-b.sequence):[];
   const selectedIndex=selectedRecord?selectedMeridianPoints.findIndex(p=>p.code===selectedRecord.code):-1;
 
-  const prepareMeridianView=(id:string)=>{if(id!=='SI')return;if(typeof window!=='undefined'&&window.matchMedia('(max-width: 767px)').matches)setSide('LEFT');onStudyAction({view:'back'})};
+  const prepareMeridianView=(id:string)=>{if(id!=='SI')return;setSide('LEFT');onStudyAction({view:'back'})};
   const selectMeridian=(id:string)=>{setActiveMeridian(id);setEnabled(true);setMotion(true);setShowMeridians(true);setQuery('');setSelected(null);onFocus(null);prepareMeridianView(id)};
   const focusPoint=(point:Acupoint)=>{
     setSelected(point.code);setActiveMeridian(point.meridianId);setEnabled(true);
@@ -178,7 +178,7 @@ export default function Meridian3DPanel({drafts,selectedPointCode,studyCommand,o
         <strong>{activeLabel}</strong>
         <span>{activePointCount} huyệt · {sideLabel(side)} · {schematicCount} vị trí 3D đã hiệu chỉnh · {publishedCount} vị trí đã duyệt · {draftCount} vị trí nháp trên máy</span>
         <span>{visiblePaths.length?visiblePaths.length+' đường/đoạn 3D đang hiển thị':'Chưa có đường kinh 3D — không tự nối điểm'}</span>
-        {activeMeridian==='SI'&&<span data-si-route-guidance="true">Lộ trình ngoài liên tục SI-1 → SI-19; không nối với kinh Thận. Nhánh nội tại không vẽ trên da.</span>}
+        {activeMeridian==='SI'&&<span data-si-route-guidance="true">Lộ trình ngoài liên tục SI-1 → SI-19; không nối với kinh Thận. Nhánh nội tại không vẽ trên da. Mặc định chỉ hiện bên trái để tránh đường đối bên hiện xuyên qua mô hình; chọn “Hai bên” để đối chiếu.</span>}
         {activeMeridian===ALL_MAIN_MERIDIANS&&<span data-all-meridian-guidance="true">Đang xem đồng thời 12 đường riêng; chỗ giao nhau không phải nối kinh. Chọn một kinh để xem riêng.</span>}
         {showCollaterals&&<span role="status">Chưa có dữ liệu đường lạc phù hợp để hiển thị.</span>}
       </div>
