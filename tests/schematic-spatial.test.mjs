@@ -125,6 +125,14 @@ test('licensed schematic spatial dataset stays unverified and complete',async()=
         assert.deepEqual(actual,expected,`SI-1 through SI-5 sample ${segment+1}.${sample} must preserve the authored ulnar hand/wrist course`);
       }
     }
+    for(const anchorIndex of [4,5,6]){
+      const start=p.points[anchorIndex*5],end=p.points[(anchorIndex+1)*5];
+      for(let sample=1;sample<5;sample++){
+        const t=sample/5,actual=p.points[anchorIndex*5+sample];
+        const expected=start.map((value,axis)=>Math.round((value+(end[axis]-value)*t)*1e6)/1e6);
+        assert.deepEqual(actual,expected,`SI-${anchorIndex+1} to SI-${anchorIndex+2} sample ${sample} must stay on the authored ulnar wrist/forearm course`);
+      }
+    }
     const sideSign=p.side==='RIGHT'?1:-1;
     const anchor=code=>data.anchors.find(a=>a.pointCode===code&&a.side===p.side);
     const si9=anchor('SI-9'),si10=anchor('SI-10'),si11=anchor('SI-11'),si12=anchor('SI-12'),si13=anchor('SI-13');
