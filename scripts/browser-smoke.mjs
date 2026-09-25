@@ -115,6 +115,7 @@ try{
   await evaluate("document.querySelector('[data-meridian3d-load-error=true] button').click()");
   await waitFor(()=>evaluate("!document.querySelector('[data-meridian3d-load-error=true]')&&document.querySelector('[data-meridian3d-launch=true]')?.innerText.includes('361 huyệt')"),{label:'meridian retry recovers data'});
   if(await evaluate("document.querySelectorAll('.meridian3d-controls select')[0]?.value")!=='SI')throw new Error('Meridian panel must open with the small-intestine route isolated');
+  if(await evaluate("document.querySelectorAll('.meridian3d-controls select')[1]?.value")!=='LEFT')throw new Error('Opening the SI panel must hide the opposite-side crossing by default');
   console.log('SMOKE_DEFAULT_SI_ROUTE_ISOLATION_PASS');
   console.log('SMOKE_LOAD_FAILURE_RECOVERY_PASS');
   await waitFor(()=>evaluate("!!document.querySelector('[data-effect-master=true]')"),{label:'effect master control'});
@@ -368,7 +369,7 @@ try{
     await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.meridianId==="+JSON.stringify(code)+"&&Number(document.querySelector('canvas')?.dataset.meridianSchematicAnchors)>0&&Number(document.querySelector('canvas')?.dataset.meridianSchematicPaths)>0"),{label:code+' schematic markers and paths'});
     if(code==='SI'){
       const siRoute=await evaluate("({paths:Number(document.querySelector('canvas')?.dataset.meridianSchematicPaths||0),guidance:document.querySelector('[data-si-route-guidance=true]')?.textContent||''})");
-      if(siRoute.paths!==2||!siRoute.guidance.includes('SI-1 → SI-19')||!siRoute.guidance.includes('không nối với kinh Thận'))throw new Error('Small-intestine route isolation/guidance assertion failed: '+JSON.stringify(siRoute));
+      if(siRoute.paths!==1||!siRoute.guidance.includes('SI-1 → SI-19')||!siRoute.guidance.includes('không nối với kinh Thận')||!siRoute.guidance.includes('Mặc định chỉ hiện bên trái'))throw new Error('Small-intestine single-side route/guidance assertion failed: '+JSON.stringify(siRoute));
       console.log('SMOKE_SI_ROUTE_CONTINUITY_PASS '+JSON.stringify(siRoute));
     }
     schematicCoverage.push({code,...await evaluate("({...document.querySelector('canvas').dataset})")});
@@ -436,6 +437,8 @@ try{
   await waitFor(()=>evaluate("document.querySelector('.studio')?.classList.contains('layout-mobile')"),{label:'mobile layout toggle'});
   await evaluate("document.querySelector('[data-meridian3d-launch=true]')?.click()");
   await waitFor(()=>evaluate("!!document.querySelector('[data-meridian3d-panel=true]')"),{label:'mobile meridian panel'});
+  await evaluate("document.querySelector('[data-meridian-scope=SI]')?.click()");
+  await waitFor(()=>evaluate("document.querySelectorAll('.meridian3d-controls select')[1]?.value==='LEFT'"),{label:'mobile SI route defaults to the unobscured side'});
   const mobileLayout=await evaluate("(()=>{const p=document.querySelector('[data-meridian3d-panel=true]')?.getBoundingClientRect(),v=document.querySelector('.view-controls')?.getBoundingClientRect();return{vw:innerWidth,vh:innerHeight,panel:p&&{left:p.left,right:p.right,top:p.top,bottom:p.bottom,height:p.height},views:v&&{left:v.left,right:v.right,top:v.top,bottom:v.bottom}}})()");
   if(!mobileLayout.panel||mobileLayout.panel.left<0||mobileLayout.panel.right>mobileLayout.vw||mobileLayout.panel.top<0||mobileLayout.panel.bottom>mobileLayout.vh||mobileLayout.panel.height>mobileLayout.vh*.62)throw new Error('Mobile meridian layout overflow: '+JSON.stringify(mobileLayout));
   if(!mobileLayout.views||mobileLayout.views.left<0||mobileLayout.views.right>mobileLayout.vw)throw new Error('Mobile view controls overflow: '+JSON.stringify(mobileLayout));

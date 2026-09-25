@@ -117,6 +117,14 @@ test('licensed schematic spatial dataset stays unverified and complete',async()=
     assert.deepEqual(p.pointCodes,meridians.find(m=>m.id==='SI').pointIds,'SI source order must remain SI-1 through SI-19');
     assert.equal(p.points.length,p.pointCodes.length+(p.pointCodes.length-1)*4,'SI path must add four surface controls between each pair of authored anchors');
     assert.ok(p.points.every(v=>v.length===3&&v.every(Number.isFinite)),'SI surface controls must have finite xyz');
+    for(let segment=0;segment<4;segment++){
+      const start=p.points[segment*5],end=p.points[(segment+1)*5];
+      for(let sample=1;sample<5;sample++){
+        const t=sample/5,actual=p.points[segment*5+sample];
+        const expected=start.map((value,axis)=>Math.round((value+(end[axis]-value)*t)*1e6)/1e6);
+        assert.deepEqual(actual,expected,`SI-1 through SI-5 sample ${segment+1}.${sample} must preserve the authored ulnar hand/wrist course`);
+      }
+    }
     const sideSign=p.side==='RIGHT'?1:-1;
     const anchor=code=>data.anchors.find(a=>a.pointCode===code&&a.side===p.side);
     const si9=anchor('SI-9'),si10=anchor('SI-10'),si11=anchor('SI-11'),si12=anchor('SI-12'),si13=anchor('SI-13');
