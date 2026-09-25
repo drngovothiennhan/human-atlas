@@ -21,7 +21,7 @@ export interface Part {id:string;name:string;conceptId:string;system:SystemId;ch
 export interface Concept {id:string;name:string;elements:string[]}
 export interface Atlas {version:string;sex?:'male';source?:string;scope?:string;parts:Part[];concepts:Concept[];chunks:{url:string;bytes:number;gzip?:string;gzipBytes?:number}[];triangles:number}
 export type View = 'three-quarter'|'front'|'back'|'side';
-export const DEFAULT_LAYER_OPACITY:Record<SystemId,number>=Object.fromEntries(SYSTEMS.map(system=>[system.id,system.id==='integumentary'?12:100])) as Record<SystemId,number>;
+export const DEFAULT_LAYER_OPACITY:Record<SystemId,number>=Object.fromEntries(SYSTEMS.map(system=>[system.id,100])) as Record<SystemId,number>;
 export interface SceneState {inspectorOpen?:boolean;explode:number;visible:SystemId[];opacity:Record<SystemId,number>;selected:string[];isolate:boolean;view:View;rotate:boolean;reset:number}
 export const DEFAULT_VISIBLE:SystemId[] = ['integumentary'];
 export const PRIMARY_SURFACE_CONCEPT_ID='FMA7163';
