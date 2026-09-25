@@ -58,7 +58,7 @@ test('licensed schematic spatial dataset stays unverified and complete',async()=
   assert.ok(stPath,'ST path containing ST-1 must exist');
   assert.deepEqual(stPath.pointCodes.slice(0,2),['ST-ROUTE-ORIGIN','ST-1'],'ST route must begin at lateral-nose origin before ST-1');
   assert.equal(stPath.points.length,stPath.pointCodes.length,'ST route origin must have a matching 3D point');
-  const calibratedCodes=['LU-10','LU-11','LI-20','ST-1','BL-1','TE-23','GB-1','CV-24','GV-28','ST-45'];
+  const calibratedCodes=['LU-10','LU-11','LI-20','ST-1','BL-1','TE-23','GB-1','CV-24','GV-28','ST-45','SI-9','SI-11','SI-12','SI-13'];
   assert.deepEqual(data.spatialOverrides?.slice().sort(),calibratedCodes.slice().sort(),'HIU facial/endpoint calibration set must stay explicit');
   for(const code of calibratedCodes){
     const anchors=data.anchors.filter(a=>a.pointCode===code);
@@ -105,6 +105,7 @@ test('licensed schematic spatial dataset stays unverified and complete',async()=
   }
   const siPaths=data.paths.filter(p=>p.meridianId==='SI');
   assert.equal(siPaths.length,2,'SI external course must remain bilateral');
+  const fittedRig=JSON.parse(await readFile(new URL('../vendor/furia-acupuncture-3d/rig_fitted.json',import.meta.url),'utf8'));
   const atlas=JSON.parse(await readFile(new URL('../public/models/atlas.json',import.meta.url),'utf8'));
   const kidneys=atlas.parts.filter(p=>p.system==='urinary'&&/kidney/i.test(p.name));
   assert.equal(kidneys.length,2,'kidney anatomy bounds must be available for the SI route exclusion check');
@@ -116,6 +117,16 @@ test('licensed schematic spatial dataset stays unverified and complete',async()=
     assert.deepEqual(p.pointCodes,meridians.find(m=>m.id==='SI').pointIds,'SI source order must remain SI-1 through SI-19');
     assert.equal(p.points.length,p.pointCodes.length+(p.pointCodes.length-1)*4,'SI path must add four surface controls between each pair of authored anchors');
     assert.ok(p.points.every(v=>v.length===3&&v.every(Number.isFinite)),'SI surface controls must have finite xyz');
+    const sideSign=p.side==='RIGHT'?1:-1;
+    const anchor=code=>data.anchors.find(a=>a.pointCode===code&&a.side===p.side);
+    const si9=anchor('SI-9'),si10=anchor('SI-10'),si11=anchor('SI-11'),si12=anchor('SI-12'),si13=anchor('SI-13');
+    assert.ok(si9.x*sideSign>si10.x*sideSign,'SI-9 must sit laterally at the posterior axillary fold before the course curves onto the scapula');
+    assert.ok(Math.abs(si11.y-fittedRig.vertebra.T4.z)<.01,'SI-11 must stay at T4 in the infraspinous fossa');
+    assert.ok(Math.abs(si12.y-fittedRig.vertebra.T2.z)<.01,'SI-12 must sit above SI-11 in the supraspinous fossa');
+    assert.ok(Math.abs(si13.y-fittedRig.vertebra.T2.z)<.01,'SI-13 must stay at the medial supraspinous fossa near T2');
+    assert.ok(si13.x*sideSign<si12.x*sideSign,'SI-13 must be medial to SI-12 at the scapular spine');
+    const scapularCourse=p.points.slice(8*5,14*5+1);
+    assert.ok(scapularCourse.every(([,y,z])=>y>=fittedRig.vertebra.T4.z-.02&&z<-.09),'SI-9 through SI-15 must remain on the posterior upper scapular region without dropping into the lower trunk');
     const curve=new CatmullRomCurve3(p.points.map(v=>new Vector3(...v)),false,'centripetal');
     let nearestKidneyDistance=Infinity;
     for(const kidney of kidneys){
