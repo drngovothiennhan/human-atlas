@@ -127,7 +127,7 @@ test('licensed schematic spatial dataset stays unverified and complete',async()=
     assert.deepEqual(p.visualAnchorCodes,['SI-2','SI-3','SI-4'],'only the three intermediate hand markers may use render-only corridor positions');
     assert.equal(p.handProjection,'reference-guided ulnar corridor SI-1 -> SI-5','SI hand path must use the supplied ulnar reference corridor');
     assert.equal(p.anchorCoordinatePolicy,'canonical schematic anchors unchanged; SI-2..SI-4 use render-only surface corridor','SI canonical anchor coordinates must remain untouched');
-    const si1=anchor('SI-1'),si5=anchor('SI-5');
+    const si1=data.anchors.find(a=>a.pointCode==='SI-1'&&a.side===p.side),si5=data.anchors.find(a=>a.pointCode==='SI-5'&&a.side===p.side);
     assert.deepEqual(p.points[0],[si1.x,si1.y,si1.z],'SI-1 render endpoint must remain on its canonical anchor');
     assert.deepEqual(p.points[4*5],[si5.x,si5.y,si5.z],'SI-5 render endpoint must remain on its canonical wrist anchor');
     const handStart=new Vector3(...p.points[0]),handEnd=new Vector3(...p.points[4*5]),handAxis=handEnd.clone().sub(handStart),handAxisLengthSq=handAxis.lengthSq();
