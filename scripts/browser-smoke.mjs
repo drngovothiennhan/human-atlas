@@ -436,6 +436,8 @@ try{
   await waitFor(()=>evaluate("document.querySelector('.studio')?.classList.contains('layout-mobile')"),{label:'mobile layout toggle'});
   await evaluate("document.querySelector('[data-meridian3d-launch=true]')?.click()");
   await waitFor(()=>evaluate("!!document.querySelector('[data-meridian3d-panel=true]')"),{label:'mobile meridian panel'});
+  await evaluate("document.querySelector('[data-meridian-scope=SI]')?.click()");
+  await waitFor(()=>evaluate("document.querySelectorAll('.meridian3d-controls select')[1]?.value==='LEFT'"),{label:'mobile SI route defaults to the unobscured side'});
   const mobileLayout=await evaluate("(()=>{const p=document.querySelector('[data-meridian3d-panel=true]')?.getBoundingClientRect(),v=document.querySelector('.view-controls')?.getBoundingClientRect();return{vw:innerWidth,vh:innerHeight,panel:p&&{left:p.left,right:p.right,top:p.top,bottom:p.bottom,height:p.height},views:v&&{left:v.left,right:v.right,top:v.top,bottom:v.bottom}}})()");
   if(!mobileLayout.panel||mobileLayout.panel.left<0||mobileLayout.panel.right>mobileLayout.vw||mobileLayout.panel.top<0||mobileLayout.panel.bottom>mobileLayout.vh||mobileLayout.panel.height>mobileLayout.vh*.62)throw new Error('Mobile meridian layout overflow: '+JSON.stringify(mobileLayout));
   if(!mobileLayout.views||mobileLayout.views.left<0||mobileLayout.views.right>mobileLayout.vw)throw new Error('Mobile view controls overflow: '+JSON.stringify(mobileLayout));
