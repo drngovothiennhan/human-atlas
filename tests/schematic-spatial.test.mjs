@@ -185,8 +185,9 @@ test('licensed schematic spatial dataset stays unverified and complete',async()=
     assert.equal(p.pointCodes.length,44,'GB source topology must retain all 44 acupoints');
     assert.deepEqual(p.pointCodes,Array.from({length:44},(_,i)=>'GB-'+(i+1)),'GB path must preserve canonical acupoint order');
     assert.equal(p.points.length,216,'GB route must add four surface controls between consecutive anchors');
-    assert.equal(p.surfaceProjection,'BodyParts3D FMA7163 fitted-segment surface-following');
-    assert.equal(p.anchorCoordinatePolicy,'source acupoint anchors and topology unchanged; interpolated render points surface-projected');
+    assert.equal(p.surfaceProjection,'BodyParts3D FMA7163 Gallbladder-course surface-following');
+    assert.equal(p.anchorCoordinatePolicy,'source acupoint anchors and GB-1 → GB-44 topology unchanged; interpolated render points projected to anatomy segment by course region');
+    assert.match(p.courseRule,/lateral eye and temporal head.*fourth toe/);
   }
   for(const p of data.paths.filter(p=>['LEFT','RIGHT'].includes(p.side))){
     const sideSign=p.side==='LEFT'?-1:1;
