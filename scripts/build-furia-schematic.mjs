@@ -250,6 +250,19 @@ const spSegmentForPair=(a,b)=>{
 function numericPointSequenceForBuild(code){
   const m=String(code||'').match(/-(\d+)$/);return m?Number(m[1]):Number.MAX_SAFE_INTEGER;
 }
+const gbSegmentForPair=(a,b,fraction)=>{
+  const seqA=numericPointSequenceForBuild(a),seqB=numericPointSequenceForBuild(b);
+  if(seqB<=19)return 'head';
+  if(seqA===19&&seqB===20)return fraction<=.4?'head':'neck';
+  if(seqB<=20)return 'neck';
+  // GB-20 at the nape leads over the neck/shoulder to GB-21; the lateral
+  // thoracic and abdominal points then stay on the trunk surface through GB-29.
+  if(seqA===20&&seqB===21)return fraction<=.6?'neck':'trunk';
+  if(seqB<=29)return 'trunk';
+  if(seqB<=33)return 'thigh';
+  if(seqB<=39)return 'shank';
+  return 'foot';
+};
 const luSegmentForPair=(a,b,fraction)=>{
   const seqA=numericPointSequenceForBuild(a),seqB=numericPointSequenceForBuild(b);
   if(seqB<=2)return 'trunk';
@@ -382,6 +395,28 @@ for(const pathItem of paths.filter(item=>item.meridianId==='SP')){
   pathItem.points=dense;
   pathItem.surfaceProjection='BodyParts3D FMA7163 surface-following densification';
   pathItem.surfaceProjectionStep='quarter-segment';
+}
+// Follow the Gallbladder channel's lateral head → nape/shoulder → flank/hip →
+// lateral thigh and leg → dorsum of foot course. Use anatomy segments chosen by
+// canonical GB point order so projection cannot jump between unrelated fitted
+// body segments when a chord passes near their center axes.
+for(const pathItem of paths.filter(item=>item.meridianId==='GB')){
+  const dense=[];
+  for(let i=0;i<pathItem.points.length-1;i++){
+    const codeA=pathItem.pointCodes[i],codeB=pathItem.pointCodes[i+1],a=pathItem.points[i],b=pathItem.points[i+1];
+    if(i===0)dense.push(a);
+    for(const fraction of [.2,.4,.6,.8]){
+      const p=[a[0]+(b[0]-a[0])*fraction,a[1]+(b[1]-a[1])*fraction,a[2]+(b[2]-a[2])*fraction];
+      dense.push(projectBrowserToSegmentSurface(p,gbSegmentForPair(codeA,codeB,fraction),pathItem.side).map(round));
+    }
+    dense.push(b);
+  }
+  if(pathItem.points.length===1)dense.push(pathItem.points[0]);
+  pathItem.points=dense;
+  pathItem.surfaceProjection='BodyParts3D FMA7163 Gallbladder-course surface-following';
+  pathItem.surfaceProjectionStep='fifth-segment';
+  pathItem.courseRule='lateral eye and temporal head → behind ear and nape → neck and shoulder → lateral chest/flank → hip → lateral thigh and leg → dorsum of foot → fourth toe';
+  pathItem.anchorCoordinatePolicy='source acupoint anchors and GB-1 → GB-44 topology unchanged; interpolated render points projected to anatomy segment by course region';
 }
 // The remaining licensed routes previously connected surface anchors with straight
 // chords. Those chords can pass through the body and disappear behind anatomy under
