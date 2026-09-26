@@ -226,6 +226,20 @@ function projectBrowserToSegmentSurface(pointBrowser,segmentName,side='RIGHT'){
   const projected=toBrowser(castSource(base,ray,.65));
   return mirror?[-projected[0],projected[1],projected[2]]:projected;
 }
+const routeSegmentNames=['head','neck','trunk','upper_arm','forearm','hand','thigh','shank','foot'];
+function nearestRouteSegment(pointBrowser,side='RIGHT'){
+  const mirrored=side==='LEFT'?[-pointBrowser[0],pointBrowser[1],pointBrowser[2]]:pointBrowser;
+  const p=fromBrowser(mirrored);let bestName='trunk',bestDistance=Infinity;
+  for(const name of routeSegmentNames){
+    const segment=segments[name],axis=sub(segment.p1,segment.p0),den=dot(axis,axis)||1;
+    const t=clamp(dot(sub(p,segment.p0),axis)/den,0,1),center=interior(segment,t),delta=sub(p,center),distance=dot(delta,delta);
+    if(distance<bestDistance){bestDistance=distance;bestName=name}
+  }
+  return bestName;
+}
+function projectRoutePoint(pointBrowser,side='RIGHT'){
+  return projectBrowserToSegmentSurface(pointBrowser,nearestRouteSegment(pointBrowser,side),side).map(round);
+}
 const spSegmentForPair=(a,b)=>{
   const seq=Math.max(numericPointSequenceForBuild(a),numericPointSequenceForBuild(b));
   if(seq<=5)return 'foot';
@@ -274,26 +288,23 @@ for(const pathItem of paths.filter(item=>item.meridianId==='LU')){
   pathItem.courseRule='upper chest -> anterior-lateral upper arm -> radial forearm -> thenar/thumb -> radial nail edge of thumb';
 }
 
-// Keep the facial end of the Large Intestine channel on the visible body surface.
-// LI-18→LI-20 is densified only for rendering; catalogue adjacency stays unchanged.
+// Keep the entire Large Intestine channel on the visible body surface. Catalogue
+// adjacency and acupoint anchors stay unchanged; only render points are densified.
 for(const pathItem of paths.filter(item=>item.meridianId==='LI')){
   const dense=[];
   for(let i=0;i<pathItem.pointCodes.length-1;i++){
-    const codeA=pathItem.pointCodes[i],codeB=pathItem.pointCodes[i+1],a=pathItem.points[i],b=pathItem.points[i+1];
+    const a=pathItem.points[i],b=pathItem.points[i+1];
     if(i===0)dense.push(a);
-    const seqA=numericPointSequenceForBuild(codeA),seqB=numericPointSequenceForBuild(codeB),facial=seqA>=18&&seqB>=19;
-    if(facial){
-      for(const fraction of [.25,.5,.75]){
-        const p=[a[0]+(b[0]-a[0])*fraction,a[1]+(b[1]-a[1])*fraction,a[2]+(b[2]-a[2])*fraction];
-        const segName=codeA==='LI-18'&&fraction<.5?'neck':'head';
-        dense.push(projectBrowserToSegmentSurface(p,segName,pathItem.side).map(round));
-      }
+    for(const fraction of [.2,.4,.6,.8]){
+      const p=[a[0]+(b[0]-a[0])*fraction,a[1]+(b[1]-a[1])*fraction,a[2]+(b[2]-a[2])*fraction];
+      dense.push(projectRoutePoint(p,pathItem.side));
     }
     dense.push(b);
   }
   if(pathItem.pointCodes.length===1)dense.push(pathItem.points[0]);
   pathItem.points=dense;
-  pathItem.surfaceProjection='BodyParts3D FMA7163 facial surface-following';
+  pathItem.surfaceProjection='BodyParts3D FMA7163 full-route surface-following';
+  pathItem.surfaceProjectionStep='fifth-segment';
 }
 const siSegmentForPair=(a,b,fraction)=>{
   const seqA=numericPointSequenceForBuild(a),seqB=numericPointSequenceForBuild(b);
@@ -371,6 +382,27 @@ for(const pathItem of paths.filter(item=>item.meridianId==='SP')){
   pathItem.points=dense;
   pathItem.surfaceProjection='BodyParts3D FMA7163 surface-following densification';
   pathItem.surfaceProjectionStep='quarter-segment';
+}
+// The remaining licensed routes previously connected surface anchors with straight
+// chords. Those chords can pass through the body and disappear behind anatomy under
+// depth testing. Preserve source topology and anchor coordinates; only insert and
+// surface-project render vertices between adjacent points.
+for(const pathItem of paths.filter(item=>!item.surfaceProjection)){
+  const dense=[];
+  for(let i=0;i<pathItem.points.length-1;i++){
+    const a=pathItem.points[i],b=pathItem.points[i+1];
+    if(i===0)dense.push(a);
+    for(const fraction of [.2,.4,.6,.8]){
+      const p=[a[0]+(b[0]-a[0])*fraction,a[1]+(b[1]-a[1])*fraction,a[2]+(b[2]-a[2])*fraction];
+      dense.push(projectRoutePoint(p,pathItem.side));
+    }
+    dense.push(b);
+  }
+  if(pathItem.points.length===1)dense.push(pathItem.points[0]);
+  pathItem.points=dense;
+  pathItem.surfaceProjection='BodyParts3D FMA7163 fitted-segment surface-following';
+  pathItem.surfaceProjectionStep='fifth-segment';
+  pathItem.anchorCoordinatePolicy='source acupoint anchors and topology unchanged; interpolated render points surface-projected';
 }
 const codes=new Set(pointDoc.points.map(p=>canonicalCode(p.code))),topologyCodes=new Set(Object.values(topology.paths).flat(2).map(canonicalCode));
 const omitted=[...codes].filter(c=>!topologyCodes.has(c)).sort();
