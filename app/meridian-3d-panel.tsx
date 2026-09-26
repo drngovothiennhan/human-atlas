@@ -33,7 +33,7 @@ export default function Meridian3DPanel({drafts,selectedPointCode,studyCommand,o
   const [language,setLanguage]=useState<Language>('vi');
   const [meridians,setMeridians]=useState<Meridian[]>([]),[points,setPoints]=useState<Acupoint[]>([]);
   const [schematic,setSchematic]=useState<SchematicSpatial>({anchors:[],paths:[]});
-  const [activeMeridian,setActiveMeridian]=useState('SI'),[side,setSide]=useState<MeridianOverlaySide>('BOTH');
+  const [activeMeridian,setActiveMeridian]=useState<string>(ALL_MAIN_MERIDIANS),[side,setSide]=useState<MeridianOverlaySide>('BOTH');
   const autoSiSide=useRef(false),previousSide=useRef<MeridianOverlaySide>('BOTH');
   const [query,setQuery]=useState(''),[selected,setSelected]=useState<string|null>(null);
   const [loading,setLoading]=useState(true),[loadError,setLoadError]=useState(''),[loadAttempt,setLoadAttempt]=useState(0);
@@ -154,7 +154,7 @@ export default function Meridian3DPanel({drafts,selectedPointCode,studyCommand,o
   const selectedMeridianPoints=selectedRecord?points.filter(p=>p.meridianId===selectedRecord.meridianId).sort((a,b)=>a.sequence-b.sequence):[];
   const selectedIndex=selectedRecord?selectedMeridianPoints.findIndex(p=>p.code===selectedRecord.code):-1;
 
-  const prepareMeridianView=(id:string)=>{if(id!=='SI'){if(autoSiSide.current){setSide(previousSide.current);autoSiSide.current=false}return}if(!autoSiSide.current)previousSide.current=side;setSide('LEFT');autoSiSide.current=true;onStudyAction({view:'back'})};
+  const prepareMeridianView=(id:string)=>{if(id===ALL_MAIN_MERIDIANS){if(autoSiSide.current){setSide(previousSide.current);autoSiSide.current=false}onStudyAction({view:'three-quarter'});return}if(id!=='SI'){if(autoSiSide.current){setSide(previousSide.current);autoSiSide.current=false}return}if(!autoSiSide.current)previousSide.current=side;setSide('LEFT');autoSiSide.current=true;onStudyAction({view:'back'})};
   const selectMeridian=(id:string)=>{setActiveMeridian(id);setEnabled(true);setMotion(true);setShowMeridians(true);setQuery('');setSelected(null);onFocus(null);prepareMeridianView(id)};
   const focusPoint=(point:Acupoint)=>{
     setSelected(point.code);setActiveMeridian(point.meridianId);setEnabled(true);
