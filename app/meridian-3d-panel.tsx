@@ -33,7 +33,7 @@ export default function Meridian3DPanel({drafts,selectedPointCode,studyCommand,o
   const [language,setLanguage]=useState<Language>('vi');
   const [meridians,setMeridians]=useState<Meridian[]>([]),[points,setPoints]=useState<Acupoint[]>([]);
   const [schematic,setSchematic]=useState<SchematicSpatial>({anchors:[],paths:[]});
-  const [activeMeridian,setActiveMeridian]=useState('SI'),[side,setSide]=useState<MeridianOverlaySide>('BOTH');
+  const [activeMeridian,setActiveMeridian]=useState<string>(ALL_MAIN_MERIDIANS),[side,setSide]=useState<MeridianOverlaySide>('BOTH');
   const autoSiSide=useRef(false),previousSide=useRef<MeridianOverlaySide>('BOTH');
   const [query,setQuery]=useState(''),[selected,setSelected]=useState<string|null>(null);
   const [loading,setLoading]=useState(true),[loadError,setLoadError]=useState(''),[loadAttempt,setLoadAttempt]=useState(0);
@@ -154,7 +154,7 @@ export default function Meridian3DPanel({drafts,selectedPointCode,studyCommand,o
   const selectedMeridianPoints=selectedRecord?points.filter(p=>p.meridianId===selectedRecord.meridianId).sort((a,b)=>a.sequence-b.sequence):[];
   const selectedIndex=selectedRecord?selectedMeridianPoints.findIndex(p=>p.code===selectedRecord.code):-1;
 
-  const prepareMeridianView=(id:string)=>{if(id!=='SI'){if(autoSiSide.current){setSide(previousSide.current);autoSiSide.current=false}return}if(!autoSiSide.current)previousSide.current=side;setSide('LEFT');autoSiSide.current=true;onStudyAction({view:'back'})};
+  const prepareMeridianView=(id:string)=>{if(id===ALL_MAIN_MERIDIANS){if(autoSiSide.current){setSide(previousSide.current);autoSiSide.current=false}onStudyAction({view:'three-quarter'});return}if(id!=='SI'){if(autoSiSide.current){setSide(previousSide.current);autoSiSide.current=false}return}if(!autoSiSide.current)previousSide.current=side;setSide('LEFT');autoSiSide.current=true;onStudyAction({view:'back'})};
   const selectMeridian=(id:string)=>{setActiveMeridian(id);setEnabled(true);setMotion(true);setShowMeridians(true);setQuery('');setSelected(null);onFocus(null);prepareMeridianView(id)};
   const focusPoint=(point:Acupoint)=>{
     setSelected(point.code);setActiveMeridian(point.meridianId);setEnabled(true);
@@ -202,7 +202,7 @@ export default function Meridian3DPanel({drafts,selectedPointCode,studyCommand,o
         <div><span>Góc nhìn</span><button type="button" data-meridian-view="three-quarter" onClick={()=>onStudyAction({view:'three-quarter'})}>¾</button><button type="button" data-meridian-view="front" onClick={()=>onStudyAction({view:'front'})}>Trước</button><button type="button" data-meridian-view="side" onClick={()=>onStudyAction({view:'side'})}>Bên</button><button type="button" data-meridian-view="back" onClick={()=>onStudyAction({view:'back'})}>Sau</button></div>
         <div><span>Nền giải phẫu</span><button type="button" data-anatomy-preset="surface" onClick={()=>onStudyAction({anatomyPreset:'surface'})}>Bề mặt</button><button type="button" data-anatomy-preset="muscle-landmarks" onClick={()=>onStudyAction({anatomyPreset:'muscle-landmarks'})}>Cơ mốc</button><button type="button" data-anatomy-preset="skeleton" onClick={()=>onStudyAction({anatomyPreset:'skeleton'})}>Xương</button></div>
       </div>
-      <div className="meridian3d-exit-row"><Button variant="ghost" data-exit-meridians="true" onClick={()=>{setEnabled(false);setOpen(false);onFocus(null);onStudyAction({anatomyPreset:'surface',view:'three-quarter'})}}>Về giải phẫu</Button></div>
+      <div className="meridian3d-exit-row"><Button variant="ghost" data-exit-meridians="true" onClick={()=>{setEnabled(false);setOpen(false);setActiveMeridian(ALL_MAIN_MERIDIANS);setSide('BOTH');setSelected(null);setQuery('');onFocus(null);onStudyAction({anatomyPreset:'surface',view:'three-quarter'})}}>Về giải phẫu</Button></div>
       <div className="meridian3d-section-label">Hiệu ứng đường kinh</div>
       <div className="meridian3d-effect-controls" data-meridian3d-effect-controls="true" aria-label="Điều khiển hiệu ứng kinh lạc">
         <button type="button" data-effect-master="true" aria-pressed={enabled} className={enabled?'active':''} onClick={()=>setEnabled(v=>!v)}>Hiệu ứng: {enabled?'Bật':'Tắt'}</button>
