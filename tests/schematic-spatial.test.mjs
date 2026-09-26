@@ -44,6 +44,7 @@ test('licensed schematic spatial dataset stays unverified and complete',async()=
   }
   assert.ok(data.paths.length>=28);
   assert.ok(data.paths.every(p=>p.verificationStatus==='UNVERIFIED'&&p.sourceKind==='LICENSED_SCHEMATIC'&&p.points.length>=2));
+  assert.ok(data.paths.every(p=>p.surfaceProjection&&p.points.length>p.pointCodes.length),'every rendered route must add surface-projected controls to prevent depth-occluded straight chords');
   assert.deepEqual(data.methodology?.priority,['WHO_STANDARD_LOCATION_METHOD','TARA_ANATOMICAL_LANDMARKS','HIU_DOCUMENT_CORROBORATION','BODYPARTS3D_SKIN_PROJECTION']);
   assert.deepEqual(data.methodology?.research,['PMID:24761187','PMID:26101534']);
   for(const p of data.paths){
@@ -57,7 +58,7 @@ test('licensed schematic spatial dataset stays unverified and complete',async()=
   const stPath=data.paths.find(p=>p.meridianId==='ST'&&p.pointCodes?.includes('ST-1'));
   assert.ok(stPath,'ST path containing ST-1 must exist');
   assert.deepEqual(stPath.pointCodes.slice(0,2),['ST-ROUTE-ORIGIN','ST-1'],'ST route must begin at lateral-nose origin before ST-1');
-  assert.equal(stPath.points.length,stPath.pointCodes.length,'ST route origin must have a matching 3D point');
+  assert.equal(stPath.points.length,stPath.pointCodes.length+(stPath.pointCodes.length-1)*4,'ST route origin and each source point must retain matching five-point render groups');
   const calibratedCodes=['LU-10','LU-11','LI-20','ST-1','BL-1','TE-23','GB-1','CV-24','GV-28','ST-45','SI-9','SI-11','SI-12','SI-13'];
   assert.deepEqual(data.spatialOverrides?.slice().sort(),calibratedCodes.slice().sort(),'HIU facial/endpoint calibration set must stay explicit');
   for(const code of calibratedCodes){
@@ -106,8 +107,8 @@ test('licensed schematic spatial dataset stays unverified and complete',async()=
   const liPaths=data.paths.filter(p=>p.meridianId==='LI');
   assert.ok(liPaths.length>=2,'LI bilateral paths must exist');
   for(const p of liPaths){
-    assert.equal(p.surfaceProjection,'BodyParts3D FMA7163 facial surface-following','LI facial path must be surface-projected');
-    assert.ok(p.points.length>p.pointCodes.length,'LI facial render path must include surface-following points');
+    assert.equal(p.surfaceProjection,'BodyParts3D FMA7163 full-route surface-following','LI full route must be surface-projected');
+    assert.equal(p.points.length,p.pointCodes.length+(p.pointCodes.length-1)*4,'LI route must add four surface controls between consecutive anchors');
   }
   const siPaths=data.paths.filter(p=>p.meridianId==='SI');
   assert.equal(siPaths.length,2,'SI external course must remain bilateral');
@@ -175,6 +176,17 @@ test('licensed schematic spatial dataset stays unverified and complete',async()=
     const first=data.anchors.find(a=>a.pointCode==='SI-1'&&a.side===p.side),last=data.anchors.find(a=>a.pointCode==='SI-19'&&a.side===p.side);
     assert.deepEqual(p.points[0],[first.x,first.y,first.z],'SI-1 anchor must remain fixed');
     assert.deepEqual(p.points.at(-1),[last.x,last.y,last.z],'SI-19 anchor must remain fixed');
+  }
+  const gbPaths=data.paths.filter(p=>p.meridianId==='GB');
+  assert.equal(gbPaths.length,2,'GB external course must remain bilateral');
+  for(const p of gbPaths){
+    assert.equal(p.directionStart,'GB-1','GB course must start at GB-1');
+    assert.equal(p.directionEnd,'GB-44','GB course must end at GB-44');
+    assert.equal(p.pointCodes.length,44,'GB source topology must retain all 44 acupoints');
+    assert.deepEqual(p.pointCodes,Array.from({length:44},(_,i)=>'GB-'+(i+1)),'GB path must preserve canonical acupoint order');
+    assert.equal(p.points.length,216,'GB route must add four surface controls between consecutive anchors');
+    assert.equal(p.surfaceProjection,'BodyParts3D FMA7163 fitted-segment surface-following');
+    assert.equal(p.anchorCoordinatePolicy,'source acupoint anchors and topology unchanged; interpolated render points surface-projected');
   }
   for(const p of data.paths.filter(p=>['LEFT','RIGHT'].includes(p.side))){
     const sideSign=p.side==='LEFT'?-1:1;
