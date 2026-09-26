@@ -117,6 +117,7 @@ try{
   if(await evaluate("document.querySelectorAll('.meridian3d-controls select')[0]?.value")!=='ALL')throw new Error('Meridian panel must open with all 12 main meridians selected');
   if(await evaluate("document.querySelectorAll('.meridian3d-controls select')[1]?.value")!=='BOTH')throw new Error('Opening all 12 main meridians must show both sides by default');
   await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.sceneView==='three-quarter'&&document.querySelector('canvas')?.dataset.meridianId==='ALL'&&Number(document.querySelector('canvas')?.dataset.meridianSchematicPaths)>=12"),{label:'default three-quarter view with all 12 main meridians'});
+  if(await evaluate("!!document.querySelector('.explode-control')"))throw new Error('Explode bar must be hidden while the meridian diagram is enabled');
   await screenshot('meridians-all-default-three-quarter.png');
   console.log('SMOKE_DEFAULT_THREE_QUARTER_ALL_12_MERIDIANS_PASS');
   console.log('SMOKE_LOAD_FAILURE_RECOVERY_PASS');
@@ -418,6 +419,7 @@ try{
   await waitFor(()=>evaluate("!!document.querySelector('[data-meridian3d-panel=true]')"),{label:'reopen active meridian mode'});
   await evaluate("document.querySelector('[data-exit-meridians=true]')?.click()");
   await waitFor(()=>evaluate("document.querySelector('[data-meridian3d-launch=true]')?.getAttribute('aria-pressed')==='false'&&document.querySelector('canvas')?.dataset.meridianEffect==='off'&&document.querySelector('canvas')?.dataset.meridianFlowParticles==='0'&&document.querySelector('canvas')?.dataset.sceneView==='three-quarter'&&document.querySelector('canvas')?.dataset.visibleSystems==='integumentary'"),{label:'exit meridian mode clears animation and restores anatomy'});
+  if(!await evaluate("!!document.querySelector('.explode-control')"))throw new Error('Explode bar must return after leaving meridian mode');
   console.log('SMOKE_MERIDIAN_MODE_EXIT_PASS '+JSON.stringify({effectFrameBeforePanelClose}));
 
   await setViewport(1024,768,{touch:true});
