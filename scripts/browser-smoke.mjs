@@ -117,6 +117,7 @@ try{
   if(await evaluate("document.querySelectorAll('.meridian3d-controls select')[0]?.value")!=='ALL')throw new Error('Meridian panel must open with all 12 main meridians selected');
   if(await evaluate("document.querySelectorAll('.meridian3d-controls select')[1]?.value")!=='BOTH')throw new Error('Opening all 12 main meridians must show both sides by default');
   await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.sceneView==='three-quarter'&&document.querySelector('canvas')?.dataset.meridianId==='ALL'&&Number(document.querySelector('canvas')?.dataset.meridianSchematicPaths)>=12"),{label:'default three-quarter view with all 12 main meridians'});
+  await screenshot('meridians-all-default-three-quarter.png');
   console.log('SMOKE_DEFAULT_THREE_QUARTER_ALL_12_MERIDIANS_PASS');
   console.log('SMOKE_LOAD_FAILURE_RECOVERY_PASS');
   await waitFor(()=>evaluate("!!document.querySelector('[data-effect-master=true]')"),{label:'effect master control'});
@@ -376,6 +377,11 @@ try{
       const siRoute=await evaluate("({paths:Number(document.querySelector('canvas')?.dataset.meridianSchematicPaths||0),guidance:document.querySelector('[data-si-route-guidance=true]')?.textContent||''})");
       if(siRoute.paths!==1||!siRoute.guidance.includes('SI-1 → SI-19')||!siRoute.guidance.includes('không nối với kinh Thận')||!siRoute.guidance.includes('Mặc định chỉ hiện bên trái'))throw new Error('Small-intestine single-side route/guidance assertion failed: '+JSON.stringify(siRoute));
       console.log('SMOKE_SI_ROUTE_CONTINUITY_PASS '+JSON.stringify(siRoute));
+    }
+    if(code==='GB'){
+      const gbRoute=await evaluate("({id:document.querySelector('canvas')?.dataset.meridianId,paths:Number(document.querySelector('canvas')?.dataset.meridianSchematicPaths||0),anchors:Number(document.querySelector('canvas')?.dataset.meridianSchematicAnchors||0)})");
+      if(gbRoute.id!=='GB'||gbRoute.paths!==2||gbRoute.anchors!==88)throw new Error('Gallbladder route must show 44 bilateral anchors and both continuous paths: '+JSON.stringify(gbRoute));
+      await screenshot('meridian-gallbladder-course.png');
     }
     schematicCoverage.push({code,...await evaluate("({...document.querySelector('canvas').dataset})")});
   }
