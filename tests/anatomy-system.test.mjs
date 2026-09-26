@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import {normalizeAtlasSystems,isPrimarySurfacePart,PRIMARY_SURFACE_CONCEPT_ID,DEFAULT_LAYER_OPACITY} from '../app/anatomy.ts';
+import {normalizeAtlasSystems,isPrimarySurfacePart,PRIMARY_SURFACE_CONCEPT_ID,DEFAULT_LAYER_OPACITY,effectiveLayerOpacity} from '../app/anatomy.ts';
 
 const atlas=JSON.parse(fs.readFileSync(new URL('../public/models/atlas.json',import.meta.url),'utf8'));
 const muscleName=/\b(muscle|musculus|flexor|extensor|adductor|abductor|gastrocnemius|soleus|tibialis|fibularis|peroneus)\b/i;
@@ -30,5 +30,15 @@ test('surface preset has exactly one canonical skin mesh',()=>{
   assert.equal(primary.length,1,'default surface must render exactly one canonical skin structure');
   assert.equal(primary[0].name,'Skin');
   assert.equal(primary[0].conceptId,'FMA7163');
-  assert.equal(DEFAULT_LAYER_OPACITY.integumentary,100,'the single canonical skin mesh must render opaque by default');
+  assert.equal(DEFAULT_LAYER_OPACITY.integumentary,100,'single-surface view must start opaque');
+});
+
+test('skin becomes translucent only when combined with another anatomy layer, unless manually overridden',()=>{
+  const opacity={...DEFAULT_LAYER_OPACITY};
+  const surfaceOnly={visible:['integumentary'],opacity};
+  const combined={visible:['integumentary','skeletal'],opacity};
+  assert.equal(effectiveLayerOpacity(surfaceOnly,'integumentary'),100);
+  assert.equal(effectiveLayerOpacity(combined,'integumentary'),12);
+  assert.equal(effectiveLayerOpacity({...combined,opacityOverrides:['integumentary']},'integumentary'),100);
+  assert.equal(effectiveLayerOpacity({...combined,opacity:{...opacity,integumentary:45},opacityOverrides:['integumentary']},'integumentary'),45);
 });
