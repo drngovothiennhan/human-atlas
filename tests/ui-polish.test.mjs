@@ -43,7 +43,7 @@ test('meridian overlay uses anatomy depth occlusion and separated controls',asyn
   assert.ok(scene.includes("meridianDepthOcclusion='anatomy-surface'"));
   assert.match(scene,/depthTest:true,depthWrite:false/);
   assert.ok(scene.includes("side:surface?T.FrontSide:T.DoubleSide"));
-  assert.match(scene,/side:surface\?T\.FrontSide:T\.DoubleSide,transparent:false,opacity:1,depthWrite:true/);
+  assert.ok(scene.includes('effectiveLayerOpacity(s,system.id)/100'));
   assert.ok(scene.includes("surfaceFacePolicy='front-side-only'"));
   assert.ok(scene.includes("anatomyLoadPolicy='visible-chunks-on-demand'"));
   assert.ok(panel.includes('meridian3d-exit-row'));
@@ -70,13 +70,14 @@ test('anatomical layers expose independent opacity controls wired to Three.js ma
     readFile(new URL('../app/globals.css',import.meta.url),'utf8')
   ]);
   assert.ok(anatomy.includes('DEFAULT_LAYER_OPACITY'));
-  assert.ok(anatomy.includes('Object.fromEntries(SYSTEMS.map(system=>[system.id,100]))'));
+  assert.ok(anatomy.includes('system.id,100'));
+  assert.ok(anatomy.includes('function effectiveLayerOpacity'));
   assert.ok(page.includes('aria-label={`Độ mờ lớp ${s.name.toLowerCase()}`}'));
-  assert.ok(page.includes('opacity:{...v.opacity,[s.id]:value}'));
+  assert.ok(page.includes('opacityOverrides:[...new Set([...(v.opacityOverrides??[]),s.id])]'));
+  assert.ok(page.includes('effectiveLayerOpacity(state,s.id)'));
   assert.ok(scene.includes('lastState?.opacity!==s.opacity'));
   assert.ok(scene.includes('material.transparent=alpha<1'));
   assert.ok(scene.includes('material.depthWrite=alpha>=1'));
-  assert.match(scene,/side:surface\?T\.FrontSide:T\.DoubleSide,transparent:false,opacity:1,depthWrite:true/);
   assert.ok(scene.includes("material.side=system.id==='integumentary'?T.FrontSide:T.DoubleSide"));
   assert.ok(scene.includes('const loadedChunks=new Set<number>()'));
   assert.ok(scene.includes('initialAnatomyChunkCount'));
