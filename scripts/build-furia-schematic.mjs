@@ -1,6 +1,7 @@
 import {readFile,mkdir,writeFile} from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
+import {courseSpecs} from './meridian-courses.mjs';
 
 const ROOT=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const VENDOR=path.join(ROOT,'vendor','furia-acupuncture-3d');
@@ -438,6 +439,75 @@ for(const pathItem of paths.filter(item=>!item.surfaceProjection)){
   pathItem.surfaceProjection='BodyParts3D FMA7163 fitted-segment surface-following';
   pathItem.surfaceProjectionStep='fifth-segment';
   pathItem.anchorCoordinatePolicy='source acupoint anchors and topology unchanged; interpolated render points surface-projected';
+}
+
+// ---------------------------------------------------------------------------
+// Textbook course engine (scripts/meridian-courses.mjs).
+// Every waypoint becomes a ray (origin + direction) in the same anatomical DSL
+// used for acupoint anchors. Rays between consecutive waypoints are blended and
+// re-cast onto the BodyParts3D skin so a channel follows the body surface and
+// never zig-zags between sparse anchors. Acupoint anchors are NOT modified.
+const anchorSpecByCode=new Map(pointDoc.points.map(p=>[canonicalCode(p.code),p.anchor]));
+function rayOfSpec(spec){
+  if(spec.pt){const a=spatialOverrides[spec.pt]??anchorSpecByCode.get(spec.pt);if(!a)throw new Error('Unknown course point '+spec.pt);return rayOfSpec(a)}
+  if('struct'in spec){
+    const ref=structRef(spec.struct),longDir=spec.region?regionFrame(spec.region).long:null;let base=structAt(ref,spec.along??.5,longDir);
+    if(spec.toward){const other=structRef(spec.toward);base=add(base,mul(sub(structAt(other,spec.along??.5,longDir),base),spec.frac??.4))}
+    for(const [name,mm] of Object.entries(spec.shift??{}))base=add(base,mul(direction(name,spec.region),mm/1000));
+    return {base,d:unit(direction(spec.dir??'dorsal',spec.region)),limit:.45,out:0,cunLat:0};
+  }
+  if('arc_cun'in spec)return {fixed:scalpCast(spec)};
+  const s=segments[spec.seg],t=axialT(spec);let base,d;
+  if('az'in spec){const rad=spec.az*Math.PI/180;base=interior(s,t);d=unit(add(mul(s.eAnt,Math.cos(rad)),mul(s.eLat,Math.sin(rad))))}
+  else if('lat'in spec){base=interior(s,t);if(spec.face==='lateral'){d=(spec.lat??0)>=0?s.eLat:mul(s.eLat,-1)}else{base=add(base,mul(s.eLat,spec.lat*s.cunLat));d=spec.face==='posterior'?mul(s.eAnt,-1):s.eAnt}}
+  else throw new Error('Unsupported course waypoint '+JSON.stringify(spec));
+  return {base,d,limit:limitFor(s,base,d),out:spec.out??0,cunLat:s.cunLat};
+}
+function castRay(r){
+  if(r.fixed)return r.fixed;
+  let hit=castSource(r.base,r.d,r.limit);if(r.out)hit=add(hit,mul(unit(r.d),r.out*r.cunLat));return hit;
+}
+const lerp3=(a,b,t)=>[a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t,a[2]+(b[2]-a[2])*t];
+function buildCourseRight(waypoints,stepMeters=.012){
+  const rays=waypoints.map(rayOfSpec),hits=rays.map(castRay),out=[hits[0]],waypointIndex=[0];
+  for(let i=0;i<rays.length-1;i++){
+    const r0=rays[i],r1=rays[i+1],h0=hits[i],h1=hits[i+1],n=Math.max(1,Math.ceil(norm(sub(h1,h0))/stepMeters));
+    for(let k=1;k<n;k++){
+      const f=k/n;
+      if(r0.fixed||r1.fixed||dot(r0.d,r1.d)<.3){out.push(fromBrowser(projectRoutePoint(toBrowser(lerp3(h0,h1,f)),'RIGHT')));continue}
+      out.push(castRay({base:lerp3(r0.base,r1.base,f),d:unit(lerp3(r0.d,r1.d,f)),limit:Math.max(r0.limit,r1.limit),out:r0.out+(r1.out-r0.out)*f,cunLat:r0.cunLat||r1.cunLat}));
+    }
+    out.push(h1);waypointIndex.push(out.length-1);
+  }
+  return {points:out,waypointIndex};
+}
+function smoothCourse({points,waypointIndex},passes=2){
+  let cur=points.map(p=>p.slice());const fixed=new Set(waypointIndex);
+  for(let pass=0;pass<passes;pass++){
+    const next=cur.map(p=>p.slice());
+    for(let i=1;i<cur.length-1;i++){if(fixed.has(i))continue;next[i]=[0,1,2].map(a=>(cur[i-1][a]+2*cur[i][a]+cur[i+1][a])/4)}
+    cur=next;
+  }
+  return cur;
+}
+const courseMeridianOrder=Object.keys(topology.paths).map(canonicalChannel);
+const generatedCourses=[];
+for(const meridianId of courseMeridianOrder){
+  const specs=courseSpecs[meridianId];if(!specs)continue;
+  const mid=meridianId==='CV'||meridianId==='GV',sides=mid?['MIDLINE']:['RIGHT','LEFT'];
+  specs.forEach((spec,gi)=>{
+    const built=buildCourseRight(spec.waypoints),smooth=smoothCourse(built);
+    for(const side of sides){
+      const points=smooth.map(src=>{const b=toBrowser(src);return [round(side==='LEFT'?-b[0]:b[0]),round(b[1]),round(b[2])]});
+      generatedCourses.push({meridianId,side,groupIndex:gi,courseId:spec.id,pointCodes:spec.codes.slice(),points,verificationStatus:'UNVERIFIED',sourceKind:'LICENSED_SCHEMATIC',flowDirection:'SOURCE_ORDER',directionStart:spec.codes[0],directionEnd:spec.codes.at(-1),surfaceProjection:'BodyParts3D FMA7163 textbook-course surface-following',surfaceProjectionStep:'12mm',courseSource:'HIU-TEXTBOOK-COURSE-2026-09',anchorCoordinatePolicy:'acupoint anchors unchanged; drawn course follows the textbook route, not straight chords between anchors',...(spec.note?{courseRule:spec.note}:{})});
+    }
+  });
+}
+{
+  const covered=new Set(generatedCourses.map(item=>item.meridianId)),legacy=paths.filter(item=>!covered.has(item.meridianId));
+  paths.length=0;paths.push(...legacy,...generatedCourses);
+  const rank=id=>courseMeridianOrder.indexOf(id),sideRank={RIGHT:0,LEFT:1,MIDLINE:0};
+  paths.sort((a,b)=>rank(a.meridianId)-rank(b.meridianId)||sideRank[a.side]-sideRank[b.side]||a.groupIndex-b.groupIndex);
 }
 const codes=new Set(pointDoc.points.map(p=>canonicalCode(p.code))),topologyCodes=new Set(Object.values(topology.paths).flat(2).map(canonicalCode));
 const omitted=[...codes].filter(c=>!topologyCodes.has(c)).sort();
