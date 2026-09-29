@@ -1,0 +1,237 @@
+{
+  "schemaVersion": "0.1.0",
+  "status": "DRAFT_NOT_APPROVED",
+  "meridianId": "LU",
+  "sourcePolicy": "Chỉ trích từ sách Ngô Trung Triều được người dùng cung cấp; không dùng dữ liệu vendor.",
+  "codeMapping": {
+    "status": "PROVISIONAL_SEQUENCE_MAPPING",
+    "note": "Sách không in mã LU-1…LU-11. Mã trong bản nháp được ghép lần lượt theo thứ tự 11 nhãn trên đường nét liền trong hình trang in 7–9 để đối chiếu danh mục Atlas; đây là ánh xạ suy luận, không phải mã in trong sách."
+  },
+  "sourceBook": {
+    "title": "Huyệt vị kinh lạc cơ thể người",
+    "author": "Ngô Trung Triều",
+    "pages": "Trang in 7–9; PDF 9–11"
+  },
+  "points": [
+    {
+      "code": "LU-1",
+      "name": "Trung phủ",
+      "originalLocation": "Dưới huyệt Vân môn 1,6 tấc, từ giữa ngực đi ra hai bên đều 6 tấc, trong chỗ lõm sờ thấy mạch đập. Lấy ở ngoài Nhâm mạch 6 tấc, trong khoảng gian xương sườn thứ 2, huyệt ở sát bờ trên xương sườn thứ 3.",
+      "landmarks": [
+        "Vân môn",
+        "đường giữa ngực",
+        "ngoài Nhâm mạch",
+        "gian xương sườn thứ 2",
+        "bờ trên xương sườn thứ 3",
+        "chỗ lõm sờ thấy mạch đập"
+      ],
+      "cun": [
+        "dưới Vân môn 1,6 tấc",
+        "từ giữa ngực ra mỗi bên 6 tấc",
+        "ngoài Nhâm mạch 6 tấc"
+      ],
+      "sequence": 1,
+      "source": {
+        "printPage": 7,
+        "pdfPage": 9
+      }
+    },
+    {
+      "code": "LU-2",
+      "name": "Vân môn",
+      "originalLocation": "Bờ dưới xương đòn gánh, nơi chỗ lõm ngang cơ ngực to, giữa cơ Delta, nơi có gian xương sườn 1, cách đường ngực 0,6 tấc, trên huyệt Trung phủ 1,6 tấc.",
+      "landmarks": [
+        "bờ dưới xương đòn gánh",
+        "chỗ lõm ngang cơ ngực to",
+        "giữa cơ Delta",
+        "gian xương sườn 1",
+        "đường ngực",
+        "Trung phủ"
+      ],
+      "cun": [
+        "cách đường ngực 0,6 tấc",
+        "trên Trung phủ 1,6 tấc"
+      ],
+      "sequence": 2,
+      "source": {
+        "printPage": 7,
+        "pdfPage": 9
+      }
+    },
+    {
+      "code": "LU-3",
+      "name": "Thiên phủ",
+      "originalLocation": "Ở bờ trong bắp cánh tay trong, dưới nếp nách trước 3 tấc, nơi bờ ngoài cơ 2 đầu cánh tay, trên huyệt Xích trạch khoảng 6 tấc.",
+      "landmarks": [
+        "bờ trong bắp cánh tay trong",
+        "nếp nách trước",
+        "bờ ngoài cơ 2 đầu cánh tay",
+        "Xích trạch"
+      ],
+      "cun": [
+        "dưới nếp nách trước 3 tấc",
+        "trên Xích trạch khoảng 6 tấc"
+      ],
+      "sequence": 3,
+      "source": {
+        "printPage": 7,
+        "pdfPage": 9
+      }
+    },
+    {
+      "code": "LU-4",
+      "name": "Hiệp bạch",
+      "originalLocation": "Ở mặt trong cánh tay, nơi gặp nhau của bờ ngoài cơ 2 đầu cánh tay với đường ngang dưới nếp nách trước 4 tấc, trên khớp khuỷu (Xích trạch) 5 tấc, dưới huyệt Thiên phủ 1 tấc.",
+      "landmarks": [
+        "mặt trong cánh tay",
+        "bờ ngoài cơ 2 đầu cánh tay",
+        "đường ngang dưới nếp nách trước",
+        "khớp khuỷu/Xích trạch",
+        "Thiên phủ"
+      ],
+      "cun": [
+        "dưới nếp nách trước 4 tấc",
+        "trên khớp khuỷu/Xích trạch 5 tấc",
+        "dưới Thiên phủ 1 tấc"
+      ],
+      "sequence": 4,
+      "source": {
+        "printPage": 8,
+        "pdfPage": 10
+      }
+    },
+    {
+      "code": "LU-5",
+      "name": "Xích trạch",
+      "originalLocation": "Gấp nếp khuỷu tay lại, huyệt ở chỗ lõm bờ ngoài gân cơ 2 đầu cánh tay, bờ trong phần trên cơ ngửa dài, cơ cánh tay trước.",
+      "landmarks": [
+        "nếp khuỷu tay",
+        "chỗ lõm",
+        "bờ ngoài gân cơ 2 đầu cánh tay",
+        "bờ trong phần trên cơ ngửa dài",
+        "cơ cánh tay trước"
+      ],
+      "cun": [],
+      "sequence": 5,
+      "source": {
+        "printPage": 8,
+        "pdfPage": 10
+      }
+    },
+    {
+      "code": "LU-6",
+      "name": "Không tối",
+      "nameNote": "Giữ đúng nhãn in trong sách là “Không tối”; không tự đổi thành cách viết khác.",
+      "originalLocation": "Ở bờ ngoài cẳng tay, trên cổ tay 7 tấc, nơi gặp nhau của bờ trong cơ ngửa dài hay bờ ngoài của cơ gan với đường ngang trên khớp cổ tay 7 tấc, trên đường thẳng nối huyệt Xích trạch và Thái uyên.",
+      "landmarks": [
+        "bờ ngoài cẳng tay",
+        "bờ trong cơ ngửa dài",
+        "bờ ngoài của “cơ gan” (nguyên văn; cụm này cần xác nhận)",
+        "đường ngang trên khớp cổ tay",
+        "đường nối Xích trạch–Thái uyên"
+      ],
+      "cun": [
+        "trên cổ tay 7 tấc",
+        "đường ngang trên khớp cổ tay 7 tấc"
+      ],
+      "sequence": 6,
+      "source": {
+        "printPage": 8,
+        "pdfPage": 10
+      },
+      "uncertainties": [
+        "Scan đọc được cụm “cơ gan”; giữ nguyên, không hiệu đính hoặc diễn giải."
+      ]
+    },
+    {
+      "code": "LU-7",
+      "name": "Liệt khuyết",
+      "originalLocation": "Dưới đầu xương quay nối với thân xương, cách lằn chỉ ngang cổ tay 1,5 tấc. Hoặc chéo 2 ngón tay trỏ và ngón tay cái của 2 bàn tay với nhau, huyệt ở chỗ lõm ngay dưới đầu ngón tay trỏ.",
+      "landmarks": [
+        "đầu xương quay nối với thân xương",
+        "lằn chỉ ngang cổ tay",
+        "chỗ lõm dưới đầu ngón tay trỏ khi chéo hai ngón tay"
+      ],
+      "cun": [
+        "cách lằn chỉ ngang cổ tay 1,5 tấc"
+      ],
+      "sequence": 7,
+      "source": {
+        "printPage": 8,
+        "pdfPage": 10
+      }
+    },
+    {
+      "code": "LU-8",
+      "name": "Kinh cừ",
+      "originalLocation": "Trên lằn chỉ cổ tay 1 tấc, ở mặt trong đầu dưới xương quay.",
+      "landmarks": [
+        "lằn chỉ cổ tay",
+        "mặt trong đầu dưới xương quay"
+      ],
+      "cun": [
+        "trên lằn chỉ cổ tay 1 tấc"
+      ],
+      "sequence": 8,
+      "source": {
+        "printPage": 9,
+        "pdfPage": 11
+      }
+    },
+    {
+      "code": "LU-9",
+      "name": "Thái uyên",
+      "originalLocation": "Trên lằn chỉ ngang cổ tay, nơi chỗ lõm trên động mạch tay quay, dưới huyệt là rãnh mạch tay quay.",
+      "landmarks": [
+        "lằn chỉ ngang cổ tay",
+        "chỗ lõm trên động mạch tay quay",
+        "rãnh mạch tay quay"
+      ],
+      "cun": [],
+      "sequence": 9,
+      "source": {
+        "printPage": 9,
+        "pdfPage": 11
+      }
+    },
+    {
+      "code": "LU-10",
+      "name": "Ngư tế",
+      "originalLocation": "Ở mặt trong lòng bàn tay, trung điểm giữa xương bàn ngón tay cái, nơi phần tiếp giáp lằn da đổi màu. Gấp ngón tay trỏ vào lòng bàn tay, đầu ngón tay trỏ chạm vào chỗ nào ở mô ngón tay cái, đó là huyệt.",
+      "landmarks": [
+        "mặt trong lòng bàn tay",
+        "xương bàn ngón tay cái",
+        "ranh giới lằn da đổi màu",
+        "mô ngón tay cái"
+      ],
+      "cun": [],
+      "sequence": 10,
+      "source": {
+        "printPage": 9,
+        "pdfPage": 11
+      }
+    },
+    {
+      "code": "LU-11",
+      "name": "Thiếu thương",
+      "originalLocation": "Tại bờ ngoài ngón tay cái, cách góc móng tay 0,1 tấc về phía tay quay. Hoặc huyệt nằm ở nơi gặp nhau tiếp giáp Dagan – mu tay và đường ngang qua góc chân móng ngón tay cái.",
+      "landmarks": [
+        "bờ ngoài ngón tay cái",
+        "góc móng tay",
+        "ranh tiếp giáp Dagan–mu tay",
+        "đường ngang qua góc chân móng"
+      ],
+      "cun": [
+        "cách góc móng tay 0,1 tấc về phía tay quay"
+      ],
+      "sequence": 11,
+      "source": {
+        "printPage": 9,
+        "pdfPage": 11
+      },
+      "uncertainties": [
+        "Sách nêu hai cách mô tả vị trí; giữ cả hai, không tự chọn một."
+      ]
+    }
+  ]
+}
