@@ -1,0 +1,100 @@
+{
+  "schemaVersion": "0.1.0",
+  "status": "DRAFT_NOT_APPROVED",
+  "meridianId": "LU",
+  "sourceBook": {
+    "title": "Huyệt vị kinh lạc cơ thể người",
+    "author": "Ngô Trung Triều",
+    "pages": "Trang in 7, PDF 9"
+  },
+  "legend": {
+    "solid": "Nét liền: bản kinh có huyệt đi qua.",
+    "dashed": "Nét đứt: bản kinh không có huyệt đi qua.",
+    "source": {
+      "printPage": 7,
+      "pdfPage": 9
+    }
+  },
+  "sourceRouteText": {
+    "quotation": "Thủ thái âm Phế kinh là khởi nguồn của 12 kinh mạch tuần hành. Kinh mạch tuần hành nối liền với phế tạng, lại hướng xuống dưới liên hệ với đại tràng. Cho nên, phế với đại tràng là tạng phủ biểu lý với nhau. Phế tạng có vị trí cao nhất trong lục phủ ngũ tạng, hình dạng giống như cái lồng của chiến xa thời Chiến quốc, nên còn được gọi là “lục phủ ngũ tạng chi hoa cái”.",
+    "source": {
+      "printPage": 7,
+      "pdfPage": 9
+    },
+    "note": "Đoạn in nghiêng này mô tả mối liên hệ tạng phủ; sách không có trong đoạn này một mô tả bằng văn xuôi liệt kê toàn bộ đường kinh theo thứ tự huyệt."
+  },
+  "surfaceRoute": {
+    "lineType": "SOLID",
+    "evidence": "Hình trang in 7–9 thể hiện đường nét liền qua các nhãn huyệt; theo chú giải trang in 7, nét liền biểu thị có huyệt đi qua.",
+    "pointNamesInPrintedDiagram": [
+      "Trung phủ",
+      "Vân môn",
+      "Thiên phủ",
+      "Hiệp bạch",
+      "Xích trạch",
+      "Không tối",
+      "Liệt khuyết",
+      "Kinh cừ",
+      "Thái uyên",
+      "Ngư tế",
+      "Thiếu thương"
+    ],
+    "provisionalCodes": [
+      "LU-1",
+      "LU-2",
+      "LU-3",
+      "LU-4",
+      "LU-5",
+      "LU-6",
+      "LU-7",
+      "LU-8",
+      "LU-9",
+      "LU-10",
+      "LU-11"
+    ],
+    "codeMappingNote": "Sách không in mã LU. Các mã tạm ghép theo thứ tự nhãn trên đường nét liền; cần giữ trạng thái ánh xạ tạm.",
+    "source": {
+      "printPages": "7–9",
+      "pdfPages": "9–11"
+    }
+  },
+  "deepRoute": {
+    "lineType": "DASHED",
+    "evidence": "Hình trang in 7 (PDF 9) có các đoạn nét đứt trong thân và vùng cơ quan; theo chú giải, nét đứt là đoạn không có huyệt đi qua.",
+    "visibleRegions": [
+      "vùng Trung tiêu",
+      "vùng Phế",
+      "vùng hầu/khí quản",
+      "vùng Đại tràng"
+    ],
+    "direction": "NOT_RESOLVED_FROM_SOURCE",
+    "source": {
+      "printPage": 7,
+      "pdfPage": 9
+    },
+    "observation": "Các đường nối và mũi tên đỏ trong hình được giữ làm chứng cứ hình ảnh; sách không chú giải riêng chiều của từng đoạn nét đứt."
+  },
+  "textFigureDirectionEvidence": [
+    {
+      "kind": "TEXT",
+      "quotation": "Kinh mạch tuần hành nối liền với phế tạng, lại hướng xuống dưới liên hệ với đại tràng.",
+      "directionClaim": "Từ Phế hướng xuống liên hệ Đại tràng.",
+      "source": {
+        "printPage": 7,
+        "pdfPage": 9
+      }
+    },
+    {
+      "kind": "FIGURE",
+      "observation": "Hình có mũi tên đỏ hướng lên trên cạnh vùng Đại tràng; hình cũng có mũi tên đỏ hướng xuống ở vùng Trung tiêu.",
+      "directionClaim": "Nếu mũi tên biểu thị chiều tuần hành, mũi tên vùng Đại tràng hướng lên không cùng chiều với câu chữ “hướng xuống”.",
+      "status": "POTENTIAL_TEXT_FIGURE_CONFLICT_NEEDS_REVIEW",
+      "source": {
+        "printPage": 7,
+        "pdfPage": 9
+      }
+    }
+  ],
+  "branches": "TÀI LIỆU KHÔNG NÊU nhánh riêng bằng văn xuôi trong đoạn trích; không tự gắn nhãn nhánh.",
+  "noCoordinates": true
+}
