@@ -76,9 +76,8 @@ test('licensed schematic spatial dataset stays unverified and complete',async()=
   const luPaths=data.paths.filter(p=>p.meridianId==='LU');
   assert.ok(luPaths.length>=2,'LU bilateral paths must exist');
   for(const p of luPaths){
-    assert.equal(p.surfaceProjection,'BodyParts3D FMA7163 lung-channel surface-following','LU path must stay surface-projected on the anterior/radial course');
-    assert.equal(p.surfaceProjectionStep,'fifth-segment','LU surface-following density must stay explicit');
-    assert.equal(p.handProjection,'anchor-preserving LU-9 -> LU-10 -> LU-11 thumb course','LU hand route must not be reprojected onto the generic hand axis');
+    assert.equal(p.surfaceProjection,'BodyParts3D FMA7163 textbook-course surface-following','LU path must stay surface-projected on the anterior/radial course');
+    assert.equal(p.courseSource,'HIU-TEXTBOOK-COURSE-2026-09');
     assert.ok(p.points.length>p.pointCodes.length,'LU render path must include surface-following control points');
     assert.equal(p.pointCodes[0],'LU-1','LU route must begin at Trung phủ');
     assert.equal(p.pointCodes.at(-1),'LU-11','LU route must terminate at Thiếu thương');

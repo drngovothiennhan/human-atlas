@@ -107,9 +107,9 @@
       "sourceMeridianId": "LU",
       "sequence": 2,
       "side": "RIGHT",
-      "x": 0.12414,
-      "y": 1.383156,
-      "z": 0.046688,
+      "x": 0.127962,
+      "y": 1.375403,
+      "z": 0.049195,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "anchored",
@@ -136,7 +136,8 @@
             "uri": "http://uri.interlex.org/base/ilx_0795286"
           }
         ]
-      }
+      },
+      "snappedToCourseMm": 9
     },
     {
       "pointCode": "LU-2",
@@ -145,9 +146,9 @@
       "sourceMeridianId": "LU",
       "sequence": 2,
       "side": "LEFT",
-      "x": -0.12414,
-      "y": 1.383156,
-      "z": 0.046688,
+      "x": -0.127962,
+      "y": 1.375403,
+      "z": 0.049195,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "anchored",
@@ -174,7 +175,8 @@
             "uri": "http://uri.interlex.org/base/ilx_0795286"
           }
         ]
-      }
+      },
+      "snappedToCourseMm": 9
     },
     {
       "pointCode": "LU-3",
@@ -183,9 +185,9 @@
       "sourceMeridianId": "LU",
       "sequence": 3,
       "side": "RIGHT",
-      "x": 0.217892,
-      "y": 1.257129,
-      "z": 0.006869,
+      "x": 0.211486,
+      "y": 1.253762,
+      "z": 0.011601,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "anchored",
@@ -204,7 +206,8 @@
             "uri": "http://uri.interlex.org/base/ilx_0795287"
           }
         ]
-      }
+      },
+      "snappedToCourseMm": 8.6
     },
     {
       "pointCode": "LU-3",
@@ -213,9 +216,9 @@
       "sourceMeridianId": "LU",
       "sequence": 3,
       "side": "LEFT",
-      "x": -0.217892,
-      "y": 1.257129,
-      "z": 0.006869,
+      "x": -0.211486,
+      "y": 1.253762,
+      "z": 0.011601,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "anchored",
@@ -234,7 +237,8 @@
             "uri": "http://uri.interlex.org/base/ilx_0795287"
           }
         ]
-      }
+      },
+      "snappedToCourseMm": 8.6
     },
     {
       "pointCode": "LU-4",
@@ -243,9 +247,9 @@
       "sourceMeridianId": "LU",
       "sequence": 4,
       "side": "RIGHT",
-      "x": 0.221425,
-      "y": 1.231032,
-      "z": 0.005192,
+      "x": 0.219115,
+      "y": 1.230065,
+      "z": 0.006972,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "anchored",
@@ -264,7 +268,8 @@
             "uri": "http://uri.interlex.org/base/ilx_0795287"
           }
         ]
-      }
+      },
+      "snappedToCourseMm": 3.1
     },
     {
       "pointCode": "LU-4",
@@ -273,9 +278,9 @@
       "sourceMeridianId": "LU",
       "sequence": 4,
       "side": "LEFT",
-      "x": -0.221425,
-      "y": 1.231032,
-      "z": 0.005192,
+      "x": -0.219115,
+      "y": 1.230065,
+      "z": 0.006972,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "anchored",
@@ -294,7 +299,8 @@
             "uri": "http://uri.interlex.org/base/ilx_0795287"
           }
         ]
-      }
+      },
+      "snappedToCourseMm": 3.1
     },
     {
       "pointCode": "LU-5",
@@ -303,9 +309,9 @@
       "sourceMeridianId": "LU",
       "sequence": 5,
       "side": "RIGHT",
-      "x": 0.249885,
-      "y": 1.111565,
-      "z": -0.000813,
+      "x": 0.24773,
+      "y": 1.111098,
+      "z": 0.001248,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "anchored",
@@ -324,7 +330,8 @@
             "uri": "http://uri.interlex.org/base/ilx_0795332"
           }
         ]
-      }
+      },
+      "snappedToCourseMm": 3
     },
     {
       "pointCode": "LU-5",
@@ -333,9 +340,9 @@
       "sourceMeridianId": "LU",
       "sequence": 5,
       "side": "LEFT",
-      "x": -0.249885,
-      "y": 1.111565,
-      "z": -0.000813,
+      "x": -0.24773,
+      "y": 1.111098,
+      "z": 0.001248,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "anchored",
@@ -354,7 +361,8 @@
             "uri": "http://uri.interlex.org/base/ilx_0795332"
           }
         ]
-      }
+      },
+      "snappedToCourseMm": 3
     },
     {
       "pointCode": "LU-6",
@@ -363,9 +371,9 @@
       "sourceMeridianId": "LU",
       "sequence": 6,
       "side": "RIGHT",
-      "x": 0.265257,
-      "y": 1.01035,
-      "z": 0.007397,
+      "x": 0.266263,
+      "y": 1.010465,
+      "z": 0.006588,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "anchored",
@@ -380,7 +388,8 @@
             "uri": "http://uri.interlex.org/base/ilx_0795334"
           }
         ]
-      }
+      },
+      "snappedToCourseMm": 1.3
     },
     {
       "pointCode": "LU-6",
@@ -389,9 +398,9 @@
       "sourceMeridianId": "LU",
       "sequence": 6,
       "side": "LEFT",
-      "x": -0.265257,
-      "y": 1.01035,
-      "z": 0.007397,
+      "x": -0.266263,
+      "y": 1.010465,
+      "z": 0.006588,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "anchored",
@@ -406,7 +415,8 @@
             "uri": "http://uri.interlex.org/base/ilx_0795334"
           }
         ]
-      }
+      },
+      "snappedToCourseMm": 1.3
     },
     {
       "pointCode": "LU-7",
@@ -415,9 +425,9 @@
       "sourceMeridianId": "LU",
       "sequence": 7,
       "side": "RIGHT",
-      "x": 0.280882,
-      "y": 0.897249,
-      "z": 0.00908,
+      "x": 0.283207,
+      "y": 0.899141,
+      "z": 0.014978,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "anchored",
@@ -440,7 +450,8 @@
             "uri": "http://uri.interlex.org/base/ilx_0795334"
           }
         ]
-      }
+      },
+      "snappedToCourseMm": 6.6
     },
     {
       "pointCode": "LU-7",
@@ -449,9 +460,9 @@
       "sourceMeridianId": "LU",
       "sequence": 7,
       "side": "LEFT",
-      "x": -0.280882,
-      "y": 0.897249,
-      "z": 0.00908,
+      "x": -0.283207,
+      "y": 0.899141,
+      "z": 0.014978,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "anchored",
@@ -474,7 +485,8 @@
             "uri": "http://uri.interlex.org/base/ilx_0795334"
           }
         ]
-      }
+      },
+      "snappedToCourseMm": 6.6
     },
     {
       "pointCode": "LU-8",
@@ -483,9 +495,9 @@
       "sourceMeridianId": "LU",
       "sequence": 8,
       "side": "RIGHT",
-      "x": 0.283911,
-      "y": 0.889344,
-      "z": 0.019241,
+      "x": 0.286892,
+      "y": 0.890405,
+      "z": 0.018244,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "anchored",
@@ -508,7 +520,8 @@
             "uri": "http://uri.interlex.org/base/ilx_0795334"
           }
         ]
-      }
+      },
+      "snappedToCourseMm": 3.3
     },
     {
       "pointCode": "LU-8",
@@ -517,9 +530,9 @@
       "sourceMeridianId": "LU",
       "sequence": 8,
       "side": "LEFT",
-      "x": -0.283911,
-      "y": 0.889344,
-      "z": 0.019241,
+      "x": -0.286892,
+      "y": 0.890405,
+      "z": 0.018244,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "anchored",
@@ -542,7 +555,8 @@
             "uri": "http://uri.interlex.org/base/ilx_0795334"
           }
         ]
-      }
+      },
+      "snappedToCourseMm": 3.3
     },
     {
       "pointCode": "LU-9",
@@ -551,9 +565,9 @@
       "sourceMeridianId": "LU",
       "sequence": 9,
       "side": "RIGHT",
-      "x": 0.292645,
-      "y": 0.876093,
-      "z": 0.019049,
+      "x": 0.2951,
+      "y": 0.877896,
+      "z": 0.021566,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "anchored",
@@ -584,7 +598,8 @@
             "uri": "http://purl.obolibrary.org/obo/UBERON_0001404"
           }
         ]
-      }
+      },
+      "snappedToCourseMm": 4
     },
     {
       "pointCode": "LU-9",
@@ -593,9 +608,9 @@
       "sourceMeridianId": "LU",
       "sequence": 9,
       "side": "LEFT",
-      "x": -0.292645,
-      "y": 0.876093,
-      "z": 0.019049,
+      "x": -0.2951,
+      "y": 0.877896,
+      "z": 0.021566,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "anchored",
@@ -626,7 +641,8 @@
             "uri": "http://purl.obolibrary.org/obo/UBERON_0001404"
           }
         ]
-      }
+      },
+      "snappedToCourseMm": 4
     },
     {
       "pointCode": "LU-10",
@@ -635,9 +651,9 @@
       "sourceMeridianId": "LU",
       "sequence": 10,
       "side": "RIGHT",
-      "x": 0.308897,
-      "y": 0.825429,
-      "z": 0.045956,
+      "x": 0.308748,
+      "y": 0.826281,
+      "z": 0.047247,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "structural",
@@ -663,7 +679,8 @@
         "label": "Theo tài liệu Ngô Trung Triều · PDF tr. 9–11",
         "evidenceType": "VISUAL_LOCATION_REFERENCE",
         "spatialStatus": "DOCUMENT_REFERENCED_2D"
-      }
+      },
+      "snappedToCourseMm": 1.6
     },
     {
       "pointCode": "LU-10",
@@ -672,9 +689,9 @@
       "sourceMeridianId": "LU",
       "sequence": 10,
       "side": "LEFT",
-      "x": -0.308897,
-      "y": 0.825429,
-      "z": 0.045956,
+      "x": -0.308748,
+      "y": 0.826281,
+      "z": 0.047247,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "structural",
@@ -700,7 +717,8 @@
         "label": "Theo tài liệu Ngô Trung Triều · PDF tr. 9–11",
         "evidenceType": "VISUAL_LOCATION_REFERENCE",
         "spatialStatus": "DOCUMENT_REFERENCED_2D"
-      }
+      },
+      "snappedToCourseMm": 1.6
     },
     {
       "pointCode": "LU-11",
@@ -851,9 +869,9 @@
       "sourceMeridianId": "LI",
       "sequence": 2,
       "side": "RIGHT",
-      "x": 0.302572,
-      "y": 0.765977,
-      "z": 0.051564,
+      "x": 0.30441,
+      "y": 0.76682,
+      "z": 0.049828,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "structural",
@@ -869,7 +887,7 @@
           }
         ]
       },
-      "snappedToCourseMm": 9
+      "snappedToCourseMm": 8.3
     },
     {
       "pointCode": "LI-2",
@@ -878,9 +896,9 @@
       "sourceMeridianId": "LI",
       "sequence": 2,
       "side": "LEFT",
-      "x": -0.302572,
-      "y": 0.765977,
-      "z": 0.051564,
+      "x": -0.30441,
+      "y": 0.76682,
+      "z": 0.049828,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "structural",
@@ -896,7 +914,7 @@
           }
         ]
       },
-      "snappedToCourseMm": 9
+      "snappedToCourseMm": 8.3
     },
     {
       "pointCode": "LI-3",
@@ -905,9 +923,9 @@
       "sourceMeridianId": "LI",
       "sequence": 3,
       "side": "RIGHT",
-      "x": 0.303797,
-      "y": 0.771705,
-      "z": 0.051821,
+      "x": 0.306639,
+      "y": 0.771297,
+      "z": 0.049342,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "structural",
@@ -923,7 +941,7 @@
           }
         ]
       },
-      "snappedToCourseMm": 9
+      "snappedToCourseMm": 8.4
     },
     {
       "pointCode": "LI-3",
@@ -932,9 +950,9 @@
       "sourceMeridianId": "LI",
       "sequence": 3,
       "side": "LEFT",
-      "x": -0.303797,
-      "y": 0.771705,
-      "z": 0.051821,
+      "x": -0.306639,
+      "y": 0.771297,
+      "z": 0.049342,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "structural",
@@ -950,7 +968,7 @@
           }
         ]
       },
-      "snappedToCourseMm": 9
+      "snappedToCourseMm": 8.4
     },
     {
       "pointCode": "LI-4",
@@ -6891,9 +6909,9 @@
       "sourceMeridianId": "SI",
       "sequence": 2,
       "side": "RIGHT",
-      "x": 0.235666,
-      "y": 0.768882,
-      "z": 0.062953,
+      "x": 0.23535,
+      "y": 0.769598,
+      "z": 0.062724,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "structural",
@@ -6922,9 +6940,9 @@
       "sourceMeridianId": "SI",
       "sequence": 2,
       "side": "LEFT",
-      "x": -0.235666,
-      "y": 0.768882,
-      "z": 0.062953,
+      "x": -0.23535,
+      "y": 0.769598,
+      "z": 0.062724,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "structural",
@@ -6953,9 +6971,9 @@
       "sourceMeridianId": "SI",
       "sequence": 3,
       "side": "RIGHT",
-      "x": 0.232679,
-      "y": 0.780739,
-      "z": 0.058829,
+      "x": 0.232037,
+      "y": 0.779846,
+      "z": 0.05927,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "structural",
@@ -6975,7 +6993,7 @@
           }
         ]
       },
-      "snappedToCourseMm": 8.3
+      "snappedToCourseMm": 7.9
     },
     {
       "pointCode": "SI-3",
@@ -6984,9 +7002,9 @@
       "sourceMeridianId": "SI",
       "sequence": 3,
       "side": "LEFT",
-      "x": -0.232679,
-      "y": 0.780739,
-      "z": 0.058829,
+      "x": -0.232037,
+      "y": 0.779846,
+      "z": 0.05927,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "structural",
@@ -7006,7 +7024,7 @@
           }
         ]
       },
-      "snappedToCourseMm": 8.3
+      "snappedToCourseMm": 7.9
     },
     {
       "pointCode": "SI-4",
@@ -12687,9 +12705,9 @@
       "sourceMeridianId": "KI",
       "sequence": 8,
       "side": "RIGHT",
-      "x": 0.08047,
-      "y": 0.103104,
-      "z": -0.06149,
+      "x": 0.080921,
+      "y": 0.10265,
+      "z": -0.065195,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "anchored",
@@ -12709,7 +12727,7 @@
           }
         ]
       },
-      "snappedToCourseMm": 3.7
+      "snappedToCourseMm": 1.6
     },
     {
       "pointCode": "KI-8",
@@ -12718,9 +12736,9 @@
       "sourceMeridianId": "KI",
       "sequence": 8,
       "side": "LEFT",
-      "x": -0.08047,
-      "y": 0.103104,
-      "z": -0.06149,
+      "x": -0.080921,
+      "y": 0.10265,
+      "z": -0.065195,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "anchored",
@@ -12740,7 +12758,7 @@
           }
         ]
       },
-      "snappedToCourseMm": 3.7
+      "snappedToCourseMm": 1.6
     },
     {
       "pointCode": "KI-9",
@@ -12889,9 +12907,9 @@
       "sourceMeridianId": "KI",
       "sequence": 11,
       "side": "RIGHT",
-      "x": 0.012029,
-      "y": 0.85236,
-      "z": 0.068686,
+      "x": 0.014437,
+      "y": 0.852758,
+      "z": 0.068979,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "anchored",
@@ -12911,7 +12929,7 @@
           }
         ]
       },
-      "snappedToCourseMm": 9
+      "snappedToCourseMm": 9.4
     },
     {
       "pointCode": "KI-11",
@@ -12920,9 +12938,9 @@
       "sourceMeridianId": "KI",
       "sequence": 11,
       "side": "LEFT",
-      "x": -0.012029,
-      "y": 0.85236,
-      "z": 0.068686,
+      "x": -0.014437,
+      "y": 0.852758,
+      "z": 0.068979,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "anchored",
@@ -12942,7 +12960,7 @@
           }
         ]
       },
-      "snappedToCourseMm": 9
+      "snappedToCourseMm": 9.4
     },
     {
       "pointCode": "KI-12",
@@ -14385,9 +14403,9 @@
       "sourceMeridianId": "PC",
       "sequence": 8,
       "side": "RIGHT",
-      "x": 0.27418,
-      "y": 0.789363,
-      "z": 0.047844,
+      "x": 0.27804,
+      "y": 0.789102,
+      "z": 0.048657,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "structural",
@@ -14415,7 +14433,7 @@
           }
         ]
       },
-      "snappedToCourseMm": 9
+      "snappedToCourseMm": 7.9
     },
     {
       "pointCode": "PC-8",
@@ -14424,9 +14442,9 @@
       "sourceMeridianId": "PC",
       "sequence": 8,
       "side": "LEFT",
-      "x": -0.27418,
-      "y": 0.789363,
-      "z": 0.047844,
+      "x": -0.27804,
+      "y": 0.789102,
+      "z": 0.048657,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "structural",
@@ -14454,7 +14472,7 @@
           }
         ]
       },
-      "snappedToCourseMm": 9
+      "snappedToCourseMm": 7.9
     },
     {
       "pointCode": "PC-9",
@@ -17111,9 +17129,9 @@
       "sourceMeridianId": "GB",
       "sequence": 21,
       "side": "RIGHT",
-      "x": 0.113795,
-      "y": 1.422026,
-      "z": -0.117037,
+      "x": 0.113273,
+      "y": 1.420651,
+      "z": -0.115523,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "anchored",
@@ -17132,7 +17150,8 @@
             "uri": "http://purl.obolibrary.org/obo/UBERON_0002497"
           }
         ]
-      }
+      },
+      "snappedToCourseMm": 2.1
     },
     {
       "pointCode": "GB-21",
@@ -17141,9 +17160,9 @@
       "sourceMeridianId": "GB",
       "sequence": 21,
       "side": "LEFT",
-      "x": -0.113795,
-      "y": 1.422026,
-      "z": -0.117037,
+      "x": -0.113273,
+      "y": 1.420651,
+      "z": -0.115523,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "anchored",
@@ -17162,7 +17181,8 @@
             "uri": "http://purl.obolibrary.org/obo/UBERON_0002497"
           }
         ]
-      }
+      },
+      "snappedToCourseMm": 2.1
     },
     {
       "pointCode": "GB-22",
@@ -17295,9 +17315,9 @@
       "sourceMeridianId": "GB",
       "sequence": 24,
       "side": "RIGHT",
-      "x": 0.090388,
-      "y": 1.203728,
-      "z": 0.107674,
+      "x": 0.090994,
+      "y": 1.203667,
+      "z": 0.109067,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "anchored",
@@ -17325,7 +17345,7 @@
           }
         ]
       },
-      "snappedToCourseMm": 9
+      "snappedToCourseMm": 8.9
     },
     {
       "pointCode": "GB-24",
@@ -17334,9 +17354,9 @@
       "sourceMeridianId": "GB",
       "sequence": 24,
       "side": "LEFT",
-      "x": -0.090388,
-      "y": 1.203728,
-      "z": 0.107674,
+      "x": -0.090994,
+      "y": 1.203667,
+      "z": 0.109067,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "anchored",
@@ -17364,7 +17384,7 @@
           }
         ]
       },
-      "snappedToCourseMm": 9
+      "snappedToCourseMm": 8.9
     },
     {
       "pointCode": "GB-25",
@@ -17373,9 +17393,9 @@
       "sourceMeridianId": "GB",
       "sequence": 25,
       "side": "RIGHT",
-      "x": 0.14536,
-      "y": 1.132905,
-      "z": -0.003588,
+      "x": 0.145005,
+      "y": 1.134931,
+      "z": -0.003709,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "anchored",
@@ -17399,7 +17419,7 @@
           }
         ]
       },
-      "snappedToCourseMm": 5.3
+      "snappedToCourseMm": 4.6
     },
     {
       "pointCode": "GB-25",
@@ -17408,9 +17428,9 @@
       "sourceMeridianId": "GB",
       "sequence": 25,
       "side": "LEFT",
-      "x": -0.14536,
-      "y": 1.132905,
-      "z": -0.003588,
+      "x": -0.145005,
+      "y": 1.134931,
+      "z": -0.003709,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "anchored",
@@ -17434,7 +17454,7 @@
           }
         ]
       },
-      "snappedToCourseMm": 5.3
+      "snappedToCourseMm": 4.6
     },
     {
       "pointCode": "GB-26",
@@ -17443,9 +17463,9 @@
       "sourceMeridianId": "GB",
       "sequence": 26,
       "side": "RIGHT",
-      "x": 0.14481,
-      "y": 1.034391,
-      "z": 0.004765,
+      "x": 0.14389,
+      "y": 1.02903,
+      "z": 0.004248,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "anchored",
@@ -17469,7 +17489,7 @@
           }
         ]
       },
-      "snappedToCourseMm": 7.1
+      "snappedToCourseMm": 3.7
     },
     {
       "pointCode": "GB-26",
@@ -17478,9 +17498,9 @@
       "sourceMeridianId": "GB",
       "sequence": 26,
       "side": "LEFT",
-      "x": -0.14481,
-      "y": 1.034391,
-      "z": 0.004765,
+      "x": -0.14389,
+      "y": 1.02903,
+      "z": 0.004248,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "anchored",
@@ -17504,7 +17524,7 @@
           }
         ]
       },
-      "snappedToCourseMm": 7.1
+      "snappedToCourseMm": 3.7
     },
     {
       "pointCode": "GB-27",
@@ -17513,9 +17533,9 @@
       "sourceMeridianId": "GB",
       "sequence": 27,
       "side": "RIGHT",
-      "x": 0.111567,
-      "y": 0.963517,
-      "z": 0.068737,
+      "x": 0.112044,
+      "y": 0.963463,
+      "z": 0.070662,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "anchored",
@@ -17535,7 +17555,7 @@
           }
         ]
       },
-      "snappedToCourseMm": 9
+      "snappedToCourseMm": 8.8
     },
     {
       "pointCode": "GB-27",
@@ -17544,9 +17564,9 @@
       "sourceMeridianId": "GB",
       "sequence": 27,
       "side": "LEFT",
-      "x": -0.111567,
-      "y": 0.963517,
-      "z": 0.068737,
+      "x": -0.112044,
+      "y": 0.963463,
+      "z": 0.070662,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "anchored",
@@ -17566,7 +17586,7 @@
           }
         ]
       },
-      "snappedToCourseMm": 9
+      "snappedToCourseMm": 8.8
     },
     {
       "pointCode": "GB-28",
@@ -17575,9 +17595,9 @@
       "sourceMeridianId": "GB",
       "sequence": 28,
       "side": "RIGHT",
-      "x": 0.120726,
-      "y": 0.946807,
-      "z": 0.065006,
+      "x": 0.12072,
+      "y": 0.946895,
+      "z": 0.065133,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "anchored",
@@ -17602,9 +17622,9 @@
       "sourceMeridianId": "GB",
       "sequence": 28,
       "side": "LEFT",
-      "x": -0.120726,
-      "y": 0.946807,
-      "z": 0.065006,
+      "x": -0.12072,
+      "y": 0.946895,
+      "z": 0.065133,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "anchored",
@@ -17629,9 +17649,9 @@
       "sourceMeridianId": "GB",
       "sequence": 29,
       "side": "RIGHT",
-      "x": 0.163669,
-      "y": 0.915335,
-      "z": -0.007809,
+      "x": 0.162935,
+      "y": 0.91717,
+      "z": -0.003915,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "anchored",
@@ -17651,7 +17671,7 @@
           }
         ]
       },
-      "snappedToCourseMm": 8.1
+      "snappedToCourseMm": 6.7
     },
     {
       "pointCode": "GB-29",
@@ -17660,9 +17680,9 @@
       "sourceMeridianId": "GB",
       "sequence": 29,
       "side": "LEFT",
-      "x": -0.163669,
-      "y": 0.915335,
-      "z": -0.007809,
+      "x": -0.162935,
+      "y": 0.91717,
+      "z": -0.003915,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "anchored",
@@ -17682,7 +17702,7 @@
           }
         ]
       },
-      "snappedToCourseMm": 8.1
+      "snappedToCourseMm": 6.7
     },
     {
       "pointCode": "GB-30",
@@ -18325,9 +18345,9 @@
       "sourceMeridianId": "GB",
       "sequence": 40,
       "side": "RIGHT",
-      "x": 0.105742,
-      "y": 0.06496,
-      "z": -0.048342,
+      "x": 0.108459,
+      "y": 0.063866,
+      "z": -0.049461,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "structural",
@@ -18347,7 +18367,7 @@
           }
         ]
       },
-      "snappedToCourseMm": 9
+      "snappedToCourseMm": 8.8
     },
     {
       "pointCode": "GB-40",
@@ -18356,9 +18376,9 @@
       "sourceMeridianId": "GB",
       "sequence": 40,
       "side": "LEFT",
-      "x": -0.105742,
-      "y": 0.06496,
-      "z": -0.048342,
+      "x": -0.108459,
+      "y": 0.063866,
+      "z": -0.049461,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "structural",
@@ -18378,7 +18398,7 @@
           }
         ]
       },
-      "snappedToCourseMm": 9
+      "snappedToCourseMm": 8.8
     },
     {
       "pointCode": "GB-41",
@@ -19245,9 +19265,9 @@
       "sourceMeridianId": "LR",
       "sequence": 10,
       "side": "RIGHT",
-      "x": 0.010531,
-      "y": 0.780269,
-      "z": 0.059253,
+      "x": 0.009566,
+      "y": 0.779298,
+      "z": 0.064605,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "anchored",
@@ -19258,7 +19278,7 @@
         "surfaceRegionEn": "Thigh",
         "landmarks": []
       },
-      "snappedToCourseMm": 9
+      "snappedToCourseMm": 7.5
     },
     {
       "pointCode": "LR-10",
@@ -19267,9 +19287,9 @@
       "sourceMeridianId": "LR",
       "sequence": 10,
       "side": "LEFT",
-      "x": -0.010531,
-      "y": 0.780269,
-      "z": 0.059253,
+      "x": -0.009566,
+      "y": 0.779298,
+      "z": 0.064605,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "anchored",
@@ -19280,7 +19300,7 @@
         "surfaceRegionEn": "Thigh",
         "landmarks": []
       },
-      "snappedToCourseMm": 9
+      "snappedToCourseMm": 7.5
     },
     {
       "pointCode": "LR-11",
@@ -19289,9 +19309,9 @@
       "sourceMeridianId": "LR",
       "sequence": 11,
       "side": "RIGHT",
-      "x": 0.025996,
-      "y": 0.782816,
-      "z": 0.041979,
+      "x": 0.030063,
+      "y": 0.780742,
+      "z": 0.046946,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "anchored",
@@ -19307,7 +19327,7 @@
           }
         ]
       },
-      "snappedToCourseMm": 9
+      "snappedToCourseMm": 13.3
     },
     {
       "pointCode": "LR-11",
@@ -19316,9 +19336,9 @@
       "sourceMeridianId": "LR",
       "sequence": 11,
       "side": "LEFT",
-      "x": -0.025996,
-      "y": 0.782816,
-      "z": 0.041979,
+      "x": -0.030063,
+      "y": 0.780742,
+      "z": 0.046946,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "anchored",
@@ -19334,7 +19354,7 @@
           }
         ]
       },
-      "snappedToCourseMm": 9
+      "snappedToCourseMm": 13.3
     },
     {
       "pointCode": "LR-12",
@@ -19405,9 +19425,9 @@
       "sourceMeridianId": "LR",
       "sequence": 13,
       "side": "RIGHT",
-      "x": 0.145813,
-      "y": 1.100396,
-      "z": -0.002384,
+      "x": 0.139206,
+      "y": 1.101131,
+      "z": -0.000291,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "anchored",
@@ -19427,7 +19447,7 @@
           }
         ]
       },
-      "snappedToCourseMm": 9
+      "snappedToCourseMm": 2.2
     },
     {
       "pointCode": "LR-13",
@@ -19436,9 +19456,9 @@
       "sourceMeridianId": "LR",
       "sequence": 13,
       "side": "LEFT",
-      "x": -0.145813,
-      "y": 1.100396,
-      "z": -0.002384,
+      "x": -0.139206,
+      "y": 1.101131,
+      "z": -0.000291,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "anchored",
@@ -19458,7 +19478,7 @@
           }
         ]
       },
-      "snappedToCourseMm": 9
+      "snappedToCourseMm": 2.2
     },
     {
       "pointCode": "LR-14",
@@ -20846,9 +20866,9 @@
       "sourceMeridianId": "DU",
       "sequence": 19,
       "side": "MIDLINE",
-      "x": 0,
-      "y": 1.7104,
-      "z": -0.044223,
+      "x": 0.000161,
+      "y": 1.714095,
+      "z": -0.045353,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "anchored",
@@ -20867,7 +20887,8 @@
             "uri": "http://uri.interlex.org/base/ilx_0795312"
           }
         ]
-      }
+      },
+      "snappedToCourseMm": 3.9
     },
     {
       "pointCode": "GV-20",
@@ -20876,9 +20897,9 @@
       "sourceMeridianId": "DU",
       "sequence": 20,
       "side": "MIDLINE",
-      "x": 0,
-      "y": 1.71154,
-      "z": -0.005842,
+      "x": 0.000176,
+      "y": 1.716905,
+      "z": -0.005092,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "anchored",
@@ -20901,7 +20922,8 @@
             "uri": "http://uri.interlex.org/base/ilx_0795326"
           }
         ]
-      }
+      },
+      "snappedToCourseMm": 5.4
     },
     {
       "pointCode": "GV-21",
@@ -21159,6 +21181,7 @@
       "meridianId": "LU",
       "side": "RIGHT",
       "groupIndex": 0,
+      "courseId": "main",
       "pointCodes": [
         "LU-1",
         "LU-2",
@@ -21179,249 +21202,319 @@
           0.065822
         ],
         [
-          0.124358,
-          1.360826,
-          0.062178
+          0.12605,
+          1.357116,
+          0.05987
         ],
         [
-          0.124586,
-          1.366409,
-          0.058527
+          0.126114,
+          1.364544,
+          0.053292
         ],
         [
-          0.124523,
-          1.371991,
-          0.054638
+          0.127962,
+          1.375403,
+          0.049195
         ],
         [
-          0.124295,
-          1.377574,
-          0.050629
+          0.134647,
+          1.365222,
+          0.04646
         ],
         [
-          0.12414,
-          1.383156,
-          0.046688
+          0.143256,
+          1.35633,
+          0.045181
         ],
         [
-          0.151085,
-          1.357951,
-          0.043368
+          0.151103,
+          1.348808,
+          0.04301
         ],
         [
-          0.154577,
-          1.33082,
-          0.051433
+          0.158029,
+          1.342628,
+          0.040637
         ],
         [
-          0.18047,
-          1.307587,
-          0.021942
+          0.163726,
+          1.335343,
+          0.036692
         ],
         [
-          0.199146,
-          1.282334,
-          0.014852
+          0.16707,
+          1.328545,
+          0.030878
         ],
         [
-          0.217892,
-          1.257129,
-          0.006869
+          0.176452,
+          1.318616,
+          0.031751
         ],
         [
-          0.218605,
-          1.25191,
-          0.006543
+          0.182385,
+          1.3104,
+          0.028614
         ],
         [
-          0.219319,
-          1.246691,
-          0.006218
+          0.187579,
+          1.301511,
+          0.025549
         ],
         [
-          0.220032,
-          1.241473,
-          0.005892
+          0.192692,
+          1.292786,
+          0.022693
         ],
         [
-          0.220735,
-          1.236253,
-          0.00555
+          0.198198,
+          1.283929,
+          0.020689
         ],
         [
-          0.221425,
-          1.231032,
-          0.005192
+          0.202926,
+          1.274811,
+          0.019394
         ],
         [
-          0.22662,
-          1.201803,
-          0.002086
+          0.205516,
+          1.265362,
+          0.009994
         ],
         [
-          0.231083,
-          1.173992,
-          -0.001314
+          0.210472,
+          1.256062,
+          0.011597
         ],
         [
-          0.236052,
-          1.152421,
-          -0.002556
+          0.212582,
+          1.246407,
+          0.007986
         ],
         [
-          0.242291,
-          1.132874,
-          -0.002073
+          0.215914,
+          1.236694,
+          0.006376
         ],
         [
-          0.249885,
-          1.111565,
-          -0.000813
+          0.21954,
+          1.226832,
+          0.005753
         ],
         [
-          0.254373,
-          1.091866,
-          0.002206
+          0.220446,
+          1.216728,
+          0.001944
         ],
         [
-          0.257887,
-          1.071768,
-          0.004162
+          0.222794,
+          1.206528,
+          0.000452
         ],
         [
-          0.261021,
-          1.051523,
-          0.005737
+          0.224995,
+          1.196183,
+          -0.000927
         ],
         [
-          0.263338,
-          1.030992,
-          0.00666
+          0.232498,
+          1.185877,
+          0.004768
         ],
         [
-          0.265257,
-          1.01035,
-          0.007397
+          0.234491,
+          1.175286,
+          0.002945
         ],
         [
-          0.268589,
-          0.987793,
-          0.007856
+          0.236487,
+          1.164827,
+          0.002136
         ],
         [
-          0.272017,
-          0.965252,
-          0.008308
+          0.238935,
+          1.15422,
+          0.002051
         ],
         [
-          0.274626,
-          0.942488,
-          0.008405
+          0.24173,
+          1.143727,
+          0.002354
         ],
         [
-          0.277949,
-          0.919912,
-          0.008779
+          0.244701,
+          1.133252,
+          0.003042
         ],
         [
-          0.280882,
-          0.897249,
-          0.00908
+          0.247507,
+          1.122459,
+          0.004137
         ],
         [
-          0.281668,
-          0.895704,
-          0.011129
+          0.247833,
+          1.110542,
+          0.00123
         ],
         [
-          0.282331,
-          0.894138,
-          0.013181
+          0.248676,
+          1.09891,
+          -0.000099
         ],
         [
-          0.282686,
-          0.892503,
-          0.015174
+          0.251423,
+          1.088276,
+          0.000757
         ],
         [
-          0.28307,
-          0.890869,
-          0.017145
+          0.253768,
+          1.07726,
+          0.001525
         ],
         [
-          0.283911,
-          0.889344,
-          0.019241
+          0.256034,
+          1.066207,
+          0.002358
         ],
         [
-          0.285631,
-          0.886687,
-          0.019195
+          0.25821,
+          1.055274,
+          0.002872
         ],
         [
-          0.287962,
-          0.884175,
-          0.019309
+          0.260065,
+          1.044004,
+          0.003174
         ],
         [
-          0.289704,
-          0.88152,
-          0.019253
+          0.261195,
+          1.032844,
+          0.003645
         ],
         [
-          0.291129,
-          0.878795,
-          0.019134
+          0.262869,
+          1.021617,
+          0.004055
         ],
         [
-          0.292645,
-          0.876093,
-          0.019049
+          0.266242,
+          1.010669,
+          0.00659
         ],
         [
-          0.295895,
-          0.86596,
-          0.02443
+          0.265552,
+          0.999293,
+          0.00411
         ],
         [
-          0.299146,
-          0.855827,
-          0.029812
+          0.266453,
+          0.987801,
+          0.004877
         ],
         [
-          0.302396,
-          0.845695,
-          0.035193
+          0.267725,
+          0.977027,
+          0.006108
         ],
         [
-          0.305647,
-          0.835562,
-          0.040575
+          0.268908,
+          0.966143,
+          0.006428
         ],
         [
-          0.308897,
-          0.825429,
-          0.045956
+          0.277915,
+          0.95651,
+          0.010793
         ],
         [
-          0.313389,
-          0.819322,
-          0.052121
+          0.2792,
+          0.946011,
+          0.011391
         ],
         [
-          0.317881,
-          0.813215,
-          0.058286
+          0.280662,
+          0.9357,
+          0.011373
         ],
         [
-          0.322374,
-          0.807108,
-          0.064452
+          0.282143,
+          0.925928,
+          0.012429
         ],
         [
-          0.326866,
-          0.801001,
-          0.070617
+          0.283825,
+          0.916219,
+          0.013735
+        ],
+        [
+          0.283756,
+          0.90532,
+          0.01402
+        ],
+        [
+          0.284076,
+          0.896891,
+          0.015668
+        ],
+        [
+          0.289171,
+          0.888081,
+          0.019148
+        ],
+        [
+          0.294523,
+          0.880999,
+          0.020328
+        ],
+        [
+          0.295825,
+          0.871573,
+          0.024406
+        ],
+        [
+          0.299746,
+          0.863833,
+          0.0267
+        ],
+        [
+          0.304455,
+          0.856324,
+          0.028506
+        ],
+        [
+          0.306043,
+          0.847865,
+          0.033245
+        ],
+        [
+          0.306316,
+          0.840594,
+          0.038296
+        ],
+        [
+          0.307243,
+          0.835996,
+          0.044036
+        ],
+        [
+          0.309251,
+          0.826773,
+          0.046981
+        ],
+        [
+          0.303948,
+          0.821228,
+          0.047974
+        ],
+        [
+          0.303895,
+          0.816324,
+          0.051227
+        ],
+        [
+          0.316369,
+          0.809233,
+          0.064133
         ],
         [
           0.331358,
@@ -21434,15 +21527,18 @@
       "flowDirection": "SOURCE_ORDER",
       "directionStart": "LU-1",
       "directionEnd": "LU-11",
-      "surfaceProjection": "BodyParts3D FMA7163 lung-channel surface-following",
-      "surfaceProjectionStep": "fifth-segment",
-      "handProjection": "anchor-preserving LU-9 -> LU-10 -> LU-11 thumb course",
-      "courseRule": "upper chest -> anterior-lateral upper arm -> radial forearm -> thenar/thumb -> radial nail edge of thumb"
+      "surfaceProjection": "BodyParts3D FMA7163 textbook-course surface-following",
+      "surfaceProjectionStep": "12mm",
+      "courseSource": "HIU-TEXTBOOK-COURSE-2026-09",
+      "anchorCoordinatePolicy": "acupoint anchors unchanged; drawn course follows the textbook route, not straight chords between anchors",
+      "courseRule": "Trung tiêu → (nội tạng không vẽ) → Trung phủ dưới xương đòn → mặt trước ngoài cánh tay → Xích trạch → bờ ngoài cẳng tay → Kinh cừ, Thái uyên → mô cái (Ngư tế) → đầu ngón cái (Thiếu thương).",
+      "surfaceLiftMeters": 0.0035
     },
     {
       "meridianId": "LU",
       "side": "LEFT",
       "groupIndex": 0,
+      "courseId": "main",
       "pointCodes": [
         "LU-1",
         "LU-2",
@@ -21463,249 +21559,319 @@
           0.065822
         ],
         [
-          -0.124358,
-          1.360826,
-          0.062178
+          -0.126049,
+          1.357127,
+          0.059863
         ],
         [
-          -0.124586,
-          1.366409,
-          0.058527
+          -0.126249,
+          1.364446,
+          0.053256
         ],
         [
-          -0.124523,
-          1.371991,
-          0.054638
+          -0.127962,
+          1.375403,
+          0.049195
         ],
         [
-          -0.124295,
-          1.377574,
-          0.050629
+          -0.134772,
+          1.365145,
+          0.046408
         ],
         [
-          -0.12414,
-          1.383156,
-          0.046688
+          -0.143262,
+          1.356335,
+          0.045174
         ],
         [
-          -0.151085,
-          1.357951,
-          0.043368
+          -0.151108,
+          1.348807,
+          0.043007
         ],
         [
-          -0.154577,
-          1.33082,
-          0.051433
+          -0.158074,
+          1.342733,
+          0.040563
         ],
         [
-          -0.18047,
-          1.307587,
-          0.021942
+          -0.163525,
+          1.335712,
+          0.036915
         ],
         [
-          -0.199146,
-          1.282334,
-          0.014852
+          -0.166882,
+          1.328769,
+          0.031222
         ],
         [
-          -0.217892,
-          1.257129,
-          0.006869
+          -0.175744,
+          1.31858,
+          0.031781
         ],
         [
-          -0.218605,
-          1.25191,
-          0.006543
+          -0.181344,
+          1.309846,
+          0.028438
         ],
         [
-          -0.219319,
-          1.246691,
-          0.006218
+          -0.186538,
+          1.300957,
+          0.025373
         ],
         [
-          -0.220032,
-          1.241473,
-          0.005892
+          -0.192865,
+          1.292766,
+          0.022667
         ],
         [
-          -0.220735,
-          1.236253,
-          0.00555
+          -0.197487,
+          1.283803,
+          0.0208
         ],
         [
-          -0.221425,
-          1.231032,
-          0.005192
+          -0.202834,
+          1.274881,
+          0.019412
         ],
         [
-          -0.22662,
-          1.201803,
-          0.002086
+          -0.205397,
+          1.265368,
+          0.010027
         ],
         [
-          -0.231083,
-          1.173992,
-          -0.001314
+          -0.210506,
+          1.256072,
+          0.011588
         ],
         [
-          -0.236052,
-          1.152421,
-          -0.002556
+          -0.212847,
+          1.246492,
+          0.007805
         ],
         [
-          -0.242291,
-          1.132874,
-          -0.002073
+          -0.216116,
+          1.236749,
+          0.006242
         ],
         [
-          -0.249885,
-          1.111565,
-          -0.000813
+          -0.21961,
+          1.226851,
+          0.005706
         ],
         [
-          -0.254373,
-          1.091866,
-          0.002206
+          -0.220764,
+          1.216817,
+          0.001733
         ],
         [
-          -0.257887,
-          1.071768,
-          0.004162
+          -0.223112,
+          1.206617,
+          0.000241
         ],
         [
-          -0.261021,
-          1.051523,
-          0.005737
+          -0.2248,
+          1.196197,
+          -0.000771
         ],
         [
-          -0.263338,
-          1.030992,
-          0.00666
+          -0.232126,
+          1.185795,
+          0.005033
         ],
         [
-          -0.265257,
-          1.01035,
-          0.007397
+          -0.229284,
+          1.175186,
+          -0.001732
         ],
         [
-          -0.268589,
-          0.987793,
-          0.007856
+          -0.231456,
+          1.164066,
+          -0.002671
         ],
         [
-          -0.272017,
-          0.965252,
-          0.008308
+          -0.238742,
+          1.154023,
+          0.002242
         ],
         [
-          -0.274626,
-          0.942488,
-          0.008405
+          -0.241505,
+          1.143733,
+          0.00253
         ],
         [
-          -0.277949,
-          0.919912,
-          0.008779
+          -0.244563,
+          1.133056,
+          0.003213
         ],
         [
-          -0.280882,
-          0.897249,
-          0.00908
+          -0.246846,
+          1.122065,
+          0.004559
         ],
         [
-          -0.281668,
-          0.895704,
-          0.011129
+          -0.247833,
+          1.110542,
+          0.00123
         ],
         [
-          -0.282331,
-          0.894138,
-          0.013181
+          -0.249166,
+          1.099029,
+          -0.00046
         ],
         [
-          -0.282686,
-          0.892503,
-          0.015174
+          -0.251663,
+          1.088316,
+          0.00059
         ],
         [
-          -0.28307,
-          0.890869,
-          0.017145
+          -0.254008,
+          1.0773,
+          0.001358
         ],
         [
-          -0.283911,
-          0.889344,
-          0.019241
+          -0.256274,
+          1.066247,
+          0.002191
         ],
         [
-          -0.285631,
-          0.886687,
-          0.019195
+          -0.257963,
+          1.055051,
+          0.003079
         ],
         [
-          -0.287962,
-          0.884175,
-          0.019309
+          -0.259687,
+          1.044134,
+          0.003402
         ],
         [
-          -0.289704,
-          0.88152,
-          0.019253
+          -0.261341,
+          1.032842,
+          0.003533
         ],
         [
-          -0.291129,
-          0.878795,
-          0.019134
+          -0.263001,
+          1.021615,
+          0.003953
         ],
         [
-          -0.292645,
-          0.876093,
-          0.019049
+          -0.266242,
+          1.010669,
+          0.00659
         ],
         [
-          -0.295895,
-          0.86596,
-          0.02443
+          -0.265099,
+          0.999099,
+          0.004584
         ],
         [
-          -0.299146,
-          0.855827,
-          0.029812
+          -0.266053,
+          0.988122,
+          0.0054
         ],
         [
-          -0.302396,
-          0.845695,
-          0.035193
+          -0.267882,
+          0.976933,
+          0.005847
         ],
         [
-          -0.305647,
-          0.835562,
-          0.040575
+          -0.269065,
+          0.966049,
+          0.006167
         ],
         [
-          -0.308897,
-          0.825429,
-          0.045956
+          -0.271866,
+          0.955564,
+          0.007408
         ],
         [
-          -0.313389,
-          0.819322,
-          0.052121
+          -0.272829,
+          0.945147,
+          0.008665
         ],
         [
-          -0.317881,
-          0.813215,
-          0.058286
+          -0.28059,
+          0.935938,
+          0.011498
         ],
         [
-          -0.322374,
-          0.807108,
-          0.064452
+          -0.27552,
+          0.92453,
+          0.01066
         ],
         [
-          -0.326866,
-          0.801001,
-          0.070617
+          -0.277202,
+          0.914821,
+          0.011966
+        ],
+        [
+          -0.280106,
+          0.904708,
+          0.013632
+        ],
+        [
+          -0.283312,
+          0.896719,
+          0.015528
+        ],
+        [
+          -0.289112,
+          0.888148,
+          0.019159
+        ],
+        [
+          -0.293328,
+          0.880314,
+          0.021167
+        ],
+        [
+          -0.29572,
+          0.871354,
+          0.024025
+        ],
+        [
+          -0.299688,
+          0.863863,
+          0.02664
+        ],
+        [
+          -0.304356,
+          0.855595,
+          0.02809
+        ],
+        [
+          -0.305724,
+          0.847808,
+          0.032738
+        ],
+        [
+          -0.307177,
+          0.84166,
+          0.038284
+        ],
+        [
+          -0.307062,
+          0.835762,
+          0.04424
+        ],
+        [
+          -0.309251,
+          0.826773,
+          0.046981
+        ],
+        [
+          -0.303951,
+          0.821225,
+          0.047975
+        ],
+        [
+          -0.30398,
+          0.816352,
+          0.051123
+        ],
+        [
+          -0.315692,
+          0.8094,
+          0.064273
         ],
         [
           -0.331358,
@@ -21718,10 +21884,12 @@
       "flowDirection": "SOURCE_ORDER",
       "directionStart": "LU-1",
       "directionEnd": "LU-11",
-      "surfaceProjection": "BodyParts3D FMA7163 lung-channel surface-following",
-      "surfaceProjectionStep": "fifth-segment",
-      "handProjection": "anchor-preserving LU-9 -> LU-10 -> LU-11 thumb course",
-      "courseRule": "upper chest -> anterior-lateral upper arm -> radial forearm -> thenar/thumb -> radial nail edge of thumb"
+      "surfaceProjection": "BodyParts3D FMA7163 textbook-course surface-following",
+      "surfaceProjectionStep": "12mm",
+      "courseSource": "HIU-TEXTBOOK-COURSE-2026-09",
+      "anchorCoordinatePolicy": "acupoint anchors unchanged; drawn course follows the textbook route, not straight chords between anchors",
+      "courseRule": "Trung tiêu → (nội tạng không vẽ) → Trung phủ dưới xương đòn → mặt trước ngoài cánh tay → Xích trạch → bờ ngoài cẳng tay → Kinh cừ, Thái uyên → mô cái (Ngư tế) → đầu ngón cái (Thiếu thương).",
+      "surfaceLiftMeters": 0.0035
     },
     {
       "meridianId": "LI",
@@ -21762,19 +21930,19 @@
           0.062674
         ],
         [
-          0.29979,
-          0.761974,
-          0.056021
+          0.299911,
+          0.762128,
+          0.056156
         ],
         [
-          0.302417,
-          0.765253,
-          0.051531
+          0.302985,
+          0.764683,
+          0.050483
         ],
         [
-          0.303925,
-          0.772302,
-          0.051848
+          0.306639,
+          0.771297,
+          0.049342
         ],
         [
           0.28493,
@@ -21782,9 +21950,9 @@
           0.039469
         ],
         [
-          0.26485,
-          0.8055,
-          0.02925
+          0.264178,
+          0.804833,
+          0.02684
         ],
         [
           0.261685,
@@ -22157,34 +22325,34 @@
           -0.010064
         ],
         [
-          0.148845,
-          1.422563,
-          -0.02781
+          0.149802,
+          1.426661,
+          -0.02668
         ],
         [
-          0.157089,
-          1.422987,
-          -0.053184
+          0.15809,
+          1.427061,
+          -0.052996
         ],
         [
-          0.142385,
-          1.424044,
-          -0.078692
+          0.144722,
+          1.428983,
+          -0.081247
         ],
         [
-          0.113832,
-          1.424795,
-          -0.098905
+          0.114687,
+          1.427105,
+          -0.10072
         ],
         [
-          0.082608,
-          1.425789,
-          -0.110193
+          0.082965,
+          1.427085,
+          -0.111788
         ],
         [
-          0.056253,
-          1.426816,
-          -0.114263
+          0.056153,
+          1.428026,
+          -0.116481
         ],
         [
           0.035667,
@@ -22222,34 +22390,34 @@
           -0.108927
         ],
         [
-          0.049933,
-          1.439509,
-          -0.106365
+          0.050253,
+          1.440751,
+          -0.107849
         ],
         [
-          0.068133,
-          1.44327,
-          -0.098917
+          0.068597,
+          1.444638,
+          -0.100142
         ],
         [
-          0.085754,
-          1.44703,
-          -0.085845
+          0.086373,
+          1.448747,
+          -0.087158
         ],
         [
-          0.099507,
-          1.44897,
-          -0.069293
+          0.100891,
+          1.452207,
+          -0.070503
         ],
         [
-          0.107588,
-          1.447996,
-          -0.052022
+          0.109092,
+          1.450994,
+          -0.051876
         ],
         [
-          0.106874,
-          1.445539,
-          -0.036247
+          0.107999,
+          1.447582,
+          -0.035168
         ],
         [
           0.095256,
@@ -22357,19 +22525,19 @@
           0.036369
         ],
         [
-          0.010603,
-          1.484474,
-          0.046756
+          0.009818,
+          1.486804,
+          0.046242
         ],
         [
-          0.011191,
-          1.499962,
-          0.064075
+          0.012437,
+          1.495039,
+          0.063309
         ],
         [
-          0.011179,
-          1.505187,
-          0.071959
+          0.012752,
+          1.505326,
+          0.074895
         ],
         [
           0.010321,
@@ -22392,9 +22560,9 @@
           0.083883
         ],
         [
-          0.009606,
-          1.551691,
-          0.096431
+          0.007946,
+          1.551907,
+          0.093872
         ],
         [
           0.002912,
@@ -22458,19 +22626,19 @@
           0.063023
         ],
         [
-          -0.299387,
-          0.761937,
-          0.056354
+          -0.29948,
+          0.762088,
+          0.056513
         ],
         [
-          -0.302417,
-          0.765253,
-          0.051531
+          -0.303164,
+          0.764741,
+          0.050518
         ],
         [
-          -0.303925,
-          0.772302,
-          0.051848
+          -0.306639,
+          0.771297,
+          0.049342
         ],
         [
           -0.281181,
@@ -22478,9 +22646,9 @@
           0.036921
         ],
         [
-          -0.265325,
-          0.80598,
-          0.028895
+          -0.264653,
+          0.805313,
+          0.026485
         ],
         [
           -0.261658,
@@ -22853,34 +23021,34 @@
           -0.010137
         ],
         [
-          -0.149084,
-          1.422502,
-          -0.027755
+          -0.150041,
+          1.4266,
+          -0.026625
         ],
         [
-          -0.156939,
-          1.423026,
-          -0.053146
+          -0.15794,
+          1.4271,
+          -0.052958
         ],
         [
-          -0.142255,
-          1.424019,
-          -0.078876
+          -0.144592,
+          1.428958,
+          -0.081431
         ],
         [
-          -0.113742,
-          1.424854,
-          -0.098874
+          -0.114597,
+          1.427164,
+          -0.100689
         ],
         [
-          -0.082563,
-          1.425756,
-          -0.11023
+          -0.08292,
+          1.427052,
+          -0.111825
         ],
         [
-          -0.055878,
-          1.426733,
-          -0.114316
+          -0.055778,
+          1.427943,
+          -0.116534
         ],
         [
           -0.035709,
@@ -22918,34 +23086,34 @@
           -0.108937
         ],
         [
-          -0.050297,
-          1.439612,
-          -0.106231
+          -0.050617,
+          1.440854,
+          -0.107715
         ],
         [
-          -0.068196,
-          1.443372,
-          -0.098787
+          -0.06866,
+          1.44474,
+          -0.100012
         ],
         [
-          -0.085716,
-          1.447026,
-          -0.085869
+          -0.086335,
+          1.448743,
+          -0.087182
         ],
         [
-          -0.099191,
-          1.449001,
-          -0.069683
+          -0.100575,
+          1.452238,
+          -0.070893
         ],
         [
-          -0.107507,
-          1.448041,
-          -0.051656
+          -0.109017,
+          1.451037,
+          -0.051536
         ],
         [
-          -0.106781,
-          1.445522,
-          -0.036107
+          -0.107906,
+          1.447565,
+          -0.035028
         ],
         [
           -0.095331,
@@ -23053,19 +23221,19 @@
           0.036544
         ],
         [
-          -0.010423,
-          1.484491,
-          0.047173
+          -0.009638,
+          1.486821,
+          0.046659
         ],
         [
-          -0.011891,
-          1.500101,
-          0.063704
+          -0.013137,
+          1.495178,
+          0.062938
         ],
         [
-          -0.010928,
-          1.505058,
-          0.072117
+          -0.012501,
+          1.505197,
+          0.075053
         ],
         [
           -0.010374,
@@ -23088,9 +23256,9 @@
           0.08372
         ],
         [
-          -0.00963,
-          1.551037,
-          0.096284
+          -0.00797,
+          1.551253,
+          0.093725
         ],
         [
           -0.002912,
@@ -23153,9 +23321,9 @@
           0.088963
         ],
         [
-          0.025226,
-          1.582711,
-          0.080824
+          0.023167,
+          1.582081,
+          0.079727
         ],
         [
           0.030919,
@@ -23193,9 +23361,9 @@
           0.103278
         ],
         [
-          0.011256,
-          1.549492,
-          0.094897
+          0.010178,
+          1.54907,
+          0.092647
         ],
         [
           0.006952,
@@ -23278,9 +23446,9 @@
           0.059471
         ],
         [
-          0.042479,
-          1.620158,
-          0.063551
+          0.04429,
+          1.619915,
+          0.064768
         ],
         [
           0.040862,
@@ -23370,9 +23538,9 @@
           0.056054
         ],
         [
-          0.034411,
-          1.514202,
-          0.045906
+          0.035785,
+          1.512821,
+          0.045807
         ],
         [
           0.032649,
@@ -24322,9 +24490,9 @@
           0.088835
         ],
         [
-          -0.024098,
-          1.583889,
-          0.081344
+          -0.022039,
+          1.583259,
+          0.080247
         ],
         [
           -0.030919,
@@ -24362,9 +24530,9 @@
           0.103278
         ],
         [
-          -0.01131,
-          1.549389,
-          0.094888
+          -0.010232,
+          1.548967,
+          0.092638
         ],
         [
           -0.006856,
@@ -24447,9 +24615,9 @@
           0.058973
         ],
         [
-          -0.042558,
-          1.620494,
-          0.063531
+          -0.044369,
+          1.620251,
+          0.064748
         ],
         [
           -0.040829,
@@ -24539,9 +24707,9 @@
           0.056054
         ],
         [
-          -0.034208,
-          1.513977,
-          0.045493
+          -0.035582,
+          1.512596,
+          0.045394
         ],
         [
           -0.032772,
@@ -26163,9 +26331,9 @@
           0.040068
         ],
         [
-          0.169988,
-          1.302157,
-          0.028086
+          0.167732,
+          1.302381,
+          0.0274
         ],
         [
           0.180338,
@@ -26935,9 +27103,9 @@
           0.038071
         ],
         [
-          -0.169941,
-          1.301713,
-          0.027993
+          -0.161054,
+          1.303226,
+          0.025491
         ],
         [
           -0.179978,
@@ -27070,14 +27238,14 @@
           0.000128
         ],
         [
-          0.216435,
-          1.239004,
-          0.004669
+          0.216989,
+          1.239028,
+          0.005392
         ],
         [
-          0.211287,
-          1.227595,
-          0.007322
+          0.211461,
+          1.227582,
+          0.007713
         ],
         [
           0.203903,
@@ -27265,19 +27433,19 @@
           0.031474
         ],
         [
-          0.226963,
-          0.83153,
-          0.037832
+          0.224974,
+          0.831281,
+          0.03708
         ],
         [
-          0.230506,
-          0.822421,
-          0.042352
+          0.224964,
+          0.82173,
+          0.040256
         ],
         [
-          0.233852,
-          0.811856,
-          0.042916
+          0.228138,
+          0.809554,
+          0.038517
         ],
         [
           0.236508,
@@ -27400,14 +27568,14 @@
           0.000206
         ],
         [
-          -0.216331,
-          1.238961,
-          0.004754
+          -0.216915,
+          1.238997,
+          0.005453
         ],
         [
-          -0.211938,
-          1.227595,
-          0.007106
+          -0.212032,
+          1.227582,
+          0.007524
         ],
         [
           -0.203556,
@@ -27595,19 +27763,19 @@
           0.029163
         ],
         [
-          -0.227203,
-          0.831111,
-          0.036834
+          -0.218294,
+          0.83068,
+          0.035171
         ],
         [
-          -0.230736,
-          0.822037,
-          0.041477
+          -0.218284,
+          0.821129,
+          0.038347
         ],
         [
-          -0.233662,
-          0.812018,
-          0.043058
+          -0.222693,
+          0.807462,
+          0.034657
         ],
         [
           -0.23669,
@@ -27695,9 +27863,9 @@
           0.067535
         ],
         [
-          0.242013,
-          0.762613,
-          0.064015
+          0.242339,
+          0.762768,
+          0.064084
         ],
         [
           0.235666,
@@ -27705,14 +27873,14 @@
           0.062953
         ],
         [
-          0.235684,
-          0.775669,
-          0.060313
+          0.233061,
+          0.776352,
+          0.060454
         ],
         [
-          0.230876,
-          0.784034,
-          0.05777
+          0.23068,
+          0.784082,
+          0.057766
         ],
         [
           0.234978,
@@ -28215,9 +28383,9 @@
           0.021099
         ],
         [
-          0.055505,
-          1.549544,
-          0.03091
+          0.057094,
+          1.549353,
+          0.031187
         ],
         [
           0.0542,
@@ -28315,9 +28483,9 @@
           0.065004
         ],
         [
-          -0.237005,
-          0.760127,
-          0.062817
+          -0.236687,
+          0.759962,
+          0.062732
         ],
         [
           -0.235666,
@@ -28325,14 +28493,14 @@
           0.062953
         ],
         [
-          -0.235608,
-          0.775553,
-          0.060035
+          -0.231563,
+          0.776842,
+          0.060718
         ],
         [
-          -0.230946,
-          0.784139,
-          0.058035
+          -0.230765,
+          0.784211,
+          0.058091
         ],
         [
           -0.235839,
@@ -28835,9 +29003,9 @@
           0.021018
         ],
         [
-          -0.055573,
-          1.549667,
-          0.030665
+          -0.057161,
+          1.549483,
+          0.030956
         ],
         [
           -0.054282,
@@ -29056,9 +29224,9 @@
           -0.035792
         ],
         [
-          0.051677,
-          1.687844,
-          -0.052466
+          0.05348,
+          1.689449,
+          -0.053034
         ],
         [
           0.052457,
@@ -30446,9 +30614,9 @@
           0.065553
         ],
         [
-          0.158494,
-          0.013391,
-          0.072961
+          0.15856,
+          0.016934,
+          0.074656
         ],
         [
           0.152525,
@@ -30632,9 +30800,9 @@
           -0.035744
         ],
         [
-          -0.052069,
-          1.687831,
-          -0.05171
+          -0.053872,
+          1.689436,
+          -0.052278
         ],
         [
           -0.052638,
@@ -32022,9 +32190,9 @@
           0.065616
         ],
         [
-          -0.159366,
-          0.013656,
-          0.072674
+          -0.159432,
+          0.017199,
+          0.074369
         ],
         [
           -0.152837,
@@ -32210,9 +32378,9 @@
           -0.059657
         ],
         [
-          0.065083,
-          0.101675,
-          -0.059611
+          0.071959,
+          0.101398,
+          -0.06693
         ],
         [
           0.08815,
@@ -32220,14 +32388,14 @@
           -0.061104
         ],
         [
-          0.082023,
-          0.10687,
-          -0.062182
+          0.082141,
+          0.106873,
+          -0.062513
         ],
         [
-          0.077858,
-          0.110131,
-          -0.063253
+          0.078218,
+          0.110069,
+          -0.063983
         ],
         [
           0.076691,
@@ -32540,9 +32708,9 @@
           0.013324
         ],
         [
-          0.001466,
-          0.82234,
-          0.022584
+          0.003707,
+          0.82317,
+          0.021317
         ],
         [
           0.005824,
@@ -32555,14 +32723,14 @@
           0.051879
         ],
         [
-          0.012019,
-          0.852291,
-          0.068697
+          0.014477,
+          0.852373,
+          0.069055
         ],
         [
-          0.011017,
-          0.86165,
-          0.065148
+          0.011141,
+          0.86168,
+          0.065247
         ],
         [
           0.010821,
@@ -33003,9 +33171,9 @@
           -0.061754
         ],
         [
-          -0.064924,
-          0.101663,
-          -0.059772
+          -0.071772,
+          0.101418,
+          -0.067116
         ],
         [
           -0.08815,
@@ -33013,14 +33181,14 @@
           -0.061104
         ],
         [
-          -0.082016,
+          -0.082135,
           0.106883,
-          -0.062185
+          -0.062515
         ],
         [
-          -0.07756,
-          0.109929,
-          -0.063411
+          -0.077999,
+          0.10992,
+          -0.064099
         ],
         [
           -0.076794,
@@ -33333,9 +33501,9 @@
           0.013198
         ],
         [
-          -0.001523,
-          0.822221,
-          0.022601
+          -0.003764,
+          0.823051,
+          0.021334
         ],
         [
           -0.004808,
@@ -33348,14 +33516,14 @@
           0.052163
         ],
         [
-          -0.012019,
-          0.852291,
-          0.068697
+          -0.014477,
+          0.852373,
+          0.069055
         ],
         [
-          -0.010666,
-          0.861512,
-          0.065763
+          -0.010807,
+          0.861549,
+          0.06583
         ],
         [
           -0.01077,
@@ -33678,9 +33846,9 @@
           -0.002505
         ],
         [
-          0.208416,
-          1.27213,
-          0.00561
+          0.209686,
+          1.272431,
+          0.007061
         ],
         [
           0.198808,
@@ -33908,14 +34076,14 @@
           0.049001
         ],
         [
-          0.27418,
-          0.789363,
-          0.047844
+          0.27804,
+          0.789102,
+          0.048657
         ],
         [
-          0.270329,
-          0.785569,
-          0.049862
+          0.264573,
+          0.784828,
+          0.049579
         ],
         [
           0.266794,
@@ -34008,9 +34176,9 @@
           -0.00232
         ],
         [
-          -0.208715,
-          1.272262,
-          0.005354
+          -0.209979,
+          1.272562,
+          0.006809
         ],
         [
           -0.198777,
@@ -34238,14 +34406,14 @@
           0.048984
         ],
         [
-          -0.27418,
-          0.789363,
-          0.047844
+          -0.27804,
+          0.789102,
+          0.048657
         ],
         [
-          -0.270325,
-          0.785614,
-          0.049826
+          -0.258018,
+          0.784132,
+          0.049713
         ],
         [
           -0.266772,
@@ -35846,9 +36014,9 @@
           0.040706
         ],
         [
-          0.047878,
-          1.65191,
-          0.051898
+          0.048885,
+          1.65226,
+          0.052866
         ],
         [
           0.038114,
@@ -36046,24 +36214,24 @@
           -0.042634
         ],
         [
-          0.055263,
-          1.531682,
-          -0.044784
+          0.05385,
+          1.531945,
+          -0.044156
         ],
         [
-          0.055724,
-          1.519076,
-          -0.045941
+          0.052936,
+          1.518983,
+          -0.044744
         ],
         [
-          0.059378,
-          1.504842,
-          -0.047407
+          0.056665,
+          1.503746,
+          -0.046606
         ],
         [
-          0.066126,
-          1.491553,
-          -0.05154
+          0.064097,
+          1.489991,
+          -0.050845
         ],
         [
           0.07528,
@@ -36086,14 +36254,14 @@
           -0.049
         ],
         [
-          0.099513,
-          1.448258,
-          -0.057022
+          0.102518,
+          1.454249,
+          -0.056729
         ],
         [
-          0.104446,
-          1.439061,
-          -0.079301
+          0.106437,
+          1.443993,
+          -0.082993
         ],
         [
           0.10868,
@@ -36101,9 +36269,9 @@
           -0.102195
         ],
         [
-          0.113795,
-          1.422026,
-          -0.117037
+          0.113273,
+          1.420651,
+          -0.115523
         ],
         [
           0.122215,
@@ -36216,9 +36384,9 @@
           -0.001323
         ],
         [
-          0.209185,
-          1.264648,
-          0.005917
+          0.210398,
+          1.26481,
+          0.00777
         ],
         [
           0.199785,
@@ -36261,19 +36429,19 @@
           0.010816
         ],
         [
-          0.16913,
-          1.235321,
-          0.010306
+          0.163663,
+          1.236044,
+          0.008736
         ],
         [
-          0.164723,
-          1.232293,
-          0.01257
+          0.169109,
+          1.233274,
+          0.007143
         ],
         [
-          0.166439,
-          1.228797,
-          0.017087
+          0.160863,
+          1.229528,
+          0.015477
         ],
         [
           0.143434,
@@ -36281,39 +36449,39 @@
           0.041013
         ],
         [
-          0.12591,
-          1.215587,
-          0.067844
+          0.129892,
+          1.215746,
+          0.06996
         ],
         [
-          0.102179,
-          1.208632,
-          0.093713
+          0.104811,
+          1.208778,
+          0.098317
         ],
         [
-          0.090388,
-          1.203728,
-          0.107674
+          0.090994,
+          1.203667,
+          0.109067
         ],
         [
-          0.097479,
-          1.19865,
-          0.100391
+          0.098142,
+          1.198583,
+          0.101917
         ],
         [
-          0.104829,
-          1.193894,
-          0.095657
+          0.106139,
+          1.193618,
+          0.097192
         ],
         [
-          0.112611,
-          1.188935,
-          0.088809
+          0.113591,
+          1.18871,
+          0.089975
         ],
         [
-          0.122349,
-          1.184658,
-          0.076306
+          0.123768,
+          1.184425,
+          0.077422
         ],
         [
           0.139285,
@@ -36321,44 +36489,44 @@
           0.049636
         ],
         [
-          0.157543,
-          1.179011,
-          0.028381
+          0.155023,
+          1.179131,
+          0.027999
         ],
         [
-          0.165274,
-          1.175859,
-          0.006359
+          0.175193,
+          1.178486,
+          -0.001558
         ],
         [
-          0.167925,
-          1.170817,
-          -0.001643
+          0.173278,
+          1.172169,
+          -0.005975
         ],
         [
-          0.167353,
-          1.164814,
-          -0.004521
+          0.173062,
+          1.166065,
+          -0.008146
         ],
         [
-          0.166624,
-          1.158762,
-          -0.00748
+          0.172472,
+          1.15952,
+          -0.011176
         ],
         [
-          0.164086,
-          1.151863,
-          -0.008696
+          0.171815,
+          1.152865,
+          -0.013581
         ],
         [
-          0.159413,
-          1.142788,
-          -0.009162
+          0.150019,
+          1.144777,
+          -0.006426
         ],
         [
-          0.144544,
-          1.132103,
-          -0.003238
+          0.145027,
+          1.132001,
+          -0.003379
         ],
         [
           0.145674,
@@ -36366,19 +36534,19 @@
           -0.003695
         ],
         [
-          0.143233,
-          1.110367,
-          -0.002993
+          0.142721,
+          1.110448,
+          -0.002829
         ],
         [
-          0.140622,
-          1.099667,
-          -0.001829
+          0.138945,
+          1.099853,
+          -0.001298
         ],
         [
-          0.141494,
-          1.08866,
-          -0.00136
+          0.141424,
+          1.088664,
+          -0.001345
         ],
         [
           0.141608,
@@ -36401,29 +36569,29 @@
           0.003404
         ],
         [
-          0.143242,
-          1.035368,
-          0.005198
+          0.144643,
+          1.035637,
+          0.004959
         ],
         [
-          0.167141,
-          1.026263,
-          -0.00065
+          0.147105,
+          1.022416,
+          0.002761
         ],
         [
-          0.177186,
-          1.018862,
-          0.000144
+          0.186034,
+          1.020649,
+          -0.003725
         ],
         [
-          0.178821,
-          1.011498,
-          0.004907
+          0.189239,
+          1.013602,
+          0.000352
         ],
         [
-          0.171808,
-          1.003906,
-          0.016963
+          0.153387,
+          1.001315,
+          0.015293
         ],
         [
           0.150967,
@@ -36441,19 +36609,19 @@
           0.053661
         ],
         [
-          0.119337,
-          0.970464,
-          0.06032
+          0.120607,
+          0.970771,
+          0.06202
         ],
         [
-          0.111567,
-          0.963517,
-          0.068737
+          0.112044,
+          0.963463,
+          0.070662
         ],
         [
-          0.115149,
-          0.955067,
-          0.063875
+          0.115806,
+          0.954905,
+          0.065312
         ],
         [
           0.120982,
@@ -36481,24 +36649,24 @@
           0.031643
         ],
         [
-          0.165251,
-          0.930433,
-          0.023233
+          0.160587,
+          0.92965,
+          0.021564
         ],
         [
-          0.187582,
-          0.927222,
-          0.012356
+          0.164704,
+          0.924709,
+          0.007953
         ],
         [
-          0.186811,
-          0.921169,
-          0.003074
+          0.164402,
+          0.919694,
+          0.001296
         ],
         [
-          0.163084,
-          0.915168,
-          -0.008125
+          0.164351,
+          0.915251,
+          -0.008207
         ],
         [
           0.165215,
@@ -36921,19 +37089,19 @@
           -0.045465
         ],
         [
-          0.103664,
-          0.075348,
-          -0.046635
+          0.105253,
+          0.075753,
+          -0.047303
         ],
         [
-          0.105742,
-          0.06496,
-          -0.048342
+          0.108459,
+          0.063866,
+          -0.049461
         ],
         [
-          0.104593,
-          0.063696,
-          -0.038282
+          0.104991,
+          0.063658,
+          -0.038222
         ],
         [
           0.111566,
@@ -37321,9 +37489,9 @@
           0.040592
         ],
         [
-          -0.047856,
-          1.651896,
-          0.051928
+          -0.04886,
+          1.652245,
+          0.052899
         ],
         [
           -0.038293,
@@ -37521,24 +37689,24 @@
           -0.043111
         ],
         [
-          -0.055253,
-          1.531848,
-          -0.044863
+          -0.047465,
+          1.532822,
+          -0.041442
         ],
         [
-          -0.0557,
-          1.518949,
-          -0.046011
+          -0.046697,
+          1.518327,
+          -0.041653
         ],
         [
-          -0.059204,
-          1.504988,
-          -0.047716
+          -0.056491,
+          1.503892,
+          -0.046915
         ],
         [
-          -0.066028,
-          1.491811,
-          -0.051093
+          -0.058774,
+          1.485766,
+          -0.049175
         ],
         [
           -0.075376,
@@ -37561,14 +37729,14 @@
           -0.049165
         ],
         [
-          -0.099432,
-          1.448303,
-          -0.056656
+          -0.102437,
+          1.454294,
+          -0.056363
         ],
         [
-          -0.1044,
-          1.438985,
-          -0.079434
+          -0.106391,
+          1.443917,
+          -0.083126
         ],
         [
           -0.108694,
@@ -37576,9 +37744,9 @@
           -0.101988
         ],
         [
-          -0.113795,
-          1.422026,
-          -0.117037
+          -0.113273,
+          1.420651,
+          -0.115523
         ],
         [
           -0.122148,
@@ -37691,9 +37859,9 @@
           -0.001408
         ],
         [
-          -0.209118,
-          1.264495,
-          0.005979
+          -0.210336,
+          1.264669,
+          0.007828
         ],
         [
           -0.200177,
@@ -37736,19 +37904,19 @@
           0.010698
         ],
         [
-          -0.169215,
-          1.235312,
-          0.009932
+          -0.163748,
+          1.236035,
+          0.008362
         ],
         [
-          -0.170322,
-          1.232334,
-          0.010464
+          -0.168915,
+          1.233263,
+          0.006972
         ],
         [
-          -0.16647,
-          1.228887,
-          0.017015
+          -0.154165,
+          1.23046,
+          0.013677
         ],
         [
           -0.143516,
@@ -37756,39 +37924,39 @@
           0.040815
         ],
         [
-          -0.125895,
-          1.215659,
-          0.06787
+          -0.129877,
+          1.215818,
+          0.069986
         ],
         [
-          -0.102287,
-          1.208693,
-          0.093652
+          -0.104919,
+          1.208839,
+          0.098256
         ],
         [
-          -0.090388,
-          1.203728,
-          0.107674
+          -0.090994,
+          1.203667,
+          0.109067
         ],
         [
-          -0.09741,
-          1.198642,
-          0.100421
+          -0.098073,
+          1.198575,
+          0.101947
         ],
         [
-          -0.104995,
-          1.193784,
-          0.095508
+          -0.106305,
+          1.193508,
+          0.097043
         ],
         [
-          -0.112305,
-          1.188873,
-          0.089088
+          -0.113285,
+          1.188648,
+          0.090254
         ],
         [
-          -0.122239,
-          1.184487,
-          0.076422
+          -0.123658,
+          1.184254,
+          0.077538
         ],
         [
           -0.139195,
@@ -37796,44 +37964,44 @@
           0.049838
         ],
         [
-          -0.157536,
-          1.179031,
-          0.028426
+          -0.148164,
+          1.179338,
+          0.026651
         ],
         [
-          -0.171426,
-          1.176135,
-          0.004229
+          -0.175122,
+          1.178438,
+          -0.001668
         ],
         [
-          -0.167845,
-          1.170734,
-          -0.001775
+          -0.173198,
+          1.172086,
+          -0.006107
         ],
         [
-          -0.167273,
-          1.164731,
-          -0.004653
+          -0.172982,
+          1.165982,
+          -0.008278
         ],
         [
-          -0.166753,
-          1.158752,
-          -0.007293
+          -0.172601,
+          1.15951,
+          -0.010989
         ],
         [
-          -0.164215,
-          1.151853,
-          -0.008509
+          -0.171944,
+          1.152855,
+          -0.013394
         ],
         [
-          -0.15946,
-          1.142837,
-          -0.009026
+          -0.143417,
+          1.146171,
+          -0.004563
         ],
         [
-          -0.144544,
-          1.132103,
-          -0.003238
+          -0.144059,
+          1.132205,
+          -0.003105
         ],
         [
           -0.139197,
@@ -37841,19 +38009,19 @@
           -0.001604
         ],
         [
-          -0.136584,
-          1.11151,
-          -0.001149
+          -0.137105,
+          1.111413,
+          -0.001272
         ],
         [
-          -0.136909,
-          1.100066,
-          -0.000651
+          -0.138587,
+          1.099892,
+          -0.001184
         ],
         [
-          -0.134756,
-          1.089204,
-          0.000415
+          -0.134824,
+          1.089197,
+          0.000393
         ],
         [
           -0.134801,
@@ -37876,29 +38044,29 @@
           0.004839
         ],
         [
-          -0.142483,
-          1.03522,
-          0.005352
+          -0.141101,
+          1.034946,
+          0.005676
         ],
         [
-          -0.16716,
-          1.02626,
-          -0.00053
+          -0.143008,
+          1.021616,
+          0.00359
         ],
         [
-          -0.177177,
-          1.018881,
-          0.000132
+          -0.186025,
+          1.020668,
+          -0.003737
         ],
         [
-          -0.178812,
-          1.011517,
-          0.004895
+          -0.18923,
+          1.013621,
+          0.00034
         ],
         [
-          -0.171807,
-          1.00388,
-          0.017014
+          -0.146484,
+          1.000322,
+          0.014692
         ],
         [
           -0.1443,
@@ -37916,19 +38084,19 @@
           0.053694
         ],
         [
-          -0.119231,
-          0.970506,
-          0.060395
+          -0.120501,
+          0.970813,
+          0.062095
         ],
         [
-          -0.111567,
-          0.963517,
-          0.068737
+          -0.112044,
+          0.963463,
+          0.070662
         ],
         [
-          -0.115241,
-          0.955057,
-          0.063834
+          -0.115898,
+          0.954895,
+          0.065271
         ],
         [
           -0.120982,
@@ -37956,24 +38124,24 @@
           0.028767
         ],
         [
-          -0.165193,
-          0.930497,
-          0.023355
+          -0.154052,
+          0.928511,
+          0.019332
         ],
         [
-          -0.187614,
-          0.927336,
-          0.012034
+          -0.157878,
+          0.923845,
+          0.006672
         ],
         [
-          -0.186816,
-          0.92118,
-          0.002974
+          -0.16111,
+          0.919435,
+          0.001083
         ],
         [
-          -0.163084,
-          0.915168,
-          -0.008125
+          -0.161816,
+          0.915112,
+          -0.008046
         ],
         [
           -0.158352,
@@ -38396,19 +38564,19 @@
           -0.044736
         ],
         [
-          -0.103857,
-          0.075326,
-          -0.046264
+          -0.105473,
+          0.075728,
+          -0.046881
         ],
         [
-          -0.105742,
-          0.06496,
-          -0.048342
+          -0.108459,
+          0.063866,
+          -0.049461
         ],
         [
-          -0.104604,
-          0.063714,
-          -0.038337
+          -0.105,
+          0.063674,
+          -0.038271
         ],
         [
           -0.104648,
@@ -38916,34 +39084,34 @@
           0.045139
         ],
         [
-          0.01687,
-          0.77252,
-          0.049645
+          0.016805,
+          0.771043,
+          0.049369
         ],
         [
-          0.010531,
-          0.780269,
-          0.059253
+          0.009566,
+          0.779298,
+          0.064605
         ],
         [
-          0.012855,
-          0.779737,
-          0.057183
+          0.011191,
+          0.775942,
+          0.061936
         ],
         [
-          0.016253,
-          0.781539,
-          0.052081
+          0.027793,
+          0.779471,
+          0.052377
         ],
         [
-          0.025996,
-          0.782816,
-          0.041979
+          0.030063,
+          0.780742,
+          0.046946
         ],
         [
-          0.022971,
-          0.793112,
-          0.049698
+          0.02487,
+          0.793811,
+          0.050038
         ],
         [
           0.029667,
@@ -39056,14 +39224,14 @@
           0.017034
         ],
         [
-          0.148449,
-          1.036381,
-          0.011252
+          0.146953,
+          1.0361,
+          0.011359
         ],
         [
-          0.16458,
-          1.049141,
-          0.000324
+          0.143991,
+          1.04808,
+          0.004991
         ],
         [
           0.178742,
@@ -39081,19 +39249,19 @@
           -0.008812
         ],
         [
-          0.168139,
-          1.091793,
-          -0.009049
+          0.173391,
+          1.091798,
+          -0.011717
         ],
         [
-          0.145813,
-          1.100396,
-          -0.002384
+          0.139206,
+          1.101131,
+          -0.000291
         ],
         [
-          0.168897,
-          1.110839,
-          -0.009322
+          0.173961,
+          1.110509,
+          -0.011877
         ],
         [
           0.176535,
@@ -39106,19 +39274,19 @@
           -0.006202
         ],
         [
-          0.170335,
-          1.139968,
-          -0.005176
+          0.176071,
+          1.140333,
+          -0.009359
         ],
         [
-          0.167969,
-          1.147007,
-          0.001746
+          0.177407,
+          1.148109,
+          -0.006538
         ],
         [
-          0.160343,
-          1.151598,
-          0.020389
+          0.153409,
+          1.152387,
+          0.019635
         ],
         [
           0.140296,
@@ -39151,9 +39319,9 @@
           0.099442
         ],
         [
-          0.091658,
-          1.196334,
-          0.105765
+          0.091633,
+          1.19634,
+          0.105703
         ],
         [
           0.08276,
@@ -39586,34 +39754,34 @@
           0.044934
         ],
         [
-          -0.016915,
-          0.77248,
-          0.049822
+          -0.01685,
+          0.771003,
+          0.049546
         ],
         [
-          -0.010531,
-          0.780269,
-          0.059253
+          -0.009566,
+          0.779298,
+          0.064605
         ],
         [
-          -0.012818,
-          0.779553,
-          0.057066
+          -0.011253,
+          0.775908,
+          0.061933
         ],
         [
-          -0.016341,
-          0.78188,
-          0.051899
+          -0.027836,
+          0.779636,
+          0.052294
         ],
         [
-          -0.025996,
-          0.782816,
-          0.041979
+          -0.030063,
+          0.780742,
+          0.046946
         ],
         [
-          -0.022982,
-          0.793047,
-          0.04978
+          -0.024881,
+          0.793746,
+          0.05012
         ],
         [
           -0.029741,
@@ -39726,14 +39894,14 @@
           0.017044
         ],
         [
-          -0.148449,
-          1.036286,
-          0.0111
+          -0.140103,
+          1.034707,
+          0.01158
         ],
         [
-          -0.164602,
-          1.049459,
-          0.000612
+          -0.137156,
+          1.047505,
+          0.006356
         ],
         [
           -0.178831,
@@ -39751,19 +39919,19 @@
           -0.009066
         ],
         [
-          -0.168187,
-          1.09173,
-          -0.008958
+          -0.17325,
+          1.09175,
+          -0.012033
         ],
         [
-          -0.145813,
-          1.100396,
-          -0.002384
+          -0.139206,
+          1.101131,
+          -0.000291
         ],
         [
-          -0.168922,
-          1.110882,
-          -0.009271
+          -0.173986,
+          1.110552,
+          -0.011826
         ],
         [
           -0.176449,
@@ -39776,19 +39944,19 @@
           -0.006565
         ],
         [
-          -0.170423,
-          1.140132,
-          -0.005053
+          -0.176159,
+          1.140497,
+          -0.009236
         ],
         [
-          -0.167805,
-          1.146876,
-          0.001522
+          -0.177243,
+          1.147978,
+          -0.006762
         ],
         [
-          -0.160301,
-          1.151565,
-          0.02065
+          -0.146504,
+          1.153228,
+          0.01886
         ],
         [
           -0.140289,
@@ -39821,9 +39989,9 @@
           0.099346
         ],
         [
-          -0.091646,
-          1.196323,
-          0.105769
+          -0.09162,
+          1.196329,
+          0.105707
         ],
         [
           -0.08276,
@@ -39901,24 +40069,24 @@
           0.017345
         ],
         [
-          0,
-          0.833504,
-          0.034885
+          0.000066,
+          0.832628,
+          0.033342
         ],
         [
-          0,
-          0.839545,
-          0.053064
+          0.000021,
+          0.839107,
+          0.05518
         ],
         [
-          0,
-          0.840963,
-          0.07314
+          0.000332,
+          0.848055,
+          0.083895
         ],
         [
-          0,
-          0.847634,
-          0.082417
+          0.000056,
+          0.848593,
+          0.08387
         ],
         [
           0,
@@ -39926,9 +40094,9 @@
           0.082154
         ],
         [
-          0,
-          0.867971,
-          0.079335
+          0.000089,
+          0.866836,
+          0.078034
         ],
         [
           0,
@@ -40256,19 +40424,19 @@
           0.036715
         ],
         [
-          0.00004,
-          1.483246,
-          0.047475
+          0.000171,
+          1.486071,
+          0.047579
         ],
         [
-          0.000053,
-          1.498624,
-          0.065784
+          0.000221,
+          1.49461,
+          0.065899
         ],
         [
-          0.000067,
-          1.50464,
-          0.074813
+          -0.000084,
+          1.50335,
+          0.078618
         ],
         [
           0.00008,
@@ -40795,39 +40963,39 @@
           -0.070966
         ],
         [
-          0,
-          1.705322,
-          -0.059962
+          0.000012,
+          1.707154,
+          -0.06051
+        ],
+        [
+          0.000243,
+          1.714839,
+          -0.044991
+        ],
+        [
+          -0.000657,
+          1.710481,
+          -0.053619
         ],
         [
           0,
-          1.7104,
-          -0.044223
+          1.707747,
+          -0.054636
         ],
         [
-          0,
-          1.708348,
-          -0.053601
+          0.000242,
+          1.714287,
+          -0.039957
         ],
         [
-          0,
-          1.708191,
-          -0.054769
+          0.000187,
+          1.716996,
+          -0.005745
         ],
         [
-          0,
-          1.710209,
-          -0.039252
-        ],
-        [
-          0,
-          1.71154,
-          -0.005842
-        ],
-        [
-          0,
-          1.707225,
-          0.012657
+          -0.000147,
+          1.710794,
+          0.013672
         ],
         [
           0,
@@ -40940,9 +41108,9 @@
           0.104179
         ],
         [
-          0.01053,
-          1.553413,
-          0.094403
+          0.009649,
+          1.55441,
+          0.093348
         ],
         [
           0.012098,

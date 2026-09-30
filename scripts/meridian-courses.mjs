@@ -27,7 +27,6 @@ const codes=(ch,from,to)=>Array.from({length:to-from+1},(_,i)=>`${ch}-${from+i}`
 const R=(seg,pos,az)=>({seg,...pos,az});
 const T=(pos,lat,face)=>({seg:'trunk',...pos,lat,face});
 
-// LU intentionally keeps its previously reviewed legacy thumb course in scripts/build-furia-schematic.mjs.
 export const courseSpecs={
   LI:[{
     id:'main',codes:codes('LI',1,20),
@@ -48,6 +47,7 @@ export const courseSpecs={
   SP:[{id:'main',codes:codes('SP',1,21),waypoints:pts('SP',1,21),
      note:'Góc trong móng ngón chân cái → bờ da gan/mu chân → trước mắt cá trong → bờ sau xương chày (cắt chéo và đi trước kinh Can) → mặt trong gối, đùi → bụng → ngực (Chu vinh, Đại bao).'}],
   SI:[{id:'main',codes:codes('SI',1,19),waypoints:pts('SI',1,19),note:'Góc ngoài móng ngón út → bờ trụ bàn tay → cổ tay (Uyển cốt, Dương cốc) → bờ sau cẳng tay → khuỷu (giữa mỏm khuỷu và mỏm trên lồi cầu trong) → mặt sau trong cánh tay → sau vai → hố trên xương bả → cổ → má → trước tai (Thính cung).'}],
+  LU:[{id:'main',codes:codes('LU',1,11),waypoints:pts('LU',1,11),note:'Trung tiêu → (nội tạng không vẽ) → Trung phủ dưới xương đòn → mặt trước ngoài cánh tay → Xích trạch → bờ ngoài cẳng tay → Kinh cừ, Thái uyên → mô cái (Ngư tế) → đầu ngón cái (Thiếu thương).'}],
   HT:[{id:'main',codes:codes('HT',1,9),
      note:'Từ hõm nách → bờ sau mặt trong cánh tay (trong kinh Phế và Tâm bào) → khuỷu (trong) → bờ trụ cẳng tay phía gan tay → xương đậu → gan tay → bờ quay ngón út (Thiếu xung).',
      waypoints:[P('HT-1'),P('HT-2'),P('HT-3'),R('forearm',{t:.3},-82),...pts('HT',4,9)]}],

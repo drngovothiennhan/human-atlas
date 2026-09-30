@@ -514,7 +514,14 @@ function cpTriSkin(p,a,b,c){
 }
 const skinTris=[],skinCen=[];
 for(let t=0;t<indices.length/3;t++){const a=vertex(indices[t*3]),b=vertex(indices[t*3+1]),c=vertex(indices[t*3+2]);skinTris.push([a,b,c]);skinCen.push([(a[0]+b[0]+c[0])/3,(a[1]+b[1]+c[1])/3,(a[2]+b[2]+c[2])/3])}
+function snapCourseToSkin(points){
+  // Final guarantee: every drawn point lies on the skin surface (chords across the concave waist/flank used to float 20-27 mm outside the body).
+  return points.map(src=>{const b=toBrowser(src),q=nearestSkinPoint(b);return norm(sub(q,b))>.0015?fromBrowser(q):src});
+}
 function flowSmoothTrunk(meridianId,points){
+  return snapCourseToSkin(flowSmoothTrunkInner(meridianId,points));
+}
+function flowSmoothTrunkInner(meridianId,points){
   // Whole-course relaxation: removes the sub-centimetre jitter that comes from re-casting every 12 mm onto a coarse skin mesh
   // and from sparse anchors. Head/neck (y>1.42) and the straight CV/GV midlines are left alone. Each point may move at most
   // 20 mm from its cast position; the acupoint markers are snapped onto the relaxed line afterwards (see snapAnchorsToCourses).
