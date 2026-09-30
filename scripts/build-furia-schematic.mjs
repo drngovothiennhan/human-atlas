@@ -2,6 +2,7 @@ import {readFile,mkdir,writeFile} from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {courseSpecs} from './meridian-courses.mjs';
+import {applyTextbookAnchorFixes} from './anchor-corrections.mjs';
 
 const ROOT=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const VENDOR=path.join(ROOT,'vendor','furia-acupuncture-3d');
@@ -178,6 +179,7 @@ const sourceSideWarnings=pointDoc.points
     normalizedSide:'MIDLINE',
     reason:'Upstream side metadata is bilateral, but CV/GV are canonical midline channels; one midline anchor is emitted while the original side is retained here for provenance.'
   }));
+const textbookAnchorFixes=applyTextbookAnchorFixes(pointDoc.points,canonicalCode);
 const anchorOut=[];
 for(const point of pointDoc.points){
   const canonicalPointCode=canonicalCode(point.code),right=resolveRight(point.anchor,canonicalPointCode),meridianId=canonicalChannel(point.channel),canonicalMidline=meridianId==='CV'||meridianId==='GV';
@@ -531,7 +533,7 @@ for(const sourceMeridianId of Object.keys(topology.paths)){
 
 const routeOrigins={ST:{label:'Điểm khởi đường Kinh Vị',description:'Khởi từ vùng ngoài cánh mũi trước khi đi tới huyệt ST-1 Thừa khấp; đây là mốc đường kinh, không phải huyệt.',notAnAcupoint:true}};
 const out={schemaVersion:'1.3.0',coordinateSystem:'BodyParts3D-4.0-browser-meters-Y-up',verificationStatus:'UNVERIFIED',calibrationStatus:'DOCUMENT_CORROBORATED_3D',calibration:{status:'DOCUMENT_CORROBORATED_3D',method:'Anatomical landmarks first; proportional cun/region rules second; final positions are raycast to the BodyParts3D FMA7163 skin. Two-dimensional references corroborate region/course but never promote a point to verified 3D.',documentSourceId:documentReference.sourceId,documentTitle:documentReference.document.title+' — '+documentReference.document.author,documentPages:documentReference.document.pdfPages},methodology:{priority:['WHO_STANDARD_LOCATION_METHOD','TARA_ANATOMICAL_LANDMARKS','HIU_DOCUMENT_CORROBORATION','BODYPARTS3D_SKIN_PROJECTION'],whoStandard:'WHO Standard Acupuncture Point Locations in the Western Pacific Region (2008)',taraSource:anatomyLocationDoc.source.id,research:['PMID:24761187','PMID:26101534'],flowDirection:'canonical/source topology order'},source:{repository:'FuriaRozkwit/acupuncture-3d',commit:'1fc9ec98d365c9fb035844e2775c1be05a0a05fc',license:'MIT anchors/code; CC BY-SA calibrated anatomy metadata',skin:'BodyParts3D FMA7163'},anchors:anchorOut,paths,omittedTopology:omitted,generatedBy:'scripts/build-furia-schematic.mjs'};
-out.channelAliases=channelAliases;out.sourceSideWarnings=sourceSideWarnings;out.routeOrigins=routeOrigins;out.spatialOverrides=Object.keys(spatialOverrides);
+out.channelAliases=channelAliases;out.sourceSideWarnings=sourceSideWarnings;out.routeOrigins=routeOrigins;out.spatialOverrides=Object.keys(spatialOverrides);out.textbookAnchorFixes=textbookAnchorFixes;
 out.anchorCoverage={catalogPoints:catalogCodes.size,generatedPointCodes:anchorPointCodes.size,generatedAnchors:anchorOut.length,missingAnchorCodes};
 out.pathCoverage={catalogPoints:codes.size,sourceTopologyPoints:topologyCodes.size,generatedTopologyPoints:generatedPathCodes.size,missingGenerated,extraGenerated};
 out.endpointAudit=endpointAudit;
