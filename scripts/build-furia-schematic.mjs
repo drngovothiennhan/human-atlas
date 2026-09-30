@@ -514,39 +514,59 @@ function cpTriSkin(p,a,b,c){
 }
 const skinTris=[],skinCen=[];
 for(let t=0;t<indices.length/3;t++){const a=vertex(indices[t*3]),b=vertex(indices[t*3+1]),c=vertex(indices[t*3+2]);skinTris.push([a,b,c]);skinCen.push([(a[0]+b[0]+c[0])/3,(a[1]+b[1]+c[1])/3,(a[2]+b[2]+c[2])/3])}
-function flowSmoothTrunk(meridianId,points,pins=new Set()){
-  const b=points.map(toBrowser);
-  const relax=(inRun,passes,rounds)=>{
-    let i=0;
-    while(i<b.length){
-      if(!inRun[i]){i++;continue}
-      let j=i;while(j+1<b.length&&inRun[j+1])j++;
-      if(j-i>=6){
-        for(let round=0;round<rounds;round++){
-          for(let pass=0;pass<passes;pass++){const nx=b.map(q=>q.slice());for(let k=i+1;k<j;k++)if(!pins.has(k))nx[k]=[0,1,2].map(a=>(b[k-1][a]+2*b[k][a]+b[k+1][a])/4);for(let k=i+1;k<j;k++)b[k]=nx[k]}
-          for(let k=i+1;k<j;k++)if(!pins.has(k))b[k]=nearestSkinPoint(b[k]);
+function flowSmoothTrunk(meridianId,points){
+  // Whole-course relaxation: removes the sub-centimetre jitter that comes from re-casting every 12 mm onto a coarse skin mesh
+  // and from sparse anchors. Head/neck (y>1.42) and the straight CV/GV midlines are left alone. Each point may move at most
+  // 20 mm from its cast position; the acupoint markers are snapped onto the relaxed line afterwards (see snapAnchorsToCourses).
+  if(meridianId==='CV'||meridianId==='GV')return points;
+  const b=points.map(toBrowser),orig=b.map(q=>q.slice()),free=b.map((q,i)=>i>0&&i<b.length-1&&q[1]<1.42);
+  let i=0;
+  while(i<b.length){
+    if(!free[i]){i++;continue}
+    let j=i;while(j+1<b.length&&free[j+1])j++;
+    if(j-i>=4){
+      for(let round=0;round<4;round++){
+        for(let pass=0;pass<12;pass++){const nx=b.map(q=>q.slice());for(let k=i;k<=j;k++)nx[k]=[0,1,2].map(a=>(b[k-1][a]+2*b[k][a]+b[k+1][a])/4);for(let k=i;k<=j;k++)b[k]=nx[k]}
+        for(let k=i;k<=j;k++){
+          let q=nearestSkinPoint(b[k]);const dv=sub(q,orig[k]),dn=norm(dv);
+          if(dn>.009)q=add(orig[k],mul(dv,.009/dn));
+          b[k]=q;
         }
       }
-      i=j+1;
     }
-  };
-  if(FLOW_SMOOTH_TRUNK.has(meridianId))relax(b.map(q=>q[1]>.80&&q[1]<1.34),25,4);
-  // Hand: sparse finger/palm anchors make the drawn route loop between them; relax it into a single stroke along the hand.
-  if(FLOW_SMOOTH_HAND.has(meridianId))relax(b.map(q=>q[1]>.70&&q[1]<.90&&Math.abs(q[0])>.17),6,3);
+    i=j+1;
+  }
   return b.map(fromBrowser);
+}
+function snapAnchorsToCourses(){
+  // Markers must sit on their meridian line: move each acupoint to the nearest point of its (relaxed) drawn course, within 25 mm.
+  let moved=0;
+  for(const a of anchorOut){
+    let best=null,bd=Infinity;
+    for(const pth of generatedCourses){
+      if(pth.meridianId!==a.meridianId||!(pth.side===a.side||pth.side==='MIDLINE'))continue;
+      for(let i=0;i<pth.points.length-1;i++){
+        const A=pth.points[i],B=pth.points[i+1],ab=sub(B,A),l=dot(ab,ab)||1e-12,t=Math.max(0,Math.min(1,dot(sub([a.x,a.y,a.z],A),ab)/l)),q=add(A,mul(ab,t)),d=norm(sub(q,[a.x,a.y,a.z]));
+        if(d<bd){bd=d;best=q}
+      }
+    }
+    if(best&&bd>.0005&&bd<.02&&a.pointCode!=='GV-28'){a.x=round(best[0]);a.y=round(best[1]);a.z=round(best[2]);a.snappedToCourseMm=+(bd*1000).toFixed(1);moved++}
+  }
+  console.log('ANCHOR_SNAP moved='+moved);
 }
 const generatedCourses=[];
 for(const meridianId of courseMeridianOrder){
   const specs=courseSpecs[meridianId];if(!specs)continue;
   const mid=meridianId==='CV'||meridianId==='GV',sides=mid?['MIDLINE']:['RIGHT','LEFT'];
   specs.forEach((spec,gi)=>{
-    const built=buildCourseRight(spec.waypoints),smooth=flowSmoothTrunk(meridianId,smoothCourse(built),new Set(built.waypointIndex));
+    const built=buildCourseRight(spec.waypoints),smooth=flowSmoothTrunk(meridianId,smoothCourse(built));
     for(const side of sides){
       const points=smooth.map(src=>{const b=toBrowser(src);return [round(side==='LEFT'?-b[0]:b[0]),round(b[1]),round(b[2])]});
       generatedCourses.push({meridianId,side,groupIndex:gi,courseId:spec.id,pointCodes:spec.codes.slice(),points,verificationStatus:'UNVERIFIED',sourceKind:'LICENSED_SCHEMATIC',flowDirection:'SOURCE_ORDER',directionStart:spec.codes[0],directionEnd:spec.codes.at(-1),surfaceProjection:'BodyParts3D FMA7163 textbook-course surface-following',surfaceProjectionStep:'12mm',courseSource:'HIU-TEXTBOOK-COURSE-2026-09',anchorCoordinatePolicy:'acupoint anchors unchanged; drawn course follows the textbook route, not straight chords between anchors',...(spec.note?{courseRule:spec.note}:{})});
     }
   });
 }
+snapAnchorsToCourses();
 {
   const covered=new Set(generatedCourses.map(item=>item.meridianId)),legacy=paths.filter(item=>!covered.has(item.meridianId));
   paths.length=0;paths.push(...legacy,...generatedCourses);
@@ -601,9 +621,11 @@ const SURFACE_LIFT_M=.0035;
   for(const pathItem of paths){
     if(!pathItem.courseSource)continue;// legacy LU/SI hand paths keep their tested interpolation
     pathItem.points=pathItem.points.map((b,pi,arr)=>{
-      if(pi===0||pi===arr.length-1||anchorOut.some(a=>Math.abs(a.x-b[0])+Math.abs(a.y-b[1])+Math.abs(a.z-b[2])<.002))return b;// points on canonical anchors stay exactly on them
+      if(pi===0||pi===arr.length-1)return b;
       const n=outward(b);if(!n){missed++;return b}
-      lifted++;const q=add(b,mul(n,SURFACE_LIFT_M));if(q[0]*b[0]<0||Math.abs(b[0])<.001)q[0]=b[0];// never cross the midline
+      let dA=Infinity;for(const a of anchorOut){const d=Math.abs(a.x-b[0])+Math.abs(a.y-b[1])+Math.abs(a.z-b[2]);if(d<dA)dA=d}
+      const taper=Math.max(0,Math.min(1,(dA-.002)/.012));// no lift at an acupoint, full lift 14 mm away: markers stay exactly on the line
+      lifted++;const q=add(b,mul(n,SURFACE_LIFT_M*taper));if(q[0]*b[0]<0||Math.abs(b[0])<.001)q[0]=b[0];// never cross the midline
       return [round(q[0]),round(q[1]),round(q[2])];
     });
     pathItem.surfaceLiftMeters=SURFACE_LIFT_M;
