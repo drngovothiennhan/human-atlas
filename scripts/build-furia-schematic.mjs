@@ -493,12 +493,49 @@ function smoothCourse({points,waypointIndex},passes=2){
   return cur;
 }
 const courseMeridianOrder=Object.keys(topology.paths).map(canonicalChannel);
+// Flow smoothing: anchors of some channels alternate front/back on the trunk (e.g. GB-24 front, GB-25 flank, GB-27 front,
+// GB-30 back). Drawing straight through each one gives zig-zag loops. On the trunk the drawn line is relaxed (Laplacian) and
+// re-snapped to the skin, so it reads as one flowing channel; the acupoint markers stay at their true anchors.
+const FLOW_SMOOTH_TRUNK=new Set(['GB','LR','SP','ST']);
+function nearestSkinPoint(p){
+  let best=null,bd=Infinity;
+  for(let t=0;t<skinTris.length;t++){const c=skinCen[t];const dx=c[0]-p[0],dy=c[1]-p[1],dz=c[2]-p[2];if(dx*dx+dy*dy+dz*dz>.04)continue;const q=cpTriSkin(p,skinTris[t][0],skinTris[t][1],skinTris[t][2]),d=(q[0]-p[0])**2+(q[1]-p[1])**2+(q[2]-p[2])**2;if(d<bd){bd=d;best=q}}
+  return best||p;
+}
+function cpTriSkin(p,a,b,c){
+  const ab=sub(b,a),ac=sub(c,a),ap=sub(p,a),d1=dot(ab,ap),d2=dot(ac,ap);if(d1<=0&&d2<=0)return a;
+  const bp=sub(p,b),d3=dot(ab,bp),d4=dot(ac,bp);if(d3>=0&&d4<=d3)return b;
+  const vc=d1*d4-d3*d2;if(vc<=0&&d1>=0&&d3<=0)return add(a,mul(ab,d1/(d1-d3)));
+  const cp=sub(p,c),d5=dot(ab,cp),d6=dot(ac,cp);if(d6>=0&&d5<=d6)return c;
+  const vb=d5*d2-d1*d6;if(vb<=0&&d2>=0&&d6<=0)return add(a,mul(ac,d2/(d2-d6)));
+  const va=d3*d6-d5*d4;if(va<=0&&(d4-d3)>=0&&(d5-d6)>=0)return add(b,mul(sub(c,b),(d4-d3)/((d4-d3)+(d5-d6))));
+  const den=1/(va+vb+vc);return add(a,add(mul(ab,vb*den),mul(ac,vc*den)));
+}
+const skinTris=[],skinCen=[];
+for(let t=0;t<indices.length/3;t++){const a=vertex(indices[t*3]),b=vertex(indices[t*3+1]),c=vertex(indices[t*3+2]);skinTris.push([a,b,c]);skinCen.push([(a[0]+b[0]+c[0])/3,(a[1]+b[1]+c[1])/3,(a[2]+b[2]+c[2])/3])}
+function flowSmoothTrunk(meridianId,points){
+  if(!FLOW_SMOOTH_TRUNK.has(meridianId))return points;
+  const b=points.map(toBrowser),inRun=b.map(q=>q[1]>.80&&q[1]<1.34);
+  let i=0;
+  while(i<b.length){
+    if(!inRun[i]){i++;continue}
+    let j=i;while(j+1<b.length&&inRun[j+1])j++;
+    if(j-i>=6){
+      for(let round=0;round<4;round++){
+        for(let pass=0;pass<25;pass++){const nx=b.map(q=>q.slice());for(let k=i+1;k<j;k++)nx[k]=[0,1,2].map(a=>(b[k-1][a]+2*b[k][a]+b[k+1][a])/4);for(let k=i+1;k<j;k++)b[k]=nx[k]}
+        for(let k=i+1;k<j;k++)b[k]=nearestSkinPoint(b[k]);
+      }
+    }
+    i=j+1;
+  }
+  return b.map(fromBrowser);
+}
 const generatedCourses=[];
 for(const meridianId of courseMeridianOrder){
   const specs=courseSpecs[meridianId];if(!specs)continue;
   const mid=meridianId==='CV'||meridianId==='GV',sides=mid?['MIDLINE']:['RIGHT','LEFT'];
   specs.forEach((spec,gi)=>{
-    const built=buildCourseRight(spec.waypoints),smooth=smoothCourse(built);
+    const built=buildCourseRight(spec.waypoints),smooth=flowSmoothTrunk(meridianId,smoothCourse(built));
     for(const side of sides){
       const points=smooth.map(src=>{const b=toBrowser(src);return [round(side==='LEFT'?-b[0]:b[0]),round(b[1]),round(b[2])]});
       generatedCourses.push({meridianId,side,groupIndex:gi,courseId:spec.id,pointCodes:spec.codes.slice(),points,verificationStatus:'UNVERIFIED',sourceKind:'LICENSED_SCHEMATIC',flowDirection:'SOURCE_ORDER',directionStart:spec.codes[0],directionEnd:spec.codes.at(-1),surfaceProjection:'BodyParts3D FMA7163 textbook-course surface-following',surfaceProjectionStep:'12mm',courseSource:'HIU-TEXTBOOK-COURSE-2026-09',anchorCoordinatePolicy:'acupoint anchors unchanged; drawn course follows the textbook route, not straight chords between anchors',...(spec.note?{courseRule:spec.note}:{})});
