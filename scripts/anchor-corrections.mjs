@@ -33,7 +33,11 @@ const REPLACE={
   'GB-19':{seg:'head',z_frac:zf(1.62),lat:2.25,face:'posterior'},
   'GB-20':{seg:'head',z_frac:zf(1.56),lat:2.6,face:'posterior'},
   // ST-41 (ankle crease, between the extensor tendons) was cast from the talus 6.5 cm above the crease.
-  'ST-41':{seg:'shank',cun:.7,from:'p1',az:0}
+  'ST-41':{seg:'shank',cun:.7,from:'p1',az:0},
+  // SI-2/SI-3: the vendor rays were cast ulnar-ward from a bone centroid that lies outside the skin of the little finger and hit the thigh
+  // (~8 cm off the hand). Re-cast from the SI-1 nail corner along the finger: SI-2 distal to the 5th MCP joint, SI-3 proximal to it.
+  'SI-2':{struct:'Distal phalanx of fifth finger of hand',along:.82,dir:'dorsal',shift:{ulnar:5,long:-44},region:'hand'},
+  'SI-3':{struct:'Distal phalanx of fifth finger of hand',along:.82,dir:'dorsal',shift:{ulnar:5,long:-58},region:'hand'}
 };
 
 const stripZ=a=>{const {z_frac,z_from,z_cun,t,cun,from,vertebra,dz_cun,...rest}=a;return rest};

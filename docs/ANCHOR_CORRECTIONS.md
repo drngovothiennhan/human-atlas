@@ -19,3 +19,9 @@ The sternum is 9 cun from the suprasternal notch (CV-22) to the xiphisternal joi
 
 ## Not yet audited
 Upper arm, thigh, face and hand/foot fine points still use vendor anchors (no gross errors found by ordering/monotonic checks).
+
+## Pass 3 (markers on lines, hand, HT/LI/BL)
+- Rule: every acupoint marker must lie on its own meridian line (tests/schematic-spatial.test.mjs, tolerance 4 mm; only GV-28, inside the mouth, is exempt).
+- Flow smoothing (trunk GB/LR/SP/ST, hand LI/HT/PC/TE) now pins every waypoint at its anchor, so lines are relaxed only between acupoints.
+- SI-2/SI-3: vendor rays landed on the thigh (~8 cm medial of the hand). Re-cast from the SI-1 nail corner along the little finger; SI is now a normal course (SI-1…SI-19).
+- HT: course passes through HT-2 (was 30 mm off). LI: course passes through LI-16 (Cự cốt) before GV-14. BL-39: explicit short spur from BL-38.

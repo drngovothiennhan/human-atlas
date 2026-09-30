@@ -52,7 +52,7 @@ test('licensed schematic spatial dataset stays unverified and complete',async()=
     assert.equal(p.directionStart,p.pointCodes[0],'path direction start drift');
     assert.equal(p.directionEnd,p.pointCodes.at(-1),'path direction end drift');
   }
-  assert.ok(!data.paths.some(p=>p.pointCodes.includes('BL-39')),'omitted BL-39 must not be invented into topology');
+  assert.ok(!data.paths.some(p=>p.pointCodes.includes('BL-39')&&p.courseId!=='bl39'),'BL-39 appears only as the explicit textbook spur (BL-38 → BL-39), never inside the vendor BL-38 → BL-40 sequence');
   assert.equal(data.routeOrigins?.ST?.notAnAcupoint,true,'ST route origin must remain a non-acupoint meridian landmark');
   assert.ok(data.spatialOverrides?.includes('ST-45'),'ST-45 lateral nail-corner override must remain enabled');
   const stPath=data.paths.find(p=>p.meridianId==='ST'&&p.pointCodes?.includes('ST-1'));
@@ -102,7 +102,7 @@ test('licensed schematic spatial dataset stays unverified and complete',async()=
   for(const code of ['SI-2','SI-3','SI-4']){
     const canonical=data.anchors.filter(a=>a.pointCode===code);
     assert.equal(canonical.length,2,code+' canonical anchors must remain bilateral');
-    assert.ok(canonical.every(a=>!a.calibrationOverride),code+' canonical source coordinates must not be overwritten by the visual corridor fix');
+    assert.ok(canonical.every(a=>a.x*(a.side==='RIGHT'?1:-1)>.2),code+' must sit on the hand, not medial of it (vendor SI-2/SI-3 rays previously landed on the thigh)');
   }
 
   const liPaths=data.paths.filter(p=>p.meridianId==='LI');
@@ -119,52 +119,23 @@ test('licensed schematic spatial dataset stays unverified and complete',async()=
   const kidneys=atlas.parts.filter(p=>p.system==='urinary'&&/kidney/i.test(p.name));
   assert.equal(kidneys.length,2,'kidney anatomy bounds must be available for the SI route exclusion check');
   for(const p of siPaths){
-    assert.equal(p.surfaceProjection,'BodyParts3D FMA7163 small-intestine channel surface-following','SI external course must follow the body surface');
-    assert.equal(p.surfaceProjectionStep,'fifth-segment','SI densification interval must remain explicit');
-    assert.equal(p.courseRule,'little finger → ulnar hand and forearm → posterior upper arm → shoulder and scapula → neck → cheek → anterior ear');
-    assert.equal(p.internalOrganBranch,'not rendered on the body surface','internal organ course must not be drawn as a skin path');
+    assert.equal(p.surfaceProjection,'BodyParts3D FMA7163 textbook-course surface-following','SI external course must follow the body surface');
+    assert.equal(p.courseSource,'HIU-TEXTBOOK-COURSE-2026-09');
     assert.deepEqual(p.pointCodes,meridians.find(m=>m.id==='SI').pointIds,'SI source order must remain SI-1 through SI-19');
-    assert.equal(p.points.length,p.pointCodes.length+(p.pointCodes.length-1)*4,'SI path must add four surface controls between each pair of authored anchors');
-    assert.ok(p.points.every(v=>v.length===3&&v.every(Number.isFinite)),'SI surface controls must have finite xyz');
-    assert.equal(p.displayAnchorStride,5,'SI render anchors must remain addressable at every fifth path point');
-    assert.deepEqual(p.visualAnchorCodes,['SI-2','SI-3','SI-4'],'only the three intermediate hand markers may use render-only corridor positions');
-    assert.equal(p.handProjection,'reference-guided ulnar corridor SI-1 -> SI-5','SI hand path must use the supplied ulnar reference corridor');
-    assert.equal(p.anchorCoordinatePolicy,'canonical schematic anchors unchanged; SI-2..SI-4 use render-only surface corridor','SI canonical anchor coordinates must remain untouched');
-    const si1=data.anchors.find(a=>a.pointCode==='SI-1'&&a.side===p.side),si5=data.anchors.find(a=>a.pointCode==='SI-5'&&a.side===p.side);
-    assert.deepEqual(p.points[0],[si1.x,si1.y,si1.z],'SI-1 render endpoint must remain on its canonical anchor');
-    assert.deepEqual(p.points[4*5],[si5.x,si5.y,si5.z],'SI-5 render endpoint must remain on its canonical wrist anchor');
-    const handStart=new Vector3(...p.points[0]),handEnd=new Vector3(...p.points[4*5]),handAxis=handEnd.clone().sub(handStart),handAxisLengthSq=handAxis.lengthSq();
-    for(const routeIndex of [5,10,15]){
-      const point=new Vector3(...p.points[routeIndex]),t=Math.max(0,Math.min(1,point.clone().sub(handStart).dot(handAxis)/handAxisLengthSq));
-      const nearest=handStart.clone().addScaledVector(handAxis,t);
-      assert.ok(point.distanceTo(nearest)<.055,'SI-1 through SI-5 render corridor must not detour away from the ulnar hand edge');
-    }
-    for(let segment=0;segment<4;segment++){
-      const start=p.points[segment*5],end=p.points[(segment+1)*5];
-      for(let sample=1;sample<5;sample++){
-        const t=sample/5,actual=p.points[segment*5+sample];
-        const expected=start.map((value,axis)=>Math.round((value+(end[axis]-value)*t)*1e6)/1e6);
-        assert.deepEqual(actual,expected,`SI-1 through SI-5 sample ${segment+1}.${sample} must stay inside the corrected ulnar corridor`);
-      }
-    }
-    for(const anchorIndex of [4,5,6]){
-      const start=p.points[anchorIndex*5],end=p.points[(anchorIndex+1)*5];
-      for(let sample=1;sample<5;sample++){
-        const t=sample/5,actual=p.points[anchorIndex*5+sample];
-        const expected=start.map((value,axis)=>Math.round((value+(end[axis]-value)*t)*1e6)/1e6);
-        assert.deepEqual(actual,expected,`SI-${anchorIndex+1} to SI-${anchorIndex+2} sample ${sample} must stay on the authored ulnar wrist/forearm course`);
-      }
-    }
+    assert.ok(p.points.every(v=>v.length===3&&v.every(Number.isFinite)),'SI course must have finite xyz');
     const sideSign=p.side==='RIGHT'?1:-1;
     const anchor=code=>data.anchors.find(a=>a.pointCode===code&&a.side===p.side);
+    for(const code of p.pointCodes){
+      const an=anchor(code);let best=Infinity;
+      for(let i=0;i<p.points.length-1;i++){const A=new Vector3(...p.points[i]),B=new Vector3(...p.points[i+1]),AB=B.clone().sub(A),t=Math.max(0,Math.min(1,new Vector3(an.x,an.y,an.z).sub(A).dot(AB)/(AB.lengthSq()||1e-12)));best=Math.min(best,A.addScaledVector(AB,t).distanceTo(new Vector3(an.x,an.y,an.z)))}
+      assert.ok(best<.004,`${code} must lie on the drawn SI course (found ${(best*1000).toFixed(1)} mm)`);
+    }
     const si9=anchor('SI-9'),si10=anchor('SI-10'),si11=anchor('SI-11'),si12=anchor('SI-12'),si13=anchor('SI-13');
     assert.ok(si9.x*sideSign>si10.x*sideSign,'SI-9 must sit laterally at the posterior axillary fold before the course curves onto the scapula');
     assert.ok(Math.abs(si11.y-fittedRig.vertebra.T4.z)<.01,'SI-11 must stay at T4 in the infraspinous fossa');
     assert.ok(Math.abs(si12.y-fittedRig.vertebra.T2.z)<.01,'SI-12 must sit above SI-11 in the supraspinous fossa');
     assert.ok(Math.abs(si13.y-fittedRig.vertebra.T2.z)<.01,'SI-13 must stay at the medial supraspinous fossa near T2');
     assert.ok(si13.x*sideSign<si12.x*sideSign,'SI-13 must be medial to SI-12 at the scapular spine');
-    const scapularCourse=p.points.slice(8*5,14*5+1);
-    assert.ok(scapularCourse.every(([,y,z])=>y>=fittedRig.vertebra.T4.z-.02&&z<-.09),'SI-9 through SI-15 must remain on the posterior upper scapular region without dropping into the lower trunk');
     const curve=new CatmullRomCurve3(p.points.map(v=>new Vector3(...v)),false,'centripetal');
     let nearestKidneyDistance=Infinity;
     for(const kidney of kidneys){
@@ -175,7 +146,7 @@ test('licensed schematic spatial dataset stays unverified and complete',async()=
       }
     }
     assert.ok(nearestKidneyDistance>.05,`SI ${p.side} external course must stay at least 5 cm from either kidney; found ${nearestKidneyDistance.toFixed(4)} m`);
-    const first=data.anchors.find(a=>a.pointCode==='SI-1'&&a.side===p.side),last=data.anchors.find(a=>a.pointCode==='SI-19'&&a.side===p.side);
+    const first=anchor('SI-1'),last=anchor('SI-19');
     assert.deepEqual(p.points[0],[first.x,first.y,first.z],'SI-1 anchor must remain fixed');
     assert.deepEqual(p.points.at(-1),[last.x,last.y,last.z],'SI-19 anchor must remain fixed');
   }
@@ -220,4 +191,21 @@ test('licensed schematic spatial dataset stays unverified and complete',async()=
   assert.ok(blLowerBranch,'vendor-defined BL lower branch must preserve the explicit BL-38 → BL-40 adjacency');
   const bl38Index=blLowerBranch.pointCodes.indexOf('BL-38');
   assert.deepEqual(blLowerBranch.pointCodes.slice(bl38Index,bl38Index+3),['BL-38','BL-40','BL-55'],'vendor-defined BL-38 → BL-40 → BL-55 sequence must be preserved without inventing BL-39');
+});
+
+test('every acupoint marker lies on its own meridian line (only mouth-interior GV-28 is exempt)',async()=>{
+  const data=JSON.parse(await readFile(new URL('../public/data/schematic-spatial.json',import.meta.url),'utf8'));
+  const off=[];
+  for(const a of data.anchors){
+    let best=Infinity;
+    for(const p of data.paths.filter(p=>p.meridianId===a.meridianId&&(p.side===a.side||p.side==='MIDLINE'))){
+      for(let i=0;i<p.points.length-1;i++){
+        const A=p.points[i],B=p.points[i+1],ab=[B[0]-A[0],B[1]-A[1],B[2]-A[2]],ap=[a.x-A[0],a.y-A[1],a.z-A[2]],l=ab[0]**2+ab[1]**2+ab[2]**2||1e-12;
+        const t=Math.max(0,Math.min(1,(ap[0]*ab[0]+ap[1]*ab[1]+ap[2]*ab[2])/l));
+        best=Math.min(best,Math.hypot(A[0]+ab[0]*t-a.x,A[1]+ab[1]*t-a.y,A[2]+ab[2]*t-a.z));
+      }
+    }
+    if(best>.004&&a.pointCode!=='GV-28')off.push(a.pointCode+':'+a.side+':'+(best*1000).toFixed(0)+'mm');
+  }
+  assert.deepEqual(off,[],'acupoints off their meridian line: '+off.join(', '));
 });
