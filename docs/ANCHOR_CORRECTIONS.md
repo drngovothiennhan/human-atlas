@@ -12,5 +12,10 @@ Trunk anchors were compared with textbook cun rules using the fitted trunk ruler
 The sternum is 9 cun from the suprasternal notch (CV-22) to the xiphisternal joint (CV-16); CV-17…CV-21 follow in 1.6-cun steps
 (CV-21 is 1 cun below CV-22). Lateral points on the same rib level share the height (ST 4 cun, KI 2 cun, SP 6 cun, LU-1/2, PC-1). Levels are stored as cun above the xiphoid landmark.
 
+## Pass 2 (limbs, back, head)
+- Forearm (LU, PC, HT, TE, LI, SI), shank (SP, KI, ST, BL, GB, LR) cun rules, BL 1.5/3 cun lateral offsets, BL vertebral levels and GV vertebral levels all agree with the textbook within ~1 cun — no change.
+- Occiput: GV-15/16, BL-10, GB-20 sat ~6 cm too low and GV-17, BL-9, GB-19 ~6 cm too high (GV-16→17 was 5 cun, GB-19→20 was 20 cm). Re-levelled on the skin mesh (inion z≈1.62 m; GV-16 1.5 cun below).
+- ST-41 was ~6.5 cm above the ankle crease; re-anchored at the anterior ankle crease.
+
 ## Not yet audited
-Limbs, back (BL, GV vertebral levels), head and face points still use vendor anchors. Next pass: limb cun rules (upper arm 9, forearm 12, thigh 19, leg 16) and vertebral levels.
+Upper arm, thigh, face and hand/foot fine points still use vendor anchors (no gross errors found by ordering/monotonic checks).

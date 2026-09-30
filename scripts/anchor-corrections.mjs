@@ -16,6 +16,26 @@ const LEVEL={ // cun above xiphisternal joint
 };
 export const CHEST_LEVEL_FIXES=LEVEL;
 
+// Full anchor replacements (source coordinates: z = height above floor, fit.height = 1.7195 m).
+// Occiput. Vendor placed GV-15/16, BL-10 and GB-20 on the top of the neck segment (chin level,
+// ~6 cm below the nape hairline) and GV-17/BL-9/GB-19 ~6 cm above the external occipital
+// protuberance, so GV-16→GV-17 was 5 cun apart instead of 1.5 and GB-19→GB-20 was 20 cm.
+// Textbook: GV-17 on the upper border of the protuberance (posterior-most midline skin, z≈1.62 m),
+// GV-16 1.5 cun below in the occipital hollow, GV-15 between C1 and C2, GB-19 level with GV-17,
+// GB-20 level with GV-16, BL-9 level with GV-17 (1.3 cun lateral), BL-10 level with GV-15.
+const H=1.7195,zf=z=>+(z/H).toFixed(4);
+const REPLACE={
+  'DU-17':{seg:'head',z_frac:zf(1.62),az:180},
+  'DU-16':{seg:'head',z_frac:zf(1.56),az:180},
+  'DU-15':{seg:'head',z_frac:zf(1.525),az:180},
+  'BL-9':{seg:'head',z_frac:zf(1.62),lat:1.3,face:'posterior'},
+  'BL-10':{seg:'head',z_frac:zf(1.525),lat:1.3,face:'posterior'},
+  'GB-19':{seg:'head',z_frac:zf(1.62),lat:2.25,face:'posterior'},
+  'GB-20':{seg:'head',z_frac:zf(1.56),lat:2.6,face:'posterior'},
+  // ST-41 (ankle crease, between the extensor tendons) was cast from the talus 6.5 cm above the crease.
+  'ST-41':{seg:'shank',cun:.7,from:'p1',az:0}
+};
+
 const stripZ=a=>{const {z_frac,z_from,z_cun,t,cun,from,vertebra,dz_cun,...rest}=a;return rest};
 
 /** Apply the chest-level correction to a channel-point list (mutates anchors). */
@@ -26,6 +46,11 @@ export function applyTextbookAnchorFixes(points,canonicalCode){
     if(cun===undefined||!point.anchor||point.anchor.seg!=='trunk')continue;
     point.anchor={...stripZ(point.anchor),z_from:'xiphoid',z_cun:cun};
     fixed.push(code);
+  }
+  for(const point of points){
+    const code=canonicalCode(point.code),a=REPLACE[code]??REPLACE[point.code];
+    if(!a)continue;
+    point.anchor={...a};fixed.push(code);
   }
   return fixed;
 }
