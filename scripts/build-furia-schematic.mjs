@@ -497,6 +497,7 @@ const courseMeridianOrder=Object.keys(topology.paths).map(canonicalChannel);
 // GB-30 back). Drawing straight through each one gives zig-zag loops. On the trunk the drawn line is relaxed (Laplacian) and
 // re-snapped to the skin, so it reads as one flowing channel; the acupoint markers stay at their true anchors.
 const FLOW_SMOOTH_TRUNK=new Set(['GB','LR','SP','ST']);
+const FLOW_SMOOTH_HAND=new Set(['LI','HT','PC','TE']);
 function nearestSkinPoint(p){
   let best=null,bd=Infinity;
   for(let t=0;t<skinTris.length;t++){const c=skinCen[t];const dx=c[0]-p[0],dy=c[1]-p[1],dz=c[2]-p[2];if(dx*dx+dy*dy+dz*dz>.04)continue;const q=cpTriSkin(p,skinTris[t][0],skinTris[t][1],skinTris[t][2]),d=(q[0]-p[0])**2+(q[1]-p[1])**2+(q[2]-p[2])**2;if(d<bd){bd=d;best=q}}
@@ -514,20 +515,24 @@ function cpTriSkin(p,a,b,c){
 const skinTris=[],skinCen=[];
 for(let t=0;t<indices.length/3;t++){const a=vertex(indices[t*3]),b=vertex(indices[t*3+1]),c=vertex(indices[t*3+2]);skinTris.push([a,b,c]);skinCen.push([(a[0]+b[0]+c[0])/3,(a[1]+b[1]+c[1])/3,(a[2]+b[2]+c[2])/3])}
 function flowSmoothTrunk(meridianId,points){
-  if(!FLOW_SMOOTH_TRUNK.has(meridianId))return points;
-  const b=points.map(toBrowser),inRun=b.map(q=>q[1]>.80&&q[1]<1.34);
-  let i=0;
-  while(i<b.length){
-    if(!inRun[i]){i++;continue}
-    let j=i;while(j+1<b.length&&inRun[j+1])j++;
-    if(j-i>=6){
-      for(let round=0;round<4;round++){
-        for(let pass=0;pass<25;pass++){const nx=b.map(q=>q.slice());for(let k=i+1;k<j;k++)nx[k]=[0,1,2].map(a=>(b[k-1][a]+2*b[k][a]+b[k+1][a])/4);for(let k=i+1;k<j;k++)b[k]=nx[k]}
-        for(let k=i+1;k<j;k++)b[k]=nearestSkinPoint(b[k]);
+  const b=points.map(toBrowser);
+  const relax=(inRun,passes,rounds)=>{
+    let i=0;
+    while(i<b.length){
+      if(!inRun[i]){i++;continue}
+      let j=i;while(j+1<b.length&&inRun[j+1])j++;
+      if(j-i>=6){
+        for(let round=0;round<rounds;round++){
+          for(let pass=0;pass<passes;pass++){const nx=b.map(q=>q.slice());for(let k=i+1;k<j;k++)nx[k]=[0,1,2].map(a=>(b[k-1][a]+2*b[k][a]+b[k+1][a])/4);for(let k=i+1;k<j;k++)b[k]=nx[k]}
+          for(let k=i+1;k<j;k++)b[k]=nearestSkinPoint(b[k]);
+        }
       }
+      i=j+1;
     }
-    i=j+1;
-  }
+  };
+  if(FLOW_SMOOTH_TRUNK.has(meridianId))relax(b.map(q=>q[1]>.80&&q[1]<1.34),25,4);
+  // Hand: sparse finger/palm anchors make the drawn route loop between them; relax it into a single stroke along the hand.
+  if(FLOW_SMOOTH_HAND.has(meridianId))relax(b.map(q=>q[1]>.70&&q[1]<.90&&Math.abs(q[0])>.17),6,3);
   return b.map(fromBrowser);
 }
 const generatedCourses=[];
