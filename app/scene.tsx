@@ -129,7 +129,7 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
   // while parts on the far side of the body (centimetres deeper) stay correctly occluded.
   const nearer=(m:T.MeshBasicMaterial)=>{m.onBeforeCompile=shader=>{shader.vertexShader=shader.vertexShader.replace('#include <project_vertex>','vec4 mvPosition=vec4(transformed,1.0);\n#ifdef USE_INSTANCING\nmvPosition=instanceMatrix*mvPosition;\n#endif\nmvPosition=modelViewMatrix*mvPosition;\nmvPosition.xyz-=normalize(mvPosition.xyz)*0.014;\ngl_Position=projectionMatrix*mvPosition;');};m.customProgramCacheKey=()=>'meridian-nearer';return m;};
   const MERIDIAN_LINE_EDGE_RADIUS=.00185,MERIDIAN_LINE_CORE_RADIUS=.00115;
-  const MERIDIAN_LINE_EDGE_OPACITY=.55,MERIDIAN_LINE_CORE_OPACITY=1;
+  const MERIDIAN_LINE_EDGE_OPACITY=.55,MERIDIAN_LINE_CORE_OPACITY=.96;
   const MERIDIAN_FLOW_WORLD_SPEED=.075;
   const ACUPOINT_RADIUS_SCHEMATIC=.0062,ACUPOINT_RADIUS_LOCAL=.0067,ACUPOINT_RADIUS_PUBLISHED=.0072,ACUPOINT_RADIUS_SELECTED=.0082;
   const disposeOverlay=()=>{
