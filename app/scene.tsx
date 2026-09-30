@@ -124,12 +124,12 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
   const reduceMeridianMotion=window.matchMedia?.('(prefers-reduced-motion: reduce)').matches??false;
   type MeridianFlowParticle={mesh:T.Mesh;curve:T.CatmullRomCurve3;offset:number;speed:number};
   let meridianMarkers:T.Mesh[]=[],meridianPulseMarkers:T.Mesh[]=[],meridianFlowParticles:MeridianFlowParticle[]=[],needleMesh:T.Mesh|null=null;
-  const meridianColors:Record<string,number>={LU:0x1d4ed8,LI:0xc2410c,ST:0x854d0e,SP:0x84cc16,HT:0xb91c1c,SI:0x0369a1,BL:0x334155,KI:0x0f766e,PC:0xbe185d,TE:0x0e7490,GB:0x4d7c0f,LR:0x15803d,CV:0x6d28d9,GV:0x991b1b};
+  const meridianColors:Record<string,number>={LU:0x2563eb,LI:0xea580c,ST:0xca8a04,SP:0x84cc16,HT:0xdc2626,SI:0x0891b2,BL:0x4f46e5,KI:0x0d9488,PC:0xdb2777,TE:0x0ea5e9,GB:0x16a34a,LR:0x65a30d,CV:0x7c3aed,GV:0xc026d3};
   // Pull overlay geometry 14 mm toward the camera in view space: lines can no longer sink into skin/muscle that pokes through,
   // while parts on the far side of the body (centimetres deeper) stay correctly occluded.
   const nearer=(m:T.MeshBasicMaterial)=>{m.onBeforeCompile=shader=>{shader.vertexShader=shader.vertexShader.replace('#include <project_vertex>','vec4 mvPosition=vec4(transformed,1.0);\n#ifdef USE_INSTANCING\nmvPosition=instanceMatrix*mvPosition;\n#endif\nmvPosition=modelViewMatrix*mvPosition;\nmvPosition.xyz-=normalize(mvPosition.xyz)*0.014;\ngl_Position=projectionMatrix*mvPosition;');};m.customProgramCacheKey=()=>'meridian-nearer';return m;};
   const MERIDIAN_LINE_EDGE_RADIUS=.00185,MERIDIAN_LINE_CORE_RADIUS=.00115;
-  const MERIDIAN_LINE_EDGE_OPACITY=.28,MERIDIAN_LINE_CORE_OPACITY=.86;
+  const MERIDIAN_LINE_EDGE_OPACITY=.55,MERIDIAN_LINE_CORE_OPACITY=.96;
   const MERIDIAN_FLOW_WORLD_SPEED=.075;
   const ACUPOINT_RADIUS_SCHEMATIC=.0062,ACUPOINT_RADIUS_LOCAL=.0067,ACUPOINT_RADIUS_PUBLISHED=.0072,ACUPOINT_RADIUS_SELECTED=.0082;
   const disposeOverlay=()=>{
@@ -168,12 +168,12 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
     const schematic=path.sourceKind==='LICENSED_SCHEMATIC'&&path.verificationStatus==='UNVERIFIED';
     const reviewed=['FACULTY_REVIEWED','PUBLISHED'].includes(path.verificationStatus);
     if(!schematic&&!reviewed)continue;
-    const color=meridianColors[path.meridianId]??fallbackColor,lineColor=new T.Color(color).offsetHSL(0,.04,-.12);
+    const color=meridianColors[path.meridianId]??fallbackColor,lineColor=new T.Color(color);
     const points=path.points.map(point=>new T.Vector3(point[0],point[1],point[2]));
     const curve=new T.CatmullRomCurve3(points,false,'centripetal');
     const segments=Math.max(36,points.length*18);
     // Thin semi-transparent channels stay legible without masking anatomy.
-    const edge=new T.Mesh(new T.TubeGeometry(curve,segments,MERIDIAN_LINE_EDGE_RADIUS,qualityConfig.tubeRadialSegments,false),nearer(new T.MeshBasicMaterial({color:0x17212b,transparent:true,opacity:MERIDIAN_LINE_EDGE_OPACITY,depthTest:true,depthWrite:false,polygonOffset:true,polygonOffsetFactor:-4,polygonOffsetUnits:-4})));
+    const edge=new T.Mesh(new T.TubeGeometry(curve,segments,MERIDIAN_LINE_EDGE_RADIUS,qualityConfig.tubeRadialSegments,false),nearer(new T.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:MERIDIAN_LINE_EDGE_OPACITY,depthTest:true,depthWrite:false,polygonOffset:true,polygonOffsetFactor:-4,polygonOffsetUnits:-4})));
     edge.renderOrder=21;meridianGroup.add(edge);
     const tube=new T.Mesh(new T.TubeGeometry(curve,segments,MERIDIAN_LINE_CORE_RADIUS,qualityConfig.tubeRadialSegments,false),nearer(new T.MeshBasicMaterial({color:lineColor,transparent:true,opacity:MERIDIAN_LINE_CORE_OPACITY,depthTest:true,depthWrite:false,polygonOffset:true,polygonOffsetFactor:-6,polygonOffsetUnits:-6})));
     tube.renderOrder=22;meridianGroup.add(tube);
