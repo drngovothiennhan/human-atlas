@@ -170,9 +170,9 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
     const curve=new T.CatmullRomCurve3(points,false,'centripetal');
     const segments=Math.max(36,points.length*18);
     // Thin semi-transparent channels stay legible without masking anatomy.
-    const edge=new T.Mesh(new T.TubeGeometry(curve,segments,MERIDIAN_LINE_EDGE_RADIUS,qualityConfig.tubeRadialSegments,false),new T.MeshBasicMaterial({color:0x17212b,transparent:true,opacity:MERIDIAN_LINE_EDGE_OPACITY,depthTest:true,depthWrite:false}));
+    const edge=new T.Mesh(new T.TubeGeometry(curve,segments,MERIDIAN_LINE_EDGE_RADIUS,qualityConfig.tubeRadialSegments,false),new T.MeshBasicMaterial({color:0x17212b,transparent:true,opacity:MERIDIAN_LINE_EDGE_OPACITY,depthTest:true,depthWrite:false,polygonOffset:true,polygonOffsetFactor:-4,polygonOffsetUnits:-4}));
     edge.renderOrder=21;meridianGroup.add(edge);
-    const tube=new T.Mesh(new T.TubeGeometry(curve,segments,MERIDIAN_LINE_CORE_RADIUS,qualityConfig.tubeRadialSegments,false),new T.MeshBasicMaterial({color:lineColor,transparent:true,opacity:MERIDIAN_LINE_CORE_OPACITY,depthTest:true,depthWrite:false}));
+    const tube=new T.Mesh(new T.TubeGeometry(curve,segments,MERIDIAN_LINE_CORE_RADIUS,qualityConfig.tubeRadialSegments,false),new T.MeshBasicMaterial({color:lineColor,transparent:true,opacity:MERIDIAN_LINE_CORE_OPACITY,depthTest:true,depthWrite:false,polygonOffset:true,polygonOffsetFactor:-6,polygonOffsetUnits:-6}));
     tube.renderOrder=22;meridianGroup.add(tube);
     // Several moving lights make motion visible along long channels, not only at one end.
     for(let i=0;i<qualityConfig.flowParticlesPerPath;i++){

@@ -531,6 +531,42 @@ for(const sourceMeridianId of Object.keys(topology.paths)){
   }
 }
 
+// Lift path polylines off the skin so the tube is never half-buried (z-fighting / sunk lines).
+const SURFACE_LIFT_M=.0035;
+{
+  const cpTri=(p,a,b,c)=>{
+    const ab=sub(b,a),ac=sub(c,a),ap=sub(p,a),d1=dot(ab,ap),d2=dot(ac,ap);if(d1<=0&&d2<=0)return a;
+    const bp=sub(p,b),d3=dot(ab,bp),d4=dot(ac,bp);if(d3>=0&&d4<=d3)return b;
+    const vc=d1*d4-d3*d2;if(vc<=0&&d1>=0&&d3<=0)return add(a,mul(ab,d1/(d1-d3)));
+    const cp=sub(p,c),d5=dot(ab,cp),d6=dot(ac,cp);if(d6>=0&&d5<=d6)return c;
+    const vb=d5*d2-d1*d6;if(vb<=0&&d2>=0&&d6<=0)return add(a,mul(ac,d2/(d2-d6)));
+    const va=d3*d6-d5*d4;if(va<=0&&(d4-d3)>=0&&(d5-d6)>=0)return add(b,mul(sub(c,b),(d4-d3)/((d4-d3)+(d5-d6))));
+    const den=1/(va+vb+vc);return add(a,add(mul(ab,vb*den),mul(ac,vc*den)));
+  };
+  const triCount=indices.length/3,tri=[],cen=new Float32Array(triCount*3);
+  for(let t=0;t<triCount;t++){const a=vertex(indices[t*3]),b=vertex(indices[t*3+1]),c=vertex(indices[t*3+2]);tri.push([a,b,c]);cen[t*3]=(a[0]+b[0]+c[0])/3;cen[t*3+1]=(a[1]+b[1]+c[1])/3;cen[t*3+2]=(a[2]+b[2]+c[2])/3}
+  // outward orientation: normal of the topmost triangle must point up
+  let topT=0;for(let t=1;t<triCount;t++)if(cen[t*3+1]>cen[topT*3+1])topT=t;
+  const triN=t=>unit(cross(sub(tri[t][1],tri[t][0]),sub(tri[t][2],tri[t][0])));
+  const flip=triN(topT)[1]<0?-1:1;
+  const outward=p=>{
+    let best=-1,bd=Infinity;
+    for(let t=0;t<triCount;t++){const dx=cen[t*3]-p[0],dy=cen[t*3+1]-p[1],dz=cen[t*3+2]-p[2];if(dx*dx+dy*dy+dz*dz>.09)continue;const q=cpTri(p,tri[t][0],tri[t][1],tri[t][2]),d=(q[0]-p[0])**2+(q[1]-p[1])**2+(q[2]-p[2])**2;if(d<bd){bd=d;best=t}}
+    return best<0?null:mul(triN(best),flip);
+  };
+  let lifted=0,missed=0;
+  for(const pathItem of paths){
+    if(!pathItem.courseSource)continue;// legacy LU/SI hand paths keep their tested interpolation
+    pathItem.points=pathItem.points.map((b,pi,arr)=>{
+      if(pi===0||pi===arr.length-1||anchorOut.some(a=>Math.abs(a.x-b[0])+Math.abs(a.y-b[1])+Math.abs(a.z-b[2])<.002))return b;// points on canonical anchors stay exactly on them
+      const n=outward(b);if(!n){missed++;return b}
+      lifted++;const q=add(b,mul(n,SURFACE_LIFT_M));if(q[0]*b[0]<0||Math.abs(b[0])<.001)q[0]=b[0];// never cross the midline
+      return [round(q[0]),round(q[1]),round(q[2])];
+    });
+    pathItem.surfaceLiftMeters=SURFACE_LIFT_M;
+  }
+  console.log('SURFACE_LIFT lifted='+lifted+' missed='+missed);
+}
 const routeOrigins={ST:{label:'Điểm khởi đường Kinh Vị',description:'Khởi từ vùng ngoài cánh mũi trước khi đi tới huyệt ST-1 Thừa khấp; đây là mốc đường kinh, không phải huyệt.',notAnAcupoint:true}};
 const out={schemaVersion:'1.3.0',coordinateSystem:'BodyParts3D-4.0-browser-meters-Y-up',verificationStatus:'UNVERIFIED',calibrationStatus:'DOCUMENT_CORROBORATED_3D',calibration:{status:'DOCUMENT_CORROBORATED_3D',method:'Anatomical landmarks first; proportional cun/region rules second; final positions are raycast to the BodyParts3D FMA7163 skin. Two-dimensional references corroborate region/course but never promote a point to verified 3D.',documentSourceId:documentReference.sourceId,documentTitle:documentReference.document.title+' — '+documentReference.document.author,documentPages:documentReference.document.pdfPages},methodology:{priority:['WHO_STANDARD_LOCATION_METHOD','TARA_ANATOMICAL_LANDMARKS','HIU_DOCUMENT_CORROBORATION','BODYPARTS3D_SKIN_PROJECTION'],whoStandard:'WHO Standard Acupuncture Point Locations in the Western Pacific Region (2008)',taraSource:anatomyLocationDoc.source.id,research:['PMID:24761187','PMID:26101534'],flowDirection:'canonical/source topology order'},source:{repository:'FuriaRozkwit/acupuncture-3d',commit:'1fc9ec98d365c9fb035844e2775c1be05a0a05fc',license:'MIT anchors/code; CC BY-SA calibrated anatomy metadata',skin:'BodyParts3D FMA7163'},anchors:anchorOut,paths,omittedTopology:omitted,generatedBy:'scripts/build-furia-schematic.mjs'};
 out.channelAliases=channelAliases;out.sourceSideWarnings=sourceSideWarnings;out.routeOrigins=routeOrigins;out.spatialOverrides=Object.keys(spatialOverrides);out.textbookAnchorFixes=textbookAnchorFixes;
