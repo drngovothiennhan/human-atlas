@@ -27,13 +27,12 @@ const codes=(ch,from,to)=>Array.from({length:to-from+1},(_,i)=>`${ch}-${from+i}`
 const R=(seg,pos,az)=>({seg,...pos,az});
 const T=(pos,lat,face)=>({seg:'trunk',...pos,lat,face});
 
-// LU and SI intentionally keep their previously reviewed legacy routes in
-// scripts/build-furia-schematic.mjs (thumb course / ulnar hand corridor).
+// LU intentionally keeps its previously reviewed legacy thumb course in scripts/build-furia-schematic.mjs.
 export const courseSpecs={
   LI:[{
     id:'main',codes:codes('LI',1,20),
     note:'Đầu ngón trỏ (bờ quay) → Hợp cốc → mặt ngoài cẳng tay → ngoài khuỷu → bờ trước mặt ngoài cánh tay → Kiên ngung → đỉnh vai → Đại chùy (GV-14) → hố trên đòn (ST-12) → cổ → má → cánh mũi đối bên (Nghênh hương).',
-    waypoints:[...pts('LI',1,15),T({z_frac:.83},6,'posterior'),P('GV-14'),R('neck',{z_frac:.842},85),P('ST-12'),P('LI-17'),P('LI-18'),P('LI-19'),P('LI-20')]
+    waypoints:[...pts('LI',1,16),P('GV-14'),R('neck',{z_frac:.842},85),P('ST-12'),P('LI-17'),P('LI-18'),P('LI-19'),P('LI-20')]
   }],
   ST:[
     {id:'face',codes:['ST-ROUTE-ORIGIN',...codes('ST',1,8)],
@@ -48,12 +47,14 @@ export const courseSpecs={
   ],
   SP:[{id:'main',codes:codes('SP',1,21),waypoints:pts('SP',1,21),
      note:'Góc trong móng ngón chân cái → bờ da gan/mu chân → trước mắt cá trong → bờ sau xương chày (cắt chéo và đi trước kinh Can) → mặt trong gối, đùi → bụng → ngực (Chu vinh, Đại bao).'}],
+  SI:[{id:'main',codes:codes('SI',1,19),waypoints:pts('SI',1,19),note:'Góc ngoài móng ngón út → bờ trụ bàn tay → cổ tay (Uyển cốt, Dương cốc) → bờ sau cẳng tay → khuỷu (giữa mỏm khuỷu và mỏm trên lồi cầu trong) → mặt sau trong cánh tay → sau vai → hố trên xương bả → cổ → má → trước tai (Thính cung).'}],
   HT:[{id:'main',codes:codes('HT',1,9),
      note:'Từ hõm nách → bờ sau mặt trong cánh tay (trong kinh Phế và Tâm bào) → khuỷu (trong) → bờ trụ cẳng tay phía gan tay → xương đậu → gan tay → bờ quay ngón út (Thiếu xung).',
-     waypoints:[P('HT-1'),R('upper_arm',{t:.35},-85),R('upper_arm',{t:.7},-82),R('upper_arm',{t:.95},-80),P('HT-3'),R('forearm',{t:.3},-82),...pts('HT',4,9)]}],
+     waypoints:[P('HT-1'),P('HT-2'),P('HT-3'),R('forearm',{t:.3},-82),...pts('HT',4,9)]}],
   BL:[
     {id:'inner',codes:codes('BL',1,35),waypoints:pts('BL',1,35),note:'Khóe mắt trong → trán → đỉnh đầu → gáy → hai bên cột sống (1,5 thốn) tới xương cùng.'},
     {id:'outer',codes:codes('BL',41,54),waypoints:pts('BL',41,54),note:'Nhánh từ vai đi dọc hai bên cột sống (3 thốn) tới mấu chuyển lớn.'},
+    {id:'bl39',codes:['BL-39'],waypoints:[P('BL-38'),P('BL-39')],note:'Ủy dương: đầu ngoài nếp khoeo, nhánh ngắn từ Phù khích (BL-38).'},
     {id:'leg',codes:['BL-36','BL-37','BL-38','BL-40',...codes('BL',55,67)],waypoints:[P('BL-36'),P('BL-37'),P('BL-38'),P('BL-40'),...pts('BL',55,67)],note:'Mặt sau đùi → giữa khoeo → sau mắt cá ngoài (Côn lôn) → bờ ngoài bàn chân → ngón chân út (Chí âm).'}
   ],
   KI:[{id:'main',codes:codes('KI',1,27),waypoints:pts('KI',1,27),note:'Dưới ngón chân út vào lòng bàn chân → xương thuyền → sau mắt cá trong → bờ sau xương chày → trong khoeo → mặt trong đùi → bụng (0,5 thốn cạnh Nhâm) → ngực (2 thốn cạnh Nhâm).'}],

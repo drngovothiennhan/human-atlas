@@ -514,7 +514,7 @@ function cpTriSkin(p,a,b,c){
 }
 const skinTris=[],skinCen=[];
 for(let t=0;t<indices.length/3;t++){const a=vertex(indices[t*3]),b=vertex(indices[t*3+1]),c=vertex(indices[t*3+2]);skinTris.push([a,b,c]);skinCen.push([(a[0]+b[0]+c[0])/3,(a[1]+b[1]+c[1])/3,(a[2]+b[2]+c[2])/3])}
-function flowSmoothTrunk(meridianId,points){
+function flowSmoothTrunk(meridianId,points,pins=new Set()){
   const b=points.map(toBrowser);
   const relax=(inRun,passes,rounds)=>{
     let i=0;
@@ -523,8 +523,8 @@ function flowSmoothTrunk(meridianId,points){
       let j=i;while(j+1<b.length&&inRun[j+1])j++;
       if(j-i>=6){
         for(let round=0;round<rounds;round++){
-          for(let pass=0;pass<passes;pass++){const nx=b.map(q=>q.slice());for(let k=i+1;k<j;k++)nx[k]=[0,1,2].map(a=>(b[k-1][a]+2*b[k][a]+b[k+1][a])/4);for(let k=i+1;k<j;k++)b[k]=nx[k]}
-          for(let k=i+1;k<j;k++)b[k]=nearestSkinPoint(b[k]);
+          for(let pass=0;pass<passes;pass++){const nx=b.map(q=>q.slice());for(let k=i+1;k<j;k++)if(!pins.has(k))nx[k]=[0,1,2].map(a=>(b[k-1][a]+2*b[k][a]+b[k+1][a])/4);for(let k=i+1;k<j;k++)b[k]=nx[k]}
+          for(let k=i+1;k<j;k++)if(!pins.has(k))b[k]=nearestSkinPoint(b[k]);
         }
       }
       i=j+1;
@@ -540,7 +540,7 @@ for(const meridianId of courseMeridianOrder){
   const specs=courseSpecs[meridianId];if(!specs)continue;
   const mid=meridianId==='CV'||meridianId==='GV',sides=mid?['MIDLINE']:['RIGHT','LEFT'];
   specs.forEach((spec,gi)=>{
-    const built=buildCourseRight(spec.waypoints),smooth=flowSmoothTrunk(meridianId,smoothCourse(built));
+    const built=buildCourseRight(spec.waypoints),smooth=flowSmoothTrunk(meridianId,smoothCourse(built),new Set(built.waypointIndex));
     for(const side of sides){
       const points=smooth.map(src=>{const b=toBrowser(src);return [round(side==='LEFT'?-b[0]:b[0]),round(b[1]),round(b[2])]});
       generatedCourses.push({meridianId,side,groupIndex:gi,courseId:spec.id,pointCodes:spec.codes.slice(),points,verificationStatus:'UNVERIFIED',sourceKind:'LICENSED_SCHEMATIC',flowDirection:'SOURCE_ORDER',directionStart:spec.codes[0],directionEnd:spec.codes.at(-1),surfaceProjection:'BodyParts3D FMA7163 textbook-course surface-following',surfaceProjectionStep:'12mm',courseSource:'HIU-TEXTBOOK-COURSE-2026-09',anchorCoordinatePolicy:'acupoint anchors unchanged; drawn course follows the textbook route, not straight chords between anchors',...(spec.note?{courseRule:spec.note}:{})});
@@ -557,7 +557,8 @@ const codes=new Set(pointDoc.points.map(p=>canonicalCode(p.code))),topologyCodes
 const omitted=[...codes].filter(c=>!topologyCodes.has(c)).sort();
 const generatedPathCodes=new Set(paths.flatMap(path=>path.pointCodes).filter(code=>code!=='ST-ROUTE-ORIGIN'));
 const missingGenerated=[...topologyCodes].filter(code=>!generatedPathCodes.has(code)).sort();
-const extraGenerated=[...generatedPathCodes].filter(code=>!topologyCodes.has(code)).sort();
+const TEXTBOOK_EXTRA=new Set(['BL-39']);
+const extraGenerated=[...generatedPathCodes].filter(code=>!topologyCodes.has(code)&&!TEXTBOOK_EXTRA.has(code)).sort();
 if(missingGenerated.length||extraGenerated.length)throw new Error('Generated meridian topology drift: '+JSON.stringify({missingGenerated,extraGenerated}));
 const endpointAudit={};
 for(const sourceMeridianId of Object.keys(topology.paths)){
