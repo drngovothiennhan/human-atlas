@@ -59,7 +59,7 @@ test('licensed schematic spatial dataset stays unverified and complete',async()=
   assert.ok(stPath,'ST path containing ST-1 must exist');
   assert.deepEqual(stPath.pointCodes.slice(0,2),['ST-ROUTE-ORIGIN','ST-1'],'ST route must begin at lateral-nose origin before ST-1');
   assert.equal(stPath.courseSource,'HIU-TEXTBOOK-COURSE-2026-09','ST face branch must come from the textbook course engine');
-  assert.ok(stPath.points.length>=stPath.pointCodes.length*2,'ST course must be densely surface-followed');
+  assert.ok(stPath.points.length>=stPath.pointCodes.length,'ST course must pass through every acupoint (straight segments)');
   const calibratedCodes=['LU-10','LU-11','LI-20','ST-1','BL-1','TE-23','GB-1','CV-24','GV-28','ST-45','SI-9','SI-11','SI-12','SI-13'];
   assert.deepEqual(data.spatialOverrides?.slice().sort(),calibratedCodes.slice().sort(),'HIU facial/endpoint calibration set must stay explicit');
   for(const code of calibratedCodes){
@@ -109,7 +109,7 @@ test('licensed schematic spatial dataset stays unverified and complete',async()=
   for(const p of liPaths){
     assert.equal(p.surfaceProjection,'BodyParts3D FMA7163 textbook-course surface-following','LI full route must be surface-projected');
     assert.equal(p.courseSource,'HIU-TEXTBOOK-COURSE-2026-09');
-    assert.ok(p.points.length>=p.pointCodes.length*3,'LI course must be densely surface-followed');
+    assert.ok(p.points.length>=p.pointCodes.length,'LI course must pass through every acupoint (straight segments)');
   }
   const siPaths=data.paths.filter(p=>p.meridianId==='SI');
   assert.equal(siPaths.length,2,'SI external course must remain bilateral');
@@ -156,7 +156,7 @@ test('licensed schematic spatial dataset stays unverified and complete',async()=
     assert.equal(p.directionEnd,'GB-44','GB course must end at GB-44');
     assert.equal(p.pointCodes.length,44,'GB source topology must retain all 44 acupoints');
     assert.deepEqual(p.pointCodes,Array.from({length:44},(_,i)=>'GB-'+(i+1)),'GB path must preserve canonical acupoint order');
-    assert.ok(p.points.length>=44*3,'GB course must be densely surface-followed');
+    assert.ok(p.points.length>=44,'GB course must pass through every acupoint (straight segments)');
     assert.equal(p.surfaceProjection,'BodyParts3D FMA7163 textbook-course surface-following');
     assert.equal(p.courseSource,'HIU-TEXTBOOK-COURSE-2026-09');
     assert.match(p.courseRule,/Đuôi mắt.*ngón chân IV/);

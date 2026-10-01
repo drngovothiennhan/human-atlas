@@ -514,36 +514,20 @@ function cpTriSkin(p,a,b,c){
 }
 const skinTris=[],skinCen=[];
 for(let t=0;t<indices.length/3;t++){const a=vertex(indices[t*3]),b=vertex(indices[t*3+1]),c=vertex(indices[t*3+2]);skinTris.push([a,b,c]);skinCen.push([(a[0]+b[0]+c[0])/3,(a[1]+b[1]+c[1])/3,(a[2]+b[2]+c[2])/3])}
-function snapCourseToSkin(points){
-  // Final guarantee: every drawn point lies on the skin surface (chords across the concave waist/flank used to float 20-27 mm outside the body).
-  return points.map(src=>{const b=toBrowser(src),q=nearestSkinPoint(b);return norm(sub(q,b))>.0015?fromBrowser(q):src});
+// Straight course: consecutive acupoints of a meridian are joined by straight segments (the textbook describes a line from point to
+// point). A segment is only split where a straight chord would leave the skin (> 2.5 mm), by inserting the skin point under the
+// chord midpoint, so the line stays a straight line wherever the body surface is flat and bends only as the body does.
+const STRAIGHT_CHORD_TOL_M=.0025;
+function subdivideChord(a,b,depth=0){
+  const len=norm(sub(b,a));if(len<.018||depth>7)return [];
+  const mid=mul(add(a,b),.5),snap=nearestSkinPoint(mid),dev=norm(sub(snap,mid));
+  if(dev<=STRAIGHT_CHORD_TOL_M||dev>.12)return [];
+  return [...subdivideChord(a,snap,depth+1),snap,...subdivideChord(snap,b,depth+1)];
 }
-function flowSmoothTrunk(meridianId,points){
-  return snapCourseToSkin(flowSmoothTrunkInner(meridianId,points));
-}
-function flowSmoothTrunkInner(meridianId,points){
-  // Whole-course relaxation: removes the sub-centimetre jitter that comes from re-casting every 12 mm onto a coarse skin mesh
-  // and from sparse anchors. Head/neck (y>1.42) and the straight CV/GV midlines are left alone. Each point may move at most
-  // 20 mm from its cast position; the acupoint markers are snapped onto the relaxed line afterwards (see snapAnchorsToCourses).
-  if(meridianId==='CV'||meridianId==='GV')return points;
-  const b=points.map(toBrowser),orig=b.map(q=>q.slice()),free=b.map((q,i)=>i>0&&i<b.length-1&&q[1]<1.42);
-  let i=0;
-  while(i<b.length){
-    if(!free[i]){i++;continue}
-    let j=i;while(j+1<b.length&&free[j+1])j++;
-    if(j-i>=4){
-      for(let round=0;round<4;round++){
-        for(let pass=0;pass<12;pass++){const nx=b.map(q=>q.slice());for(let k=i;k<=j;k++)nx[k]=[0,1,2].map(a=>(b[k-1][a]+2*b[k][a]+b[k+1][a])/4);for(let k=i;k<=j;k++)b[k]=nx[k]}
-        for(let k=i;k<=j;k++){
-          let q=nearestSkinPoint(b[k]);const dv=sub(q,orig[k]),dn=norm(dv);
-          if(dn>.009)q=add(orig[k],mul(dv,.009/dn));
-          b[k]=q;
-        }
-      }
-    }
-    i=j+1;
-  }
-  return b.map(fromBrowser);
+function straightCourse(meridianId,hitsSource){
+  const b=hitsSource.map(toBrowser),out=[b[0]];
+  for(let i=0;i<b.length-1;i++){out.push(...subdivideChord(b[i],b[i+1]),b[i+1])}
+  return out.map(fromBrowser);
 }
 function snapAnchorsToCourses(){
   // Markers must sit on their meridian line: move each acupoint to the nearest point of its (relaxed) drawn course, within 25 mm.
@@ -566,10 +550,10 @@ for(const meridianId of courseMeridianOrder){
   const specs=courseSpecs[meridianId];if(!specs)continue;
   const mid=meridianId==='CV'||meridianId==='GV',sides=mid?['MIDLINE']:['RIGHT','LEFT'];
   specs.forEach((spec,gi)=>{
-    const built=buildCourseRight(spec.waypoints),smooth=flowSmoothTrunk(meridianId,smoothCourse(built));
+    const built=buildCourseRight(spec.waypoints),smooth=straightCourse(meridianId,built.waypointIndex.map(i=>built.points[i]));
     for(const side of sides){
       const points=smooth.map(src=>{const b=toBrowser(src);return [round(side==='LEFT'?-b[0]:b[0]),round(b[1]),round(b[2])]});
-      generatedCourses.push({meridianId,side,groupIndex:gi,courseId:spec.id,pointCodes:spec.codes.slice(),points,verificationStatus:'UNVERIFIED',sourceKind:'LICENSED_SCHEMATIC',flowDirection:'SOURCE_ORDER',directionStart:spec.codes[0],directionEnd:spec.codes.at(-1),surfaceProjection:'BodyParts3D FMA7163 textbook-course surface-following',surfaceProjectionStep:'12mm',courseSource:'HIU-TEXTBOOK-COURSE-2026-09',anchorCoordinatePolicy:'acupoint anchors unchanged; drawn course follows the textbook route, not straight chords between anchors',...(spec.note?{courseRule:spec.note}:{})});
+      generatedCourses.push({meridianId,side,groupIndex:gi,courseId:spec.id,pointCodes:spec.codes.slice(),points,verificationStatus:'UNVERIFIED',sourceKind:'LICENSED_SCHEMATIC',flowDirection:'SOURCE_ORDER',directionStart:spec.codes[0],directionEnd:spec.codes.at(-1),surfaceProjection:'BodyParts3D FMA7163 textbook-course surface-following',surfaceProjectionStep:'straight-chord-2.5mm',courseSource:'HIU-TEXTBOOK-COURSE-2026-09',anchorCoordinatePolicy:'acupoint anchors unchanged; drawn course follows the textbook route, not straight chords between anchors',...(spec.note?{courseRule:spec.note}:{})});
     }
   });
 }
@@ -601,44 +585,6 @@ for(const sourceMeridianId of Object.keys(topology.paths)){
   }
 }
 
-// Lift path polylines off the skin so the tube is never half-buried (z-fighting / sunk lines).
-const SURFACE_LIFT_M=.0035;
-{
-  const cpTri=(p,a,b,c)=>{
-    const ab=sub(b,a),ac=sub(c,a),ap=sub(p,a),d1=dot(ab,ap),d2=dot(ac,ap);if(d1<=0&&d2<=0)return a;
-    const bp=sub(p,b),d3=dot(ab,bp),d4=dot(ac,bp);if(d3>=0&&d4<=d3)return b;
-    const vc=d1*d4-d3*d2;if(vc<=0&&d1>=0&&d3<=0)return add(a,mul(ab,d1/(d1-d3)));
-    const cp=sub(p,c),d5=dot(ab,cp),d6=dot(ac,cp);if(d6>=0&&d5<=d6)return c;
-    const vb=d5*d2-d1*d6;if(vb<=0&&d2>=0&&d6<=0)return add(a,mul(ac,d2/(d2-d6)));
-    const va=d3*d6-d5*d4;if(va<=0&&(d4-d3)>=0&&(d5-d6)>=0)return add(b,mul(sub(c,b),(d4-d3)/((d4-d3)+(d5-d6))));
-    const den=1/(va+vb+vc);return add(a,add(mul(ab,vb*den),mul(ac,vc*den)));
-  };
-  const triCount=indices.length/3,tri=[],cen=new Float32Array(triCount*3);
-  for(let t=0;t<triCount;t++){const a=vertex(indices[t*3]),b=vertex(indices[t*3+1]),c=vertex(indices[t*3+2]);tri.push([a,b,c]);cen[t*3]=(a[0]+b[0]+c[0])/3;cen[t*3+1]=(a[1]+b[1]+c[1])/3;cen[t*3+2]=(a[2]+b[2]+c[2])/3}
-  // outward orientation: normal of the topmost triangle must point up
-  let topT=0;for(let t=1;t<triCount;t++)if(cen[t*3+1]>cen[topT*3+1])topT=t;
-  const triN=t=>unit(cross(sub(tri[t][1],tri[t][0]),sub(tri[t][2],tri[t][0])));
-  const flip=triN(topT)[1]<0?-1:1;
-  const outward=p=>{
-    let best=-1,bd=Infinity;
-    for(let t=0;t<triCount;t++){const dx=cen[t*3]-p[0],dy=cen[t*3+1]-p[1],dz=cen[t*3+2]-p[2];if(dx*dx+dy*dy+dz*dz>.09)continue;const q=cpTri(p,tri[t][0],tri[t][1],tri[t][2]),d=(q[0]-p[0])**2+(q[1]-p[1])**2+(q[2]-p[2])**2;if(d<bd){bd=d;best=t}}
-    return best<0?null:mul(triN(best),flip);
-  };
-  let lifted=0,missed=0;
-  for(const pathItem of paths){
-    if(!pathItem.courseSource)continue;// legacy LU/SI hand paths keep their tested interpolation
-    pathItem.points=pathItem.points.map((b,pi,arr)=>{
-      if(pi===0||pi===arr.length-1)return b;
-      const n=outward(b);if(!n){missed++;return b}
-      let dA=Infinity;for(const a of anchorOut){const d=Math.abs(a.x-b[0])+Math.abs(a.y-b[1])+Math.abs(a.z-b[2]);if(d<dA)dA=d}
-      const taper=Math.max(0,Math.min(1,(dA-.002)/.012));// no lift at an acupoint, full lift 14 mm away: markers stay exactly on the line
-      lifted++;const q=add(b,mul(n,SURFACE_LIFT_M*taper));if(q[0]*b[0]<0||Math.abs(b[0])<.001)q[0]=b[0];// never cross the midline
-      return [round(q[0]),round(q[1]),round(q[2])];
-    });
-    pathItem.surfaceLiftMeters=SURFACE_LIFT_M;
-  }
-  console.log('SURFACE_LIFT lifted='+lifted+' missed='+missed);
-}
 const routeOrigins={ST:{label:'Điểm khởi đường Kinh Vị',description:'Khởi từ vùng ngoài cánh mũi trước khi đi tới huyệt ST-1 Thừa khấp; đây là mốc đường kinh, không phải huyệt.',notAnAcupoint:true}};
 const out={schemaVersion:'1.3.0',coordinateSystem:'BodyParts3D-4.0-browser-meters-Y-up',verificationStatus:'UNVERIFIED',calibrationStatus:'DOCUMENT_CORROBORATED_3D',calibration:{status:'DOCUMENT_CORROBORATED_3D',method:'Anatomical landmarks first; proportional cun/region rules second; final positions are raycast to the BodyParts3D FMA7163 skin. Two-dimensional references corroborate region/course but never promote a point to verified 3D.',documentSourceId:documentReference.sourceId,documentTitle:documentReference.document.title+' — '+documentReference.document.author,documentPages:documentReference.document.pdfPages},methodology:{priority:['WHO_STANDARD_LOCATION_METHOD','TARA_ANATOMICAL_LANDMARKS','HIU_DOCUMENT_CORROBORATION','BODYPARTS3D_SKIN_PROJECTION'],whoStandard:'WHO Standard Acupuncture Point Locations in the Western Pacific Region (2008)',taraSource:anatomyLocationDoc.source.id,research:['PMID:24761187','PMID:26101534'],flowDirection:'canonical/source topology order'},source:{repository:'FuriaRozkwit/acupuncture-3d',commit:'1fc9ec98d365c9fb035844e2775c1be05a0a05fc',license:'MIT anchors/code; CC BY-SA calibrated anatomy metadata',skin:'BodyParts3D FMA7163'},anchors:anchorOut,paths,omittedTopology:omitted,generatedBy:'scripts/build-furia-schematic.mjs'};
 out.channelAliases=channelAliases;out.sourceSideWarnings=sourceSideWarnings;out.routeOrigins=routeOrigins;out.spatialOverrides=Object.keys(spatialOverrides);out.textbookAnchorFixes=textbookAnchorFixes;

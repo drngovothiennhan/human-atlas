@@ -25,3 +25,6 @@ Upper arm, thigh, face and hand/foot fine points still use vendor anchors (no gr
 - Flow smoothing (trunk GB/LR/SP/ST, hand LI/HT/PC/TE) now pins every waypoint at its anchor, so lines are relaxed only between acupoints.
 - SI-2/SI-3: vendor rays landed on the thigh (~8 cm medial of the hand). Re-cast from the SI-1 nail corner along the little finger; SI is now a normal course (SI-1…SI-19).
 - HT: course passes through HT-2 (was 30 mm off). LI: course passes through LI-16 (Cự cốt) before GV-14. BL-39: explicit short spur from BL-38.
+
+## Pass 4 (straight segments)
+Consecutive acupoints of a meridian are joined by straight segments (renderer: LineCurve3 path, no spline). A segment is split only where a straight chord would leave the skin by more than 2.5 mm (skin point under the chord midpoint). Relaxation/smoothing and the 3.5 mm lift were removed; the markers are the exact waypoints, so every point lies on its line. Curved routes are limited to what the anchors and course waypoints themselves describe (head, around the ear, over the shoulder).
