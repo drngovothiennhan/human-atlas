@@ -122,7 +122,7 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
    }).catch(error=>{if(disposed)return;skeletalStatus='error';clearGroup(skeletalReferenceGroup);renderer.domElement.dataset.skeletalReferenceStatus='error';renderer.domElement.dataset.skeletalReferenceError=error instanceof Error?error.message:'load failed';console.error('[skeletal-reference]',error);dirty=true;}).finally(()=>draco.dispose());
   };
   const reduceMeridianMotion=window.matchMedia?.('(prefers-reduced-motion: reduce)').matches??false;
-  type MeridianFlowParticle={mesh:T.Mesh;curve:T.CatmullRomCurve3;offset:number;speed:number};
+  type MeridianFlowParticle={mesh:T.Mesh;curve:T.Curve<T.Vector3>;offset:number;speed:number};
   let meridianMarkers:T.Mesh[]=[],meridianPulseMarkers:T.Mesh[]=[],meridianFlowParticles:MeridianFlowParticle[]=[],needleMesh:T.Mesh|null=null;
   const meridianColors:Record<string,number>={LU:0x2563eb,LI:0xea580c,ST:0xca8a04,SP:0x84cc16,HT:0xdc2626,SI:0x0891b2,BL:0x4f46e5,KI:0x0d9488,PC:0xdb2777,TE:0x0ea5e9,GB:0x16a34a,LR:0x65a30d,CV:0x7c3aed,GV:0xc026d3};
   // Pull overlay geometry 14 mm toward the camera in view space: lines can no longer sink into skin/muscle that pokes through,
@@ -170,8 +170,12 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
     if(!schematic&&!reviewed)continue;
     const color=meridianColors[path.meridianId]??fallbackColor,lineColor=new T.Color(color);
     const points=path.points.map(point=>new T.Vector3(point[0],point[1],point[2]));
-    const curve=new T.CatmullRomCurve3(points,false,'centripetal');
-    const segments=Math.max(36,points.length*18);
+    // Acupoints are joined by straight segments (textbook: a line from point to point); the data already bends only where the body does.
+    const straight=Boolean((path as {courseSource?:string}).courseSource);
+    let curve:T.Curve<T.Vector3>;
+    if(straight){const cp=new T.CurvePath<T.Vector3>();for(let i=0;i<points.length-1;i++)if(points[i].distanceToSquared(points[i+1])>1e-12)cp.add(new T.LineCurve3(points[i],points[i+1]));curve=cp;}
+    else curve=new T.CatmullRomCurve3(points,false,'centripetal');
+    const segments=straight?Math.min(4000,Math.max(36,Math.ceil(curve.getLength()/.004)+points.length)):Math.max(36,points.length*18);
     // Thin semi-transparent channels stay legible without masking anatomy.
     const edge=new T.Mesh(new T.TubeGeometry(curve,segments,MERIDIAN_LINE_EDGE_RADIUS,qualityConfig.tubeRadialSegments,false),nearer(new T.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:MERIDIAN_LINE_EDGE_OPACITY,depthTest:true,depthWrite:false,polygonOffset:true,polygonOffsetFactor:-4,polygonOffsetUnits:-4})));
     edge.renderOrder=21;meridianGroup.add(edge);
