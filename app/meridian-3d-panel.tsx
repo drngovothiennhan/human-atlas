@@ -1,5 +1,6 @@
 import {useEffect,useMemo,useRef,useState} from 'react';
 import {isMobileLayout,useExclusiveSheet} from './mobile-sheets';
+import AcupunctureLab from './acupuncture-lab';
 import {Move} from 'lucide-react';
 import {useDraggable} from './use-draggable';
 import {Button} from '@/components/ui/button';
@@ -11,7 +12,9 @@ import {
   type MeridianOverlaySide,
   type MeridianOverlayState,
   type MeridianSceneAnchor,
-  type MeridianScenePath
+  type MeridianScenePath,
+  type NeedleSimulationState,
+  type FormulaOverlay
 } from './meridian-overlay';
 
 type Language='vi'|'en'|'zh';
@@ -40,7 +43,7 @@ export default function Meridian3DPanel({drafts,selectedPointCode,studyCommand,o
   const [query,setQuery]=useState(''),[selected,setSelected]=useState<string|null>(null);
   const [loading,setLoading]=useState(true),[loadError,setLoadError]=useState(''),[loadAttempt,setLoadAttempt]=useState(0);
   const panelDrag=useDraggable('meridian3d'),launchDrag=useDraggable('meridian3d-launch');
-  const [needleMode,setNeedleMode]=useState(false),[needleAngle,setNeedleAngle]=useState(35),[needleLength,setNeedleLength]=useState(36),[needleAction,setNeedleAction]=useState<'insert'|'twist'|'lift-thrust'>('insert'),[needlePlaying,setNeedlePlaying]=useState(false);
+  const [needleState,setNeedleState]=useState<NeedleSimulationState|null>(null),[formulaOverlay,setFormulaOverlay]=useState<FormulaOverlay|null>(null),[labFocus,setLabFocus]=useState(0);
 
   useEffect(()=>{
     let alive=true;
@@ -116,7 +119,7 @@ export default function Meridian3DPanel({drafts,selectedPointCode,studyCommand,o
     }
     setEnabled(true);
     // On phones the study sheet that sent the command stays open; the overlay still shows on the model.
-    if(!isMobileLayout())setOpen(true);
+    if(command.openLab){setOpen(true);setLabFocus(v=>v+1)}else if(!isMobileLayout())setOpen(true);
     if(point){
       setSelected(point.code);setQuery('');
       const candidates=allAnchors.filter(a=>a.pointCode===point.code),anchor=candidates[0];
@@ -134,9 +137,7 @@ export default function Meridian3DPanel({drafts,selectedPointCode,studyCommand,o
     return schematic.paths.filter(p=>p.meridianId===id&&matchesSide(p.side));
   }),[publishedPaths,schematic.paths,activeMeridianIds,side]);
 
-  const needleAnchors=allAnchors.filter(a=>a.pointCode===selected);
-  const needleAnchor=needleAnchors.find(a=>side==='BOTH'||a.side===side)||needleAnchors[0];
-  useEffect(()=>{onOverlayChange({enabled:enabled||needleMode,meridianId:activeMeridian,side,selectedPointCode:selected,anchors:visibleAnchors,paths:visiblePaths,effects:{motion,meridians:showMeridians,acupoints:showPoints,collaterals:showCollaterals},needleSimulation:needleMode&&needleAnchor?{pointCode:needleAnchor.pointCode,x:needleAnchor.x,y:needleAnchor.y,z:needleAnchor.z,angleDegrees:needleAngle,visualLengthMm:needleLength,animated:needlePlaying,action:needleAction}:null})},[enabled,needleMode,needleAnchor,needleAngle,needleLength,needlePlaying,needleAction,activeMeridian,side,selected,visibleAnchors,visiblePaths,motion,showMeridians,showPoints,showCollaterals,onOverlayChange]);
+  useEffect(()=>{onOverlayChange({enabled:enabled||!!needleState||!!formulaOverlay,meridianId:activeMeridian,side,selectedPointCode:selected,anchors:visibleAnchors,paths:visiblePaths,effects:{motion,meridians:showMeridians,acupoints:showPoints,collaterals:showCollaterals},needleSimulation:needleState,formula:formulaOverlay})},[enabled,needleState,formulaOverlay,activeMeridian,side,selected,visibleAnchors,visiblePaths,motion,showMeridians,showPoints,showCollaterals,onOverlayChange]);
 
   const meridianName=(m:Meridian|undefined)=>{
     if(!m)return activeMeridian;
@@ -215,21 +216,7 @@ export default function Meridian3DPanel({drafts,selectedPointCode,studyCommand,o
         <button type="button" data-effect-collateral="true" aria-disabled="true" disabled title="Chưa có dữ liệu đường lạc đã thẩm định để hiển thị">Lạc · chưa dữ liệu</button>
         <button type="button" data-effect-acupoint="true" aria-pressed={showPoints} className={showPoints?'active':''} onClick={()=>setShowPoints(v=>!v)}>Huyệt</button>
       </div>
-      <section className="acupuncture-sim" data-acupuncture-simulator="true" aria-label="Mô phỏng châm cứu 3D">
-        <div className="meridian3d-section-label">Mô phỏng châm cứu 3D</div>
-        <p>Chọn huyệt có tọa độ rồi mô phỏng hướng kim, góc và chiều dài biểu diễn ngay trên mô hình 3D.</p>
-        {!selectedRecord||!needleAnchor?<p role="status">Chọn một huyệt có vị trí 3D để bật mô phỏng.</p>:<>
-          <Button variant="ghost" type="button" aria-pressed={needleMode} onClick={()=>{setNeedleMode(v=>!v);setEnabled(true)}}>{needleMode?'Tắt mô phỏng kim':'Hiện kim mô phỏng'} · {selectedRecord.code}</Button>
-          <label>Góc minh họa từ mặt da · {needleAngle}°<input type="range" min="5" max="90" step="5" value={needleAngle} onChange={e=>setNeedleAngle(Number(e.target.value))}/></label>
-          <label>Chiều dài biểu diễn · {needleLength} mm<input type="range" min="8" max="120" step="2" value={needleLength} onChange={e=>setNeedleLength(Number(e.target.value))}/></label>
-          <label>Động tác minh họa<select value={needleAction} onChange={e=>setNeedleAction(e.target.value as typeof needleAction)}><option value="insert">Tiến / lui kim</option><option value="twist">Xoay kim</option><option value="lift-thrust">Nâng / đẩy kim</option></select></label>
-          <p>Động tác đang chọn: {needleAction==='insert'?'chuyển động dọc theo trục kim':needleAction==='twist'?'xoay trục kim': 'chuyển động nâng và đẩy'}. Phần trình diễn là khái quát trực quan, không tái hiện kỹ thuật lâm sàng.</p>
-          <Button variant="ghost" type="button" aria-pressed={needlePlaying} onClick={()=>setNeedlePlaying(v=>!v)}>{needlePlaying?'Tạm dừng động tác':'Chạy mô phỏng động tác'}</Button>
-          <p className="acupuncture-warning">Hình minh họa không phải góc/độ sâu châm thực tế. WHO nêu góc và độ sâu cần tùy huyệt, mục đích và thể trạng; chỉ người hành nghề được đào tạo mới thực hiện.</p>
-          <p><b>Tác dụng / chỉ định:</b> catalog hiện có tên huyệt, kinh và mốc giải phẫu nhưng chưa có dữ liệu chỉ định được thẩm định; app không tự suy diễn tác dụng điều trị.</p>
-          <div className="acupuncture-sources"><a href="https://www.who.int/westernpacific/publications/i/item/978-92-4-001688-0" target="_blank" rel="noreferrer">WHO · Benchmarks for the practice of acupuncture ↗</a><a href="https://github.com/Antonio-Abrao/acu-master" target="_blank" rel="noreferrer">GitHub · AcuMaster WebGL/Three.js · GPL-3.0 ↗</a><a href="https://github.com/SciCrunch/TARA-Ontology-Repository" target="_blank" rel="noreferrer">GitHub · TARA Acupoints Ontology · xem chỉ định/phương pháp ↗</a><a href="https://github.com/ZoeApokalypse/acuSim" target="_blank" rel="noreferrer">GitHub · AcuSim 3D keypoint data · CC BY 4.0 ↗</a></div>
-        </>}
-      </section>
+      <AcupunctureLab selectedPoint={selectedRecord??null} points={points} anchors={allAnchors} side={side} focusRequest={labFocus} onNeedleChange={setNeedleState} onFormulaChange={setFormulaOverlay} onFocusPoint={code=>{const point=points.find(p=>p.code===code);if(point)focusPoint(point)}}/>
       <div className="meridian3d-effect-note" aria-label="Chú giải hiệu ứng 3D"><span><i className="effect-dot"/>Huyệt nhịp</span><span><i className="effect-flow"/>Dòng kinh</span><span>Chạm huyệt → phóng tới vị trí</span></div>
       <input className="meridian3d-search" value={query} onChange={e=>setQuery(e.target.value)} placeholder="Tìm ST-36, LI-4, tên Việt/Anh/中文…" aria-label="Tìm huyệt để bay tới"/>
       {!loading&&!loadError&&!filteredPoints.length&&<p role="status">Không tìm thấy huyệt phù hợp.</p>}

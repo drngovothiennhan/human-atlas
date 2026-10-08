@@ -84,7 +84,7 @@ export default function Home(){
    setState(s=>({...s,visible,selected:[],isolate:false,explode:0,rotate:false,reset:s.reset+1}));
   }
   const {view:_,anatomyPreset:__,...overlayCommand}=command;
-  if(overlayCommand.meridianId||overlayCommand.pointCode||overlayCommand.effects)setStudyCommand({...overlayCommand,seq:++studyCommandSeq.current});
+  if(overlayCommand.meridianId||overlayCommand.pointCode||overlayCommand.effects||overlayCommand.openLab)setStudyCommand({...overlayCommand,seq:++studyCommandSeq.current});
  };
  return <main className={`studio layout-${layout}`} data-layout-mode={layout}>
   {atlas&&<AnatomyScene atlas={atlas} state={{...state,inspectorOpen:details&&selectedParts.length>0}} renderQuality={renderQuality} onSelect={id=>{if(meridianOverlay.enabled&&isMobileLayout())return;choosePart(id)}} onProgress={n=>{setProgress(n);if(n===100)setError('');}} onError={setError} registrationMode={registrationEnabled} onRegisterSurface={setRegistrationCapture} meridianOverlay={meridianOverlay} focusAcupoint={meridianFocus} onSelectAcupoint={setSelectedMeridianPoint}/>} 

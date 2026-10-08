@@ -40,15 +40,34 @@ export type MeridianOverlayState={
     acupoints:boolean;
     collaterals:boolean;
   };
-  needleSimulation?:{
-    pointCode:string;
-    x:number;y:number;z:number;
-    angleDegrees:number;
-    visualLengthMm:number;
-    animated:boolean;
-    action:'insert'|'twist'|'lift-thrust';
-  }|null;
+  needleSimulation?:NeedleSimulationState|null;
+  formula?:FormulaOverlay|null;
 };
+
+/** Illustrative needle motions (Châm cứu học Trung Quốc, tr. 13–14) plus the legacy 'insert' cycle. */
+export type NeedleAction='insert'|'twist'|'lift-thrust'|'twist-lift'|'scrape'|'shake';
+/** Stimulation strength (tr. 16): weak ≈ bổ, moderate ≈ bình, strong ≈ tả. */
+export type NeedleIntensity='weak'|'moderate'|'strong';
+/** Step of the needling sequence; the scene eases the needle toward each step. */
+export type NeedlePhase='approach'|'pierce'|'manipulate'|'retain'|'withdraw';
+
+export type NeedleSimulationState={
+  pointCode:string;
+  x:number;y:number;z:number;
+  angleDegrees:number;
+  /** Length of shaft left above the skin, illustrative millimetres. */
+  visualLengthMm:number;
+  /** Illustrative inserted depth in millimetres (drawn faintly under the skin). */
+  depthMm?:number;
+  animated:boolean;
+  action:NeedleAction;
+  intensity?:NeedleIntensity;
+  phase?:NeedlePhase;
+  deqi?:boolean;
+};
+
+export type FormulaOverlayPoint={code:string;x:number;y:number;z:number;method:'bo'|'ta'|'binh';order:number;active?:boolean};
+export type FormulaOverlay={id:string;points:FormulaOverlayPoint[]};
 
 export type MeridianFocusTarget={
   key:string;

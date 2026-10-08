@@ -1,0 +1,775 @@
+{
+  "schemaVersion": "0.1.0",
+  "sourceId": "USER-DRIVE-BYT-HDCDDT-YHCT-TAP-1",
+  "source": {
+    "title": "Hướng dẫn chẩn đoán và điều trị bệnh theo y học cổ truyền, kết hợp y học cổ truyền và y học hiện đại — Tập I",
+    "issuer": "Bộ Y tế (Trưởng ban biên soạn PGS.TS.BS. Nguyễn Thị Thu Hà)",
+    "location": "Google Drive của chủ dự án (Quy trình chữa bệnh YHCT)",
+    "pageNote": "Số trang theo số in ở cuối trang; nội dung phần Pháp và danh sách huyệt chép theo tài liệu."
+  },
+  "reviewStatus": "SOURCE_TRANSCRIBED_PENDING_FACULTY_REVIEW",
+  "policy": "Dữ liệu học tập về phối huyệt theo tài liệu. Không dùng thay chỉ định điều trị; thầy thuốc được cấp chứng chỉ hành nghề mới được thực hiện.",
+  "methods": {
+    "ta": "Châm tả",
+    "bo": "Châm bổ",
+    "ta-cuu": "Châm tả và cứu",
+    "bo-cuu": "Châm bổ và/hoặc cứu"
+  },
+  "formulas": [
+    {
+      "id": "BYT-01-HAN-THAP",
+      "disease": "Đau cột sống thắt lưng (Yêu thống)",
+      "pattern": "Thể hàn thấp",
+      "principle": "Tán hàn, trừ thấp, ôn thông kinh lạc",
+      "pages": [
+        8,
+        9
+      ],
+      "retention": "Lưu kim 20–30 phút/lần/ngày, 15–20 ngày/liệu trình",
+      "groups": [
+        {
+          "role": "Tại chỗ",
+          "method": "ta",
+          "points": [
+            {
+              "name": "A thị huyệt",
+              "code": null
+            },
+            {
+              "name": "Thượng liêu",
+              "code": "BL-31"
+            },
+            {
+              "name": "Thứ liêu",
+              "code": "BL-32"
+            },
+            {
+              "name": "Yêu dương quan",
+              "code": "GV-3"
+            },
+            {
+              "name": "Giáp tích vùng thắt lưng",
+              "code": null
+            },
+            {
+              "name": "Thận du",
+              "code": "BL-23"
+            },
+            {
+              "name": "Đại trường du",
+              "code": "BL-25"
+            },
+            {
+              "name": "Yêu du",
+              "code": "GV-2"
+            }
+          ]
+        },
+        {
+          "role": "Toàn thân",
+          "method": "ta",
+          "points": [
+            {
+              "name": "Hoàn khiêu",
+              "code": "GB-30"
+            },
+            {
+              "name": "Ủy trung",
+              "code": "BL-40"
+            },
+            {
+              "name": "Dương lăng tuyền",
+              "code": "GB-34"
+            },
+            {
+              "name": "Côn lôn",
+              "code": "BL-60"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BYT-01-CAN-THAN-HU",
+      "disease": "Đau cột sống thắt lưng (Yêu thống)",
+      "pattern": "Thể can thận hư",
+      "principle": "Bổ can thận, khu phong trừ thấp, thông kinh hoạt lạc",
+      "pages": [
+        11,
+        12
+      ],
+      "baseFormula": "BYT-01-HAN-THAP",
+      "baseMethod": "ta",
+      "groups": [
+        {
+          "role": "Thêm (châm bổ)",
+          "method": "bo",
+          "points": [
+            {
+              "name": "Thái khê",
+              "code": "KI-3"
+            },
+            {
+              "name": "Tam âm giao",
+              "code": "SP-6"
+            },
+            {
+              "name": "Thận du",
+              "code": "BL-23"
+            },
+            {
+              "name": "Thái xung",
+              "code": "LR-3"
+            }
+          ]
+        }
+      ],
+      "technique": "Điện châm, điện mãng châm (theo tài liệu)"
+    },
+    {
+      "id": "BYT-02-PHONG-HAN-THAP-TY",
+      "disease": "Thoái hóa khớp gối (Hạc tất phong)",
+      "pattern": "Thể phong hàn thấp tý",
+      "principle": "Trừ thấp, khu phong, tán hàn, chỉ thống",
+      "pages": [
+        16
+      ],
+      "retention": "Lưu kim 20–30 phút/lần/ngày, 10–15 ngày/liệu trình",
+      "groups": [
+        {
+          "role": "Tại chỗ",
+          "method": "ta-cuu",
+          "points": [
+            {
+              "name": "A thị huyệt",
+              "code": null
+            },
+            {
+              "name": "Độc tỵ",
+              "code": "ST-35"
+            },
+            {
+              "name": "Dương lăng tuyền",
+              "code": "GB-34"
+            },
+            {
+              "name": "Lương khâu",
+              "code": "ST-34"
+            },
+            {
+              "name": "Tất nhãn",
+              "code": null
+            },
+            {
+              "name": "Âm lăng tuyền",
+              "code": "SP-9"
+            },
+            {
+              "name": "Huyết hải",
+              "code": "SP-10",
+              "printedCode": "IV-10"
+            },
+            {
+              "name": "Ủy trung",
+              "code": "BL-40"
+            }
+          ]
+        },
+        {
+          "role": "Toàn thân",
+          "method": "ta-cuu",
+          "points": [
+            {
+              "name": "Phong long",
+              "code": "ST-40"
+            },
+            {
+              "name": "Túc tam lý",
+              "code": "ST-36"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BYT-04-PHONG-THAP",
+      "disease": "Viêm khớp dạng thấp (Chứng tý)",
+      "pattern": "Thể phong thấp",
+      "principle": "Khu phong, trừ thấp, thông lạc, chỉ thống",
+      "pages": [
+        30,
+        31
+      ],
+      "retention": "Lưu kim 20–30 phút/lần/ngày, 15–20 ngày/liệu trình",
+      "groups": [
+        {
+          "role": "Tại chỗ",
+          "method": "ta",
+          "points": [
+            {
+              "name": "Huyệt tại các khớp sưng đau và vùng lân cận",
+              "code": null
+            }
+          ]
+        },
+        {
+          "role": "Toàn thân",
+          "method": "ta",
+          "points": [
+            {
+              "name": "Đại chùy",
+              "code": "GV-14"
+            },
+            {
+              "name": "Phong môn",
+              "code": "BL-12"
+            },
+            {
+              "name": "Phong trì",
+              "code": "GB-20"
+            },
+            {
+              "name": "Hợp cốc",
+              "code": "LI-4"
+            },
+            {
+              "name": "Túc tam lý",
+              "code": "ST-36"
+            },
+            {
+              "name": "Huyết hải",
+              "code": "SP-10"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BYT-05-PHONG-HAN",
+      "disease": "Hội chứng cổ vai cánh tay (Chứng tý)",
+      "pattern": "Thể phong hàn",
+      "principle": "Trừ phong tán hàn, thông kinh hoạt lạc",
+      "pages": [
+        38
+      ],
+      "retention": "Châm ngày một lần, mỗi lần chọn 8–12 huyệt; 20–30 lần/liệu trình",
+      "groups": [
+        {
+          "role": "Phác đồ",
+          "method": "ta",
+          "points": [
+            {
+              "name": "Hậu khê",
+              "code": "SI-3"
+            },
+            {
+              "name": "Phong trì",
+              "code": "GB-20"
+            },
+            {
+              "name": "Đại chùy",
+              "code": "GV-14"
+            },
+            {
+              "name": "Liệt khuyết",
+              "code": "LU-7"
+            },
+            {
+              "name": "Kiên tỉnh",
+              "code": "GB-21"
+            },
+            {
+              "name": "Hợp cốc",
+              "code": "LI-4"
+            },
+            {
+              "name": "Thủ tam lý",
+              "code": "LI-10"
+            },
+            {
+              "name": "Thiên trụ",
+              "code": "BL-10"
+            },
+            {
+              "name": "Ngoại quan",
+              "code": "TE-5"
+            },
+            {
+              "name": "Giáp tích C4–C7",
+              "code": null
+            },
+            {
+              "name": "A thị huyệt",
+              "code": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BYT-05-CAN-THAN-HU",
+      "disease": "Hội chứng cổ vai cánh tay (Chứng tý)",
+      "pattern": "Thể can thận hư",
+      "principle": "Tư dưỡng can thận, hoạt huyết thông kinh lạc",
+      "pages": [
+        41
+      ],
+      "groups": [
+        {
+          "role": "Phác đồ",
+          "method": "bo",
+          "points": [
+            {
+              "name": "Thái khê",
+              "code": "KI-3"
+            },
+            {
+              "name": "Đại trữ",
+              "code": "BL-11"
+            },
+            {
+              "name": "Huyền chung",
+              "code": "GB-39"
+            },
+            {
+              "name": "Giáp tích C4–C7",
+              "code": null
+            },
+            {
+              "name": "Thủ tam lý",
+              "code": "LI-10"
+            },
+            {
+              "name": "Thiên trụ",
+              "code": "BL-10"
+            },
+            {
+              "name": "A thị huyệt",
+              "code": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BYT-06-CAN-DUONG",
+      "disease": "Tăng huyết áp vô căn (Huyễn vựng)",
+      "pattern": "Thể can dương thượng cang",
+      "principle": "Bình can tức phong (bình can tiềm dương)",
+      "pages": [
+        45,
+        46
+      ],
+      "retention": "Lưu kim 20–30 phút/lần/ngày, 15–20 ngày/liệu trình",
+      "groups": [
+        {
+          "role": "Tại chỗ",
+          "method": "ta",
+          "points": [
+            {
+              "name": "Bách hội",
+              "code": "GV-20"
+            },
+            {
+              "name": "Thái dương",
+              "code": null
+            }
+          ]
+        },
+        {
+          "role": "Toàn thân",
+          "method": "ta",
+          "points": [
+            {
+              "name": "Đởm du",
+              "code": "BL-19"
+            },
+            {
+              "name": "Can du",
+              "code": "BL-18"
+            },
+            {
+              "name": "Thái xung",
+              "code": "LR-3"
+            },
+            {
+              "name": "Hành gian",
+              "code": "LR-2"
+            },
+            {
+              "name": "Nội quan",
+              "code": "PC-6"
+            },
+            {
+              "name": "Thần môn",
+              "code": "HT-7"
+            },
+            {
+              "name": "Tam âm giao",
+              "code": "SP-6"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BYT-06-CAN-THAN-AM-HU",
+      "disease": "Tăng huyết áp vô căn (Huyễn vựng)",
+      "pattern": "Thể can thận âm hư",
+      "principle": "Tư bổ can thận",
+      "pages": [
+        46,
+        47
+      ],
+      "retention": "Lưu kim 20–30 phút/lần/ngày, 15–20 ngày/liệu trình",
+      "groups": [
+        {
+          "role": "Phác đồ",
+          "method": "bo",
+          "points": [
+            {
+              "name": "Can du",
+              "code": "BL-18"
+            },
+            {
+              "name": "Thận du",
+              "code": "BL-23"
+            },
+            {
+              "name": "Thái khê",
+              "code": "KI-3"
+            },
+            {
+              "name": "Huyết hải",
+              "code": "SP-10"
+            },
+            {
+              "name": "Tam âm giao",
+              "code": "SP-6"
+            },
+            {
+              "name": "Nội quan",
+              "code": "PC-6"
+            },
+            {
+              "name": "Thần môn",
+              "code": "HT-7"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BYT-06-DAM-THAP",
+      "disease": "Tăng huyết áp vô căn (Huyễn vựng)",
+      "pattern": "Thể đàm thấp",
+      "principle": "Kiện tỳ, trừ thấp, hóa đàm",
+      "pages": [
+        48,
+        49
+      ],
+      "retention": "Lưu kim 20–30 phút/lần/ngày, 15–20 ngày/liệu trình",
+      "groups": [
+        {
+          "role": "Châm bổ",
+          "method": "bo",
+          "points": [
+            {
+              "name": "Túc tam lý",
+              "code": "ST-36",
+              "printedCode": "SP.6"
+            },
+            {
+              "name": "Tỳ du",
+              "code": "BL-20"
+            },
+            {
+              "name": "Vị du",
+              "code": "BL-21"
+            },
+            {
+              "name": "Nội quan",
+              "code": "PC-6"
+            },
+            {
+              "name": "Thần môn",
+              "code": "HT-7"
+            },
+            {
+              "name": "Tam âm giao",
+              "code": "SP-6"
+            }
+          ]
+        },
+        {
+          "role": "Châm tả",
+          "method": "ta",
+          "points": [
+            {
+              "name": "Phong long",
+              "code": "ST-40"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BYT-07-TY-HU-DAM-THAP",
+      "disease": "Rối loạn chuyển hóa lipoprotein, tăng lipid máu (Chứng đàm)",
+      "pattern": "Thể tỳ hư đàm thấp",
+      "principle": "Kiện tỳ, hóa đàm, trừ thấp",
+      "pages": [
+        52,
+        53
+      ],
+      "retention": "Lưu kim 20–30 phút/lần/ngày, 15–20 ngày/liệu trình",
+      "groups": [
+        {
+          "role": "Châm bổ",
+          "method": "bo",
+          "points": [
+            {
+              "name": "Tỳ du",
+              "code": "BL-20"
+            },
+            {
+              "name": "Túc tam lý",
+              "code": "ST-36"
+            },
+            {
+              "name": "Tam âm giao",
+              "code": "SP-6"
+            }
+          ]
+        },
+        {
+          "role": "Châm tả",
+          "method": "ta",
+          "points": [
+            {
+              "name": "Phong long",
+              "code": "ST-40"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BYT-07-CAN-UAT-TY-HU",
+      "disease": "Rối loạn chuyển hóa lipoprotein, tăng lipid máu (Chứng đàm)",
+      "pattern": "Thể can uất tỳ hư",
+      "principle": "Sơ can giải uất, kiện tỳ trừ đàm",
+      "pages": [
+        55
+      ],
+      "retention": "Lưu kim 20–30 phút/lần/ngày, 15–20 ngày/liệu trình",
+      "groups": [
+        {
+          "role": "Châm tả",
+          "method": "ta",
+          "points": [
+            {
+              "name": "Can du",
+              "code": "BL-18"
+            },
+            {
+              "name": "Thái xung",
+              "code": "LR-3"
+            },
+            {
+              "name": "Phong long",
+              "code": "ST-40"
+            }
+          ]
+        },
+        {
+          "role": "Châm bổ",
+          "method": "bo",
+          "points": [
+            {
+              "name": "Túc tam lý",
+              "code": "ST-36"
+            },
+            {
+              "name": "Tam âm giao",
+              "code": "SP-6"
+            },
+            {
+              "name": "Tỳ du",
+              "code": "BL-20"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BYT-07-KHI-TRE-HUYET-U",
+      "disease": "Rối loạn chuyển hóa lipoprotein, tăng lipid máu (Chứng đàm)",
+      "pattern": "Thể khí trệ huyết ứ",
+      "principle": "Hoạt huyết hóa ứ",
+      "pages": [
+        56
+      ],
+      "retention": "Lưu kim 20–30 phút/lần/ngày, 15–20 ngày/liệu trình",
+      "groups": [
+        {
+          "role": "Châm bổ",
+          "method": "bo",
+          "points": [
+            {
+              "name": "Túc tam lý",
+              "code": "ST-36"
+            },
+            {
+              "name": "Tam âm giao",
+              "code": "SP-6"
+            }
+          ]
+        },
+        {
+          "role": "Châm tả",
+          "method": "ta",
+          "points": [
+            {
+              "name": "Cách du",
+              "code": "BL-17"
+            },
+            {
+              "name": "Huyết hải",
+              "code": "SP-10"
+            },
+            {
+              "name": "Phong long",
+              "code": "ST-40"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BYT-08-PHONG-HAN",
+      "disease": "Bệnh dây thần kinh mặt (Khẩu nhãn oa tà)",
+      "pattern": "Thể phong hàn ở kinh lạc",
+      "principle": "Khu phong tán hàn, ôn kinh hoạt lạc",
+      "pages": [
+        60
+      ],
+      "retention": "Lưu kim 20–30 phút/lần/ngày, 15–20 ngày/liệu trình",
+      "groups": [
+        {
+          "role": "Tại chỗ",
+          "method": "ta",
+          "points": [
+            {
+              "name": "Ế phong",
+              "code": "TE-17"
+            },
+            {
+              "name": "Nghinh hương",
+              "code": "LI-20"
+            },
+            {
+              "name": "Đồng tử liêu",
+              "code": "GB-1"
+            },
+            {
+              "name": "Địa thương",
+              "code": "ST-4"
+            },
+            {
+              "name": "Dương bạch",
+              "code": "GB-14"
+            },
+            {
+              "name": "Giáp xa",
+              "code": "ST-6"
+            },
+            {
+              "name": "Ngư yêu",
+              "code": null
+            },
+            {
+              "name": "Nhân trung",
+              "code": "GV-26"
+            },
+            {
+              "name": "Quyền liêu",
+              "code": "SI-18"
+            },
+            {
+              "name": "Thừa tương",
+              "code": "CV-24"
+            }
+          ]
+        },
+        {
+          "role": "Toàn thân",
+          "method": "ta",
+          "points": [
+            {
+              "name": "Bách hội",
+              "code": "GV-20"
+            },
+            {
+              "name": "Phong trì",
+              "code": "GB-20"
+            },
+            {
+              "name": "Hợp cốc",
+              "code": "LI-4",
+              "side": "OPPOSITE",
+              "note": "bên đối diện"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BYT-08-PHONG-NHIET",
+      "disease": "Bệnh dây thần kinh mặt (Khẩu nhãn oa tà)",
+      "pattern": "Thể phong nhiệt",
+      "principle": "Khu phong, thanh nhiệt, hoạt huyết",
+      "pages": [
+        61
+      ],
+      "baseFormula": "BYT-08-PHONG-HAN",
+      "baseGroups": [
+        "Tại chỗ"
+      ],
+      "baseMethod": "ta",
+      "retention": "Lưu kim 20–30 phút/lần/ngày, 15–20 ngày/liệu trình; không châm khi có tổn thương trên da",
+      "groups": [
+        {
+          "role": "Toàn thân",
+          "method": "ta",
+          "points": [
+            {
+              "name": "Bách hội",
+              "code": "GV-20"
+            },
+            {
+              "name": "Phong trì",
+              "code": "GB-20"
+            },
+            {
+              "name": "Hợp cốc",
+              "code": "LI-4",
+              "side": "OPPOSITE",
+              "note": "bên đối diện"
+            },
+            {
+              "name": "Khúc trì",
+              "code": "LI-11",
+              "side": "BOTH",
+              "note": "2 bên"
+            },
+            {
+              "name": "Nội đình",
+              "code": "ST-44"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
