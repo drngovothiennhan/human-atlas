@@ -1,4 +1,5 @@
 import {useEffect,useMemo,useState} from 'react';
+import {useExclusiveSheet} from './mobile-sheets';
 import {Move} from 'lucide-react';
 import {useDraggable} from './use-draggable';
 import NeedleSimulation from './needle-simulation';
@@ -62,6 +63,7 @@ const canonicalPointCode=(v:string)=>{
 
 export default function YhctStudyPanel({localDraftCount,onStudyCommand}:Props){
   const [open,setOpen]=useState(false);
+  useExclusiveSheet('study',open,()=>setOpen(false));
   const [tab,setTab]=useState<Tab>('meridians');
   const [meridians,setMeridians]=useState<Meridian[]>([]);
   const [points,setPoints]=useState<Acupoint[]>([]);

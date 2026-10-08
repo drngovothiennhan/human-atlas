@@ -448,6 +448,14 @@ try{
   await sleep(250);
   await evaluate("(()=>{const studio=document.querySelector('.studio');if(studio?.classList.contains('layout-mobile'))return true;const button=document.querySelector('[aria-label=\"Chuyển giao diện điện thoại\"]');if(!button)return false;button.click();return true})()");
   await waitFor(()=>evaluate("document.querySelector('.studio')?.classList.contains('layout-mobile')"),{label:'mobile layout toggle'});
+  const mobileOverlap=async(stage,extra=[])=>{
+    const report=await evaluate("(()=>{const sel="+JSON.stringify(['.identity h1','.top-actions','[data-meridian3d-launch=true]','.yhct-launch','.view-controls','.bottom-dock',...extra])+";const vw=innerWidth,vh=innerHeight;const boxes=sel.map(s=>{const e=document.querySelector(s);if(!e)return null;const r=e.getBoundingClientRect();if(!r.width||!r.height||getComputedStyle(e).visibility==='hidden')return null;return{s,l:Math.round(r.left),t:Math.round(r.top),r:Math.round(r.right),b:Math.round(r.bottom)}}).filter(Boolean);const out=boxes.filter(x=>x.l<0||x.t<0||x.r>vw||x.b>vh).map(x=>x.s);const hits=[];for(let i=0;i<boxes.length;i++)for(let j=i+1;j<boxes.length;j++){const a=boxes[i],b=boxes[j];if(a.l<b.r-1&&b.l<a.r-1&&a.t<b.b-1&&b.t<a.b-1)hits.push(a.s+' x '+b.s)}return{vw,vh,boxes,out,hits}})()");
+    console.log('::notice title=mobile-layout '+stage+'::'+JSON.stringify(report));
+    if(report.out.length||report.hits.length)throw new Error('Mobile layout overlap at '+stage+': '+JSON.stringify(report));
+    return report;
+  };
+  await sleep(400);
+  await mobileOverlap('idle');
   await evaluate("document.querySelector('[data-meridian3d-launch=true]')?.click()");
   await waitFor(()=>evaluate("!!document.querySelector('[data-meridian3d-panel=true]')"),{label:'mobile meridian panel'});
   await waitFor(()=>evaluate("document.querySelectorAll('.meridian3d-controls select')[0]?.value==='ALL'&&document.querySelectorAll('.meridian3d-controls select')[1]?.value==='BOTH'"),{label:'mobile opens with all 12 main meridians'});
@@ -456,6 +464,7 @@ try{
   if(!mobileLayout.views||mobileLayout.views.left<0||mobileLayout.views.right>mobileLayout.vw)throw new Error('Mobile view controls overflow: '+JSON.stringify(mobileLayout));
   const mobileMeridianControlsOverflow=await evaluate("(()=>[...document.querySelectorAll('[data-meridian3d-panel=true] button')].filter(el=>el.scrollWidth>el.clientWidth+2).map(el=>(el.textContent||el.getAttribute('aria-label')||'button').trim().slice(0,80)))()");
   if(mobileMeridianControlsOverflow.length)throw new Error('Mobile meridian button overflow: '+JSON.stringify(mobileMeridianControlsOverflow));
+  await mobileOverlap('meridian-sheet',['[data-meridian3d-panel=true]']);
   await screenshot('mobile-meridian3d-layout.png');
   await evaluate("document.querySelector('[data-meridian3d-panel=true] [aria-label=\"Đóng mô hình kinh lạc 3D\"]')?.click()");
   console.log('SMOKE_MOBILE_MERIDIAN_LAYOUT_PASS '+JSON.stringify(mobileLayout));
@@ -493,6 +502,7 @@ try{
   if(!mobileStudyLayout.mode||mobileStudyLayout.mode.left<mobileStudyLayout.panel.left||mobileStudyLayout.mode.right>mobileStudyLayout.panel.right)throw new Error('Mobile study mode overflow: '+JSON.stringify(mobileStudyLayout));
   const mobileYhctControlsOverflow=await evaluate("(()=>[...document.querySelectorAll('.yhct-panel button')].filter(el=>el.scrollWidth>el.clientWidth+2).map(el=>(el.textContent||el.getAttribute('aria-label')||'button').trim().slice(0,80)))()");
   if(mobileYhctControlsOverflow.length)throw new Error('Mobile YHCT button overflow: '+JSON.stringify(mobileYhctControlsOverflow));
+  await mobileOverlap('yhct-sheet',['.yhct-panel']);
   await screenshot('mobile-yhct-quiz-layout.png');
   await evaluate("document.querySelector('.yhct-head>button')?.click()");
   console.log('SMOKE_MOBILE_YHCT_LAYOUT_PASS '+JSON.stringify(mobileStudyLayout));

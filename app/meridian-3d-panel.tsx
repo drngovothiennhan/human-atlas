@@ -1,4 +1,5 @@
 import {useEffect,useMemo,useRef,useState} from 'react';
+import {useExclusiveSheet} from './mobile-sheets';
 import {Move} from 'lucide-react';
 import {useDraggable} from './use-draggable';
 import {Button} from '@/components/ui/button';
@@ -29,6 +30,7 @@ const ALL_MAIN_MERIDIANS='ALL';
 
 export default function Meridian3DPanel({drafts,selectedPointCode,studyCommand,onStudyAction,onOverlayChange,onFocus}:Props){
   const [open,setOpen]=useState(false),[enabled,setEnabled]=useState(false);
+  useExclusiveSheet('meridians',open,()=>setOpen(false));
   const [motion,setMotion]=useState(true),[showMeridians,setShowMeridians]=useState(true),[showPoints,setShowPoints]=useState(true),[showCollaterals,setShowCollaterals]=useState(false);
   const [language,setLanguage]=useState<Language>('vi');
   const [meridians,setMeridians]=useState<Meridian[]>([]),[points,setPoints]=useState<Acupoint[]>([]);

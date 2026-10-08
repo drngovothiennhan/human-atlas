@@ -380,3 +380,72 @@ body:has(.registration-panel) .meridian3d-launch{left:376px}body:has(.registrati
 @media(max-width:767px){.meridian3d-panel[data-floating-resized]{top:max(126px,calc(env(safe-area-inset-top) + 112px));bottom:auto!important;height:min(58dvh,calc(100dvh - 160px),520px)!important;max-height:min(58dvh,calc(100dvh - 160px),520px)!important}body:has(.registration-panel) .meridian3d-panel[data-floating-resized]{top:max(172px,calc(env(safe-area-inset-top) + 160px))}}
 
 @media(max-width:767px){.yhct-panel[data-floating-menu]{top:max(126px,calc(env(safe-area-inset-top) + 112px));bottom:auto!important;height:min(var(--floating-height,58dvh),calc(100dvh - 160px),520px)!important;max-height:min(58dvh,calc(100dvh - 160px),520px)}}
+
+
+/* Mobile layout v2 (2026-10-08): one clean grid, nothing overlaps.
+   Top: title + icon actions · row 2: Kinh lạc 3D | Học YHCT · right: view rail ·
+   bottom: dock · every panel opens as one bottom sheet (only one at a time). */
+@media(max-width:767px){
+.studio.layout-mobile{--m-top:env(safe-area-inset-top,0px);--m-bottom:env(safe-area-inset-bottom,0px);--m-dock:72px;--m-sheet-bottom:calc(var(--m-dock) + 18px + var(--m-bottom));--m-sheet-max:min(56dvh,calc(100dvh - 210px - var(--m-top) - var(--m-bottom)))}
+/* Fixed positions only: no dragging, no resizing, no saved offsets on phones. */
+.studio.layout-mobile .drag-grip{display:none!important}
+.studio.layout-mobile :is(.top-actions,.layers-panel,.search-panel,.view-controls,.bottom-dock,.yhct-launch,.yhct-panel,.meridian3d-launch,.meridian3d-panel,.registration-panel){translate:none!important}
+.studio.layout-mobile [data-floating-menu]{resize:none!important;min-width:0!important;min-height:0!important}
+.studio.layout-mobile [data-floating-menu]::after{display:none!important}
+/* Hidden on phones: decoration and duplicated controls. */
+.studio.layout-mobile .scene-caption,.studio.layout-mobile .studio-footer,.studio.layout-mobile .identity .eyebrow,.studio.layout-mobile .identity-meta,.studio.layout-mobile .dock-reset,.studio.layout-mobile .slider-endpoints,.studio.layout-mobile .top-actions .toggle-layers,.studio.layout-mobile .top-actions kbd,.studio.layout-mobile .top-actions button>span{display:none!important}
+/* Row 1: title + icons. */
+.studio.layout-mobile .identity{top:calc(var(--m-top) + 14px)!important;left:14px!important;z-index:18}
+.studio.layout-mobile .identity h1{font-size:17px!important;gap:6px!important;margin:0;line-height:1.2}
+.studio.layout-mobile .top-actions{position:absolute!important;top:calc(var(--m-top) + 6px)!important;right:6px!important;left:auto!important;gap:0!important;z-index:19}
+.studio.layout-mobile .top-actions>button{min-width:42px!important;min-height:42px!important;padding:0!important;justify-content:center}
+/* Row 2: the two learning entry points share one row. */
+.studio.layout-mobile :is(.meridian3d-launch,.yhct-launch){position:absolute!important;top:calc(var(--m-top) + 54px)!important;bottom:auto!important;width:calc(50% - 18px)!important;min-height:42px!important;height:42px;padding:0 10px!important;margin:0!important;justify-content:center;gap:6px;overflow:hidden;white-space:nowrap;border-radius:11px;font-size:12px;z-index:18}
+.studio.layout-mobile .meridian3d-launch{left:12px!important;right:auto!important}
+.studio.layout-mobile .yhct-launch{right:12px!important;left:auto!important}
+.studio.layout-mobile .meridian3d-launch>span:not(.drag-grip){display:none!important}
+.studio.layout-mobile .meridian3d-launch strong{font-size:12px;overflow:hidden;text-overflow:ellipsis}
+.studio.layout-mobile .yhct-launch>span:not(.drag-grip){font-size:10px;font-weight:500;opacity:.72;overflow:hidden;text-overflow:ellipsis}
+.studio.layout-mobile .meridian3d-launch[aria-expanded=true],.studio.layout-mobile .yhct-launch[aria-expanded=true]{outline:2px solid #0f766e;outline-offset:-2px}
+/* Right rail: view controls, below row 2. */
+.studio.layout-mobile .view-controls{position:absolute!important;top:calc(var(--m-top) + 106px)!important;right:8px!important;left:auto!important;bottom:auto!important;transform:none!important;flex-direction:column!important;padding:3px!important;gap:1px!important;z-index:17}
+.studio.layout-mobile .view-controls>button{min-width:42px!important;min-height:42px!important;width:42px;padding:0!important}
+.studio.layout-mobile .view-controls>i{display:block;height:1px;margin:2px 6px;background:#18253618}
+/* Bottom dock: layers + explode slider in one compact row. */
+.studio.layout-mobile .bottom-dock{left:12px!important;right:12px!important;width:auto!important;max-width:none!important;transform:none!important;margin:0!important;bottom:calc(10px + var(--m-bottom))!important;min-height:var(--m-dock);padding:8px 12px!important;gap:12px!important;z-index:22}
+.studio.layout-mobile .dock-layers{min-height:52px!important}
+.studio.layout-mobile .explode-label{font-size:11px}
+/* Every panel is the same bottom sheet above the dock. */
+.studio.layout-mobile :is(.meridian3d-panel,.yhct-panel,.layers-panel.mobile-open,.registration-panel)[data-floating-menu],.studio.layout-mobile :is(.meridian3d-panel,.yhct-panel,.layers-panel.mobile-open,.registration-panel){position:absolute!important;left:8px!important;right:8px!important;top:auto!important;bottom:var(--m-sheet-bottom)!important;width:auto!important;height:auto!important;max-width:none!important;max-height:var(--m-sheet-max)!important;margin:0!important;transform:none!important;overflow-y:auto!important;overflow-x:hidden!important;border-radius:16px!important;z-index:30!important;box-shadow:0 -8px 40px #1825361f}
+.studio.layout-mobile .search-panel{position:absolute!important;top:calc(var(--m-top) + 52px)!important;left:8px!important;right:8px!important;bottom:auto!important;width:auto!important;max-height:var(--m-sheet-max)!important;z-index:32!important}
+body:has(.studio.layout-mobile) .detail-sheet{left:8px!important;right:8px!important;bottom:calc(90px + env(safe-area-inset-bottom,0px))!important;max-height:min(46dvh,calc(100dvh - 220px))!important}
+/* Rail hides while a sheet is open (sheets carry their own view buttons). */
+body:has(.studio.layout-mobile :is(.meridian3d-panel,.yhct-panel,.layers-panel.mobile-open,.search-panel,.registration-panel)) .studio.layout-mobile .view-controls,body:has(.detail-sheet) .studio.layout-mobile .view-controls{display:none!important}
+/* Meridian sheet: search and point list first, long notes hidden. */
+.studio.layout-mobile .meridian3d-panel{display:flex!important;flex-direction:column;padding:12px!important;gap:8px}
+.studio.layout-mobile .meridian3d-panel>*{flex:0 0 auto}
+.studio.layout-mobile .meridian3d-head small,.studio.layout-mobile .meridian3d-effect-note,.studio.layout-mobile [data-effect-collateral],.studio.layout-mobile [data-all-meridian-guidance],.studio.layout-mobile .meridian3d-quick>small{display:none!important}
+.studio.layout-mobile .meridian3d-head{order:0;position:sticky;top:-12px;z-index:2;background:#fffffff8;margin:-12px -12px 0;padding:12px 12px 6px}
+.studio.layout-mobile .meridian3d-controls{order:1;display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.studio.layout-mobile .meridian3d-controls label{min-width:0;font-size:10px}
+.studio.layout-mobile .meridian3d-controls select{width:100%;min-width:0}
+.studio.layout-mobile .meridian3d-quick{order:2;display:flex!important;flex-wrap:nowrap!important;overflow-x:auto;overflow-y:hidden;max-height:none!important;gap:5px;padding-bottom:4px;scroll-snap-type:x proximity}
+.studio.layout-mobile .meridian3d-quick button{flex:0 0 auto;min-width:58px;min-height:44px;padding:4px 8px;font-size:9px;white-space:nowrap;scroll-snap-align:start}
+.studio.layout-mobile .meridian3d-panel>.meridian3d-search{order:3;min-height:42px}
+.studio.layout-mobile .meridian3d-panel>.meridian3d-list{order:4;max-height:34dvh;overflow-y:auto}
+.studio.layout-mobile .meridian3d-panel>.meridian3d-detail{order:5}
+.studio.layout-mobile .meridian3d-panel>.meridian3d-summary{order:6;font-size:10px}
+.studio.layout-mobile .meridian3d-panel>.meridian3d-model-controls{order:7}
+.studio.layout-mobile .meridian3d-panel>.meridian3d-exit-row{order:8}
+.studio.layout-mobile .meridian3d-panel>.meridian3d-section-label{order:9}
+.studio.layout-mobile .meridian3d-panel>.meridian3d-effect-controls{order:10}
+.studio.layout-mobile .meridian3d-panel>.acupuncture-sim{order:11}
+.studio.layout-mobile .meridian3d-panel>.meridian3d-info{order:12}
+.studio.layout-mobile .meridian3d-panel>[role=status],.studio.layout-mobile .meridian3d-panel>[role=alert]{order:1}
+/* YHCT sheet: counters off, disclaimer smaller. */
+.studio.layout-mobile .yhct-panel{display:flex!important;flex-direction:column;padding:12px!important}
+.studio.layout-mobile .yhct-panel>*{flex:0 0 auto}
+.studio.layout-mobile .yhct-stats{display:none!important}
+.studio.layout-mobile .yhct-panel>footer{font-size:9px;line-height:1.35;opacity:.8}
+.studio.layout-mobile .yhct-list{max-height:30dvh;overflow-y:auto}
+}

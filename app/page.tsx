@@ -19,6 +19,7 @@ import {normalizeAtlasSystems,DEFAULT_VISIBLE,DEFAULT_LAYER_OPACITY,effectiveLay
 import {ARTICULAR_SOURCE,SKELETAL_SOURCE} from './reference-anatomy';
 import {useDraggable} from './use-draggable';
 import {installFloatingMenuResize} from './floating-menu';
+import {isMobileLayout,useExclusiveSheet} from './mobile-sheets';
 const initial:SceneState={explode:0,visible:DEFAULT_VISIBLE,opacity:DEFAULT_LAYER_OPACITY,selected:[],isolate:false,view:'three-quarter',rotate:false,reset:0};
 const REGISTRATION_STORAGE_KEY='hiu-yhct-registration-drafts-v0.1';
 const RENDER_QUALITY_STORAGE_KEY='hiu-atlas-render-quality-v1';
@@ -35,6 +36,8 @@ export default function Home(){
  const [layersVisible,setLayersVisible]=useState(true),[viewControlsVisible,setViewControlsVisible]=useState(true);
  const studyCommandSeq=useRef(0),[studyCommand,setStudyCommand]=useState<(StudyCommand&{seq:number})|null>(null);
  const [layout,setLayout]=useState<'mobile'|'desktop'>(()=>{if(typeof window==='undefined')return 'desktop';try{const saved=localStorage.getItem(LAYOUT_STORAGE_KEY);if(saved==='mobile'||saved==='desktop')return saved}catch{}return window.matchMedia('(max-width: 767px)').matches?'mobile':'desktop'});
+ useExclusiveSheet('page-panel',panel!==null,()=>setPanel(null));
+ useExclusiveSheet('details',details,()=>setDetails(false));
  const layersDrag=useDraggable('layers'),searchDrag=useDraggable('search'),viewsDrag=useDraggable('views'),dockDrag=useDraggable('dock'),topDrag=useDraggable('top-actions');
  useEffect(()=>installFloatingMenuResize(document.body),[]);
  useEffect(()=>{const abort=new AbortController();const timeout=setTimeout(()=>{setError('Tải danh mục quá thời gian. Kiểm tra kết nối và tải lại.');abort.abort();},20000);setProgress(0);setError('');setAtlas(null);setChosen(null);setDetails(false);setState({...initial,visible:DEFAULT_VISIBLE});fetch(import.meta.env.BASE_URL+'models/atlas.json',{signal:abort.signal}).then(r=>{if(!r.ok)throw new Error('Không tải được danh mục giải phẫu.');return r.json();}).then(data=>{clearTimeout(timeout);setAtlas(normalizeAtlasSystems(data as Atlas));}).catch(e=>{clearTimeout(timeout);if(e.name!=='AbortError')setError(e.message);});return()=>{clearTimeout(timeout);abort.abort();};},[]);
@@ -84,7 +87,7 @@ export default function Home(){
   if(overlayCommand.meridianId||overlayCommand.pointCode||overlayCommand.effects)setStudyCommand({...overlayCommand,seq:++studyCommandSeq.current});
  };
  return <main className={`studio layout-${layout}`} data-layout-mode={layout}>
-  {atlas&&<AnatomyScene atlas={atlas} state={{...state,inspectorOpen:details&&selectedParts.length>0}} renderQuality={renderQuality} onSelect={choosePart} onProgress={n=>{setProgress(n);if(n===100)setError('');}} onError={setError} registrationMode={registrationEnabled} onRegisterSurface={setRegistrationCapture} meridianOverlay={meridianOverlay} focusAcupoint={meridianFocus} onSelectAcupoint={setSelectedMeridianPoint}/>} 
+  {atlas&&<AnatomyScene atlas={atlas} state={{...state,inspectorOpen:details&&selectedParts.length>0}} renderQuality={renderQuality} onSelect={id=>{if(meridianOverlay.enabled&&isMobileLayout())return;choosePart(id)}} onProgress={n=>{setProgress(n);if(n===100)setError('');}} onError={setError} registrationMode={registrationEnabled} onRegisterSurface={setRegistrationCapture} meridianOverlay={meridianOverlay} focusAcupoint={meridianFocus} onSelectAcupoint={setSelectedMeridianPoint}/>} 
   <div className="vignette"/>
   <header className="identity"><div className="eyebrow"><span className="status-dot"/> HIU CLB YHCT · ATLAS GIÁO DỤC</div><h1>HIU YHCT Atlas<Badge variant="outline" className="edition">3D</Badge></h1><div className="identity-meta">{atlas?atlas.parts.length.toLocaleString():'2,234'} cấu trúc giải phẫu <span>·</span> BodyParts3D</div></header>
   <YhctStudyPanel localDraftCount={registrationDrafts.length} onStudyCommand={handleStudyCommand}/>
