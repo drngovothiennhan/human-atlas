@@ -386,7 +386,7 @@ body:has(.registration-panel) .meridian3d-launch{left:376px}body:has(.registrati
    Top: title + icon actions · row 2: Kinh lạc 3D | Học YHCT · right: view rail ·
    bottom: dock · every panel opens as one bottom sheet (only one at a time). */
 @media(max-width:767px){
-.studio.layout-mobile{--m-top:env(safe-area-inset-top,0px);--m-bottom:env(safe-area-inset-bottom,0px);--m-dock:72px;--m-sheet-bottom:calc(var(--m-dock) + 18px + var(--m-bottom));--m-sheet-max:min(56dvh,calc(100dvh - 210px - var(--m-top) - var(--m-bottom)))}
+.studio.layout-mobile{--m-top:env(safe-area-inset-top,0px);--m-bottom:env(safe-area-inset-bottom,0px);--m-dock:80px;--m-sheet-bottom:calc(var(--m-dock) + 18px + var(--m-bottom));--m-sheet-max:min(56dvh,calc(100dvh - 210px - var(--m-top) - var(--m-bottom)))}
 /* Fixed positions only: no dragging, no resizing, no saved offsets on phones. */
 .studio.layout-mobile .drag-grip{display:none!important}
 .studio.layout-mobile :is(.top-actions,.layers-panel,.search-panel,.view-controls,.bottom-dock,.yhct-launch,.yhct-panel,.meridian3d-launch,.meridian3d-panel,.registration-panel){translate:none!important}

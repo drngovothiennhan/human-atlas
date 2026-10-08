@@ -592,6 +592,7 @@ try{
   await mkdir('artifacts',{recursive:true});
   const detail=error instanceof Error?(error.stack||error.message):String(error);
   await writeFile('artifacts/browser-smoke-error.txt',detail+'\n');
+  console.log('::error title=browser-smoke::'+detail.slice(0,3000).replace(/%/g,'%25').replace(/\r?\n/g,'%0A'));
   throw error;
 } finally {
   chrome?.kill('SIGTERM');
