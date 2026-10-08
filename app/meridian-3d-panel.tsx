@@ -1,5 +1,5 @@
 import {useEffect,useMemo,useRef,useState} from 'react';
-import {useExclusiveSheet} from './mobile-sheets';
+import {isMobileLayout,useExclusiveSheet} from './mobile-sheets';
 import {Move} from 'lucide-react';
 import {useDraggable} from './use-draggable';
 import {Button} from '@/components/ui/button';
@@ -114,7 +114,9 @@ export default function Meridian3DPanel({drafts,selectedPointCode,studyCommand,o
       if(typeof command.effects.acupoints==='boolean')setShowPoints(command.effects.acupoints);
       if(typeof command.effects.collaterals==='boolean')setShowCollaterals(command.effects.collaterals);
     }
-    setEnabled(true);setOpen(true);
+    setEnabled(true);
+    // On phones the study sheet that sent the command stays open; the overlay still shows on the model.
+    if(!isMobileLayout())setOpen(true);
     if(point){
       setSelected(point.code);setQuery('');
       const candidates=allAnchors.filter(a=>a.pointCode===point.code),anchor=candidates[0];
