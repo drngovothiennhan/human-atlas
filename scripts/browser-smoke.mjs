@@ -469,6 +469,11 @@ try{
   };
   await sleep(400);
   await mobileOverlap('idle');
+  await clickAria('Ẩn thanh thao tác phía dưới');
+  await waitFor(()=>evaluate("!document.querySelector('[data-bottom-bar]')&&!!document.querySelector('[data-bar-restore=true]')"),{label:'bottom bars close and show restore chip'});
+  await mobileOverlap('bars-hidden',['[data-bar-restore=true]']);
+  await clickAria('Hiện lại thanh thao tác phía dưới');
+  await waitFor(()=>evaluate("!!document.querySelector('[data-bottom-bar=dock]')&&!document.querySelector('[data-bar-restore=true]')"),{label:'bottom bars restore'});
   await evaluate("document.querySelector('[data-meridian3d-launch=true]')?.click()");
   await waitFor(()=>evaluate("!!document.querySelector('[data-meridian3d-panel=true]')"),{label:'mobile meridian panel'});
   await waitFor(()=>evaluate("document.querySelectorAll('.meridian3d-controls select')[0]?.value==='ALL'&&document.querySelectorAll('.meridian3d-controls select')[1]?.value==='BOTH'"),{label:'mobile opens with all 12 main meridians'});

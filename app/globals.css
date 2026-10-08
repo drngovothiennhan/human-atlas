@@ -537,3 +537,8 @@ body:has(.studio.layout-mobile :is(.meridian3d-panel,.yhct-panel,.layers-panel.m
 @keyframes needle-scrape{from{transform:translateX(-.8px)}to{transform:translateX(.8px)}}
 @media(prefers-reduced-motion:reduce){.needle-section *{animation:none!important}}
 @media(max-width:767px){.studio.layout-mobile .acupuncture-lab{padding:8px}.studio.layout-mobile .meridian3d-panel>.acupuncture-lab{order:5}}
+
+/* Mọi thanh đều tắt được */
+.bar-close{position:absolute;top:-10px;right:-6px;min-width:28px!important;width:28px;height:28px;padding:0!important;border-radius:50%;background:#fff;border:1px solid #25384a24!important;display:flex;align-items:center;justify-content:center;color:#5d6b78;z-index:2}
+.bar-restore{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:22px;font-size:13px;color:#3c4956;z-index:5}
+@media(max-width:767px){.bar-restore{bottom:calc(28px + env(safe-area-inset-bottom))}.bar-close{top:-12px;right:-2px}}
