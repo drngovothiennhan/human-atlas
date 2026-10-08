@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "0.1.0",
+  "sourceId": "USER-DRIVE-CHAM-CUU-HOC-TRUNG-QUOC-2000",
+  "source": {
+    "title": "Khái yếu Châm cứu học Trung Quốc",
+    "author": "Học viện Y học cổ truyền Trung Quốc",
+    "translator": "BS Hoàng Quý (dịch theo bản tiếng Anh)",
+    "publisher": "Nhà xuất bản Y học, Hà Nội, 2000",
+    "chapter": "Chương I — Kỹ thuật châm và cứu, A. Thao tác dùng hào châm",
+    "pageRange": [10, 21],
+    "location": "Google Drive của chủ dự án (thư mục Châm cứu)",
+    "pageNote": "Số trang theo số in ở lề sách; nội dung được diễn đạt lại ngắn gọn, không chép nguyên văn."
+  },
+  "reviewStatus": "SOURCE_TRANSCRIBED_PENDING_FACULTY_REVIEW",
+  "policy": "Dữ liệu học tập. Hoạt ảnh là minh họa, không phải thông số hay chỉ dẫn châm cứu trên người.",
+  "insertion": [
+    {"id": "finger-press", "name": "Châm có ngón tay tì", "summary": "Đầu ngón cái hoặc trỏ tay trái tì cạnh huyệt; tay phải châm nhanh sát đầu ngón tì.", "use": "Kim ngắn, khoảng 1,5 tấc.", "page": 11, "maxNeedleTac": 1.5},
+    {"id": "long-needle", "name": "Châm kim dài", "summary": "Tay trái giữ thân kim gần mũi; tay phải đưa kim nhanh qua da rồi xoay đẩy vào sâu.", "use": "Kim dài trên 3 tấc.", "page": 11, "minNeedleTac": 3},
+    {"id": "fast-pierce", "name": "Châm kim nhanh qua da", "summary": "Tay phải cầm thân kim cách mũi 0,2–0,3 tấc, châm nhanh qua da; tay trái giữ thân kim, tay phải xoay đẩy tới độ sâu cần.", "use": "Dùng được cho cả kim ngắn và kim dài.", "page": 12},
+    {"id": "pinch-skin", "name": "Châm kết hợp véo da", "summary": "Tay trái véo da quanh huyệt, tay phải châm nhanh.", "use": "Nơi mỏng cơ, ví dụ Ấn đường, Địa thương.", "page": 12, "examplePoints": ["ST-4"]},
+    {"id": "stretch-skin", "name": "Châm kết hợp căng da", "summary": "Tay trái căng da quanh huyệt, tay phải châm nhanh tới độ sâu và hướng cần.", "use": "Nơi da lỏng, nhiều nếp như da bụng.", "page": 12}
+  ],
+  "manipulations": [
+    {"id": "lift-thrust", "name": "Tiến – lui kim", "summary": "Tay trái ấn quanh huyệt, tay phải cầm chuôi tiến và lui kim.", "caution": "Hạn chế hoặc không dùng ở huyệt liên quan nội tạng quan trọng, vùng mắt, vùng nhiều mạch máu lớn.", "page": 13, "motion": "lift-thrust"},
+    {"id": "twirl", "name": "Vê xoay kim", "summary": "Ngón cái và trỏ vê chuôi kim theo hai chiều; biên độ rộng phải tránh để mô xơ quấn kim.", "page": 13, "motion": "twist"},
+    {"id": "lift-thrust-twirl", "name": "Tiến, lui phối hợp vê", "summary": "Kết hợp tiến, lui và vê xoay kim; dùng để thăm dò cảm giác châm.", "page": 13, "motion": "twist-lift"},
+    {"id": "scrape", "name": "Cạo (cọ) kim", "summary": "Giữ chuôi kim, dùng móng tay cọ chuôi kim từ dưới lên.", "page": 14, "motion": "scrape"},
+    {"id": "shake", "name": "Lay kim", "summary": "Cầm chuôi kim, tiến lui rất nhanh, nhẹ để lay động kim.", "page": 14, "motion": "shake"}
+  ],
+  "tonificationReduction": [
+    {"id": "lift-thrust", "name": "Tiến – lui kim", "bo": "Ấn nhẹ, rút mạnh.", "ta": "Rút nhẹ, ấn mạnh vào sâu.", "page": 15},
+    {"id": "twirl", "name": "Vê kim", "bo": "Vê biên độ nhỏ, chậm.", "ta": "Vê mạnh, nhanh, biên độ lớn.", "page": 15},
+    {"id": "speed", "name": "Châm nhanh – chậm và rút kim", "bo": "Châm từ từ, xoay nhẹ; rút kim nhanh.", "ta": "Châm nhanh, xoay biên độ lớn; rút kim từ từ.", "page": 15},
+    {"id": "hole", "name": "Đóng – mở lỗ châm", "bo": "Rút kim xong ấn bịt lỗ châm.", "ta": "Trước khi rút, xoay lắc kim cho rộng lỗ châm.", "page": 15},
+    {"id": "even", "name": "Điều hòa (bình bổ bình tả)", "binh": "Tiến lui đều đặn để gây cảm giác rồi rút kim.", "page": 16}
+  ],
+  "stimulation": [
+    {"id": "weak", "name": "Kích thích yếu", "equivalent": "bo", "summary": "Tiến lui nhẹ, vê biên độ nhỏ; ngừng thao tác khi có cảm giác.", "indication": "Thể trạng yếu, nhạy cảm, châm lần đầu, huyệt liên quan tạng phủ quan trọng.", "page": 16, "animation": {"twistTurns": 0.25, "frequencyHz": 1.0, "liftFraction": 0.12}},
+    {"id": "moderate", "name": "Kích thích vừa", "equivalent": "binh", "summary": "Trung gian giữa mạnh và yếu.", "indication": "Chưa xác định rõ hư hay thực.", "page": 16, "animation": {"twistTurns": 0.5, "frequencyHz": 1.8, "liftFraction": 0.2}},
+    {"id": "strong", "name": "Kích thích mạnh", "equivalent": "ta", "summary": "Vê biên độ lớn, tiến lui mạnh; có thể thêm lay và cạo kim.", "indication": "Thể trạng khỏe, ít nhạy cảm, bệnh cấp hoặc co giật.", "page": 16, "animation": {"twistTurns": 1.0, "frequencyHz": 3.0, "liftFraction": 0.32}}
+  ],
+  "deqi": {"summary": "Khi kim tới độ sâu nhất định, người bệnh có thể thấy đau nhẹ, căng tức hoặc tê bì — người xưa gọi là đắc khí. Huyệt ở mặt thường gây căng; nơi dày cơ gây tức; gan tay, gan chân, đầu ngón gây đau; huyệt ở chi có thể lan như điện giật.", "page": 16},
+  "angles": [
+    {"id": "perpendicular", "name": "Châm thẳng", "degrees": 90, "range": [90, 90], "use": "Vùng cơ dày hoặc cần châm sâu: tứ chi, bụng, thắt lưng.", "page": 17},
+    {"id": "oblique", "name": "Châm xiên", "degrees": 45, "range": [30, 60], "use": "Huyệt ngực, lưng liên quan tạng phủ; một số huyệt đặc biệt như Liệt khuyết.", "page": 17, "examplePoints": ["LU-7"]},
+    {"id": "transverse", "name": "Châm ngang", "degrees": 15, "range": [10, 20], "use": "Huyệt đầu, mặt (cơ mỏng); châm xuyên huyệt; huyệt ngực không được châm sâu.", "page": 17}
+  ],
+  "depthByRegion": [
+    {"id": "limbs", "name": "Tứ chi", "summary": "Có thể châm sâu theo độ dày cơ, có thể xuyên cơ qua huyệt khác.", "recommendedAngles": ["perpendicular"], "examples": [{"code": "PC-6", "depthTac": [0.5, 1.5]}, {"code": "ST-36", "depthTac": [1, 2]}], "page": 18},
+    {"id": "abdomen-lumbosacral", "name": "Bụng, thắt lưng – cùng", "summary": "Cơ khá dày, nói chung châm sâu 1–2 tấc; huyệt bụng trên không châm quá sâu.", "recommendedAngles": ["perpendicular"], "depthTac": [1, 2], "page": 18, "insertion": "stretch-skin"},
+    {"id": "chest-back", "name": "Ngực và lưng", "summary": "Cơ mỏng, gần tim, phổi, gan, lách: châm nông, nên châm xiên hoặc ngang. Huyệt dọc cột sống có thể châm thẳng hay xiên ở đường giữa, sâu khoảng 1–1,5 tấc.", "recommendedAngles": ["oblique", "transverse"], "spineDepthTac": [1, 1.5], "page": 18},
+    {"id": "head-face", "name": "Đầu và mặt", "summary": "Cơ mỏng: châm nông, xiên hoặc ngang. Đặc biệt chú ý độ sâu ở các huyệt sau gáy như Phong phủ, Á môn, Thiên trụ vì ở nơi hiểm yếu.", "recommendedAngles": ["oblique", "transverse"], "cautionPoints": ["GV-16", "GV-15", "BL-10"], "page": 18}
+  ],
+  "depthGeneral": {"summary": "Không có tiêu chuẩn tuyệt đối; độ sâu tùy cảm giác của người bệnh, độ dày cơ và thể trạng. Trẻ em châm nông hơn. Ví dụ Trung quản: người gầy 0,5 tấc đã có cảm giác mạnh, người béo khoảng 2 tấc mới có cảm giác.", "page": 19, "examples": [{"code": "CV-12", "note": "0,5 tấc (người gầy) – khoảng 2 tấc (người béo)"}]},
+  "retention": {"summary": "Sau khi có cảm giác châm, tiếp tục thao tác rồi rút kim. Đau cấp hoặc cơn cấp có thể lưu kim 30 phút hay lâu hơn, cứ vài phút vê kim một lần.", "page": 19, "illustrativeMinutes": 30},
+  "accidents": [
+    {"id": "faint", "name": "Vựng châm (choáng)", "summary": "Hoa mắt, chóng mặt, buồn nôn, da tái; nặng có thể vã mồ hôi, mạch yếu. Xử lý: rút kim ngay, cho nằm đầu thấp, uống nước ấm.", "page": 19},
+    {"id": "stuck", "name": "Rít kim", "summary": "Khó vê, khó rút do co cơ hoặc mô xơ quấn kim. Xử lý: trấn an, xoa quanh huyệt, xoay nhẹ ngược chiều rồi rút.", "page": 20},
+    {"id": "bent", "name": "Cong kim", "summary": "Do đổi tư thế hoặc thao tác mạnh. Xử lý: đưa về tư thế cũ, rút theo chiều cong, không cố xoay.", "page": 20},
+    {"id": "broken", "name": "Gãy kim", "summary": "Giữ bệnh nhân bất động, rút đoạn gãy bằng nhíp; không lấy được thì can thiệp ngoại khoa. Phòng: để lại 0,3–0,5 tấc thân kim ngoài da.", "page": 21}
+  ]
+}

@@ -433,7 +433,7 @@ body:has(.studio.layout-mobile :is(.meridian3d-panel,.yhct-panel,.layers-panel.m
 .studio.layout-mobile .meridian3d-quick button{flex:0 0 auto;min-width:58px;min-height:44px;padding:4px 8px;font-size:9px;white-space:nowrap;scroll-snap-align:start}
 .studio.layout-mobile .meridian3d-panel>.meridian3d-search{order:3;min-height:42px}
 .studio.layout-mobile .meridian3d-panel>.meridian3d-list{order:4;max-height:34dvh;overflow-y:auto}
-.studio.layout-mobile .meridian3d-panel>.meridian3d-detail{order:5}
+.studio.layout-mobile .meridian3d-panel>.meridian3d-detail{order:4}
 .studio.layout-mobile .meridian3d-panel>.meridian3d-summary{order:6;font-size:10px}
 .studio.layout-mobile .meridian3d-panel>.meridian3d-model-controls{order:7}
 .studio.layout-mobile .meridian3d-panel>.meridian3d-exit-row{order:8}
@@ -449,3 +449,91 @@ body:has(.studio.layout-mobile :is(.meridian3d-panel,.yhct-panel,.layers-panel.m
 .studio.layout-mobile .yhct-panel>footer{font-size:9px;line-height:1.35;opacity:.8}
 .studio.layout-mobile .yhct-list{max-height:30dvh;overflow-y:auto}
 }
+
+
+/* Phòng châm (2026-10-08): needling lab + phối huyệt inside the Kinh lạc 3D sheet. */
+.acupuncture-lab{display:grid;gap:8px;margin-top:6px;padding:10px;border:1px solid #18253614;border-radius:12px;background:#fbfcfc}
+.acupuncture-lab .lab-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;padding:3px;border-radius:10px;background:#eef3f3}
+.acupuncture-lab .lab-tabs button{min-height:36px;border:0;border-radius:8px;background:transparent;color:#4b5b66;font-size:12px;font-weight:600;cursor:pointer}
+.acupuncture-lab .lab-tabs button.active{background:#fff;color:#0f5f58;box-shadow:0 1px 4px #18253618}
+.acupuncture-lab .lab-pane{display:grid;gap:8px;min-width:0}
+.acupuncture-lab .lab-point{display:flex;flex-wrap:wrap;gap:6px;align-items:baseline}
+.acupuncture-lab .lab-point b{font-size:14px;color:#1f2f38}
+.acupuncture-lab .lab-point span{font-size:11px;color:#6b7a84}
+.acupuncture-lab .lab-row{display:flex;flex-wrap:wrap;gap:6px}
+.acupuncture-lab button{min-height:38px;padding:6px 10px;border:1px solid #18253620;border-radius:8px;background:#fff;color:#33454f;font-size:12px;cursor:pointer;text-align:left}
+.acupuncture-lab button:disabled{opacity:.5;cursor:not-allowed}
+.acupuncture-lab button[aria-pressed=true]{background:#e6f2ef;border-color:#0f766e66;color:#0f5f58}
+.acupuncture-lab .lab-primary{background:#0f766e;border-color:#0f766e;color:#fff;font-weight:600}
+.acupuncture-lab .lab-primary[aria-pressed=true]{background:#134e4a;color:#fff}
+.acupuncture-lab .lab-tabs button{text-align:center}
+.acupuncture-lab .lab-chips{display:flex;flex-wrap:wrap;gap:5px}
+.acupuncture-lab .lab-chips button{min-height:34px;padding:5px 9px;font-size:11px}
+.acupuncture-lab .lab-field{display:grid;gap:6px;margin:0;padding:8px;border:1px solid #18253612;border-radius:10px;min-width:0}
+.acupuncture-lab .lab-field legend{padding:0 4px;font-size:11px;font-weight:700;color:#4b5b66}
+.acupuncture-lab .lab-field label{display:grid;gap:4px;margin:0;font-size:11px;color:#4b5b66}
+.acupuncture-lab input[type=range]{width:100%;accent-color:#0f766e}
+.acupuncture-lab small{font-size:10.5px;line-height:1.4;color:#64727d}
+.acupuncture-lab .lab-warn{color:#9a3412;font-weight:600}
+.acupuncture-lab .lab-guide{display:grid;gap:4px;padding:8px;border-radius:10px;background:#eef6f4;font-size:11px;color:#29424a}
+.acupuncture-lab .lab-guide p{margin:0;line-height:1.45}
+.acupuncture-lab .lab-guide.muted{background:#f3f4f5;color:#55626b;margin:0;line-height:1.45}
+.acupuncture-lab .lab-steps{margin:0;padding:0 0 0 18px;display:grid;gap:3px;font-size:11px;color:#7a8892}
+.acupuncture-lab .lab-steps li.current{color:#0f5f58;font-weight:700}
+.acupuncture-lab .lab-steps li.done{color:#9aa6ae;text-decoration:line-through}
+.acupuncture-lab .lab-details{font-size:11px;color:#3f515b}
+.acupuncture-lab .lab-details summary{cursor:pointer;font-weight:600;min-height:32px;display:flex;align-items:center}
+.acupuncture-lab .lab-details h4{margin:8px 0 3px;font-size:11.5px}
+.acupuncture-lab .lab-details ul{margin:0;padding-left:16px;display:grid;gap:3px;line-height:1.45}
+.acupuncture-lab .lab-select{display:grid;gap:4px;font-size:11px;color:#4b5b66}
+.acupuncture-lab .lab-select select{min-height:40px;padding:6px;border:1px solid #18253620;border-radius:8px;background:#fff;width:100%}
+.acupuncture-lab .lab-principle{display:grid;gap:2px;margin:0;padding:8px;border-radius:10px;background:#f3f7f6}
+.acupuncture-lab .lab-principle b{font-size:13px;color:#1f3b3a}
+.acupuncture-lab .lab-formula{display:grid;gap:8px}
+.acupuncture-lab .lab-formula-points{margin:0;padding:0;list-style:none;display:grid;gap:4px;counter-reset:fp}
+.acupuncture-lab .lab-formula-points li{display:grid;grid-template-columns:22px 34px minmax(0,1fr);gap:2px 6px;align-items:center;counter-increment:fp}
+.acupuncture-lab .lab-formula-points li::before{content:counter(fp);font-size:11px;font-weight:700;color:#64727d;text-align:right}
+.acupuncture-lab .lab-formula-points li small{grid-column:3}
+.acupuncture-lab .lab-formula-points li button{min-height:32px;padding:4px 8px;font-size:12px}
+.acupuncture-lab .lab-formula-points li.current button{border-color:#f59e0b;background:#fff7e6}
+.acupuncture-lab .lab-badge{font-size:10px;font-weight:700;text-align:center;border-radius:6px;padding:3px 0;color:#fff}
+.acupuncture-lab .method-bo .lab-badge{background:#0f766e}
+.acupuncture-lab .method-ta .lab-badge{background:#c2410c}
+.acupuncture-lab .lab-legend{margin:0;font-size:10.5px;color:#64727d}
+.acupuncture-lab .lab-legend .method-bo{color:#0f766e;font-weight:700}
+.acupuncture-lab .lab-legend .method-ta{color:#c2410c;font-weight:700}
+.acupuncture-lab .lab-source{color:#7b8a93}
+.acupuncture-lab .lab-score{margin:0;font-size:11px;color:#4b5b66}
+.acupuncture-lab .lab-question{display:grid;gap:8px}
+.acupuncture-lab .lab-question p{margin:0;font-size:12px;line-height:1.45}
+.acupuncture-lab .lab-options{display:grid;gap:5px}
+.acupuncture-lab .lab-options button.right{background:#e7f5ec;border-color:#15803d;color:#14532d}
+.acupuncture-lab .lab-options button.wrong{background:#fdecea;border-color:#b91c1c;color:#7f1d1d}
+.acupuncture-lab .acupuncture-warning{margin:0;font-size:10.5px;line-height:1.4}
+.yhct-panel .open-lab{min-height:40px;margin:6px 0;padding:6px 10px;border:1px solid #0f766e;border-radius:8px;background:#0f766e;color:#fff;font-weight:600;cursor:pointer}
+/* Lát cắt mô (SVG) */
+.needle-simulation{margin:0;display:grid;gap:4px}
+.needle-section{display:block;width:100%;height:auto;border:1px solid #18253612;border-radius:10px;background:#f6f8f9;overflow:hidden}
+.needle-section .needle-layer-label{font-size:9px;fill:#6b5a50;letter-spacing:.02em}
+.needle-section .needle-view-label{font-size:8px;fill:#7a8791;letter-spacing:.04em}
+.needle-section .needle-shaft{stroke:#8a96a0;stroke-width:2.2;stroke-linecap:round}
+.needle-section .needle-handle{fill:#b9c4c9;stroke:#697982;stroke-width:.8}
+.needle-section .needle-grip{stroke:#697982;stroke-width:1.2}
+.needle-section .needle-guide line{stroke:#c2410c;stroke-width:1;stroke-dasharray:4 3}
+.needle-section .needle-guide text{font-size:8.5px;fill:#9a3412}
+.needle-section .needle-deqi{fill:none;stroke:#f59e0b;stroke-width:2;opacity:.7;transform-box:fill-box;transform-origin:center;animation:needle-deqi 1.8s ease-out infinite}
+@keyframes needle-deqi{from{transform:scale(.4);opacity:.85}to{transform:scale(2.2);opacity:0}}
+.needle-section [class*=needle-motion-]{transform-box:view-box}
+.needle-motion-lift-thrust,.needle-motion-insert{animation:needle-lift var(--needle-speed,1s) ease-in-out infinite alternate}
+.needle-motion-twist .needle-grip,.needle-motion-twist-lift .needle-grip{animation:needle-twist calc(var(--needle-speed,1s)/2) linear infinite}
+.needle-motion-twist-lift{animation:needle-lift var(--needle-speed,1s) ease-in-out infinite alternate}
+.needle-motion-shake{animation:needle-lift .12s linear infinite alternate}
+.needle-motion-scrape .needle-handle{animation:needle-scrape .18s linear infinite alternate}
+.needle-speed-weak{--needle-speed:1.4s;--needle-lift:-6px}
+.needle-speed-moderate{--needle-speed:.9s;--needle-lift:-10px}
+.needle-speed-strong{--needle-speed:.45s;--needle-lift:-16px}
+@keyframes needle-lift{from{transform:translateY(0)}to{transform:translateY(var(--needle-lift,-10px))}}
+@keyframes needle-twist{0%{transform:translateY(0)}50%{transform:translateY(-6px)}100%{transform:translateY(0)}}
+@keyframes needle-scrape{from{transform:translateX(-.8px)}to{transform:translateX(.8px)}}
+@media(prefers-reduced-motion:reduce){.needle-section *{animation:none!important}}
+@media(max-width:767px){.studio.layout-mobile .acupuncture-lab{padding:8px}.studio.layout-mobile .meridian3d-panel>.acupuncture-lab{order:5}}

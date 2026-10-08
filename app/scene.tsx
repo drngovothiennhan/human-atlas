@@ -121,9 +121,20 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
     const s=latest.current;skeletalReferenceGroup.visible=s.visible.includes('skeletal')&&!s.isolate&&s.explode<.01;dirty=true;
    }).catch(error=>{if(disposed)return;skeletalStatus='error';clearGroup(skeletalReferenceGroup);renderer.domElement.dataset.skeletalReferenceStatus='error';renderer.domElement.dataset.skeletalReferenceError=error instanceof Error?error.message:'load failed';console.error('[skeletal-reference]',error);dirty=true;}).finally(()=>draco.dispose());
   };
+  // Phones show panels as a bottom sheet: centre focused acupoints in the free band above the sheet, and drop the offset once the sheet closes.
+  let mobileSheetOffset=false;
+  const mobileSheet=()=>document.querySelector<HTMLElement>('.studio.layout-mobile :is(.meridian3d-panel,.yhct-panel,.layers-panel.mobile-open,.registration-panel)');
+  const applyMobileSheetOffset=()=>{
+   const sheet=mobileSheet();if(!sheet)return false;
+   const r=renderer.domElement.getBoundingClientRect(),top=r.top+100,bottom=Math.min(r.bottom,sheet.getBoundingClientRect().top-8);
+   if(bottom-top<80)return false;
+   camera.setViewOffset(r.width,r.height,0,r.height/2-((top+bottom)/2-r.top),r.width,r.height);mobileSheetOffset=true;return true;
+  };
   const reduceMeridianMotion=window.matchMedia?.('(prefers-reduced-motion: reduce)').matches??false;
   type MeridianFlowParticle={mesh:T.Mesh;curve:T.Curve<T.Vector3>;offset:number;speed:number};
   let meridianMarkers:T.Mesh[]=[],meridianPulseMarkers:T.Mesh[]=[],meridianFlowParticles:MeridianFlowParticle[]=[],needleMesh:T.Mesh|null=null;
+  let formulaMarkers:T.Object3D[]=[];
+  const needleMotion={tip:-.012,lastPhase:'',fade:1};
   const meridianColors:Record<string,number>={LU:0x2563eb,LI:0xea580c,ST:0xca8a04,SP:0x84cc16,HT:0xdc2626,SI:0x0891b2,BL:0x4f46e5,KI:0x0d9488,PC:0xdb2777,TE:0x0ea5e9,GB:0x16a34a,LR:0x65a30d,CV:0x7c3aed,GV:0xc026d3};
   // Pull overlay geometry 14 mm toward the camera in view space: lines can no longer sink into skin/muscle that pokes through,
   // while parts on the far side of the body (centimetres deeper) stay correctly occluded.
@@ -133,7 +144,7 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
   const MERIDIAN_FLOW_WORLD_SPEED=.075;
   const ACUPOINT_RADIUS_SCHEMATIC=.0062,ACUPOINT_RADIUS_LOCAL=.0067,ACUPOINT_RADIUS_PUBLISHED=.0072,ACUPOINT_RADIUS_SELECTED=.0082;
   const disposeOverlay=()=>{
-   meridianMarkers=[];meridianPulseMarkers=[];meridianFlowParticles=[];needleMesh=null;
+   meridianMarkers=[];meridianPulseMarkers=[];meridianFlowParticles=[];needleMesh=null;formulaMarkers=[];
    while(meridianGroup.children.length){
     const child=meridianGroup.children.pop()!;
     const geometry=(child as T.Mesh).geometry as T.BufferGeometry|undefined;geometry?.dispose();
@@ -189,8 +200,30 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
     }
     if(schematic)schematicPaths++;else trustedPaths++;
    }
+   const formula=value.formula;
+   if(formula?.points?.length){
+    const colors={bo:0x0f766e,ta:0xc2410c,binh:0x64748b} as const;
+    const label=(n:number,color:number)=>{const c=document.createElement('canvas');c.width=c.height=64;const g=c.getContext('2d');if(g){g.fillStyle='#'+color.toString(16).padStart(6,'0');g.beginPath();g.arc(32,32,28,0,Math.PI*2);g.fill();g.fillStyle='#fff';g.font='bold 34px sans-serif';g.textAlign='center';g.textBaseline='middle';g.fillText(String(n),32,34);}const tex=new T.CanvasTexture(c);const sprite=new T.Sprite(new T.SpriteMaterial({map:tex,depthTest:false,depthWrite:false,transparent:true}));sprite.scale.setScalar(.016);sprite.renderOrder=32;return sprite;};
+    const ordered=[...formula.points].sort((a,b)=>a.order-b.order);
+    ordered.forEach(pt=>{
+     const color=colors[pt.method]??colors.binh;
+     const halo=new T.Mesh(new T.SphereGeometry(pt.active?.013:.0105,16,10),new T.MeshBasicMaterial({color,transparent:true,opacity:pt.active?.42:.26,depthTest:true,depthWrite:false}));
+     nearer(halo.material as T.MeshBasicMaterial);halo.position.set(pt.x,pt.y,pt.z);halo.renderOrder=24;halo.userData.formulaPoint=pt.code;halo.userData.active=Boolean(pt.active);
+     const tag=label(pt.order,color);tag.position.set(pt.x,pt.y+.018,pt.z);
+     meridianGroup.add(halo,tag);formulaMarkers.push(halo);
+    });
+    for(let i=1;i<ordered.length;i++){
+     const a=ordered.at(i-1)!,b=ordered.at(i)!;
+     const geometry=new T.BufferGeometry().setFromPoints([new T.Vector3(a.x,a.y,a.z),new T.Vector3(b.x,b.y,b.z)]);
+     const line=new T.Line(geometry,new T.LineDashedMaterial({color:0x475569,dashSize:.008,gapSize:.006,transparent:true,opacity:.42,depthTest:false,depthWrite:false}));
+     line.computeLineDistances();line.renderOrder=23;meridianGroup.add(line);
+    }
+    renderer.domElement.dataset.formulaOverlay=formula.id;renderer.domElement.dataset.formulaPoints=String(ordered.length);
+   }else{renderer.domElement.dataset.formulaOverlay='off';renderer.domElement.dataset.formulaPoints='0';}
    const needle=value.needleSimulation;
    if(needle&&[needle.x,needle.y,needle.z,needle.angleDegrees,needle.visualLengthMm].every(Number.isFinite)){
+    // Illustrative needle (Châm cứu học Trung Quốc tr. 10–21): one shaft from tip to tail, a faint copy of the
+    // part under the skin drawn through the body, a handle and a ring for the illustrative đắc khí effect.
     const surface=new T.Vector3(needle.x,needle.y,needle.z);
     const inward=new T.Vector3(-needle.x,0,-needle.z);
     if(inward.lengthSq()<1e-8)inward.set(0,0,1);
@@ -199,17 +232,20 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
     tangent.addScaledVector(inward,-tangent.dot(inward)).normalize();
     const angle=T.MathUtils.degToRad(T.MathUtils.clamp(needle.angleDegrees,5,90));
     const entryDirection=needleNormal.clone().multiplyScalar(Math.sin(angle)).add(tangent.clone().multiplyScalar(Math.cos(angle))).normalize();
-    const outward=entryDirection.clone().negate();
-    const length=T.MathUtils.clamp(needle.visualLengthMm,8,120)/1000;
-    const start=surface.clone();
-    const end=surface.clone().addScaledVector(outward,length);
-    const axis=end.clone().sub(start),needleObject=new T.Mesh(new T.CylinderGeometry(.0012,.0012,axis.length(),8),new T.MeshBasicMaterial({color:0xc87937,depthTest:true,depthWrite:false}));
-    needleObject.position.copy(start).add(end).multiplyScalar(.5);
-    needleObject.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),axis.clone().normalize());
-    needleObject.renderOrder=27;needleObject.userData.acupunctureSimulation=needle.pointCode;needleObject.userData.needleStart=start;needleObject.userData.needleDirection=outward.clone();needleObject.userData.needleLength=length;needleObject.userData.needleBaseQuaternion=needleObject.quaternion.clone();needleObject.userData.needleAction=needle.action;meridianGroup.add(needleObject);needleMesh=needleObject;
-    const gripDirection=tangent.clone().addScaledVector(outward,-tangent.dot(outward)).normalize();
-    const handle=new T.Mesh(new T.CylinderGeometry(.00055,.00055,.012,6),new T.MeshBasicMaterial({color:0x4b5563,depthTest:true,depthWrite:false}));handle.position.copy(end);handle.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),gripDirection);handle.renderOrder=28;meridianGroup.add(handle);needleObject.userData.needleHandle=handle;needleObject.userData.needleGripDirection=gripDirection;
+    const above=T.MathUtils.clamp(needle.visualLengthMm,8,120)/1000,depth=T.MathUtils.clamp(Number(needle.depthMm??0),0,90)/1000;
+    const shaft=new T.Mesh(new T.CylinderGeometry(.0012,.0012,1,8),new T.MeshBasicMaterial({color:0xc87937,depthTest:true,depthWrite:false}));
+    shaft.renderOrder=27;shaft.userData.acupunctureSimulation=needle.pointCode;
+    const inner=new T.Mesh(new T.CylinderGeometry(.0009,.0009,1,8),new T.MeshBasicMaterial({color:0xb45309,transparent:true,opacity:.55,depthTest:false,depthWrite:false}));
+    inner.renderOrder=29;inner.visible=false;
+    const gripDirection=tangent.clone().addScaledVector(entryDirection,-tangent.dot(entryDirection)).normalize();
+    const handle=new T.Mesh(new T.CylinderGeometry(.00055,.00055,.012,6),new T.MeshBasicMaterial({color:0x4b5563,depthTest:true,depthWrite:false}));handle.renderOrder=28;
+    const ring=new T.Mesh(new T.TorusGeometry(.007,.0007,6,32),new T.MeshBasicMaterial({color:0xf59e0b,transparent:true,opacity:0,depthTest:false,depthWrite:false}));
+    ring.position.copy(surface);ring.quaternion.setFromUnitVectors(new T.Vector3(0,0,1),needleNormal);ring.renderOrder=30;
+    Object.assign(shaft.userData,{surface,entry:entryDirection,above,depth,inner,handle,ring,grip:gripDirection});
+    meridianGroup.add(shaft,inner,handle,ring);needleMesh=shaft;
+    needleMotion.tip=needle.phase&&needle.phase!=='approach'?depth:-.012;needleMotion.lastPhase='';
     renderer.domElement.dataset.acupunctureSimulation=needle.pointCode;
+    renderer.domElement.dataset.needleDepthMm=String(Math.round(depth*1000));
    }else renderer.domElement.dataset.acupunctureSimulation='off';
    renderer.domElement.dataset.meridianPaths=String(trustedPaths);renderer.domElement.dataset.meridianSchematicPaths=String(schematicPaths);renderer.domElement.dataset.meridianPulseMarkers=String(meridianPulseMarkers.length);renderer.domElement.dataset.meridianSelectedMarkers=String(selectedMarkers);renderer.domElement.dataset.meridianFlowParticles=String(meridianFlowParticles.length);
   };
@@ -355,7 +391,7 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
    }
    const overlayValue=overlay.current;
    const overlayKey=overlayValue?.enabled
-    ?[qualityProfile,overlayValue.meridianId,overlayValue.side,overlayValue.selectedPointCode??'',overlayValue.effects?.meridians,overlayValue.effects?.acupoints,overlayValue.needleSimulation?JSON.stringify(overlayValue.needleSimulation):'',overlayValue.anchors.map(anchor=>[anchor.pointCode,anchor.side,anchor.x.toFixed(5),anchor.y.toFixed(5),anchor.z.toFixed(5),anchor.verificationStatus].join(':')).join('|'),overlayValue.paths.map(path=>path.meridianId+':'+path.verificationStatus+':'+path.points.length).join('|')].join('::')
+    ?[qualityProfile,overlayValue.meridianId,overlayValue.side,overlayValue.selectedPointCode??'',overlayValue.effects?.meridians,overlayValue.effects?.acupoints,overlayValue.needleSimulation?[overlayValue.needleSimulation.pointCode,overlayValue.needleSimulation.x,overlayValue.needleSimulation.y,overlayValue.needleSimulation.z,overlayValue.needleSimulation.angleDegrees,overlayValue.needleSimulation.visualLengthMm,overlayValue.needleSimulation.depthMm??0].join(','):'',overlayValue.formula?overlayValue.formula.id+'='+overlayValue.formula.points.map(p=>p.code+p.method+p.order+(p.active?'*':'')+p.x.toFixed(4)).join(','):'',overlayValue.anchors.map(anchor=>[anchor.pointCode,anchor.side,anchor.x.toFixed(5),anchor.y.toFixed(5),anchor.z.toFixed(5),anchor.verificationStatus].join(':')).join('|'),overlayValue.paths.map(path=>path.meridianId+':'+path.verificationStatus+':'+path.points.length).join('|')].join('::')
     :'off';
    if(overlayKey!==lastOverlayKey){rebuildOverlay(overlayValue);lastOverlayKey=overlayKey;dirty=true;}
    if(overlayValue?.enabled&&overlayValue.effects?.motion!==false&&!reduceMeridianMotion&&(meridianFlowParticles.length||meridianPulseMarkers.length)){
@@ -366,14 +402,47 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
      renderer.domElement.dataset.meridianEffect='flow';renderer.domElement.dataset.meridianEffectFrame=String(effectFrame);lastMeridianEffectFrame=effectFrame;dirty=true;
     }
    }else {renderer.domElement.dataset.meridianEffect=!overlayValue?.enabled?'off':reduceMeridianMotion?'reduced':'paused';}
-   if(needleMesh&&overlayValue?.needleSimulation?.animated&&!reduceMeridianMotion){
-    const cycle=.5+.5*Math.sin(clock.elapsedTime*3.2),base=Number(needleMesh.userData.needleLength),factor=overlayValue.needleSimulation.action==='insert'?.58+.42*cycle:overlayValue.needleSimulation.action==='lift-thrust'?.72+.24*cycle:1,length=base*factor,start=needleMesh.userData.needleStart as T.Vector3,direction=needleMesh.userData.needleDirection as T.Vector3,handle=needleMesh.userData.needleHandle as T.Mesh;
-    needleMesh.scale.y=factor;needleMesh.position.copy(start).addScaledVector(direction,length/2);handle.position.copy(start).addScaledVector(direction,length);if(overlayValue.needleSimulation.action==='twist'){const gripDirection=(needleMesh.userData.needleGripDirection as T.Vector3).clone().applyAxisAngle(direction,cycle*Math.PI*2);handle.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),gripDirection);needleMesh.quaternion.copy(needleMesh.userData.needleBaseQuaternion as T.Quaternion).multiply(new T.Quaternion().setFromAxisAngle(direction,cycle*Math.PI*2));}dirty=true;
+   const needleState=overlayValue?.needleSimulation;
+   if(needleMesh&&needleState){
+    const d=needleMesh.userData as {surface:T.Vector3;entry:T.Vector3;above:number;depth:number;inner:T.Mesh;handle:T.Mesh;ring:T.Mesh;grip:T.Vector3};
+    const phase=needleState.phase??(needleState.animated?'manipulate':'pierce');
+    const params=needleState.intensity==='strong'?{turns:1,hz:3,lift:.32}:needleState.intensity==='weak'?{turns:.25,hz:1,lift:.12}:{turns:.5,hz:1.8,lift:.2};
+    const target=phase==='approach'?-.012:phase==='withdraw'?-.03:d.depth;
+    // Pierce the skin quickly (tr. 11); withdraw fast for bổ, slowly for tả (tr. 15).
+    const rate=phase==='pierce'?20:phase==='withdraw'?(needleState.intensity==='strong'?3:needleState.intensity==='weak'?18:8):phase==='approach'?6:8;
+    needleMotion.tip+=(target-needleMotion.tip)*(1-Math.exp(-rate*dt));
+    const moving=phase==='manipulate'&&needleState.animated&&!reduceMeridianMotion,t=clock.elapsedTime*params.hz*Math.PI*2;
+    let tip=needleMotion.tip,spin=0;
+    if(moving){
+     const action=needleState.action;
+     if(action==='lift-thrust'||action==='insert'||action==='twist-lift')tip-=d.depth*params.lift*(.5+.5*Math.sin(t));
+     if(action==='twist'||action==='twist-lift')spin=Math.sin(t)*params.turns*Math.PI*2;
+     if(action==='shake')tip-=d.depth*.08*(.5+.5*Math.sin(t*4));
+     if(action==='scrape')spin=Math.sin(t*6)*.12;
+    }
+    const tipPoint=d.surface.clone().addScaledVector(d.entry,tip),tail=tipPoint.clone().addScaledVector(d.entry,-(d.above+d.depth));
+    const axis=tail.clone().sub(tipPoint),len=axis.length(),dir=axis.clone().normalize();
+    needleMesh.position.copy(tipPoint).add(tail).multiplyScalar(.5);needleMesh.scale.set(1,len,1);
+    needleMesh.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),dir);
+    if(spin)needleMesh.quaternion.premultiply(new T.Quaternion().setFromAxisAngle(dir,spin));
+    const insideLen=Math.max(0,tip);d.inner.visible=insideLen>.0005;
+    if(d.inner.visible){d.inner.position.copy(d.surface).addScaledVector(d.entry,insideLen/2);d.inner.scale.set(1,insideLen,1);d.inner.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),d.entry);}
+    d.handle.position.copy(tail);d.handle.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),d.grip.clone().applyAxisAngle(dir,spin));
+    const deqi=Boolean(needleState.deqi)&&(phase==='manipulate'||phase==='retain')&&insideLen>.0005;
+    const ringMat=d.ring.material as T.MeshBasicMaterial,wave=.5+.5*Math.sin(clock.elapsedTime*3.4);
+    ringMat.opacity=deqi?(reduceMeridianMotion?.5:.25+.45*wave):0;d.ring.scale.setScalar(deqi&&!reduceMeridianMotion?1+.8*wave:1);
+    renderer.domElement.dataset.needlePhase=phase;renderer.domElement.dataset.needleInsideMm=String(Math.round(insideLen*1000));renderer.domElement.dataset.needleDeqi=deqi?'on':'off';
+    dirty=true;
    }
+   if(formulaMarkers.length&&!reduceMeridianMotion){
+    const wave=.5+.5*Math.sin(clock.elapsedTime*4);
+    formulaMarkers.forEach(m=>{if(m.userData.active){m.scale.setScalar(1+.25*wave);dirty=true;}});
+   }
+   if(mobileSheetOffset&&Math.floor(clock.elapsedTime*4)%2===0&&!mobileSheet()){camera.clearViewOffset();mobileSheetOffset=false;dirty=true;}
    const focusValue=focus.current;
    if(focusValue?.key&&focusValue.key!==lastFocusKey){
     const point=new T.Vector3(focusValue.x,focusValue.y,focusValue.z),destination=point.clone().add(new T.Vector3(.28,.12,.42).normalize().multiplyScalar(.48));
-    camera.clearViewOffset();startCameraMotion(point,destination,1.08);lastFocusKey=focusValue.key;dirty=true;
+    if(!applyMobileSheetOffset())camera.clearViewOffset();startCameraMotion(point,destination,1.08);lastFocusKey=focusValue.key;dirty=true;
    }
    if(cameraMotion){
     const t=Math.min(1,(performance.now()-cameraMotion.startedAt)/(cameraMotion.duration*1000)),e=t*t*t*(t*(t*6-15)+10);

@@ -16,6 +16,11 @@ for(const [src,name] of [[r.files.meridianFile,'meridians.json'],[r.files.regist
   const t=fs.readFileSync(src,'utf8');
   fs.writeFileSync(path.join(out,name),t.endsWith('\n')?t:t+'\n');
 }
+for(const [rel,name] of [['content/needling/techniques.json','needling-techniques.json'],['content/formulas/formulas.json','acupoint-formulas.json']]){
+  const src=path.join(root,rel);if(!fs.existsSync(src)){console.error('Missing '+rel);process.exit(1)}
+  const t=fs.readFileSync(src,'utf8');JSON.parse(t);
+  fs.writeFileSync(path.join(out,name),t.endsWith('\n')?t:t+'\n');
+}
 const documentReference=JSON.parse(fs.readFileSync(documentReferenceFile,'utf8'));
 const points=JSON.parse(fs.readFileSync(r.files.pointFile,'utf8'));
 const nomenclature=JSON.parse(fs.readFileSync(nomenclatureFile,'utf8'));

@@ -2,7 +2,6 @@ import {useEffect,useMemo,useState} from 'react';
 import {useExclusiveSheet} from './mobile-sheets';
 import {Move} from 'lucide-react';
 import {useDraggable} from './use-draggable';
-import NeedleSimulation from './needle-simulation';
 
 type Meridian={
   id:string;
@@ -47,6 +46,8 @@ export type StudyCommand={
   view?:'three-quarter'|'front'|'side'|'back';
   anatomyPreset?:'surface'|'muscle-landmarks'|'skeleton';
   effects?:Partial<{motion:boolean;meridians:boolean;acupoints:boolean;collaterals:boolean}>;
+  /** Opens the Phòng châm inside the Kinh lạc 3D sheet (also on phones). */
+  openLab?:boolean;
 };
 
 interface Props{
@@ -278,7 +279,7 @@ export default function YhctStudyPanel({localDraftCount,onStudyCommand}:Props){
       {mode==='simulation'&&<section className="yhct-mode-panel" data-mode-panel="simulation">
         <strong>Mô phỏng 3D · hiệu ứng học tập</strong>
         <p>Điều khiển hiển thị, không mô phỏng sinh lý và không xác nhận vị trí lâm sàng.</p>
-        <NeedleSimulation/>
+        <button type="button" className="open-lab" data-open-lab="true" onClick={()=>onStudyCommand({openLab:true})}>Mở Phòng châm · châm kim và phối huyệt</button>
         <div className="simulation-controls">
           <button aria-pressed={simulation.motion} onClick={()=>applySimulation({...simulation,motion:!simulation.motion})}>Chuyển động</button>
           <button aria-pressed={simulation.meridians} onClick={()=>applySimulation({...simulation,meridians:!simulation.meridians})}>Đường kinh</button>
