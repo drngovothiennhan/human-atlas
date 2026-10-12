@@ -8,6 +8,7 @@ import {mergeGeometries} from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 import {createExplosionLayout} from './explosion-layout';
 import {decodeModelResponse} from './model-download';
 import {PointerTap} from './pointer-tap';
+import {PROBE_DIRECTIONS,fallbackInward,needleBasis,pickSkinNormal,type SkinHit} from './needle-geometry';
 import {SYSTEMS,effectiveLayerOpacity,isMeridianLandmarkMuscle,isPrimarySurfacePart,PRIMARY_SURFACE_CONCEPT_ID,type Atlas,type SceneState} from './anatomy';
 import {BODY_CANONICAL_COORDINATE_SYSTEM,type SurfaceCapture} from '../src/acupoints/registration/coordinate-system';
 import type {MeridianFocusTarget,MeridianOverlayState} from './meridian-overlay';
@@ -134,7 +135,7 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
   type MeridianFlowParticle={mesh:T.Mesh;curve:T.Curve<T.Vector3>;offset:number;speed:number};
   let meridianMarkers:T.Mesh[]=[],meridianPulseMarkers:T.Mesh[]=[],meridianFlowParticles:MeridianFlowParticle[]=[],needleMesh:T.Mesh|null=null;
   let formulaMarkers:T.Object3D[]=[];
-  const needleMotion={tip:-.012,lastPhase:'',fade:1};
+  const needleMotion={tip:-.012,lastPhase:'',fade:1},needleNormalCache=new Map<string,T.Vector3>();
   const meridianColors:Record<string,number>={LU:0x2563eb,LI:0xea580c,ST:0xca8a04,SP:0x84cc16,HT:0xdc2626,SI:0x0891b2,BL:0x4f46e5,KI:0x0d9488,PC:0xdb2777,TE:0x0ea5e9,GB:0x16a34a,LR:0x65a30d,CV:0x7c3aed,GV:0xc026d3};
   // Pull overlay geometry 14 mm toward the camera in view space: lines can no longer sink into skin/muscle that pokes through,
   // while parts on the far side of the body (centimetres deeper) stay correctly occluded.
@@ -220,24 +221,39 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
     }
     renderer.domElement.dataset.formulaOverlay=formula.id;renderer.domElement.dataset.formulaPoints=String(ordered.length);
    }else{renderer.domElement.dataset.formulaOverlay='off';renderer.domElement.dataset.formulaPoints='0';}
+   // Outward skin normal at a point: probe 26 directions from 4 cm outside, take the nearest front-face hit on the
+   // primary skin mesh. Returns null (caller falls back to the old horizontal estimate) when the skin is not ready.
+   const estimateOutwardSkinNormal=(p:T.Vector3):T.Vector3|null=>{
+    const key=[p.x,p.y,p.z].map(v=>v.toFixed(4)).join(',');
+    const cached=needleNormalCache.get(key);if(cached)return cached.clone();
+    const rc=new T.Raycaster(),hits:SkinHit[]=[],reach=.04;rc.far=reach*3;
+    for(let i=0;i<pickers.length;i++){
+     const mesh=pickers[i];if(!mesh||atlas.parts[i].system!=='integumentary'||!isPrimarySurfacePart(atlas.parts[i]))continue;
+     mesh.updateMatrixWorld(true);
+     for(const d of PROBE_DIRECTIONS){
+      rc.set(new T.Vector3(p.x+d[0]*reach,p.y+d[1]*reach,p.z+d[2]*reach),new T.Vector3(-d[0],-d[1],-d[2]));
+      const hit=rc.intersectObject(mesh,false)[0];
+      if(hit?.face){const n=hit.face.normal.clone().transformDirection(mesh.matrixWorld);hits.push({distance:hit.distance,normal:[n.x,n.y,n.z]});}
+     }
+    }
+    const picked=pickSkinNormal(hits,reach*3);if(!picked)return null;
+    const normal=new T.Vector3(...picked);if(ready)needleNormalCache.set(key,normal.clone());return normal;
+   };
    const needle=value.needleSimulation;
    if(needle&&[needle.x,needle.y,needle.z,needle.angleDegrees,needle.visualLengthMm].every(Number.isFinite)){
     // Illustrative needle (Châm cứu học Trung Quốc tr. 10–21): one shaft from tip to tail, a faint copy of the
     // part under the skin drawn through the body, a handle and a ring for the illustrative đắc khí effect.
     const surface=new T.Vector3(needle.x,needle.y,needle.z);
-    const inward=new T.Vector3(-needle.x,0,-needle.z);
-    if(inward.lengthSq()<1e-8)inward.set(0,0,1);
-    inward.normalize();const needleNormal=inward.clone();
-    const tangent=new T.Vector3(0,1,0);
-    tangent.addScaledVector(inward,-tangent.dot(inward)).normalize();
-    const angle=T.MathUtils.degToRad(T.MathUtils.clamp(needle.angleDegrees,5,90));
-    const entryDirection=needleNormal.clone().multiplyScalar(Math.sin(angle)).add(tangent.clone().multiplyScalar(Math.cos(angle))).normalize();
+    // Needle direction follows the real skin surface (vertex, soles, shoulders...), not a fixed horizontal axis.
+    const skinOutward=estimateOutwardSkinNormal(surface);
+    const basis=needleBasis(skinOutward?[-skinOutward.x,-skinOutward.y,-skinOutward.z]:fallbackInward(needle.x,needle.z),needle.angleDegrees);
+    const needleNormal=new T.Vector3(...basis.inward),entryDirection=new T.Vector3(...basis.entry),gripDirection=new T.Vector3(...basis.grip);
+    renderer.domElement.dataset.needleNormalSource=skinOutward?'skin':'fallback';
     const above=T.MathUtils.clamp(needle.visualLengthMm,8,120)/1000,depth=T.MathUtils.clamp(Number(needle.depthMm??0),0,90)/1000;
     const shaft=new T.Mesh(new T.CylinderGeometry(.0012,.0012,1,8),new T.MeshBasicMaterial({color:0xc87937,depthTest:true,depthWrite:false}));
     shaft.renderOrder=27;shaft.userData.acupunctureSimulation=needle.pointCode;
     const inner=new T.Mesh(new T.CylinderGeometry(.0009,.0009,1,8),new T.MeshBasicMaterial({color:0xb45309,transparent:true,opacity:.55,depthTest:false,depthWrite:false}));
     inner.renderOrder=29;inner.visible=false;
-    const gripDirection=tangent.clone().addScaledVector(entryDirection,-tangent.dot(entryDirection)).normalize();
     const handle=new T.Mesh(new T.CylinderGeometry(.00055,.00055,.012,6),new T.MeshBasicMaterial({color:0x4b5563,depthTest:true,depthWrite:false}));handle.renderOrder=28;
     const ring=new T.Mesh(new T.TorusGeometry(.007,.0007,6,32),new T.MeshBasicMaterial({color:0xf59e0b,transparent:true,opacity:0,depthTest:false,depthWrite:false}));
     ring.position.copy(surface);ring.quaternion.setFromUnitVectors(new T.Vector3(0,0,1),needleNormal);ring.renderOrder=30;
