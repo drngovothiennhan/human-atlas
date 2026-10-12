@@ -11,13 +11,14 @@
     "location": "Google Drive của chủ dự án (thư mục Châm cứu)",
     "pageNote": "Số trang theo số in ở lề sách; nội dung được diễn đạt lại ngắn gọn, không chép nguyên văn."
   },
+  "animationNote": "Các số trong mục animation (số vòng xoay, tần số, biên độ tiến lui) chỉ để hoạt ảnh trông rõ; sách không nêu các số này.",
   "reviewStatus": "SOURCE_TRANSCRIBED_PENDING_FACULTY_REVIEW",
   "policy": "Dữ liệu học tập. Hoạt ảnh là minh họa, không phải thông số hay chỉ dẫn châm cứu trên người.",
   "insertion": [
     {"id": "finger-press", "name": "Châm có ngón tay tì", "summary": "Đầu ngón cái hoặc trỏ tay trái tì cạnh huyệt; tay phải châm nhanh sát đầu ngón tì.", "use": "Kim ngắn, khoảng 1,5 tấc.", "page": 11, "maxNeedleTac": 1.5},
     {"id": "long-needle", "name": "Châm kim dài", "summary": "Tay trái giữ thân kim gần mũi; tay phải đưa kim nhanh qua da rồi xoay đẩy vào sâu.", "use": "Kim dài trên 3 tấc.", "page": 11, "minNeedleTac": 3},
     {"id": "fast-pierce", "name": "Châm kim nhanh qua da", "summary": "Tay phải cầm thân kim cách mũi 0,2–0,3 tấc, châm nhanh qua da; tay trái giữ thân kim, tay phải xoay đẩy tới độ sâu cần.", "use": "Dùng được cho cả kim ngắn và kim dài.", "page": 12},
-    {"id": "pinch-skin", "name": "Châm kết hợp véo da", "summary": "Tay trái véo da quanh huyệt, tay phải châm nhanh.", "use": "Nơi mỏng cơ, ví dụ Ấn đường, Địa thương.", "page": 12, "examplePoints": ["ST-4"]},
+    {"id": "pinch-skin", "name": "Châm kết hợp véo da", "summary": "Tay trái véo da quanh huyệt, tay phải châm nhanh.", "use": "Nơi mỏng cơ, ví dụ Ấn đường, Địa thương.", "page": 12, "examplePoints": ["EX-HN3", "ST-4"]},
     {"id": "stretch-skin", "name": "Châm kết hợp căng da", "summary": "Tay trái căng da quanh huyệt, tay phải châm nhanh tới độ sâu và hướng cần.", "use": "Nơi da lỏng, nhiều nếp như da bụng.", "page": 12}
   ],
   "manipulations": [
@@ -37,13 +38,13 @@
   "stimulation": [
     {"id": "weak", "name": "Kích thích yếu", "equivalent": "bo", "summary": "Tiến lui nhẹ, vê biên độ nhỏ; ngừng thao tác khi có cảm giác.", "indication": "Thể trạng yếu, nhạy cảm, châm lần đầu, huyệt liên quan tạng phủ quan trọng.", "page": 16, "animation": {"twistTurns": 0.25, "frequencyHz": 1.0, "liftFraction": 0.12}},
     {"id": "moderate", "name": "Kích thích vừa", "equivalent": "binh", "summary": "Trung gian giữa mạnh và yếu.", "indication": "Chưa xác định rõ hư hay thực.", "page": 16, "animation": {"twistTurns": 0.5, "frequencyHz": 1.8, "liftFraction": 0.2}},
-    {"id": "strong", "name": "Kích thích mạnh", "equivalent": "ta", "summary": "Vê biên độ lớn, tiến lui mạnh; có thể thêm lay và cạo kim.", "indication": "Thể trạng khỏe, ít nhạy cảm, bệnh cấp hoặc co giật.", "page": 16, "animation": {"twistTurns": 1.0, "frequencyHz": 3.0, "liftFraction": 0.32}}
+    {"id": "strong", "name": "Kích thích mạnh", "equivalent": "ta", "summary": "Vê biên độ lớn, tiến lui mạnh; có thể thêm lay và cạo kim.", "indication": "Thể trạng khỏe, ít nhạy cảm, bệnh cấp hoặc co giật; chủ yếu dùng ở huyệt tứ chi hoặc vùng thắt lưng.", "page": 16, "animation": {"twistTurns": 1.0, "frequencyHz": 3.0, "liftFraction": 0.32}}
   ],
   "deqi": {"summary": "Khi kim tới độ sâu nhất định, người bệnh có thể thấy đau nhẹ, căng tức hoặc tê bì — người xưa gọi là đắc khí. Huyệt ở mặt thường gây căng; nơi dày cơ gây tức; gan tay, gan chân, đầu ngón gây đau; huyệt ở chi có thể lan như điện giật.", "page": 16},
   "angles": [
     {"id": "perpendicular", "name": "Châm thẳng", "degrees": 90, "range": [90, 90], "use": "Vùng cơ dày hoặc cần châm sâu: tứ chi, bụng, thắt lưng.", "page": 17},
     {"id": "oblique", "name": "Châm xiên", "degrees": 45, "range": [30, 60], "use": "Huyệt ngực, lưng liên quan tạng phủ; một số huyệt đặc biệt như Liệt khuyết.", "page": 17, "examplePoints": ["LU-7"]},
-    {"id": "transverse", "name": "Châm ngang", "degrees": 15, "range": [10, 20], "use": "Huyệt đầu, mặt (cơ mỏng); châm xuyên huyệt; huyệt ngực không được châm sâu.", "page": 17}
+    {"id": "transverse", "name": "Châm ngang", "degrees": 15, "range": [10, 20], "use": "Huyệt đầu, mặt (cơ mỏng); châm xuyên qua hai hay nhiều huyệt bằng một kim; huyệt ngực và lưng không được châm sâu.", "page": 17}
   ],
   "depthByRegion": [
     {"id": "limbs", "name": "Tứ chi", "summary": "Có thể châm sâu theo độ dày cơ, có thể xuyên cơ qua huyệt khác.", "recommendedAngles": ["perpendicular"], "examples": [{"code": "PC-6", "depthTac": [0.5, 1.5]}, {"code": "ST-36", "depthTac": [1, 2]}], "page": 18},
