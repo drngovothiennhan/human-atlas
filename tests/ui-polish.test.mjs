@@ -74,7 +74,7 @@ test('anatomical layers expose independent opacity controls wired to Three.js ma
   assert.ok(anatomy.includes('function effectiveLayerOpacity'));
   assert.ok(page.includes('aria-label={`Độ mờ lớp ${s.name.toLowerCase()}`}'));
   assert.ok(page.includes('opacityOverrides:[...new Set([...(v.opacityOverrides??[]),s.id])]'));
-  assert.ok(page.includes('effectiveLayerOpacity(state,s.id)'));
+  assert.ok(page.includes('effectiveLayerOpacity(sceneState,s.id)'));
   assert.ok(scene.includes('lastState?.opacity!==s.opacity'));
   assert.ok(scene.includes('material.transparent=alpha<1'));
   assert.ok(scene.includes('material.depthWrite=alpha>=1'));
