@@ -235,6 +235,15 @@ try{
   await waitFor(()=>evaluate("!!document.querySelector('.search-panel')"),{label:'anatomy search panel'});
   await evaluate("(()=>{const i=document.querySelector('[aria-label=\\\"Tìm theo tên cấu trúc giải phẫu\\\"]');if(!i)return false;const s=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;s.call(i,'Tim');i.dispatchEvent(new Event('input',{bubbles:true}));return true})()");
   await waitFor(()=>evaluate("document.querySelector('.anatomy-search-results')?.innerText.includes('Tim')"),{label:'anatomy search actual result'});
+  // Picking a bone must reveal it: the skin turns see-through instead of hiding the selection.
+  await evaluate("(()=>{const i=document.querySelector('[aria-label=\\\"Tìm theo tên cấu trúc giải phẫu\\\"]');if(!i)return false;const s=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;s.call(i,'xương đùi');i.dispatchEvent(new Event('input',{bubbles:true}));return true})()");
+  await waitFor(()=>evaluate("!!document.querySelector('.anatomy-search-results [data-slot=combobox-item]')"),{label:'bone search result'});
+  await evaluate("document.querySelector('.anatomy-search-results [data-slot=combobox-item]').click()");
+  await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.skinOpacity==='12'"),{label:'skin turns see-through when a bone is picked'});
+  if(!await clickAria('Ghép và đặt lại'))throw new Error('Reset control missing after bone pick');
+  await waitFor(()=>evaluate("document.querySelector('canvas')?.dataset.skinOpacity==='100'"),{label:'skin opaque again after reset'});
+  if(!await clickAria('Tìm giải phẫu'))throw new Error('Anatomy search control missing');
+  await waitFor(()=>evaluate("!!document.querySelector('.search-panel')"),{label:'anatomy search panel reopened'});
   if(!await clickAria('Đóng tìm kiếm'))throw new Error('Anatomy search close missing');
 
   const informationOpened=await evaluate("(()=>{const b=document.querySelector('.top-actions [aria-label=\\\"Thông tin ứng dụng\\\"]');if(!b)return false;b.click();return true})()");

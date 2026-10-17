@@ -22,13 +22,13 @@ export interface Concept {id:string;name:string;elements:string[]}
 export interface Atlas {version:string;sex?:'male';source?:string;scope?:string;parts:Part[];concepts:Concept[];chunks:{url:string;bytes:number;gzip?:string;gzipBytes?:number}[];triangles:number}
 export type View = 'three-quarter'|'front'|'back'|'side';
 export const DEFAULT_LAYER_OPACITY:Record<SystemId,number>=Object.fromEntries(SYSTEMS.map(system=>[system.id,100])) as Record<SystemId,number>;
-export interface SceneState {inspectorOpen?:boolean;explode:number;visible:SystemId[];opacity:Record<SystemId,number>;opacityOverrides?:SystemId[];selected:string[];isolate:boolean;view:View;rotate:boolean;reset:number}
+export interface SceneState {inspectorOpen?:boolean;/** True when a part under the skin is selected, so the skin turns see-through and the picked structure is visible. */seeThrough?:boolean;explode:number;visible:SystemId[];opacity:Record<SystemId,number>;opacityOverrides?:SystemId[];selected:string[];isolate:boolean;view:View;rotate:boolean;reset:number}
 export const DEFAULT_VISIBLE:SystemId[] = ['integumentary'];
 export const PRIMARY_SURFACE_CONCEPT_ID='FMA7163';
 export function isPrimarySurfacePart(part:Part){return part.system!=='integumentary'||part.conceptId===PRIMARY_SURFACE_CONCEPT_ID;}
-export function effectiveLayerOpacity(state:Pick<SceneState,'visible'|'opacity'|'opacityOverrides'>,system:SystemId){
+export function effectiveLayerOpacity(state:Pick<SceneState,'visible'|'opacity'|'opacityOverrides'>&{seeThrough?:boolean},system:SystemId){
  const requested=state.opacity?.[system]??DEFAULT_LAYER_OPACITY[system];
- const hasAnatomyOverlay=state.visible.includes('integumentary')&&state.visible.some(id=>id!=='integumentary');
+ const hasAnatomyOverlay=state.visible.includes('integumentary')&&(state.seeThrough||state.visible.some(id=>id!=='integumentary'));
  if(system==='integumentary'&&hasAnatomyOverlay&&!state.opacityOverrides?.includes(system))return Math.min(requested,12);
  return requested;
 }
