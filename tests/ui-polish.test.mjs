@@ -83,3 +83,12 @@ test('anatomical layers expose independent opacity controls wired to Three.js ma
   assert.ok(scene.includes('initialAnatomyChunkCount'));
   assert.ok(css.includes('.layer-opacity input'));
 });
+
+test('error reload button keeps a 44px touch target on mobile',async()=>{
+  const [page,css]=await Promise.all([
+    readFile(new URL('../app/page.tsx',import.meta.url),'utf8'),
+    readFile(new URL('../app/globals.css',import.meta.url),'utf8')
+  ]);
+  assert.ok(page.includes('role="alert"'),'error state must announce itself');
+  assert.match(css,/\.error button\{[^}]*min-height:44px/);
+});
