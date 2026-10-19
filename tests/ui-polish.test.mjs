@@ -83,3 +83,13 @@ test('anatomical layers expose independent opacity controls wired to Three.js ma
   assert.ok(scene.includes('initialAnatomyChunkCount'));
   assert.ok(css.includes('.layer-opacity input'));
 });
+
+test('acupuncture lab controls reach 44px touch targets on mobile',async()=>{
+  const css=await readFile(new URL('../app/globals.css',import.meta.url),'utf8');
+  const mobile=css.match(/@media\(max-width:767px\)\{\.lab-tabs button[^}]*\}/);
+  assert.ok(mobile,'mobile lab touch-target rule missing');
+  for(const selector of ['.lab-tabs button','.lab-chips button','.lab-formula-points li button','.lab-details summary','.lab-primary']){
+    assert.ok(mobile[0].includes(selector),`${selector} missing from mobile touch-target rule`);
+  }
+  assert.match(mobile[0],/min-height:44px/);
+});
