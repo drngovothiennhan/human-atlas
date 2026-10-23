@@ -60,7 +60,7 @@ test('licensed schematic spatial dataset stays unverified and complete',async()=
   assert.deepEqual(stPath.pointCodes.slice(0,2),['ST-ROUTE-ORIGIN','ST-1'],'ST route must begin at lateral-nose origin before ST-1');
   assert.equal(stPath.courseSource,'HIU-TEXTBOOK-COURSE-2026-09','ST face branch must come from the textbook course engine');
   assert.ok(stPath.points.length>=stPath.pointCodes.length,'ST course must pass through every acupoint (straight segments)');
-  const calibratedCodes=['LU-10','LU-11','LI-20','ST-1','BL-1','TE-23','GB-1','CV-24','GV-28','ST-45','SI-9','SI-11','SI-12','SI-13'];
+  const calibratedCodes=['LU-10','LU-11','LI-20','ST-1','BL-1','TE-23','GB-1','CV-24','GV-28','ST-45','SI-9','SI-11','SI-12','SI-13','KI-7','KI-8','KI-9'];
   assert.deepEqual(data.spatialOverrides?.slice().sort(),calibratedCodes.slice().sort(),'HIU facial/endpoint calibration set must stay explicit');
   for(const code of calibratedCodes){
     const anchors=data.anchors.filter(a=>a.pointCode===code);

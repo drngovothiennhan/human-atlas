@@ -12395,13 +12395,14 @@
       "sourceMeridianId": "KI",
       "sequence": 7,
       "side": "RIGHT",
-      "x": 0.095821,
-      "y": 0.101823,
-      "z": -0.056939,
+      "x": 0.045841,
+      "y": 0.130588,
+      "z": -0.061028,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "anchored",
       "projection": "BodyParts3D FMA7163 surface raycast",
+      "calibrationOverride": "HIU_DOCUMENT_ANATOMY_QC",
       "anatomicalEvidence": {
         "sourceId": "TARA-ACUPOINT-ANATOMY-2026-09-08",
         "surfaceRegionVi": "Cẳng chân",
@@ -12416,6 +12417,16 @@
             "uri": "http://uri.interlex.org/base/ilx_0795305"
           }
         ]
+      },
+      "documentEvidence": {
+        "sourceId": "USER-NGO-TRUNG-TRIEU-HUYET-VI-KINH-LAC",
+        "pdfPageRange": [
+          37,
+          41
+        ],
+        "label": "Theo tài liệu Ngô Trung Triều · PDF tr. 37–41",
+        "evidenceType": "VISUAL_LOCATION_REFERENCE",
+        "spatialStatus": "DOCUMENT_REFERENCED_2D"
       }
     },
     {
@@ -12425,13 +12436,14 @@
       "sourceMeridianId": "KI",
       "sequence": 7,
       "side": "LEFT",
-      "x": -0.095821,
-      "y": 0.101823,
-      "z": -0.056939,
+      "x": -0.045841,
+      "y": 0.130588,
+      "z": -0.061028,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "anchored",
       "projection": "BodyParts3D FMA7163 surface raycast",
+      "calibrationOverride": "HIU_DOCUMENT_ANATOMY_QC",
       "anatomicalEvidence": {
         "sourceId": "TARA-ACUPOINT-ANATOMY-2026-09-08",
         "surfaceRegionVi": "Cẳng chân",
@@ -12446,6 +12458,16 @@
             "uri": "http://uri.interlex.org/base/ilx_0795305"
           }
         ]
+      },
+      "documentEvidence": {
+        "sourceId": "USER-NGO-TRUNG-TRIEU-HUYET-VI-KINH-LAC",
+        "pdfPageRange": [
+          37,
+          41
+        ],
+        "label": "Theo tài liệu Ngô Trung Triều · PDF tr. 37–41",
+        "evidenceType": "VISUAL_LOCATION_REFERENCE",
+        "spatialStatus": "DOCUMENT_REFERENCED_2D"
       }
     },
     {
@@ -12455,13 +12477,14 @@
       "sourceMeridianId": "KI",
       "sequence": 8,
       "side": "RIGHT",
-      "x": 0.080856,
-      "y": 0.101162,
-      "z": -0.064584,
+      "x": 0.04487,
+      "y": 0.130588,
+      "z": -0.036028,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "anchored",
       "projection": "BodyParts3D FMA7163 surface raycast",
+      "calibrationOverride": "HIU_DOCUMENT_ANATOMY_QC",
       "anatomicalEvidence": {
         "sourceId": "TARA-ACUPOINT-ANATOMY-2026-09-08",
         "surfaceRegionVi": "Cẳng chân",
@@ -12476,6 +12499,16 @@
             "uri": "http://uri.interlex.org/base/ilx_0795305"
           }
         ]
+      },
+      "documentEvidence": {
+        "sourceId": "USER-NGO-TRUNG-TRIEU-HUYET-VI-KINH-LAC",
+        "pdfPageRange": [
+          37,
+          41
+        ],
+        "label": "Theo tài liệu Ngô Trung Triều · PDF tr. 37–41",
+        "evidenceType": "VISUAL_LOCATION_REFERENCE",
+        "spatialStatus": "DOCUMENT_REFERENCED_2D"
       }
     },
     {
@@ -12485,13 +12518,14 @@
       "sourceMeridianId": "KI",
       "sequence": 8,
       "side": "LEFT",
-      "x": -0.080856,
-      "y": 0.101162,
-      "z": -0.064584,
+      "x": -0.04487,
+      "y": 0.130588,
+      "z": -0.036028,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "anchored",
       "projection": "BodyParts3D FMA7163 surface raycast",
+      "calibrationOverride": "HIU_DOCUMENT_ANATOMY_QC",
       "anatomicalEvidence": {
         "sourceId": "TARA-ACUPOINT-ANATOMY-2026-09-08",
         "surfaceRegionVi": "Cẳng chân",
@@ -12506,6 +12540,16 @@
             "uri": "http://uri.interlex.org/base/ilx_0795305"
           }
         ]
+      },
+      "documentEvidence": {
+        "sourceId": "USER-NGO-TRUNG-TRIEU-HUYET-VI-KINH-LAC",
+        "pdfPageRange": [
+          37,
+          41
+        ],
+        "label": "Theo tài liệu Ngô Trung Triều · PDF tr. 37–41",
+        "evidenceType": "VISUAL_LOCATION_REFERENCE",
+        "spatialStatus": "DOCUMENT_REFERENCED_2D"
       }
     },
     {
@@ -12515,13 +12559,14 @@
       "sourceMeridianId": "KI",
       "sequence": 9,
       "side": "RIGHT",
-      "x": 0.077246,
-      "y": 0.171585,
-      "z": -0.074792,
+      "x": 0.042955,
+      "y": 0.200497,
+      "z": -0.050327,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "anchored",
       "projection": "BodyParts3D FMA7163 surface raycast",
+      "calibrationOverride": "HIU_DOCUMENT_ANATOMY_QC",
       "anatomicalEvidence": {
         "sourceId": "TARA-ACUPOINT-ANATOMY-2026-09-08",
         "surfaceRegionVi": "Cẳng chân",
@@ -12544,6 +12589,16 @@
             "uri": "http://purl.obolibrary.org/obo/UBERON_0000979"
           }
         ]
+      },
+      "documentEvidence": {
+        "sourceId": "USER-NGO-TRUNG-TRIEU-HUYET-VI-KINH-LAC",
+        "pdfPageRange": [
+          37,
+          41
+        ],
+        "label": "Theo tài liệu Ngô Trung Triều · PDF tr. 37–41",
+        "evidenceType": "VISUAL_LOCATION_REFERENCE",
+        "spatialStatus": "DOCUMENT_REFERENCED_2D"
       }
     },
     {
@@ -12553,13 +12608,14 @@
       "sourceMeridianId": "KI",
       "sequence": 9,
       "side": "LEFT",
-      "x": -0.077246,
-      "y": 0.171585,
-      "z": -0.074792,
+      "x": -0.042955,
+      "y": 0.200497,
+      "z": -0.050327,
       "verificationStatus": "UNVERIFIED",
       "sourceKind": "LICENSED_SCHEMATIC",
       "accuracy": "anchored",
       "projection": "BodyParts3D FMA7163 surface raycast",
+      "calibrationOverride": "HIU_DOCUMENT_ANATOMY_QC",
       "anatomicalEvidence": {
         "sourceId": "TARA-ACUPOINT-ANATOMY-2026-09-08",
         "surfaceRegionVi": "Cẳng chân",
@@ -12582,6 +12638,16 @@
             "uri": "http://purl.obolibrary.org/obo/UBERON_0000979"
           }
         ]
+      },
+      "documentEvidence": {
+        "sourceId": "USER-NGO-TRUNG-TRIEU-HUYET-VI-KINH-LAC",
+        "pdfPageRange": [
+          37,
+          41
+        ],
+        "label": "Theo tài liệu Ngô Trung Triều · PDF tr. 37–41",
+        "evidenceType": "VISUAL_LOCATION_REFERENCE",
+        "spatialStatus": "DOCUMENT_REFERENCED_2D"
       }
     },
     {
@@ -24641,79 +24707,29 @@
           -0.029127
         ],
         [
-          0.036563,
-          0.075385,
-          -0.042155
+          0.045841,
+          0.130588,
+          -0.061028
         ],
         [
-          0.040034,
-          0.079956,
-          -0.055391
+          0.04487,
+          0.130588,
+          -0.036028
         ],
         [
-          0.044742,
-          0.084692,
-          -0.065624
+          0.042955,
+          0.200497,
+          -0.050327
         ],
         [
-          0.048802,
-          0.085837,
-          -0.073926
+          0.027688,
+          0.310884,
+          -0.051624
         ],
         [
-          0.056203,
-          0.087286,
-          -0.079794
-        ],
-        [
-          0.06932,
-          0.085795,
-          -0.072955
-        ],
-        [
-          0.078986,
-          0.086319,
-          -0.065657
-        ],
-        [
-          0.095821,
-          0.101823,
-          -0.056939
-        ],
-        [
-          0.080856,
-          0.101162,
-          -0.064584
-        ],
-        [
-          0.077246,
-          0.171585,
-          -0.074792
-        ],
-        [
-          0.062857,
-          0.201198,
-          -0.079895
-        ],
-        [
-          0.049993,
-          0.231852,
-          -0.076137
-        ],
-        [
-          0.033915,
-          0.294279,
-          -0.068487
-        ],
-        [
-          0.02748,
-          0.327136,
-          -0.066224
-        ],
-        [
-          0.026727,
-          0.360677,
-          -0.062402
+          0.024759,
+          0.368044,
+          -0.052111
         ],
         [
           0.03384,
@@ -24898,79 +24914,29 @@
           -0.029127
         ],
         [
-          -0.036563,
-          0.075385,
-          -0.042155
+          -0.045841,
+          0.130588,
+          -0.061028
         ],
         [
-          -0.040034,
-          0.079956,
-          -0.055391
+          -0.04487,
+          0.130588,
+          -0.036028
         ],
         [
-          -0.044742,
-          0.084692,
-          -0.065624
+          -0.042955,
+          0.200497,
+          -0.050327
         ],
         [
-          -0.048802,
-          0.085837,
-          -0.073926
+          -0.027688,
+          0.310884,
+          -0.051624
         ],
         [
-          -0.056203,
-          0.087286,
-          -0.079794
-        ],
-        [
-          -0.06932,
-          0.085795,
-          -0.072955
-        ],
-        [
-          -0.078986,
-          0.086319,
-          -0.065657
-        ],
-        [
-          -0.095821,
-          0.101823,
-          -0.056939
-        ],
-        [
-          -0.080856,
-          0.101162,
-          -0.064584
-        ],
-        [
-          -0.077246,
-          0.171585,
-          -0.074792
-        ],
-        [
-          -0.062857,
-          0.201198,
-          -0.079895
-        ],
-        [
-          -0.049993,
-          0.231852,
-          -0.076137
-        ],
-        [
-          -0.033915,
-          0.294279,
-          -0.068487
-        ],
-        [
-          -0.02748,
-          0.327136,
-          -0.066224
-        ],
-        [
-          -0.026727,
-          0.360677,
-          -0.062402
+          -0.024759,
+          0.368044,
+          -0.052111
         ],
         [
           -0.03384,
@@ -27874,7 +27840,10 @@
     "SI-9",
     "SI-11",
     "SI-12",
-    "SI-13"
+    "SI-13",
+    "KI-7",
+    "KI-8",
+    "KI-9"
   ],
   "textbookAnchorFixes": [
     "LU-1",
