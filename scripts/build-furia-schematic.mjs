@@ -159,7 +159,17 @@ const spatialOverrides={
   'SI-9':{seg:'upper_arm',t:.12,lat:.4,face:'posterior'},
   'SI-11':{seg:'trunk',vertebra:'T4',lat:4,face:'posterior'},
   'SI-12':{seg:'trunk',vertebra:'T2',lat:4,face:'posterior'},
-  'SI-13':{seg:'trunk',vertebra:'T2',lat:2.5,face:'posterior'}
+  'SI-13':{seg:'trunk',vertebra:'T2',lat:2.5,face:'posterior'},
+  // Medial calf (KI-7..KI-9). The vendor anchors cast these from the calf centre or the lateral
+  // side (x ≈ 0.08-0.10 m, the same column as BL-55..59), so the kidney route crossed the bladder
+  // route on the lower leg. Re-cast from the right tibia (structure 'Tibia'), keeping the TARA
+  // landmarks for these points: KI-7 near the calcaneal tendon, KI-8 at the medial face of the
+  // tibia, KI-9 between soleus and tibia. Heights use the KI-3 level (medial malleolus) and the
+  // shank segment length (16 cun ≈ 0.372 m, i.e. ≈ 0.0233 m per cun, rig_fitted.json):
+  // KI-7 and KI-8 2 cun above KI-3, KI-9 5 cun above KI-3. Render layer only; anchors stay UNVERIFIED.
+  'KI-7':{struct:'Tibia',along:.8449,dir:'medial',shift:{posterior:25,medial:5}},
+  'KI-8':{struct:'Tibia',along:.8449,dir:'medial',shift:{medial:12}},
+  'KI-9':{struct:'Tibia',along:.6497,dir:'medial',shift:{posterior:15,medial:10}}
 };
 const documentEvidenceByMeridian=new Map(documentReference.meridians.map(item=>[item.meridianId,item]));
 const anatomyEvidenceByCode=new Map(anatomyLocationDoc.points.map(item=>[item.code,item]));
