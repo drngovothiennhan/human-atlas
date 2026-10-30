@@ -285,7 +285,12 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
   };
   const materialFor=(system:string)=>{
    const surface=system==='integumentary';
-   const m=new T.MeshStandardMaterial({color:SYSTEMS.find(s=>s.id===system)?.color??'#aebbb8',metalness:.08,roughness:.53,side:surface?T.FrontSide:T.DoubleSide,transparent:surface,opacity:surface?.12:1,depthWrite:!surface});
+   const base={color:SYSTEMS.find(s=>s.id===system)?.color??'#aebbb8',metalness:0,side:surface?T.FrontSide:T.DoubleSide,transparent:surface,opacity:surface?.12:1,depthWrite:!surface};
+   // Organic tissue is dielectric (metalness 0). Skin adds a soft warm sheen and a faint warm emissive that stands in for
+   // subsurface scattering, so the body reads as living skin instead of grey plastic; organs stay slightly glossy/moist.
+   const m=surface
+    ?new T.MeshPhysicalMaterial({...base,roughness:.6,sheen:.45,sheenRoughness:.65,sheenColor:new T.Color('#ffd2bd'),emissive:new T.Color('#5a2414'),emissiveIntensity:.1})
+    :new T.MeshStandardMaterial({...base,roughness:.46});
    m.onBeforeCompile=shader=>{
     shader.uniforms.partState={value:partTexture};shader.uniforms.selectionState={value:selectionTexture};shader.uniforms.stateWidth={value:width};
     shader.vertexShader='attribute float partIndex; uniform sampler2D partState; uniform sampler2D selectionState; uniform float stateWidth; varying float partVisible; varying float partSelected;\n'+shader.vertexShader;

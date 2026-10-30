@@ -348,9 +348,9 @@ body:has(.registration-panel) .meridian3d-launch{left:376px}body:has(.registrati
 .studio.layout-mobile .mobile-only{display:flex!important}.studio.layout-mobile .desktop-only{display:none!important}.studio.layout-mobile .layers-panel{display:none}.studio.layout-mobile .layers-panel.mobile-open{display:flex;z-index:30;top:auto;left:12px;right:12px;bottom:140px;width:auto;max-height:calc(100dvh - 270px)}.studio.layout-mobile .view-controls{right:12px;top:43%;padding:3px}.studio.layout-mobile .bottom-dock{bottom:30px;width:calc(100% - 24px);padding:13px;gap:15px}.studio.layout-mobile .studio-footer{justify-content:center}.studio.layout-mobile .studio-footer>span{display:none}
 .studio.layout-desktop .mobile-only{display:none!important}.studio.layout-desktop .desktop-only{display:flex!important}.studio.layout-desktop .layers-panel{display:flex;left:30px;right:auto;top:217px;bottom:175px;width:254px;max-height:654px}.studio.layout-desktop .layers-panel.mobile-open{left:30px;right:auto;top:217px;bottom:175px;width:254px;max-height:654px}
 @media(max-width:767px){.studio.layout-desktop .layers-panel{left:12px;top:105px;bottom:90px;width:min(254px,calc(100vw - 24px));max-height:none;padding:12px 12px 0;background:#fffffff5;z-index:30}.studio.layout-desktop .layers-panel .system-count{display:none}.studio.layout-desktop .layers-panel.mobile-open{left:12px;right:auto;top:105px;bottom:90px;width:min(254px,calc(100vw - 24px));max-height:none}.studio.layout-desktop .top-actions{right:8px;gap:0}.studio.layout-desktop .top-actions>button:not(.layout-toggle):not(.toggle-layers):not(.toggle-views){display:none}.studio.layout-desktop .view-controls{right:8px}.studio.layout-desktop .bottom-dock{width:390px;max-width:calc(100% - 24px);bottom:30px}}
-.meridian3d-launch{position:relative!important;padding-right:46px!important}.meridian-launch-grip{position:absolute;right:9px;top:9px}
+.meridian3d-launch{position:absolute!important;padding-right:46px!important}.meridian-launch-grip{position:absolute;right:9px;top:9px}
 .acupuncture-sim>button{min-height:40px;margin:5px 0;border:1px solid #18253618!important;border-radius:7px!important;background:#fff!important;padding:7px 10px!important;font-size:11px!important;text-align:left}
-.yhct-launch{position:relative!important;padding-right:42px!important}.yhct-launch-grip{position:absolute;right:8px;top:8px}
+.yhct-launch{position:absolute!important;padding-right:42px!important}.yhct-launch-grip{position:absolute;right:8px;top:8px}
 
 /* Resizable floating menus; dragging stays on the existing touch-safe drag grips. */
 [data-floating-menu]{resize:both;min-width:220px;min-height:120px;max-width:calc(100vw - 16px);max-height:calc(100dvh - 16px);overflow:auto;overscroll-behavior:contain}
@@ -542,3 +542,23 @@ body:has(.studio.layout-mobile :is(.meridian3d-panel,.yhct-panel,.layers-panel.m
 .bar-close{position:absolute;top:-10px;right:-6px;min-width:28px!important;width:28px;height:28px;padding:0!important;border-radius:50%;background:#fff;border:1px solid #25384a24!important;display:flex;align-items:center;justify-content:center;color:#5d6b78;z-index:2}
 .bar-restore{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:22px;font-size:13px;color:#3c4956;z-index:5}
 @media(max-width:767px){.bar-restore{bottom:calc(28px + env(safe-area-inset-bottom))}.bar-close{top:-12px;right:-2px}}
+
+/* Bố cục phím chức năng PC/tablet (2026-10-30): hai nút học nằm dưới tiêu đề, không đè chữ;
+   bảng kinh lạc mở ngay dưới nút. Tablet (768–1180px) dùng nút 44px và bảng hẹp để mô hình vẫn ở giữa. */
+.studio.layout-desktop .meridian3d-launch{top:126px;max-width:min(460px,calc(100vw - 60px))}
+.studio.layout-desktop .meridian3d-panel{top:182px}
+@media(max-width:1180px) and (min-width:768px){
+ .studio.layout-desktop .identity-meta{display:none}
+ .studio.layout-desktop .meridian3d-launch{left:16px;top:104px;max-width:calc(50vw - 24px)}
+ .studio.layout-desktop .meridian3d-launch>span:not(.drag-grip){display:none}
+ .studio.layout-desktop .yhct-launch{right:16px;top:104px;max-width:calc(50vw - 24px)}
+ .studio.layout-desktop .meridian3d-panel{top:158px;bottom:150px;width:min(320px,42vw)}
+ .studio.layout-desktop .yhct-panel{top:158px;bottom:150px;width:min(330px,42vw)}
+ .studio.layout-desktop .layers-panel,.studio.layout-desktop .layers-panel.mobile-open{top:158px;bottom:150px;width:min(240px,32vw)}
+ .studio.layout-desktop .view-controls button{min-height:44px}
+ .studio.layout-desktop .layer-presets button,.studio.layout-desktop .meridian3d-quick button,.studio.layout-desktop .meridian3d-model-controls button{min-height:44px}
+}
+/* Điện thoại: bảng đáy thấp hơn để mô hình (đầu–thân) vẫn nhìn thấy phía trên. */
+@media(max-width:767px){
+ .studio.layout-mobile{--m-sheet-max:min(46dvh,calc(100dvh - 250px - var(--m-top) - var(--m-bottom)))}
+}
