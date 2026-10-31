@@ -44,7 +44,7 @@ export type StudyCommand={
   meridianId?:string;
   pointCode?:string;
   view?:'three-quarter'|'front'|'side'|'back';
-  anatomyPreset?:'surface'|'muscle-landmarks'|'skeleton';
+  anatomyPreset?:'surface'|'muscle-landmarks'|'skeleton'|'organs';
   effects?:Partial<{motion:boolean;meridians:boolean;acupoints:boolean;collaterals:boolean}>;
   /** Opens the Phòng châm inside the Kinh lạc 3D sheet (also on phones). */
   openLab?:boolean;

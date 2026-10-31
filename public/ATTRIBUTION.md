@@ -27,3 +27,6 @@ Earlier repository revisions included female reference anatomy: Kristen Browne a
 Adaptations: translated native meter/Y-up coordinates onto the stage, coincident vertices welded and source normals averaged, geometry simplified with a 0.2% per-structure relative error bound, and normals quantized. Colors and display systems are curated for this interface. All 888 source meshes are represented, with 1,073 source nodes available as selectable individual or compound concepts.
 
 This is a reference assembly with whole-body surface and selected organs, including female reproductive anatomy. Its skeleton and muscle coverage is partial. It is not a complete model of every human structure or a single-person scan. Eight placenta/umbilical structures are classified under Pregnancy reference and hidden by default.
+
+
+Skeletal, articular and visceral reference layers (`z-skeletal-male.glb`, `z-articular-male.glb`, `z-visceral-male.glb`): Anatria-3D (https://github.com/Nurkan1/Anatria-3D), pinned commit `949ac80cc9763539afc48e60b5246132f00468db`, Z-Anatomy derived meshes under CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/). Adaptation: none to the files; the visceral layer renders only the five lung lobes and the liver, which the BodyParts3D atlas lacks.

@@ -94,4 +94,8 @@ export function isMeridianLandmarkMuscle(name:string){
 
 // Source atlas labels incorrectly group these named lower-leg muscles as bone.
 const LEG_MUSCLE_IDS=new Set(["FJ1409","FJ1409M","FJ1410","FJ1410M","FJ1411","FJ1411M","FJ1439","FJ1439M","FJ1440","FJ1440M"]);
-export function normalizeAtlasSystems(atlas:Atlas):Atlas{return {...atlas,parts:atlas.parts.map(part=>LEG_MUSCLE_IDS.has(part.id)?{...part,system:"muscular" as SystemId}:part)};}
+// BodyParts3D files the brain ventricles under the heart (cardiac); they are CSF cavities of the brain.
+const BRAIN_VENTRICLE_NAMES=new Set(["Fourth ventricle","Third ventricle","Left lateral ventricle","Right lateral ventricle","Interventricular foramen"]);
+export function normalizeAtlasSystems(atlas:Atlas):Atlas{return {...atlas,parts:atlas.parts.map(part=>LEG_MUSCLE_IDS.has(part.id)?{...part,system:"muscular" as SystemId}:part.system==='cardiac'&&BRAIN_VENTRICLE_NAMES.has(part.name)?{...part,system:"nervous" as SystemId}:part)};}
+/** "Nội tạng" preset: thoracic/abdominal organs plus brain (nervous) and spleen (lymphatic). */
+export const ORGAN_SYSTEMS:SystemId[]=['cardiac','respiratory','digestive','urinary','endocrine','reproductive','nervous','lymphatic'];

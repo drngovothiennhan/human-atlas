@@ -263,12 +263,12 @@ body:has(.registration-panel) .meridian3d-launch{left:376px}body:has(.registrati
 /* Functional controls kept inside the meridian panel so mobile users do not need hidden outer toolbars. */
 .meridian3d-model-controls{display:grid;gap:6px;margin-top:8px;padding:8px;border:1px solid #18253610;border-radius:10px;background:#f8faf9}
 .meridian3d-model-controls>div{display:grid;grid-template-columns:72px repeat(4,minmax(0,1fr));gap:5px;align-items:center}
-.meridian3d-model-controls>div:last-child{grid-template-columns:72px repeat(3,minmax(0,1fr))}
+.meridian3d-model-controls>div:last-child{grid-template-columns:72px repeat(4,minmax(0,1fr))}
 .meridian3d-model-controls span{font-size:8px;color:#72808a;font-weight:650}
 .meridian3d-model-controls button{min-height:31px;border:1px solid #18253616;border-radius:7px;background:#fff;color:#3f4e58;font-size:8.5px;cursor:pointer}
 .meridian3d-model-controls button:active{background:#e6f0ef;color:#145e58}
 .meridian3d-effect-controls button:disabled{opacity:.48;cursor:not-allowed;background:#f3f4f4!important;color:#78838b!important}
-@media(max-width:767px){.meridian3d-model-controls{padding:7px}.meridian3d-model-controls>div{grid-template-columns:62px repeat(4,minmax(0,1fr))}.meridian3d-model-controls>div:last-child{grid-template-columns:62px repeat(3,minmax(0,1fr))}.meridian3d-model-controls button{min-height:36px;padding-inline:3px}}
+@media(max-width:767px){.meridian3d-model-controls{padding:7px}.meridian3d-model-controls>div{grid-template-columns:62px repeat(4,minmax(0,1fr))}.meridian3d-model-controls>div:last-child{grid-template-columns:62px repeat(4,minmax(0,1fr))}.meridian3d-model-controls button{min-height:36px;padding-inline:3px}}
 
 
 /* 2026-09-23: compact meridian-first layer menu; prevent mobile overflow. */
@@ -561,4 +561,17 @@ body:has(.studio.layout-mobile :is(.meridian3d-panel,.yhct-panel,.layers-panel.m
 /* Điện thoại: bảng đáy thấp hơn để mô hình (đầu–thân) vẫn nhìn thấy phía trên. */
 @media(max-width:767px){
  .studio.layout-mobile{--m-sheet-max:min(46dvh,calc(100dvh - 250px - var(--m-top) - var(--m-bottom)))}
+}
+/* Liên hệ kinh – tạng phủ (thuộc/lạc) trong bảng kinh lạc. */
+.meridian3d-organ{display:grid;gap:5px;margin-top:4px;padding:7px 8px;border-radius:8px;background:#ffffffb8;border:1px solid #18314414;color:#3c4a54}
+.meridian3d-organ p{margin:0;font-size:11px;line-height:1.4}.meridian3d-organ b{display:inline-block;min-width:44px;font-weight:650;color:#1f3440}
+.meridian3d-organ small{display:block;color:#7b8790;font-size:10px;line-height:1.35}
+.meridian3d-organ button{justify-self:start;min-height:36px;padding:0 12px;border:1px solid #0f766e40;border-radius:8px;background:#e8f3f1;color:#0f665f;font-size:11px;font-weight:650;cursor:pointer}
+@media(max-width:767px){.meridian3d-organ button{min-height:44px}}
+/* Điện thoại: nhãn "Góc nhìn"/"Nền giải phẫu" nằm riêng một dòng, 4 nút chia đều bên dưới (không rơi nút vào cột nhãn). */
+@media(max-width:767px){
+ .meridian3d-model-controls>div,.meridian3d-model-controls>div:last-child{grid-template-columns:repeat(4,minmax(0,1fr))}
+ .meridian3d-model-controls>div>span{grid-column:1/-1}
+ .meridian3d-model-controls>div button:nth-of-type(n+3){margin-top:0}
+ .meridian3d-model-controls button{min-height:44px}
 }
