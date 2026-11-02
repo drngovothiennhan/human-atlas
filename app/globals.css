@@ -263,12 +263,12 @@ body:has(.registration-panel) .meridian3d-launch{left:376px}body:has(.registrati
 /* Functional controls kept inside the meridian panel so mobile users do not need hidden outer toolbars. */
 .meridian3d-model-controls{display:grid;gap:6px;margin-top:8px;padding:8px;border:1px solid #18253610;border-radius:10px;background:#f8faf9}
 .meridian3d-model-controls>div{display:grid;grid-template-columns:72px repeat(4,minmax(0,1fr));gap:5px;align-items:center}
-.meridian3d-model-controls>div:last-child{grid-template-columns:72px repeat(3,minmax(0,1fr))}
+.meridian3d-model-controls>div:last-child{grid-template-columns:72px repeat(4,minmax(0,1fr))}
 .meridian3d-model-controls span{font-size:8px;color:#72808a;font-weight:650}
 .meridian3d-model-controls button{min-height:31px;border:1px solid #18253616;border-radius:7px;background:#fff;color:#3f4e58;font-size:8.5px;cursor:pointer}
 .meridian3d-model-controls button:active{background:#e6f0ef;color:#145e58}
 .meridian3d-effect-controls button:disabled{opacity:.48;cursor:not-allowed;background:#f3f4f4!important;color:#78838b!important}
-@media(max-width:767px){.meridian3d-model-controls{padding:7px}.meridian3d-model-controls>div{grid-template-columns:62px repeat(4,minmax(0,1fr))}.meridian3d-model-controls>div:last-child{grid-template-columns:62px repeat(3,minmax(0,1fr))}.meridian3d-model-controls button{min-height:36px;padding-inline:3px}}
+@media(max-width:767px){.meridian3d-model-controls{padding:7px}.meridian3d-model-controls>div{grid-template-columns:62px repeat(4,minmax(0,1fr))}.meridian3d-model-controls>div:last-child{grid-template-columns:62px repeat(4,minmax(0,1fr))}.meridian3d-model-controls button{min-height:36px;padding-inline:3px}}
 
 
 /* 2026-09-23: compact meridian-first layer menu; prevent mobile overflow. */
@@ -348,9 +348,9 @@ body:has(.registration-panel) .meridian3d-launch{left:376px}body:has(.registrati
 .studio.layout-mobile .mobile-only{display:flex!important}.studio.layout-mobile .desktop-only{display:none!important}.studio.layout-mobile .layers-panel{display:none}.studio.layout-mobile .layers-panel.mobile-open{display:flex;z-index:30;top:auto;left:12px;right:12px;bottom:140px;width:auto;max-height:calc(100dvh - 270px)}.studio.layout-mobile .view-controls{right:12px;top:43%;padding:3px}.studio.layout-mobile .bottom-dock{bottom:30px;width:calc(100% - 24px);padding:13px;gap:15px}.studio.layout-mobile .studio-footer{justify-content:center}.studio.layout-mobile .studio-footer>span{display:none}
 .studio.layout-desktop .mobile-only{display:none!important}.studio.layout-desktop .desktop-only{display:flex!important}.studio.layout-desktop .layers-panel{display:flex;left:30px;right:auto;top:217px;bottom:175px;width:254px;max-height:654px}.studio.layout-desktop .layers-panel.mobile-open{left:30px;right:auto;top:217px;bottom:175px;width:254px;max-height:654px}
 @media(max-width:767px){.studio.layout-desktop .layers-panel{left:12px;top:105px;bottom:90px;width:min(254px,calc(100vw - 24px));max-height:none;padding:12px 12px 0;background:#fffffff5;z-index:30}.studio.layout-desktop .layers-panel .system-count{display:none}.studio.layout-desktop .layers-panel.mobile-open{left:12px;right:auto;top:105px;bottom:90px;width:min(254px,calc(100vw - 24px));max-height:none}.studio.layout-desktop .top-actions{right:8px;gap:0}.studio.layout-desktop .top-actions>button:not(.layout-toggle):not(.toggle-layers):not(.toggle-views){display:none}.studio.layout-desktop .view-controls{right:8px}.studio.layout-desktop .bottom-dock{width:390px;max-width:calc(100% - 24px);bottom:30px}}
-.meridian3d-launch{position:relative!important;padding-right:46px!important}.meridian-launch-grip{position:absolute;right:9px;top:9px}
+.meridian3d-launch{position:absolute!important;padding-right:46px!important}.meridian-launch-grip{position:absolute;right:9px;top:9px}
 .acupuncture-sim>button{min-height:40px;margin:5px 0;border:1px solid #18253618!important;border-radius:7px!important;background:#fff!important;padding:7px 10px!important;font-size:11px!important;text-align:left}
-.yhct-launch{position:relative!important;padding-right:42px!important}.yhct-launch-grip{position:absolute;right:8px;top:8px}
+.yhct-launch{position:absolute!important;padding-right:42px!important}.yhct-launch-grip{position:absolute;right:8px;top:8px}
 
 /* Resizable floating menus; dragging stays on the existing touch-safe drag grips. */
 [data-floating-menu]{resize:both;min-width:220px;min-height:120px;max-width:calc(100vw - 16px);max-height:calc(100dvh - 16px);overflow:auto;overscroll-behavior:contain}
@@ -542,3 +542,184 @@ body:has(.studio.layout-mobile :is(.meridian3d-panel,.yhct-panel,.layers-panel.m
 .bar-close{position:absolute;top:-10px;right:-6px;min-width:28px!important;width:28px;height:28px;padding:0!important;border-radius:50%;background:#fff;border:1px solid #25384a24!important;display:flex;align-items:center;justify-content:center;color:#5d6b78;z-index:2}
 .bar-restore{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:22px;font-size:13px;color:#3c4956;z-index:5}
 @media(max-width:767px){.bar-restore{bottom:calc(28px + env(safe-area-inset-bottom))}.bar-close{top:-12px;right:-2px}}
+
+/* Bố cục phím chức năng PC/tablet (2026-10-30): hai nút học nằm dưới tiêu đề, không đè chữ;
+   bảng kinh lạc mở ngay dưới nút. Tablet (768–1180px) dùng nút 44px và bảng hẹp để mô hình vẫn ở giữa. */
+.studio.layout-desktop .meridian3d-launch{top:126px;max-width:min(460px,calc(100vw - 60px))}
+.studio.layout-desktop .meridian3d-panel{top:182px}
+@media(max-width:1180px) and (min-width:768px){
+ .studio.layout-desktop .identity-meta{display:none}
+ .studio.layout-desktop .meridian3d-launch{left:16px;top:104px;max-width:calc(50vw - 24px)}
+ .studio.layout-desktop .meridian3d-launch>span:not(.drag-grip){display:none}
+ .studio.layout-desktop .yhct-launch{right:16px;top:104px;max-width:calc(50vw - 24px)}
+ .studio.layout-desktop .meridian3d-panel{top:158px;bottom:150px;width:min(320px,42vw)}
+ .studio.layout-desktop .yhct-panel{top:158px;bottom:150px;width:min(330px,42vw)}
+ .studio.layout-desktop .layers-panel,.studio.layout-desktop .layers-panel.mobile-open{top:158px;bottom:150px;width:min(240px,32vw)}
+ .studio.layout-desktop .view-controls button{min-height:44px}
+ .studio.layout-desktop .layer-presets button,.studio.layout-desktop .meridian3d-quick button,.studio.layout-desktop .meridian3d-model-controls button{min-height:44px}
+}
+/* Điện thoại: bảng đáy thấp hơn để mô hình (đầu–thân) vẫn nhìn thấy phía trên. */
+@media(max-width:767px){
+ .studio.layout-mobile{--m-sheet-max:min(46dvh,calc(100dvh - 250px - var(--m-top) - var(--m-bottom)))}
+}
+/* Liên hệ kinh – tạng phủ (thuộc/lạc) trong bảng kinh lạc. */
+.meridian3d-organ{display:grid;gap:5px;margin-top:4px;padding:7px 8px;border-radius:8px;background:#ffffffb8;border:1px solid #18314414;color:#3c4a54}
+.meridian3d-organ p{margin:0;font-size:11px;line-height:1.4}.meridian3d-organ b{display:inline-block;min-width:44px;font-weight:650;color:#1f3440}
+.meridian3d-organ small{display:block;color:#7b8790;font-size:10px;line-height:1.35}
+.meridian3d-organ button{justify-self:start;min-height:36px;padding:0 12px;border:1px solid #0f766e40;border-radius:8px;background:#e8f3f1;color:#0f665f;font-size:11px;font-weight:650;cursor:pointer}
+@media(max-width:767px){.meridian3d-organ button{min-height:44px}}
+/* Điện thoại: nhãn "Góc nhìn"/"Nền giải phẫu" nằm riêng một dòng, 4 nút chia đều bên dưới (không rơi nút vào cột nhãn). */
+@media(max-width:767px){
+ .meridian3d-model-controls>div,.meridian3d-model-controls>div:last-child{grid-template-columns:repeat(4,minmax(0,1fr))}
+ .meridian3d-model-controls>div>span{grid-column:1/-1}
+ .meridian3d-model-controls>div button:nth-of-type(n+3){margin-top:0}
+ .meridian3d-model-controls button{min-height:44px}
+}
+
+/* =====================================================================================
+   THEME 2026-11 · "Hiện đại × Y học cổ truyền Á Đông"
+   Nền ngà thư tịch · xanh thảo dược (#1B4332) · vàng đồng hoàng thổ (#C5A059) · kính mờ.
+   Chỉ đổi trình bày: mọi class, aria-label, data-* và handler giữ nguyên.
+   ===================================================================================== */
+:root{
+ --hiu-ivory:#f8f7f4;--hiu-ivory-2:#ece8df;--hiu-paper:#f9f9f8;
+ --hiu-herb:#1b4332;--hiu-herb-2:#0f3d3e;--hiu-herb-soft:#e3ece6;--hiu-gold:#c5a059;--hiu-gold-soft:#f3ead6;
+ --hiu-ink:#1f2a24;--hiu-ink-2:#55615a;--hiu-line:rgba(27,67,50,.12);
+ --hiu-glass:rgba(255,255,255,.82);--hiu-glass-border:rgba(255,255,255,.5);--hiu-shadow:0 8px 24px rgba(0,0,0,.06);
+ --hiu-radius:16px;--hiu-pill:999px;
+ --primary:#1b4332;--ring:#c5a059;
+ font-family:'Be Vietnam Pro',Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:var(--hiu-ink);
+}
+html,body,#root{background:linear-gradient(180deg,var(--hiu-paper) 0%,var(--hiu-ivory) 55%,var(--hiu-ivory-2) 100%)}
+.studio{color:var(--hiu-ink)}
+
+/* --- 1. Bề mặt kính mờ dùng chung --- */
+.glass,.studio .top-actions,.studio .control-dock,.layers-panel,.meridian3d-panel,.yhct-panel,.search-panel,.registration-panel{
+ background:var(--hiu-glass)!important;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+ border:1px solid var(--hiu-glass-border)!important;box-shadow:var(--hiu-shadow)!important}
+.studio .control-dock .glass{background:transparent!important;border:0!important;box-shadow:none!important;-webkit-backdrop-filter:none;backdrop-filter:none}
+
+/* --- 2. Tiêu đề --- */
+.identity h1{color:var(--hiu-herb);letter-spacing:-.02em;font-weight:700}
+.identity .eyebrow{color:#8a7a55}
+.identity .status-dot{background:var(--hiu-gold)!important;box-shadow:0 0 0 3px rgba(197,160,89,.18)}
+.identity .edition{color:var(--hiu-herb)!important;border-color:rgba(197,160,89,.55)!important;background:var(--hiu-gold-soft)}
+.identity-meta{color:var(--hiu-ink-2)}
+
+/* --- 3. Thanh công cụ nổi góc phải (Floating Toolbar) --- */
+.studio .top-actions{padding:4px!important;gap:4px!important;border-radius:var(--hiu-pill)}
+.studio .top-actions>button{border:0!important;background:transparent!important;border-radius:var(--hiu-pill)!important;color:var(--hiu-herb)!important;min-width:42px;min-height:42px;transition:background-color .18s,color .18s}
+.studio .top-actions>button:hover{background:var(--hiu-herb-soft)!important}
+.studio .top-actions>button.active,.studio .top-actions>button[aria-pressed=true]{background:var(--hiu-herb)!important;color:#fff!important}
+.studio .top-actions kbd{border-color:rgba(197,160,89,.5)!important;color:#8a7a55}
+.studio .top-actions .drag-grip{border-radius:var(--hiu-pill)!important}
+
+/* --- 4. Hai lối vào học tập: Segmented Control dạng viên thuốc --- */
+.studio .meridian3d-launch,.studio .yhct-launch{border-radius:var(--hiu-pill)!important;background:var(--hiu-glass)!important;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid var(--hiu-line)!important;box-shadow:var(--hiu-shadow)!important;color:var(--hiu-herb)!important;transition:background-color .2s,color .2s,box-shadow .2s}
+.studio .meridian3d-launch strong,.studio .yhct-launch strong{color:inherit!important}
+.studio .meridian3d-launch>span:not(.drag-grip),.studio .yhct-launch>span:not(.drag-grip){color:var(--hiu-ink-2)!important;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.studio .meridian3d-launch.active,.studio .meridian3d-launch[aria-expanded=true],.studio .yhct-launch[aria-expanded=true]{background:var(--hiu-herb)!important;color:#fff!important;border-color:var(--hiu-herb)!important;box-shadow:0 0 0 2px var(--hiu-gold),var(--hiu-shadow)!important;outline:0!important}
+.studio .meridian3d-launch.active>span:not(.drag-grip),.studio .meridian3d-launch[aria-expanded=true]>span:not(.drag-grip),.studio .yhct-launch[aria-expanded=true]>span:not(.drag-grip){color:#e8dcc0!important}
+.studio .meridian-launch-grip,.studio .yhct-launch-grip{border-radius:var(--hiu-pill)!important}
+/* PC/tablet: hai viên thuốc đứng cạnh nhau dưới tiêu đề. */
+@media(min-width:768px){
+ .studio.layout-desktop .meridian3d-launch,.studio.layout-desktop .yhct-launch{top:126px!important;width:236px;max-width:236px!important;justify-content:flex-start;gap:8px;overflow:hidden}
+ .studio.layout-desktop .meridian3d-launch{left:30px!important}
+ .studio.layout-desktop .yhct-launch{left:272px!important;right:auto!important}
+}
+@media(min-width:768px) and (max-width:1180px){
+ .studio.layout-desktop .meridian3d-launch,.studio.layout-desktop .yhct-launch{top:104px!important;width:min(236px,calc(50vw - 26px));max-width:min(236px,calc(50vw - 26px))!important}
+ .studio.layout-desktop .meridian3d-launch{left:16px!important}
+ .studio.layout-desktop .yhct-launch{left:calc(16px + min(236px,calc(50vw - 26px)) + 8px)!important}
+}
+
+/* --- 5. Dock điều khiển hợp nhất ở đáy (sửa chồng lấn) ---
+   Một khung duy nhất chứa: [↺ Đặt lại] [¾ Trước Bên Sau] [⟳ Xoay] · [thanh Tách lớp]. .bottom-dock dùng display:contents
+   nên các phần tử con của nó xếp chung hàng/lưới với .view-controls; không còn hai khối absolute đè lên nhau. */
+.studio .control-dock{position:absolute;z-index:22;left:50%;transform:translateX(-50%);bottom:max(16px,env(safe-area-inset-bottom));
+ width:max-content;max-width:calc(100vw - 24px);display:flex;align-items:center;gap:10px;padding:6px 10px 6px 6px;border-radius:22px}
+.studio .control-dock:empty{display:none}
+.studio .control-dock .drag-grip{display:none!important}
+.studio .control-dock>.bottom-dock{display:contents!important}
+.studio .control-dock :is(.view-controls,.bottom-dock){position:static!important;inset:auto!important;transform:none!important;translate:none!important;width:auto!important;max-width:none!important;margin:0!important}
+.studio .control-dock .view-controls{display:flex!important;flex-direction:row!important;align-items:center;gap:4px!important;padding:0!important;border-radius:0}
+.studio .control-dock .view-controls>i{display:block!important;width:1px!important;height:24px!important;margin:0 4px!important;background:var(--hiu-line)!important}
+/* Thứ tự: Đặt lại (trái) · 4 góc nhìn (giữa) · Xoay (phải). */
+.studio .control-dock .view-controls>[data-reset-view]{order:-1;margin-right:4px!important}
+.studio .control-dock .view-controls>[data-auto-rotate-toggle]{order:9}
+.studio .control-dock .view-controls>i{order:8}
+.studio .control-dock .view-controls>button{width:auto!important;min-width:44px!important;height:44px!important;min-height:44px!important;padding:0 12px!important;border-radius:var(--hiu-pill)!important;border:0!important;background:transparent!important;color:var(--hiu-herb)!important;font-weight:600;box-shadow:none!important;transition:background-color .18s,color .18s}
+.studio .control-dock .view-controls>button:hover{background:var(--hiu-herb-soft)!important}
+.studio .control-dock .view-controls>button.active,.studio .control-dock .view-controls>button[aria-pressed=true]{background:var(--hiu-herb)!important;color:#fff!important;box-shadow:inset 0 -2px 0 var(--hiu-gold)!important}
+.studio .control-dock .view-controls>[data-reset-view]{background:var(--hiu-gold-soft)!important;color:#7a5d1f!important;border:1px solid rgba(197,160,89,.45)!important}
+.studio .control-dock .dock-reset{display:none!important}
+.studio .control-dock .explode-control{flex:0 0 220px;min-width:0;padding-left:12px;border-left:1px solid var(--hiu-line)}
+.studio .control-dock .explode-label{color:var(--hiu-ink)}
+.studio .control-dock .explode-label output{background:var(--hiu-gold-soft)!important;color:#7a5d1f!important}
+.studio .control-dock .bar-close{position:absolute!important;top:-12px!important;right:-8px!important}
+.studio .control-dock .bar-restore{position:static!important;transform:none!important;border-radius:var(--hiu-pill);color:var(--hiu-herb)!important}
+/* Thanh trượt: rãnh ngà, phần đã chọn xanh thảo dược, núm có viền vàng đồng. */
+[data-slot=slider-track]{background:var(--hiu-ivory-2)!important}
+[data-slot=slider-range]{background:var(--hiu-herb)!important}
+[data-slot=slider-thumb]{background:var(--hiu-herb)!important;border-color:#fff!important;box-shadow:0 0 0 2px var(--hiu-gold),0 2px 6px rgba(0,0,0,.12)!important}
+
+/* Điện thoại (cả khi chọn giao diện PC trên máy hẹp): dock 2 hàng, bám đáy, tránh thanh Home. */
+@media(max-width:767px){
+ .studio,.studio.layout-mobile{--m-dock:136px}
+ .studio .control-dock{left:12px!important;right:12px!important;transform:none!important;width:auto!important;max-width:none!important;bottom:max(12px,env(safe-area-inset-bottom))!important;
+  display:grid!important;grid-template-columns:auto minmax(0,1fr);grid-template-areas:"layers explode" "views views";gap:6px 10px;padding:8px!important;border-radius:20px}
+ .studio .control-dock .dock-layers{grid-area:layers;min-height:48px!important;padding:4px 10px 4px 4px!important}
+ .studio .control-dock .explode-control{grid-area:explode;flex:none;padding-left:0;border-left:0;align-self:center}
+ .studio .control-dock .view-controls{grid-area:views;justify-content:space-between;visibility:visible}
+ .studio .control-dock .view-controls>button{min-width:42px!important;padding:0 8px!important;font-size:13px}
+ .studio .control-dock .view-controls>i{display:none!important}
+ .studio .control-dock .bar-restore{grid-column:1/-1;justify-self:center}
+ .studio .control-dock:not(:has(.dock-layers)) {grid-template-areas:"views views"}
+ body:has(.detail-sheet) .studio .control-dock .view-controls{visibility:hidden}
+ /* Bảng đáy, thẻ chi tiết luôn nằm trên dock. */
+ .studio.layout-mobile{--m-sheet-bottom:calc(var(--m-dock) + 20px + var(--m-bottom))}
+ .studio .detail-sheet{bottom:calc(var(--m-dock) + 20px + env(safe-area-inset-bottom))!important}
+}
+@media(max-height:600px) and (orientation:landscape){
+ .studio .control-dock{bottom:max(10px,env(safe-area-inset-bottom))!important}
+ .studio .control-dock .view-controls>button{height:40px!important;min-height:40px!important}
+}
+
+/* --- 6. Nút, preset, bảng --- */
+.layer-presets button[aria-pressed=true],.meridian3d-quick button.active,.yhct-tabs button[aria-selected=true],.yhct-modes button.active{background:var(--hiu-herb)!important;color:#fff!important;border-color:var(--hiu-herb)!important;box-shadow:inset 0 -2px 0 var(--hiu-gold)!important}
+.meridian3d-quick button.active b,.meridian3d-quick button.active span{color:#fff!important}
+.layer-presets{background:var(--hiu-ivory)!important;border-radius:14px}
+.meridian3d-summary,.meridian3d-quick{background:rgba(248,247,244,.8)!important;border-color:var(--hiu-line)!important}
+.meridian3d-organ{background:#fff!important;border-color:rgba(197,160,89,.35)!important}
+.meridian3d-organ b{color:var(--hiu-herb)}
+.meridian3d-organ button,.meridian3d-exit-row button{background:var(--hiu-herb-soft)!important;border-color:rgba(27,67,50,.25)!important;color:var(--hiu-herb)!important}
+.studio [data-slot=switch][data-checked],.studio [data-slot=switch][aria-checked=true]{background:var(--hiu-herb)!important}
+.studio .layer-opacity input{accent-color:var(--hiu-herb)}
+.studio button:focus-visible{outline:2px solid var(--hiu-gold)!important;outline-offset:2px}
+.scene-caption{color:#8a7a55}
+.studio-footer,.studio-footer button{color:var(--hiu-ink-2)}
+@media(prefers-reduced-motion:reduce){.studio .control-dock *,.studio .top-actions>button{transition:none!important}}
+/* PC/tablet: dock nằm trên dòng chân trang (footer ~38px). */
+@media(min-width:768px){.studio .control-dock{bottom:max(48px,calc(env(safe-area-inset-bottom) + 36px))}}
+/* Điện thoại: thanh công cụ viên thuốc gọn để không chạm hàng nút học (hàng này bắt đầu ở +54px). */
+@media(max-width:767px){
+ .studio .top-actions{padding:2px!important;gap:2px!important}
+ .studio .top-actions>button{min-width:42px!important;min-height:42px!important;height:42px!important}
+}
+/* Điện thoại nhưng người dùng chọn "giao diện PC": dùng cùng khung bố trí gọn như mobile để không có gì chồng lên nhau. */
+@media(max-width:767px){
+ .studio.layout-desktop .identity{top:calc(env(safe-area-inset-top) + 14px)!important;left:14px!important}
+ .studio.layout-desktop .identity .eyebrow,.studio.layout-desktop .identity-meta,.studio.layout-desktop .scene-caption,.studio.layout-desktop .studio-footer{display:none!important}
+ .studio.layout-desktop .identity h1{font-size:18px!important;margin:0;line-height:1.2}
+ .studio.layout-desktop .top-actions{top:calc(env(safe-area-inset-top) + 6px)!important;right:6px!important;translate:none!important}
+ .studio.layout-desktop .top-actions .drag-grip{display:none!important}
+ .studio.layout-desktop :is(.meridian3d-launch,.yhct-launch){position:absolute!important;top:calc(env(safe-area-inset-top) + 56px)!important;width:calc(50% - 18px)!important;max-width:none!important;min-height:42px!important;height:42px;padding:0 12px!important;translate:none!important;justify-content:center}
+ .studio.layout-desktop .meridian3d-launch{left:12px!important;right:auto!important}
+ .studio.layout-desktop .yhct-launch{right:12px!important;left:auto!important}
+ .studio.layout-desktop :is(.meridian3d-launch,.yhct-launch)>span:not(.drag-grip){display:none!important}
+ .studio.layout-desktop :is(.meridian3d-launch,.yhct-launch) .drag-grip{display:none!important}
+ .studio.layout-desktop .layers-panel,.studio.layout-desktop .layers-panel.mobile-open{top:calc(env(safe-area-inset-top) + 108px)!important;bottom:calc(var(--m-dock) + 24px + env(safe-area-inset-bottom))!important;translate:none!important}
+ .studio.layout-desktop :is(.meridian3d-panel,.yhct-panel){top:calc(env(safe-area-inset-top) + 108px)!important;bottom:calc(var(--m-dock) + 24px + env(safe-area-inset-bottom))!important;left:8px!important;right:8px!important;width:auto!important;translate:none!important}
+}
+@media(max-width:767px){.studio .control-dock .slider-endpoints{display:none!important}}
+@media(max-width:767px){.studio.layout-desktop .layers-panel,.studio.layout-desktop .layers-panel.mobile-open{left:12px!important;right:auto!important;width:min(264px,calc(100vw - 24px))!important}}

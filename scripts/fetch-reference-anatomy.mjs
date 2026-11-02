@@ -10,6 +10,7 @@ const RAW='https://raw.githubusercontent.com/'+SOURCE_REPO+'/'+SOURCE_COMMIT+'/'
 const files=[
   ['public/anatomy/articular_male.glb','public/models/z-articular-male.glb'],
   ['public/anatomy/skeletal_male.glb','public/models/z-skeletal-male.glb'],
+  ['public/anatomy/visceral_male.glb','public/models/z-visceral-male.glb'],
   ['public/draco/draco_decoder.js','public/draco/draco_decoder.js'],
   ['public/draco/draco_wasm_wrapper.js','public/draco/draco_wasm_wrapper.js'],
   ['public/draco/draco_decoder.wasm','public/draco/draco_decoder.wasm']
@@ -40,16 +41,26 @@ async function fetchJsonPinned(source){
 const fetched=[];
 for(const pair of files)fetched.push(await fetchPinned(...pair));
 
-const [articularReport,skeletalReport]=await Promise.all([
+const [articularReport,skeletalReport,visceralReport]=await Promise.all([
   fetchJsonPinned('tools/asset-pipeline/vendor/reports/articular.json'),
-  fetchJsonPinned('tools/asset-pipeline/vendor/reports/skeletal.json')
+  fetchJsonPinned('tools/asset-pipeline/vendor/reports/skeletal.json'),
+  fetchJsonPinned('tools/asset-pipeline/vendor/reports/visceral.json')
 ]);
 if(articularReport.object_count!==413||articularReport.objects.length!==413)throw new Error('Articular source object count drift');
 if(skeletalReport.object_count!==335||skeletalReport.objects.length!==335)throw new Error('Skeletal source object count drift');
+if(visceralReport.object_count!==120||visceralReport.objects.length!==120)throw new Error('Visceral source object count drift');
+// Only organs missing from BodyParts3D are rendered; kidneys are kept for the runtime alignment check.
+const VISCERAL_NODES=['Superior lobe of right lung','Middle lobe of right lung','Inferior lobe of right lung','Superior lobe of left lung','Inferior lobe of left lung','Liver'];
+const VISCERAL_ALIGNMENT_NODES=['Kidney.l','Kidney.r'];
+const visceralNames=new Set(visceralReport.objects.map(object=>object.name));
+for(const name of [...VISCERAL_NODES,...VISCERAL_ALIGNMENT_NODES])if(!visceralNames.has(name))throw new Error('Visceral source is missing '+name);
 
 const writeManifest=async(name,payload)=>writeFile(join(ROOT,'public/models',name),JSON.stringify(payload,null,2)+'\n');
 await writeManifest('z-skeletal-manifest.json',{
   schemaVersion:'1.0.0',sourceRepository:SOURCE_REPO,sourceCommit:SOURCE_COMMIT,sourceReport:'tools/asset-pipeline/vendor/reports/skeletal.json',meshCount:skeletalReport.object_count,nodes:skeletalReport.objects.map(object=>object.name)
+});
+await writeManifest('z-visceral-manifest.json',{
+  schemaVersion:'1.0.0',sourceRepository:SOURCE_REPO,sourceCommit:SOURCE_COMMIT,sourceReport:'tools/asset-pipeline/vendor/reports/visceral.json',meshCount:VISCERAL_NODES.length,nodes:VISCERAL_NODES,alignmentNodes:VISCERAL_ALIGNMENT_NODES
 });
 await writeManifest('z-articular-manifest.json',{
   schemaVersion:'1.0.0',
@@ -64,5 +75,6 @@ console.log('REFERENCE_ANATOMY_SOURCE_READY '+JSON.stringify({
   sourceCommit:SOURCE_COMMIT,
   files:fetched.map(({dest,bytes,cached})=>({dest,bytes,cached})),
   articularMeshes:articularReport.object_count,
-  skeletalMeshes:skeletalReport.object_count
+  skeletalMeshes:skeletalReport.object_count,
+  visceralMeshes:VISCERAL_NODES.length
 }));

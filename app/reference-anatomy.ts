@@ -17,3 +17,13 @@ export const ARTICULAR_SOURCE = {
   expectedMeshCount:413,
   scope:'Pinned articular-system meshes including joint capsules, discs, menisci and ligaments where present in the source hierarchy.'
 } as const;
+
+export const VISCERAL_SOURCE = {
+  repository:'Nurkan1/Anatria-3D',
+  commit:'949ac80cc9763539afc48e60b5246132f00468db',
+  runtimeAsset:'/models/z-visceral-male.glb',
+  runtimeManifest:'/models/z-visceral-manifest.json',
+  license:'CC BY-SA 4.0',
+  expectedMeshCount:6,
+  scope:'Pinned visceral meshes for organs BodyParts3D lacks here (five lung lobes, liver); same source world transform as the skeletal layer. The two kidneys are read only to check alignment against the BodyParts3D kidneys.'
+} as const;

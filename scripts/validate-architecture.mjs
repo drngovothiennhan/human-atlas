@@ -66,6 +66,6 @@ if(pkg.scripts?.['source:anatomy:fetch']!=='node scripts/fetch-reference-anatomy
 console.log('ARCHITECTURE_GUARD_PASS '+JSON.stringify({
   profile:'meridian-first',
   muscles:'BodyParts3D-landmarks-only',
-  referenceLayers:['skeletal','articular'],
+  referenceLayers:['skeletal','articular','visceral'],
   retiredDetailedMuscleRuntime:false
 }));

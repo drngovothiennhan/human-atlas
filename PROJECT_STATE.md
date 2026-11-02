@@ -16,13 +16,14 @@ The application is **meridian-first** for Traditional Medicine study.
 - Default anatomy: body surface.
 - Muscle layer: compact BodyParts3D landmark subset only.
 - Skeletal and articular layers: optional reference layers loaded on demand.
+- Visceral reference layer (Anatria-3D, same pinned commit): only the five lung lobes and the liver, which BodyParts3D lacks here; shown with the respiratory/digestive layers and used to highlight the tạng phủ a meridian thuộc/lạc (`app/meridian-organs.ts`).
 - The retired 484-mesh detailed Z-Anatomy muscle runtime must not return.
 - Do not reintroduce `app/head-muscles.ts`, `z-muscular-male.glb`, `z-muscles-manifest.json`, `fetch-zanatomy-muscles.mjs`, or detailed-muscle runtime state.
 
 ## Source of truth
 
 - `app/scene.tsx`: active WebGL scene and meridian-first rendering.
-- `app/reference-anatomy.ts`: active skeletal/articular reference sources only.
+- `app/reference-anatomy.ts`: active skeletal/articular/visceral reference sources only.
 - `app/anatomy.ts`: BodyParts3D systems and landmark muscle policy.
 - `content/acupoints/acupoints.json`: acupoint content source.
 - `content/meridians/meridians.json`: meridian content source.

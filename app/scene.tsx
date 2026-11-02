@@ -12,7 +12,8 @@ import {PROBE_DIRECTIONS,fallbackInward,needleBasis,pickSkinNormal,type SkinHit}
 import {SYSTEMS,effectiveLayerOpacity,isMeridianLandmarkMuscle,isPrimarySurfacePart,PRIMARY_SURFACE_CONCEPT_ID,type Atlas,type SceneState} from './anatomy';
 import {BODY_CANONICAL_COORDINATE_SYSTEM,type SurfaceCapture} from '../src/acupoints/registration/coordinate-system';
 import type {MeridianFocusTarget,MeridianOverlayState} from './meridian-overlay';
-import {ARTICULAR_SOURCE,SKELETAL_SOURCE} from './reference-anatomy';
+import {ARTICULAR_SOURCE,SKELETAL_SOURCE,VISCERAL_SOURCE} from './reference-anatomy';
+import {meridianOrganLink} from './meridian-organs';
 import {detectRenderCapabilities,QUALITY_CONFIG,selectInitialProfile,stepAdaptiveProfile,type RenderQualityMode,type RenderQualityProfile} from './render-quality';
 interface Props {atlas:Atlas;state:SceneState;renderQuality:RenderQualityMode;onSelect:(id:string)=>void;onProgress:(n:number)=>void;onError:(s:string)=>void;registrationMode?:boolean;onRegisterSurface?:(capture:SurfaceCapture)=>void;meridianOverlay?:MeridianOverlayState;focusAcupoint?:MeridianFocusTarget|null;onSelectAcupoint?:(pointCode:string)=>void}
 const assetUrl=(url:string)=>url.startsWith('/')?import.meta.env.BASE_URL+url.slice(1):url;
@@ -26,7 +27,7 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
   let qualityProfile:RenderQualityProfile=selectInitialProfile(renderQuality,capabilities),lastQualityMode:RenderQualityMode=renderQuality,qualityConfig=QUALITY_CONFIG[qualityProfile];
   let renderer:T.WebGLRenderer;
   try{renderer=new T.WebGLRenderer({antialias:qualityConfig.antialias,alpha:false,powerPreference:'high-performance'});}catch{onError('Không khởi động được mô hình 3D. Vui lòng dùng trình duyệt có hỗ trợ WebGL.');return;}
-  renderer.setPixelRatio(Math.min(devicePixelRatio,qualityConfig.pixelRatioCap));renderer.setClearColor('#f2f3f3');renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1.12;renderer.shadowMap.enabled=qualityConfig.shadows;renderer.shadowMap.type=T.PCFSoftShadowMap;renderer.domElement.style.touchAction='none';renderer.domElement.style.userSelect='none';el.appendChild(renderer.domElement);
+  renderer.setPixelRatio(Math.min(devicePixelRatio,qualityConfig.pixelRatioCap));renderer.setClearColor('#f3f0ea');renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1.12;renderer.shadowMap.enabled=qualityConfig.shadows;renderer.shadowMap.type=T.PCFSoftShadowMap;renderer.domElement.style.touchAction='none';renderer.domElement.style.userSelect='none';el.appendChild(renderer.domElement);
   renderer.domElement.dataset.renderQualityMode=renderQuality;renderer.domElement.dataset.renderQualityProfile=qualityProfile;renderer.domElement.dataset.renderPixelRatio=renderer.getPixelRatio().toFixed(2);renderer.domElement.dataset.renderAntialias=String(renderer.getContext().getContextAttributes()?.antialias??false);renderer.domElement.dataset.renderShadows=String(qualityConfig.shadows);renderer.domElement.dataset.renderTubeSegments=String(qualityConfig.tubeRadialSegments);renderer.domElement.dataset.renderFlowParticlesPerPath=String(qualityConfig.flowParticlesPerPath);renderer.domElement.dataset.renderSuspended='false';renderer.domElement.dataset.renderCount='0';renderer.domElement.dataset.renderAdaptations='0';renderer.domElement.dataset.renderCapabilities=JSON.stringify({webgl:capabilities.webgl,webgl2:capabilities.webgl2,maxTextureSize:capabilities.maxTextureSize,hardwareConcurrency:capabilities.hardwareConcurrency,deviceMemoryGb:capabilities.deviceMemoryGb,devicePixelRatio:capabilities.devicePixelRatio,viewportPixels:capabilities.viewportPixels});
   renderer.domElement.setAttribute('aria-label','Giải phẫu tương tác: kéo để xoay, chụm hoặc cuộn để thu phóng, chạm để xem cấu trúc.');
   const scene=new T.Scene(),camera=new T.PerspectiveCamera(34,1,.005,100),controls=new OrbitControls(camera,renderer.domElement);
@@ -44,10 +45,10 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
   scene.add(new T.HemisphereLight(0xffffff,0xa7acb2,1.05));
   const key=new T.DirectionalLight(0xfffaf4,2.3);key.position.set(-2,4,3);key.castShadow=qualityConfig.shadows;key.shadow.mapSize.set(1024,1024);scene.add(key);
   const rim=new T.DirectionalLight(0xe9f0ff,1.8);rim.position.set(2,2,-3);scene.add(rim);
-  const ground=new T.Mesh(new T.CircleGeometry(30,96),new T.MeshStandardMaterial({color:0xd5d9dc,roughness:1}));ground.rotation.x=-Math.PI/2;ground.position.y=-.019;ground.receiveShadow=qualityConfig.shadows;scene.add(ground);
+  const ground=new T.Mesh(new T.CircleGeometry(30,96),new T.MeshStandardMaterial({color:0xdcd5c7,roughness:1}));ground.rotation.x=-Math.PI/2;ground.position.y=-.019;ground.receiveShadow=qualityConfig.shadows;scene.add(ground);
   const backdropCanvas=document.createElement('canvas');backdropCanvas.width=2;backdropCanvas.height=256;
   const backdropCtx=backdropCanvas.getContext('2d');
-  if(backdropCtx){const sky=backdropCtx.createLinearGradient(0,0,0,256);sky.addColorStop(0,'#fbfcfc');sky.addColorStop(.6,'#f2f3f3');sky.addColorStop(1,'#dfe5ea');backdropCtx.fillStyle=sky;backdropCtx.fillRect(0,0,2,256);}
+  if(backdropCtx){const sky=backdropCtx.createLinearGradient(0,0,0,256);sky.addColorStop(0,'#f9f9f8');sky.addColorStop(.6,'#f3f0ea');sky.addColorStop(1,'#ece8df');backdropCtx.fillStyle=sky;backdropCtx.fillRect(0,0,2,256);}
   const backdropTexture=new T.CanvasTexture(backdropCanvas);backdropTexture.colorSpace=T.SRGBColorSpace;scene.background=backdropTexture;
   const contactCanvas=document.createElement('canvas');contactCanvas.width=128;contactCanvas.height=128;
   const contactCtx=contactCanvas.getContext('2d');
@@ -73,7 +74,12 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
   const skeletalReferenceGroup=new T.Group();skeletalReferenceGroup.name='hiu-skeletal-reference';skeletalReferenceGroup.visible=false;scene.add(skeletalReferenceGroup);
   const jointMaterial=new T.MeshStandardMaterial({color:0xc6b98f,metalness:.02,roughness:.68,transparent:false,opacity:1,depthWrite:true,side:T.DoubleSide});
   const skeletalReferenceMaterial=new T.MeshStandardMaterial({color:0xe2d9ba,metalness:.02,roughness:.7,transparent:false,opacity:1,depthWrite:true,side:T.DoubleSide,polygonOffset:true,polygonOffsetFactor:-.2,polygonOffsetUnits:-.2});
-  type RuntimeNodeManifest={meshCount:number;nodes:string[]};
+  // Lungs and liver are missing from the BodyParts3D atlas; they come from the pinned Anatria visceral layer (same world
+  // transform as the skeletal layer). Each organ stays a separate mesh so the meridian's tạng phủ can be highlighted.
+  const visceralGroup=new T.Group();visceralGroup.name='hiu-visceral-reference';visceralGroup.visible=false;scene.add(visceralGroup);
+  const visceralMeshes=new Map<string,T.Mesh<T.BufferGeometry,T.MeshStandardMaterial>>();let visceralStatus:'idle'|'loading'|'ready'|'error'='idle';
+  const isLungNode=(name:string)=>name.includes('lung');
+  type RuntimeNodeManifest={meshCount:number;nodes:string[];alignmentNodes?:string[]};
   let jointStatus:'idle'|'loading'|'ready'|'error'='idle',skeletalStatus:'idle'|'loading'|'ready'|'error'='idle';
   renderer.domElement.dataset.articularStatus='idle';
   renderer.domElement.dataset.articularExpected=String(ARTICULAR_SOURCE.expectedMeshCount);
@@ -131,6 +137,43 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
     skeletalStatus='ready';lastState=null;renderer.domElement.dataset.skeletalReferenceStatus='ready';renderer.domElement.dataset.skeletalReferenceCount=String(count);renderer.domElement.dataset.skeletalReferenceBounds=[box.min.x,box.min.y,box.min.z,box.max.x,box.max.y,box.max.z].map(v=>v.toFixed(4)).join(',');
     const s=latest.current;skeletalReferenceGroup.visible=s.visible.includes('skeletal')&&!s.isolate&&s.explode<.01;dirty=true;
    }).catch(error=>{if(disposed)return;skeletalStatus='error';clearGroup(skeletalReferenceGroup);renderer.domElement.dataset.skeletalReferenceStatus='error';renderer.domElement.dataset.skeletalReferenceError=error instanceof Error?error.message:'load failed';console.error('[skeletal-reference]',error);dirty=true;}).finally(()=>draco.dispose());
+  };
+  const ensureVisceralReference=()=>{
+   if(visceralStatus==='loading'||visceralStatus==='ready')return;
+   visceralStatus='loading';renderer.domElement.dataset.visceralReferenceStatus='loading';dirty=true;
+   const draco=new DRACOLoader();draco.setDecoderPath(assetUrl('/draco/'));const loader=new GLTFLoader();loader.setDRACOLoader(draco);
+   Promise.all([loadManifest(VISCERAL_SOURCE.runtimeManifest,VISCERAL_SOURCE.expectedMeshCount),loader.loadAsync(assetUrl(VISCERAL_SOURCE.runtimeAsset))]).then(([manifest,gltf])=>{
+    if(disposed)return;gltf.scene.updateMatrixWorld(true);clearGroup(visceralGroup);visceralMeshes.clear();
+    const wanted=new Map(manifest.nodes.map(name=>[T.PropertyBinding.sanitizeNodeName(name),name])),alignment=new Map((manifest.alignmentNodes??[]).map(name=>[T.PropertyBinding.sanitizeNodeName(name),name])),alignmentBounds:Record<string,number[]>={};
+    gltf.scene.traverse(object=>{
+     if(!(object instanceof T.Mesh))return;const clean=T.PropertyBinding.sanitizeNodeName(object.name);
+     const check=alignment.get(clean);if(check){const box=new T.Box3().setFromObject(object);alignmentBounds[check]=[box.min.x,box.min.y,box.min.z,box.max.x,box.max.y,box.max.z].map(v=>Number(v.toFixed(4)));return;}
+     const name=wanted.get(clean);if(!name)return;
+     const geometry=bakeStaticGeometry(object);geometry.computeBoundingBox();geometry.computeBoundingSphere();geometries.push(geometry);
+     const lung=isLungNode(name),material=new T.MeshStandardMaterial({color:lung?0xd9a7a0:0x9a4b3c,metalness:0,roughness:lung?.62:.42,side:T.DoubleSide,transparent:lung,opacity:lung?.55:1,depthWrite:!lung});materials.push(material);
+     const mesh=new T.Mesh(geometry,material);mesh.name='hiu-visceral-'+name;mesh.userData.baseOpacity=material.opacity;mesh.frustumCulled=false;mesh.castShadow=qualityConfig.shadows;mesh.renderOrder=lung?12:10;visceralGroup.add(mesh);visceralMeshes.set(name,mesh);
+    });
+    if(visceralMeshes.size!==VISCERAL_SOURCE.expectedMeshCount)throw new Error('Visceral source mismatch: '+visceralMeshes.size+'/'+VISCERAL_SOURCE.expectedMeshCount);
+    visceralStatus='ready';organKey=null;lastState=null;renderer.domElement.dataset.visceralReferenceStatus='ready';renderer.domElement.dataset.visceralReferenceCount=String(visceralMeshes.size);renderer.domElement.dataset.visceralAlignmentBounds=JSON.stringify(alignmentBounds);dirty=true;
+   }).catch(error=>{if(disposed)return;visceralStatus='error';clearGroup(visceralGroup);visceralMeshes.clear();renderer.domElement.dataset.visceralReferenceStatus='error';renderer.domElement.dataset.visceralReferenceError=error instanceof Error?error.message:'load failed';console.error('[visceral-reference]',error);dirty=true;}).finally(()=>draco.dispose());
+  };
+  // Lungs follow the respiratory layer, the liver the digestive layer; both hide while isolating or exploding.
+  const applyVisceralState=(s:SceneState)=>{
+   const lungs=s.visible.includes('respiratory')&&!s.isolate&&s.explode<.01,liver=s.visible.includes('digestive')&&!s.isolate&&s.explode<.01;
+   visceralGroup.visible=lungs||liver;renderer.domElement.dataset.visceralReferenceActive=String(lungs||liver);if(lungs||liver)ensureVisceralReference();
+   visceralMeshes.forEach((mesh,name)=>{const lung=isLungNode(name);mesh.visible=lung?lungs:liver;const opacity=Math.min(mesh.userData.baseOpacity as number,effectiveLayerOpacity(s,lung?'respiratory':'digestive')/100),transparent=opacity<1;if(mesh.material.opacity!==opacity)mesh.material.opacity=opacity;if(mesh.material.transparent!==transparent){mesh.material.transparent=transparent;mesh.material.depthWrite=!transparent;mesh.material.needsUpdate=true;}});
+  };
+  // Tạng phủ of the selected meridian: "thuộc" organ strongly tinted in the meridian colour, "lạc" organ lightly.
+  // BodyParts3D parts use the G/B channels of the selection texture; visceral meshes use their emissive colour.
+  const organTint={value:new T.Color(0x2563eb)};let organKey:string|null=null;
+  const applyMeridianOrgans=()=>{
+   const value=overlay.current,link=value?.enabled?meridianOrganLink(value.meridianId):null,key=link?link.meridianId:'';
+   if(key===organKey)return;organKey=key;
+   const thuoc=new Set(link?.thuoc.parts??[]),lac=new Set(link?.lac.parts??[]);let tinted=0;
+   atlas.parts.forEach((p,i)=>{const a=thuoc.has(p.name),b=lac.has(p.name);selectedData[i*4+1]=a?255:0;selectedData[i*4+2]=b?255:0;if(a||b)tinted++;});selectionTexture.needsUpdate=true;
+   if(link)organTint.value.setHex(meridianColors[link.meridianId]??0x2563eb);
+   visceralMeshes.forEach((mesh,name)=>{const strength=link?.thuoc.visceral.includes(name)?.4:link?.lac.visceral.includes(name)?.2:0;mesh.material.emissive.copy(organTint.value).multiplyScalar(strength);if(strength)tinted++;});
+   renderer.domElement.dataset.meridianOrganThuoc=link?.thuoc.label??'';renderer.domElement.dataset.meridianOrganLac=link?.lac.label??'';renderer.domElement.dataset.meridianOrganTinted=String(tinted);dirty=true;
   };
   // Phones show panels as a bottom sheet: centre focused acupoints in the free band above the sheet, and drop the offset once the sheet closes.
   let mobileSheetOffset=false;
@@ -285,15 +328,21 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
   };
   const materialFor=(system:string)=>{
    const surface=system==='integumentary';
-   const m=new T.MeshStandardMaterial({color:SYSTEMS.find(s=>s.id===system)?.color??'#aebbb8',metalness:.08,roughness:.53,side:surface?T.FrontSide:T.DoubleSide,transparent:surface,opacity:surface?.12:1,depthWrite:!surface});
+   const base={color:SYSTEMS.find(s=>s.id===system)?.color??'#aebbb8',metalness:0,side:surface?T.FrontSide:T.DoubleSide,transparent:surface,opacity:surface?.12:1,depthWrite:!surface};
+   // Organic tissue is dielectric (metalness 0). Skin adds a soft warm sheen and a faint warm emissive that stands in for
+   // subsurface scattering, so the body reads as living skin instead of grey plastic; organs stay slightly glossy/moist.
+   const m=surface
+    ?new T.MeshPhysicalMaterial({...base,roughness:.6,sheen:.45,sheenRoughness:.65,sheenColor:new T.Color('#ffd2bd'),emissive:new T.Color('#5a2414'),emissiveIntensity:.1})
+    :new T.MeshStandardMaterial({...base,roughness:.46});
    m.onBeforeCompile=shader=>{
     shader.uniforms.partState={value:partTexture};shader.uniforms.selectionState={value:selectionTexture};shader.uniforms.stateWidth={value:width};
-    shader.vertexShader='attribute float partIndex; uniform sampler2D partState; uniform sampler2D selectionState; uniform float stateWidth; varying float partVisible; varying float partSelected;\n'+shader.vertexShader;
-    shader.vertexShader=shader.vertexShader.replace('#include <begin_vertex>','#include <begin_vertex>\nvec2 stateUv = vec2((partIndex + 0.5) / stateWidth, 0.5); vec4 state = texture2D(partState, stateUv); transformed += state.xyz; partVisible = state.w; partSelected = texture2D(selectionState, stateUv).r;');
-    shader.fragmentShader='varying float partVisible; varying float partSelected;\n'+shader.fragmentShader;
+    shader.vertexShader='attribute float partIndex; uniform sampler2D partState; uniform sampler2D selectionState; uniform float stateWidth; varying float partVisible; varying float partSelected; varying vec2 partOrgan;\n'+shader.vertexShader;
+    shader.vertexShader=shader.vertexShader.replace('#include <begin_vertex>','#include <begin_vertex>\nvec2 stateUv = vec2((partIndex + 0.5) / stateWidth, 0.5); vec4 state = texture2D(partState, stateUv); transformed += state.xyz; partVisible = state.w; vec4 selection = texture2D(selectionState, stateUv); partSelected = selection.r; partOrgan = selection.gb;');
+    shader.uniforms.organTint=organTint;
+    shader.fragmentShader='uniform vec3 organTint; varying float partVisible; varying float partSelected; varying vec2 partOrgan;\n'+shader.fragmentShader;
     shader.fragmentShader=shader.fragmentShader.replace('#include <clipping_planes_fragment>','#include <clipping_planes_fragment>\nif (partVisible < 0.5) discard;');
     // The body surface keeps its skin tone when picked: a mint highlight on the skin made the whole model look green.
-    if(!surface)shader.fragmentShader=shader.fragmentShader.replace('#include <color_fragment>','#include <color_fragment>\ndiffuseColor.rgb = mix(diffuseColor.rgb, vec3(0.42, 0.85, 0.78), partSelected * 0.75);');
+    if(!surface)shader.fragmentShader=shader.fragmentShader.replace('#include <color_fragment>','#include <color_fragment>\ndiffuseColor.rgb = mix(diffuseColor.rgb, organTint, max(partOrgan.x * 0.55, partOrgan.y * 0.3));\ndiffuseColor.rgb = mix(diffuseColor.rgb, vec3(0.42, 0.85, 0.78), partSelected * 0.75);').replace('#include <emissivemap_fragment>','#include <emissivemap_fragment>\ntotalEmissiveRadiance += organTint * (partOrgan.x * 0.22 + partOrgan.y * 0.08);');
    };materials.push(m);return m;
   };
   const mats=new Map(SYSTEMS.map(s=>[s.id,materialFor(s.id)]));
@@ -478,6 +527,7 @@ export default function AnatomyScene({atlas,state,renderQuality,onSelect,onProgr
    const detailedReplacement=false;
    const jointsWanted=s.visible.includes('articular')&&!s.isolate&&s.explode<.01;jointGroup.visible=jointsWanted;if(jointsWanted)ensureJoints();const articularReplacement=jointsWanted&&jointStatus==='ready';renderer.domElement.dataset.articularActive=String(jointsWanted);renderer.domElement.dataset.articularReplacement=String(articularReplacement);
    const skeletalWanted=s.visible.includes('skeletal')&&!s.isolate&&s.explode<.01;skeletalReferenceGroup.visible=skeletalWanted;if(skeletalWanted)ensureSkeletalReference();const skeletalReplacement=skeletalWanted&&skeletalStatus==='ready';renderer.domElement.dataset.skeletalReferenceActive=String(skeletalWanted);renderer.domElement.dataset.skeletalReferenceReplacement=String(skeletalReplacement);
+   applyVisceralState(s);applyMeridianOrgans();
    const changed=lastState?.visible!==s.visible||lastState?.opacity!==s.opacity||lastState?.opacityOverrides!==s.opacityOverrides||lastState?.selected!==s.selected||lastState?.isolate!==s.isolate;
    const moving=Math.abs(amount-s.explode)>.0001;
    if(moving){amount=T.MathUtils.damp(amount,s.explode,8,dt);dirty=true;}

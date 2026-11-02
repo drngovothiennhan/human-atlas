@@ -6,6 +6,7 @@ import {useDraggable} from './use-draggable';
 import {Button} from '@/components/ui/button';
 import type {StudyCommand} from './yhct-study-panel';
 import type {AcupointAnchorDraft} from '../src/acupoints/registration/coordinate-system';
+import {meridianOrganLink} from './meridian-organs';
 import {
   draftToSceneAnchor,
   type MeridianFocusTarget,
@@ -154,6 +155,7 @@ export default function Meridian3DPanel({drafts,selectedPointCode,studyCommand,o
   const filteredPoints=useMemo(()=>{const q=norm(query),codeQuery=q.replace(/[-\s]/g,'');return points.filter(p=>q?p.code.toLowerCase().replace(/-/g,'').includes(codeQuery)||[p.vietnameseName??'',p.englishName??'',p.chineseName??'',p.pinyin??'',p.anatomicalLocation?.surfaceRegionVi??'',p.anatomicalLocation?.surfaceRegionEn??''].some(v=>norm(v).includes(q)):activeMeridianIds.includes(p.meridianId)).slice(0,80)},[points,activeMeridianIds,query]);
   const active=meridians.find(m=>m.id===activeMeridian),selectedRecord=points.find(p=>p.code===selected),selectedAnchors=allAnchors.filter(a=>a.pointCode===selected);
   const activePointCount=points.filter(p=>activeMeridianIds.includes(p.meridianId)).length;
+  const organLink=activeMeridian===ALL_MAIN_MERIDIANS?null:meridianOrganLink(activeMeridian);
   const activeLabel=activeMeridian===ALL_MAIN_MERIDIANS?'12 chính kinh':meridianName(active);
   const publishedCount=publishedAnchors.filter(a=>activeMeridianIds.includes(a.meridianId)).length,draftCount=draftAnchors.filter(a=>activeMeridianIds.includes(a.meridianId)).length,schematicCount=schematic.anchors.filter(a=>activeMeridianIds.includes(a.meridianId)).length;
   const selectedMeridianPoints=selectedRecord?points.filter(p=>p.meridianId===selectedRecord.meridianId).sort((a,b)=>a.sequence-b.sequence):[];
@@ -201,11 +203,12 @@ export default function Meridian3DPanel({drafts,selectedPointCode,studyCommand,o
         <span>{visiblePaths.length?visiblePaths.length+' đường/đoạn 3D đang hiển thị':'Chưa có đường kinh 3D — không tự nối điểm'}</span>
         {activeMeridian==='SI'&&<span data-si-route-guidance="true">Lộ trình ngoài liên tục SI-1 → SI-19; không nối với kinh Thận. Nhánh nội tại không vẽ trên da. Mặc định chỉ hiện bên trái để tránh đường đối bên hiện xuyên qua mô hình; chọn “Hai bên” để đối chiếu.</span>}
         {activeMeridian===ALL_MAIN_MERIDIANS&&<span data-all-meridian-guidance="true">Đang xem đồng thời 12 đường riêng; chỗ giao nhau không phải nối kinh. Chọn một kinh để xem riêng.</span>}
+        {organLink&&<div className="meridian3d-organ" data-meridian-organ-link={organLink.meridianId}><p><b>Thuộc</b> {organLink.thuoc.label} ({organLink.thuoc.anatomy})</p><p><b>Lạc</b> {organLink.lac.label} ({organLink.lac.anatomy})</p>{[organLink.thuoc.note,organLink.lac.note].filter(Boolean).map(note=><small key={note}>{note}</small>)}<button type="button" data-show-meridian-organs="true" onClick={()=>onStudyAction({anatomyPreset:'organs'})}>Xem tạng phủ trên mô hình</button></div>}
         {showCollaterals&&<span role="status">Chưa có dữ liệu đường lạc phù hợp để hiển thị.</span>}
       </div>
       <div className="meridian3d-model-controls" data-meridian3d-model-controls="true">
         <div><span>Góc nhìn</span><button type="button" data-meridian-view="three-quarter" onClick={()=>onStudyAction({view:'three-quarter'})}>¾</button><button type="button" data-meridian-view="front" onClick={()=>onStudyAction({view:'front'})}>Trước</button><button type="button" data-meridian-view="side" onClick={()=>onStudyAction({view:'side'})}>Bên</button><button type="button" data-meridian-view="back" onClick={()=>onStudyAction({view:'back'})}>Sau</button></div>
-        <div><span>Nền giải phẫu</span><button type="button" data-anatomy-preset="surface" onClick={()=>onStudyAction({anatomyPreset:'surface'})}>Bề mặt</button><button type="button" data-anatomy-preset="muscle-landmarks" onClick={()=>onStudyAction({anatomyPreset:'muscle-landmarks'})}>Cơ mốc</button><button type="button" data-anatomy-preset="skeleton" onClick={()=>onStudyAction({anatomyPreset:'skeleton'})}>Xương</button></div>
+        <div><span>Nền giải phẫu</span><button type="button" data-anatomy-preset="surface" onClick={()=>onStudyAction({anatomyPreset:'surface'})}>Bề mặt</button><button type="button" data-anatomy-preset="muscle-landmarks" onClick={()=>onStudyAction({anatomyPreset:'muscle-landmarks'})}>Cơ mốc</button><button type="button" data-anatomy-preset="skeleton" onClick={()=>onStudyAction({anatomyPreset:'skeleton'})}>Xương</button><button type="button" data-anatomy-preset="organs" onClick={()=>onStudyAction({anatomyPreset:'organs'})}>Tạng phủ</button></div>
       </div>
       <div className="meridian3d-exit-row"><Button variant="ghost" data-exit-meridians="true" onClick={()=>{setEnabled(false);setOpen(false);setActiveMeridian(ALL_MAIN_MERIDIANS);setSide('BOTH');setSelected(null);setQuery('');onFocus(null);onStudyAction({anatomyPreset:'surface',view:'three-quarter'})}}>Về giải phẫu</Button></div>
       <div className="meridian3d-section-label">Hiệu ứng đường kinh</div>
