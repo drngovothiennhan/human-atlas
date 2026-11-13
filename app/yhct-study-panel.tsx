@@ -48,6 +48,8 @@ export type StudyCommand={
   effects?:Partial<{motion:boolean;meridians:boolean;acupoints:boolean;collaterals:boolean}>;
   /** Opens the Phòng châm inside the Kinh lạc 3D sheet (also on phones). */
   openLab?:boolean;
+  /** Opens the Kinh lạc 3D sheet with the point's details on phones too (used by deep links). */
+  openPanel?:boolean;
 };
 
 interface Props{

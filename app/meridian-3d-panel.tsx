@@ -120,7 +120,7 @@ export default function Meridian3DPanel({drafts,selectedPointCode,studyCommand,o
     }
     setEnabled(true);
     // On phones the study sheet that sent the command stays open; the overlay still shows on the model.
-    if(command.openLab){setOpen(true);setLabFocus(v=>v+1)}else if(!isMobileLayout())setOpen(true);
+    if(command.openLab){setOpen(true);setLabFocus(v=>v+1)}else if(command.openPanel||!isMobileLayout())setOpen(true);
     if(point){
       setSelected(point.code);setQuery('');
       const candidates=allAnchors.filter(a=>a.pointCode===point.code),anchor=candidates[0];
