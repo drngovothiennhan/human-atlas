@@ -20,6 +20,7 @@ import {ARTICULAR_SOURCE,SKELETAL_SOURCE} from './reference-anatomy';
 import {useDraggable} from './use-draggable';
 import {installFloatingMenuResize} from './floating-menu';
 import {isMobileLayout,useExclusiveSheet} from './mobile-sheets';
+import {parseDeepLink,rememberLastView} from './deep-link';
 const initial:SceneState={explode:0,visible:DEFAULT_VISIBLE,opacity:DEFAULT_LAYER_OPACITY,selected:[],isolate:false,view:'three-quarter',rotate:false,reset:0};
 const REGISTRATION_STORAGE_KEY='hiu-yhct-registration-drafts-v0.1';
 const RENDER_QUALITY_STORAGE_KEY='hiu-atlas-render-quality-v1';
@@ -88,8 +89,13 @@ export default function Home(){
    setState(s=>({...s,visible,selected:[],isolate:false,explode:0,rotate:false,reset:s.reset+1}));
   }
   const {view:_,anatomyPreset:__,...overlayCommand}=command;
-  if(overlayCommand.meridianId||overlayCommand.pointCode||overlayCommand.effects||overlayCommand.openLab)setStudyCommand({...overlayCommand,seq:++studyCommandSeq.current});
+  if(overlayCommand.meridianId||overlayCommand.pointCode||overlayCommand.effects||overlayCommand.openLab||overlayCommand.openPanel)setStudyCommand({...overlayCommand,seq:++studyCommandSeq.current});
+  rememberLastView(command);
  };
+ // Liên kết sâu (?huyet=ST36, ?kinh=ST, ?kinh=all, &cham=1): chạy một lần sau khi danh mục đã tải.
+ const deepLinkDone=useRef(false);
+ useEffect(()=>{if(!atlas||deepLinkDone.current)return;deepLinkDone.current=true;const command=parseDeepLink(window.location.search);if(command)handleStudyCommand(command);},[atlas]);
+ useEffect(()=>{if(selectedMeridianPoint)rememberLastView({pointCode:selectedMeridianPoint});},[selectedMeridianPoint]);
  return <main className={`studio layout-${layout}`} data-layout-mode={layout}>
   {atlas&&<AnatomyScene atlas={atlas} state={sceneState} renderQuality={renderQuality} onSelect={id=>{if(meridianOverlay.enabled&&isMobileLayout())return;choosePart(id)}} onProgress={n=>{setProgress(n);if(n===100)setError('');}} onError={setError} registrationMode={registrationEnabled} onRegisterSurface={setRegistrationCapture} meridianOverlay={meridianOverlay} focusAcupoint={meridianFocus} onSelectAcupoint={setSelectedMeridianPoint}/>} 
   <div className="vignette"/>
